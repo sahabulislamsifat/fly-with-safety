@@ -3,5 +3,10 @@
   command = "npm run build"
   publish = ".next"
 
+[build.environment]
+  SECRETS_SCAN_OMIT_KEYS = "NEXT_BASE_API_URL,NEXT_PUBLIC_API_BASE_URL"
+  SECRETS_SCAN_OMIT_PATHS = "src/lib/api/client.ts,client/src/lib/api/client.ts"
+
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+

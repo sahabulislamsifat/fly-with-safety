@@ -11,6 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://fly-with-safety.netlify.app"),
   title: "FlyWithSafe — Safe & Easy Travel Booking",
   description: "Book flights, hotels, travel packages and get reliable travel support with FlyWithSafe. Your trusted travel partner for seamless journeys.",
   keywords: ["flights", "hotels", "travel packages", "visa assistance", "travel booking", "FlyWithSafe"],
