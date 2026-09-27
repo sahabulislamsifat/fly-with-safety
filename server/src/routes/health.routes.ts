@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
-import { success } from '../utils/response';
-import { env } from '../config/env';
+import { success } from '../utils/response.js';
+import { env } from '../config/env.js';
 
 const router = Router();
 
@@ -11,7 +11,7 @@ router.get('/health', (_req: Request, res: Response) => {
       message: 'FlyWithSafe API is running',
       environment: env.nodeEnv,
       timestamp: new Date().toISOString(),
-      uptime: process.uptime(),
+      uptime: Math.floor(process.uptime()),
     })
   );
 });

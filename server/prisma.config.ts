@@ -8,5 +8,7 @@ export default defineConfig({
   },
   datasource: {
     url: env('DATABASE_URL'),
+    // directUrl for migrations/CLI (bypasses connection pooler)
+    // directUrl: env('DIRECT_URL'),
   },
 });

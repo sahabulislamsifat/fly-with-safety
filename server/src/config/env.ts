@@ -2,15 +2,9 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-interface EnvConfig {
-  port: number;
-  nodeEnv: 'development' | 'production' | 'test';
-  clientUrl: string;
-}
-
 function getEnv(key: string, defaultValue?: string): string {
   const value = process.env[key];
-  if (value === undefined) {
+  if (value === undefined || value === '') {
     if (defaultValue !== undefined) {
       return defaultValue;
     }
@@ -21,7 +15,7 @@ function getEnv(key: string, defaultValue?: string): string {
 
 function getEnvNumber(key: string, defaultValue?: number): number {
   const value = process.env[key];
-  if (value === undefined) {
+  if (value === undefined || value === '') {
     if (defaultValue !== undefined) {
       return defaultValue;
     }
@@ -34,11 +28,65 @@ function getEnvNumber(key: string, defaultValue?: number): number {
   return parsed;
 }
 
-export const env: EnvConfig = {
-  port: getEnvNumber('PORT', 4000),
-  nodeEnv: (getEnv('NODE_ENV', 'development') as EnvConfig['nodeEnv']),
-  clientUrl: getEnv('CLIENT_URL', 'http://localhost:3000'),
+function getEnvBool(key: string, defaultValue: boolean): boolean {
+  const value = process.env[key];
+  if (value === undefined || value === '') {
+    return defaultValue;
+  }
+  return value.toLowerCase() === 'true' || value === '1';
+}
+
+export const env = {
+  // Server
+  port: getEnvNumber('PORT', 5000),
+  nodeEnv: getEnv('NODE_ENV', 'development') as 'development' | 'production' | 'test',
+
+  // CORS
+  corsOrigin: getEnv('CORS_ORIGIN', 'http://localhost:3000'),
+
+  // Database
+  databaseUrl: getEnv('DATABASE_URL', ''),
+  directUrl: getEnv('DIRECT_URL', ''),
+
+  // JWT
+  jwtSecret: getEnv('JWT_SECRET', 'dev-secret-change-in-production'),
+  jwtExpiresIn: getEnv('JWT_EXPIRES_IN', '7d'),
+
+  // Rate limiting
+  rateLimitWindowMs: getEnvNumber('RATE_LIMIT_WINDOW_MS', 900000),
+  rateLimitMax: getEnvNumber('RATE_LIMIT_MAX', 100),
+  authRateLimitWindowMs: getEnvNumber('AUTH_RATE_LIMIT_WINDOW_MS', 900000),
+  authRateLimitMax: getEnvNumber('AUTH_RATE_LIMIT_MAX', 10),
+
+  // SMTP
+  smtpHost: getEnv('SMTP_HOST', ''),
+  smtpPort: getEnvNumber('SMTP_PORT', 587),
+  smtpSecure: getEnvBool('SMTP_SECURE', false),
+  smtpUser: getEnv('SMTP_USER', ''),
+  smtpPassword: getEnv('SMTP_PASSWORD', ''),
+  smtpEmailFrom: getEnv('SMTP_EMAIL_FROM', ''),
+  smtpEmailFromName: getEnv('SMTP_EMAIL_FROM_NAME', 'FlyWithSafe'),
+  smtpService: getEnv('SMTP_SERVICE', ''),
+
+  // Google OAuth
+  googleClientId: getEnv('GOOGLE_CLIENT_ID', ''),
+  googleClientSecret: getEnv('GOOGLE_CLIENT_SECRET', ''),
+  googleCallbackUrl: getEnv('GOOGLE_CALLBACK_URL', 'http://localhost:5000/api/v1/auth/google/callback'),
+
+  // Stripe
+  stripePublishableKey: getEnv('STRIPE_PUBLISHABLE_KEY', ''),
+  stripeSecretKey: getEnv('STRIPE_SECRET_KEY', ''),
+  stripeWebhookSecret: getEnv('STRIPE_WEBHOOK_SECRET', ''),
+
+  // Admin seed
+  adminEmail: getEnv('ADMIN_EMAIL', ''),
+  adminPassword: getEnv('ADMIN_PASSWORD', ''),
+
+  // Frontend URL
+  frontendUrl: getEnv('CORS_ORIGIN', 'http://localhost:3000'),
 };
+
+export type Env = typeof env;
 
 export function validateEnv(): void {
   if (!['development', 'production', 'test'].includes(env.nodeEnv)) {
@@ -48,8 +96,8 @@ export function validateEnv(): void {
     throw new Error(`Invalid PORT: ${env.port}`);
   }
   try {
-    new URL(env.clientUrl);
+    new URL(env.corsOrigin);
   } catch {
-    throw new Error(`Invalid CLIENT_URL: ${env.clientUrl}`);
+    throw new Error(`Invalid CORS_ORIGIN: ${env.corsOrigin}`);
   }
 }

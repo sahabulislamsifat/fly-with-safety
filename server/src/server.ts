@@ -1,8 +1,9 @@
-import { env } from './config/env';
-import { validateEnv } from './config/env';
-import app from './app';
+import { env } from './config/env.js';
+import { validateEnv } from './config/env.js';
+import app from './app.js';
+import { prisma } from './lib/prisma.js';
 
-function startServer(): void {
+async function startServer(): Promise<void> {
   try {
     validateEnv();
   } catch (error) {
@@ -11,15 +12,22 @@ function startServer(): void {
   }
 
   const server = app.listen(env.port, () => {
-    console.log(`FlyWithSafe API server running on port ${env.port}`);
-    console.log(`Environment: ${env.nodeEnv}`);
-    console.log(`Health check: http://localhost:${env.port}/api/health`);
+    console.log(`✈  FlyWithSafe API server running on port ${env.port}`);
+    console.log(`   Environment: ${env.nodeEnv}`);
+    console.log(`   Health: http://localhost:${env.port}/api/v1/health`);
+    console.log(`   CORS origin: ${env.corsOrigin}`);
   });
 
-  const shutdown = (signal: string) => {
+  const shutdown = async (signal: string): Promise<void> => {
     console.log(`\n${signal} received. Shutting down gracefully...`);
-    server.close(() => {
+    server.close(async () => {
       console.log('HTTP server closed.');
+      try {
+        await prisma.$disconnect();
+        console.log('Database connection closed.');
+      } catch (err) {
+        console.error('Error closing database connection:', err);
+      }
       process.exit(0);
     });
 
@@ -29,8 +37,15 @@ function startServer(): void {
     }, 10000);
   };
 
-  process.on('SIGINT', () => shutdown('SIGINT'));
-  process.on('SIGTERM', () => shutdown('SIGTERM'));
+  process.on('SIGINT', () => void shutdown('SIGINT'));
+  process.on('SIGTERM', () => void shutdown('SIGTERM'));
+  process.on('uncaughtException', (err) => {
+    console.error('Uncaught Exception:', err);
+    void shutdown('uncaughtException');
+  });
+  process.on('unhandledRejection', (reason) => {
+    console.error('Unhandled Rejection:', reason);
+  });
 }
 
-startServer();
+void startServer();
