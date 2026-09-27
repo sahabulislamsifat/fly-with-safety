@@ -16,7 +16,7 @@ export function Hero() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-primary/70 via-brand-primary/60 to-brand-primary/80" />
+        <div className="absolute inset-0 bg-linear-to-b from-brand-primary/70 via-brand-primary/60 to-brand-primary/80" />
       </div>
 
       <div className="relative z-10 container py-20 lg:py-32">
@@ -29,11 +29,11 @@ export function Hero() {
             id="hero-heading"
             className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 text-balance"
           >
-            EXPLORE THE WORLD{' '}
-            <span className="text-brand-cta">WITH SAFETY</span>
+            EXPLORE THE WORLD <span className="text-brand-cta">WITH SAFETY</span>
           </h1>
           <p className="text-lg sm:text-xl text-white/90 leading-relaxed mb-8 max-w-xl">
-            Find best deals on Flights, Hotels & Packages
+            Find best deals on Flights, Hotels & Packages with our trusted travel partners. Book
+            with confidence and enjoy a safe journey.
           </p>
         </div>
       </div>
