@@ -1,4 +1,13 @@
-import { Destination, Feature, Partner, Testimonial, NavLink, FooterColumn, SocialLink, PaymentMethod } from '@/types';
+import {
+  Destination,
+  Feature,
+  Partner,
+  Testimonial,
+  NavLink,
+  FooterColumn,
+  SocialLink,
+  PaymentMethod,
+} from '@/types';
 
 export const navLinks: NavLink[] = [
   { label: 'Home', href: '/' },
@@ -64,7 +73,7 @@ export const destinations: Destination[] = [
     price: '$50',
     image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&h=600&fit=crop',
     imageAlt: "Cox's Bazar beach with golden sand and blue water",
-    description: 'World\'s longest natural sandy beach',
+    description: "World's longest natural sandy beach",
   },
 ];
 
@@ -119,19 +128,29 @@ export const partners: Partner[] = [
 export const testimonials: Testimonial[] = [
   {
     id: 'testimonial-1',
-    quote: 'Booking my flight was super fast and hassle-free! The team helped me find the best deal and I had my e-ticket within minutes.',
+    quote:
+      'Booking my flight was super fast and hassle-free! The team helped me find the best deal and I had my e-ticket within minutes.',
     author: 'Sarah Ahmed',
     role: 'Frequent Traveler',
   },
   {
     id: 'testimonial-2',
-    quote: 'I\'ve used many travel agencies but FlyWithSafe stands out for their transparency and support. Highly recommended!',
+    quote:
+      "I've used many travel agencies but FlyWithSafe stands out for their transparency and support. Highly recommended!",
     author: 'Mohammad Rahman',
     role: 'Business Traveler',
   },
   {
     id: 'testimonial-3',
-    quote: 'The visa assistance was incredibly helpful. They guided me through the entire process and made it stress-free.',
+    quote:
+      'The visa assistance was incredibly helpful. They guided me through the entire process and made it stress-free.',
+    author: 'Priya Sharma',
+    role: 'Tourist',
+  },
+  {
+    id: 'testimonial-4',
+    quote:
+      'The visa assistance was incredibly helpful. They guided me through the entire process and made it stress-free.',
     author: 'Priya Sharma',
     role: 'Tourist',
   },

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from 'next/link';
 import { footerColumns, socialLinks, paymentMethods } from '@/lib/data/site-data';
 import { Icon } from '@/components/ui';
@@ -7,12 +8,12 @@ export function Footer() {
 
   return (
     <footer className="bg-bg-footer text-white" role="contentinfo">
-      <div className="container py-16 lg:py-20">
+      <div className="max-w-11/12 mx-auto py-16 lg:py-20">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 lg:gap-12 mb-12 lg:mb-16">
           <div className="col-span-2 lg:col-span-1">
             <Link
               href="/"
-              className="flex items-center gap-2 text-xl font-bold text-white mb-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cta focus-visible:ring-offset-2 focus-visible:ring-offset-bg-footer rounded-lg"
+              className="flex items-center gap-2 text-xl font-bold text-white mb-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cta focus-visible:ring-offset-2 focus-visible:ring-offset-bg-footer rounded-xs"
               aria-label="FlyWithSafe Home"
             >
               <Icon name="plane" size={28} className="text-brand-cta" />
@@ -30,7 +31,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-neutral-400 hover:text-white transition-colors text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cta focus-visible:ring-offset-2 focus-visible:ring-offset-bg-footer rounded"
+                    className="text-neutral-400 hover:text-white transition-colors text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cta focus-visible:ring-offset-2 focus-visible:ring-offset-bg-footer rounded-xs"
                   >
                     {link.label}
                   </Link>
@@ -46,7 +47,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-neutral-400 hover:text-white transition-colors text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cta focus-visible:ring-offset-2 focus-visible:ring-offset-bg-footer rounded"
+                    className="text-neutral-400 hover:text-white transition-colors text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cta focus-visible:ring-offset-2 focus-visible:ring-offset-bg-footer rounded-xs"
                   >
                     {link.label}
                   </Link>
@@ -57,11 +58,11 @@ export function Footer() {
 
           <div>
             <h3 className="font-semibold text-white mb-4">Payment Options</h3>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex gap-3">
               {paymentMethods.map((method) => (
                 <div
                   key={method.name}
-                  className="flex items-center gap-2 px-3 py-2 bg-neutral-800/50 rounded-lg border border-neutral-700"
+                  className="flex items-center gap-2 px-3 py-2 bg-neutral-800/50 rounded-xs border border-neutral-700"
                   role="img"
                   aria-label={method.name}
                 >
@@ -86,7 +87,7 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded-lg bg-neutral-800/50 hover:bg-neutral-800 text-neutral-400 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cta focus-visible:ring-offset-2 focus-visible:ring-offset-bg-footer"
+                  className="p-2 rounded-xs bg-neutral-800/50 hover:bg-neutral-800 text-neutral-400 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cta focus-visible:ring-offset-2 focus-visible:ring-offset-bg-footer"
                   aria-label={social.name}
                 >
                   <Icon name={social.icon as any} size={20} />

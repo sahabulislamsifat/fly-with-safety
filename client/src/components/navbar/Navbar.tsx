@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Button } from '@/components/ui';
 import { Icon } from '@/components/ui/Icons';
 import { navLinks } from '@/lib/data/site-data';
 
@@ -21,18 +20,18 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-[200] transition-all duration-200 ${
+      className={`fixed top-0 left-0 right-0 z-200 transition-all duration-200 ${
         isScrolled
           ? 'bg-white/95 backdrop-blur-sm shadow-sm border-b border-border-light'
           : 'bg-transparent'
       }`}
       role="banner"
     >
-      <nav className="container" aria-label="Main navigation">
+      <nav className="max-w-11/12 mx-auto" aria-label="Main navigation">
         <div className="flex h-16 items-center justify-between">
           <Link
             href="/"
-            className="flex items-center gap-2 text-xl font-bold text-brand-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 rounded-lg"
+            className="flex items-center gap-2 text-xl font-bold text-brand-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 rounded-xs"
             aria-label="FlyWithSafe Home"
           >
             <Icon name="plane" size={28} className="text-brand-cta" />
@@ -56,7 +55,7 @@ export function Navbar() {
               href="https://wa.me"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-xs hover:bg-emerald-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
             >
               <Icon name="messageCircle" size={18} />
               <span>WhatsApp</span>
@@ -65,7 +64,7 @@ export function Navbar() {
 
           <button
             type="button"
-            className="md:hidden p-2 rounded-lg text-text-secondary hover:bg-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
+            className="md:hidden p-2 rounded-xs text-text-secondary hover:bg-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu"
@@ -81,12 +80,15 @@ export function Navbar() {
           role="navigation"
           aria-label="Mobile navigation"
         >
-          <div className="py-4 space-y-2 border-t border-border-light">
+          <div
+            className="py-4 space-y-2 border
+          -t border-border-light"
+          >
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="block px-2 py-3 text-base font-medium text-text-secondary hover:text-brand-primary hover:bg-neutral-50 rounded-lg transition-colors"
+                className="block px-2 py-3 text-base font-medium text-text-secondary hover:text-brand-primary hover:bg-neutral-50 rounded-xs transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.label}
@@ -97,7 +99,7 @@ export function Navbar() {
                 href="https://wa.me"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 w-full justify-center px-6 py-3 text-base font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+                className="inline-flex items-center gap-2 w-full justify-center px-6 py-3 text-base font-medium text-white bg-emerald-600 rounded-xs hover:bg-emerald-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
               >
                 <Icon name="messageCircle" size={20} />
                 <span>Contact us on WhatsApp</span>

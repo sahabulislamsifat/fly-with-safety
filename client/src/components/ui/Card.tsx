@@ -26,18 +26,18 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         className={cn(
-          'rounded-xl transition-all duration-200',
+          'rounded-xs transition-all duration-200',
           variants[variant],
           paddings[padding],
           hover && 'hover:shadow-xl hover:-translate-y-0.5',
-          className
+          className,
         )}
         {...props}
       >
         {children}
       </div>
     );
-  }
+  },
 );
 
 Card.displayName = 'Card';
@@ -46,14 +46,10 @@ export interface CardHeaderProps extends HTMLAttributes<HTMLDivElement> {}
 
 export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
   ({ className, children, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn('mb-4', className)}
-      {...props}
-    >
+    <div ref={ref} className={cn('mb-4', className)} {...props}>
       {children}
     </div>
-  )
+  ),
 );
 
 CardHeader.displayName = 'CardHeader';
@@ -71,7 +67,7 @@ export const CardTitle = forwardRef<HTMLHeadingElement, CardTitleProps>(
     >
       {children}
     </Component>
-  )
+  ),
 );
 
 CardTitle.displayName = 'CardTitle';
@@ -80,14 +76,10 @@ export interface CardDescriptionProps extends HTMLAttributes<HTMLParagraphElemen
 
 export const CardDescription = forwardRef<HTMLParagraphElement, CardDescriptionProps>(
   ({ className, children, ...props }, ref) => (
-    <p
-      ref={ref}
-      className={cn('text-sm text-text-tertiary mt-1', className)}
-      {...props}
-    >
+    <p ref={ref} className={cn('text-sm text-text-tertiary mt-1', className)} {...props}>
       {children}
     </p>
-  )
+  ),
 );
 
 CardDescription.displayName = 'CardDescription';
@@ -96,14 +88,10 @@ export interface CardContentProps extends HTMLAttributes<HTMLDivElement> {}
 
 export const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
   ({ className, children, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(className)}
-      {...props}
-    >
+    <div ref={ref} className={cn(className)} {...props}>
       {children}
     </div>
-  )
+  ),
 );
 
 CardContent.displayName = 'CardContent';
@@ -119,7 +107,7 @@ export const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
     >
       {children}
     </div>
-  )
+  ),
 );
 
 CardFooter.displayName = 'CardFooter';
