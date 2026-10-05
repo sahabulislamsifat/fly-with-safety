@@ -35,9 +35,11 @@ enum InquiryStatus {
 }
 
 enum ContactStatus {
-  OPEN
+  NEW
   IN_PROGRESS
   RESOLVED
+  // Legacy values kept so existing rows stay valid. OPEN behaves as NEW, CLOSED as RESOLVED.
+  OPEN
   CLOSED
 }
 
@@ -60,6 +62,7 @@ model User {
   hotelInquiries           HotelInquiry[]
   packageInquiries         PackageInquiry[]
   visaInquiries            VisaInquiry[]
+  bookings                 Booking[]
 
   @@index([email])
 }
@@ -272,8 +275,9 @@ model ContactMessage {
   email           String
   phone           String?
   subject         String
+  serviceType     String?
   message         String
-  status          ContactStatus @default(OPEN)
+  status          ContactStatus @default(NEW)
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
 
@@ -297,3 +301,84 @@ model Testimonial {
 
   @@index([status])
 }
+
+// ─── Booking ─────────────────────────────────────────────────────────────────
+
+enum BookingType {
+  FLIGHT
+  HOTEL
+  PACKAGE
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+enum BookingModel {
+  AGENCY_INQUIRY
+  PROVIDER_REDIRECT
+  DIRECT_API
+}
+
+model Booking {
+  id              String        @id @default(cuid())
+  referenceNumber String        @unique
+  bookingType     BookingType   @default(FLIGHT)
+  bookingModel    BookingModel  @default(AGENCY_INQUIRY)
+  status          BookingStatus @default(PENDING)
+  customerName    String
+  customerEmail   String
+  customerPhone   String?
+  totalPrice      Int           @default(0)
+  currency        String        @default("BDT")
+  bookingDetails  Json?
+  notes           String?
+  userId          String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  user          User?                  @relation(fields: [userId], references: [id])
+  passengers    BookingPassenger[]
+  statusHistory BookingStatusHistory[]
+
+  @@index([referenceNumber])
+  @@index([customerEmail])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model BookingPassenger {
+  id             String   @id @default(cuid())
+  bookingId      String
+  firstName      String
+  lastName       String
+  passengerType  String   @default("adult")
+  gender         String?
+  dateOfBirth    String?
+  passportNumber String?
+  passportExpiry String?
+  nationality    String?
+  createdAt      DateTime @default(now())
+
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  @@index([bookingId])
+}
+
+model BookingStatusHistory {
+  id        String        @id @default(cuid())
+  bookingId String
+  fromStatus BookingStatus
+  toStatus   BookingStatus
+  reason    String?
+  changedBy String?
+  createdAt DateTime      @default(now())
+
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  @@index([bookingId])
+}
+

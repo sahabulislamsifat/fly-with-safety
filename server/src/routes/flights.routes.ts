@@ -15,6 +15,8 @@ const inquiryRateLimiter = rateLimiter({
 });
 
 router.post('/flights/search', validate(flightSearchSchema), flightController.searchFlights);
+// Plural route according to API plan, with singular alias
+router.post('/flights/inquiries', inquiryRateLimiter, optionalAuth, validate(flightInquirySchema), flightController.submitFlightInquiry);
 router.post('/flights/inquiry', inquiryRateLimiter, optionalAuth, validate(flightInquirySchema), flightController.submitFlightInquiry);
 
 export default router;

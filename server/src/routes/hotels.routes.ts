@@ -15,6 +15,7 @@ const inquiryRateLimiter = rateLimiter({
 });
 
 router.post('/hotels/search', validate(hotelSearchSchema), hotelController.searchHotels);
+router.post('/hotels/inquiries', inquiryRateLimiter, optionalAuth, validate(hotelInquirySchema), hotelController.submitHotelInquiry);
 router.post('/hotels/inquiry', inquiryRateLimiter, optionalAuth, validate(hotelInquirySchema), hotelController.submitHotelInquiry);
 
 export default router;

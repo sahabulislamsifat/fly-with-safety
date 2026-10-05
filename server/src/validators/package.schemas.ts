@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 export const packageInquirySchema = z.object({
   packageId: z.string().optional().or(z.literal('')),
+  packageSlug: z.string().max(200).optional().or(z.literal('')),
   packageTitle: z.string().max(200).optional().or(z.literal('')),
   travellers: z.number().int().min(1).max(20),
   travelDate: z.string().optional().or(z.literal('')),

@@ -14,6 +14,9 @@ export const navLinks: NavLink[] = [
   { label: 'Flights', href: '/flights' },
   { label: 'Hotels', href: '/hotels' },
   { label: 'Packages', href: '/packages' },
+  { label: 'Visa Info', href: '/visa-info' },
+  { label: 'Track Booking', href: '/bookings/lookup' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export const footerColumns: FooterColumn[] = [
@@ -24,11 +27,14 @@ export const footerColumns: FooterColumn[] = [
       { label: 'Flights', href: '/flights' },
       { label: 'Hotels', href: '/hotels' },
       { label: 'Packages', href: '/packages' },
+      { label: 'Visa Info', href: '/visa-info' },
+      { label: 'Track Booking', href: '/bookings/lookup' },
     ],
   },
   {
-    title: 'Legal',
+    title: 'Support & Legal',
     links: [
+      { label: 'Contact Us', href: '/contact' },
       { label: 'Privacy Policy', href: '/privacy' },
       { label: 'Terms of Use', href: '/terms' },
     ],

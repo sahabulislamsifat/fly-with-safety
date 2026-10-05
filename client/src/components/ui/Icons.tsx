@@ -31,6 +31,12 @@ import {
   Send,
   Mail,
   Phone,
+  Edit,
+  Filter,
+  Info,
+  Check,
+  Plus,
+  ChevronUp,
 } from 'lucide-react';
 
 const icons = {
@@ -66,6 +72,12 @@ const icons = {
   send: Send,
   mail: Mail,
   phone: Phone,
+  edit: Edit,
+  filter: Filter,
+  info: Info,
+  check: Check,
+  plus: Plus,
+  chevronUp: ChevronUp,
 } as const;
 
 export type IconName = keyof typeof icons;

@@ -1,27 +1,32 @@
-import { MockFlightProvider } from './providers/mock-flight.provider.js';
-import type { FlightProvider } from './providers/flight.provider.js';
+import { flightAggregator } from './flight-aggregator.service.js';
 import { prisma } from '../lib/prisma.js';
 import { generateReferenceNumber, normalizeEmail, normalizePhone } from '../utils/helpers.js';
 import { sendInquiryConfirmation } from './notification.service.js';
 import type { FlightSearchInput, FlightInquiryInput } from '../validators/flight.schemas.js';
-
-// Provider abstraction — swap MockFlightProvider with a real one when configured
-const flightProvider: FlightProvider = new MockFlightProvider();
+import { transitionInquiryStatus } from './inquiry-status.service.js';
 
 export async function searchFlights(input: FlightSearchInput) {
-  const results = await flightProvider.searchFlights({
+  const aggregated = await flightAggregator.aggregate({
+    tripType: input.tripType,
     from: input.from,
     to: input.to,
     departureDate: input.departureDate,
     returnDate: input.returnDate || undefined,
+    adults: input.adults,
+    children: input.children,
+    infants: input.infants,
     passengers: input.passengers,
     cabinClass: input.cabinClass,
   });
 
   return {
-    results,
-    provider: flightProvider.name,
-    isLiveData: false, // MockFlightProvider is not live
+    results: aggregated.offers,
+    offers: aggregated.offers,
+    stats: aggregated.stats,
+    totalCount: aggregated.totalCount,
+    provider: aggregated.providers.join(', '),
+    isLiveData: !aggregated.isDemoData,
+    isDemoData: aggregated.isDemoData,
     searchParams: input,
   };
 }
@@ -37,7 +42,7 @@ export async function submitFlightInquiry(input: FlightInquiryInput, userId?: st
       toAirport: input.to.toUpperCase(),
       departureDate: input.departureDate,
       returnDate: input.returnDate || null,
-      passengers: input.passengers,
+      passengers: input.passengers || 1,
       cabinClass: input.cabinClass,
       name: input.name.trim(),
       email: normalizeEmail(input.email),
@@ -90,8 +95,5 @@ export async function getFlightInquiries(params: {
 }
 
 export async function updateFlightInquiryStatus(id: string, status: string) {
-  return prisma.flightInquiry.update({
-    where: { id },
-    data: { status: status as any },
-  });
+  return transitionInquiryStatus('flightInquiry', id, status);
 }

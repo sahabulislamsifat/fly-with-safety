@@ -14,11 +14,16 @@ const API_BASE_URL = getApiBaseUrl();
 export interface ApiSuccessResponse<T> {
   success: true;
   data: T;
+  message?: string;
 }
 
 export interface ApiErrorResponse {
   success: false;
-  error: {
+  code?: string;
+  message?: string;
+  requestId?: string;
+  details?: Record<string, unknown>;
+  error?: {
     code: string;
     message: string;
     details?: Record<string, string[]>;
@@ -30,12 +35,20 @@ export type ApiResponse<T> = ApiSuccessResponse<T> | ApiErrorResponse;
 export class ApiError extends Error {
   public readonly code: string;
   public readonly status: number;
-  public readonly details?: Record<string, string[]>;
+  public readonly requestId?: string;
+  public readonly details?: Record<string, unknown>;
 
-  constructor(code: string, message: string, status: number, details?: Record<string, string[]>) {
+  constructor(
+    code: string,
+    message: string,
+    status: number,
+    requestId?: string,
+    details?: Record<string, unknown>
+  ) {
     super(message);
     this.code = code;
     this.status = status;
+    this.requestId = requestId;
     this.details = details;
     this.name = 'ApiError';
   }
@@ -72,12 +85,10 @@ export async function apiRequest<T>(
   }
 
   if (!data.success) {
-    throw new ApiError(
-      data.error.code,
-      data.error.message,
-      response.status,
-      data.error.details
-    );
+    const code = data.code || data.error?.code || 'UNKNOWN_ERROR';
+    const message = data.message || data.error?.message || 'An error occurred';
+    const details = data.details || data.error?.details;
+    throw new ApiError(code, message, response.status, data.requestId, details);
   }
 
   return data.data;

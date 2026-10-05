@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import * as authService from '../services/auth.service.js';
 import { success } from '../utils/response.js';
+import { AppError } from '../utils/errors.js';
 import { env } from '../config/env.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
 
@@ -42,7 +43,7 @@ export async function getMe(req: Request, res: Response, next: NextFunction): Pr
     const authReq = req as AuthenticatedRequest;
     const user = await authService.getMe(authReq.user!.id);
     if (!user) {
-      res.status(404).json({ success: false, error: { code: 'NOT_FOUND', message: 'User not found' } });
+      next(AppError.notFound('User not found'));
       return;
     }
     res.json(success({ user }));

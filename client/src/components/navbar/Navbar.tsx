@@ -35,7 +35,7 @@ export function Navbar() {
             aria-label="FlyWithSafe Home"
           >
             <Icon name="plane" size={28} className="text-brand-cta" />
-            <span>FlyWithSafe</span>
+            <span>FlyWithSafety</span>
           </Link>
 
           <div className="hidden md:flex items-center gap-6">

@@ -1,5 +1,5 @@
+import Image from 'next/image';
 import { partners } from '@/lib/data/site-data';
-import { Card } from '@/components/ui';
 
 export function Partners() {
   return (
@@ -16,13 +16,13 @@ export function Partners() {
               role="img"
               aria-label={partner.name}
             >
-              <img
+              <Image
                 src={partner.logo}
                 alt=""
-                className="h-8 sm:h-10 max-w-[120px] grayscale"
-                loading="lazy"
+                className="h-8 sm:h-10 max-w-[120px] grayscale object-contain"
                 width={120}
                 height={40}
+                unoptimized
               />
             </div>
           ))}

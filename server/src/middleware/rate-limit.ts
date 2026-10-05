@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { error as errorResponse } from '../utils/response.js';
 
 interface RateLimitStore {
   [key: string]: {
@@ -52,13 +53,7 @@ export function rateLimiter(options: RateLimitOptions) {
     res.setHeader('X-RateLimit-Reset', Math.ceil(store[key].resetTime / 1000));
 
     if (store[key].count > maxRequests) {
-      res.status(429).json({
-        success: false,
-        error: {
-          code: 'TOO_MANY_REQUESTS',
-          message,
-        },
-      });
+      res.status(429).json(errorResponse('TOO_MANY_REQUESTS', message));
       return;
     }
 

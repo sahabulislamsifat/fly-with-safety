@@ -3,6 +3,7 @@ import { AppError } from '../utils/errors.js';
 import { generateReferenceNumber, normalizeEmail, normalizePhone } from '../utils/helpers.js';
 import { sendInquiryConfirmation } from './notification.service.js';
 import type { VisaInquiryInput } from '../validators/visa.schemas.js';
+import { transitionInquiryStatus } from './inquiry-status.service.js';
 
 export async function getPublicVisaInfoList(params: { page?: number; limit?: number }) {
   const page = Math.max(1, params.page || 1);
@@ -102,7 +103,7 @@ export async function getVisaInquiries(params: { page?: number; limit?: number; 
 }
 
 export async function updateVisaInquiryStatus(id: string, status: string) {
-  return prisma.visaInquiry.update({ where: { id }, data: { status: status as any } });
+  return transitionInquiryStatus('visaInquiry', id, status);
 }
 
 export async function adminGetAllVisaInfo(params: { page?: number; limit?: number }) {

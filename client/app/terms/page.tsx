@@ -24,7 +24,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-2xl font-bold text-text-primary mb-4">1. Acceptance of Terms</h2>
             <p className="text-text-secondary leading-relaxed">
-              By accessing and using FlyWithSafe's website and services, you agree to be bound by these Terms of Use and all applicable laws and regulations. If you do not agree with any part of these terms, you may not use our services.
+              By accessing and using FlyWithSafe&apos;s website and services, you agree to be bound by these Terms of Use and all applicable laws and regulations. If you do not agree with any part of these terms, you may not use our services.
             </p>
           </section>
 
@@ -52,7 +52,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-2xl font-bold text-text-primary mb-4">4. Changes and Cancellations</h2>
             <p className="text-text-secondary leading-relaxed mb-4">
-              Changes and cancellations are governed by the policies of the respective travel service provider. FlyWithSafe will assist you with modifications to the extent permitted by the provider's terms. Fees may apply.
+              Changes and cancellations are governed by the policies of the respective travel service provider. FlyWithSafe will assist you with modifications to the extent permitted by the provider&apos;s terms. Fees may apply.
             </p>
           </section>
 
@@ -97,7 +97,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-2xl font-bold text-text-primary mb-4">8. Disclaimers</h2>
             <p className="text-text-secondary leading-relaxed mb-4">
-              OUR SERVICES ARE PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+              OUR SERVICES ARE PROVIDED &quot;AS IS&quot; AND &quot;AS AVAILABLE&quot; WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
             </p>
             <p className="text-text-secondary leading-relaxed">
               We do not warrant that the platform will be uninterrupted, error-free, or free of viruses. Travel information, prices, and availability are provided by third parties and may contain inaccuracies.
@@ -117,7 +117,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-2xl font-bold text-text-primary mb-4">10. Indemnification</h2>
             <p className="text-text-secondary leading-relaxed">
-              You agree to indemnify and hold FlyWithSafe harmless from any claims, damages, losses, and expenses (including reasonable attorneys' fees) arising from your use of our services, violation of these terms, or infringement of any third-party rights.
+              You agree to indemnify and hold FlyWithSafe harmless from any claims, damages, losses, and expenses (including reasonable attorneys&apos; fees) arising from your use of our services, violation of these terms, or infringement of any third-party rights.
             </p>
           </section>
 

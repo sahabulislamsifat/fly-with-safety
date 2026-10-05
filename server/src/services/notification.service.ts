@@ -135,3 +135,60 @@ export async function sendEmailVerification(params: {
     `,
   });
 }
+
+export async function sendBookingConfirmation(params: {
+  to: string;
+  name: string;
+  referenceNumber: string;
+  bookingType: string;
+  totalPrice: number;
+  currency: string;
+}): Promise<void> {
+  await sendEmail({
+    to: params.to,
+    subject: `Your Booking Request — ${params.referenceNumber}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #1e293b;">
+        <h2 style="color: #1e3a8a;">Booking Request Received</h2>
+        <p>Dear ${params.name},</p>
+        <p>Thank you for booking with FlyWithSafe. Your ${params.bookingType.toLowerCase()} booking request has been registered under reference:</p>
+        <div style="background: #f1f5f9; border-radius: 8px; padding: 16px; margin: 16px 0; border-left: 4px solid #ea580c;">
+          <p style="margin: 0; font-size: 14px; color: #64748b;">REFERENCE NUMBER</p>
+          <p style="font-size: 24px; font-weight: bold; color: #1e3a8a; margin: 4px 0;">${params.referenceNumber}</p>
+          <p style="margin: 8px 0 0 0; font-size: 14px;">Total Amount: <strong>${params.currency} ${params.totalPrice.toLocaleString()}</strong></p>
+          <p style="margin: 4px 0 0 0; font-size: 14px;">Status: <span style="background: #fed7aa; color: #9a3412; padding: 2px 8px; border-radius: 4px; font-weight: 600;">PENDING</span></p>
+        </div>
+        <p>Our dedicated travel desk is processing your reservation. You can check the current status anytime using your reference number and email address on our website.</p>
+        <hr style="border: 1px solid #e2e8f0; margin: 20px 0;" />
+        <p style="color: #64748b; font-size: 14px;">FlyWithSafe — Travel Made Reassuring</p>
+      </div>
+    `,
+  });
+}
+
+export async function sendBookingStatusNotification(params: {
+  to: string;
+  name: string;
+  referenceNumber: string;
+  status: string;
+  reason?: string;
+}): Promise<void> {
+  await sendEmail({
+    to: params.to,
+    subject: `Booking Status Update: ${params.status} — ${params.referenceNumber}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #1e293b;">
+        <h2 style="color: #1e3a8a;">Booking Status Update</h2>
+        <p>Dear ${params.name},</p>
+        <p>Your booking <strong>${params.referenceNumber}</strong> status has been updated to:</p>
+        <div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 16px 0;">
+          <p style="font-size: 20px; font-weight: bold; color: #1e3a8a; margin: 0;">${params.status}</p>
+          ${params.reason ? `<p style="margin: 8px 0 0 0; font-size: 14px; color: #64748b;">Note: ${params.reason}</p>` : ''}
+        </div>
+        <hr style="border: 1px solid #e2e8f0; margin: 20px 0;" />
+        <p style="color: #64748b; font-size: 14px;">FlyWithSafe — Travel Made Reassuring</p>
+      </div>
+    `,
+  });
+}
+

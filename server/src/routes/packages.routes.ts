@@ -16,6 +16,18 @@ const inquiryRateLimiter = rateLimiter({
 
 router.get('/packages', packageController.getPackages);
 router.get('/packages/:slug', packageController.getPackageBySlug);
+// Spec route: package identified in the body (or general inquiry)
+router.post(
+  '/packages/inquiries',
+  inquiryRateLimiter,
+  optionalAuth,
+  validate(packageInquirySchema),
+  (req, _res, next) => {
+    req.params.slug = req.body.packageSlug || 'general';
+    next();
+  },
+  packageController.submitPackageInquiry
+);
 router.post(
   '/packages/:slug/inquiry',
   inquiryRateLimiter,

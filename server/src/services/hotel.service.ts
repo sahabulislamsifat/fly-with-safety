@@ -4,6 +4,7 @@ import { prisma } from '../lib/prisma.js';
 import { generateReferenceNumber, normalizeEmail, normalizePhone } from '../utils/helpers.js';
 import { sendInquiryConfirmation } from './notification.service.js';
 import type { HotelSearchInput, HotelInquiryInput } from '../validators/hotel.schemas.js';
+import { transitionInquiryStatus } from './inquiry-status.service.js';
 
 const hotelProvider: HotelProvider = new MockHotelProvider();
 
@@ -83,8 +84,5 @@ export async function getHotelInquiries(params: { page?: number; limit?: number;
 }
 
 export async function updateHotelInquiryStatus(id: string, status: string) {
-  return prisma.hotelInquiry.update({
-    where: { id },
-    data: { status: status as any },
-  });
+  return transitionInquiryStatus('hotelInquiry', id, status);
 }

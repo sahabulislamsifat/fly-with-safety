@@ -30,7 +30,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           id={inputId}
           className={cn(
-            'w-full px-4 py-2.5 rounded-lg border bg-white text-text-primary placeholder:text-text-muted',
+            'w-full px-4 py-2.5 rounded-xs border bg-white text-text-primary placeholder:text-text-muted',
             'transition-colors duration-150',
             'focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent',
             'disabled:bg-neutral-100 disabled:text-text-muted disabled:cursor-not-allowed',
@@ -87,7 +87,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           ref={ref}
           id={inputId}
           className={cn(
-            'w-full px-4 py-2.5 rounded-lg border bg-white text-text-primary placeholder:text-text-muted',
+            'w-full px-4 py-2.5 rounded-xs border bg-white text-text-primary placeholder:text-text-muted',
             'transition-colors duration-150 resize-y min-h-[100px]',
             'focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent',
             'disabled:bg-neutral-100 disabled:text-text-muted disabled:cursor-not-allowed',
@@ -146,7 +146,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           ref={ref}
           id={selectId}
           className={cn(
-            'w-full px-4 py-2.5 rounded-lg border bg-white text-text-primary appearance-none',
+            'w-full px-4 py-2.5 rounded-xs border bg-white text-text-primary appearance-none',
             'transition-colors duration-150',
             'focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent',
             'disabled:bg-neutral-100 disabled:text-text-muted disabled:cursor-not-allowed',

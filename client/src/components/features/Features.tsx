@@ -1,5 +1,6 @@
 import { features } from '@/lib/data/site-data';
-import { Card, CardContent, Icon } from '@/components/ui';
+import { Card } from '@/components/ui';
+import { Icon, type IconName } from '@/components/ui/Icons';
 
 export function Features() {
   return (
@@ -25,10 +26,10 @@ export function Features() {
             >
               <div className="flex flex-col h-full">
                 <div
-                  className="w-12 h-12 rounded-lg bg-brand-primary/10 flex items-center justify-center mb-4 text-brand-primary"
+                  className="w-12 h-12 rounded-xs bg-brand-primary/10 flex items-center justify-center mb-4 text-brand-primary"
                   aria-hidden="true"
                 >
-                  <Icon name={feature.icon as any} size={24} />
+                  <Icon name={feature.icon as IconName} size={24} />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-text-primary mb-2">

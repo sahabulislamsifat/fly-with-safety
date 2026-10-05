@@ -3,6 +3,7 @@ import { generateReferenceNumber, normalizeEmail, normalizePhone } from '../util
 import { sendInquiryConfirmation } from './notification.service.js';
 import type { PackageInquiryInput } from '../validators/package.schemas.js';
 import { AppError } from '../utils/errors.js';
+import { transitionInquiryStatus } from './inquiry-status.service.js';
 
 export async function getPublicPackages(params: {
   page?: number;
@@ -124,7 +125,7 @@ export async function getPackageInquiries(params: { page?: number; limit?: numbe
 }
 
 export async function updatePackageInquiryStatus(id: string, status: string) {
-  return prisma.packageInquiry.update({ where: { id }, data: { status: status as any } });
+  return transitionInquiryStatus('packageInquiry', id, status);
 }
 
 // Admin CRUD

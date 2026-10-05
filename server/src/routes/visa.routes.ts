@@ -16,6 +16,7 @@ const inquiryRateLimiter = rateLimiter({
 
 router.get('/visa', visaController.getVisaList);
 router.get('/visa/:country', visaController.getVisaByCountry);
+router.post('/visa/inquiries', inquiryRateLimiter, optionalAuth, validate(visaInquirySchema), visaController.submitVisaInquiry);
 router.post('/visa/inquiry', inquiryRateLimiter, optionalAuth, validate(visaInquirySchema), visaController.submitVisaInquiry);
 
 export default router;

@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react-hooks/set-state-in-effect */
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import {
   SearchTab,
   FlightSearchParams,
@@ -11,25 +10,15 @@ import {
   VisaSearchParams,
 } from '@/types';
 import { Button, Input, Select, Card } from '@/components/ui';
-import { Icon } from '@/components/ui/Icons';
+import { Icon, IconName } from '@/components/ui/Icons';
 import { defaultSearchParams } from '@/lib/data/site-data';
+import { AirportCombobox } from './AirportCombobox';
 
-const tabs: { id: SearchTab; label: string; icon: string }[] = [
+const tabs: { id: SearchTab; label: string; icon: IconName }[] = [
   { id: 'flights', label: 'Flights', icon: 'plane' },
   { id: 'hotels', label: 'Hotels', icon: 'hotel' },
   { id: 'packages', label: 'Packages', icon: 'package' },
   { id: 'visa', label: 'Visa Info', icon: 'fileText' },
-];
-
-const popularAirports = [
-  { code: 'DAC', label: 'DAC - Dhaka' },
-  { code: 'KUL', label: 'KUL - Kuala Lumpur' },
-  { code: 'BKK', label: 'BKK - Bangkok' },
-  { code: 'SIN', label: 'SIN - Singapore' },
-  { code: 'DXB', label: 'DXB - Dubai' },
-  { code: 'JED', label: 'JED - Jeddah' },
-  { code: 'LHR', label: 'LHR - London' },
-  { code: 'SYD', label: 'SYD - Sydney' },
 ];
 
 const passengerOptions = [
@@ -74,42 +63,73 @@ interface BookingSearchProps {
 }
 
 export function BookingSearch({ defaultTab = 'flights' }: BookingSearchProps) {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<SearchTab>(defaultTab);
   const [isLoading, setIsLoading] = useState(false);
-  const [flightData, setFlightData] = useState<FlightSearchParams>(defaultSearchParams.flights);
-  const [hotelData, setHotelData] = useState<HotelSearchParams>(defaultSearchParams.hotels);
-  const [packageData, setPackageData] = useState<PackageSearchParams>(defaultSearchParams.packages);
-  const [visaData, setVisaData] = useState<VisaSearchParams>(defaultSearchParams.visa);
-  const cardRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  const [flightData, setFlightData] = useState<FlightSearchParams>(() => {
+    const today = new Date().toISOString().split('T')[0];
+    return {
+      ...defaultSearchParams.flights,
+      departureDate: defaultSearchParams.flights.departureDate || today,
+    };
+  });
+
+  const [hotelData, setHotelData] = useState<HotelSearchParams>(() => {
     const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
-
     const format = (d: Date) => d.toISOString().split('T')[0];
-    const formatDisplay = (d: Date) =>
-      d.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    return {
+      ...defaultSearchParams.hotels,
+      checkIn: defaultSearchParams.hotels.checkIn || format(today),
+      checkOut: defaultSearchParams.hotels.checkOut || format(tomorrow),
+    };
+  });
 
-    if (!flightData.departureDate) {
-      setFlightData((prev) => ({ ...prev, departureDate: format(today) }));
-    }
-    if (!hotelData.checkIn) {
-      setHotelData((prev) => ({ ...prev, checkIn: format(today), checkOut: format(tomorrow) }));
-    }
-    if (!packageData.travelDate) {
-      setPackageData((prev) => ({ ...prev, travelDate: format(today) }));
-    }
-  }, []);
+  const [packageData, setPackageData] = useState<PackageSearchParams>(() => {
+    const today = new Date().toISOString().split('T')[0];
+    return {
+      ...defaultSearchParams.packages,
+      travelDate: defaultSearchParams.packages.travelDate || today,
+    };
+  });
 
-  const handleSearch = async () => {
+  const [visaData, setVisaData] = useState<VisaSearchParams>(defaultSearchParams.visa);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleSearch = () => {
     setIsLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setIsLoading(false);
 
-    if (cardRef.current) {
-      cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (activeTab === 'flights') {
+      const from = flightData.from || 'DAC';
+      const to = flightData.to || 'KUL';
+      const depart = flightData.departureDate || new Date().toISOString().split('T')[0];
+      const cabin = flightData.class || 'economy';
+      const adults = flightData.passengers || 1;
+      router.push(
+        `/flights/results?from=${encodeURIComponent(from)}&to=${encodeURIComponent(
+          to
+        )}&depart=${encodeURIComponent(depart)}&cabin=${cabin}&adults=${adults}&tripType=oneWay`
+      );
+    } else if (activeTab === 'hotels') {
+      const destination = hotelData.destination || 'Bangkok';
+      const checkIn = hotelData.checkIn || new Date().toISOString().split('T')[0];
+      const checkOut = hotelData.checkOut || '';
+      router.push(
+        `/hotels/results?destination=${encodeURIComponent(
+          destination
+        )}&checkIn=${encodeURIComponent(checkIn)}&checkOut=${encodeURIComponent(
+          checkOut
+        )}&guests=${hotelData.guests || 2}&rooms=${hotelData.rooms || 1}`
+      );
+    } else if (activeTab === 'packages') {
+      router.push('/packages');
+    } else if (activeTab === 'visa') {
+      router.push('/visa-info');
     }
+
+    setIsLoading(false);
   };
 
   const swapAirports = () => {
@@ -118,31 +138,29 @@ export function BookingSearch({ defaultTab = 'flights' }: BookingSearchProps) {
 
   const renderFlightForm = () => (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
-      <Input
+      <AirportCombobox
         label="From"
         value={flightData.from}
-        onChange={(e) => setFlightData((prev) => ({ ...prev, from: e.target.value.toUpperCase() }))}
-        placeholder="DAC"
+        onChange={(code) => setFlightData((prev) => ({ ...prev, from: code }))}
+        placeholder="DAC - Dhaka"
         id="flight-from"
-        className="rounded-xs"
       />
       <div className="flex items-center justify-center md:justify-start">
         <button
           type="button"
           onClick={swapAirports}
-          className="p-2 rounded-xs bg-neutral-100 hover:bg-neutral-200 text-text-tertiary hover:text-text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
+          className="p-2.5 rounded-xs bg-neutral-100 hover:bg-neutral-200 text-text-tertiary hover:text-text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary cursor-pointer"
           aria-label="Swap origin and destination"
         >
           <Icon name="swapHorizontal" size={20} />
         </button>
       </div>
-      <Input
+      <AirportCombobox
         label="To"
         value={flightData.to}
-        onChange={(e) => setFlightData((prev) => ({ ...prev, to: e.target.value.toUpperCase() }))}
-        placeholder="KUL"
+        onChange={(code) => setFlightData((prev) => ({ ...prev, to: code }))}
+        placeholder="KUL - Kuala Lumpur"
         id="flight-to"
-        className="rounded-xs"
       />
       <div className="md:col-span-2 grid grid-cols-2 gap-4">
         <Input
@@ -162,7 +180,7 @@ export function BookingSearch({ defaultTab = 'flights' }: BookingSearchProps) {
             const [passengers, cls] = e.target.value.split(',');
             setFlightData((prev) => ({
               ...prev,
-              passengers: parseInt(passengers),
+              passengers: parseInt(passengers, 10),
               class: cls as FlightSearchParams['class'],
             }));
           }}
@@ -171,7 +189,7 @@ export function BookingSearch({ defaultTab = 'flights' }: BookingSearchProps) {
               classOptions.map((c) => ({
                 value: `${p.value},${c.value}`,
                 label: `${p.label}, ${c.label}`,
-              })),
+              }))
             ),
           ]}
           id="flight-passengers-class"
@@ -213,7 +231,9 @@ export function BookingSearch({ defaultTab = 'flights' }: BookingSearchProps) {
           label="Guests"
           className="rounded-xs"
           value={hotelData.guests.toString()}
-          onChange={(e) => setHotelData((prev) => ({ ...prev, guests: parseInt(e.target.value) }))}
+          onChange={(e) =>
+            setHotelData((prev) => ({ ...prev, guests: parseInt(e.target.value, 10) }))
+          }
           options={guestOptions}
           id="hotel-guests"
         />
@@ -221,7 +241,9 @@ export function BookingSearch({ defaultTab = 'flights' }: BookingSearchProps) {
           label="Rooms"
           className="rounded-xs"
           value={hotelData.rooms.toString()}
-          onChange={(e) => setHotelData((prev) => ({ ...prev, rooms: parseInt(e.target.value) }))}
+          onChange={(e) =>
+            setHotelData((prev) => ({ ...prev, rooms: parseInt(e.target.value, 10) }))
+          }
           options={roomOptions}
           id="hotel-rooms"
         />
@@ -253,7 +275,7 @@ export function BookingSearch({ defaultTab = 'flights' }: BookingSearchProps) {
         className="rounded-xs"
         value={packageData.travellers.toString()}
         onChange={(e) =>
-          setPackageData((prev) => ({ ...prev, travellers: parseInt(e.target.value) }))
+          setPackageData((prev) => ({ ...prev, travellers: parseInt(e.target.value, 10) }))
         }
         options={travellerOptions}
         id="package-travellers"
@@ -285,12 +307,12 @@ export function BookingSearch({ defaultTab = 'flights' }: BookingSearchProps) {
   return (
     <div
       ref={cardRef}
-      className="relative -mt-10 z-100 container"
+      className="relative -mt-10 z-10 container mx-auto px-4"
       role="search"
       aria-label="Travel booking search"
     >
-      <Card variant="elevated" padding="lg" className="rounded-xs">
-        <div className="border-b border-border-light mb-6">
+      <Card variant="elevated" padding="lg" className="rounded-xs shadow-lg">
+        <div className="border-b border-neutral-200 mb-6">
           <nav
             aria-label="Search type"
             className="flex overflow-x-auto gap-1 pb-1 -mb-1"
@@ -304,13 +326,13 @@ export function BookingSearch({ defaultTab = 'flights' }: BookingSearchProps) {
                 aria-controls={`panel-${tab.id}`}
                 id={`tab-${tab.id}`}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-xs transition-all duration-150 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 ${
+                className={`flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-xs transition-all duration-150 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 cursor-pointer ${
                   activeTab === tab.id
-                    ? 'bg-brand-primary text-white shadow-sm'
+                    ? 'bg-brand-primary text-white shadow-xs'
                     : 'text-text-secondary hover:text-text-primary hover:bg-neutral-100'
                 }`}
               >
-                <Icon name={tab.icon as any} size={18} />
+                <Icon name={tab.icon} size={18} />
                 {tab.label}
               </button>
             ))}
@@ -323,14 +345,13 @@ export function BookingSearch({ defaultTab = 'flights' }: BookingSearchProps) {
           {activeTab === 'packages' && renderPackageForm()}
           {activeTab === 'visa' && renderVisaForm()}
 
-          <div className="mt-6 pt-6 border-t border-border-light">
+          <div className="mt-6 pt-6 border-t border-neutral-200">
             <Button
               variant="primary"
               size="md"
-              fullWidth
               onClick={handleSearch}
               loading={isLoading}
-              className="w-full sm:w-auto rounded-xs"
+              className="w-full sm:w-auto rounded-xs font-bold"
             >
               <Icon name="search" size={20} />
               {activeTab === 'flights' && 'Search Flights'}

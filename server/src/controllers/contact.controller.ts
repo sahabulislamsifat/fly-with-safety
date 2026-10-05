@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import * as contactService from '../services/contact.service.js';
 import { success } from '../utils/response.js';
+import { AppError } from '../utils/errors.js';
 
 export async function submitContact(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
@@ -30,7 +31,7 @@ export async function getContactMessageById(req: Request, res: Response, next: N
   try {
     const message = await contactService.getContactMessageById(req.params.id);
     if (!message) {
-      res.status(404).json({ success: false, error: { code: 'NOT_FOUND', message: 'Message not found' } });
+      next(AppError.notFound('Message not found'));
       return;
     }
     res.json(success({ message }));

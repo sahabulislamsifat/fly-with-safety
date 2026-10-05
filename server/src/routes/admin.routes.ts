@@ -9,17 +9,20 @@ import * as visaService from '../services/visa.service.js';
 import * as destinationService from '../services/destination.service.js';
 import { success } from '../utils/response.js';
 import { Request, Response, NextFunction } from 'express';
+import { validate } from '../middleware/validation.middleware.js';
+import { contactStatusSchema, inquiryStatusSchema } from '../validators/admin.schemas.js';
+import * as bookingController from '../controllers/booking.controller.js';
+import { updateBookingStatusSchema } from '../validators/booking.schemas.js';
 
 const router = Router();
 
 // All admin routes require authentication AND ADMIN/STAFF role
-router.use(requireAuth);
-router.use(requireRole('ADMIN', 'STAFF'));
+router.use('/admin', requireAuth, requireRole('ADMIN', 'STAFF'));
 
 // ─── Contact Messages ────────────────────────────────────────────────────────
 router.get('/admin/contact', contactController.getContactMessages);
 router.get('/admin/contact/:id', contactController.getContactMessageById);
-router.patch('/admin/contact/:id/status', contactController.updateContactStatus);
+router.patch('/admin/contact/:id/status', validate(contactStatusSchema), contactController.updateContactStatus);
 
 // ─── Testimonials ────────────────────────────────────────────────────────────
 router.get('/admin/testimonials', testimonialController.adminGetTestimonials);
@@ -39,7 +42,7 @@ router.get('/admin/inquiries/flights', async (req: Request, res: Response, next:
   } catch (err) { next(err); }
 });
 
-router.patch('/admin/inquiries/flights/:id/status', async (req: Request, res: Response, next: NextFunction) => {
+router.patch('/admin/inquiries/flights/:id/status', validate(inquiryStatusSchema), async (req: Request, res: Response, next: NextFunction) => {
   try {
     const inquiry = await flightService.updateFlightInquiryStatus(req.params.id, req.body.status);
     res.json(success({ inquiry }));
@@ -58,7 +61,7 @@ router.get('/admin/inquiries/hotels', async (req: Request, res: Response, next: 
   } catch (err) { next(err); }
 });
 
-router.patch('/admin/inquiries/hotels/:id/status', async (req: Request, res: Response, next: NextFunction) => {
+router.patch('/admin/inquiries/hotels/:id/status', validate(inquiryStatusSchema), async (req: Request, res: Response, next: NextFunction) => {
   try {
     const inquiry = await hotelService.updateHotelInquiryStatus(req.params.id, req.body.status);
     res.json(success({ inquiry }));
@@ -77,7 +80,7 @@ router.get('/admin/inquiries/packages', async (req: Request, res: Response, next
   } catch (err) { next(err); }
 });
 
-router.patch('/admin/inquiries/packages/:id/status', async (req: Request, res: Response, next: NextFunction) => {
+router.patch('/admin/inquiries/packages/:id/status', validate(inquiryStatusSchema), async (req: Request, res: Response, next: NextFunction) => {
   try {
     const inquiry = await packageService.updatePackageInquiryStatus(req.params.id, req.body.status);
     res.json(success({ inquiry }));
@@ -96,7 +99,7 @@ router.get('/admin/inquiries/visa', async (req: Request, res: Response, next: Ne
   } catch (err) { next(err); }
 });
 
-router.patch('/admin/inquiries/visa/:id/status', async (req: Request, res: Response, next: NextFunction) => {
+router.patch('/admin/inquiries/visa/:id/status', validate(inquiryStatusSchema), async (req: Request, res: Response, next: NextFunction) => {
   try {
     const inquiry = await visaService.updateVisaInquiryStatus(req.params.id, req.body.status);
     res.json(success({ inquiry }));
@@ -150,4 +153,13 @@ router.get('/admin/visa', async (req: Request, res: Response, next: NextFunction
   } catch (err) { next(err); }
 });
 
+// ─── Bookings ─────────────────────────────────────────────────────────────────
+router.get('/admin/bookings', bookingController.adminGetBookings);
+router.patch(
+  '/admin/bookings/:id/status',
+  validate(updateBookingStatusSchema),
+  bookingController.adminUpdateBookingStatus
+);
+
 export default router;
+

@@ -1,6 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
-import { AppError, isAppError } from '../utils/errors.js';
+import { isAppError } from '../utils/errors.js';
 import { error as errorResponse } from '../utils/response.js';
+import { logger, serializeError } from '../lib/logger.js';
+
+interface PrismaLikeError {
+  code?: string;
+  name?: string;
+}
 
 export function errorHandler(
   err: Error,
@@ -8,34 +14,36 @@ export function errorHandler(
   res: Response,
   _next: NextFunction
 ): void {
-  console.error('Error:', err);
-
   if (isAppError(err)) {
-    res.status(err.statusCode).json(
-      errorResponse(err.code, err.message, err.details)
-    );
+    if (err.statusCode >= 500) logger.error('app_error', serializeError(err));
+    res.status(err.statusCode).json(errorResponse(err.code, err.message, err.details));
     return;
   }
 
-  if (err.name === 'ValidationError') {
-    res.status(400).json(
-      errorResponse('VALIDATION_ERROR', err.message)
-    );
+  // Malformed JSON body (body-parser)
+  if (err.name === 'SyntaxError' && (err as { status?: number }).status === 400) {
+    res.status(400).json(errorResponse('INVALID_JSON', 'Invalid JSON payload'));
     return;
   }
 
-  if (err.name === 'SyntaxError' && 'status' in err && (err as any).status === 400) {
-    res.status(400).json(
-      errorResponse('INVALID_JSON', 'Invalid JSON payload')
-    );
+  // Body too large (body-parser)
+  if ((err as { type?: string }).type === 'entity.too.large') {
+    res.status(413).json(errorResponse('PAYLOAD_TOO_LARGE', 'Request body too large'));
     return;
   }
 
-  const message = process.env.NODE_ENV === 'production'
-    ? 'Internal server error'
-    : err.message;
+  // Prisma known request errors — map without leaking internals
+  const prismaErr = err as PrismaLikeError;
+  if (prismaErr.code === 'P2025') {
+    res.status(404).json(errorResponse('NOT_FOUND', 'Resource not found'));
+    return;
+  }
+  if (prismaErr.code === 'P2002') {
+    res.status(409).json(errorResponse('CONFLICT', 'Resource already exists'));
+    return;
+  }
 
-  res.status(500).json(
-    errorResponse('INTERNAL_ERROR', message)
-  );
+  // Unknown: log full detail server-side, return a sanitised message always.
+  logger.error('unhandled_error', serializeError(err));
+  res.status(500).json(errorResponse('INTERNAL_ERROR', 'Internal server error'));
 }

@@ -28,7 +28,7 @@ export default function ContactPage() {
               id="contact-heading"
               className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
             >
-              We're Here to Help
+              We&apos;re Here to Help
             </h1>
             <p className="text-lg sm:text-xl text-white/90 leading-relaxed mb-8 max-w-xl mx-auto">
               Have questions about your booking? Need travel advice? Our friendly support team is

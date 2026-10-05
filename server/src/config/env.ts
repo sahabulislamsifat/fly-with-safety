@@ -89,15 +89,29 @@ export const env = {
 export type Env = typeof env;
 
 export function validateEnv(): void {
+  const problems: string[] = [];
+
   if (!['development', 'production', 'test'].includes(env.nodeEnv)) {
-    throw new Error(`Invalid NODE_ENV: ${env.nodeEnv}`);
+    problems.push(`Invalid NODE_ENV: ${env.nodeEnv}`);
   }
   if (env.port < 1 || env.port > 65535) {
-    throw new Error(`Invalid PORT: ${env.port}`);
+    problems.push(`Invalid PORT: ${env.port}`);
   }
   try {
     new URL(env.corsOrigin);
   } catch {
-    throw new Error(`Invalid CORS_ORIGIN: ${env.corsOrigin}`);
+    problems.push(`Invalid CORS_ORIGIN: ${env.corsOrigin}`);
+  }
+  if (env.nodeEnv !== 'test' && !env.databaseUrl) {
+    problems.push('DATABASE_URL is required');
+  }
+  if (env.nodeEnv === 'production') {
+    if (env.jwtSecret === 'dev-secret-change-in-production' || env.jwtSecret.length < 32) {
+      problems.push('JWT_SECRET must be set to a random value of at least 32 characters in production');
+    }
+  }
+
+  if (problems.length > 0) {
+    throw new Error(`Environment validation failed:\n - ${problems.join('\n - ')}`);
   }
 }
