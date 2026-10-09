@@ -79,7 +79,7 @@ export function BookingModal() {
       aria-labelledby="booking-modal-title"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs overflow-y-auto"
     >
-      <div className="relative w-full max-w-2xl bg-white rounded-md shadow-2xl overflow-hidden my-8 max-h-[90vh] flex flex-col">
+      <div className="relative w-full max-w-2xl bg-white rounded-xs shadow-2xl overflow-hidden my-8 max-h-[90vh] flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-200 bg-neutral-50">
           <div>
@@ -93,7 +93,7 @@ export function BookingModal() {
           <button
             type="button"
             onClick={handleClose}
-            className="p-2 text-text-tertiary hover:text-text-primary rounded-full hover:bg-neutral-200 transition-colors"
+            className="p-2 text-text-tertiary hover:text-text-primary rounded-xs hover:bg-neutral-200 transition-colors"
             aria-label="Close dialog"
           >
             <Icon name="x" size={20} />
@@ -104,7 +104,7 @@ export function BookingModal() {
         <div className="p-6 overflow-y-auto flex-1">
           {recentBooking ? (
             <div className="text-center py-6 space-y-4">
-              <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
+              <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-xs flex items-center justify-center mx-auto">
                 <Icon name="check" size={32} />
               </div>
               <h3 className="text-xl font-bold text-text-primary">
@@ -114,7 +114,7 @@ export function BookingModal() {
                 Your booking request has been securely registered in our system. A FlyWithSafe travel specialist will review your itinerary and contact you shortly.
               </p>
 
-              <div className="bg-neutral-50 border border-neutral-200 rounded-sm p-4 max-w-md mx-auto text-left space-y-2">
+              <div className="bg-neutral-50 border border-neutral-200 rounded-xs p-4 max-w-md mx-auto text-left space-y-2">
                 <div className="flex justify-between items-center text-sm">
                   <span className="text-text-secondary">Reference Code:</span>
                   <span className="font-mono font-bold text-brand-primary text-base">
@@ -123,7 +123,7 @@ export function BookingModal() {
                 </div>
                 <div className="flex justify-between items-center text-sm">
                   <span className="text-text-secondary">Status:</span>
-                  <span className="px-2 py-0.5 rounded text-xs font-semibold bg-amber-100 text-amber-800">
+                  <span className="px-2 py-0.5 rounded-xs text-xs font-semibold bg-amber-100 text-amber-800">
                     {recentBooking.status}
                   </span>
                 </div>
@@ -154,7 +154,7 @@ export function BookingModal() {
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Summary Banner */}
-              <div className="p-4 bg-brand-primary/5 border border-brand-primary/15 rounded-sm flex items-center justify-between">
+              <div className="p-4 bg-brand-primary/5 border border-brand-primary/15 rounded-xs flex items-center justify-between">
                 <div>
                   <p className="text-xs text-text-secondary">Selected Itinerary</p>
                   <p className="text-sm font-bold text-text-primary">{bookingTarget.title}</p>
@@ -300,7 +300,7 @@ export function BookingModal() {
                 >
                   {submitStatus === 'loading' ? (
                     <span className="flex items-center gap-2">
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-xs animate-spin" />
                       Submitting Request...
                     </span>
                   ) : (

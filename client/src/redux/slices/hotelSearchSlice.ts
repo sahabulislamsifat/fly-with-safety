@@ -19,6 +19,7 @@ export interface HotelSearchState {
   error: string | null;
   searchParams: HotelSearchPayload | null;
   hotels: HotelOffer[];
+  isDemoData: boolean;
   filters: HotelFilters;
   sortBy: HotelSortOption;
   selectedHotel: HotelOffer | null;
@@ -29,6 +30,7 @@ const initialState: HotelSearchState = {
   error: null,
   searchParams: null,
   hotels: [],
+  isDemoData: true,
   filters: {
     maxPrice: null,
     minRating: null,
@@ -100,6 +102,7 @@ export const hotelSearchSlice = createSlice({
       .addCase(fetchHotelOffers.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.hotels = action.payload.results || [];
+        state.isDemoData = action.payload.results?.some((r) => r.isDemoData) ?? true;
         state.error = null;
       })
       .addCase(fetchHotelOffers.rejected, (state, action) => {

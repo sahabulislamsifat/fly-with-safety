@@ -35,7 +35,7 @@ function HotelResultsContent() {
   const [editOut, setEditOut] = useState(checkOut);
   const [isEditing, setIsEditing] = useState(false);
 
-  const { status, error, hotels, filters, sortBy } = useAppSelector(
+  const { status, error, hotels, isDemoData, filters, sortBy } = useAppSelector(
     (state) => state.hotelSearch
   );
 
@@ -119,7 +119,7 @@ function HotelResultsContent() {
           {isEditing && (
             <form
               onSubmit={handleUpdate}
-              className="mt-6 p-4 bg-white text-text-primary rounded-sm shadow-md grid grid-cols-1 sm:grid-cols-4 gap-4 items-end"
+              className="mt-6 p-4 bg-white text-text-primary rounded-xs shadow-md grid grid-cols-1 sm:grid-cols-4 gap-4 items-end"
             >
               <Input
                 label="Destination"
@@ -148,10 +148,25 @@ function HotelResultsContent() {
 
       {/* Main Grid */}
       <div className="container mx-auto px-4 py-8">
+        {/* Demo banner indicator */}
+        {isDemoData && (
+          <div className="mb-6 p-3.5 bg-amber-50 border border-amber-200 rounded-xs flex items-center justify-between text-xs text-amber-900">
+            <div className="flex items-center gap-2">
+              <Icon name="info" size={18} className="text-amber-700 shrink-0" />
+              <span>
+                <strong>Demonstration Inventory:</strong> Current hotel properties are generated via FlyWithSafe&apos;s provider abstraction engine. Live reservations and room availability are confirmed by our travel desk.
+              </span>
+            </div>
+            <span className="font-mono px-2 py-0.5 rounded-xs bg-amber-200 text-amber-900 text-[10px] font-bold shrink-0">
+              DEMO MODE
+            </span>
+          </div>
+        )}
+
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Filters */}
           <aside className="lg:col-span-1 space-y-6">
-            <Card className="p-5 bg-white border border-neutral-200 rounded-sm space-y-6 shadow-xs">
+            <Card className="p-5 bg-white border border-neutral-200 rounded-xs space-y-6 shadow-xs">
               <div className="flex items-center justify-between border-b pb-3">
                 <h3 className="font-bold text-sm text-text-primary flex items-center gap-2">
                   <Icon name="filter" size={16} /> Filters
@@ -180,7 +195,7 @@ function HotelResultsContent() {
                         type="checkbox"
                         checked={filters.stars.includes(star)}
                         onChange={() => dispatch(toggleHotelStar(star))}
-                        className="rounded border-neutral-300 text-brand-primary"
+                        className="rounded-xs border-neutral-300 text-brand-primary"
                       />
                       <span className="flex items-center gap-1">
                         {star} Stars
@@ -218,7 +233,7 @@ function HotelResultsContent() {
           {/* Hotel Cards List */}
           <main className="lg:col-span-3 space-y-4">
             {/* Sort bar */}
-            <div className="flex items-center justify-between bg-white p-2.5 rounded-sm border border-neutral-200">
+            <div className="flex items-center justify-between bg-white p-2.5 rounded-xs border border-neutral-200">
               <span className="text-xs text-text-secondary font-medium">
                 Showing <strong>{processedHotels.length}</strong> verified properties
               </span>
@@ -227,7 +242,7 @@ function HotelResultsContent() {
                 <select
                   value={sortBy}
                   onChange={(e) => dispatch(setHotelSortBy(e.target.value as HotelSortOption))}
-                  className="bg-neutral-50 border border-neutral-200 rounded px-2 py-1 text-text-primary font-medium"
+                  className="bg-neutral-50 border border-neutral-200 rounded-xs px-2 py-1 text-text-primary font-medium"
                 >
                   <option value="recommended">Recommended</option>
                   <option value="cheapest">Cheapest First</option>
@@ -242,13 +257,13 @@ function HotelResultsContent() {
                 {[1, 2, 3].map((n) => (
                   <div
                     key={n}
-                    className="p-6 bg-white border border-neutral-200 rounded-sm animate-pulse flex gap-4"
+                    className="p-6 bg-white border border-neutral-200 rounded-xs animate-pulse flex gap-4"
                   >
-                    <div className="w-36 h-28 bg-neutral-200 rounded" />
+                    <div className="w-36 h-28 bg-neutral-200 rounded-xs" />
                     <div className="flex-1 space-y-3">
-                      <div className="h-6 w-48 bg-neutral-200 rounded" />
-                      <div className="h-4 w-32 bg-neutral-100 rounded" />
-                      <div className="h-4 w-64 bg-neutral-100 rounded" />
+                      <div className="h-6 w-48 bg-neutral-200 rounded-xs" />
+                      <div className="h-4 w-32 bg-neutral-100 rounded-xs" />
+                      <div className="h-4 w-64 bg-neutral-100 rounded-xs" />
                     </div>
                   </div>
                 ))}
@@ -257,7 +272,7 @@ function HotelResultsContent() {
 
             {/* Error */}
             {status === 'failed' && (
-              <div className="p-8 bg-white border border-red-200 rounded-sm text-center space-y-3">
+              <div className="p-8 bg-white border border-red-200 rounded-xs text-center space-y-3">
                 <p className="text-red-600 font-bold">{error}</p>
                 <Button
                   variant="primary"
@@ -280,7 +295,7 @@ function HotelResultsContent() {
 
             {/* Empty */}
             {status === 'succeeded' && processedHotels.length === 0 && (
-              <div className="p-12 bg-white border border-neutral-200 rounded-sm text-center space-y-3">
+              <div className="p-12 bg-white border border-neutral-200 rounded-xs text-center space-y-3">
                 <Icon name="hotel" size={32} className="text-neutral-400 mx-auto" />
                 <h3 className="font-bold text-base text-text-primary">No Hotels Found</h3>
                 <p className="text-xs text-text-secondary">
@@ -294,7 +309,7 @@ function HotelResultsContent() {
               processedHotels.map((hotel) => (
                 <Card
                   key={hotel.id}
-                  className="p-5 bg-white border border-neutral-200 rounded-sm hover:border-brand-primary/40 shadow-xs flex flex-col sm:flex-row gap-5"
+                  className="p-5 bg-white border border-neutral-200 rounded-xs hover:border-brand-primary/40 shadow-xs flex flex-col sm:flex-row gap-5"
                 >
                   <div className="sm:w-48 h-36 bg-neutral-100 rounded-xs overflow-hidden relative shrink-0">
                     <Image
@@ -305,7 +320,7 @@ function HotelResultsContent() {
                       sizes="(max-width: 640px) 100vw, 192px"
                       unoptimized
                     />
-                    <div className="absolute top-2 left-2 bg-black/70 text-white text-[10px] font-bold px-2 py-0.5 rounded">
+                    <div className="absolute top-2 left-2 bg-black/70 text-white text-[10px] font-bold px-2 py-0.5 rounded-xs">
                       {hotel.starRating} ★
                     </div>
                   </div>
@@ -318,7 +333,7 @@ function HotelResultsContent() {
                           <p className="text-xs text-text-secondary">{hotel.destination}</p>
                         </div>
                         <div className="text-right">
-                          <span className="px-2 py-1 bg-brand-primary/10 text-brand-primary font-bold text-xs rounded">
+                          <span className="px-2 py-1 bg-brand-primary/10 text-brand-primary font-bold text-xs rounded-xs">
                             {hotel.reviewScore} / 10
                           </span>
                           <span className="block text-[10px] text-text-tertiary mt-0.5">
@@ -331,7 +346,7 @@ function HotelResultsContent() {
                         {hotel.amenities.map((a) => (
                           <span
                             key={a}
-                            className="text-[11px] px-2 py-0.5 bg-neutral-100 text-text-secondary rounded"
+                            className="text-[11px] px-2 py-0.5 bg-neutral-100 text-text-secondary rounded-xs"
                           >
                             {a}
                           </span>
@@ -391,7 +406,7 @@ export default function HotelResultsPage() {
       fallback={
         <div className="min-h-screen flex items-center justify-center bg-neutral-50">
           <div className="text-center space-y-3">
-            <div className="w-8 h-8 border-4 border-brand-primary border-t-transparent rounded-full animate-spin mx-auto" />
+            <div className="w-8 h-8 border-4 border-brand-primary border-t-transparent rounded-xs animate-spin mx-auto" />
             <p className="text-sm font-semibold text-text-secondary">Searching hotels...</p>
           </div>
         </div>

@@ -29,7 +29,9 @@ export default function FlightsPage() {
         </div>
       </section>
 
-      <BookingSearch defaultTab="flights" />
+      <div className="py-6 px-4">
+        <BookingSearch defaultTab="flights" isOverlapping={false} />
+      </div>
 
       <Partners />
 

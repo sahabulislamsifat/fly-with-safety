@@ -1,42 +1,95 @@
-import Image from 'next/image';
-import { Icon } from '@/components/ui/Icons';
+'use client';
 
-export function Hero() {
+import { useState, useEffect, useCallback } from 'react';
+import { HeroCarousel, heroSlides } from './HeroCarousel';
+import { DestinationDiscoveryCard } from './DestinationDiscoveryCard';
+
+interface HeroProps {
+  children?: React.ReactNode;
+  onSelectRoute?: (from: string, to: string) => void;
+}
+
+export function Hero({ children, onSelectRoute }: HeroProps) {
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  const nextSlide = useCallback(() => {
+    setActiveSlide((prev) => (prev + 1) % heroSlides.length);
+  }, []);
+
+  // Automatic slide progression every 5.5 seconds, paused when tab is hidden
+  useEffect(() => {
+    let timer = setInterval(() => {
+      if (typeof document !== 'undefined' && document.visibilityState === 'visible') {
+        nextSlide();
+      }
+    }, 5500);
+
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') {
+        clearInterval(timer);
+        timer = setInterval(nextSlide, 5500);
+      } else {
+        clearInterval(timer);
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibility);
+    return () => {
+      clearInterval(timer);
+      document.removeEventListener('visibilitychange', handleVisibility);
+    };
+  }, [nextSlide]);
+
   return (
     <section
-      className="relative min-h-[70vh] sm:min-h-[80vh] lg:min-h-[90vh] flex items-center"
-      aria-labelledby="hero-heading"
+      className="relative pt-3 sm:pt-5 pb-6 lg:pb-10"
+      aria-label="Homepage hero banner and booking search"
     >
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1920&h=1080&fit=crop"
-          alt=""
-          fill
-          priority
-          className="object-cover"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-linear-to-b from-brand-primary/70 via-brand-primary/60 to-brand-primary/80" />
-      </div>
+      {/* 1. Wide, Rounded Hero Banner Card */}
+      <div className="w-full max-w-433 mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative h-85 sm:h-88.75 lg:h-90 rounded-xs overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.12)]">
+          {/* Framer Motion Crossfade Carousel Background */}
+          <HeroCarousel activeIndex={activeSlide} />
 
-      <div className="relative z-10 container py-20 lg:py-32">
-        <div className="max-w-3xl">
-          <p className="text-sm sm:text-base font-medium text-white/90 uppercase tracking-wider mb-4">
-            <Icon name="shield" size={16} className="inline-block mr-2" />
-            TRAVEL MADE REASSURING
-          </p>
-          <h1
-            id="hero-heading"
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 text-balance"
+          {/* Upper-Right Carousel Dash Indicators */}
+          <div
+            className="absolute top-6 right-6 sm:top-8 sm:right-8 z-20 flex items-center gap-1.5 select-none"
+            role="tablist"
+            aria-label="Carousel slide selectors"
           >
-            EXPLORE THE WORLD <span className="text-brand-cta">WITH SAFETY</span>
-          </h1>
-          <p className="text-lg sm:text-xl text-white/90 leading-relaxed mb-8 max-w-xl">
-            Find best deals on Flights, Hotels & Packages with our trusted travel partners. Book
-            with confidence and enjoy a safe journey.
-          </p>
+            {heroSlides.map((slide, idx) => {
+              const isActive = activeSlide === idx;
+              return (
+                <button
+                  key={slide.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-label={`Show slide ${idx + 1}: ${slide.location}`}
+                  onClick={() => setActiveSlide(idx)}
+                  className="p-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-xs cursor-pointer"
+                >
+                  <span
+                    className={`block h-1 rounded-xs transition-all duration-300 ${
+                      isActive
+                        ? 'w-7 sm:w-8 bg-white shadow-2xs'
+                        : 'w-4 sm:w-5 bg-white/40 hover:bg-white/70'
+                    }`}
+                  />
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Floating Destination-Discovery Card inside Upper-Left Area */}
+          <div className="absolute top-5 left-5 sm:top-7 sm:left-8 lg:left-12 z-20">
+            <DestinationDiscoveryCard onSelectRoute={onSelectRoute} />
+          </div>
         </div>
       </div>
+
+      {/* 2. Overlapping Booking Card & Children */}
+      {children}
     </section>
   );
 }

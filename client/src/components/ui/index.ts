@@ -12,3 +12,5 @@ export type { BadgeProps } from './Badge';
 
 export { Icon } from './Icons';
 export type { IconName } from './Icons';
+
+export { Marquee } from '@/components/ui/marquee';

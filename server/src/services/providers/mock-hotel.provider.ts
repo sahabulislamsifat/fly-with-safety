@@ -22,25 +22,24 @@ function nightsBetween(checkIn: string, checkOut: string): number {
   return Math.max(1, Math.round((b.getTime() - a.getTime()) / (1000 * 60 * 60 * 24)));
 }
 
-function randomInt(min: number, max: number): number {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 export class MockHotelProvider implements HotelProvider {
-  readonly name = 'MockHotelProvider (Demo)';
+  readonly name = 'FlyWithSafe Mock Hotel Aggregator';
 
   async searchHotels(params: HotelSearchParams): Promise<HotelSearchResult[]> {
-    await new Promise((resolve) => setTimeout(resolve, 200));
+    await new Promise((resolve) => setTimeout(resolve, 100));
 
     const nights = nightsBetween(params.checkIn, params.checkOut);
+    const destSlug = params.destination.toLowerCase().replace(/[^a-z0-9]/g, '');
 
     return HOTELS.map((hotel, i) => {
-      const pricePerNight = hotel.stars * randomInt(20, 60);
+      // Deterministic pricing and stats
+      const basePerNight = hotel.stars * 35 + i * 15;
+      const pricePerNight = basePerNight;
       const totalPrice = pricePerNight * nights * params.rooms;
 
       return {
-        id: `mock-hotel-${i}-${Date.now()}`,
-        name: hotel.name,
+        id: `fws-hotel-${destSlug}-${i}`,
+        name: `${hotel.name} ${params.destination}`,
         destination: params.destination,
         starRating: hotel.stars,
         pricePerNight,
@@ -48,8 +47,8 @@ export class MockHotelProvider implements HotelProvider {
         currency: 'USD',
         amenities: hotel.amenities,
         imageUrl: UNSPLASH_HOTEL_IMAGES[i % UNSPLASH_HOTEL_IMAGES.length],
-        reviewScore: +(3.5 + hotel.stars * 0.2 + Math.random() * 0.5).toFixed(1),
-        reviewCount: randomInt(50, 500),
+        reviewScore: +(3.8 + hotel.stars * 0.2 + (i % 3) * 0.1).toFixed(1),
+        reviewCount: 140 + i * 65,
         isDemoData: true,
       };
     }).sort((a, b) => a.totalPrice - b.totalPrice);

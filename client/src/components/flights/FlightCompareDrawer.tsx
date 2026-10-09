@@ -42,7 +42,7 @@ export function FlightCompareDrawer() {
           <button
             type="button"
             onClick={() => dispatch(setCompareDrawerOpen(!isDrawerOpen))}
-            className="p-1 text-neutral-300 hover:text-white rounded cursor-pointer"
+            className="p-1 text-neutral-300 hover:text-white rounded-xs cursor-pointer"
             aria-label={isDrawerOpen ? 'Collapse comparison' : 'Expand comparison'}
           >
             <Icon name={isDrawerOpen ? 'chevronDown' : 'chevronUp'} size={20} />
@@ -105,7 +105,7 @@ export function FlightCompareDrawer() {
 
                   <div className="h-8 flex items-center">
                     <span
-                      className={`text-xs px-2 py-0.5 rounded-full font-medium ${
+                      className={`text-xs px-2 py-0.5 rounded-xs font-medium ${
                         offer.stopsCount === 0
                           ? 'bg-emerald-100 text-emerald-800'
                           : 'bg-amber-100 text-amber-800'

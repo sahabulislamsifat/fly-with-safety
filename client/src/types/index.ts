@@ -1,12 +1,40 @@
 export type SearchTab = 'flights' | 'hotels' | 'packages' | 'visa';
+export type TripType = 'oneWay' | 'roundTrip' | 'multiCity';
+
+export interface MultiCitySegment {
+  id: string;
+  from: string;
+  to: string;
+  departureDate: string;
+}
+
+export interface TrendingRoute {
+  id: string;
+  from: string;
+  to: string;
+  fromCity: string;
+  toCity: string;
+  fare: string;
+  rank: number;
+  isTopRanked?: boolean;
+}
+
+export interface PreferredAirline {
+  code: string;
+  name: string;
+  country?: string;
+}
 
 export interface FlightSearchParams {
+  tripType?: TripType;
   from: string;
   to: string;
   departureDate: string;
   returnDate?: string;
   passengers: number;
-  class: 'economy' | 'business' | 'first';
+  class: 'economy' | 'premiumEconomy' | 'business' | 'first';
+  preferredAirlines?: string[];
+  multiCitySegments?: MultiCitySegment[];
 }
 
 export interface HotelSearchParams {
@@ -86,4 +114,31 @@ export interface SocialLink {
 export interface PaymentMethod {
   name: string;
   icon: string;
+}
+
+export interface ExclusiveDeal {
+  id: string;
+  title: string;
+  subtitle: string;
+  tag: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+  ctaText: string;
+  href: string;
+  badge?: string;
+  startingPrice?: string;
+}
+
+export interface HolidayPackage {
+  id: string;
+  title: string;
+  destination: string;
+  country: string;
+  duration: string;
+  price: string;
+  image: string;
+  imageAlt: string;
+  tags?: string[];
+  featured?: boolean;
 }

@@ -23,7 +23,18 @@ const CONTACT_TRANSITIONS: Record<string, readonly string[]> = {
   CLOSED: ['IN_PROGRESS'],
 };
 
+/**
+ * Booking lifecycle: PENDING -> CONFIRMED/CANCELLED, CONFIRMED -> COMPLETED/CANCELLED.
+ */
+const BOOKING_TRANSITIONS: Record<string, readonly string[]> = {
+  PENDING: ['CONFIRMED', 'CANCELLED'],
+  CONFIRMED: ['COMPLETED', 'CANCELLED'],
+  COMPLETED: [],
+  CANCELLED: [],
+};
+
 export const INQUIRY_STATUSES = Object.keys(INQUIRY_TRANSITIONS) as [string, ...string[]];
+export const BOOKING_STATUSES = Object.keys(BOOKING_TRANSITIONS) as [string, ...string[]];
 export const CONTACT_STATUSES = ['NEW', 'IN_PROGRESS', 'RESOLVED'] as const;
 
 function assertTransition(
@@ -48,6 +59,10 @@ export function assertInquiryTransition(from: string, to: string): void {
   assertTransition(INQUIRY_TRANSITIONS, from, to, 'inquiry');
 }
 
+export function assertBookingTransition(from: string, to: string): void {
+  assertTransition(BOOKING_TRANSITIONS, from, to, 'booking');
+}
+
 export function assertContactTransition(from: string, to: string): void {
   assertTransition(CONTACT_TRANSITIONS, from, to, 'contact');
 }
@@ -63,6 +78,9 @@ export function canTransitionStatus(
 ): boolean {
   if (type === 'contact') {
     return CONTACT_TRANSITIONS[from]?.includes(to) ?? false;
+  }
+  if (type === 'booking') {
+    return BOOKING_TRANSITIONS[from]?.includes(to) ?? false;
   }
   return INQUIRY_TRANSITIONS[from]?.includes(to) ?? false;
 }
