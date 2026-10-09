@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon } from '@/components/ui/Icons';
+import { ApiError, signIn, startGoogleSignIn } from '@/lib/api';
 
 interface SignInModalProps {
   isOpen: boolean;
@@ -76,30 +77,19 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
 
     setIsSubmitting(true);
 
-    // Simulate API processing with honest response
-    setTimeout(() => {
-      setIsSubmitting(false);
-      // Since live backend authentication endpoint is in migration/integration phase:
-      setNoticeMessage(
-        'FlyWithSafe Member Portal integration is currently in scheduled maintenance. For immediate booking assistance or account inquiries, please reach our 24/7 desk.',
-      );
-    }, 800);
+    void signIn({ email, password })
+      .then(() => {
+        window.dispatchEvent(new Event('flywithsafe:auth-change'));
+        onClose();
+      })
+      .catch((error: unknown) => {
+        setErrorMessage(error instanceof ApiError ? error.message : 'Unable to sign in. Please try again.');
+      })
+      .finally(() => setIsSubmitting(false));
   };
 
   const handleGoogleSignIn = () => {
-    const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
-    if (googleClientId) {
-      // In production OAuth flow, redirect to Google OAuth URL
-      window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${encodeURIComponent(
-        googleClientId,
-      )}&redirect_uri=${encodeURIComponent(
-        window.location.origin,
-      )}/api/auth/callback/google&response_type=code&scope=openid%20email%20profile`;
-    } else {
-      setNoticeMessage(
-        'Google OAuth client credentials are not configured in environment variables. Please continue with agency support or email login.',
-      );
-    }
+    startGoogleSignIn();
   };
 
   if (!isClient) return null;
@@ -107,7 +97,7 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
   return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-9999 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+        <>
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -115,23 +105,24 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             onClick={onClose}
-            className="fixed inset-0 z-0 bg-neutral-950/70 backdrop-blur-sm"
+            className="fixed inset-0 z-40 bg-neutral-950/70 backdrop-blur-sm"
             aria-hidden="true"
           />
 
-          {/* Modal dialog card */}
-          <motion.div
-            ref={modalRef}
-            initial={{ opacity: 0, scale: 0.95, y: 16 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: 10 }}
-            transition={{ duration: 0.24, ease: 'easeOut' }}
-            className="relative z-10 my-auto grid w-full max-w-4xl max-h-[90vh] grid-cols-1 overflow-y-auto rounded-xs bg-white shadow-[0_25px_60px_rgba(0,0,0,0.35)] md:grid-cols-12 md:overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="signin-modal-title"
-          >
+          <div className="fixed inset-0 z-50 grid place-items-center overflow-y-auto p-4 sm:p-6">
+            {/* Modal dialog card */}
+            <motion.div
+              ref={modalRef}
+              initial={{ opacity: 0, scale: 0.95, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 10 }}
+              transition={{ duration: 0.24, ease: 'easeOut' }}
+              className="relative my-auto grid w-full max-w-4xl max-h-[90vh] grid-cols-1 overflow-y-auto rounded-xs bg-white shadow-[0_25px_60px_rgba(0,0,0,0.35)] md:grid-cols-12 md:overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="signin-modal-title"
+            >
             {/* Left panel stays visual support, not a mobile obstacle. */}
             <div className="relative hidden overflow-hidden bg-[linear-gradient(145deg,#4c1016_0%,#8B1D24_58%,#5b1219_100%)] p-7 text-white md:col-span-5 md:flex md:flex-col md:justify-between sm:p-9">
               <div
@@ -399,8 +390,9 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
                 </Link>
               </div>
             </div>
-          </motion.div>
-        </div>
+            </motion.div>
+          </div>
+        </>
       )}
     </AnimatePresence>,
     document.body,
