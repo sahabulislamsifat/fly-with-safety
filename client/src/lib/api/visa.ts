@@ -12,12 +12,12 @@ export interface VisaInfoItem {
 }
 
 export interface VisaInquiryPayload {
-  country: string;
-  visaType?: string;
+  destination: string;
+  nationality: string;
+  travelPurpose?: string;
   name: string;
   email: string;
   phone?: string;
-  travelDate?: string;
   notes?: string;
 }
 

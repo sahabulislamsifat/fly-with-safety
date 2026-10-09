@@ -194,6 +194,22 @@ describe('FlyWithsafety Server API Tests', () => {
       expect(res.status).toBe(422);
       expect(res.body.code).toBe('VALIDATION_ERROR');
     });
+
+    it('rejects invalid inquiry date and route combinations before persistence', async () => {
+      const flight = await request(app).post('/api/v1/flights/inquiries').send({
+        from: 'DAC', to: 'DAC', departureDate: '2026-11-20', tripType: 'oneWay',
+        name: 'Test User', email: 'test@example.com', cabinClass: 'economy',
+      });
+      expect(flight.status).toBe(422);
+      expect(flight.body.code).toBe('VALIDATION_ERROR');
+
+      const hotel = await request(app).post('/api/v1/hotels/inquiries').send({
+        destination: 'Dhaka', checkIn: '2026-11-20', checkOut: '2026-11-20', guests: 1, rooms: 1,
+        name: 'Test User', email: 'test@example.com',
+      });
+      expect(hotel.status).toBe(422);
+      expect(hotel.body.code).toBe('VALIDATION_ERROR');
+    });
   });
 
   // ─── Additional Flight Validation Tests ────────────────────────────────────

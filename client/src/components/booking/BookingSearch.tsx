@@ -12,6 +12,7 @@ import {
   CabinClass,
 } from './PassengerClassPopover';
 import { PreferredAirlinePopover } from './PreferredAirlinePopover';
+import { InquiryDefaults, ServiceInquiryModal } from './ServiceInquiryModal';
 
 interface BookingSearchProps {
   defaultTab?: SearchTab;
@@ -98,6 +99,7 @@ export function BookingSearch({
   // Submission & Validation
   const [isLoading, setIsLoading] = useState(false);
   const [validationError, setValidationError] = useState<string | null>(null);
+  const [inquiryDefaults, setInquiryDefaults] = useState<InquiryDefaults | null>(null);
 
   // Sync external route if triggered from Destination Card or Trending Routes
   if (externalRoute && (externalRoute.from !== fromAirport || externalRoute.to !== toAirport)) {
@@ -221,6 +223,45 @@ export function BookingSearch({
     }
 
     setIsLoading(false);
+  };
+
+  const openSpecialistInquiry = () => {
+    if (activeTab === 'flights') {
+      const isMultiCity = tripType === 'multiCity';
+      const firstSegment = segments[0];
+      const lastSegment = segments[segments.length - 1];
+      const cabinMap = {
+        economy: 'economy',
+        premiumEconomy: 'premium_economy',
+        business: 'business',
+        first: 'first',
+      } as const;
+      setInquiryDefaults({
+        kind: 'flight',
+        from: isMultiCity ? firstSegment.from : fromAirport,
+        to: isMultiCity ? lastSegment.to : toAirport,
+        departureDate: isMultiCity ? firstSegment.departureDate : departureDate,
+        returnDate: tripType === 'roundTrip' ? returnDate : undefined,
+        tripType,
+        routeNote: isMultiCity
+          ? `Multi-city itinerary: ${segments.map((segment) => `${segment.from} → ${segment.to} (${segment.departureDate})`).join('; ')}`
+          : undefined,
+        adults: passengers.adults,
+        children: passengers.children,
+        infants: passengers.infants,
+        cabinClass: cabinMap[cabinClass],
+      });
+      return;
+    }
+    if (activeTab === 'hotels') {
+      setInquiryDefaults({ kind: 'hotel', destination: hotelDestination, checkIn: hotelCheckIn, checkOut: hotelCheckOut, guests: hotelGuests, rooms: hotelRooms });
+      return;
+    }
+    if (activeTab === 'packages') {
+      setInquiryDefaults({ kind: 'package', packageTitle: `${holidayDestination || 'Holiday'} — ${holidayCategory}`, travelDate: holidayTravelDate, travellers: holidayTravellers });
+      return;
+    }
+    setInquiryDefaults({ kind: 'visa', destination: visaCountry, nationality: visaNationality, travelPurpose: visaPurpose });
   };
 
   const humanDepart = formatHumanDate(departureDate);
@@ -749,6 +790,16 @@ export function BookingSearch({
             </div>
           )}
 
+          <div className="mt-6 flex justify-center">
+            <button
+              type="button"
+              onClick={openSpecialistInquiry}
+              className="rounded-xs px-3 py-2 text-sm font-semibold text-brand-red underline-offset-4 hover:bg-brand-red-light hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2"
+            >
+              Request specialist help instead
+            </button>
+          </div>
+
           {/* 3. Floating Red Search Button (Centered, Overlapping Panel Bottom Edge) - rounded-xs */}
           <div className="absolute -bottom-7 sm:-bottom-8 left-1/2 -translate-x-1/2 z-30">
             <button
@@ -771,6 +822,9 @@ export function BookingSearch({
           </div>
         </form>
       </div>
+      {inquiryDefaults && (
+        <ServiceInquiryModal defaults={inquiryDefaults} onClose={() => setInquiryDefaults(null)} />
+      )}
     </div>
   );
 }

@@ -58,7 +58,7 @@ export async function submitPackageInquiry(
   input: PackageInquiryInput,
   userId?: string
 ) {
-  // Try to find the package
+  // Resolve every supplied package identifier server-side. Browser titles never establish identity.
   let pkg = null;
   if (slugOrId !== 'general') {
     pkg = await prisma.package.findFirst({
@@ -68,6 +68,7 @@ export async function submitPackageInquiry(
       },
       select: { id: true, title: true },
     });
+    if (!pkg) throw AppError.notFound('Package not found');
   }
 
   const referenceNumber = generateReferenceNumber();
@@ -76,8 +77,8 @@ export async function submitPackageInquiry(
     data: {
       referenceNumber,
       userId: userId || null,
-      packageId: pkg?.id || input.packageId || null,
-      packageTitle: pkg?.title || input.packageTitle || null,
+      packageId: pkg?.id || null,
+      packageTitle: pkg?.title || (slugOrId === 'general' ? input.packageTitle || null : null),
       travellers: input.travellers,
       travelDate: input.travelDate || null,
       name: input.name.trim(),
