@@ -1,14 +1,16 @@
 import { z } from 'zod';
 
+export const passwordSchema = z
+  .string()
+  .min(8, 'Password must be at least 8 characters')
+  .max(128, 'Password too long')
+  .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
+  .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
+  .regex(/[0-9]/, 'Password must contain at least one number');
+
 export const registerSchema = z.object({
   email: z.string().email('Invalid email address').max(255),
-  password: z
-    .string()
-    .min(8, 'Password must be at least 8 characters')
-    .max(128, 'Password too long')
-    .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
-    .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
-    .regex(/[0-9]/, 'Password must contain at least one number'),
+  password: passwordSchema,
   name: z.string().min(2, 'Name must be at least 2 characters').max(100).trim().optional(),
 });
 
@@ -16,6 +18,10 @@ export const loginSchema = z.object({
   email: z.string().email('Invalid email address').max(255),
   password: z.string().min(1, 'Password is required').max(128),
 });
+
+export const emailSchema = z.object({ email: z.string().email('Invalid email address').max(255) });
+export const tokenSchema = z.object({ token: z.string().min(32).max(512) });
+export const resetPasswordSchema = tokenSchema.extend({ password: passwordSchema });
 
 export type RegisterInput = z.infer<typeof registerSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;

@@ -136,6 +136,28 @@ export async function sendEmailVerification(params: {
   });
 }
 
+export async function sendPasswordReset(params: {
+  to: string;
+  name: string;
+  resetUrl: string;
+}): Promise<void> {
+  await sendEmail({
+    to: params.to,
+    subject: 'Reset your FlyWithSafety password',
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h2 style="color: #8B1D24;">Reset your password${params.name ? `, ${params.name}` : ''}</h2>
+        <p>Use the link below to choose a new password. It expires in one hour.</p>
+        <a href="${params.resetUrl}"
+           style="display: inline-block; background: #8B1D24; color: white; padding: 12px 24px; border-radius: 2px; text-decoration: none; font-weight: bold; margin: 16px 0;">
+          Reset Password
+        </a>
+        <p style="color: #64748b; font-size: 14px;">If you did not request a password reset, you can safely ignore this email.</p>
+      </div>
+    `,
+  });
+}
+
 export async function sendBookingConfirmation(params: {
   to: string;
   name: string;

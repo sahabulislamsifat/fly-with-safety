@@ -18,9 +18,21 @@ interface JwtPayload {
   sub: string;
   email: string;
   role: UserRole;
+  sid?: string;
 }
 
-export function requireAuth(req: Request, _res: Response, next: NextFunction): void {
+async function authenticatedUserFromToken(token: string) {
+  const decoded = jwt.verify(token, env.jwtSecret) as JwtPayload;
+  if (!decoded.sid) throw AppError.unauthorized('Session expired. Please sign in again.');
+  const activeSession = await prisma.session.findFirst({
+    where: { id: decoded.sid, userId: decoded.sub, revokedAt: null, expiresAt: { gt: new Date() } },
+    select: { id: true },
+  });
+  if (!activeSession) throw AppError.unauthorized('Session expired. Please sign in again.');
+  return { id: decoded.sub, email: decoded.email, role: decoded.role, name: null };
+}
+
+export async function requireAuth(req: Request, _res: Response, next: NextFunction): Promise<void> {
   const authReq = req as AuthenticatedRequest;
 
   // Try Authorization header first, then cookie
@@ -34,16 +46,10 @@ export function requireAuth(req: Request, _res: Response, next: NextFunction): v
   }
 
   try {
-    const decoded = jwt.verify(token, env.jwtSecret) as JwtPayload;
-    authReq.user = {
-      id: decoded.sub,
-      email: decoded.email,
-      role: decoded.role,
-      name: null,
-    };
+    authReq.user = await authenticatedUserFromToken(token);
     next();
   } catch {
-    next(AppError.unauthorized('Invalid or expired token'));
+    next(AppError.unauthorized('Invalid or expired session'));
   }
 }
 
@@ -60,7 +66,7 @@ export function requireRole(...roles: UserRole[]) {
   };
 }
 
-export function optionalAuth(req: Request, _res: Response, next: NextFunction): void {
+export async function optionalAuth(req: Request, _res: Response, next: NextFunction): Promise<void> {
   const authReq = req as AuthenticatedRequest;
 
   const authHeader = req.headers.authorization;
@@ -73,13 +79,7 @@ export function optionalAuth(req: Request, _res: Response, next: NextFunction): 
   }
 
   try {
-    const decoded = jwt.verify(token, env.jwtSecret) as JwtPayload;
-    authReq.user = {
-      id: decoded.sub,
-      email: decoded.email,
-      role: decoded.role,
-      name: null,
-    };
+    authReq.user = await authenticatedUserFromToken(token);
   } catch {
     // Ignore invalid token in optional auth
   }

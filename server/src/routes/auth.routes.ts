@@ -5,7 +5,7 @@ import * as authController from '../controllers/auth.controller.js';
 import { validate } from '../middleware/validation.middleware.js';
 import { requireAuth } from '../middleware/auth.middleware.js';
 import { rateLimiter } from '../middleware/rate-limit.js';
-import { registerSchema, loginSchema } from '../validators/auth.schemas.js';
+import { emailSchema, loginSchema, registerSchema, resetPasswordSchema, tokenSchema } from '../validators/auth.schemas.js';
 import { env } from '../config/env.js';
 
 const router = Router();
@@ -36,7 +36,12 @@ const authRateLimiter = rateLimiter({
 router.post('/auth/register', authRateLimiter, validate(registerSchema), authController.register);
 router.post('/auth/login', authRateLimiter, validate(loginSchema), authController.login);
 router.post('/auth/logout', authController.logout);
+router.post('/auth/refresh', authRateLimiter, authController.refresh);
 router.get('/auth/me', requireAuth, authController.getMe);
+router.post('/auth/verify-email', authRateLimiter, validate(tokenSchema), authController.verifyEmail);
+router.post('/auth/resend-verification', authRateLimiter, validate(emailSchema), authController.resendVerification);
+router.post('/auth/forgot-password', authRateLimiter, validate(emailSchema), authController.forgotPassword);
+router.post('/auth/reset-password', authRateLimiter, validate(resetPasswordSchema), authController.resetPassword);
 
 // Google OAuth (only mount if configured)
 if (env.googleClientId && env.googleClientSecret) {

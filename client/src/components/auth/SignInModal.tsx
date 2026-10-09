@@ -310,7 +310,7 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
                         Password
                       </label>
                       <Link
-                        href="/contact"
+                        href="/forgot-password"
                         onClick={onClose}
                         className="text-xs font-semibold text-[#8B1D24] hover:underline"
                       >
@@ -382,7 +382,7 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
               <div className="pt-6 mt-6 border-t border-neutral-100 text-center text-xs text-neutral-500">
                 <span>New to FlyWithSafe? </span>
                 <Link
-                  href="/contact"
+                  href="/register"
                   onClick={onClose}
                   className="font-bold text-[#8B1D24] hover:underline"
                 >

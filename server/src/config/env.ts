@@ -50,7 +50,9 @@ export const env = {
 
   // JWT
   jwtSecret: getEnv('JWT_SECRET', 'dev-secret-change-in-production'),
-  jwtExpiresIn: getEnv('JWT_EXPIRES_IN', '7d'),
+  jwtExpiresIn: getEnv('JWT_EXPIRES_IN', '15m'),
+  accessTokenCookieMaxAgeMs: getEnvNumber('ACCESS_TOKEN_COOKIE_MAX_AGE_MS', 15 * 60 * 1000),
+  refreshTokenExpiresDays: getEnvNumber('REFRESH_TOKEN_EXPIRES_DAYS', 30),
 
   // Rate limiting
   rateLimitWindowMs: getEnvNumber('RATE_LIMIT_WINDOW_MS', 900000),
@@ -109,6 +111,12 @@ export function validateEnv(): void {
     if (env.jwtSecret === 'dev-secret-change-in-production' || env.jwtSecret.length < 32) {
       problems.push('JWT_SECRET must be set to a random value of at least 32 characters in production');
     }
+  }
+  if (env.refreshTokenExpiresDays < 1 || env.refreshTokenExpiresDays > 90) {
+    problems.push('REFRESH_TOKEN_EXPIRES_DAYS must be between 1 and 90');
+  }
+  if (env.accessTokenCookieMaxAgeMs < 60_000 || env.accessTokenCookieMaxAgeMs > 60 * 60 * 1000) {
+    problems.push('ACCESS_TOKEN_COOKIE_MAX_AGE_MS must be between 60000 and 3600000');
   }
 
   if (problems.length > 0) {

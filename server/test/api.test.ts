@@ -3,6 +3,24 @@ import request from 'supertest';
 import app from '../src/app.js';
 
 describe('FlyWithsafety Server API Tests', () => {
+  describe('Authentication route guards and validation', () => {
+    it('rejects protected current-user requests without a session', async () => {
+      const res = await request(app).get('/api/v1/auth/me');
+      expect(res.status).toBe(401);
+      expect(res.body.success).toBe(false);
+    });
+
+    it('validates email login and reset input before database access', async () => {
+      const login = await request(app).post('/api/v1/auth/login').send({ email: 'not-an-email' });
+      expect(login.status).toBe(422);
+      expect(login.body.code).toBe('VALIDATION_ERROR');
+
+      const reset = await request(app).post('/api/v1/auth/reset-password').send({ token: 'short', password: 'weak' });
+      expect(reset.status).toBe(422);
+      expect(reset.body.code).toBe('VALIDATION_ERROR');
+    });
+  });
+
   // ─── Health check ──────────────────────────────────────────────────────────
   describe('GET /api/v1/health', () => {
     it('returns healthy status with system diagnostics and requestId', async () => {
