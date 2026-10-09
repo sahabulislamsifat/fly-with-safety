@@ -12,13 +12,13 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', fullWidth = false, loading = false, disabled, children, ...props }, ref) => {
-    const baseStyles = 'inline-flex items-center justify-center font-medium transition-all duration-150 rounded-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+    const baseStyles = 'inline-flex items-center justify-center font-semibold transition-all duration-150 rounded-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
 
     const variants = {
       primary: 'bg-brand-cta text-white hover:bg-brand-cta-hover shadow-sm',
-      secondary: 'bg-brand-primary text-white hover:bg-primary-800 shadow-sm',
-      outline: 'border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white',
-      ghost: 'text-brand-primary hover:bg-brand-primary/10',
+      secondary: 'bg-neutral-900 text-white hover:bg-neutral-800 shadow-sm',
+      outline: 'border-2 border-brand-red text-brand-red hover:bg-brand-red hover:text-white',
+      ghost: 'text-brand-red hover:bg-brand-red-light',
       whatsapp: 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm flex items-center gap-2',
     };
 

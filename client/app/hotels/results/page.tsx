@@ -154,7 +154,7 @@ function HotelResultsContent() {
             <div className="flex items-center gap-2">
               <Icon name="info" size={18} className="text-amber-700 shrink-0" />
               <span>
-                <strong>Demonstration Inventory:</strong> Current hotel properties are generated via FlyWithSafe&apos;s provider abstraction engine. Live reservations and room availability are confirmed by our travel desk.
+                <strong>Demonstration Inventory:</strong> Current hotel properties are generated via FlyWithsafety&apos;s provider abstraction engine. Live reservations and room availability are confirmed by our travel desk.
               </span>
             </div>
             <span className="font-mono px-2 py-0.5 rounded-xs bg-amber-200 text-amber-900 text-[10px] font-bold shrink-0">

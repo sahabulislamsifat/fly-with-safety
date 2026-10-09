@@ -8,7 +8,7 @@ export function Features() {
       <div className="container">
         <div className="text-center max-w-2xl mx-auto mb-12 lg:mb-16">
           <p className="text-xs font-semibold text-brand-primary uppercase tracking-wider mb-3">
-            Why FlyWithSafe
+            Why FlyWithsafety
           </p>
           <h2 id="features-heading" className="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
             Confidence at every step of your journey

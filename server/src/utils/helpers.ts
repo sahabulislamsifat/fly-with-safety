@@ -1,7 +1,7 @@
 import { randomBytes } from 'crypto';
 
 /**
- * Generates a unique FlyWithSafe reference number.
+ * Generates a unique FlyWithsafety reference number.
  * Format: FWS-YYYY-XXXXXX (6 random alphanumeric chars)
  */
 export function generateReferenceNumber(): string {

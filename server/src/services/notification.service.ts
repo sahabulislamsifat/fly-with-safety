@@ -68,7 +68,7 @@ export async function sendContactConfirmation(params: {
         <p><strong>Reference Number:</strong> ${params.referenceNumber}</p>
         <p>Please keep this reference number for your records.</p>
         <hr style="border: 1px solid #e2e8f0; margin: 20px 0;" />
-        <p style="color: #64748b; font-size: 14px;">FlyWithSafe — Travel Made Reassuring</p>
+        <p style="color: #64748b; font-size: 14px;">FlyWithsafety — Travel Made Reassuring</p>
       </div>
     `,
   });
@@ -106,7 +106,7 @@ export async function sendInquiryConfirmation(params: {
         </ol>
         <p><strong>Important:</strong> This is an inquiry confirmation only. Your booking is not yet confirmed until you receive a separate booking confirmation.</p>
         <hr style="border: 1px solid #e2e8f0; margin: 20px 0;" />
-        <p style="color: #64748b; font-size: 14px;">FlyWithSafe — Travel Made Reassuring</p>
+        <p style="color: #64748b; font-size: 14px;">FlyWithsafety — Travel Made Reassuring</p>
       </div>
     `,
   });
@@ -119,10 +119,10 @@ export async function sendEmailVerification(params: {
 }): Promise<void> {
   await sendEmail({
     to: params.to,
-    subject: 'Verify your FlyWithSafe email address',
+    subject: 'Verify your FlyWithsafety email address',
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #1e3a8a;">Welcome to FlyWithSafe${params.name ? `, ${params.name}` : ''}!</h2>
+        <h2 style="color: #1e3a8a;">Welcome to FlyWithsafety${params.name ? `, ${params.name}` : ''}!</h2>
         <p>Please verify your email address to complete your registration.</p>
         <a href="${params.verificationUrl}"
            style="display: inline-block; background: #ea580c; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; margin: 16px 0;">
@@ -130,7 +130,7 @@ export async function sendEmailVerification(params: {
         </a>
         <p style="color: #64748b; font-size: 14px;">This link expires in 24 hours. If you did not create an account, you can safely ignore this email.</p>
         <hr style="border: 1px solid #e2e8f0; margin: 20px 0;" />
-        <p style="color: #64748b; font-size: 14px;">FlyWithSafe — Travel Made Reassuring</p>
+        <p style="color: #64748b; font-size: 14px;">FlyWithsafety — Travel Made Reassuring</p>
       </div>
     `,
   });
@@ -151,7 +151,7 @@ export async function sendBookingConfirmation(params: {
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #1e293b;">
         <h2 style="color: #1e3a8a;">Booking Request Received</h2>
         <p>Dear ${params.name},</p>
-        <p>Thank you for booking with FlyWithSafe. Your ${params.bookingType.toLowerCase()} booking request has been registered under reference:</p>
+        <p>Thank you for booking with FlyWithsafety. Your ${params.bookingType.toLowerCase()} booking request has been registered under reference:</p>
         <div style="background: #f1f5f9; border-radius: 8px; padding: 16px; margin: 16px 0; border-left: 4px solid #ea580c;">
           <p style="margin: 0; font-size: 14px; color: #64748b;">REFERENCE NUMBER</p>
           <p style="font-size: 24px; font-weight: bold; color: #1e3a8a; margin: 4px 0;">${params.referenceNumber}</p>
@@ -160,7 +160,7 @@ export async function sendBookingConfirmation(params: {
         </div>
         <p>Our dedicated travel desk is processing your reservation. You can check the current status anytime using your reference number and email address on our website.</p>
         <hr style="border: 1px solid #e2e8f0; margin: 20px 0;" />
-        <p style="color: #64748b; font-size: 14px;">FlyWithSafe — Travel Made Reassuring</p>
+        <p style="color: #64748b; font-size: 14px;">FlyWithsafety — Travel Made Reassuring</p>
       </div>
     `,
   });
@@ -186,7 +186,7 @@ export async function sendBookingStatusNotification(params: {
           ${params.reason ? `<p style="margin: 8px 0 0 0; font-size: 14px; color: #64748b;">Note: ${params.reason}</p>` : ''}
         </div>
         <hr style="border: 1px solid #e2e8f0; margin: 20px 0;" />
-        <p style="color: #64748b; font-size: 14px;">FlyWithSafe — Travel Made Reassuring</p>
+        <p style="color: #64748b; font-size: 14px;">FlyWithsafety — Travel Made Reassuring</p>
       </div>
     `,
   });

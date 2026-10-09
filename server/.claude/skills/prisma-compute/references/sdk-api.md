@@ -117,7 +117,7 @@ const detected = detectComputeApp({
 })
 ```
 
-The result contains `framework`, `frameworkName`, `buildType`, `httpPort`, `entrypoint`, and detection `evidence`, or `null` when nothing is deployable. Paths are repository-relative and unsafe absolute/parent-traversal entrypoints are rejected.
+The result contains `framework`, `frameworkName`, `buildType`, `httpPort`, `entrypoint`, and detection `evidence`, or `null` when nothing is deployable. Paths are repository-relative and unsafety absolute/parent-traversal entrypoints are rejected.
 
 The helper detects one app root. A monorepo consumer must enumerate workspaces and call it once per candidate. Detection reads `dependencies` and `devDependencies` (not peer dependencies), recognizes config files and framework packages, and can infer Bun-backed servers from valid `start`/`serve` script entrypoints.
 

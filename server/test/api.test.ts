@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import request from 'supertest';
 import app from '../src/app.js';
 
-describe('FlyWithSafe Server API Tests', () => {
+describe('FlyWithsafety Server API Tests', () => {
   // ─── Health check ──────────────────────────────────────────────────────────
   describe('GET /api/v1/health', () => {
     it('returns healthy status with system diagnostics and requestId', async () => {

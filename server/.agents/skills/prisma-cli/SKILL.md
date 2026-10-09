@@ -185,7 +185,7 @@ prisma format
 prisma complete zsh
 ```
 
-## AI Safety Checkpoint
+## AI safetyty Checkpoint
 
 Prisma blocks destructive commands when it detects an AI agent until the agent has obtained explicit user consent. This covers `migrate reset`, `db push --force-reset`, and `db push --accept-data-loss`.
 
@@ -194,7 +194,7 @@ Prisma blocks destructive commands when it detects an AI agent until the agent h
 - If automation needs the consent variable, set `PRISMA_USER_CONSENT_FOR_DANGEROUS_AI_ACTION` to the user's exact consent message. Do not invent the text.
 - The Prisma MCP server deliberately has no `migrate-reset` tool.
 
-Read `references/agent-safety.md` before any destructive Prisma command.
+Read `references/agent-safetyty.md` before any destructive Prisma command.
 
 ## Current Prisma CLI Setup
 
@@ -254,7 +254,7 @@ references/migrate-diff.md   - Schema diffing
 references/studio.md         - Database GUI
 references/mcp.md            - Prisma MCP server
 references/complete.md       - Shell completion generation
-references/agent-safety.md   - AI consent checkpoint for destructive commands
+references/agent-safetyty.md   - AI consent checkpoint for destructive commands
 references/validate.md       - Schema validation
 references/format.md         - Schema formatting
 references/debug.md          - Debug info

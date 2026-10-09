@@ -33,11 +33,11 @@ export function BookingHelpStrip() {
             </a>
 
             <a
-              href="mailto:support@flywithsafe.com"
+              href="mailto:support@flywithsafety.com"
               className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xs bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs sm:text-sm font-bold text-white transition-all shadow-2xs"
             >
               <Icon name="mail" size={14} className="text-[#8B1D24]" />
-              <span>support@flywithsafe.com</span>
+              <span>support@flywithsafety.com</span>
             </a>
 
             <a

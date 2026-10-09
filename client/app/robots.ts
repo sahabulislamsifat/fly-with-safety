@@ -5,6 +5,6 @@ export default function robots() {
       allow: '/',
       disallow: ['/api/', '/_next/', '/static/'],
     },
-    sitemap: 'https://flywithsafe.com/sitemap.xml',
+    sitemap: 'https://flywithsafety.com/sitemap.xml',
   };
 }

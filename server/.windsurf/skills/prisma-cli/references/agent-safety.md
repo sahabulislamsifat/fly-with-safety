@@ -1,4 +1,4 @@
-# AI safety checkpoint for destructive commands
+# AI safetyty checkpoint for destructive commands
 
 Prisma detects common AI-agent environments and blocks these commands until the user gives explicit consent:
 

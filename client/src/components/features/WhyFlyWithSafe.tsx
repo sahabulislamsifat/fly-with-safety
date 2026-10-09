@@ -18,7 +18,7 @@ export function WhyFlyWithSafe() {
             </p>
           </div>
           <h2 id="why-heading" className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-neutral-900 tracking-tight">
-            Why Book With FlyWithSafe
+            Why Book With FlyWithsafety
           </h2>
           <p className="text-neutral-500 text-sm sm:text-base mt-2">
             Transparent travel planning backed by verified airline inventories, real human booking agents, and personalized customer care.
@@ -100,3 +100,6 @@ export function WhyFlyWithSafe() {
     </section>
   );
 }
+
+export const WhyFlyWithsafety = WhyFlyWithSafe;
+export const WhyFlyWithSafety = WhyFlyWithSafe;

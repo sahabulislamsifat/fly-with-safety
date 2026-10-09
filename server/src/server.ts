@@ -12,7 +12,7 @@ async function startServer(): Promise<void> {
   }
 
   const server = app.listen(env.port, () => {
-    console.log(`✈  FlyWithSafe API server running on port ${env.port}`);
+    console.log(`✈  FlyWithsafety API server running on port ${env.port}`);
     console.log(`   Environment: ${env.nodeEnv}`);
     console.log(`   Health: http://localhost:${env.port}/api/v1/health`);
     console.log(`   CORS origin: ${env.corsOrigin}`);

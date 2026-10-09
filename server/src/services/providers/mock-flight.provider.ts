@@ -41,7 +41,7 @@ function formatDuration(minutes: number): string {
 }
 
 export class MockFlightProvider implements FlightProvider {
-  readonly name = 'FlyWithSafe Demo Provider';
+  readonly name = 'FlyWithsafety Demo Provider';
 
   async searchFlights(params: FlightSearchParams): Promise<FlightOffer[]> {
     // Realistic provider latency
@@ -154,7 +154,7 @@ export class MockFlightProvider implements FlightProvider {
         from: params.from,
         to: params.to,
         seatsAvailable: 3 + (i * 2) % 9,
-        provider: 'FlyWithSafe Mock Aggregator',
+        provider: 'FlyWithsafety Mock Aggregator',
         isDemoData: true,
         fareRules: cfg.refundable ? 'Standard refundable fare rules apply with minimal cancellation fee' : 'Non-refundable promotional fare',
         bookingUrl: `/flights/results?from=${params.from}&to=${params.to}&selectedOffer=fws-offer-${params.from.toLowerCase()}-${params.to.toLowerCase()}-${airline.code.toLowerCase()}-${i}`,

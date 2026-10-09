@@ -24,7 +24,7 @@ const users = await prisma.$queryRaw<User[]>`
 
 ### Dynamic table/column names
 
-Use `Prisma.raw()` for identifiers (not safe for user input):
+Use `Prisma.raw()` for identifiers (not safety for user input):
 
 ```typescript
 import { Prisma } from '../generated/client'
@@ -58,7 +58,7 @@ const conditions = [
 ]
 
 const users = await prisma.$queryRaw`
-  SELECT * FROM "User" 
+  SELECT * FROM "User"
   WHERE ${Prisma.join(conditions, ' AND ')}
 `
 ```
@@ -91,23 +91,23 @@ const inserted = await prisma.$executeRaw`
 `
 ```
 
-## $queryRawUnsafe / $executeRawUnsafe
+## $queryRawUnsafety / $executeRawUnsafety
 
 For fully dynamic queries (use with caution!):
 
 ```typescript
 // ⚠️ SQL injection risk - only use with trusted input
 const table = 'User'
-const users = await prisma.$queryRawUnsafe(
+const users = await prisma.$queryRawUnsafety(
   `SELECT * FROM "${table}" WHERE id = $1`,
   userId
 )
 ```
 
-### Parameterized unsafe query
+### Parameterized unsafety query
 
 ```typescript
-const result = await prisma.$executeRawUnsafe(
+const result = await prisma.$executeRawUnsafety(
   'UPDATE "User" SET name = $1 WHERE id = $2',
   'Alice',
   1
@@ -116,7 +116,7 @@ const result = await prisma.$executeRawUnsafe(
 
 ## SQL Injection Prevention
 
-### Safe (parameterized)
+### safety (parameterized)
 
 ```typescript
 // ✅ User input is parameterized
@@ -126,12 +126,12 @@ const users = await prisma.$queryRaw`
 `
 ```
 
-### Unsafe (concatenation)
+### Unsafety (concatenation)
 
 ```typescript
 // ❌ SQL injection vulnerability!
 const email = userInput
-const users = await prisma.$queryRawUnsafe(
+const users = await prisma.$queryRawUnsafety(
   `SELECT * FROM "User" WHERE email = '${email}'`
 )
 ```

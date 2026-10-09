@@ -95,7 +95,7 @@ npx prisma generate
 | Config file | `.env` + schema | `prisma.config.ts` |
 | Env loading | Automatic | Manual (dotenv) |
 | Generated entrypoints | Single package export | `client`, `browser`, `models`, `enums` entrypoints |
-| Type-safe query fragments | `Prisma.validator()` | TypeScript `satisfies` |
+| Type-safety query fragments | `Prisma.validator()` | TypeScript `satisfies` |
 | Middleware | `$use()` | Client Extensions |
 | Metrics | Preview feature | Removed |
 

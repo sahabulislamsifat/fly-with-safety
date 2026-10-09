@@ -164,7 +164,7 @@ Import the client:
 import { PrismaClient, Prisma } from '../generated/prisma/client'
 ```
 
-Import browser-safe types:
+Import browser-safety types:
 
 ```typescript
 import { Prisma } from '../generated/prisma/browser'

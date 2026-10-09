@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useSyncExternalStore } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon } from '@/components/ui/Icons';
@@ -10,7 +11,14 @@ interface SignInModalProps {
   onClose: () => void;
 }
 
+const emptySubscribe = () => () => {};
+
 export function SignInModal({ isOpen, onClose }: SignInModalProps) {
+  const isClient = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -73,7 +81,7 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
       setIsSubmitting(false);
       // Since live backend authentication endpoint is in migration/integration phase:
       setNoticeMessage(
-        'FlyWithSafe Member Portal integration is currently in scheduled maintenance. For immediate booking assistance or account inquiries, please reach our 24/7 desk.'
+        'FlyWithSafe Member Portal integration is currently in scheduled maintenance. For immediate booking assistance or account inquiries, please reach our 24/7 desk.',
       );
     }, 800);
   };
@@ -83,26 +91,23 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
     if (googleClientId) {
       // In production OAuth flow, redirect to Google OAuth URL
       window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${encodeURIComponent(
-        googleClientId
+        googleClientId,
       )}&redirect_uri=${encodeURIComponent(
-        window.location.origin
+        window.location.origin,
       )}/api/auth/callback/google&response_type=code&scope=openid%20email%20profile`;
     } else {
       setNoticeMessage(
-        'Google OAuth client credentials are not configured in environment variables. Please continue with agency support or email login.'
+        'Google OAuth client credentials are not configured in environment variables. Please continue with agency support or email login.',
       );
     }
   };
 
-  return (
+  if (!isClient) return null;
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="signin-modal-title"
-        >
+        <div className="fixed inset-0 z-9999 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -110,62 +115,77 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity"
+            className="fixed inset-0 z-0 bg-neutral-950/70 backdrop-blur-sm"
             aria-hidden="true"
           />
 
-          {/* Modal Container - rounded-xs */}
+          {/* Modal dialog card */}
           <motion.div
             ref={modalRef}
             initial={{ opacity: 0, scale: 0.95, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 10 }}
-            transition={{ duration: 0.26, ease: 'easeOut' }}
-            className="relative w-full max-w-[880px] sm:max-w-[920px] bg-white rounded-xs shadow-[0_25px_60px_rgba(0,0,0,0.25)] overflow-hidden z-10 grid grid-cols-1 md:grid-cols-12 max-h-[92vh]"
+            transition={{ duration: 0.24, ease: 'easeOut' }}
+            className="relative z-10 my-auto grid w-full max-w-4xl max-h-[90vh] grid-cols-1 overflow-y-auto rounded-xs bg-white shadow-[0_25px_60px_rgba(0,0,0,0.35)] md:grid-cols-12 md:overflow-hidden"
             onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="signin-modal-title"
           >
-            {/* Left Panel: Welcome and Benefits (Dark surface) */}
-            <div className="md:col-span-5 bg-[#0B1528] text-white p-7 sm:p-9 flex flex-col justify-between relative overflow-hidden">
-              {/* Subtle Ambient Decorative Gradient */}
+            {/* Left panel stays visual support, not a mobile obstacle. */}
+            <div className="relative hidden overflow-hidden bg-[linear-gradient(145deg,#4c1016_0%,#8B1D24_58%,#5b1219_100%)] p-7 text-white md:col-span-5 md:flex md:flex-col md:justify-between sm:p-9">
               <div
-                className="absolute top-0 right-0 w-64 h-64 bg-linear-to-bl from-[#8B1D24]/30 via-transparent to-transparent rounded-xs blur-2xl pointer-events-none"
+                className="pointer-events-none absolute inset-0 opacity-35 bg-[radial-gradient(rgba(255,255,255,0.7)_1px,transparent_1px)] bg-size-[14px_14px]"
                 aria-hidden="true"
               />
 
               {/* Brand Header */}
               <div className="relative z-10">
                 <div className="flex items-center gap-2.5 mb-8">
-                  <div className="w-8 h-8 rounded-xs bg-[#8B1D24] flex items-center justify-center text-white shadow-xs">
+                  <div className="w-8 h-8 rounded-xs bg-white/20 flex items-center justify-center text-white shadow-xs">
                     <Icon name="plane" size={17} className="transform -rotate-45" />
                   </div>
-                  <span className="tracking-tight font-black text-white text-xl">
-                    FlyWith<span className="text-[#8B1D24]">Safe</span>
+                  <span className="text-xl font-black tracking-tight text-white">
+                    FlyWith<span className="text-amber-300">Safety</span>
                   </span>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-black text-white leading-tight mb-2 tracking-tight">
-                  Welcome back.
+                <div className="relative mb-8 h-16 overflow-hidden" aria-hidden="true">
+                  <div className="absolute left-2 top-7 h-px w-[82%] border-t border-dashed border-white/70" />
+                  <div className="absolute left-[76%] top-3 flex h-9 w-9 items-center justify-center rounded-xs border border-white/35 bg-white/15 text-white">
+                    <Icon name="plane" size={18} className="-rotate-45" />
+                  </div>
+                </div>
+
+                <h3 className="mb-4 text-3xl font-black leading-tight tracking-tight text-white">
+                  Welcome back. Where to next?
                 </h3>
-                <h4 className="text-xl sm:text-2xl font-bold text-red-300 leading-tight mb-4">
-                  Where to next?
-                </h4>
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                <p className="text-sm leading-relaxed text-white/80">
                   Sign in to manage your bookings, saved travellers, and seamless flight updates.
                 </p>
 
                 {/* Benefits List */}
                 <div className="mt-8 space-y-4">
                   {[
-                    'Flights, Hotels, Holidays & Visas in One Place.',
-                    'An easier checkout experience.',
-                    'Convenient access to bookings and traveller details.',
-                  ].map((benefit, idx) => (
-                    <div key={idx} className="flex items-start gap-3">
-                      <div className="w-5 h-5 rounded-xs bg-red-900/60 border border-red-500/40 text-red-300 flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
-                        <Icon name="check" size={12} />
+                    {
+                      icon: 'plane' as const,
+                      text: 'Flights, Hotels, Holidays & Visas in One Place',
+                    },
+                    {
+                      icon: 'headphones' as const,
+                      text: '24/7 Dedicated Agency Travel Desk Support',
+                    },
+                    {
+                      icon: 'checkCircle' as const,
+                      text: 'Instant Booking Inquiry & E-Ticket Tracking',
+                    },
+                  ].map((benefit) => (
+                    <div key={benefit.text} className="flex items-start gap-3">
+                      <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-xs border border-white/30 bg-white/15 text-white">
+                        <Icon name={benefit.icon} size={14} />
                       </div>
-                      <span className="text-xs text-slate-200 font-medium leading-snug">
-                        {benefit}
+                      <span className="text-xs font-medium leading-snug text-white/90">
+                        {benefit.text}
                       </span>
                     </div>
                   ))}
@@ -173,12 +193,12 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
               </div>
 
               {/* Bottom Desk note */}
-              <div className="relative z-10 pt-6 mt-6 border-t border-slate-800 text-[11px] text-slate-400">
+              <div className="relative z-10 mt-6 border-t border-white/20 pt-6 text-[11px] text-white/65">
                 <span>Need immediate support? Contact our </span>
                 <Link
                   href="/contact"
                   onClick={onClose}
-                  className="text-red-300 hover:text-white underline font-semibold"
+                  className="font-semibold text-white underline hover:text-white/80"
                 >
                   24/7 Human Desk
                 </Link>
@@ -187,7 +207,7 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
             </div>
 
             {/* Right Panel: Sign In Form (Clean White Surface) */}
-            <div className="md:col-span-7 p-7 sm:p-9 bg-white text-neutral-900 flex flex-col justify-between relative overflow-y-auto max-h-[85vh] md:max-h-none">
+            <div className="relative flex flex-col justify-between bg-white p-6 text-neutral-900 sm:p-9 md:col-span-7">
               {/* Close Button - rounded-xs */}
               <button
                 type="button"
@@ -238,11 +258,11 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
 
                 {/* Divider */}
                 <div className="flex items-center gap-3 my-5">
-                  <div className="h-[1px] bg-neutral-200 flex-1" />
+                  <div className="h-px bg-neutral-200 flex-1" />
                   <span className="text-[11px] font-semibold text-neutral-400 uppercase tracking-wider">
                     or continue with email
                   </span>
-                  <div className="h-[1px] bg-neutral-200 flex-1" />
+                  <div className="h-px bg-neutral-200 flex-1" />
                 </div>
 
                 {/* Feedback notices */}
@@ -279,7 +299,12 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="you@example.com"
-                        className="w-full px-3.5 py-2.5 text-sm rounded-xs border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-[#8B1D24] focus:border-[#8B1D24] text-neutral-900 placeholder-neutral-400 transition-all"
+                        className="w-full rounded-xs border border-neutral-300 py-2.5 pl-10 pr-3.5 text-sm text-neutral-900 placeholder-neutral-400 transition-all focus:border-brand-red focus:outline-none focus:ring-2 focus:ring-brand-red"
+                      />
+                      <Icon
+                        name="mail"
+                        size={16}
+                        className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400"
                       />
                     </div>
                   </div>
@@ -309,7 +334,12 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Enter your password"
-                        className="w-full pl-3.5 pr-10 py-2.5 text-sm rounded-xs border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-[#8B1D24] focus:border-[#8B1D24] text-neutral-900 placeholder-neutral-400 transition-all"
+                        className="w-full rounded-xs border border-neutral-300 py-2.5 pl-10 pr-10 text-sm text-neutral-900 placeholder-neutral-400 transition-all focus:border-brand-red focus:outline-none focus:ring-2 focus:ring-brand-red"
+                      />
+                      <Icon
+                        name="lock"
+                        size={16}
+                        className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400"
                       />
                       <button
                         type="button"
@@ -346,9 +376,12 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
                     className="w-full py-3 px-6 rounded-xs bg-[#8B1D24] hover:bg-[#74181E] text-white text-sm font-bold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 mt-2"
                   >
                     {isSubmitting ? (
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-xs animate-spin" />
+                      <>
+                        <div className="h-4 w-4 animate-spin rounded-xs border-2 border-white border-t-transparent" />
+                        <span>Signing in…</span>
+                      </>
                     ) : (
-                      <span>Sign In</span>
+                      <span>Sign In →</span>
                     )}
                   </button>
                 </form>
@@ -369,6 +402,7 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 }

@@ -42,7 +42,7 @@ Reference this skill when:
 - `filters` - scalar and logical filter operators
 - `relations` - relation reads and nested writes
 - `transactions` - array and interactive transaction patterns
-- `raw-queries` - `$queryRaw` and `$executeRaw` safety
+- `raw-queries` - `$queryRaw` and `$executeRaw` safetyty
 - `client-methods` - lifecycle methods, extensions, and `satisfies` patterns for `prisma-client`
 
 ## Client Instantiation

@@ -69,7 +69,7 @@ export function ContactForm() {
         </div>
         <h3 className="text-xl font-bold text-text-primary">Message Received!</h3>
         <p className="text-sm text-text-secondary max-w-md mx-auto">
-          Thank you for contacting FlyWithSafe. Your message has been assigned reference number:
+          Thank you for contacting FlyWithsafety. Your message has been assigned reference number:
         </p>
         <div className="inline-block px-4 py-2 bg-white border border-emerald-300 rounded-xs font-mono font-bold text-lg text-brand-primary">
           {referenceNumber}
