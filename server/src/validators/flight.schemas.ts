@@ -42,6 +42,22 @@ export const flightSearchSchema = z
     message: 'Origin and destination airports must be different',
     path: ['to'],
   })
+  .refine((data) => data.infants <= data.adults, {
+    message: 'Infants count cannot exceed adults count',
+    path: ['infants'],
+  })
+  .refine(
+    (data) => {
+      if (data.tripType === 'roundTrip') {
+        return !!data.returnDate && data.returnDate >= data.departureDate;
+      }
+      return true;
+    },
+    {
+      message: 'Return date is required and must be on or after departure date for round trips',
+      path: ['returnDate'],
+    }
+  )
   .transform((data) => {
     // Ensure passengers property reflects total traveler count
     const total = data.passengers || data.adults + data.children + data.infants;

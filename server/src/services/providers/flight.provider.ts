@@ -55,6 +55,10 @@ export interface FlightOffer {
   isDemoData: boolean;
   score?: number;
   badge?: 'recommended' | 'cheapest' | 'fastest';
+  fareRules?: string;
+  bookingUrl?: string;
+  expiresAt?: string;
+  lastUpdated?: string;
 }
 
 export interface FlightSearchParams {

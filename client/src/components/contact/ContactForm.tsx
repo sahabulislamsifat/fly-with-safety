@@ -63,15 +63,15 @@ export function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div className="p-8 bg-emerald-50 border border-emerald-200 rounded-sm text-center space-y-4">
-        <div className="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
+      <div className="p-8 bg-emerald-50 border border-emerald-200 rounded-xs text-center space-y-4">
+        <div className="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xs flex items-center justify-center mx-auto">
           <Icon name="check" size={24} />
         </div>
         <h3 className="text-xl font-bold text-text-primary">Message Received!</h3>
         <p className="text-sm text-text-secondary max-w-md mx-auto">
           Thank you for contacting FlyWithSafe. Your message has been assigned reference number:
         </p>
-        <div className="inline-block px-4 py-2 bg-white border border-emerald-300 rounded font-mono font-bold text-lg text-brand-primary">
+        <div className="inline-block px-4 py-2 bg-white border border-emerald-300 rounded-xs font-mono font-bold text-lg text-brand-primary">
           {referenceNumber}
         </div>
         <p className="text-xs text-text-tertiary">
@@ -173,7 +173,7 @@ export function ContactForm() {
       >
         {status === 'submitting' ? (
           <span className="flex items-center gap-2">
-            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-xs animate-spin" />
             Sending Message...
           </span>
         ) : (

@@ -189,7 +189,7 @@ function FlightResultsContent() {
           {isEditingSearch && (
             <form
               onSubmit={handleApplyEdit}
-              className="mt-6 p-4 bg-white text-text-primary rounded-sm shadow-md grid grid-cols-1 sm:grid-cols-4 gap-4 items-end"
+              className="mt-6 p-4 bg-white text-text-primary rounded-xs shadow-md grid grid-cols-1 sm:grid-cols-4 gap-4 items-end"
             >
               <AirportCombobox label="From" value={editFrom} onChange={setEditFrom} />
               <AirportCombobox label="To" value={editTo} onChange={setEditTo} />
@@ -219,7 +219,7 @@ function FlightResultsContent() {
                 <strong>Demonstration Inventory:</strong> Current offers are generated via FlyWithSafe&apos;s provider abstraction engine. Live reservations are confirmed by our ticketing desk upon inquiry.
               </span>
             </div>
-            <span className="font-mono px-2 py-0.5 rounded bg-amber-200 text-amber-900 text-[10px] font-bold shrink-0">
+            <span className="font-mono px-2 py-0.5 rounded-xs bg-amber-200 text-amber-900 text-[10px] font-bold shrink-0">
               DEMO MODE
             </span>
           </div>
@@ -228,7 +228,7 @@ function FlightResultsContent() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Left Sidebar: Filters */}
           <aside className="lg:col-span-1 space-y-6">
-            <Card className="p-5 bg-white border border-neutral-200 rounded-sm space-y-6 shadow-xs">
+            <Card className="p-5 bg-white border border-neutral-200 rounded-xs space-y-6 shadow-xs">
               <div className="flex items-center justify-between border-b pb-3">
                 <h3 className="font-bold text-sm text-text-primary flex items-center gap-2">
                   <Icon name="filter" size={16} /> Filters
@@ -326,7 +326,7 @@ function FlightResultsContent() {
           {/* Right Main Area: Sort Tabs & Offers List */}
           <main className="lg:col-span-3 space-y-4">
             {/* Sort Tabs */}
-            <div className="grid grid-cols-3 gap-2 bg-white p-1 rounded-sm border border-neutral-200 shadow-xs">
+            <div className="grid grid-cols-3 gap-2 bg-white p-1 rounded-xs border border-neutral-200 shadow-xs">
               {[
                 {
                   id: 'recommended' as FlightSortOption,
@@ -375,22 +375,35 @@ function FlightResultsContent() {
               })}
             </div>
 
+            {/* Explicit Demo Data Notice Banner (Honest inventory indicator) */}
+            {isDemoData && status === 'succeeded' && (
+              <div className="flex items-center gap-3 px-4 py-2.5 bg-amber-50 border border-amber-200 rounded-xs text-amber-900 text-xs shadow-2xs">
+                <Icon name="shield" size={16} className="text-amber-600 shrink-0" />
+                <span className="flex-1">
+                  <strong>Demo Inventory:</strong> Flight schedules and rates are simulated for testing and demonstration. Official airline ticket issuance is processed upon booking inquiry with our travel desk.
+                </span>
+                <span className="px-2 py-0.5 rounded-xs font-mono font-bold bg-amber-200/80 text-amber-900 text-[10px] tracking-wider uppercase">
+                  Demo
+                </span>
+              </div>
+            )}
+
             {/* Status Handling: Loading */}
             {status === 'loading' && (
               <div className="space-y-4 py-8">
                 {[1, 2, 3].map((n) => (
                   <div
                     key={n}
-                    className="p-6 bg-white border border-neutral-200 rounded-sm animate-pulse space-y-4"
+                    className="p-6 bg-white border border-neutral-200 rounded-xs animate-pulse space-y-4"
                   >
                     <div className="flex justify-between items-center">
-                      <div className="h-6 w-36 bg-neutral-200 rounded" />
-                      <div className="h-6 w-24 bg-neutral-200 rounded" />
+                      <div className="h-6 w-36 bg-neutral-200 rounded-xs" />
+                      <div className="h-6 w-24 bg-neutral-200 rounded-xs" />
                     </div>
-                    <div className="h-12 bg-neutral-100 rounded" />
+                    <div className="h-12 bg-neutral-100 rounded-xs" />
                     <div className="flex justify-between items-center pt-2">
-                      <div className="h-4 w-48 bg-neutral-100 rounded" />
-                      <div className="h-8 w-28 bg-neutral-200 rounded" />
+                      <div className="h-4 w-48 bg-neutral-100 rounded-xs" />
+                      <div className="h-8 w-28 bg-neutral-200 rounded-xs" />
                     </div>
                   </div>
                 ))}
@@ -399,8 +412,8 @@ function FlightResultsContent() {
 
             {/* Status Handling: Error */}
             {status === 'failed' && (
-              <div className="p-8 bg-white border border-red-200 rounded-sm text-center space-y-4">
-                <div className="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto">
+              <div className="p-8 bg-white border border-red-200 rounded-xs text-center space-y-4">
+                <div className="w-12 h-12 bg-red-100 text-red-600 rounded-xs flex items-center justify-center mx-auto">
                   <Icon name="x" size={24} />
                 </div>
                 <h3 className="text-lg font-bold text-text-primary">Search Failed</h3>
@@ -430,8 +443,8 @@ function FlightResultsContent() {
 
             {/* Status Handling: Empty */}
             {status === 'succeeded' && processedOffers.length === 0 && (
-              <div className="p-12 bg-white border border-neutral-200 rounded-sm text-center space-y-4">
-                <div className="w-12 h-12 bg-neutral-100 text-neutral-400 rounded-full flex items-center justify-center mx-auto">
+              <div className="p-12 bg-white border border-neutral-200 rounded-xs text-center space-y-4">
+                <div className="w-12 h-12 bg-neutral-100 text-neutral-400 rounded-xs flex items-center justify-center mx-auto">
                   <Icon name="plane" size={24} />
                 </div>
                 <h3 className="text-lg font-bold text-text-primary">No Flights Found</h3>
@@ -464,7 +477,7 @@ function FlightResultsContent() {
                   return (
                     <Card
                       key={offer.id}
-                      className="p-5 bg-white border border-neutral-200 hover:border-brand-primary/40 rounded-sm shadow-xs transition-all hover:shadow-md"
+                      className="p-5 bg-white border border-neutral-200 hover:border-brand-primary/40 rounded-xs shadow-xs transition-all hover:shadow-md"
                     >
                       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                         {/* Left: Flight Details */}
@@ -480,7 +493,7 @@ function FlightResultsContent() {
                             </div>
                             {/* Ranking tag */}
                             {offer.rankingTags && offer.rankingTags.length > 0 && (
-                              <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-brand-primary/10 text-brand-primary">
+                              <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-xs bg-brand-primary/10 text-brand-primary">
                                 {offer.rankingTags[0]}
                               </span>
                             )}
@@ -594,7 +607,7 @@ function FlightResultsContent() {
                                 type="checkbox"
                                 checked={isCompared}
                                 onChange={() => dispatch(toggleCompareOffer(offer))}
-                                className="rounded border-neutral-300 text-brand-primary"
+                                className="rounded-xs border-neutral-300 text-brand-primary"
                               />
                               <span>Compare flight</span>
                             </label>
@@ -625,7 +638,7 @@ export default function FlightResultsPage() {
       fallback={
         <div className="min-h-screen flex items-center justify-center bg-neutral-50">
           <div className="text-center space-y-3">
-            <div className="w-8 h-8 border-4 border-brand-primary border-t-transparent rounded-full animate-spin mx-auto" />
+            <div className="w-8 h-8 border-4 border-brand-primary border-t-transparent rounded-xs animate-spin mx-auto" />
             <p className="text-sm font-semibold text-text-secondary">
               Searching flight offers...
             </p>

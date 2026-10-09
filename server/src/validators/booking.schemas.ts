@@ -22,6 +22,7 @@ export const createBookingSchema = z.object({
   bookingDetails: z.record(z.string(), z.any()).optional(),
   passengers: z.array(passengerSchema).min(1, 'At least 1 passenger is required'),
   notes: z.string().max(1000).optional().or(z.literal('')),
+  idempotencyKey: z.string().max(128).optional(),
 });
 
 export const lookupBookingSchema = z.object({

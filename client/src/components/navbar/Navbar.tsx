@@ -1,113 +1,303 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { Icon } from '@/components/ui/Icons';
-import { navLinks } from '@/lib/data/site-data';
+import { usePathname } from 'next/navigation';
+import { Icon, IconName } from '@/components/ui/Icons';
+import { SignInModal } from '@/components/auth/SignInModal';
+
+interface NavItem {
+  id: string;
+  label: string;
+  href: string;
+  icon: IconName;
+  matchPrefix?: string;
+}
+
+const primaryNavItems: NavItem[] = [
+  { id: 'flight', label: 'Flight', href: '/', icon: 'plane', matchPrefix: '/flights' },
+  { id: 'visa', label: 'Visa', href: '/visa-info', icon: 'fileText', matchPrefix: '/visa-info' },
+  { id: 'hotel', label: 'Hotel', href: '/hotels', icon: 'hotel', matchPrefix: '/hotels' },
+  {
+    id: 'holiday',
+    label: 'Holiday',
+    href: '/packages',
+    icon: 'palmtree',
+    matchPrefix: '/packages',
+  },
+];
+
+const secondaryNavItems = [
+  { label: 'Track Booking', href: '/track-booking', icon: 'ticket' as IconName },
+  { label: 'Contact Support', href: '/contact', icon: 'phone' as IconName },
+  { label: 'Privacy Policy', href: '/privacy', icon: 'shield' as IconName },
+  { label: 'Terms of Use', href: '/terms', icon: 'fileText' as IconName },
+];
 
 export function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
+  const [isSignInOpen, setIsSignInOpen] = useState(false);
+  const moreRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
+  // Close 'More' dropdown when clicking outside
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    function handleClickOutside(event: MouseEvent) {
+      if (moreRef.current && !moreRef.current.contains(event.target as Node)) {
+        setIsMoreOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  // Close dropdown on escape key
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        setIsMoreOpen(false);
+        setIsMobileMenuOpen(false);
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  const isItemActive = (item: NavItem) => {
+    if (item.id === 'flight') {
+      return pathname === '/' || pathname.startsWith('/flights');
+    }
+    return item.matchPrefix ? pathname.startsWith(item.matchPrefix) : pathname === item.href;
+  };
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-200 transition-all duration-200 ${
-        isScrolled
-          ? 'bg-white/95 backdrop-blur-sm shadow-sm border-b border-border-light'
-          : 'bg-transparent'
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-neutral-200/80 shadow-[0_2px_8px_rgba(0,0,0,0.03)]"
       role="banner"
     >
-      <nav className="max-w-11/12 mx-auto" aria-label="Main navigation">
-        <div className="flex h-16 items-center justify-between">
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-xl font-bold text-brand-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 rounded-xs"
-            aria-label="FlyWithSafe Home"
-          >
-            <Icon name="plane" size={28} className="text-brand-cta" />
-            <span>FlyWithSafety</span>
-          </Link>
-
-          <div className="hidden md:flex items-center gap-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium text-text-secondary hover:text-brand-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 rounded px-2 py-1"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-
-          <div className="hidden md:flex items-center gap-3">
-            <a
-              href="https://wa.me"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-xs hover:bg-emerald-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+      <nav className="max-w-11/12 mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
+        <div className="flex h-17.5 items-center justify-between">
+          {/* Left: Brand Identity */}
+          <div className="flex items-center">
+            <Link
+              href="/"
+              className="flex items-center gap-2.5 text-xl font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red rounded-xs py-1 px-1 transition-opacity hover:opacity-90"
+              aria-label="FlyWithSafety Home"
             >
-              <Icon name="messageCircle" size={18} />
-              <span>WhatsApp</span>
-            </a>
+              <div className="w-8 h-8 rounded-xs bg-brand-red flex items-center justify-center text-white shadow-xs">
+                <Icon name="plane" size={18} className="transform -rotate-45" />
+              </div>
+              <span className="tracking-tight font-black text-neutral-900 text-xl sm:text-2xl">
+                FlyWith<span className="text-brand-red">Safety</span>
+              </span>
+            </Link>
           </div>
 
-          <button
-            type="button"
-            className="md:hidden p-2 rounded-xs text-text-secondary hover:bg-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-expanded={isMobileMenuOpen}
-            aria-controls="mobile-menu"
-            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-          >
-            <Icon name={isMobileMenuOpen ? 'x' : 'menu'} size={24} />
-          </button>
+          {/* Center: Primary Navigation */}
+          <div className="hidden md:flex items-center gap-1 lg:gap-3">
+            {primaryNavItems.map((item) => {
+              const active = isItemActive(item);
+              return (
+                <Link
+                  key={item.id}
+                  href={item.href}
+                  className={`relative flex items-center gap-1.5 px-3 py-2 text-sm font-semibold transition-colors duration-150 rounded-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red ${
+                    active
+                      ? 'text-brand-red'
+                      : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50'
+                  }`}
+                  aria-current={active ? 'page' : undefined}
+                >
+                  <Icon
+                    name={item.icon}
+                    size={17}
+                    className={`transition-colors ${
+                      active ? 'text-brand-red' : 'text-neutral-500'
+                    }`}
+                  />
+                  <span>{item.label}</span>
+                  {active && (
+                    <span
+                      className="absolute -bottom-3.75 left-2 right-2 h-[2.5px] bg-brand-red rounded-xs"
+                      aria-hidden="true"
+                    />
+                  )}
+                </Link>
+              );
+            })}
+
+            {/* More Dropdown */}
+            <div className="relative" ref={moreRef}>
+              <button
+                type="button"
+                onClick={() => setIsMoreOpen((prev) => !prev)}
+                className={`flex items-center gap-1.5 px-3 py-2 text-sm font-semibold rounded-xs transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red cursor-pointer ${
+                  isMoreOpen
+                    ? 'text-neutral-900 bg-neutral-100/80'
+                    : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50'
+                }`}
+                aria-expanded={isMoreOpen}
+                aria-haspopup="true"
+                aria-label="More navigation options"
+              >
+                <Icon name="more" size={16} className="text-neutral-500" />
+                <span>More</span>
+                <Icon
+                  name="chevronDown"
+                  size={14}
+                  className={`text-neutral-400 transition-transform duration-150 ${
+                    isMoreOpen ? 'rotate-180' : ''
+                  }`}
+                />
+              </button>
+
+              {isMoreOpen && (
+                <div
+                  className="absolute right-0 mt-2 w-56 rounded-xs bg-white border border-neutral-200/90 shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150"
+                  role="menu"
+                  aria-orientation="vertical"
+                >
+                  {secondaryNavItems.map((sec) => (
+                    <Link
+                      key={sec.href}
+                      href={sec.href}
+                      onClick={() => setIsMoreOpen(false)}
+                      className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-semibold text-neutral-700 hover:text-brand-red hover:bg-red-50/50 transition-colors rounded-xs"
+                      role="menuitem"
+                    >
+                      <Icon name={sec.icon} size={15} className="text-neutral-400" />
+                      <span>{sec.label}</span>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Right: Support and Sign In Actions */}
+          <div className="hidden md:flex items-center gap-3">
+            {/* Support button - rounded-xs */}
+            <Link
+              href="/contact"
+              className="w-9 h-9 rounded-xs bg-neutral-100 hover:bg-neutral-200/80 text-neutral-700 flex items-center justify-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+              aria-label="24/7 Support Desk"
+              title="24/7 Support Desk"
+            >
+              <Icon name="headphones" size={17} />
+            </Link>
+
+            {/* Deep red Sign In button - rounded-xs */}
+            <button
+              type="button"
+              onClick={() => setIsSignInOpen(true)}
+              className="inline-flex items-center gap-2 px-6 py-2 text-sm font-bold text-white bg-brand-red hover:bg-[#74181E] active:scale-[0.98] rounded-xs shadow-xs hover:shadow transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2 cursor-pointer"
+              aria-label="Sign in to your FlyWithSafety account"
+            >
+              <Icon name="user" size={16} />
+              <span>Sign In</span>
+            </button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="flex md:hidden items-center gap-2">
+            <Link
+              href="/contact"
+              className="w-9 h-9 rounded-xs bg-neutral-100 text-neutral-700 flex items-center justify-center"
+              aria-label="Support Desk"
+            >
+              <Icon name="headphones" size={17} />
+            </Link>
+            <button
+              type="button"
+              className="p-2 rounded-xs text-neutral-700 hover:bg-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
+              aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            >
+              <Icon name={isMobileMenuOpen ? 'x' : 'menu'} size={24} />
+            </button>
+          </div>
         </div>
 
+        {/* Mobile menu dropdown */}
         <div
           id="mobile-menu"
-          className={`md:hidden overflow-hidden transition-all duration-200 ease-in-out ${isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
+          className={`md:hidden overflow-hidden transition-all duration-200 ease-in-out ${
+            isMobileMenuOpen ? 'max-h-125 opacity-100 pb-5' : 'max-h-0 opacity-0'
+          }`}
           role="navigation"
           aria-label="Mobile navigation"
         >
-          <div
-            className="py-4 space-y-2 border
-          -t border-border-light"
-          >
-            {navLinks.map((link) => (
+          <div className="pt-2 pb-3 space-y-1 border-t border-neutral-100">
+            {primaryNavItems.map((item) => {
+              const active = isItemActive(item);
+              return (
+                <Link
+                  key={item.id}
+                  href={item.href}
+                  className={`flex items-center gap-3 px-3.5 py-2.5 text-sm font-semibold rounded-xs transition-colors ${
+                    active
+                      ? 'text-brand-red bg-red-50/60 font-bold'
+                      : 'text-neutral-700 hover:text-neutral-900 hover:bg-neutral-50'
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <Icon
+                    name={item.icon}
+                    size={18}
+                    className={active ? 'text-brand-red' : 'text-neutral-400'}
+                  />
+                  <span>{item.label}</span>
+                </Link>
+              );
+            })}
+
+            <div className="pt-2 pb-1 border-t border-neutral-100">
+              <p className="px-3.5 text-[11px] font-bold uppercase tracking-wider text-neutral-400 mb-1">
+                More Services
+              </p>
+              {secondaryNavItems.map((sec) => (
+                <Link
+                  key={sec.href}
+                  href={sec.href}
+                  className="flex items-center gap-3 px-3.5 py-2 text-xs font-semibold text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50 rounded-xs"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <Icon name={sec.icon} size={15} className="text-neutral-400" />
+                  <span>{sec.label}</span>
+                </Link>
+              ))}
+            </div>
+
+            <div className="pt-3 border-t border-neutral-100 space-y-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setIsSignInOpen(true);
+                }}
+                className="inline-flex items-center gap-2 w-full justify-center px-4 py-2.5 text-sm font-bold text-white bg-brand-red hover:bg-[#74181E] rounded-xs shadow-xs transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red cursor-pointer"
+              >
+                <Icon name="user" size={17} />
+                <span>Sign In</span>
+              </button>
               <Link
-                key={link.href}
-                href={link.href}
-                className="block px-2 py-3 text-base font-medium text-text-secondary hover:text-brand-primary hover:bg-neutral-50 rounded-xs transition-colors"
+                href="/contact"
                 onClick={() => setIsMobileMenuOpen(false)}
+                className="inline-flex items-center gap-2 w-full justify-center px-4 py-2 text-xs font-semibold text-neutral-600 hover:text-neutral-900 bg-neutral-100 hover:bg-neutral-200/80 rounded-xs transition-colors"
               >
-                {link.label}
+                <Icon name="headphones" size={15} />
+                <span>24/7 Support Desk</span>
               </Link>
-            ))}
-            <div className="pt-4 border-t border-border-light">
-              <a
-                href="https://wa.me"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 w-full justify-center px-6 py-3 text-base font-medium text-white bg-emerald-600 rounded-xs hover:bg-emerald-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
-              >
-                <Icon name="messageCircle" size={20} />
-                <span>Contact us on WhatsApp</span>
-              </a>
             </div>
           </div>
         </div>
       </nav>
+
+      {/* Akij Air-style Animated Sign In Modal */}
+      <SignInModal isOpen={isSignInOpen} onClose={() => setIsSignInOpen(false)} />
     </header>
   );
 }

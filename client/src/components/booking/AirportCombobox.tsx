@@ -139,7 +139,7 @@ export function AirportCombobox({
 
         <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text-tertiary">
           {loading ? (
-            <div className="w-4 h-4 border-2 border-brand-primary border-t-transparent rounded-full animate-spin" />
+            <div className="w-4 h-4 border-2 border-brand-primary border-t-transparent rounded-xs animate-spin" />
           ) : (
             <Icon name="search" size={16} />
           )}
@@ -150,7 +150,7 @@ export function AirportCombobox({
         <div
           id={listboxId}
           role="listbox"
-          className="absolute z-50 mt-1.5 w-full min-w-[280px] bg-white border border-neutral-200 rounded-sm shadow-xl max-h-60 overflow-y-auto py-1"
+          className="absolute z-50 mt-1.5 w-full min-w-[280px] bg-white border border-neutral-200 rounded-xs shadow-xl max-h-60 overflow-y-auto py-1"
         >
           {airports.length === 0 ? (
             <div className="px-3.5 py-3 text-xs text-text-tertiary text-center">
@@ -184,7 +184,7 @@ export function AirportCombobox({
                     </span>
                   </div>
                   <div className="text-right flex flex-col items-end">
-                    <span className="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-neutral-100 text-neutral-800">
+                    <span className="text-xs font-mono font-bold px-1.5 py-0.5 rounded-xs bg-neutral-100 text-neutral-800">
                       {airport.code}
                     </span>
                     <span className="text-[10px] text-text-tertiary">{airport.country}</span>

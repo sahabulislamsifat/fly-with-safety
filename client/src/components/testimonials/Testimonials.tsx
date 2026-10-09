@@ -26,7 +26,7 @@ export function Testimonials() {
               >
                 <CardContent className="pt-6">
                   <div className="flex items-center justify-center mb-4" aria-hidden="true">
-                    <div className="w-12 h-12 rounded-full bg-brand-primary/10 flex items-center justify-center text-brand-primary">
+                    <div className="w-12 h-12 rounded-xs bg-brand-primary/10 flex items-center justify-center text-brand-primary">
                       <Icon name="star" size={24} />
                     </div>
                   </div>

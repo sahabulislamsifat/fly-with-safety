@@ -72,7 +72,7 @@ function BookingLookupContent() {
         </div>
 
         {/* Search Card */}
-        <Card className="p-6 bg-white border border-neutral-200 shadow-sm rounded-sm">
+        <Card className="p-6 bg-white border border-neutral-200 shadow-sm rounded-xs">
           <form onSubmit={handleLookup} className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Input
@@ -99,7 +99,7 @@ function BookingLookupContent() {
             >
               {lookupStatus === 'loading' ? (
                 <span className="flex items-center gap-2">
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-xs animate-spin" />
                   Searching Records...
                 </span>
               ) : (
@@ -111,7 +111,7 @@ function BookingLookupContent() {
 
         {/* Error State */}
         {lookupStatus === 'failed' && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded-sm text-center text-sm text-red-700">
+          <div className="p-4 bg-red-50 border border-red-200 rounded-xs text-center text-sm text-red-700">
             {lookupError || 'No booking found. Please verify the reference code and email.'}
           </div>
         )}
@@ -119,7 +119,7 @@ function BookingLookupContent() {
         {/* Found Record */}
         {lookupStatus === 'succeeded' && lookupRecord && (
           <div className="space-y-6">
-            <Card className="p-6 bg-white border border-neutral-200 shadow-sm rounded-sm space-y-6">
+            <Card className="p-6 bg-white border border-neutral-200 shadow-sm rounded-xs space-y-6">
               {/* Header */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b pb-4">
                 <div>
@@ -134,7 +134,7 @@ function BookingLookupContent() {
                 <div className="flex flex-col items-start sm:items-end">
                   <span className="text-xs text-text-secondary block mb-1">Current Lifecycle Status</span>
                   <span
-                    className={`px-3 py-1 rounded-full text-xs font-bold border ${getStatusColor(
+                    className={`px-3 py-1 rounded-xs text-xs font-bold border ${getStatusColor(
                       lookupRecord.status
                     )}`}
                   >
@@ -211,7 +211,7 @@ function BookingLookupContent() {
                   <div className="space-y-3">
                     {lookupRecord.statusHistory.map((h, idx) => (
                       <div key={idx} className="flex items-start gap-3 text-xs">
-                        <div className="w-2 h-2 rounded-full bg-brand-primary mt-1.5 shrink-0" />
+                        <div className="w-2 h-2 rounded-xs bg-brand-primary mt-1.5 shrink-0" />
                         <div className="flex-1">
                           <p className="font-bold text-text-primary">
                             Status: <span className="font-mono">{h.toStatus}</span>
@@ -245,7 +245,7 @@ export default function BookingLookupPage() {
     <Suspense
       fallback={
         <div className="min-h-screen flex items-center justify-center bg-neutral-50">
-          <div className="w-8 h-8 border-4 border-brand-primary border-t-transparent rounded-full animate-spin" />
+          <div className="w-8 h-8 border-4 border-brand-primary border-t-transparent rounded-xs animate-spin" />
         </div>
       }
     >

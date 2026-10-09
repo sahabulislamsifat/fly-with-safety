@@ -4,10 +4,55 @@ import { sendBookingConfirmation, sendBookingStatusNotification } from './notifi
 import { canTransitionStatus } from '../utils/status-transitions.js';
 import { AppError } from '../utils/errors.js';
 import type { CreateBookingInput, LookupBookingInput } from '../validators/booking.schemas.js';
+import { logger, serializeError } from '../lib/logger.js';
 
-export async function createBooking(input: CreateBookingInput, userId?: string) {
-  const referenceNumber = generateReferenceNumber();
+interface CachedBooking {
+  booking: any;
+  timestamp: number;
+}
+const idempotencyStore = new Map<string, CachedBooking>();
+
+// Periodically clean up entries older than 10 minutes
+setInterval(() => {
+  const now = Date.now();
+  for (const [key, value] of idempotencyStore.entries()) {
+    if (now - value.timestamp > 10 * 60 * 1000) {
+      idempotencyStore.delete(key);
+    }
+  }
+}, 60 * 1000);
+
+export async function createBooking(input: CreateBookingInput, userId?: string, headerIdempotencyKey?: string) {
+  const idempotencyKey = input.idempotencyKey || headerIdempotencyKey;
+  if (idempotencyKey && idempotencyStore.has(idempotencyKey)) {
+    return idempotencyStore.get(idempotencyKey)!.booking;
+  }
+
   const normalizedEmail = normalizeEmail(input.customerEmail);
+
+  // Duplicate protection: if exact same booking request arrived within last 30s
+  const recentDuplicate = await prisma.booking.findFirst({
+    where: {
+      customerEmail: normalizedEmail,
+      totalPrice: input.totalPrice,
+      bookingType: input.bookingType,
+      customerName: input.customerName.trim(),
+      createdAt: { gte: new Date(Date.now() - 30 * 1000) },
+    },
+    include: {
+      passengers: true,
+      statusHistory: true,
+    },
+  });
+
+  if (recentDuplicate) {
+    if (idempotencyKey) {
+      idempotencyStore.set(idempotencyKey, { booking: recentDuplicate, timestamp: Date.now() });
+    }
+    return recentDuplicate;
+  }
+
+  const referenceNumber = generateReferenceNumber();
 
   const booking = await prisma.booking.create({
     data: {
@@ -50,6 +95,10 @@ export async function createBooking(input: CreateBookingInput, userId?: string) 
     },
   });
 
+  if (idempotencyKey) {
+    idempotencyStore.set(idempotencyKey, { booking, timestamp: Date.now() });
+  }
+
   // Asynchronous confirmation email
   sendBookingConfirmation({
     to: normalizedEmail,
@@ -58,7 +107,7 @@ export async function createBooking(input: CreateBookingInput, userId?: string) 
     bookingType: input.bookingType,
     totalPrice: input.totalPrice,
     currency: input.currency || 'BDT',
-  }).catch((err) => console.error('[Booking] Email error:', err));
+  }).catch((err) => logger.warn('booking_email_failed', serializeError(err)));
 
   return booking;
 }
@@ -115,7 +164,7 @@ export async function updateBookingStatus(
     return booking;
   }
 
-  if (!canTransitionStatus('inquiry', booking.status, newStatus)) {
+  if (!canTransitionStatus('booking', booking.status, newStatus)) {
     throw new AppError(
       `Cannot transition booking from ${booking.status} to ${newStatus}`,
       400,
@@ -152,7 +201,7 @@ export async function updateBookingStatus(
     referenceNumber: booking.referenceNumber,
     status: newStatus,
     reason,
-  }).catch((err) => console.error('[Booking] Status notification error:', err));
+  }).catch((err) => logger.warn('booking_status_notification_failed', serializeError(err)));
 
   return updated;
 }

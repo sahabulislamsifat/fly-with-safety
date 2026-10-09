@@ -1,11 +1,13 @@
 import { Request, Response, NextFunction } from 'express';
 import * as bookingService from '../services/booking.service.js';
 import { success } from '../utils/response.js';
+import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
 
 export async function createBooking(req: Request, res: Response, next: NextFunction) {
   try {
-    const userId = (req as any).user?.id;
-    const booking = await bookingService.createBooking(req.body, userId);
+    const userId = (req as AuthenticatedRequest).user?.id;
+    const headerIdempotencyKey = req.header('x-idempotency-key') || req.header('idempotency-key');
+    const booking = await bookingService.createBooking(req.body, userId, headerIdempotencyKey);
     res.status(201).json(
       success(
         {
@@ -54,7 +56,8 @@ export async function adminGetBookings(req: Request, res: Response, next: NextFu
 
 export async function adminUpdateBookingStatus(req: Request, res: Response, next: NextFunction) {
   try {
-    const staffId = (req as any).user?.email || (req as any).user?.id || 'STAFF';
+    const authUser = (req as AuthenticatedRequest).user;
+    const staffId = authUser?.email || authUser?.id || 'STAFF';
     const booking = await bookingService.updateBookingStatus(
       req.params.id,
       req.body.status,

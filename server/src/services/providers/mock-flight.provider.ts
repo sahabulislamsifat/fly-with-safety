@@ -156,6 +156,10 @@ export class MockFlightProvider implements FlightProvider {
         seatsAvailable: 3 + (i * 2) % 9,
         provider: 'FlyWithSafe Mock Aggregator',
         isDemoData: true,
+        fareRules: cfg.refundable ? 'Standard refundable fare rules apply with minimal cancellation fee' : 'Non-refundable promotional fare',
+        bookingUrl: `/flights/results?from=${params.from}&to=${params.to}&selectedOffer=fws-offer-${params.from.toLowerCase()}-${params.to.toLowerCase()}-${airline.code.toLowerCase()}-${i}`,
+        expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+        lastUpdated: new Date().toISOString(),
       });
     }
 

@@ -177,4 +177,83 @@ describe('FlyWithSafe Server API Tests', () => {
       expect(res.body.code).toBe('VALIDATION_ERROR');
     });
   });
+
+  // ─── Additional Flight Validation Tests ────────────────────────────────────
+  describe('Flight Search Extended Validation', () => {
+    it('rejects flight search when infant count exceeds adult count', async () => {
+      const res = await request(app)
+        .post('/api/v1/flights/search')
+        .send({
+          tripType: 'oneWay',
+          from: 'DAC',
+          to: 'BKK',
+          departureDate: '2026-11-20',
+          adults: 1,
+          infants: 2,
+        });
+      expect(res.status).toBe(422);
+      expect(res.body.success).toBe(false);
+      expect(res.body.code).toBe('VALIDATION_ERROR');
+    });
+
+    it('rejects round trip flight search when returnDate is missing or before departure', async () => {
+      const res = await request(app)
+        .post('/api/v1/flights/search')
+        .send({
+          tripType: 'roundTrip',
+          from: 'DAC',
+          to: 'BKK',
+          departureDate: '2026-11-20',
+          returnDate: '2026-11-15',
+          adults: 1,
+        });
+      expect(res.status).toBe(422);
+      expect(res.body.success).toBe(false);
+    });
+  });
+
+  // ─── Hotel Search Tests ───────────────────────────────────────────────────
+  describe('POST /api/v1/hotels/search', () => {
+    it('returns deterministic hotel offers with demo data indicator', async () => {
+      const res = await request(app)
+        .post('/api/v1/hotels/search')
+        .send({
+          destination: 'Bangkok',
+          checkIn: '2026-11-15',
+          checkOut: '2026-11-20',
+          guests: 2,
+          rooms: 1,
+        });
+      expect(res.status).toBe(200);
+      expect(res.body.success).toBe(true);
+      expect(Array.isArray(res.body.data.results)).toBe(true);
+      expect(res.body.data.results.length).toBeGreaterThan(0);
+      expect(res.body.data.results[0].isDemoData).toBe(true);
+      expect(res.body.data.results[0].id).toContain('fws-hotel-bangkok');
+    });
+  });
+
+  // ─── Future Feature Stubs (Phases 6–10) ────────────────────────────────────
+  describe('Phases 6–10 Feature Stubs', () => {
+    it('returns 501 NOT_IMPLEMENTED for price alerts', async () => {
+      const res = await request(app).post('/api/v1/price-alerts').send({ route: 'DAC-KUL' });
+      expect(res.status).toBe(501);
+      expect(res.body.success).toBe(false);
+      expect(res.body.code).toBe('NOT_IMPLEMENTED');
+      expect(res.headers['x-request-id']).toBeDefined();
+    });
+
+    it('returns 501 NOT_IMPLEMENTED for flight tracker', async () => {
+      const res = await request(app).get('/api/v1/flight-tracker/BG301');
+      expect(res.status).toBe(501);
+      expect(res.body.success).toBe(false);
+      expect(res.body.code).toBe('NOT_IMPLEMENTED');
+    });
+
+    it('returns 501 NOT_IMPLEMENTED for AI assistant', async () => {
+      const res = await request(app).post('/api/v1/ai-assistant').send({ prompt: 'plan a trip' });
+      expect(res.status).toBe(501);
+      expect(res.body.code).toBe('NOT_IMPLEMENTED');
+    });
+  });
 });
