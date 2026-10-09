@@ -305,7 +305,7 @@ export const testimonials: Testimonial[] = [
   {
     id: 'testimonial-2',
     quote:
-      "I've used many travel agencies but FlyWithSafe stands out for their transparency and support. Highly recommended!",
+      "I've used many travel agencies but FlyWithsafety stands out for their transparency and support. Highly recommended!",
     author: 'Mohammad Rahman',
     role: 'Business Traveler',
   },

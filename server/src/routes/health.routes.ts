@@ -17,13 +17,13 @@ async function checkDatabase(): Promise<'up' | 'down'> {
   }
 }
 
-// Safe diagnostics only: no URLs, versions of secrets, or error details.
+// safety diagnostics only: no URLs, versions of secrets, or error details.
 router.get('/health', async (_req: Request, res: Response) => {
   const database = await checkDatabase();
   res.json(
     success({
       status: database === 'up' ? 'ok' : 'degraded',
-      message: 'FlyWithSafe API is running',
+      message: 'FlyWithsafety API is running',
       environment: env.nodeEnv,
       database,
       timestamp: new Date().toISOString(),

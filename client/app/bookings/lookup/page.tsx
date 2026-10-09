@@ -67,7 +67,7 @@ function BookingLookupContent() {
             Track Booking &amp; Inquiry Status
           </h1>
           <p className="text-sm text-text-secondary max-w-md mx-auto">
-            Enter your FlyWithSafe booking reference code (e.g. FWS-2026-XXXXXX) and email address to view real-time reservation status and history.
+            Enter your FlyWithsafety booking reference code (e.g. FWS-2026-XXXXXX) and email address to view real-time reservation status and history.
           </p>
         </div>
 

@@ -134,12 +134,12 @@ These Prisma-specific env vars are removed in v7:
 
 ## TypeScript env() Helper
 
-The `env()` function from `prisma/config` provides type safety:
+The `env()` function from `prisma/config` provides type safetyty:
 
 ```typescript
 import { env } from 'prisma/config'
 
-// Type-safe environment variable access
+// Type-safety environment variable access
 const url = env('DATABASE_URL')  // string
 ```
 

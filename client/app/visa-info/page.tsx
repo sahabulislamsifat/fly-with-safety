@@ -2,13 +2,14 @@ import { Metadata } from 'next';
 import { BookingSearch } from '@/components/booking/BookingSearch';
 import { Features } from '@/components/features/Features';
 import { Partners } from '@/components/partners/Partners';
+import { PageHero } from '@/components/ui/PageHero';
 
 export const metadata: Metadata = {
-  title: 'Visa Information | FlyWithSafe',
+  title: 'Visa Information | FlyWithsafety',
   description:
-    'Get up-to-date visa requirements and assistance for your travel destination. FlyWithSafe helps you navigate visa applications with ease.',
+    'Get up-to-date visa requirements and assistance for your travel destination. FlyWithsafety helps you navigate visa applications with ease.',
   openGraph: {
-    title: 'Visa Information | FlyWithSafe',
+    title: 'Visa Information | FlyWithsafety',
     description: 'Get up-to-date visa requirements and assistance for your travel destination.',
     type: 'website',
   },
@@ -17,27 +18,15 @@ export const metadata: Metadata = {
 export default function VisaInfoPage() {
   return (
     <>
-      <section
-        className="relative min-h-[50vh] sm:min-h-[60vh] flex items-center bg-gradient-to-b from-brand-primary/90 to-brand-primary/70"
-        aria-labelledby="visa-heading"
-      >
-        <div className="container py-20 lg:py-28">
-          <div className="max-w-3xl text-center mx-auto">
-            <h1
-              id="visa-heading"
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
-            >
-              Visa Information & Assistance
-            </h1>
-            <p className="text-lg sm:text-xl text-white/90 leading-relaxed mb-8 max-w-xl mx-auto">
-              Check visa requirements for your destination. Get guidance on documents, processing
-              times, and application procedures.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        id="visa-heading"
+        title="Visa information and assistance"
+        description="Understand the travel documents you may need before you go, with specialist support when the details matter."
+      />
 
-      <BookingSearch defaultTab="visa" />
+      <div className="page-surface">
+        <BookingSearch defaultTab="visa" />
+      </div>
 
       <div className="section container">
         <div className="max-w-3xl mx-auto">

@@ -1,8 +1,9 @@
 import { Metadata } from "next";
+import { PageHero } from "@/components/ui/PageHero";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | FlyWithSafe",
-  description: "Read FlyWithSafe's privacy policy to understand how we collect, use, and protect your personal information.",
+  title: "Privacy Policy | FlyWithsafety",
+  description: "Read FlyWithsafety's privacy policy to understand how we collect, use, and protect your personal information.",
   robots: { index: true, follow: true },
 };
 
@@ -10,14 +11,11 @@ export default function PrivacyPage() {
   const lastUpdated = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
   return (
-    <main className="flex-1 pt-16">
-      <section className="relative min-h-[40vh] flex items-center bg-gradient-to-b from-brand-primary/90 to-brand-primary/70">
-        <div className="container py-16">
-          <h1 className="text-4xl sm:text-5xl font-bold text-white text-center">Privacy Policy</h1>
-        </div>
-      </section>
+    <main className="flex-1">
+      <PageHero id="privacy-heading" title="Privacy policy" />
 
-      <section className="section container max-w-3xl">
+      <section className="page-surface">
+        <div className="container max-w-3xl rounded-xs border border-border-light bg-white px-6 py-10 shadow-card sm:px-10 sm:py-12">
         <p className="text-text-tertiary text-sm mb-8 text-center">Last updated: {lastUpdated}</p>
 
         <article className="space-y-10">
@@ -81,7 +79,7 @@ export default function PrivacyPage() {
               <li>Withdraw consent where processing is based on consent</li>
             </ul>
             <p className="text-text-secondary leading-relaxed mt-4">
-              To exercise these rights, contact us at privacy@flywithsafe.com.
+              To exercise these rights, contact us at privacy@flywithsafety.com.
             </p>
           </section>
 
@@ -135,13 +133,14 @@ export default function PrivacyPage() {
               If you have questions about this Privacy Policy or our data practices, please contact us at:
             </p>
             <address className="not-italic text-text-secondary leading-relaxed mt-2">
-              FlyWithSafe Privacy Team<br />
+              FlyWithsafety Privacy Team<br />
               123 Travel Street, Suite 100<br />
               New York, NY 10001, USA<br />
-              Email: privacy@flywithsafe.com
+              Email: privacy@flywithsafety.com
             </address>
           </section>
         </article>
+        </div>
       </section>
     </main>
   );

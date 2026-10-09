@@ -1,8 +1,9 @@
 import { Metadata } from "next";
+import { PageHero } from "@/components/ui/PageHero";
 
 export const metadata: Metadata = {
-  title: "Terms of Use | FlyWithSafe",
-  description: "Read FlyWithSafe's terms of use governing your use of our travel booking platform and services.",
+  title: "Terms of Use | FlyWithsafety",
+  description: "Read FlyWithsafety's terms of use governing your use of our travel booking platform and services.",
   robots: { index: true, follow: true },
 };
 
@@ -10,39 +11,36 @@ export default function TermsPage() {
   const lastUpdated = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
   return (
-    <main className="flex-1 pt-16">
-      <section className="relative min-h-[40vh] flex items-center bg-gradient-to-b from-brand-primary/90 to-brand-primary/70">
-        <div className="container py-16">
-          <h1 className="text-4xl sm:text-5xl font-bold text-white text-center">Terms of Use</h1>
-        </div>
-      </section>
+    <main className="flex-1">
+      <PageHero id="terms-heading" title="Terms of use" />
 
-      <section className="section container max-w-3xl">
+      <section className="page-surface">
+        <div className="container max-w-3xl rounded-xs border border-border-light bg-white px-6 py-10 shadow-card sm:px-10 sm:py-12">
         <p className="text-text-tertiary text-sm mb-8 text-center">Last updated: {lastUpdated}</p>
 
         <article className="space-y-10">
           <section>
             <h2 className="text-2xl font-bold text-text-primary mb-4">1. Acceptance of Terms</h2>
             <p className="text-text-secondary leading-relaxed">
-              By accessing and using FlyWithSafe&apos;s website and services, you agree to be bound by these Terms of Use and all applicable laws and regulations. If you do not agree with any part of these terms, you may not use our services.
+              By accessing and using FlyWithsafety&apos;s website and services, you agree to be bound by these Terms of Use and all applicable laws and regulations. If you do not agree with any part of these terms, you may not use our services.
             </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-bold text-text-primary mb-4">2. Description of Services</h2>
             <p className="text-text-secondary leading-relaxed mb-4">
-              FlyWithSafe provides a travel booking platform that enables users to search, compare, and book flights, hotels, travel packages, and access visa information. We act as an intermediary between you and travel service providers.
+              FlyWithsafety provides a travel booking platform that enables users to search, compare, and book flights, hotels, travel packages, and access visa information. We act as an intermediary between you and travel service providers.
             </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-bold text-text-primary mb-4">3. Booking and Payment</h2>
             <p className="text-text-secondary leading-relaxed mb-4">
-              When you make a booking through FlyWithSafe:
+              When you make a booking through FlyWithsafety:
             </p>
             <ul className="list-disc list-inside space-y-2 text-text-secondary">
               <li>You are entering into a contract directly with the travel service provider (airline, hotel, etc.)</li>
-              <li>FlyWithSafe facilitates the booking but is not the service provider</li>
+              <li>FlyWithsafety facilitates the booking but is not the service provider</li>
               <li>Payment terms and cancellation policies are set by the service provider</li>
               <li>You are responsible for providing accurate information for all bookings</li>
               <li>Prices and availability are subject to change until booking is confirmed</li>
@@ -52,7 +50,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-2xl font-bold text-text-primary mb-4">4. Changes and Cancellations</h2>
             <p className="text-text-secondary leading-relaxed mb-4">
-              Changes and cancellations are governed by the policies of the respective travel service provider. FlyWithSafe will assist you with modifications to the extent permitted by the provider&apos;s terms. Fees may apply.
+              Changes and cancellations are governed by the policies of the respective travel service provider. FlyWithsafety will assist you with modifications to the extent permitted by the provider&apos;s terms. Fees may apply.
             </p>
           </section>
 
@@ -68,7 +66,7 @@ export default function TermsPage() {
               <li>Checking travel advisories and restrictions</li>
             </ul>
             <p className="text-text-secondary leading-relaxed mt-4">
-              FlyWithSafe provides visa information as a courtesy but does not guarantee its accuracy or completeness. Always verify requirements with official government sources.
+              FlyWithsafety provides visa information as a courtesy but does not guarantee its accuracy or completeness. Always verify requirements with official government sources.
             </p>
           </section>
 
@@ -90,7 +88,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-2xl font-bold text-text-primary mb-4">7. Intellectual Property</h2>
             <p className="text-text-secondary leading-relaxed">
-              All content on the FlyWithSafe platform, including text, graphics, logos, images, and software, is the property of FlyWithSafe or its licensors and is protected by intellectual property laws. You may not reproduce, distribute, or create derivative works without written permission.
+              All content on the FlyWithsafety platform, including text, graphics, logos, images, and software, is the property of FlyWithsafety or its licensors and is protected by intellectual property laws. You may not reproduce, distribute, or create derivative works without written permission.
             </p>
           </section>
 
@@ -107,17 +105,17 @@ export default function TermsPage() {
           <section>
             <h2 className="text-2xl font-bold text-text-primary mb-4">9. Limitation of Liability</h2>
             <p className="text-text-secondary leading-relaxed mb-4">
-              TO THE MAXIMUM EXTENT PERMITTED BY LAW, FLYWITHSAFE SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOSS OF PROFITS, DATA, OR BUSINESS OPPORTUNITIES, ARISING FROM YOUR USE OF OUR SERVICES.
+              TO THE MAXIMUM EXTENT PERMITTED BY LAW, FLYWITHsafety SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOSS OF PROFITS, DATA, OR BUSINESS OPPORTUNITIES, ARISING FROM YOUR USE OF OUR SERVICES.
             </p>
             <p className="text-text-secondary leading-relaxed">
-              Our total liability for any claim shall not exceed the amount you paid to FlyWithSafe in the 12 months preceding the claim, or $100, whichever is greater.
+              Our total liability for any claim shall not exceed the amount you paid to FlyWithsafety in the 12 months preceding the claim, or $100, whichever is greater.
             </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-bold text-text-primary mb-4">10. Indemnification</h2>
             <p className="text-text-secondary leading-relaxed">
-              You agree to indemnify and hold FlyWithSafe harmless from any claims, damages, losses, and expenses (including reasonable attorneys&apos; fees) arising from your use of our services, violation of these terms, or infringement of any third-party rights.
+              You agree to indemnify and hold FlyWithsafety harmless from any claims, damages, losses, and expenses (including reasonable attorneys&apos; fees) arising from your use of our services, violation of these terms, or infringement of any third-party rights.
             </p>
           </section>
 
@@ -138,7 +136,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-2xl font-bold text-text-primary mb-4">13. General</h2>
             <p className="text-text-secondary leading-relaxed mb-4">
-              These terms constitute the entire agreement between you and FlyWithSafe. If any provision is found unenforceable, the remaining provisions will continue in effect. Our failure to enforce a right does not waive it.
+              These terms constitute the entire agreement between you and FlyWithsafety. If any provision is found unenforceable, the remaining provisions will continue in effect. Our failure to enforce a right does not waive it.
             </p>
           </section>
 
@@ -148,13 +146,14 @@ export default function TermsPage() {
               Questions about these Terms of Use? Contact us at:
             </p>
             <address className="not-italic text-text-secondary leading-relaxed mt-2">
-              FlyWithSafe Legal Team<br />
+              FlyWithsafety Legal Team<br />
               123 Travel Street, Suite 100<br />
               New York, NY 10001, USA<br />
-              Email: legal@flywithsafe.com
+              Email: legal@flywithsafety.com
             </address>
           </section>
         </article>
+        </div>
       </section>
     </main>
   );

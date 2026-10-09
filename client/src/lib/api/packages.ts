@@ -15,12 +15,14 @@ export interface PackageSummary {
 }
 
 export interface PackageInquiryPayload {
+  packageId?: string;
   packageSlug?: string;
+  packageTitle?: string;
   name: string;
   email: string;
   phone?: string;
   travelDate?: string;
-  travelers?: number;
+  travellers: number;
   notes?: string;
 }
 

@@ -201,9 +201,9 @@ type UserWithPosts = Prisma.UserGetPayload<{
 }>
 ```
 
-### Type-safe query fragments with satisfies
+### Type-safety query fragments with satisfies
 
-Type-safe query fragments:
+Type-safety query fragments:
 
 ```typescript
 import { Prisma } from '../generated/client'

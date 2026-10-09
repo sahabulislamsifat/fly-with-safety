@@ -93,7 +93,7 @@ export function MobileExperience() {
               {/* Phone top notch bar */}
               <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-800 text-[11px] text-slate-400">
                 <span className="font-mono font-bold text-slate-300">09:41</span>
-                <span className="text-[10px] tracking-widest text-[#8B1D24] font-bold">FLYWITHSAFE MOBILE</span>
+                <span className="text-[10px] tracking-widest text-[#8B1D24] font-bold">FLYWITHsafety MOBILE</span>
                 <span>5G · 100%</span>
               </div>
 
@@ -140,7 +140,7 @@ export function MobileExperience() {
                     Scan With Phone Camera
                   </p>
                   <p className="text-[11px] text-neutral-500 mt-0.5 leading-snug">
-                    Instantly opens WhatsApp chat with FlyWithSafe booking desk.
+                    Instantly opens WhatsApp chat with FlyWithsafety booking desk.
                   </p>
                 </div>
               </div>

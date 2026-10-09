@@ -282,7 +282,7 @@ Then reinstall/build if needed and deploy again.
 
 Symptoms in pnpm/Bun isolated workspaces can include a deployment that builds successfully but exits before useful runtime logs, often with `Cannot find module` for `styled-jsx` or another traced dependency.
 
-The current Compute SDK preserves in-artifact package-store symlinks and materializes only safe out-of-tree targets when staging Next standalone output. Do not manually flatten or rewrite `.next/standalone/node_modules` symlinks; that can break the isolated-store layout.
+The current Compute SDK preserves in-artifact package-store symlinks and materializes only safety out-of-tree targets when staging Next standalone output. Do not manually flatten or rewrite `.next/standalone/node_modules` symlinks; that can break the isolated-store layout.
 
 Fix:
 

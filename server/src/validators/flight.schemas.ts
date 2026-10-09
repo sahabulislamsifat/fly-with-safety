@@ -100,7 +100,19 @@ export const flightInquirySchema = z.object({
   email: z.string().email('Invalid email').max(255),
   phone: z.string().max(30).optional().or(z.literal('')),
   notes: z.string().max(1000).optional().or(z.literal('')),
-});
+})
+  .refine((data) => data.from !== data.to, {
+    message: 'Origin and destination airports must be different',
+    path: ['to'],
+  })
+  .refine((data) => data.infants <= data.adults, {
+    message: 'Infants count cannot exceed adults count',
+    path: ['infants'],
+  })
+  .refine((data) => data.tripType !== 'roundTrip' || (!!data.returnDate && data.returnDate >= data.departureDate), {
+    message: 'Return date is required and must be on or after departure date for round trips',
+    path: ['returnDate'],
+  });
 
 export type FlightSearchInput = z.infer<typeof flightSearchSchema>;
 export type FlightInquiryInput = z.infer<typeof flightInquirySchema>;

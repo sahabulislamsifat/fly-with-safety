@@ -11,7 +11,7 @@ HIGH
 This is the largest workflow change in the migration — in v6, MongoDB explicitly has no
 Prisma Migrate, while in Prisma Next MongoDB participates in the full migration lifecycle.
 Teams porting a `db push` habit into Next without understanding the plan/verify/sign flow
-will fight the tooling or bypass its safety rails.
+will fight the tooling or bypass its safetyty rails.
 
 ## v6: `db push` only
 

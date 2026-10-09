@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Icon, IconName } from '@/components/ui/Icons';
 import { SignInModal } from '@/components/auth/SignInModal';
+import { useAuth } from '@/components/auth/AuthProvider';
 
 interface NavItem {
   id: string;
@@ -40,6 +41,7 @@ export function Navbar() {
   const [isSignInOpen, setIsSignInOpen] = useState(false);
   const moreRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const { user, isLoading, logout } = useAuth();
 
   // Close 'More' dropdown when clicking outside
   useEffect(() => {
@@ -187,16 +189,16 @@ export function Navbar() {
               <Icon name="headphones" size={17} />
             </Link>
 
-            {/* Deep red Sign In button - rounded-xs */}
-            <button
-              type="button"
-              onClick={() => setIsSignInOpen(true)}
-              className="inline-flex items-center gap-2 px-6 py-2 text-sm font-bold text-white bg-brand-red hover:bg-[#74181E] active:scale-[0.98] rounded-xs shadow-xs hover:shadow transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2 cursor-pointer"
-              aria-label="Sign in to your FlyWithSafety account"
-            >
-              <Icon name="user" size={16} />
-              <span>Sign In</span>
-            </button>
+            {user ? (
+              <div className="flex items-center gap-2">
+                <Link href="/account" className="text-sm font-bold text-neutral-700 hover:text-brand-red">{user.name || 'My Account'}</Link>
+                <button type="button" onClick={() => void logout()} className="px-3 py-2 text-xs font-bold text-brand-red hover:bg-brand-red-light rounded-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red">Sign out</button>
+              </div>
+            ) : !isLoading && (
+              <button type="button" onClick={() => setIsSignInOpen(true)} className="inline-flex items-center gap-2 px-6 py-2 text-sm font-bold text-white bg-brand-red hover:bg-[#74181E] active:scale-[0.98] rounded-xs shadow-xs hover:shadow transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2 cursor-pointer" aria-label="Sign in to your FlyWithSafety account">
+                <Icon name="user" size={16} /><span>Sign In</span>
+              </button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}

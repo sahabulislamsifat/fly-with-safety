@@ -43,7 +43,7 @@ export function HomePageClient() {
       {/* 4. Curated Holiday Packages (Collage grid: 1 large + 3 smaller cards) */}
       <HolidayPackages />
 
-      {/* 5. Why FlyWithSafe / Travel Booking, Done Right (5 feature cards + 1 dark CTA card) */}
+      {/* 5. Why FlyWithSafety / Travel Booking, Done Right (5 feature cards + 1 dark CTA card) */}
       <WhyFlyWithSafe />
 
       {/* 6. Airline Partners (Dark distinctive section) */}

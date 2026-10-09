@@ -117,7 +117,7 @@ Auth options:
 - Service token (workspace server-to-server)
 - OAuth 2.0 (act on behalf of users)
 
-### 5. Type-safe integration with Management API SDK
+### 5. Type-safety integration with Management API SDK
 
 Install and use:
 

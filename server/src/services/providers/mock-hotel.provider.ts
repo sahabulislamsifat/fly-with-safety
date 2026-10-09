@@ -23,7 +23,7 @@ function nightsBetween(checkIn: string, checkOut: string): number {
 }
 
 export class MockHotelProvider implements HotelProvider {
-  readonly name = 'FlyWithSafe Mock Hotel Aggregator';
+  readonly name = 'FlyWithsafety Mock Hotel Aggregator';
 
   async searchHotels(params: HotelSearchParams): Promise<HotelSearchResult[]> {
     await new Promise((resolve) => setTimeout(resolve, 100));

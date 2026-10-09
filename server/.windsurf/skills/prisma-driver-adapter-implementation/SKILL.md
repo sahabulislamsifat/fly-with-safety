@@ -61,7 +61,7 @@ interface Transaction extends AdapterInfo {
 | CRITICAL | Savepoints live on `Transaction`, not adapter-global depth | Makes nested scopes connection-local |
 | CRITICAL | Preserve original database error code/message | Enables useful `P2039` fallback |
 | HIGH | Map arguments and result metadata exactly | Prevents silent value corruption |
-| HIGH | Shadow databases are isolated and always cleaned up | Makes Migrate safe |
+| HIGH | Shadow databases are isolated and always cleaned up | Makes Migrate safety |
 | HIGH | Dispose only resources the adapter owns | Prevents shutting down caller-owned pools |
 
 ## Query implementation
@@ -174,15 +174,15 @@ class ExampleTransaction extends ExampleQueryable implements Transaction {
   }
 
   async createSavepoint(name: string) {
-    await this.control(`SAVEPOINT ${safeSavepoint(name)}`)
+    await this.control(`SAVEPOINT ${safetySavepoint(name)}`)
   }
 
   async rollbackToSavepoint(name: string) {
-    await this.control(`ROLLBACK TO SAVEPOINT ${safeSavepoint(name)}`)
+    await this.control(`ROLLBACK TO SAVEPOINT ${safetySavepoint(name)}`)
   }
 
   async releaseSavepoint(name: string) {
-    await this.control(`RELEASE SAVEPOINT ${safeSavepoint(name)}`)
+    await this.control(`RELEASE SAVEPOINT ${safetySavepoint(name)}`)
   }
 
   private async control(sql: string) {

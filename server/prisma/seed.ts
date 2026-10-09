@@ -1,5 +1,5 @@
 /**
- * FlyWithSafe Database Seed — DEVELOPMENT/DEMO DATA ONLY
+ * FlyWithsafety Database Seed — DEVELOPMENT/DEMO DATA ONLY
  *
  * All content seeded here is sample data. Replace with verified agency data
  * before production use.
@@ -234,7 +234,7 @@ async function main() {
     update: {},
     create: {
       id: 'seed-testimonial-2',
-      quote: "I've used many travel agencies but FlyWithSafe stands out for their transparency and support. Highly recommended!",
+      quote: "I've used many travel agencies but FlyWithsafety stands out for their transparency and support. Highly recommended!",
       author: 'Mohammad Rahman',
       role: 'Business Traveler',
       rating: 5,

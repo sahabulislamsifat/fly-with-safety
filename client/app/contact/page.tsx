@@ -3,14 +3,15 @@ import { Features } from '@/components/features/Features';
 import { Partners } from '@/components/partners/Partners';
 import { ContactForm } from '@/components/contact/ContactForm';
 import { Icon } from '@/components/ui/Icons';
+import { PageHero } from '@/components/ui/PageHero';
 
 export const metadata: Metadata = {
-  title: 'Contact Us | FlyWithSafe',
+  title: 'Contact Us | FlyWithsafety',
   description:
-    'Get in touch with FlyWithSafe for travel assistance, booking support, or general inquiries. Our team is available 24/7 to help you.',
+    'Get in touch with FlyWithsafety for travel assistance, booking support, or general inquiries. Our team is available 24/7 to help you.',
   openGraph: {
-    title: 'Contact Us | FlyWithSafe',
-    description: 'Get in touch with FlyWithSafe for travel assistance.',
+    title: 'Contact Us | FlyWithsafety',
+    description: 'Get in touch with FlyWithsafety for travel assistance.',
     type: 'website',
   },
 };
@@ -18,27 +19,14 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <section
-        className="relative min-h-[50vh] sm:min-h-[60vh] flex items-center bg-gradient-to-b from-brand-primary/90 to-brand-primary/70"
-        aria-labelledby="contact-heading"
-      >
-        <div className="container py-20 lg:py-28">
-          <div className="max-w-3xl text-center mx-auto">
-            <h1
-              id="contact-heading"
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
-            >
-              We&apos;re Here to Help
-            </h1>
-            <p className="text-lg sm:text-xl text-white/90 leading-relaxed mb-8 max-w-xl mx-auto">
-              Have questions about your booking? Need travel advice? Our friendly support team is
-              available around the clock.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        id="contact-heading"
+        title="We’re here to help"
+        description="Questions about a booking or your next trip? Our travel team is available around the clock."
+      />
 
-      <section className="section container">
+      <section className="page-surface">
+        <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
           <div className="lg:col-span-2">
             <div className="bg-white rounded-xs p-8 lg:p-12 shadow-card border border-border-light">
@@ -73,10 +61,10 @@ export default function ContactPage() {
                 <li className="flex items-center gap-3 text-text-secondary">
                   <Icon name="mail" size={20} className="text-brand-primary flex-shrink-0" />
                   <a
-                    href="mailto:support@flywithsafe.com"
+                    href="mailto:support@flywithsafety.com"
                     className="hover:text-brand-primary transition-colors"
                   >
-                    support@flywithsafe.com
+                    support@flywithsafety.com
                   </a>
                 </li>
                 <li className="flex items-center gap-3 text-text-secondary">
@@ -118,6 +106,7 @@ export default function ContactPage() {
               </dl>
             </div>
           </div>
+        </div>
         </div>
       </section>
 

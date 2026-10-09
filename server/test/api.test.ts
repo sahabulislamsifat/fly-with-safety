@@ -2,7 +2,25 @@ import { describe, it, expect } from 'vitest';
 import request from 'supertest';
 import app from '../src/app.js';
 
-describe('FlyWithSafe Server API Tests', () => {
+describe('FlyWithsafety Server API Tests', () => {
+  describe('Authentication route guards and validation', () => {
+    it('rejects protected current-user requests without a session', async () => {
+      const res = await request(app).get('/api/v1/auth/me');
+      expect(res.status).toBe(401);
+      expect(res.body.success).toBe(false);
+    });
+
+    it('validates email login and reset input before database access', async () => {
+      const login = await request(app).post('/api/v1/auth/login').send({ email: 'not-an-email' });
+      expect(login.status).toBe(422);
+      expect(login.body.code).toBe('VALIDATION_ERROR');
+
+      const reset = await request(app).post('/api/v1/auth/reset-password').send({ token: 'short', password: 'weak' });
+      expect(reset.status).toBe(422);
+      expect(reset.body.code).toBe('VALIDATION_ERROR');
+    });
+  });
+
   // ─── Health check ──────────────────────────────────────────────────────────
   describe('GET /api/v1/health', () => {
     it('returns healthy status with system diagnostics and requestId', async () => {
@@ -175,6 +193,22 @@ describe('FlyWithSafe Server API Tests', () => {
         .send({ country: 'Malaysia' });
       expect(res.status).toBe(422);
       expect(res.body.code).toBe('VALIDATION_ERROR');
+    });
+
+    it('rejects invalid inquiry date and route combinations before persistence', async () => {
+      const flight = await request(app).post('/api/v1/flights/inquiries').send({
+        from: 'DAC', to: 'DAC', departureDate: '2026-11-20', tripType: 'oneWay',
+        name: 'Test User', email: 'test@example.com', cabinClass: 'economy',
+      });
+      expect(flight.status).toBe(422);
+      expect(flight.body.code).toBe('VALIDATION_ERROR');
+
+      const hotel = await request(app).post('/api/v1/hotels/inquiries').send({
+        destination: 'Dhaka', checkIn: '2026-11-20', checkOut: '2026-11-20', guests: 1, rooms: 1,
+        name: 'Test User', email: 'test@example.com',
+      });
+      expect(hotel.status).toBe(422);
+      expect(hotel.body.code).toBe('VALIDATION_ERROR');
     });
   });
 

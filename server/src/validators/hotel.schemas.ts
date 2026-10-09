@@ -24,6 +24,9 @@ export const hotelInquirySchema = hotelSearchSchema.extend({
   email: z.string().email('Invalid email').max(255),
   phone: z.string().max(30).optional().or(z.literal('')),
   notes: z.string().max(1000).optional().or(z.literal('')),
+}).refine((data) => data.checkOut > data.checkIn, {
+  message: 'Check-out must be after check-in',
+  path: ['checkOut'],
 });
 
 export type HotelSearchInput = z.infer<typeof hotelSearchSchema>;

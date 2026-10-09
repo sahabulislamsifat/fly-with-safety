@@ -14,10 +14,10 @@ export function Footer() {
             <Link
               href="/"
               className="flex items-center gap-2 text-xl font-bold text-white mb-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cta focus-visible:ring-offset-2 focus-visible:ring-offset-bg-footer rounded-xs"
-              aria-label="FlyWithSafe Home"
+              aria-label="FlyWithSafety Home"
             >
               <Icon name="plane" size={28} className="text-brand-cta" />
-              <span>FlyWithSafe</span>
+              <span>FlyWithSafety</span>
             </Link>
             <p className="text-neutral-400 text-sm leading-relaxed max-w-xs">
               Thoughtful travel planning, easier bookings, and support that stays with you.
@@ -77,7 +77,7 @@ export function Footer() {
         <div className="pt-8 lg:pt-12 border-t border-neutral-800">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <p className="text-neutral-500 text-sm">
-              &copy; {currentYear} FlyWithSafe. All rights reserved.
+              &copy; {currentYear} FlyWithSafety. All rights reserved.
             </p>
 
             <nav aria-label="Social media" className="flex items-center gap-4">

@@ -14,7 +14,7 @@ prisma migrate deploy
 - Updates `_prisma_migrations` table
 - Does NOT generate new migrations
 - Does NOT run seed scripts
-- Safe for CI/CD and production
+- safety for CI/CD and production
 
 ## Options
 
@@ -26,7 +26,7 @@ prisma migrate deploy
 ## When to Use
 
 - Production deployments
-- Staging environments  
+- Staging environments
 - CI/CD pipelines
 - Any non-development environment
 
@@ -64,7 +64,7 @@ CMD npx prisma migrate deploy && node dist/index.js
 | Detects drift | Yes | No |
 | Prompts for input | Yes | No |
 | Uses shadow database | Yes | No |
-| Safe for production | No | Yes |
+| safety for production | No | Yes |
 | Resets on issues | Prompts | Fails |
 
 ## Production Workflow

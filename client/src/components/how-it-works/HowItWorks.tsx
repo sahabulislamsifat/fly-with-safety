@@ -26,7 +26,7 @@ const steps: Step[] = [
   },
   {
     step: '03',
-    title: 'Let FlyWithSafe handle details',
+    title: 'Let FlyWithsafety handle details',
     description: 'Our dedicated travel agency team confirms seats, manages ticket issuance, and provides end-to-end visa application guidance.',
     icon: 'fileText',
     highlight: 'Booking assistance + visa support',
@@ -47,13 +47,13 @@ export function HowItWorks() {
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xs bg-amber-500/10 border border-amber-400/20 text-xs font-semibold text-amber-400 uppercase tracking-wider mb-3">
             <Icon name="checkCircle" size={14} />
-            <span>The FlyWithSafe Way</span>
+            <span>The FlyWithsafety Way</span>
           </div>
           <h2
             id="how-it-works-heading"
             className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-4"
           >
-            How FlyWithSafe Works
+            How FlyWithsafety Works
           </h2>
           <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
             We combine high-speed travel comparison with the care of an agency-assisted booking desk so you never travel alone.
@@ -73,7 +73,7 @@ export function HowItWorks() {
                   <span className="text-2xl sm:text-3xl font-mono font-black text-amber-400/80">
                     {item.step}
                   </span>
-                  <div className="w-10 h-10 rounded-xs bg-blue-600/20 border border-blue-400/20 flex items-center justify-center text-amber-400">
+                  <div className="w-10 h-10 rounded-xs bg-brand-red/20 border border-brand-red/30 flex items-center justify-center text-amber-400">
                     <Icon name={item.icon} size={20} />
                   </div>
                 </div>

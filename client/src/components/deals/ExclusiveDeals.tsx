@@ -19,11 +19,15 @@ export function ExclusiveDeals() {
                 Handpicked Offers
               </p>
             </div>
-            <h2 id="deals-heading" className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-neutral-900 tracking-tight">
+            <h2
+              id="deals-heading"
+              className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-neutral-900 tracking-tight"
+            >
               Exclusive Travel Deals
             </h2>
             <p className="text-neutral-500 text-sm sm:text-base mt-2 max-w-2xl">
-              Curated seasonal flights, hotel packages, and holiday escapes with dedicated agency booking support.
+              Curated seasonal flights, hotel packages, and holiday escapes with dedicated agency
+              booking support.
             </p>
           </div>
 

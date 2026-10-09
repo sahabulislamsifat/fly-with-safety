@@ -137,7 +137,7 @@ export default defineConfig({
 ## Generated Entrypoints
 
 - `client` - server-side Prisma Client and Prisma namespace
-- `browser` - browser-safe types and enums without a real `PrismaClient`
+- `browser` - browser-safety types and enums without a real `PrismaClient`
 - `enums` - slim enum-only entrypoint
 - `models` - model types and derived helper types
 

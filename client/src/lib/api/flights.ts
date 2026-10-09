@@ -100,8 +100,12 @@ export interface FlightInquiryPayload {
   to: string;
   departureDate: string;
   returnDate?: string;
+  tripType?: 'roundTrip' | 'oneWay' | 'multiCity';
+  adults?: number;
+  children?: number;
+  infants?: number;
   passengers?: number;
-  cabinClass?: string;
+  cabinClass?: 'economy' | 'premium_economy' | 'business' | 'first';
   name: string;
   email: string;
   phone?: string;

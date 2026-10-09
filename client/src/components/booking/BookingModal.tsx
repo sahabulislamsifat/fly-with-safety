@@ -84,7 +84,7 @@ export function BookingModal() {
         <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-200 bg-neutral-50">
           <div>
             <span className="text-xs font-bold uppercase tracking-wider text-brand-primary">
-              FlyWithSafe Agency Booking
+              FlyWithsafety Agency Booking
             </span>
             <h2 id="booking-modal-title" className="text-lg font-bold text-text-primary">
               {recentBooking ? 'Booking Request Submitted' : bookingTarget.title}
@@ -111,7 +111,7 @@ export function BookingModal() {
                 Thank You, {recentBooking.customerName}!
               </h3>
               <p className="text-sm text-text-secondary max-w-md mx-auto">
-                Your booking request has been securely registered in our system. A FlyWithSafe travel specialist will review your itinerary and contact you shortly.
+                Your booking request has been securely registered in our system. A FlyWithsafety travel specialist will review your itinerary and contact you shortly.
               </p>
 
               <div className="bg-neutral-50 border border-neutral-200 rounded-xs p-4 max-w-md mx-auto text-left space-y-2">

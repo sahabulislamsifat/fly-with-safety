@@ -32,7 +32,7 @@ export function TravelBenefitsBanner() {
           <div className="relative z-10 p-6 sm:p-10 lg:p-14 max-w-3xl text-white">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xs bg-white/10 backdrop-blur-xs border border-white/20 text-xs font-bold uppercase tracking-wider text-amber-300 mb-4">
               <Icon name="checkCircle" size={14} />
-              <span>FlyWithSafe Privilege</span>
+              <span>FlyWithsafety Privilege</span>
             </div>
 
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight mb-3 leading-tight">

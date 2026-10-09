@@ -82,7 +82,7 @@ generator client {
 import { PrismaClient } from '../generated/prisma/client'
 ```
 
-### Browser-Safe Types
+### Browser-safety Types
 
 ```typescript
 import { Prisma } from '../generated/prisma/browser'

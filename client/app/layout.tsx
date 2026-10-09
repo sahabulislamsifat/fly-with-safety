@@ -5,6 +5,7 @@ import { Navbar } from "@/components/navbar/Navbar";
 import { Footer } from "@/components/footer/Footer";
 import ReduxProvider from "@/redux/ReduxProvider";
 import { cn } from "@/lib/utils";
+import { AuthProvider } from '@/components/auth/AuthProvider';
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -145,9 +146,11 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col bg-[#F4F6FA] text-neutral-900">
         <ReduxProvider>
-          <Navbar />
-          <main className="flex-1 pt-[70px]">{children}</main>
-          <Footer />
+          <AuthProvider>
+            <Navbar />
+            <main className="flex-1 pt-[70px]">{children}</main>
+            <Footer />
+          </AuthProvider>
         </ReduxProvider>
       </body>
     </html>
