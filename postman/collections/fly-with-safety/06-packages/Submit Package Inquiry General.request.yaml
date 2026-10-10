@@ -1,0 +1,21 @@
+$kind: http-request
+name: 'Submit Package Inquiry (General)'
+method: POST
+url: '{{baseUrl}}/packages/inquiries'
+order: 3000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "packageSlug": "dubai-5-nights",
+      "packageTitle": "Dubai 5 Nights Package",
+      "travellers": 2,
+      "travelDate": "2027-01-15",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "phone": "+8801700000000",
+      "notes": "Honeymoon trip"
+    }

@@ -1,0 +1,5 @@
+$kind: http-request
+name: List Airports
+method: GET
+url: '{{baseUrl}}/airports'
+order: 2000

@@ -19,6 +19,7 @@ import adminRoutes from './routes/admin.routes.js';
 import airportsRoutes from './routes/airports.routes.js';
 import bookingRoutes from './routes/bookings.routes.js';
 import futureStubsRoutes from './routes/future-stubs.routes.js';
+import accountRoutes from './routes/account.routes.js';
 
 const app = express();
 
@@ -63,6 +64,7 @@ app.use(API_PREFIX, testimonialRoutes);
 app.use(API_PREFIX, adminRoutes);
 app.use(API_PREFIX, airportsRoutes);
 app.use(API_PREFIX, bookingRoutes);
+app.use(API_PREFIX, accountRoutes);
 app.use(API_PREFIX, futureStubsRoutes);
 
 // 404 handler

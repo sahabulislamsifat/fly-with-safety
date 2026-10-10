@@ -19,6 +19,20 @@ describe('FlyWithsafety Server API Tests', () => {
       expect(reset.status).toBe(422);
       expect(reset.body.code).toBe('VALIDATION_ERROR');
     });
+
+    it('rejects unauthenticated customer dashboard access before loading account records', async () => {
+      const [dashboard, inquiries, bookings, profile] = await Promise.all([
+        request(app).get('/api/v1/account/dashboard'),
+        request(app).get('/api/v1/account/inquiries'),
+        request(app).get('/api/v1/account/bookings'),
+        request(app).patch('/api/v1/account/profile').send({ name: 'Test User' }),
+      ]);
+      for (const response of [dashboard, inquiries, bookings, profile]) {
+        expect(response.status).toBe(401);
+        expect(response.body.success).toBe(false);
+        expect(response.body.code).toBe('UNAUTHORIZED');
+      }
+    });
   });
 
   // ─── Health check ──────────────────────────────────────────────────────────

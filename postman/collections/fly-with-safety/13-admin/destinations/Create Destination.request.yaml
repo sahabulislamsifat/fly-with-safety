@@ -1,0 +1,24 @@
+$kind: http-request
+name: Create Destination
+method: POST
+url: '{{baseUrl}}/admin/destinations'
+order: 2000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{accessToken}}'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Maldives",
+      "slug": "maldives",
+      "description": "Beautiful island destination",
+      "country": "Maldives",
+      "imageUrl": "https://example.com/maldives.jpg",
+      "featured": true
+    }

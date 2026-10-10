@@ -1,0 +1,19 @@
+$kind: http-request
+name: List Inquiries
+method: GET
+url: '{{baseUrl}}/account/inquiries?page=1&limit=10&type=flight&status=PENDING'
+order: 2000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{accessToken}}'
+queryParams:
+  - key: page
+    value: '1'
+  - key: limit
+    value: '10'
+  - key: type
+    value: flight
+  - key: status
+    value: PENDING

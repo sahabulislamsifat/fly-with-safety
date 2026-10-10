@@ -1,0 +1,22 @@
+$kind: http-request
+name: Submit Hotel Inquiry
+method: POST
+url: '{{baseUrl}}/hotels/inquiries'
+order: 2000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "destination": "Dubai",
+      "checkIn": "2027-01-15",
+      "checkOut": "2027-01-22",
+      "guests": 2,
+      "rooms": 1,
+      "name": "John Doe",
+      "email": "john@example.com",
+      "phone": "+8801700000000",
+      "notes": "Non-smoking room preferred"
+    }

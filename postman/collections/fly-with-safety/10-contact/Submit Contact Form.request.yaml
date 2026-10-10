@@ -1,0 +1,20 @@
+$kind: http-request
+name: Submit Contact Form
+method: POST
+url: '{{baseUrl}}/contact'
+order: 1000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john@example.com",
+      "phone": "+8801700000000",
+      "subject": "Flight inquiry question",
+      "serviceType": "flights",
+      "message": "I have a question about your flight booking process."
+    }

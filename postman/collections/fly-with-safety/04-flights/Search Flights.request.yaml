@@ -1,0 +1,22 @@
+$kind: http-request
+name: Search Flights
+method: POST
+url: '{{baseUrl}}/flights/search'
+order: 1000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "tripType": "roundTrip",
+      "from": "DAC",
+      "to": "DXB",
+      "departureDate": "2027-01-15",
+      "returnDate": "2027-01-22",
+      "adults": 1,
+      "children": 0,
+      "infants": 0,
+      "cabinClass": "economy"
+    }

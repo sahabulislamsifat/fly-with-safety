@@ -1,0 +1,17 @@
+$kind: http-request
+name: List Visa Inquiries
+method: GET
+url: '{{baseUrl}}/admin/inquiries/visa?page=1&limit=20&status=PENDING'
+order: 7000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{accessToken}}'
+queryParams:
+  - key: page
+    value: '1'
+  - key: limit
+    value: '20'
+  - key: status
+    value: PENDING

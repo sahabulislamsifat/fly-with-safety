@@ -8,6 +8,16 @@ interface EmailOptions {
   text?: string;
 }
 
+function escapeHtml(value: string): string {
+  return value.replace(/[&<>'"]/g, (character) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    "'": '&#39;',
+    '"': '&quot;',
+  })[character] || character);
+}
+
 function createTransporter() {
   if (!env.smtpUser || !env.smtpPassword) {
     return null;
@@ -58,12 +68,13 @@ export async function sendContactConfirmation(params: {
   firstName: string;
   referenceNumber: string;
 }): Promise<void> {
+  const firstName = escapeHtml(params.firstName);
   await sendEmail({
     to: params.to,
     subject: `We received your message — ${params.referenceNumber}`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #1e3a8a;">Thank you, ${params.firstName}!</h2>
+        <h2 style="color: #1e3a8a;">Thank you, ${firstName}!</h2>
         <p>We have received your message. Our team will get back to you within 24 hours.</p>
         <p><strong>Reference Number:</strong> ${params.referenceNumber}</p>
         <p>Please keep this reference number for your records.</p>
@@ -80,6 +91,7 @@ export async function sendInquiryConfirmation(params: {
   referenceNumber: string;
   type: 'flight' | 'hotel' | 'package' | 'visa';
 }): Promise<void> {
+  const name = escapeHtml(params.name);
   const typeLabel = {
     flight: 'Flight',
     hotel: 'Hotel',
@@ -92,7 +104,7 @@ export async function sendInquiryConfirmation(params: {
     subject: `Your ${typeLabel} inquiry received — ${params.referenceNumber}`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #1e3a8a;">Thank you, ${params.name}!</h2>
+        <h2 style="color: #1e3a8a;">Thank you, ${name}!</h2>
         <p>We have received your <strong>${typeLabel} Inquiry</strong> and our travel specialists will review it shortly.</p>
         <div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 16px 0;">
           <p style="margin: 0;"><strong>Reference Number:</strong></p>

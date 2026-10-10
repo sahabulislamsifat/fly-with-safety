@@ -1,0 +1,34 @@
+$kind: http-request
+name: Create Booking
+method: POST
+url: '{{baseUrl}}/bookings'
+order: 1000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "bookingType": "FLIGHT",
+      "bookingModel": "AGENCY_INQUIRY",
+      "customerName": "John Doe",
+      "customerEmail": "john@example.com",
+      "customerPhone": "+8801700000000",
+      "totalPrice": 0,
+      "currency": "BDT",
+      "passengers": [
+        {
+          "firstName": "John",
+          "lastName": "Doe",
+          "passengerType": "adult",
+          "gender": "male",
+          "dateOfBirth": "1990-01-01",
+          "passportNumber": "AB1234567",
+          "passportExpiry": "2030-01-01",
+          "nationality": "Bangladeshi"
+        }
+      ],
+      "bookingDetails": {},
+      "notes": ""
+    }

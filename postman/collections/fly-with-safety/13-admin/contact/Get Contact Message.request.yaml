@@ -1,0 +1,13 @@
+$kind: http-request
+name: Get Contact Message
+method: GET
+url: '{{baseUrl}}/admin/contact/:id'
+order: 2000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{accessToken}}'
+pathVariables:
+  - key: id
+    value: '{{contactId}}'

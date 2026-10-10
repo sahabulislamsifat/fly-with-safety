@@ -1,0 +1,5 @@
+$kind: http-request
+name: Google OAuth Callback
+method: GET
+url: '{{baseUrl}}/auth/google/callback'
+order: 11000
