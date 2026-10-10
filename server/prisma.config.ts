@@ -7,8 +7,8 @@ export default defineConfig({
     path: 'prisma/migrations',
   },
   datasource: {
-    url: env('DATABASE_URL'),
-    // directUrl for migrations/CLI (bypasses connection pooler)
-    // directUrl: env('DIRECT_URL'),
+    // Prisma CLI must bypass the application pooler for migration commands.
+    // The Express runtime separately uses DATABASE_URL in src/lib/prisma.ts.
+    url: env('DIRECT_URL'),
   },
 });

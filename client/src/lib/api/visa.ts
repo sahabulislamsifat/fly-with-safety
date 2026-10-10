@@ -29,10 +29,10 @@ export async function getVisaByCountry(country: string): Promise<{ visa: Record<
   return get(`/visa/${country}`);
 }
 
-export async function submitVisaInquiry(payload: VisaInquiryPayload): Promise<{
+export async function submitVisaInquiry(payload: VisaInquiryPayload, idempotencyKey: string): Promise<{
   referenceNumber: string;
   inquiry: Record<string, unknown>;
   message: string;
 }> {
-  return post('/visa/inquiries', payload);
+  return post('/visa/inquiries', payload, { 'Idempotency-Key': idempotencyKey });
 }

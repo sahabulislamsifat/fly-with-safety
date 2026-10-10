@@ -26,12 +26,12 @@ export async function getVisaByCountry(req: Request, res: Response, next: NextFu
 export async function submitVisaInquiry(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const userId = (req as AuthenticatedRequest).user?.id;
-    const result = await visaService.submitVisaInquiry(req.body, userId);
+    const result = await visaService.submitVisaInquiry(req.body, userId, req.idempotencyKey!);
     res.status(201).json(success({
-      referenceNumber: result.referenceNumber,
-      inquiry: result,
+      referenceNumber: result.inquiry.referenceNumber,
+      inquiry: result.inquiry,
       message: 'Visa inquiry submitted. Our specialists will contact you shortly.',
-    }));
+    }, result.replayed ? 'Original visa inquiry returned' : undefined));
   } catch (err) {
     next(err);
   }

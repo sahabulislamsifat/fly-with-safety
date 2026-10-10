@@ -70,6 +70,7 @@ function errorMessage(error: unknown): { message: string; fields: FieldErrors } 
 
 export function ServiceInquiryModal({ defaults, onClose }: { defaults: InquiryDefaults; onClose: () => void }) {
   const dialogRef = useRef<HTMLDivElement>(null);
+  const idempotencyKeyRef = useRef<string | null>(null);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -148,14 +149,15 @@ export function ServiceInquiryModal({ defaults, onClose }: { defaults: InquiryDe
 
     setStatus('submitting');
     try {
+      const idempotencyKey = idempotencyKeyRef.current ||= crypto.randomUUID();
       const contact = { name: name.trim(), email: email.trim(), phone: phone.trim() || undefined, notes: notes.trim() || undefined };
       const result = defaults.kind === 'flight'
-        ? await submitFlightInquiry({ ...contact, from: from.trim(), to: to.trim(), departureDate, returnDate: defaults.tripType === 'roundTrip' ? returnDate : undefined, tripType: defaults.tripType, adults, children, infants, passengers: adults + children + infants, cabinClass })
+        ? await submitFlightInquiry({ ...contact, from: from.trim(), to: to.trim(), departureDate, returnDate: defaults.tripType === 'roundTrip' ? returnDate : undefined, tripType: defaults.tripType, adults, children, infants, passengers: adults + children + infants, cabinClass }, idempotencyKey)
         : defaults.kind === 'hotel'
-          ? await submitHotelInquiry({ ...contact, destination: destination.trim(), checkIn, checkOut, guests, rooms })
+          ? await submitHotelInquiry({ ...contact, destination: destination.trim(), checkIn, checkOut, guests, rooms }, idempotencyKey)
           : defaults.kind === 'package'
-            ? await submitPackageInquiry({ ...contact, packageTitle: defaults.packageTitle, travelDate: travelDate || undefined, travellers })
-            : await submitVisaInquiry({ ...contact, destination: destination.trim(), nationality: nationality.trim(), travelPurpose: travelPurpose.trim() || undefined });
+            ? await submitPackageInquiry({ ...contact, packageTitle: defaults.packageTitle, travelDate: travelDate || undefined, travellers }, idempotencyKey)
+            : await submitVisaInquiry({ ...contact, destination: destination.trim(), nationality: nationality.trim(), travelPurpose: travelPurpose.trim() || undefined }, idempotencyKey);
       setReferenceNumber(result.referenceNumber);
       setStatus('success');
     } catch (error) {

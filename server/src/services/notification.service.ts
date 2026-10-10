@@ -19,7 +19,7 @@ function escapeHtml(value: string): string {
 }
 
 function createTransporter() {
-  if (!env.smtpUser || !env.smtpPassword) {
+  if (!env.emailDeliveryEnabled || !env.smtpUser || !env.smtpPassword) {
     return null;
   }
   return nodemailer.createTransport({

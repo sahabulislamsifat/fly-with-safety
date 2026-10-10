@@ -2,6 +2,7 @@ import { Router } from 'express';
 import * as packageController from '../controllers/package.controller.js';
 import { validate } from '../middleware/validation.middleware.js';
 import { optionalAuth } from '../middleware/auth.middleware.js';
+import { requireIdempotencyKey } from '../middleware/idempotency.middleware.js';
 import { rateLimiter } from '../middleware/rate-limit.js';
 import { packageInquirySchema } from '../validators/package.schemas.js';
 import { env } from '../config/env.js';
@@ -22,6 +23,7 @@ router.post(
   inquiryRateLimiter,
   optionalAuth,
   validate(packageInquirySchema),
+  requireIdempotencyKey,
   (req, _res, next) => {
     req.params.slug = req.body.packageSlug || 'general';
     next();
@@ -33,6 +35,7 @@ router.post(
   inquiryRateLimiter,
   optionalAuth,
   validate(packageInquirySchema),
+  requireIdempotencyKey,
   packageController.submitPackageInquiry
 );
 

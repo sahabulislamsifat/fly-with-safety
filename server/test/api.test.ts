@@ -177,6 +177,16 @@ describe('FlyWithsafety Server API Tests', () => {
 
   // ─── Plural Inquiry Routes ─────────────────────────────────────────────────
   describe('Inquiry endpoints', () => {
+    it('requires an idempotency key after valid inquiry input', async () => {
+      const res = await request(app).post('/api/v1/flights/inquiries').send({
+        from: 'DAC', to: 'KUL', departureDate: '2026-12-10', tripType: 'oneWay',
+        adults: 1, children: 0, infants: 0, passengers: 1, cabinClass: 'economy',
+        name: 'Test User', email: 'test@integration.test',
+      });
+      expect(res.status).toBe(400);
+      expect(res.body.code).toBe('BAD_REQUEST');
+    });
+
     it('validates flight inquiry input', async () => {
       const res = await request(app)
         .post('/api/v1/flights/inquiries')

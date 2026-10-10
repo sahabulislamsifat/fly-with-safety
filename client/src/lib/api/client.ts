@@ -98,10 +98,11 @@ export function get<T>(path: string): Promise<T> {
   return apiRequest<T>(path, { method: 'GET' });
 }
 
-export function post<T>(path: string, body: unknown): Promise<T> {
+export function post<T>(path: string, body: unknown, headers?: HeadersInit): Promise<T> {
   return apiRequest<T>(path, {
     method: 'POST',
     body: JSON.stringify(body),
+    headers,
   });
 }
 

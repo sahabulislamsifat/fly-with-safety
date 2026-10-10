@@ -28,12 +28,12 @@ export async function getPackageBySlug(req: Request, res: Response, next: NextFu
 export async function submitPackageInquiry(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const userId = (req as AuthenticatedRequest).user?.id;
-    const result = await packageService.submitPackageInquiry(req.params.slug, req.body, userId);
+    const result = await packageService.submitPackageInquiry(req.params.slug, req.body, userId, req.idempotencyKey!);
     res.status(201).json(success({
-      referenceNumber: result.referenceNumber,
-      inquiry: result,
+      referenceNumber: result.inquiry.referenceNumber,
+      inquiry: result.inquiry,
       message: 'Package inquiry submitted. Our team will contact you shortly.',
-    }));
+    }, result.replayed ? 'Original package inquiry returned' : undefined));
   } catch (err) {
     next(err);
   }

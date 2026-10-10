@@ -69,6 +69,7 @@ export const env = {
   smtpEmailFrom: getEnv('SMTP_EMAIL_FROM', ''),
   smtpEmailFromName: getEnv('SMTP_EMAIL_FROM_NAME', 'FlyWithsafety'),
   smtpService: getEnv('SMTP_SERVICE', ''),
+  emailDeliveryEnabled: getEnvBool('EMAIL_DELIVERY_ENABLED', true),
 
   // Google OAuth
   googleClientId: getEnv('GOOGLE_CLIENT_ID', ''),

@@ -34,10 +34,10 @@ export async function getPackageBySlug(slug: string): Promise<{ package: Record<
   return get(`/packages/${slug}`);
 }
 
-export async function submitPackageInquiry(payload: PackageInquiryPayload): Promise<{
+export async function submitPackageInquiry(payload: PackageInquiryPayload, idempotencyKey: string): Promise<{
   referenceNumber: string;
   inquiry: Record<string, unknown>;
   message: string;
 }> {
-  return post('/packages/inquiries', payload);
+  return post('/packages/inquiries', payload, { 'Idempotency-Key': idempotencyKey });
 }

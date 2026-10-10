@@ -13,7 +13,8 @@
     "db:seed": "tsx prisma/seed.ts",
     "db:studio": "prisma studio",
     "db:push": "prisma db push",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:idempotency:integration": "node test/run-idempotency-integration.mjs"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.10.0",

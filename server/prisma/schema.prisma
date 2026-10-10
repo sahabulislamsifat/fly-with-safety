@@ -60,6 +60,7 @@ model User {
   emailVerificationTokens  EmailVerificationToken[]
   passwordResetTokens      PasswordResetToken[]
   sessions                 Session[]
+  idempotencyRecords       IdempotencyRecord[]
   flightInquiries          FlightInquiry[]
   hotelInquiries           HotelInquiry[]
   packageInquiries         PackageInquiry[]
@@ -124,6 +125,23 @@ model Session {
 
   @@index([userId])
   @@index([expiresAt])
+}
+
+model IdempotencyRecord {
+  id              String   @id @default(cuid())
+  operation       String
+  principal       String
+  key             String
+  payloadHash     String
+  referenceNumber String
+  userId          String?
+  createdAt       DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@unique([operation, principal, key])
+  @@index([userId])
+  @@index([referenceNumber])
 }
 
 // ─── Destinations ────────────────────────────────────────────────────────────
