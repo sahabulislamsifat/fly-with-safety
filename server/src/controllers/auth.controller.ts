@@ -32,7 +32,10 @@ function setAuthCookies(res: Response, session: authService.AuthSession): void {
 }
 
 function sessionIdFromRequest(req: Request): string | undefined {
-  const token = req.cookies?.auth_token;
+  const authHeader = req.headers.authorization;
+  const token = authHeader?.startsWith('Bearer ')
+    ? authHeader.slice(7)
+    : req.cookies?.auth_token;
   if (!token) return undefined;
   try {
     return (jwt.verify(token, env.jwtSecret) as { sid?: string }).sid;

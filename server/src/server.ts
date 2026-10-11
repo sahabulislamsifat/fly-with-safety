@@ -2,6 +2,7 @@ import { env } from './config/env.js';
 import { validateEnv } from './config/env.js';
 import app from './app.js';
 import { prisma } from './lib/prisma.js';
+import { startOutboxWorker, stopOutboxWorker } from './services/outbox.service.js';
 
 async function startServer(): Promise<void> {
   try {
@@ -9,6 +10,12 @@ async function startServer(): Promise<void> {
   } catch (error) {
     console.error('Environment validation failed:', error);
     process.exit(1);
+  }
+
+  // Start background outbox processor in non-test environments
+  if (env.nodeEnv !== 'test') {
+    startOutboxWorker(15000);
+    console.log('   Outbox: Background notification worker initialized (15s poll)');
   }
 
   const server = app.listen(env.port, () => {
@@ -20,6 +27,7 @@ async function startServer(): Promise<void> {
 
   const shutdown = async (signal: string): Promise<void> => {
     console.log(`\n${signal} received. Shutting down gracefully...`);
+    stopOutboxWorker();
     server.close(async () => {
       console.log('HTTP server closed.');
       try {

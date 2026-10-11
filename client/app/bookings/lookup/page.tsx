@@ -6,6 +6,13 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { lookupBookingThunk } from '@/redux/slices/bookingSlice';
 import { Button, Input, Card } from '@/components/ui';
 
+interface BookingDetailsMeta {
+  sourceInquiryReference?: string;
+  sourceInquiryType?: string;
+  paymentStatus?: string;
+  paymentPolicy?: string;
+}
+
 function BookingLookupContent() {
   const searchParams = useSearchParams();
   const dispatch = useAppDispatch();
@@ -175,6 +182,45 @@ function BookingLookupContent() {
                   <p className="text-xs text-text-tertiary">
                     Agency Managed · Service Model: {lookupRecord.bookingModel}
                   </p>
+                  {Boolean((lookupRecord.bookingDetails as BookingDetailsMeta | null)?.sourceInquiryReference) && (
+                    <div className="mt-2 inline-flex items-center gap-1.5 rounded-xs border border-brand-primary/20 bg-brand-primary/5 px-2 py-1 text-xs font-semibold text-brand-primary">
+                      <span>Linked Inquiry:</span>
+                      <span className="font-mono">{(lookupRecord.bookingDetails as BookingDetailsMeta | null)?.sourceInquiryReference}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Payment Readiness & Truthful Settlement Disclosure */}
+              <div className="rounded-xs border border-amber-200 bg-amber-50/70 p-4 space-y-2 text-xs">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <span className="font-bold uppercase tracking-wider text-amber-900">
+                    Payment Readiness &amp; Settlement Notice
+                  </span>
+                  <span className="inline-block px-2.5 py-0.5 rounded-xs bg-amber-200 text-amber-900 font-mono font-bold text-[11px] self-start sm:self-auto">
+                    {String(
+                      (lookupRecord.bookingDetails as BookingDetailsMeta | null)?.paymentStatus ||
+                        (lookupRecord.status === 'CONFIRMED'
+                          ? 'AWAITING_PAYMENT_CONFIRMATION'
+                          : lookupRecord.status === 'COMPLETED'
+                          ? 'PAYMENT_VERIFIED'
+                          : lookupRecord.status === 'CANCELLED'
+                          ? 'CANCELLED'
+                          : 'AWAITING_PAYMENT_INSTRUCTIONS')
+                    )}
+                  </span>
+                </div>
+                <p className="text-amber-800 leading-relaxed">
+                  {String(
+                    (lookupRecord.bookingDetails as BookingDetailsMeta | null)?.paymentPolicy ||
+                      'Manual agency verification model. No payment card has been automatically charged. Wire transfer, bKash, or Nagad payment instructions will be provided by your assigned FlyWithsafe travel counselor.'
+                  )}
+                </p>
+                <div className="pt-1 text-[11px] text-amber-900 font-medium flex items-center gap-1">
+                  <span>Questions or submitting payment vouchers?</span>
+                  <a href="/contact" className="underline font-bold text-brand-primary hover:text-brand-dark">
+                    Contact Operations Support
+                  </a>
                 </div>
               </div>
 
@@ -188,12 +234,12 @@ function BookingLookupContent() {
                     {lookupRecord.passengers.map((p, idx) => (
                       <div
                         key={idx}
-                        className="p-3 bg-neutral-50 border border-neutral-200 rounded text-xs flex justify-between items-center"
+                        className="p-3 bg-neutral-50 border border-neutral-200 rounded-xs text-xs flex justify-between items-center"
                       >
                         <span className="font-bold text-text-primary">
                           {p.firstName} {p.lastName}
                         </span>
-                        <span className="capitalize px-1.5 py-0.5 rounded bg-neutral-200 text-neutral-800 text-[10px]">
+                        <span className="capitalize px-1.5 py-0.5 rounded-xs bg-neutral-200 text-neutral-800 text-[10px]">
                           {p.passengerType}
                         </span>
                       </div>

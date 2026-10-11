@@ -430,3 +430,32 @@ model BookingStatusHistory {
   @@index([bookingId])
 }
 
+// ─── Notification Outbox ──────────────────────────────────────────────────────
+
+enum NotificationStatus {
+  PENDING
+  PROCESSING
+  DELIVERED
+  FAILED
+}
+
+model NotificationOutbox {
+  id             String             @id @default(cuid())
+  channel        String             @default("EMAIL")
+  recipient      String
+  subject        String
+  payload        Json
+  status         NotificationStatus @default(PENDING)
+  attempts       Int                @default(0)
+  maxAttempts    Int                @default(5)
+  nextAttemptAt  DateTime           @default(now())
+  processedAt    DateTime?
+  error          String?
+  idempotencyKey String?            @unique
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+
+  @@index([status, nextAttemptAt])
+  @@index([createdAt])
+}
+
