@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router as createRouter, type Router } from 'express';
 import * as flightController from '../controllers/flight.controller.js';
 import { validate } from '../middleware/validation.middleware.js';
 import { optionalAuth } from '../middleware/auth.middleware.js';
@@ -7,7 +7,7 @@ import { rateLimiter } from '../middleware/rate-limit.js';
 import { flightSearchSchema, flightInquirySchema } from '../validators/flight.schemas.js';
 import { env } from '../config/env.js';
 
-const router = Router();
+const router: Router = createRouter();
 
 const inquiryRateLimiter = rateLimiter({
   windowMs: env.rateLimitWindowMs,
@@ -17,7 +17,21 @@ const inquiryRateLimiter = rateLimiter({
 
 router.post('/flights/search', validate(flightSearchSchema), flightController.searchFlights);
 // Plural route according to API plan, with singular alias
-router.post('/flights/inquiries', inquiryRateLimiter, optionalAuth, validate(flightInquirySchema), requireIdempotencyKey, flightController.submitFlightInquiry);
-router.post('/flights/inquiry', inquiryRateLimiter, optionalAuth, validate(flightInquirySchema), requireIdempotencyKey, flightController.submitFlightInquiry);
+router.post(
+  '/flights/inquiries',
+  inquiryRateLimiter,
+  optionalAuth,
+  validate(flightInquirySchema),
+  requireIdempotencyKey,
+  flightController.submitFlightInquiry,
+);
+router.post(
+  '/flights/inquiry',
+  inquiryRateLimiter,
+  optionalAuth,
+  validate(flightInquirySchema),
+  requireIdempotencyKey,
+  flightController.submitFlightInquiry,
+);
 
 export default router;

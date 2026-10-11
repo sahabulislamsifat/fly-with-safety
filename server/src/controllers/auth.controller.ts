@@ -119,8 +119,26 @@ export async function resetPassword(req: Request, res: Response, next: NextFunct
 
 export async function googleCallback(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    const profile = req.user as { id: string; emails?: Array<{ value?: string }>; displayName?: string; photos?: Array<{ value?: string }> };
-    const session = await authService.findOrCreateGoogleUser({ googleId: profile.id, email: profile.emails?.[0]?.value || '', name: profile.displayName, avatar: profile.photos?.[0]?.value });
+    const profile = req.user as
+      | {
+          id: string;
+          emails?: Array<{ value?: string }>;
+          displayName?: string;
+          photos?: Array<{ value?: string }>;
+        }
+      | undefined;
+
+    if (!profile || !profile.id) {
+      res.redirect(`${env.frontendUrl}?auth=failed&reason=invalid_profile`);
+      return;
+    }
+
+    const session = await authService.findOrCreateGoogleUser({
+      googleId: profile.id,
+      email: profile.emails?.[0]?.value || '',
+      name: profile.displayName,
+      avatar: profile.photos?.[0]?.value,
+    });
     setAuthCookies(res, session);
     res.redirect(`${env.frontendUrl}?auth=success`);
   } catch (err) { next(err); }

@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router as createRouter, type Router } from 'express';
 import * as packageController from '../controllers/package.controller.js';
 import { validate } from '../middleware/validation.middleware.js';
 import { optionalAuth } from '../middleware/auth.middleware.js';
@@ -7,7 +7,7 @@ import { rateLimiter } from '../middleware/rate-limit.js';
 import { packageInquirySchema } from '../validators/package.schemas.js';
 import { env } from '../config/env.js';
 
-const router = Router();
+const router: Router = createRouter();
 
 const inquiryRateLimiter = rateLimiter({
   windowMs: env.rateLimitWindowMs,
@@ -28,7 +28,7 @@ router.post(
     req.params.slug = req.body.packageSlug || 'general';
     next();
   },
-  packageController.submitPackageInquiry
+  packageController.submitPackageInquiry,
 );
 router.post(
   '/packages/:slug/inquiry',
@@ -36,7 +36,7 @@ router.post(
   optionalAuth,
   validate(packageInquirySchema),
   requireIdempotencyKey,
-  packageController.submitPackageInquiry
+  packageController.submitPackageInquiry,
 );
 
 export default router;
