@@ -4,6 +4,7 @@ import { generateReferenceNumber, normalizeEmail, normalizePhone } from '../util
 import { sendInquiryConfirmation } from './notification.service.js';
 import type { VisaInquiryInput } from '../validators/visa.schemas.js';
 import { transitionInquiryStatus } from './inquiry-status.service.js';
+import { createIdempotentInquiry } from './idempotency.service.js';
 
 export async function getPublicVisaInfoList(params: { page?: number; limit?: number }) {
   const page = Math.max(1, params.page || 1);
@@ -47,11 +48,11 @@ export async function getVisaInfoByCountry(countryOrSlug: string) {
   return visa;
 }
 
-export async function submitVisaInquiry(input: VisaInquiryInput, userId?: string) {
+export async function submitVisaInquiry(input: VisaInquiryInput, userId: string | undefined, idempotencyKey: string) {
   const referenceNumber = generateReferenceNumber();
-
-  const inquiry = await prisma.visaInquiry.create({
-    data: {
+  const result = await createIdempotentInquiry({
+    operation: 'visa-inquiry', key: idempotencyKey, userId, email: input.email, payload: input,
+    create: (tx) => tx.visaInquiry.create({ data: {
       referenceNumber,
       userId: userId || null,
       destination: input.destination.trim(),
@@ -62,25 +63,23 @@ export async function submitVisaInquiry(input: VisaInquiryInput, userId?: string
       phone: input.phone ? normalizePhone(input.phone) : null,
       notes: input.notes || null,
       status: 'PENDING',
-    },
-    select: {
+    }, select: {
       id: true,
       referenceNumber: true,
       destination: true,
       nationality: true,
       status: true,
       createdAt: true,
-    },
+    } }),
+    findByReference: (reference) => prisma.visaInquiry.findUnique({ where: { referenceNumber: reference } }),
   });
-
-  sendInquiryConfirmation({
+  if (!result.replayed) sendInquiryConfirmation({
     to: normalizeEmail(input.email),
     name: input.name.trim(),
     referenceNumber,
     type: 'visa',
   }).catch((err) => console.error('[Visa] Email send failed:', err));
-
-  return inquiry;
+  return result;
 }
 
 export async function getVisaInquiries(params: { page?: number; limit?: number; status?: string }) {

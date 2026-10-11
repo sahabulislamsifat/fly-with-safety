@@ -1,0 +1,18 @@
+$kind: http-request
+name: Search Hotels
+method: POST
+url: '{{baseUrl}}/hotels/search'
+order: 1000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "destination": "Dubai",
+      "checkIn": "2027-01-15",
+      "checkOut": "2027-01-22",
+      "guests": 2,
+      "rooms": 1
+    }

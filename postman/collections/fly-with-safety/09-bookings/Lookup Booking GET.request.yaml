@@ -1,0 +1,11 @@
+$kind: http-request
+name: 'Lookup Booking (GET)'
+method: GET
+url: '{{baseUrl}}/bookings/:reference?email=john@example.com'
+order: 3000
+pathVariables:
+  - key: reference
+    value: FWS-ABC123
+queryParams:
+  - key: email
+    value: john@example.com

@@ -1,0 +1,15 @@
+$kind: http-request
+name: Get Inquiry
+method: GET
+url: '{{baseUrl}}/account/inquiries/:type/:reference'
+order: 3000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{accessToken}}'
+pathVariables:
+  - key: type
+    value: flight
+  - key: reference
+    value: FWS-INQ-001

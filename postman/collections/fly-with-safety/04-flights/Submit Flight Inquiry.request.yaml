@@ -1,0 +1,26 @@
+$kind: http-request
+name: Submit Flight Inquiry
+method: POST
+url: '{{baseUrl}}/flights/inquiries'
+order: 2000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "from": "DAC",
+      "to": "DXB",
+      "departureDate": "2027-01-15",
+      "returnDate": "2027-01-22",
+      "tripType": "roundTrip",
+      "adults": 1,
+      "children": 0,
+      "infants": 0,
+      "cabinClass": "economy",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "phone": "+8801700000000",
+      "notes": "Window seat preferred"
+    }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Button, Input, Textarea, Select } from '@/components/ui';
 import { Icon } from '@/components/ui/Icons';
 import { submitContact } from '@/lib/api/contact';
@@ -15,6 +15,7 @@ export function ContactForm() {
     'flights' | 'hotels' | 'packages' | 'visa' | 'other'
   >('flights');
   const [message, setMessage] = useState('');
+  const idempotencyKeyRef = useRef<string | null>(null);
 
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [referenceNumber, setReferenceNumber] = useState<string | null>(null);
@@ -36,7 +37,7 @@ export function ContactForm() {
         subject,
         serviceType,
         message,
-      });
+      }, idempotencyKeyRef.current ||= crypto.randomUUID());
 
       setReferenceNumber(res.referenceNumber);
       setStatus('success');
@@ -59,6 +60,7 @@ export function ContactForm() {
     setMessage('');
     setStatus('idle');
     setReferenceNumber(null);
+    idempotencyKeyRef.current = null;
   };
 
   if (status === 'success') {
@@ -75,7 +77,7 @@ export function ContactForm() {
           {referenceNumber}
         </div>
         <p className="text-xs text-text-tertiary">
-          A confirmation email has been dispatched to <strong>{email}</strong>. Our travel support desk will follow up promptly.
+          Our travel support desk will follow up using <strong>{email}</strong>.
         </p>
         <div className="pt-3">
           <Button variant="outline" size="sm" onClick={handleReset}>

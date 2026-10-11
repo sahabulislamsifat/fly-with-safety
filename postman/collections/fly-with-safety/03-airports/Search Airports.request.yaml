@@ -1,0 +1,8 @@
+$kind: http-request
+name: Search Airports
+method: GET
+url: '{{baseUrl}}/airports/search?q=Dhaka'
+order: 1000
+queryParams:
+  - key: q
+    value: Dhaka

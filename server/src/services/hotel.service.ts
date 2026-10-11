@@ -5,6 +5,7 @@ import { generateReferenceNumber, normalizeEmail, normalizePhone } from '../util
 import { sendInquiryConfirmation } from './notification.service.js';
 import type { HotelSearchInput, HotelInquiryInput } from '../validators/hotel.schemas.js';
 import { transitionInquiryStatus } from './inquiry-status.service.js';
+import { createIdempotentInquiry } from './idempotency.service.js';
 
 const hotelProvider: HotelProvider = new MockHotelProvider();
 
@@ -25,11 +26,11 @@ export async function searchHotels(input: HotelSearchInput) {
   };
 }
 
-export async function submitHotelInquiry(input: HotelInquiryInput, userId?: string) {
+export async function submitHotelInquiry(input: HotelInquiryInput, userId: string | undefined, idempotencyKey: string) {
   const referenceNumber = generateReferenceNumber();
-
-  const inquiry = await prisma.hotelInquiry.create({
-    data: {
+  const result = await createIdempotentInquiry({
+    operation: 'hotel-inquiry', key: idempotencyKey, userId, email: input.email, payload: input,
+    create: (tx) => tx.hotelInquiry.create({ data: {
       referenceNumber,
       userId: userId || null,
       destination: input.destination.trim(),
@@ -42,8 +43,7 @@ export async function submitHotelInquiry(input: HotelInquiryInput, userId?: stri
       phone: input.phone ? normalizePhone(input.phone) : null,
       notes: input.notes || null,
       status: 'PENDING',
-    },
-    select: {
+    }, select: {
       id: true,
       referenceNumber: true,
       destination: true,
@@ -51,17 +51,16 @@ export async function submitHotelInquiry(input: HotelInquiryInput, userId?: stri
       checkOut: true,
       status: true,
       createdAt: true,
-    },
+    } }),
+    findByReference: (reference) => prisma.hotelInquiry.findUnique({ where: { referenceNumber: reference } }),
   });
-
-  sendInquiryConfirmation({
+  if (!result.replayed) sendInquiryConfirmation({
     to: normalizeEmail(input.email),
     name: input.name.trim(),
     referenceNumber,
     type: 'hotel',
   }).catch((err) => console.error('[Hotel] Email send failed:', err));
-
-  return inquiry;
+  return result;
 }
 
 export async function getHotelInquiries(params: { page?: number; limit?: number; status?: string }) {

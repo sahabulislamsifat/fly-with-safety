@@ -2,6 +2,7 @@ import { Router } from 'express';
 import * as hotelController from '../controllers/hotel.controller.js';
 import { validate } from '../middleware/validation.middleware.js';
 import { optionalAuth } from '../middleware/auth.middleware.js';
+import { requireIdempotencyKey } from '../middleware/idempotency.middleware.js';
 import { rateLimiter } from '../middleware/rate-limit.js';
 import { hotelSearchSchema, hotelInquirySchema } from '../validators/hotel.schemas.js';
 import { env } from '../config/env.js';
@@ -15,7 +16,7 @@ const inquiryRateLimiter = rateLimiter({
 });
 
 router.post('/hotels/search', validate(hotelSearchSchema), hotelController.searchHotels);
-router.post('/hotels/inquiries', inquiryRateLimiter, optionalAuth, validate(hotelInquirySchema), hotelController.submitHotelInquiry);
-router.post('/hotels/inquiry', inquiryRateLimiter, optionalAuth, validate(hotelInquirySchema), hotelController.submitHotelInquiry);
+router.post('/hotels/inquiries', inquiryRateLimiter, optionalAuth, validate(hotelInquirySchema), requireIdempotencyKey, hotelController.submitHotelInquiry);
+router.post('/hotels/inquiry', inquiryRateLimiter, optionalAuth, validate(hotelInquirySchema), requireIdempotencyKey, hotelController.submitHotelInquiry);
 
 export default router;

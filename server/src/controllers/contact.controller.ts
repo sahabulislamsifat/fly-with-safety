@@ -5,11 +5,11 @@ import { AppError } from '../utils/errors.js';
 
 export async function submitContact(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    const result = await contactService.submitContact(req.body);
+    const result = await contactService.submitContact(req.body, req.idempotencyKey!);
     res.status(201).json(success({
-      referenceNumber: result.referenceNumber,
+      referenceNumber: result.inquiry.referenceNumber,
       message: 'Your message has been received. We will get back to you within 24 hours.',
-    }));
+    }, result.replayed ? 'Original contact message returned' : undefined));
   } catch (err) {
     next(err);
   }

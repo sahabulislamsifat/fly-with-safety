@@ -1,0 +1,13 @@
+$kind: http-request
+name: Delete Testimonial
+method: DELETE
+url: '{{baseUrl}}/admin/testimonials/:id'
+order: 4000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{accessToken}}'
+pathVariables:
+  - key: id
+    value: '{{testimonialId}}'

@@ -1,0 +1,22 @@
+$kind: http-request
+name: Update Contact Status
+method: PATCH
+url: '{{baseUrl}}/admin/contact/:id/status'
+order: 3000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{accessToken}}'
+pathVariables:
+  - key: id
+    value: '{{contactId}}'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "status": "IN_PROGRESS"
+    }

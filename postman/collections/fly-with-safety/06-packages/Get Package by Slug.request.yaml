@@ -1,0 +1,8 @@
+$kind: http-request
+name: Get Package by Slug
+method: GET
+url: '{{baseUrl}}/packages/:slug'
+order: 2000
+pathVariables:
+  - key: slug
+    value: dubai-5-nights

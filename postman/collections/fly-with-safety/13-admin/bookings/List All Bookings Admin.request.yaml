@@ -1,0 +1,10 @@
+$kind: http-request
+name: 'List All Bookings (Admin)'
+method: GET
+url: '{{baseUrl}}/admin/bookings'
+order: 1000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{accessToken}}'

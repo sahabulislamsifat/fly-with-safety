@@ -15,12 +15,12 @@ export async function searchHotels(req: Request, res: Response, next: NextFuncti
 export async function submitHotelInquiry(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const userId = (req as AuthenticatedRequest).user?.id;
-    const result = await hotelService.submitHotelInquiry(req.body, userId);
+    const result = await hotelService.submitHotelInquiry(req.body, userId, req.idempotencyKey!);
     res.status(201).json(success({
-      referenceNumber: result.referenceNumber,
-      inquiry: result,
+      referenceNumber: result.inquiry.referenceNumber,
+      inquiry: result.inquiry,
       message: 'Hotel inquiry submitted. Our team will contact you with options shortly.',
-    }));
+    }, result.replayed ? 'Original hotel inquiry returned' : undefined));
   } catch (err) {
     next(err);
   }

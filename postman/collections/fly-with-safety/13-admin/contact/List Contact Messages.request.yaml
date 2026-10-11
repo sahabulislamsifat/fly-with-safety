@@ -1,0 +1,15 @@
+$kind: http-request
+name: List Contact Messages
+method: GET
+url: '{{baseUrl}}/admin/contact?page=1&limit=20'
+order: 1000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{accessToken}}'
+queryParams:
+  - key: page
+    value: '1'
+  - key: limit
+    value: '20'

@@ -1,0 +1,5 @@
+$kind: http-request
+name: List Destinations
+method: GET
+url: '{{baseUrl}}/destinations'
+order: 1000

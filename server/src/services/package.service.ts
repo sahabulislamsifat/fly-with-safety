@@ -4,6 +4,7 @@ import { sendInquiryConfirmation } from './notification.service.js';
 import type { PackageInquiryInput } from '../validators/package.schemas.js';
 import { AppError } from '../utils/errors.js';
 import { transitionInquiryStatus } from './inquiry-status.service.js';
+import { createIdempotentInquiry } from './idempotency.service.js';
 
 export async function getPublicPackages(params: {
   page?: number;
@@ -56,7 +57,8 @@ export async function getPackageBySlug(slug: string) {
 export async function submitPackageInquiry(
   slugOrId: string,
   input: PackageInquiryInput,
-  userId?: string
+  userId: string | undefined,
+  idempotencyKey: string
 ) {
   // Resolve every supplied package identifier server-side. Browser titles never establish identity.
   let pkg = null;
@@ -72,9 +74,10 @@ export async function submitPackageInquiry(
   }
 
   const referenceNumber = generateReferenceNumber();
-
-  const inquiry = await prisma.packageInquiry.create({
-    data: {
+  const result = await createIdempotentInquiry({
+    operation: 'package-inquiry', key: idempotencyKey, userId, email: input.email,
+    payload: { ...input, packageSlug: slugOrId },
+    create: (tx) => tx.packageInquiry.create({ data: {
       referenceNumber,
       userId: userId || null,
       packageId: pkg?.id || null,
@@ -86,24 +89,22 @@ export async function submitPackageInquiry(
       phone: input.phone ? normalizePhone(input.phone) : null,
       notes: input.notes || null,
       status: 'PENDING',
-    },
-    select: {
+    }, select: {
       id: true,
       referenceNumber: true,
       packageTitle: true,
       status: true,
       createdAt: true,
-    },
+    } }),
+    findByReference: (reference) => prisma.packageInquiry.findUnique({ where: { referenceNumber: reference } }),
   });
-
-  sendInquiryConfirmation({
+  if (!result.replayed) sendInquiryConfirmation({
     to: normalizeEmail(input.email),
     name: input.name.trim(),
     referenceNumber,
     type: 'package',
   }).catch((err) => console.error('[Package] Email send failed:', err));
-
-  return inquiry;
+  return result;
 }
 
 export async function getPackageInquiries(params: { page?: number; limit?: number; status?: string }) {

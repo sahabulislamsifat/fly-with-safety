@@ -19,6 +19,20 @@ describe('FlyWithsafety Server API Tests', () => {
       expect(reset.status).toBe(422);
       expect(reset.body.code).toBe('VALIDATION_ERROR');
     });
+
+    it('rejects unauthenticated customer dashboard access before loading account records', async () => {
+      const [dashboard, inquiries, bookings, profile] = await Promise.all([
+        request(app).get('/api/v1/account/dashboard'),
+        request(app).get('/api/v1/account/inquiries'),
+        request(app).get('/api/v1/account/bookings'),
+        request(app).patch('/api/v1/account/profile').send({ name: 'Test User' }),
+      ]);
+      for (const response of [dashboard, inquiries, bookings, profile]) {
+        expect(response.status).toBe(401);
+        expect(response.body.success).toBe(false);
+        expect(response.body.code).toBe('UNAUTHORIZED');
+      }
+    });
   });
 
   // ─── Health check ──────────────────────────────────────────────────────────
@@ -163,6 +177,16 @@ describe('FlyWithsafety Server API Tests', () => {
 
   // ─── Plural Inquiry Routes ─────────────────────────────────────────────────
   describe('Inquiry endpoints', () => {
+    it('requires an idempotency key after valid inquiry input', async () => {
+      const res = await request(app).post('/api/v1/flights/inquiries').send({
+        from: 'DAC', to: 'KUL', departureDate: '2026-12-10', tripType: 'oneWay',
+        adults: 1, children: 0, infants: 0, passengers: 1, cabinClass: 'economy',
+        name: 'Test User', email: 'test@integration.test',
+      });
+      expect(res.status).toBe(400);
+      expect(res.body.code).toBe('BAD_REQUEST');
+    });
+
     it('validates flight inquiry input', async () => {
       const res = await request(app)
         .post('/api/v1/flights/inquiries')

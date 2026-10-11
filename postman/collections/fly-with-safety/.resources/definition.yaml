@@ -1,0 +1,22 @@
+$kind: collection
+name: Fly With Safety API
+description: 'API collection for the Fly With Safety travel platform. Covers authentication, flights, hotels, packages, destinations, visa, bookings, airports, contact, testimonials, account management, and admin operations.'
+variables:
+  - key: baseUrl
+    value: 'http://localhost:5000/api/v1'
+  - key: accessToken
+    value: ''
+  - key: emailVerificationToken
+    value: ''
+  - key: passwordResetToken
+    value: ''
+  - key: contactId
+    value: ''
+  - key: testimonialId
+    value: ''
+  - key: inquiryId
+    value: ''
+  - key: destinationId
+    value: ''
+  - key: bookingId
+    value: ''

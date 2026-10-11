@@ -1,0 +1,23 @@
+$kind: http-request
+name: Update Visa Inquiry Status
+method: PATCH
+url: '{{baseUrl}}/admin/inquiries/visa/:id/status'
+order: 8000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{accessToken}}'
+pathVariables:
+  - key: id
+    value: '{{inquiryId}}'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "status": "CONFIRMED",
+      "note": "Confirmed by agent"
+    }

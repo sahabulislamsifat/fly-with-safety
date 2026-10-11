@@ -5,12 +5,13 @@ import { sendContactConfirmation } from './notification.service.js';
 import { assertContactTransition } from '../utils/status-transitions.js';
 import { AppError } from '../utils/errors.js';
 import { logger, serializeError } from '../lib/logger.js';
+import { createIdempotentInquiry } from './idempotency.service.js';
 
-export async function submitContact(input: ContactInput) {
+export async function submitContact(input: ContactInput, idempotencyKey: string) {
   const referenceNumber = generateReferenceNumber();
-
-  const message = await prisma.contactMessage.create({
-    data: {
+  const result = await createIdempotentInquiry({
+    operation: 'contact', key: idempotencyKey, email: input.email, payload: input,
+    create: (tx) => tx.contactMessage.create({ data: {
       referenceNumber,
       firstName: input.firstName.trim(),
       lastName: input.lastName.trim(),
@@ -20,24 +21,23 @@ export async function submitContact(input: ContactInput) {
       serviceType: input.serviceType ?? null,
       message: input.message.trim(),
       status: 'NEW',
-    },
-    select: {
+    }, select: {
       id: true,
       referenceNumber: true,
       firstName: true,
       email: true,
       createdAt: true,
-    },
+    } }),
+    findByReference: (reference) => prisma.contactMessage.findUnique({ where: { referenceNumber: reference } }),
   });
-
+  const message = result.inquiry;
   // Email only after the record is safely persisted; failure never fails the request.
-  sendContactConfirmation({
+  if (!result.replayed) sendContactConfirmation({
     to: message.email,
     firstName: message.firstName,
     referenceNumber: message.referenceNumber,
   }).catch((err) => logger.warn('contact_email_failed', serializeError(err)));
-
-  return message;
+  return result;
 }
 
 export async function getContactMessages(params: {

@@ -1,0 +1,5 @@
+$kind: http-request
+name: List Approved Testimonials
+method: GET
+url: '{{baseUrl}}/testimonials'
+order: 1000

@@ -1,0 +1,14 @@
+$kind: http-request
+name: Resend Verification
+method: POST
+url: '{{baseUrl}}/auth/resend-verification'
+order: 7000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "email": "user@example.com"
+    }

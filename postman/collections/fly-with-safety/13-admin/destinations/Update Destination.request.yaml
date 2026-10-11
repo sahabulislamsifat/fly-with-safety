@@ -1,0 +1,23 @@
+$kind: http-request
+name: Update Destination
+method: PATCH
+url: '{{baseUrl}}/admin/destinations/:id'
+order: 3000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{accessToken}}'
+pathVariables:
+  - key: id
+    value: '{{destinationId}}'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "description": "Updated description",
+      "featured": false
+    }

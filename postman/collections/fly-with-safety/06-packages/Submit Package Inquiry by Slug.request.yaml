@@ -1,0 +1,22 @@
+$kind: http-request
+name: 'Submit Package Inquiry (by Slug)'
+method: POST
+url: '{{baseUrl}}/packages/:slug/inquiry'
+order: 4000
+headers:
+  - key: Content-Type
+    value: application/json
+pathVariables:
+  - key: slug
+    value: dubai-5-nights
+body:
+  type: json
+  content: |-
+    {
+      "travellers": 2,
+      "travelDate": "2027-01-15",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "phone": "+8801700000000",
+      "notes": "Honeymoon trip"
+    }

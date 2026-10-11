@@ -1,0 +1,10 @@
+$kind: http-request
+name: List All Testimonials
+method: GET
+url: '{{baseUrl}}/admin/testimonials'
+order: 1000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{accessToken}}'

@@ -1,0 +1,13 @@
+$kind: http-request
+name: Get Booking
+method: GET
+url: '{{baseUrl}}/account/bookings/:reference'
+order: 5000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{accessToken}}'
+pathVariables:
+  - key: reference
+    value: FWS-ABC123

@@ -1,0 +1,15 @@
+$kind: http-request
+name: 'List All Visa Info (Admin)'
+method: GET
+url: '{{baseUrl}}/admin/visa?page=1&limit=50'
+order: 1000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{accessToken}}'
+queryParams:
+  - key: page
+    value: '1'
+  - key: limit
+    value: '50'

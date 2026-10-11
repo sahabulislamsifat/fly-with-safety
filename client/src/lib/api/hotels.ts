@@ -46,10 +46,10 @@ export async function searchHotels(payload: HotelSearchPayload): Promise<HotelSe
   return post<HotelSearchResponse>('/hotels/search', payload);
 }
 
-export async function submitHotelInquiry(payload: HotelInquiryPayload): Promise<{
+export async function submitHotelInquiry(payload: HotelInquiryPayload, idempotencyKey: string): Promise<{
   referenceNumber: string;
   inquiry: Record<string, unknown>;
   message: string;
 }> {
-  return post('/hotels/inquiries', payload);
+  return post('/hotels/inquiries', payload, { 'Idempotency-Key': idempotencyKey });
 }

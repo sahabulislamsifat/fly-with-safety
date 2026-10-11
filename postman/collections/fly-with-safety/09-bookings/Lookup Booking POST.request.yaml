@@ -1,0 +1,15 @@
+$kind: http-request
+name: 'Lookup Booking (POST)'
+method: POST
+url: '{{baseUrl}}/bookings/lookup'
+order: 2000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "referenceNumber": "FWS-ABC123",
+      "email": "john@example.com"
+    }

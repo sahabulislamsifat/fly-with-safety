@@ -1,0 +1,15 @@
+$kind: http-request
+name: List Bookings
+method: GET
+url: '{{baseUrl}}/account/bookings?page=1&limit=10'
+order: 4000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{accessToken}}'
+queryParams:
+  - key: page
+    value: '1'
+  - key: limit
+    value: '10'

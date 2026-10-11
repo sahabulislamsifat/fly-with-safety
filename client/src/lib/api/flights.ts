@@ -121,10 +121,10 @@ export async function searchFlights(payload: FlightSearchPayload): Promise<Fligh
   return post<FlightSearchResponse>('/flights/search', payload);
 }
 
-export async function submitFlightInquiry(payload: FlightInquiryPayload): Promise<{
+export async function submitFlightInquiry(payload: FlightInquiryPayload, idempotencyKey: string): Promise<{
   referenceNumber: string;
   inquiry: Record<string, unknown>;
   message: string;
 }> {
-  return post('/flights/inquiries', payload);
+  return post('/flights/inquiries', payload, { 'Idempotency-Key': idempotencyKey });
 }

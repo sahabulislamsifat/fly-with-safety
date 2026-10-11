@@ -16,6 +16,6 @@ export interface ContactResponse {
   createdAt: string;
 }
 
-export async function submitContact(payload: ContactPayload): Promise<ContactResponse> {
-  return post<ContactResponse>('/contact', payload);
+export async function submitContact(payload: ContactPayload, idempotencyKey: string): Promise<ContactResponse> {
+  return post<ContactResponse>('/contact', payload, { 'Idempotency-Key': idempotencyKey });
 }

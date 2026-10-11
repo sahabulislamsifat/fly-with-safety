@@ -1,0 +1,21 @@
+$kind: http-request
+name: Create Testimonial
+method: POST
+url: '{{baseUrl}}/admin/testimonials'
+order: 2000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{accessToken}}'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "customerName": "Jane Smith",
+      "content": "Excellent service!",
+      "rating": 5
+    }

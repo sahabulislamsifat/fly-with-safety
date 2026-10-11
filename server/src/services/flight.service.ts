@@ -4,6 +4,7 @@ import { generateReferenceNumber, normalizeEmail, normalizePhone } from '../util
 import { sendInquiryConfirmation } from './notification.service.js';
 import type { FlightSearchInput, FlightInquiryInput } from '../validators/flight.schemas.js';
 import { transitionInquiryStatus } from './inquiry-status.service.js';
+import { createIdempotentInquiry } from './idempotency.service.js';
 
 export async function searchFlights(input: FlightSearchInput) {
   const aggregated = await flightAggregator.aggregate({
@@ -31,11 +32,11 @@ export async function searchFlights(input: FlightSearchInput) {
   };
 }
 
-export async function submitFlightInquiry(input: FlightInquiryInput, userId?: string) {
+export async function submitFlightInquiry(input: FlightInquiryInput, userId: string | undefined, idempotencyKey: string) {
   const referenceNumber = generateReferenceNumber();
-
-  const inquiry = await prisma.flightInquiry.create({
-    data: {
+  const result = await createIdempotentInquiry({
+    operation: 'flight-inquiry', key: idempotencyKey, userId, email: input.email, payload: input,
+    create: (tx) => tx.flightInquiry.create({ data: {
       referenceNumber,
       userId: userId || null,
       fromAirport: input.from.toUpperCase(),
@@ -49,8 +50,7 @@ export async function submitFlightInquiry(input: FlightInquiryInput, userId?: st
       phone: input.phone ? normalizePhone(input.phone) : null,
       notes: input.notes || null,
       status: 'PENDING',
-    },
-    select: {
+    }, select: {
       id: true,
       referenceNumber: true,
       fromAirport: true,
@@ -58,17 +58,16 @@ export async function submitFlightInquiry(input: FlightInquiryInput, userId?: st
       departureDate: true,
       status: true,
       createdAt: true,
-    },
+    } }),
+    findByReference: (reference) => prisma.flightInquiry.findUnique({ where: { referenceNumber: reference } }),
   });
-
-  sendInquiryConfirmation({
+  if (!result.replayed) sendInquiryConfirmation({
     to: normalizeEmail(input.email),
     name: input.name.trim(),
     referenceNumber,
     type: 'flight',
   }).catch((err) => console.error('[Flight] Email send failed:', err));
-
-  return inquiry;
+  return result;
 }
 
 export async function getFlightInquiries(params: {

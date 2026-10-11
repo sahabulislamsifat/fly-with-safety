@@ -1,0 +1,8 @@
+$kind: http-request
+name: Get Destination by Slug
+method: GET
+url: '{{baseUrl}}/destinations/:slug'
+order: 2000
+pathVariables:
+  - key: slug
+    value: dubai

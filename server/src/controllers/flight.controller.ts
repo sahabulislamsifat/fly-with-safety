@@ -15,12 +15,12 @@ export async function searchFlights(req: Request, res: Response, next: NextFunct
 export async function submitFlightInquiry(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const userId = (req as AuthenticatedRequest).user?.id;
-    const result = await flightService.submitFlightInquiry(req.body, userId);
+    const result = await flightService.submitFlightInquiry(req.body, userId, req.idempotencyKey!);
     res.status(201).json(success({
-      referenceNumber: result.referenceNumber,
-      inquiry: result,
+      referenceNumber: result.inquiry.referenceNumber,
+      inquiry: result.inquiry,
       message: 'Flight inquiry submitted. Our team will contact you with options shortly.',
-    }));
+    }, result.replayed ? 'Original flight inquiry returned' : undefined));
   } catch (err) {
     next(err);
   }
