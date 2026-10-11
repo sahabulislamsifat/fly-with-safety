@@ -69,3 +69,14 @@ export async function adminUpdateBookingStatus(req: Request, res: Response, next
     next(err);
   }
 }
+
+export async function adminCreateBookingFromInquiry(req: Request, res: Response, next: NextFunction) {
+  try {
+    const authUser = (req as AuthenticatedRequest).user;
+    const staffId = authUser?.email || authUser?.id || 'STAFF';
+    const booking = await bookingService.createBookingFromInquiry(req.body, staffId);
+    res.status(201).json(success({ booking }, 'Booking created from inquiry successfully'));
+  } catch (err) {
+    next(err);
+  }
+}

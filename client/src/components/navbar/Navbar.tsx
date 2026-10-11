@@ -191,6 +191,14 @@ export function Navbar() {
 
             {user ? (
               <div className="flex items-center gap-2">
+                {(user.role === 'STAFF' || user.role === 'ADMIN') && (
+                  <Link
+                    href="/admin"
+                    className="px-2.5 py-1 text-xs font-bold bg-neutral-900 text-white hover:bg-neutral-800 rounded-xs transition-colors"
+                  >
+                    Staff Portal
+                  </Link>
+                )}
                 <Link href="/account" className="text-sm font-bold text-neutral-700 hover:text-brand-red">{user.name || 'My Account'}</Link>
                 <button type="button" onClick={() => void logout()} className="px-3 py-2 text-xs font-bold text-brand-red hover:bg-brand-red-light rounded-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red">Sign out</button>
               </div>
@@ -274,17 +282,50 @@ export function Navbar() {
             </div>
 
             <div className="pt-3 border-t border-neutral-100 space-y-2">
-              <button
-                type="button"
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  setIsSignInOpen(true);
-                }}
-                className="inline-flex items-center gap-2 w-full justify-center px-4 py-2.5 text-sm font-bold text-white bg-brand-red hover:bg-[#74181E] rounded-xs shadow-xs transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red cursor-pointer"
-              >
-                <Icon name="user" size={17} />
-                <span>Sign In</span>
-              </button>
+              {user ? (
+                <>
+                  {(user.role === 'STAFF' || user.role === 'ADMIN') && (
+                    <Link
+                      href="/admin"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="inline-flex items-center gap-2 w-full justify-center px-4 py-2 text-xs font-bold text-white bg-neutral-900 hover:bg-neutral-800 rounded-xs transition-colors"
+                    >
+                      <Icon name="shield" size={15} />
+                      <span>Staff Portal</span>
+                    </Link>
+                  )}
+                  <Link
+                    href="/account"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="inline-flex items-center gap-2 w-full justify-center px-4 py-2 text-xs font-bold text-neutral-800 bg-neutral-100 hover:bg-neutral-200 rounded-xs transition-colors"
+                  >
+                    <Icon name="user" size={15} />
+                    <span>My Account ({user.name || user.email})</span>
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      void logout();
+                    }}
+                    className="inline-flex items-center gap-2 w-full justify-center px-4 py-2 text-xs font-bold text-red-700 bg-red-50 hover:bg-red-100 rounded-xs transition-colors cursor-pointer"
+                  >
+                    <span>Sign Out</span>
+                  </button>
+                </>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setIsSignInOpen(true);
+                  }}
+                  className="inline-flex items-center gap-2 w-full justify-center px-4 py-2.5 text-sm font-bold text-white bg-brand-red hover:bg-[#74181E] rounded-xs shadow-xs transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red cursor-pointer"
+                >
+                  <Icon name="user" size={17} />
+                  <span>Sign In</span>
+                </button>
+              )}
               <Link
                 href="/contact"
                 onClick={() => setIsMobileMenuOpen(false)}

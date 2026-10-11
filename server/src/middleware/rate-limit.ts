@@ -19,7 +19,8 @@ function cleanupStore(): void {
   });
 }
 
-setInterval(cleanupStore, 60000);
+const cleanupTimer = setInterval(cleanupStore, 60000);
+cleanupTimer.unref?.();
 
 interface RateLimitOptions {
   windowMs: number;

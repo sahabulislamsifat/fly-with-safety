@@ -35,6 +35,23 @@ export const updateBookingStatusSchema = z.object({
   reason: z.string().max(500).optional(),
 });
 
+export const createBookingFromInquirySchema = z.object({
+  inquiryType: z.enum(['flights', 'hotels', 'packages']),
+  inquiryId: z.string().min(1, 'Inquiry ID is required'),
+  totalPrice: z.number().int().min(0, 'Total price must be a non-negative integer'),
+  currency: z.string().max(10).default('BDT'),
+  notes: z.string().max(1000).optional().or(z.literal('')),
+  passengers: z.array(passengerSchema).min(1, 'At least 1 passenger is required').optional(),
+  paymentStatus: z
+    .enum([
+      'AWAITING_PAYMENT_INSTRUCTIONS',
+      'AWAITING_PAYMENT_CONFIRMATION',
+      'PAYMENT_VERIFIED',
+    ])
+    .default('AWAITING_PAYMENT_INSTRUCTIONS'),
+});
+
 export type CreateBookingInput = z.infer<typeof createBookingSchema>;
 export type LookupBookingInput = z.infer<typeof lookupBookingSchema>;
 export type UpdateBookingStatusInput = z.infer<typeof updateBookingStatusSchema>;
+export type CreateBookingFromInquiryInput = z.infer<typeof createBookingFromInquirySchema>;

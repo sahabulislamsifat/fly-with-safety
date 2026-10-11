@@ -6,3 +6,4 @@ export * from './packages';
 export * from './visa';
 export * from './contact';
 export * from './bookings';
+export * from './admin';

@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
 import { requireAuth, requireRole } from '../middleware/auth.middleware.js';
 import * as contactController from '../controllers/contact.controller.js';
 import * as testimonialController from '../controllers/testimonial.controller.js';
@@ -8,11 +8,12 @@ import * as packageService from '../services/package.service.js';
 import * as visaService from '../services/visa.service.js';
 import * as destinationService from '../services/destination.service.js';
 import { success } from '../utils/response.js';
-import { Request, Response, NextFunction } from 'express';
 import { validate } from '../middleware/validation.middleware.js';
 import { contactStatusSchema, inquiryStatusSchema } from '../validators/admin.schemas.js';
 import * as bookingController from '../controllers/booking.controller.js';
-import { updateBookingStatusSchema } from '../validators/booking.schemas.js';
+import { updateBookingStatusSchema, createBookingFromInquirySchema } from '../validators/booking.schemas.js';
+import * as outboxService from '../services/outbox.service.js';
+import { AppError } from '../utils/errors.js';
 
 const router = Router();
 
@@ -155,11 +156,34 @@ router.get('/admin/visa', async (req: Request, res: Response, next: NextFunction
 
 // ─── Bookings ─────────────────────────────────────────────────────────────────
 router.get('/admin/bookings', bookingController.adminGetBookings);
+router.post(
+  '/admin/bookings/from-inquiry',
+  validate(createBookingFromInquirySchema),
+  bookingController.adminCreateBookingFromInquiry
+);
 router.patch(
   '/admin/bookings/:id/status',
   validate(updateBookingStatusSchema),
   bookingController.adminUpdateBookingStatus
 );
+
+// ─── Notification Outbox Observability & Redrive ─────────────────────────────
+router.get('/admin/outbox', async (_req: Request, res: Response, next: NextFunction) => {
+  try {
+    const stats = await outboxService.getOutboxStats();
+    res.json(success({ outbox: stats }));
+  } catch (err) { next(err); }
+});
+
+router.post('/admin/outbox/:id/redrive', async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const redriven = await outboxService.redriveFailedNotification(req.params.id);
+    if (!redriven) {
+      throw AppError.notFound('Notification record not found or not in FAILED status');
+    }
+    res.json(success({ id: req.params.id, status: 'PENDING' }, 'Notification queued for redrive'));
+  } catch (err) { next(err); }
+});
 
 export default router;
 
