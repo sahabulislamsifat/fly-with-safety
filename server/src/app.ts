@@ -1,7 +1,8 @@
-import express from 'express';
+import express, { type Express } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
+import passport from 'passport';
 import { env } from './config/env.js';
 import { errorHandler } from './middleware/error-handler.js';
 import { notFoundHandler } from './middleware/not-found.js';
@@ -21,7 +22,7 @@ import bookingRoutes from './routes/bookings.routes.js';
 import futureStubsRoutes from './routes/future-stubs.routes.js';
 import accountRoutes from './routes/account.routes.js';
 
-const app = express();
+const app: Express = express();
 
 // Behind a reverse proxy in production: needed for correct req.ip (rate limiting)
 if (env.nodeEnv === 'production') app.set('trust proxy', 1);
@@ -31,23 +32,28 @@ app.disable('x-powered-by');
 app.use(requestId);
 
 // Security headers
-app.use(helmet({
-  crossOriginResourcePolicy: { policy: 'cross-origin' },
-}));
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+  }),
+);
 
 // CORS
-app.use(cors({
-  origin: env.corsOrigin,
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Request-Id', 'Idempotency-Key'],
-  exposedHeaders: ['X-Request-Id'],
-}));
+app.use(
+  cors({
+    origin: env.corsOrigin,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Request-Id', 'Idempotency-Key'],
+    exposedHeaders: ['X-Request-Id'],
+  }),
+);
 
 // Body parsing
 app.use(express.json({ limit: '100kb' }));
 app.use(express.urlencoded({ extended: true, limit: '100kb' }));
 app.use(cookieParser());
+app.use(passport.initialize());
 
 // API routes
 const API_PREFIX = '/api/v1';

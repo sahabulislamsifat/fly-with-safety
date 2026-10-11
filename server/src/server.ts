@@ -3,6 +3,7 @@ import { validateEnv } from './config/env.js';
 import app from './app.js';
 import { prisma } from './lib/prisma.js';
 import { startOutboxWorker, stopOutboxWorker } from './services/outbox.service.js';
+import { isGoogleStrategyConfigured } from './config/passport.js';
 
 async function startServer(): Promise<void> {
   try {
@@ -23,6 +24,7 @@ async function startServer(): Promise<void> {
     console.log(`   Environment: ${env.nodeEnv}`);
     console.log(`   Health: http://localhost:${env.port}/api/v1/health`);
     console.log(`   CORS origin: ${env.corsOrigin}`);
+    console.log(`   Google OAuth: ${isGoogleStrategyConfigured() ? 'Configured' : 'Disabled (credentials missing)'}`);
   });
 
   const shutdown = async (signal: string): Promise<void> => {

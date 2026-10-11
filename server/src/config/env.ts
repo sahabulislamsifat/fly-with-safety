@@ -1,5 +1,21 @@
+import path from 'path';
+import fs from 'fs';
 import dotenv from 'dotenv';
 
+const currentDir = typeof __dirname !== 'undefined' ? __dirname : process.cwd();
+
+// Candidate .env file locations (current working dir, server dir, monorepo root)
+const candidateEnvPaths = [
+  path.resolve(process.cwd(), '.env'),
+  path.resolve(currentDir, '../../.env'),
+  path.resolve(currentDir, '../../../.env'),
+];
+
+for (const envPath of candidateEnvPaths) {
+  if (fs.existsSync(envPath)) {
+    dotenv.config({ path: envPath });
+  }
+}
 dotenv.config();
 
 function getEnv(key: string, defaultValue?: string): string {
@@ -87,6 +103,10 @@ export const env = {
 
   // Frontend URL
   frontendUrl: getEnv('CORS_ORIGIN', 'http://localhost:3000'),
+
+  get isGoogleOAuthConfigured(): boolean {
+    return Boolean(this.googleClientId && this.googleClientSecret);
+  },
 };
 
 export type Env = typeof env;
@@ -118,6 +138,20 @@ export function validateEnv(): void {
   }
   if (env.accessTokenCookieMaxAgeMs < 60_000 || env.accessTokenCookieMaxAgeMs > 60 * 60 * 1000) {
     problems.push('ACCESS_TOKEN_COOKIE_MAX_AGE_MS must be between 60000 and 3600000');
+  }
+
+  // Google OAuth validation: if one credential is provided, both must be provided
+  const hasClientId = Boolean(env.googleClientId);
+  const hasClientSecret = Boolean(env.googleClientSecret);
+  if ((hasClientId && !hasClientSecret) || (!hasClientId && hasClientSecret)) {
+    problems.push('Partial Google OAuth configuration: both GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET must be provided');
+  }
+  if (env.googleCallbackUrl) {
+    try {
+      new URL(env.googleCallbackUrl);
+    } catch {
+      problems.push(`Invalid GOOGLE_CALLBACK_URL: ${env.googleCallbackUrl}`);
+    }
   }
 
   if (problems.length > 0) {

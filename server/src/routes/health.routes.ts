@@ -1,9 +1,9 @@
-import { Router, Request, Response } from 'express';
+import { Router as createRouter, type Router, Request, Response } from 'express';
 import { success } from '../utils/response.js';
 import { env } from '../config/env.js';
 import { prisma } from '../lib/prisma.js';
 
-const router = Router();
+const router: Router = createRouter();
 
 async function checkDatabase(): Promise<'up' | 'down'> {
   try {
@@ -28,7 +28,7 @@ router.get('/health', async (_req: Request, res: Response) => {
       database,
       timestamp: new Date().toISOString(),
       uptime: Math.floor(process.uptime()),
-    })
+    }),
   );
 });
 

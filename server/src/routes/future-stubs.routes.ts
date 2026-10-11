@@ -1,16 +1,18 @@
-import { Router, Request, Response } from 'express';
+import { Router as createRouter, type Router, Request, Response } from 'express';
 import { error } from '../utils/response.js';
 
-const router = Router();
+const router: Router = createRouter();
 
 function notImplemented(featureName: string) {
   return (_req: Request, res: Response) => {
-    res.status(501).json(
-      error(
-        'NOT_IMPLEMENTED',
-        `${featureName} is planned for a future release (Phases 6–10) and is not yet implemented.`
-      )
-    );
+    res
+      .status(501)
+      .json(
+        error(
+          'NOT_IMPLEMENTED',
+          `${featureName} is planned for a future release (Phases 6–10) and is not yet implemented.`,
+        ),
+      );
   };
 }
 
