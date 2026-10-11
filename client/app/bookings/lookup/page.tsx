@@ -23,9 +23,7 @@ function BookingLookupContent() {
   const [referenceNumber, setReferenceNumber] = useState(refParam);
   const [email, setEmail] = useState(emailParam);
 
-  const { lookupStatus, lookupError, lookupRecord } = useAppSelector(
-    (state) => state.booking
-  );
+  const { lookupStatus, lookupError, lookupRecord } = useAppSelector((state) => state.booking);
 
   useEffect(() => {
     if (refParam && emailParam) {
@@ -33,7 +31,7 @@ function BookingLookupContent() {
         lookupBookingThunk({
           referenceNumber: refParam,
           email: emailParam,
-        })
+        }),
       );
     }
   }, [refParam, emailParam, dispatch]);
@@ -45,7 +43,7 @@ function BookingLookupContent() {
       lookupBookingThunk({
         referenceNumber: referenceNumber.trim().toUpperCase(),
         email: email.trim().toLowerCase(),
-      })
+      }),
     );
   };
 
@@ -74,7 +72,8 @@ function BookingLookupContent() {
             Track Booking &amp; Inquiry Status
           </h1>
           <p className="text-sm text-text-secondary max-w-md mx-auto">
-            Enter your FlyWithsafety booking reference code (e.g. FWS-2026-XXXXXX) and email address to view real-time reservation status and history.
+            Enter your FlyWithsafety booking reference code (e.g. FWS-2026-XXXXXX) and email address
+            to view real-time reservation status and history.
           </p>
         </div>
 
@@ -139,10 +138,12 @@ function BookingLookupContent() {
                   </span>
                 </div>
                 <div className="flex flex-col items-start sm:items-end">
-                  <span className="text-xs text-text-secondary block mb-1">Current Lifecycle Status</span>
+                  <span className="text-xs text-text-secondary block mb-1">
+                    Current Lifecycle Status
+                  </span>
                   <span
                     className={`px-3 py-1 rounded-xs text-xs font-bold border ${getStatusColor(
-                      lookupRecord.status
+                      lookupRecord.status,
                     )}`}
                   >
                     {lookupRecord.status}
@@ -153,7 +154,7 @@ function BookingLookupContent() {
               {/* Passenger & Fare Info */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
                 <div className="space-y-2">
-                  <h3 className="font-bold text-text-primary text-xs uppercase tracking-wider text-text-secondary">
+                  <h3 className="font-bold text-text-primary text-xs uppercase tracking-wider">
                     Customer Information
                   </h3>
                   <p>
@@ -173,7 +174,7 @@ function BookingLookupContent() {
                 </div>
 
                 <div className="space-y-2">
-                  <h3 className="font-bold text-text-primary text-xs uppercase tracking-wider text-text-secondary">
+                  <h3 className="font-bold text-xs uppercase tracking-wider text-text-secondary">
                     Fare Details
                   </h3>
                   <p className="text-xl font-extrabold text-text-primary">
@@ -182,10 +183,18 @@ function BookingLookupContent() {
                   <p className="text-xs text-text-tertiary">
                     Agency Managed · Service Model: {lookupRecord.bookingModel}
                   </p>
-                  {Boolean((lookupRecord.bookingDetails as BookingDetailsMeta | null)?.sourceInquiryReference) && (
+                  {Boolean(
+                    (lookupRecord.bookingDetails as BookingDetailsMeta | null)
+                      ?.sourceInquiryReference,
+                  ) && (
                     <div className="mt-2 inline-flex items-center gap-1.5 rounded-xs border border-brand-primary/20 bg-brand-primary/5 px-2 py-1 text-xs font-semibold text-brand-primary">
                       <span>Linked Inquiry:</span>
-                      <span className="font-mono">{(lookupRecord.bookingDetails as BookingDetailsMeta | null)?.sourceInquiryReference}</span>
+                      <span className="font-mono">
+                        {
+                          (lookupRecord.bookingDetails as BookingDetailsMeta | null)
+                            ?.sourceInquiryReference
+                        }
+                      </span>
                     </div>
                   )}
                 </div>
@@ -203,22 +212,25 @@ function BookingLookupContent() {
                         (lookupRecord.status === 'CONFIRMED'
                           ? 'AWAITING_PAYMENT_CONFIRMATION'
                           : lookupRecord.status === 'COMPLETED'
-                          ? 'PAYMENT_VERIFIED'
-                          : lookupRecord.status === 'CANCELLED'
-                          ? 'CANCELLED'
-                          : 'AWAITING_PAYMENT_INSTRUCTIONS')
+                            ? 'PAYMENT_VERIFIED'
+                            : lookupRecord.status === 'CANCELLED'
+                              ? 'CANCELLED'
+                              : 'AWAITING_PAYMENT_INSTRUCTIONS'),
                     )}
                   </span>
                 </div>
                 <p className="text-amber-800 leading-relaxed">
                   {String(
                     (lookupRecord.bookingDetails as BookingDetailsMeta | null)?.paymentPolicy ||
-                      'Manual agency verification model. No payment card has been automatically charged. Wire transfer, bKash, or Nagad payment instructions will be provided by your assigned FlyWithsafe travel counselor.'
+                      'Manual agency verification model. No payment card has been automatically charged. Wire transfer, bKash, or Nagad payment instructions will be provided by your assigned FlyWithsafe travel counselor.',
                   )}
                 </p>
                 <div className="pt-1 text-[11px] text-amber-900 font-medium flex items-center gap-1">
                   <span>Questions or submitting payment vouchers?</span>
-                  <a href="/contact" className="underline font-bold text-brand-primary hover:text-brand-dark">
+                  <a
+                    href="/contact"
+                    className="underline font-bold text-brand-primary hover:text-brand-dark"
+                  >
                     Contact Operations Support
                   </a>
                 </div>
@@ -227,7 +239,7 @@ function BookingLookupContent() {
               {/* Passengers */}
               {lookupRecord.passengers && lookupRecord.passengers.length > 0 && (
                 <div className="space-y-3 border-t pt-4">
-                  <h3 className="font-bold text-text-primary text-xs uppercase tracking-wider text-text-secondary">
+                  <h3 className="font-bold text-text-primary text-xs uppercase tracking-wider">
                     Passengers ({lookupRecord.passengers.length})
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -251,7 +263,7 @@ function BookingLookupContent() {
               {/* Status History Timeline */}
               {lookupRecord.statusHistory && lookupRecord.statusHistory.length > 0 && (
                 <div className="space-y-4 border-t pt-4">
-                  <h3 className="font-bold text-text-primary text-xs uppercase tracking-wider text-text-secondary">
+                  <h3 className="font-bold text-text-primary text-xs uppercase tracking-wider">
                     Status History &amp; Audit Timeline
                   </h3>
                   <div className="space-y-3">

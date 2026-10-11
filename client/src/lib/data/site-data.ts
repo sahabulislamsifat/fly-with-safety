@@ -56,6 +56,7 @@ export const paymentMethods: PaymentMethod[] = [
   { name: 'VISA', icon: 'creditCard' },
   { name: 'Mastercard', icon: 'creditCard' },
   { name: 'bKash', icon: 'smartphone' },
+  { name: 'Nagad', icon: 'smartphone' },
 ];
 
 export const destinations: Destination[] = [
