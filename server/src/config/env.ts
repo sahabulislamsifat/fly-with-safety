@@ -52,13 +52,20 @@ function getEnvBool(key: string, defaultValue: boolean): boolean {
   return value.toLowerCase() === 'true' || value === '1';
 }
 
+function getEnvUrls(key: string, fallback: string): string[] {
+  return getEnv(key, fallback).split(',').map((url) => url.trim()).filter(Boolean);
+}
+
+const corsOrigins = getEnvUrls('CORS_ORIGINS', getEnv('CORS_ORIGIN', 'https://fly-with-safety.netlify.app'));
+
 export const env = {
   // Server
   port: getEnvNumber('PORT', 5000),
   nodeEnv: getEnv('NODE_ENV', 'development') as 'development' | 'production' | 'test',
 
   // CORS
-  corsOrigin: getEnv('CORS_ORIGIN', 'https://fly-with-safety.netlify.app'),
+  corsOrigins,
+  corsOrigin: corsOrigins[0],
 
   // Database
   databaseUrl: getEnv('DATABASE_URL', ''),
@@ -106,7 +113,7 @@ export const env = {
   adminPassword: getEnv('ADMIN_PASSWORD', ''),
 
   // Frontend URL
-  frontendUrl: getEnv('CORS_ORIGIN', 'https://fly-with-safety.netlify.app'),
+  frontendUrl: getEnv('FRONTEND_URL', corsOrigins[0]),
 
   get isGoogleOAuthConfigured(): boolean {
     return Boolean(this.googleClientId && this.googleClientSecret);
@@ -124,10 +131,20 @@ export function validateEnv(): void {
   if (env.port < 1 || env.port > 65535) {
     problems.push(`Invalid PORT: ${env.port}`);
   }
+  if (env.corsOrigins.length === 0) {
+    problems.push('At least one CORS origin is required');
+  }
+  for (const origin of env.corsOrigins) {
+    try {
+      new URL(origin);
+    } catch {
+      problems.push(`Invalid CORS origin: ${origin}`);
+    }
+  }
   try {
-    new URL(env.corsOrigin);
+    new URL(env.frontendUrl);
   } catch {
-    problems.push(`Invalid CORS_ORIGIN: ${env.corsOrigin}`);
+    problems.push(`Invalid FRONTEND_URL: ${env.frontendUrl}`);
   }
   if (env.nodeEnv !== 'test' && !env.databaseUrl) {
     problems.push('DATABASE_URL is required');

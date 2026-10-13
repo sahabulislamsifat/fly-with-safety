@@ -6,17 +6,19 @@ import { AppError } from '../utils/errors.js';
 import { env } from '../config/env.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
 
+const cookieSameSite: 'lax' | 'none' = env.nodeEnv === 'production' ? 'none' : 'lax';
+
 const accessCookie = {
   httpOnly: true,
   secure: env.nodeEnv === 'production',
-  sameSite: 'lax' as const,
+  sameSite: cookieSameSite,
   maxAge: env.accessTokenCookieMaxAgeMs,
   path: '/',
 };
 const refreshCookie = {
   httpOnly: true,
   secure: env.nodeEnv === 'production',
-  sameSite: 'lax' as const,
+  sameSite: cookieSameSite,
   maxAge: env.refreshTokenExpiresDays * 24 * 60 * 60 * 1000,
   path: '/api/v1/auth',
 };

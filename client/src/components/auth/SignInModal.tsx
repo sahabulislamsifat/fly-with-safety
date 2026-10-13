@@ -89,7 +89,9 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
   };
 
   const handleGoogleSignIn = () => {
-    startGoogleSignIn();
+    void startGoogleSignIn().catch(() => {
+      setErrorMessage('Unable to start Google sign-in. Check your connection and try again.');
+    });
   };
 
   if (!isClient) return null;
