@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "tsx watch src/server.ts",
+    "postinstall": "prisma generate --config prisma.config.ts",
     "build": "prisma generate --config prisma.config.ts && tsc",
     "start": "node dist/server.js",
     "typecheck": "tsc --noEmit",
