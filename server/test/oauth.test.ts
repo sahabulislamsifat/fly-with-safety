@@ -40,8 +40,12 @@ describe('Google OAuth Route and Strategy Tests', () => {
       expect(redirectUrl.origin).toBe('https://accounts.google.com');
       expect(redirectUrl.pathname).toBe('/o/oauth2/v2/auth');
       expect(redirectUrl.searchParams.get('response_type')).toBe('code');
-      expect(redirectUrl.searchParams.get('client_id')).toBe('mock-google-client-id.apps.googleusercontent.com');
-      expect(redirectUrl.searchParams.get('redirect_uri')).toBe('http://localhost:5000/api/v1/auth/google/callback');
+      expect(redirectUrl.searchParams.get('client_id')).toBe(
+        'mock-google-client-id.apps.googleusercontent.com',
+      );
+      expect(redirectUrl.searchParams.get('redirect_uri')).toBe(
+        'http://localhost:5000/api/v1/auth/google/callback',
+      );
       expect(redirectUrl.searchParams.get('scope')).toBe('profile email');
     });
 
@@ -81,9 +85,7 @@ describe('Google OAuth Route and Strategy Tests', () => {
     });
 
     it('GET /api/v1/auth/google returns 503 with OAUTH_NOT_CONFIGURED for API requests', async () => {
-      const res = await request(app)
-        .get('/api/v1/auth/google')
-        .set('Accept', 'application/json');
+      const res = await request(app).get('/api/v1/auth/google').set('Accept', 'application/json');
 
       expect(res.status).toBe(503);
       expect(res.body.success).toBe(false);

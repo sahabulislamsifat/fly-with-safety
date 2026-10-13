@@ -58,7 +58,7 @@ export const env = {
   nodeEnv: getEnv('NODE_ENV', 'development') as 'development' | 'production' | 'test',
 
   // CORS
-  corsOrigin: getEnv('CORS_ORIGIN', 'http://localhost:3000'),
+  corsOrigin: getEnv('CORS_ORIGIN', 'https://fly-with-safety.netlify.app'),
 
   // Database
   databaseUrl: getEnv('DATABASE_URL', ''),
@@ -90,7 +90,11 @@ export const env = {
   // Google OAuth
   googleClientId: getEnv('GOOGLE_CLIENT_ID', ''),
   googleClientSecret: getEnv('GOOGLE_CLIENT_SECRET', ''),
-  googleCallbackUrl: getEnv('GOOGLE_CALLBACK_URL', 'http://localhost:5000/api/v1/auth/google/callback'),
+  googleCallbackUrl: getEnv(
+    'GOOGLE_CALLBACK_URL',
+    // 'http://localhost:5000/api/v1/auth/google/callback',
+    'https://fly-with-safety-server.vercel.app/api/v1/auth/google/callback',
+  ),
 
   // Stripe
   stripePublishableKey: getEnv('STRIPE_PUBLISHABLE_KEY', ''),
@@ -102,7 +106,7 @@ export const env = {
   adminPassword: getEnv('ADMIN_PASSWORD', ''),
 
   // Frontend URL
-  frontendUrl: getEnv('CORS_ORIGIN', 'http://localhost:3000'),
+  frontendUrl: getEnv('CORS_ORIGIN', 'https://fly-with-safety.netlify.app'),
 
   get isGoogleOAuthConfigured(): boolean {
     return Boolean(this.googleClientId && this.googleClientSecret);
@@ -130,7 +134,9 @@ export function validateEnv(): void {
   }
   if (env.nodeEnv === 'production') {
     if (env.jwtSecret === 'dev-secret-change-in-production' || env.jwtSecret.length < 32) {
-      problems.push('JWT_SECRET must be set to a random value of at least 32 characters in production');
+      problems.push(
+        'JWT_SECRET must be set to a random value of at least 32 characters in production',
+      );
     }
   }
   if (env.refreshTokenExpiresDays < 1 || env.refreshTokenExpiresDays > 90) {
@@ -144,7 +150,9 @@ export function validateEnv(): void {
   const hasClientId = Boolean(env.googleClientId);
   const hasClientSecret = Boolean(env.googleClientSecret);
   if ((hasClientId && !hasClientSecret) || (!hasClientId && hasClientSecret)) {
-    problems.push('Partial Google OAuth configuration: both GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET must be provided');
+    problems.push(
+      'Partial Google OAuth configuration: both GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET must be provided',
+    );
   }
   if (env.googleCallbackUrl) {
     try {
