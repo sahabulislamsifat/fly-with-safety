@@ -1,8 +1,27 @@
 import { describe, it, expect } from 'vitest';
 import request from 'supertest';
 import app from '../src/app.js';
+import { env } from '../src/config/env.js';
 
 describe('FlyWithsafety Server API Tests', () => {
+  describe('CORS', () => {
+    it('allows credentialed requests from configured origins', async () => {
+      const originalOrigins = [...env.corsOrigins];
+      env.corsOrigins.splice(0, env.corsOrigins.length, 'http://localhost:3000', 'https://fly-with-safety.netlify.app');
+      try {
+        const response = await request(app)
+          .options('/api/v1/auth/login')
+          .set('Origin', 'http://localhost:3000')
+          .set('Access-Control-Request-Method', 'POST');
+
+        expect(response.headers['access-control-allow-origin']).toBe('http://localhost:3000');
+        expect(response.headers['access-control-allow-credentials']).toBe('true');
+      } finally {
+        env.corsOrigins.splice(0, env.corsOrigins.length, ...originalOrigins);
+      }
+    });
+  });
+
   describe('Authentication route guards and validation', () => {
     it('rejects protected current-user requests without a session', async () => {
       const res = await request(app).get('/api/v1/auth/me');

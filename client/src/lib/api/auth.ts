@@ -1,4 +1,4 @@
-import { get, getApiBaseUrl, post } from './client';
+import { get, post, resolveApiBaseUrl } from './client';
 
 export interface AuthenticatedUser {
   id: string;
@@ -32,8 +32,8 @@ export async function resendVerification(email: string): Promise<void> { await p
 export async function requestPasswordReset(email: string): Promise<void> { await post('/auth/forgot-password', { email }); }
 export async function resetPassword(token: string, password: string): Promise<void> { await post('/auth/reset-password', { token, password }); }
 
-export function startGoogleSignIn(): void {
+export async function startGoogleSignIn(): Promise<void> {
   // OAuth must leave the Next.js app for the configured API provider route.
   // eslint-disable-next-line @next/next/no-location-assign-relative-destination
-  window.location.href = `${getApiBaseUrl()}/auth/google`;
+  window.location.href = `${await resolveApiBaseUrl()}/auth/google`;
 }

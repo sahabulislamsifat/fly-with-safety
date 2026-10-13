@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://flywithsafe.com",
+    url: "https://flywithsafety.com",
     siteName: "FlyWithSafe",
     title: "FlyWithSafe — Safe & Easy Travel Booking",
     description: "Book flights, hotels, travel packages and get reliable travel support with FlyWithSafe.",
@@ -65,8 +65,8 @@ export const metadata: Metadata = {
       "@context": "https://schema.org",
       "@type": "TravelAgency",
       "name": "FlyWithSafe",
-      "url": "https://flywithsafe.com",
-      "logo": "https://flywithsafe.com/logo.png",
+      "url": "https://flywithsafety.com",
+      "logo": "https://flywithsafety.com/logo.png",
       "description": "Book flights, hotels, travel packages and get reliable travel support with FlyWithSafe.",
       "address": {
         "@type": "PostalAddress",
@@ -118,8 +118,8 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "TravelAgency",
               "name": "FlyWithSafe",
-              "url": "https://flywithsafe.com",
-              "logo": "https://flywithsafe.com/logo.png",
+              "url": "https://flywithsafety.com",
+              "logo": "https://flywithsafety.com/logo.png",
               "description": "Book flights, hotels, travel packages and get reliable travel support with FlyWithSafe.",
               "address": {
                 "@type": "PostalAddress",
