@@ -23,7 +23,8 @@ describe('Google OAuth Route and Strategy Tests', () => {
       configureGoogleStrategy({
         clientId: 'mock-google-client-id.apps.googleusercontent.com',
         clientSecret: 'mock-google-client-secret',
-        callbackUrl: 'http://localhost:5000/api/v1/auth/google/callback',
+        // callbackUrl: 'http://localhost:5000/api/v1/auth/google/callback',
+        callbackUrl: 'https://fly-with-safety-server.vercel.app/api/v1/auth/google/callback',
       });
     });
 
@@ -44,7 +45,8 @@ describe('Google OAuth Route and Strategy Tests', () => {
         'mock-google-client-id.apps.googleusercontent.com',
       );
       expect(redirectUrl.searchParams.get('redirect_uri')).toBe(
-        'http://localhost:5000/api/v1/auth/google/callback',
+        // 'http://localhost:5000/api/v1/auth/google/callback',
+        'https://fly-with-safety-server.vercel.app/api/v1/auth/google/callback',
       );
       expect(redirectUrl.searchParams.get('scope')).toBe('profile email');
     });
