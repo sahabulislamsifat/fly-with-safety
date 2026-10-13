@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { destinations } from '@/lib/data/site-data';
-import { CardContent, Button, Icon } from '@/components/ui';
+import { CardContent, Icon } from '@/components/ui';
 
 export function Destinations() {
   return (
@@ -9,10 +9,10 @@ export function Destinations() {
       <div className="container">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
           <div>
-            <p className="text-xs font-semibold text-white uppercase tracking-wider mb-2">
+            <p className="text-xs font-semibold text-black uppercase tracking-wider mb-2">
               Ready to Go
             </p>
-            <h2 id="destinations-heading" className="text-3xl sm:text-4xl font-bold text-white">
+            <h2 id="destinations-heading" className="text-3xl sm:text-4xl font-bold text-black">
               Popular destinations
             </h2>
           </div>
@@ -57,10 +57,10 @@ export function Destinations() {
                     {destination.name}
                   </h3>
                   <p className="text-sm text-text-tertiary mb-4">{destination.country}</p>
-                  <Button variant="outline" size="sm" fullWidth className="w-full rounded-xs">
+                  <span className="inline-flex w-full items-center justify-center gap-1.5 rounded-xs border-2 border-brand-red px-3 py-1.5 text-sm font-semibold text-brand-red transition-colors duration-150 group-hover:bg-brand-red group-hover:text-white">
                     View Deals
                     <Icon name="chevronRight" size={14} />
-                  </Button>
+                  </span>
                 </CardContent>
               </Link>
             </article>

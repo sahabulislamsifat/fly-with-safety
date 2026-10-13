@@ -39,7 +39,12 @@ export function AdminContactTab() {
   const [statusFilter, setStatusFilter] = useState<ContactStatus | ''>('');
   const [page, setPage] = useState<number>(1);
   const [messages, setMessages] = useState<AdminContactSummary[]>([]);
-  const [pagination, setPagination] = useState<Pagination>({ page: 1, limit: 20, total: 0, totalPages: 1 });
+  const [pagination, setPagination] = useState<Pagination>({
+    page: 1,
+    limit: 20,
+    total: 0,
+    totalPages: 1,
+  });
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -106,7 +111,10 @@ export function AdminContactTab() {
       <div className="rounded-xs border border-neutral-200 bg-white p-4 shadow-xs">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <label htmlFor="contact-status-filter" className="text-xs font-semibold text-neutral-600">
+            <label
+              htmlFor="contact-status-filter"
+              className="text-xs font-semibold text-neutral-600"
+            >
               Filter Status:
             </label>
             <select
@@ -126,7 +134,13 @@ export function AdminContactTab() {
             </select>
           </div>
 
-          <Button variant="outline" size="sm" onClick={() => loadData()} disabled={loading} className="rounded-xs">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => loadData()}
+            disabled={loading}
+            className="rounded-xs"
+          >
             <Icon name="swapHorizontal" size={14} className={loading ? 'animate-spin' : ''} />
             <span>Refresh</span>
           </Button>
@@ -134,12 +148,20 @@ export function AdminContactTab() {
       </div>
 
       {error && (
-        <div className="rounded-xs border border-red-200 bg-red-50 p-4 text-sm text-red-700" role="alert">
+        <div
+          className="rounded-xs border border-red-200 bg-red-50 p-4 text-sm text-red-700"
+          role="alert"
+        >
           <div className="flex items-center gap-2">
             <Icon name="alertCircle" size={16} />
             <span className="font-semibold">{error}</span>
           </div>
-          <Button variant="outline" size="sm" onClick={() => loadData()} className="mt-3 rounded-xs">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => loadData()}
+            className="mt-3 rounded-xs"
+          >
             Retry
           </Button>
         </div>
@@ -198,7 +220,7 @@ export function AdminContactTab() {
                             </div>
                             <div className="text-neutral-500 text-[11px]">{m.email}</div>
                           </td>
-                          <td className="px-4 py-3.5 max-w-[200px] truncate text-neutral-700 font-medium">
+                          <td className="px-4 py-3.5 max-w-50 truncate text-neutral-700 font-medium">
                             {m.subject}
                           </td>
                           <td className="px-4 py-3.5 whitespace-nowrap text-neutral-600">
@@ -272,7 +294,9 @@ export function AdminContactTab() {
                   <span className="text-[11px] font-bold uppercase tracking-wider text-brand-red">
                     Customer Message
                   </span>
-                  <h3 className="text-lg font-black text-neutral-900">{selectedDetail.referenceNumber}</h3>
+                  <h3 className="text-lg font-black text-neutral-900">
+                    {selectedDetail.referenceNumber}
+                  </h3>
                 </div>
                 <button
                   type="button"
@@ -285,7 +309,9 @@ export function AdminContactTab() {
               </div>
 
               {detailLoading ? (
-                <div className="p-6 text-center text-xs text-neutral-500">Loading message body...</div>
+                <div className="p-6 text-center text-xs text-neutral-500">
+                  Loading message body...
+                </div>
               ) : (
                 <>
                   <div className="flex items-center justify-between rounded-xs border border-neutral-200 bg-neutral-50 p-3">
@@ -308,13 +334,19 @@ export function AdminContactTab() {
                     </div>
 
                     <div className="pt-2">
-                      <span className="font-semibold text-neutral-500 block">Email &amp; Phone</span>
+                      <span className="font-semibold text-neutral-500 block">
+                        Email &amp; Phone
+                      </span>
                       <div className="font-medium text-neutral-800">{selectedDetail.email}</div>
-                      {selectedDetail.phone && <div className="text-neutral-600">{selectedDetail.phone}</div>}
+                      {selectedDetail.phone && (
+                        <div className="text-neutral-600">{selectedDetail.phone}</div>
+                      )}
                     </div>
 
                     <div className="pt-2">
-                      <span className="font-semibold text-neutral-500 block">Subject &amp; Category</span>
+                      <span className="font-semibold text-neutral-500 block">
+                        Subject &amp; Category
+                      </span>
                       <span className="font-bold text-neutral-900">{selectedDetail.subject}</span>
                       {selectedDetail.serviceType && (
                         <div className="text-neutral-500 uppercase text-[11px] mt-0.5">
@@ -324,7 +356,9 @@ export function AdminContactTab() {
                     </div>
 
                     <div className="pt-2">
-                      <span className="font-semibold text-neutral-500 block mb-1">Message Content</span>
+                      <span className="font-semibold text-neutral-500 block mb-1">
+                        Message Content
+                      </span>
                       <div className="rounded-xs bg-neutral-50 p-3 border border-neutral-200 text-neutral-800 whitespace-pre-wrap leading-relaxed text-xs">
                         {selectedDetail.message}
                       </div>
@@ -332,7 +366,9 @@ export function AdminContactTab() {
 
                     <div className="pt-2">
                       <span className="font-semibold text-neutral-500 block">Received At</span>
-                      <span className="text-neutral-600">{formatDate(selectedDetail.createdAt)}</span>
+                      <span className="text-neutral-600">
+                        {formatDate(selectedDetail.createdAt)}
+                      </span>
                     </div>
                   </div>
 
@@ -378,7 +414,7 @@ export function AdminContactTab() {
                         size="sm"
                         disabled={actionLoading}
                         onClick={() => handleTransition('IN_PROGRESS')}
-                        className="w-full rounded-xs text-neutral-800 border-neutral-300 hover:bg-neutral-50"
+                        className="w-full rounded-xs text-neutral-800 border-neutral-300 hover:bg-neutral-100"
                       >
                         {actionLoading ? 'Updating...' : 'Reopen Inquiry (In Progress)'}
                       </Button>
