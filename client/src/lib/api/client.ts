@@ -5,11 +5,11 @@ export const getApiBaseUrl = (): string => {
   }
   return process.env.NODE_ENV === 'production'
     ? 'https://fly-with-safety-server.vercel.app/api/v1'
-    : 'http://localhost:5000/api/v1';
+    : // : 'http://localhost:5000/api/v1';
+      'https://fly-with-safety-server.vercel.app/api/v1';
 };
 
 const API_BASE_URL = getApiBaseUrl();
-
 
 export interface ApiSuccessResponse<T> {
   success: true;
@@ -43,7 +43,7 @@ export class ApiError extends Error {
     message: string,
     status: number,
     requestId?: string,
-    details?: Record<string, unknown>
+    details?: Record<string, unknown>,
   ) {
     super(message);
     this.code = code;
@@ -54,10 +54,7 @@ export class ApiError extends Error {
   }
 }
 
-export async function apiRequest<T>(
-  path: string,
-  options: RequestInit = {}
-): Promise<T> {
+export async function apiRequest<T>(path: string, options: RequestInit = {}): Promise<T> {
   const url = `${API_BASE_URL}${path}`;
 
   const defaultHeaders: HeadersInit = {
@@ -77,11 +74,7 @@ export async function apiRequest<T>(
   try {
     data = await response.json();
   } catch {
-    throw new ApiError(
-      'PARSE_ERROR',
-      'Invalid server response',
-      response.status
-    );
+    throw new ApiError('PARSE_ERROR', 'Invalid server response', response.status);
   }
 
   if (!data.success) {

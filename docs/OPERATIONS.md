@@ -15,6 +15,7 @@ The system is built as a decoupled, full-stack travel agency portal:
 - **Email Transport**: Nodemailer SMTP with safe development/test mocking when `EMAIL_DELIVERY_ENABLED=false`.
 
 ### Product & Domain Truthfulness
+
 - **Inquiries**: Handled for Flights, Hotels, Tour Packages, and Visas. Protected by idempotency keys to eliminate accidental duplicate submissions.
 - **Bookings**: Converted only from eligible, non-cancelled Flight, Hotel, or Package inquiries by authorized staff (`STAFF` or `ADMIN` roles). Visa inquiries cannot be converted to bookings.
 - **Inventory & Pricing**: The agency operates an assisted-desk model. Quotes and itineraries are managed by travel desk staff. There are **no direct live airline/hotel GDS inventory pipes** and **no simulated inventory**.
@@ -28,38 +29,40 @@ All sensitive values must be provided securely via environment variables or secr
 
 ### Backend (`server/.env`)
 
-| Variable Name | Required | Default | Purpose |
-| :--- | :---: | :---: | :--- |
-| `NODE_ENV` | Yes | `development` | Runtime environment (`development`, `production`, `test`). |
-| `PORT` | No | `5000` | Port on which the Express server listens. |
-| `DATABASE_URL` | Yes | — | PostgreSQL connection string (`postgresql://user:pass@host:5432/db`). |
-| `JWT_SECRET` | Yes | — | Strong cryptographic secret for signing session access tokens. |
-| `JWT_EXPIRES_IN` | No | `15m` | Lifetime of user access tokens. |
-| `REFRESH_TOKEN_EXPIRES_DAYS` | No | `7` | Refresh token session expiration in days. |
-| `FRONTEND_URL` | Yes | `http://localhost:3000` | URL of the frontend application for CORS, redirect links, and verification URLs. |
-| `CORS_ORIGIN` | No | Match frontend | Allowed CORS origin header. |
-| `EMAIL_DELIVERY_ENABLED` | No | `true` | When `false`, outbound email delivery is mocked/suppressed (mandatory in automated tests). |
-| `SMTP_HOST` | If email enabled | — | Outbound SMTP host. |
-| `SMTP_PORT` | No | `587` | SMTP port (e.g., 587 or 465). |
-| `SMTP_USER` | If email enabled | — | SMTP authentication username. |
-| `SMTP_PASSWORD` | If email enabled | — | SMTP authentication password. |
-| `EMAIL_FROM` | No | `noreply@flywithsafe.com` | Verified sender address in outbound email headers. |
-| `RATE_LIMIT_WINDOW_MS` | No | `900000` (15m) | Rate limiting observation window. |
-| `RATE_LIMIT_MAX` | No | `100` | General rate limit per IP per window. |
-| `AUTH_RATE_LIMIT_MAX` | No | `10` | Strict rate limit for auth and credential-sensitive endpoints. |
+| Variable Name                |     Required     |          Default          | Purpose                                                                                    |
+| :--------------------------- | :--------------: | :-----------------------: | :----------------------------------------------------------------------------------------- |
+| `NODE_ENV`                   |       Yes        |       `development`       | Runtime environment (`development`, `production`, `test`).                                 |
+| `PORT`                       |        No        |          `5000`           | Port on which the Express server listens.                                                  |
+| `DATABASE_URL`               |       Yes        |             —             | PostgreSQL connection string (`postgresql://user:pass@host:5432/db`).                      |
+| `JWT_SECRET`                 |       Yes        |             —             | Strong cryptographic secret for signing session access tokens.                             |
+| `JWT_EXPIRES_IN`             |        No        |           `15m`           | Lifetime of user access tokens.                                                            |
+| `REFRESH_TOKEN_EXPIRES_DAYS` |        No        |            `7`            | Refresh token session expiration in days.                                                  |
+| `FRONTEND_URL`               |       Yes        |  `http://localhost:3000`  | URL of the frontend application for CORS, redirect links, and verification URLs.           |
+| `CORS_ORIGIN`                |        No        |      Match frontend       | Allowed CORS origin header.                                                                |
+| `EMAIL_DELIVERY_ENABLED`     |        No        |          `true`           | When `false`, outbound email delivery is mocked/suppressed (mandatory in automated tests). |
+| `SMTP_HOST`                  | If email enabled |             —             | Outbound SMTP host.                                                                        |
+| `SMTP_PORT`                  |        No        |           `587`           | SMTP port (e.g., 587 or 465).                                                              |
+| `SMTP_USER`                  | If email enabled |             —             | SMTP authentication username.                                                              |
+| `SMTP_PASSWORD`              | If email enabled |             —             | SMTP authentication password.                                                              |
+| `EMAIL_FROM`                 |        No        | `noreply@flywithsafe.com` | Verified sender address in outbound email headers.                                         |
+| `RATE_LIMIT_WINDOW_MS`       |        No        |      `900000` (15m)       | Rate limiting observation window.                                                          |
+| `RATE_LIMIT_MAX`             |        No        |           `100`           | General rate limit per IP per window.                                                      |
+| `AUTH_RATE_LIMIT_MAX`        |        No        |           `10`            | Strict rate limit for auth and credential-sensitive endpoints.                             |
 
 ### Integration Testing Gating
 
-| Variable Name | Purpose |
-| :--- | :--- |
-| `RUN_IDEMPOTENCY_INTEGRATION` | Must be `true` to run live database-backed idempotency integration tests. |
+| Variable Name                   | Purpose                                                                                                   |
+| :------------------------------ | :-------------------------------------------------------------------------------------------------------- |
+| `RUN_IDEMPOTENCY_INTEGRATION`   | Must be `true` to run live database-backed idempotency integration tests.                                 |
 | `INTEGRATION_TEST_DATABASE_URL` | Must end in `_integration` to prevent running destructive integration scripts against non-test databases. |
 
 ### Frontend (`client/.env.local`)
 
-| Variable Name | Required | Default | Purpose |
-| :--- | :---: | :---: | :--- |
-| `NEXT_PUBLIC_API_URL` | Yes | `http://localhost:5000/api/v1` | Public API endpoint for browser calls. |
+| Variable Name         |       Required        |                      Default                       | Purpose                                            |
+| :-------------------- | :-------------------: | :------------------------------------------------: | :------------------------------------------------- | -------------------------------------- | -------------------------------------- | --- | --- |
+| <!--                  |                       |               `NEXT_PUBLIC_API_URL`                | Yes                                                | `http://localhost:5000/api/v1`         | Public API endpoint for browser calls. |     | --> |
+|                       | `NEXT_PUBLIC_API_URL` |                        Yes                         | `https://fly-with-safety-server.vercel.app/api/v1` | Public API endpoint for browser calls. |                                        |
+| `NEXT_PUBLIC_API_URL` |          Yes          | `https://fly-with-safety-server.vercel.app/api/v1` | Public API endpoint for browser calls.             |
 
 ---
 
@@ -88,6 +91,7 @@ All sensitive values must be provided securely via environment variables or secr
 ## 4. Local Development Setup & Build Commands
 
 ### Initial Setup
+
 ```bash
 # Install dependencies across monorepo / workspace
 pnpm install
@@ -99,6 +103,7 @@ cd ..
 ```
 
 ### Running Locally
+
 ```bash
 # Start backend server (port 5000)
 cd server
@@ -110,6 +115,7 @@ npm run dev
 ```
 
 ### Quality Verification Commands
+
 ```bash
 # 1. Run server test suite
 cd server
@@ -143,6 +149,7 @@ GET /api/v1/health
 ```
 
 **Example Response:**
+
 ```json
 {
   "success": true,
@@ -156,13 +163,15 @@ GET /api/v1/health
   }
 }
 ```
-*Note: This endpoint never exposes database connection strings, credentials, or internal error traces.*
+
+_Note: This endpoint never exposes database connection strings, credentials, or internal error traces._
 
 ---
 
 ## 6. Transactional Notification Outbox & Worker Operations
 
 ### Outbox Mechanics
+
 1. **Atomic Enqueueing**:
    - Customer inquiries and booking lifecycle transitions persist notification records atomically in the same database transaction using `enqueueNotification(tx, input)`.
    - Business data commit and notification scheduling succeed or fail together.
@@ -179,6 +188,7 @@ GET /api/v1/health
    - It performs graceful termination on `SIGTERM` / `SIGINT` via `stopOutboxWorker()`.
 
 ### Inspecting Outbox Telemetry (Staff / Admin)
+
 Authorized staff can query outbox statistics:
 
 ```http
@@ -187,6 +197,7 @@ Authorization: Bearer <STAFF_OR_ADMIN_TOKEN>
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -203,6 +214,7 @@ Authorization: Bearer <STAFF_OR_ADMIN_TOKEN>
 ```
 
 ### Performing Safe Operator Redrive
+
 To retry a permanently `FAILED` notification:
 
 ```http
@@ -211,6 +223,7 @@ Authorization: Bearer <STAFF_OR_ADMIN_TOKEN>
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -237,12 +250,14 @@ Authorization: Bearer <STAFF_OR_ADMIN_TOKEN>
 ## 8. Deployment, Backup & Rollback Considerations
 
 ### Deployment Checklist
+
 1. Deploy database migrations using `npx prisma migrate deploy`.
 2. Deploy backend service and verify `/api/v1/health` reports `"status": "ok"` and `"database": "up"`.
 3. Deploy frontend Next.js application.
 4. Verify admin portal accessibility at `/admin`.
 
 ### Rollback Procedure
+
 - **Preferred Strategy (Application-Code Rollback)**:
   - The notification outbox migration `20261011120000_notification_outbox` is purely additive (creates `NotificationStatus` enum and `NotificationOutbox` table).
   - Reverting application code to an earlier revision preserves the additive schema without breaking existing inquiries or bookings.
@@ -252,5 +267,6 @@ Authorization: Bearer <STAFF_OR_ADMIN_TOKEN>
   - **Never execute destructive table/type drop SQL** during routine rollbacks. Schema teardown is reserved strictly for catastrophic, separately approved recovery procedures.
 
 ### Backup Assumptions
+
 - Daily automated PostgreSQL backups with Point-In-Time-Recovery (PITR) enabled.
 - Ensure database write permissions are limited to the designated application database user.
