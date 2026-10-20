@@ -41,7 +41,21 @@ app.use(
 // CORS
 app.use(
   cors({
-    origin: env.corsOrigins,
+    origin: (requestOrigin, callback) => {
+      // Allow requests with no origin (e.g. server-to-server, curl, health checks)
+      if (!requestOrigin) {
+        return callback(null, true);
+      }
+      const normalizedReqOrigin = requestOrigin.trim().replace(/\/+$/, '').toLowerCase();
+      const isAllowed = env.corsOrigins.some(
+        (allowed) => allowed.trim().replace(/\/+$/, '').toLowerCase() === normalizedReqOrigin,
+      );
+      if (isAllowed) {
+        callback(null, true);
+      } else {
+        callback(null, false);
+      }
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Request-Id', 'Idempotency-Key'],

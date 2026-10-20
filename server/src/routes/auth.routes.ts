@@ -80,10 +80,12 @@ router.get(
 router.get(
   '/auth/google/callback',
   requireGoogleOAuth,
-  passport.authenticate('google', {
-    failureRedirect: `${env.frontendUrl}?auth=failed`,
-    session: false,
-  }),
+  (req: Request, res: Response, next: NextFunction) => {
+    passport.authenticate('google', {
+      failureRedirect: `${env.frontendUrl}?auth=failed`,
+      session: false,
+    })(req, res, next);
+  },
   authController.googleCallback,
 );
 

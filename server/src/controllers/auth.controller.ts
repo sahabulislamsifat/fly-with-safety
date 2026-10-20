@@ -6,31 +6,38 @@ import { AppError } from '../utils/errors.js';
 import { env } from '../config/env.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
 
-const cookieSameSite: 'lax' | 'none' = env.nodeEnv === 'production' ? 'none' : 'lax';
-
-const accessCookie = {
-  httpOnly: true,
-  secure: env.nodeEnv === 'production',
-  sameSite: cookieSameSite,
-  maxAge: env.accessTokenCookieMaxAgeMs,
-  path: '/',
-};
-const refreshCookie = {
-  httpOnly: true,
-  secure: env.nodeEnv === 'production',
-  sameSite: cookieSameSite,
-  maxAge: env.refreshTokenExpiresDays * 24 * 60 * 60 * 1000,
-  path: '/api/v1/auth',
-};
+function getCookieOptions() {
+  const isProd = env.nodeEnv === 'production';
+  const sameSite: 'lax' | 'none' = isProd ? 'none' : 'lax';
+  return {
+    access: {
+      httpOnly: true,
+      secure: isProd,
+      sameSite,
+      maxAge: env.accessTokenCookieMaxAgeMs,
+      path: '/',
+    },
+    refresh: {
+      httpOnly: true,
+      secure: isProd,
+      sameSite,
+      maxAge: env.refreshTokenExpiresDays * 24 * 60 * 60 * 1000,
+      path: '/api/v1/auth',
+    },
+  };
+}
 
 function clearAuthCookies(res: Response): void {
-  res.clearCookie('auth_token', { path: '/' });
-  res.clearCookie('refresh_token', { path: '/api/v1/auth' });
+  const isProd = env.nodeEnv === 'production';
+  const sameSite: 'lax' | 'none' = isProd ? 'none' : 'lax';
+  res.clearCookie('auth_token', { path: '/', httpOnly: true, secure: isProd, sameSite });
+  res.clearCookie('refresh_token', { path: '/api/v1/auth', httpOnly: true, secure: isProd, sameSite });
 }
 
 function setAuthCookies(res: Response, session: authService.AuthSession): void {
-  res.cookie('auth_token', session.accessToken, accessCookie);
-  res.cookie('refresh_token', session.refreshToken, refreshCookie);
+  const { access, refresh } = getCookieOptions();
+  res.cookie('auth_token', session.accessToken, access);
+  res.cookie('refresh_token', session.refreshToken, refresh);
 }
 
 function sessionIdFromRequest(req: Request): string | undefined {

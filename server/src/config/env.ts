@@ -7,6 +7,7 @@ const currentDir = typeof __dirname !== 'undefined' ? __dirname : process.cwd();
 // Candidate .env file locations (current working dir, server dir, monorepo root)
 const candidateEnvPaths = [
   path.resolve(process.cwd(), '.env'),
+  path.resolve(process.cwd(), 'server/.env'),
   path.resolve(currentDir, '../../.env'),
   path.resolve(currentDir, '../../../.env'),
 ];
@@ -17,6 +18,17 @@ for (const envPath of candidateEnvPaths) {
   }
 }
 dotenv.config();
+
+export function normalizeUrl(rawUrl: string): string {
+  const trimmed = rawUrl.trim().replace(/\/+$/, '');
+  const parsed = new URL(trimmed);
+  return `${parsed.protocol}//${parsed.host}${parsed.pathname === '/' ? '' : parsed.pathname}`;
+}
+
+export function normalizeOrigin(rawUrl: string): string {
+  const parsed = new URL(rawUrl.trim());
+  return parsed.origin.toLowerCase();
+}
 
 function getEnv(key: string, defaultValue?: string): string {
   const value = process.env[key];
@@ -52,74 +64,219 @@ function getEnvBool(key: string, defaultValue: boolean): boolean {
   return value.toLowerCase() === 'true' || value === '1';
 }
 
-function getEnvUrls(key: string, fallback: string): string[] {
-  return getEnv(key, fallback).split(',').map((url) => url.trim()).filter(Boolean);
+function resolveFrontendUrl(nodeEnv: string): string {
+  const val = process.env.FRONTEND_URL?.trim();
+  if (val) {
+    return normalizeUrl(val);
+  }
+  if (nodeEnv === 'production') {
+    const corsEnv = process.env.CORS_ORIGINS?.split(',')[0]?.trim() || process.env.CORS_ORIGIN?.trim();
+    if (corsEnv) {
+      try {
+        return normalizeUrl(corsEnv);
+      } catch {
+        return '';
+      }
+    }
+    return '';
+  }
+  return 'http://localhost:3000';
 }
 
-const corsOrigins = getEnvUrls('CORS_ORIGINS', getEnv('CORS_ORIGIN', 'https://fly-with-safety.netlify.app'));
+function resolveApiBaseUrl(nodeEnv: string, port: number): string {
+  const val = process.env.API_BASE_URL?.trim();
+  if (val) {
+    return normalizeUrl(val);
+  }
+  if (nodeEnv === 'production') {
+    const callbackEnv = process.env.GOOGLE_CALLBACK_URL?.trim();
+    if (callbackEnv) {
+      try {
+        const u = new URL(callbackEnv);
+        return `${u.protocol}//${u.host}`;
+      } catch {
+        return '';
+      }
+    }
+    return '';
+  }
+  return `http://localhost:${port}`;
+}
 
-export const env = {
-  // Server
-  port: getEnvNumber('PORT', 5000),
-  nodeEnv: getEnv('NODE_ENV', 'development') as 'development' | 'production' | 'test',
+function resolveGoogleCallbackUrl(nodeEnv: string, apiBaseUrl: string): string {
+  const val = process.env.GOOGLE_CALLBACK_URL?.trim();
+  if (val) {
+    return normalizeUrl(val);
+  }
+  if (apiBaseUrl) {
+    return `${normalizeUrl(apiBaseUrl)}/api/v1/auth/google/callback`;
+  }
+  if (nodeEnv !== 'production') {
+    return 'http://localhost:5000/api/v1/auth/google/callback';
+  }
+  return '';
+}
 
-  // CORS
-  corsOrigins,
-  corsOrigin: corsOrigins[0],
+function resolveCorsOrigins(nodeEnv: string, frontendUrl: string): string[] {
+  const raw = process.env.CORS_ORIGINS || process.env.CORS_ORIGIN;
+  if (raw) {
+    return raw
+      .split(',')
+      .map((item) => item.trim())
+      .filter(Boolean)
+      .map((item) => {
+        try {
+          return normalizeOrigin(item);
+        } catch {
+          return item;
+        }
+      });
+  }
+  if (frontendUrl) {
+    try {
+      return [normalizeOrigin(frontendUrl)];
+    } catch {
+      return [];
+    }
+  }
+  if (nodeEnv !== 'production') {
+    return ['http://localhost:3000'];
+  }
+  return [];
+}
 
-  // Database
-  databaseUrl: getEnv('DATABASE_URL', ''),
-  directUrl: getEnv('DIRECT_URL', ''),
+class EnvironmentConfig {
+  private _nodeEnv?: 'development' | 'production' | 'test';
+  private _port?: number;
+  private _frontendUrl?: string;
+  private _apiBaseUrl?: string;
+  private _googleCallbackUrl?: string;
+  private _googleClientId?: string;
+  private _googleClientSecret?: string;
+  private _corsOrigins?: string[];
+  private _jwtSecret?: string;
 
-  // JWT
-  jwtSecret: getEnv('JWT_SECRET', 'dev-secret-change-in-production'),
-  jwtExpiresIn: getEnv('JWT_EXPIRES_IN', '15m'),
-  accessTokenCookieMaxAgeMs: getEnvNumber('ACCESS_TOKEN_COOKIE_MAX_AGE_MS', 15 * 60 * 1000),
-  refreshTokenExpiresDays: getEnvNumber('REFRESH_TOKEN_EXPIRES_DAYS', 30),
+  get nodeEnv(): 'development' | 'production' | 'test' {
+    if (this._nodeEnv !== undefined) return this._nodeEnv;
+    const val = process.env.NODE_ENV?.toLowerCase().trim();
+    if (val === 'production') return 'production';
+    if (val === 'test') return 'test';
+    return 'development';
+  }
+  set nodeEnv(val: 'development' | 'production' | 'test') {
+    this._nodeEnv = val;
+    this._corsOrigins = undefined;
+    this._frontendUrl = undefined;
+    this._apiBaseUrl = undefined;
+    this._googleCallbackUrl = undefined;
+  }
 
-  // Rate limiting
-  rateLimitWindowMs: getEnvNumber('RATE_LIMIT_WINDOW_MS', 900000),
-  rateLimitMax: getEnvNumber('RATE_LIMIT_MAX', 100),
-  authRateLimitWindowMs: getEnvNumber('AUTH_RATE_LIMIT_WINDOW_MS', 900000),
-  authRateLimitMax: getEnvNumber('AUTH_RATE_LIMIT_MAX', 10),
+  get port(): number {
+    return this._port !== undefined ? this._port : getEnvNumber('PORT', 5000);
+  }
+  set port(val: number) {
+    this._port = val;
+  }
 
-  // SMTP
-  smtpHost: getEnv('SMTP_HOST', ''),
-  smtpPort: getEnvNumber('SMTP_PORT', 587),
-  smtpSecure: getEnvBool('SMTP_SECURE', false),
-  smtpUser: getEnv('SMTP_USER', ''),
-  smtpPassword: getEnv('SMTP_PASSWORD', ''),
-  smtpEmailFrom: getEnv('SMTP_EMAIL_FROM', ''),
-  smtpEmailFromName: getEnv('SMTP_EMAIL_FROM_NAME', 'FlyWithsafety'),
-  smtpService: getEnv('SMTP_SERVICE', ''),
-  emailDeliveryEnabled: getEnvBool('EMAIL_DELIVERY_ENABLED', true),
+  get frontendUrl(): string {
+    if (this._frontendUrl !== undefined) return this._frontendUrl;
+    return resolveFrontendUrl(this.nodeEnv);
+  }
+  set frontendUrl(val: string) {
+    this._frontendUrl = val;
+    this._corsOrigins = undefined;
+  }
 
-  // Google OAuth
-  googleClientId: getEnv('GOOGLE_CLIENT_ID', ''),
-  googleClientSecret: getEnv('GOOGLE_CLIENT_SECRET', ''),
-  googleCallbackUrl: getEnv(
-    'GOOGLE_CALLBACK_URL',
-    // 'http://localhost:5000/api/v1/auth/google/callback',
-    'https://fly-with-safety-server.vercel.app/api/v1/auth/google/callback',
-  ),
+  get apiBaseUrl(): string {
+    if (this._apiBaseUrl !== undefined) return this._apiBaseUrl;
+    return resolveApiBaseUrl(this.nodeEnv, this.port);
+  }
+  set apiBaseUrl(val: string) {
+    this._apiBaseUrl = val;
+  }
 
-  // Stripe
-  stripePublishableKey: getEnv('STRIPE_PUBLISHABLE_KEY', ''),
-  stripeSecretKey: getEnv('STRIPE_SECRET_KEY', ''),
-  stripeWebhookSecret: getEnv('STRIPE_WEBHOOK_SECRET', ''),
+  get corsOrigins(): string[] {
+    if (this._corsOrigins !== undefined) return this._corsOrigins;
+    this._corsOrigins = resolveCorsOrigins(this.nodeEnv, this.frontendUrl);
+    return this._corsOrigins;
+  }
+  set corsOrigins(val: string[]) {
+    this._corsOrigins = val;
+  }
 
-  // Admin seed
-  adminEmail: getEnv('ADMIN_EMAIL', ''),
-  adminPassword: getEnv('ADMIN_PASSWORD', ''),
+  get corsOrigin(): string {
+    return this.corsOrigins[0] || '';
+  }
 
-  // Frontend URL
-  frontendUrl: getEnv('FRONTEND_URL', corsOrigins[0]),
+  get googleClientId(): string {
+    return this._googleClientId !== undefined ? this._googleClientId : getEnv('GOOGLE_CLIENT_ID', '');
+  }
+  set googleClientId(val: string) {
+    this._googleClientId = val;
+  }
+
+  get googleClientSecret(): string {
+    return this._googleClientSecret !== undefined ? this._googleClientSecret : getEnv('GOOGLE_CLIENT_SECRET', '');
+  }
+  set googleClientSecret(val: string) {
+    this._googleClientSecret = val;
+  }
+
+  get googleCallbackUrl(): string {
+    if (this._googleCallbackUrl !== undefined) return this._googleCallbackUrl;
+    return resolveGoogleCallbackUrl(this.nodeEnv, this.apiBaseUrl);
+  }
+  set googleCallbackUrl(val: string) {
+    this._googleCallbackUrl = val;
+  }
 
   get isGoogleOAuthConfigured(): boolean {
     return Boolean(this.googleClientId && this.googleClientSecret);
-  },
-};
+  }
 
+  // Database
+  get databaseUrl(): string { return getEnv('DATABASE_URL', ''); }
+  get directUrl(): string { return getEnv('DIRECT_URL', ''); }
+
+  // JWT
+  get jwtSecret(): string {
+    return this._jwtSecret !== undefined ? this._jwtSecret : getEnv('JWT_SECRET', 'dev-secret-change-in-production');
+  }
+  set jwtSecret(val: string) {
+    this._jwtSecret = val;
+  }
+  get jwtExpiresIn(): string { return getEnv('JWT_EXPIRES_IN', '15m'); }
+  get accessTokenCookieMaxAgeMs(): number { return getEnvNumber('ACCESS_TOKEN_COOKIE_MAX_AGE_MS', 15 * 60 * 1000); }
+  get refreshTokenExpiresDays(): number { return getEnvNumber('REFRESH_TOKEN_EXPIRES_DAYS', 30); }
+
+  // Rate limiting
+  get rateLimitWindowMs(): number { return getEnvNumber('RATE_LIMIT_WINDOW_MS', 900000); }
+  get rateLimitMax(): number { return getEnvNumber('RATE_LIMIT_MAX', 100); }
+  get authRateLimitWindowMs(): number { return getEnvNumber('AUTH_RATE_LIMIT_WINDOW_MS', 900000); }
+  get authRateLimitMax(): number { return getEnvNumber('AUTH_RATE_LIMIT_MAX', 10); }
+
+  // SMTP
+  get smtpHost(): string { return getEnv('SMTP_HOST', ''); }
+  get smtpPort(): number { return getEnvNumber('SMTP_PORT', 587); }
+  get smtpSecure(): boolean { return getEnvBool('SMTP_SECURE', false); }
+  get smtpUser(): string { return getEnv('SMTP_USER', ''); }
+  get smtpPassword(): string { return getEnv('SMTP_PASSWORD', ''); }
+  get smtpEmailFrom(): string { return getEnv('SMTP_EMAIL_FROM', ''); }
+  get smtpEmailFromName(): string { return getEnv('SMTP_EMAIL_FROM_NAME', 'FlyWithsafety'); }
+  get smtpService(): string { return getEnv('SMTP_SERVICE', ''); }
+  get emailDeliveryEnabled(): boolean { return getEnvBool('EMAIL_DELIVERY_ENABLED', true); }
+
+  // Stripe
+  get stripePublishableKey(): string { return getEnv('STRIPE_PUBLISHABLE_KEY', ''); }
+  get stripeSecretKey(): string { return getEnv('STRIPE_SECRET_KEY', ''); }
+  get stripeWebhookSecret(): string { return getEnv('STRIPE_WEBHOOK_SECRET', ''); }
+
+  // Admin seed
+  get adminEmail(): string { return getEnv('ADMIN_EMAIL', ''); }
+  get adminPassword(): string { return getEnv('ADMIN_PASSWORD', ''); }
+}
+
+export const env = new EnvironmentConfig();
 export type Env = typeof env;
 
 export function validateEnv(): void {
@@ -131,24 +288,54 @@ export function validateEnv(): void {
   if (env.port < 1 || env.port > 65535) {
     problems.push(`Invalid PORT: ${env.port}`);
   }
+
+  // Frontend URL validation
+  if (!env.frontendUrl) {
+    problems.push('FRONTEND_URL is required');
+  } else {
+    try {
+      const u = new URL(env.frontendUrl);
+      if (env.nodeEnv === 'production' && (u.hostname === 'localhost' || u.hostname === '127.0.0.1')) {
+        problems.push(`FRONTEND_URL cannot be localhost in production: ${env.frontendUrl}`);
+      }
+    } catch {
+      problems.push(`Invalid FRONTEND_URL: ${env.frontendUrl}`);
+    }
+  }
+
+  // API Base URL validation
+  if (!env.apiBaseUrl) {
+    problems.push('API_BASE_URL is required');
+  } else {
+    try {
+      const u = new URL(env.apiBaseUrl);
+      if (env.nodeEnv === 'production' && (u.hostname === 'localhost' || u.hostname === '127.0.0.1')) {
+        problems.push(`API_BASE_URL cannot be localhost in production: ${env.apiBaseUrl}`);
+      }
+    } catch {
+      problems.push(`Invalid API_BASE_URL: ${env.apiBaseUrl}`);
+    }
+  }
+
+  // CORS Origins validation
   if (env.corsOrigins.length === 0) {
     problems.push('At least one CORS origin is required');
   }
   for (const origin of env.corsOrigins) {
     try {
-      new URL(origin);
+      const u = new URL(origin);
+      if (env.nodeEnv === 'production' && (u.hostname === 'localhost' || u.hostname === '127.0.0.1')) {
+        problems.push(`CORS origin cannot be localhost in production: ${origin}`);
+      }
     } catch {
       problems.push(`Invalid CORS origin: ${origin}`);
     }
   }
-  try {
-    new URL(env.frontendUrl);
-  } catch {
-    problems.push(`Invalid FRONTEND_URL: ${env.frontendUrl}`);
-  }
+
   if (env.nodeEnv !== 'test' && !env.databaseUrl) {
     problems.push('DATABASE_URL is required');
   }
+
   if (env.nodeEnv === 'production') {
     if (env.jwtSecret === 'dev-secret-change-in-production' || env.jwtSecret.length < 32) {
       problems.push(
@@ -156,6 +343,7 @@ export function validateEnv(): void {
       );
     }
   }
+
   if (env.refreshTokenExpiresDays < 1 || env.refreshTokenExpiresDays > 90) {
     problems.push('REFRESH_TOKEN_EXPIRES_DAYS must be between 1 and 90');
   }
@@ -171,9 +359,16 @@ export function validateEnv(): void {
       'Partial Google OAuth configuration: both GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET must be provided',
     );
   }
+
+  // Validate Google Callback URL if configured
   if (env.googleCallbackUrl) {
     try {
-      new URL(env.googleCallbackUrl);
+      const u = new URL(env.googleCallbackUrl);
+      if (env.nodeEnv === 'production' && (u.hostname === 'localhost' || u.hostname === '127.0.0.1')) {
+        problems.push(
+          `GOOGLE_CALLBACK_URL cannot be localhost in production: ${env.googleCallbackUrl}`,
+        );
+      }
     } catch {
       problems.push(`Invalid GOOGLE_CALLBACK_URL: ${env.googleCallbackUrl}`);
     }
