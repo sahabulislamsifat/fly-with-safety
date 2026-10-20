@@ -1,4 +1,5 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
+import { prisma } from '../src/lib/prisma.js';
 import request from 'supertest';
 import app from '../src/app.js';
 import { env } from '../src/config/env.js';
@@ -57,6 +58,7 @@ describe('FlyWithsafety Server API Tests', () => {
   // ─── Health check ──────────────────────────────────────────────────────────
   describe('GET /api/v1/health', () => {
     it('returns healthy status with system diagnostics and requestId', async () => {
+      vi.spyOn(prisma, '$queryRaw').mockResolvedValue([{ 1: 1 }] as any);
       const res = await request(app).get('/api/v1/health');
       expect(res.status).toBe(200);
       expect(res.body.success).toBe(true);

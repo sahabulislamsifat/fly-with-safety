@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import app from '../src/app.js';
 import { prisma } from '../src/lib/prisma.js';
 import { env } from '../src/config/env.js';
+import { setOutboxTableAvailable } from '../src/services/outbox.service.js';
 import {
   assertInquiryTransition,
   assertBookingTransition,
@@ -203,6 +204,7 @@ describe('Admin & Staff Operations API Tests', () => {
     });
 
     it('permits STAFF user to inspect outbox telemetry', async () => {
+      setOutboxTableAvailable(true);
       vi.spyOn(prisma.notificationOutbox, 'count').mockResolvedValue(0);
 
       const token = createTestToken('STAFF');

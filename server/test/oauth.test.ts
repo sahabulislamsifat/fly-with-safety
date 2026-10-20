@@ -8,9 +8,21 @@ describe('Google OAuth Route and Strategy Tests', () => {
   const originalClientId = env.googleClientId;
   const originalClientSecret = env.googleClientSecret;
   const originalCallbackUrl = env.googleCallbackUrl;
+  const originalFrontendUrl = env.frontendUrl;
+  const originalApiBaseUrl = env.apiBaseUrl;
+  const originalCorsOrigins = [...env.corsOrigins];
+  const originalNodeEnv = env.nodeEnv;
 
   afterEach(() => {
     // Restore original configuration
+    (env as any).nodeEnv = originalNodeEnv;
+    (env as any).frontendUrl = originalFrontendUrl;
+    (env as any).apiBaseUrl = originalApiBaseUrl;
+    (env as any).corsOrigins = [...originalCorsOrigins];
+    (env as any).googleClientId = originalClientId;
+    (env as any).googleClientSecret = originalClientSecret;
+    (env as any).googleCallbackUrl = originalCallbackUrl;
+
     configureGoogleStrategy({
       clientId: originalClientId,
       clientSecret: originalClientSecret,
@@ -23,8 +35,7 @@ describe('Google OAuth Route and Strategy Tests', () => {
       configureGoogleStrategy({
         clientId: 'mock-google-client-id.apps.googleusercontent.com',
         clientSecret: 'mock-google-client-secret',
-        // callbackUrl: 'http://localhost:5000/api/v1/auth/google/callback',
-        callbackUrl: 'https://fly-with-safety-server.vercel.app/api/v1/auth/google/callback',
+        callbackUrl: 'http://localhost:5000/api/v1/auth/google/callback',
       });
     });
 
@@ -45,8 +56,7 @@ describe('Google OAuth Route and Strategy Tests', () => {
         'mock-google-client-id.apps.googleusercontent.com',
       );
       expect(redirectUrl.searchParams.get('redirect_uri')).toBe(
-        // 'http://localhost:5000/api/v1/auth/google/callback',
-        'https://fly-with-safety-server.vercel.app/api/v1/auth/google/callback',
+        'http://localhost:5000/api/v1/auth/google/callback',
       );
       expect(redirectUrl.searchParams.get('scope')).toBe('profile email');
     });
@@ -71,6 +81,7 @@ describe('Google OAuth Route and Strategy Tests', () => {
       const res = await request(app).get('/api/v1/auth/google/callback?error=access_denied');
       expect(res.status).toBe(302);
       expect(res.headers.location).toContain('auth=failed');
+      expect(res.headers.location).toContain(env.frontendUrl);
     });
   });
 
@@ -117,31 +128,149 @@ describe('Google OAuth Route and Strategy Tests', () => {
     });
   });
 
+  describe('Environment-aware CORS verification', () => {
+    it('accepts configured local frontend origin in development', async () => {
+      (env as any).nodeEnv = 'development';
+      (env as any).corsOrigins = ['http://localhost:3000'];
+
+      const res = await request(app)
+        .get('/api/v1/airports/search')
+        .set('Origin', 'http://localhost:3000');
+
+      expect(res.status).toBe(200);
+      expect(res.headers['access-control-allow-origin']).toBe('http://localhost:3000');
+      expect(res.headers['access-control-allow-credentials']).toBe('true');
+    });
+
+    it('accepts configured production frontend origin in production', async () => {
+      (env as any).nodeEnv = 'production';
+      (env as any).corsOrigins = ['https://fly-with-safety.netlify.app'];
+
+      const res = await request(app)
+        .get('/api/v1/airports/search')
+        .set('Origin', 'https://fly-with-safety.netlify.app');
+
+      expect(res.status).toBe(200);
+      expect(res.headers['access-control-allow-origin']).toBe('https://fly-with-safety.netlify.app');
+      expect(res.headers['access-control-allow-credentials']).toBe('true');
+    });
+
+    it('rejects unexpected origin by omitting Access-Control-Allow-Origin', async () => {
+      (env as any).corsOrigins = ['https://fly-with-safety.netlify.app'];
+
+      const res = await request(app)
+        .get('/api/v1/airports/search')
+        .set('Origin', 'https://unauthorized-attacker.com');
+
+      expect(res.headers['access-control-allow-origin']).toBeUndefined();
+    });
+
+    it('handles CORS preflight OPTIONS request for allowed origin', async () => {
+      (env as any).corsOrigins = ['https://fly-with-safety.netlify.app'];
+
+      const res = await request(app)
+        .options('/api/v1/auth/login')
+        .set('Origin', 'https://fly-with-safety.netlify.app')
+        .set('Access-Control-Request-Method', 'POST');
+
+      expect(res.status).toBe(204);
+      expect(res.headers['access-control-allow-origin']).toBe('https://fly-with-safety.netlify.app');
+      expect(res.headers['access-control-allow-credentials']).toBe('true');
+      expect(res.headers['access-control-allow-methods']).toContain('POST');
+    });
+  });
+
+  describe('OAuth redirect environment separation', () => {
+    it('uses local backend callback URL in development', () => {
+      (env as any).nodeEnv = 'development';
+      (env as any).apiBaseUrl = 'http://localhost:5000';
+      (env as any).googleCallbackUrl = 'http://localhost:5000/api/v1/auth/google/callback';
+
+      expect(env.googleCallbackUrl).toBe('http://localhost:5000/api/v1/auth/google/callback');
+    });
+
+    it('uses production backend callback URL in production', () => {
+      (env as any).nodeEnv = 'production';
+      (env as any).apiBaseUrl = 'https://fly-with-safety-server.vercel.app';
+      (env as any).googleCallbackUrl = 'https://fly-with-safety-server.vercel.app/api/v1/auth/google/callback';
+
+      expect(env.googleCallbackUrl).toBe(
+        'https://fly-with-safety-server.vercel.app/api/v1/auth/google/callback',
+      );
+    });
+
+    it('redirects failure to active development frontend URL', async () => {
+      (env as any).nodeEnv = 'development';
+      (env as any).frontendUrl = 'http://localhost:3000';
+
+      const res = await request(app)
+        .get('/api/v1/auth/google/callback?error=access_denied');
+
+      expect(res.status).toBe(302);
+      expect(res.headers.location).toBe('http://localhost:3000?auth=failed');
+    });
+
+    it('redirects failure to active production frontend URL', async () => {
+      (env as any).nodeEnv = 'production';
+      (env as any).frontendUrl = 'https://fly-with-safety.netlify.app';
+
+      const res = await request(app)
+        .get('/api/v1/auth/google/callback?error=access_denied');
+
+      expect(res.status).toBe(302);
+      expect(res.headers.location).toBe('https://fly-with-safety.netlify.app?auth=failed');
+    });
+  });
+
   describe('Environment configuration and validation', () => {
     it('detects partial OAuth credentials in validateEnv', () => {
-      const originalId = env.googleClientId;
-      const originalSecret = env.googleClientSecret;
-
-      // Only client ID
       (env as any).googleClientId = 'some-client-id';
       (env as any).googleClientSecret = '';
       expect(() => validateEnv()).toThrow('Partial Google OAuth configuration');
 
-      // Only client secret
       (env as any).googleClientId = '';
       (env as any).googleClientSecret = 'some-secret';
       expect(() => validateEnv()).toThrow('Partial Google OAuth configuration');
-
-      // Restore
-      (env as any).googleClientId = originalId;
-      (env as any).googleClientSecret = originalSecret;
     });
 
     it('detects invalid GOOGLE_CALLBACK_URL in validateEnv', () => {
-      const originalUrl = env.googleCallbackUrl;
       (env as any).googleCallbackUrl = 'not-a-valid-url';
       expect(() => validateEnv()).toThrow('Invalid GOOGLE_CALLBACK_URL');
-      (env as any).googleCallbackUrl = originalUrl;
+    });
+
+    it('rejects missing or localhost URLs in production', () => {
+      (env as any).nodeEnv = 'production';
+      (env as any).frontendUrl = 'http://localhost:3000';
+      (env as any).apiBaseUrl = 'https://fly-with-safety-server.vercel.app';
+      (env as any).corsOrigins = ['https://fly-with-safety.netlify.app'];
+      (env as any).jwtSecret = 'a-very-long-secret-key-that-is-at-least-32-chars-long';
+
+      expect(() => validateEnv()).toThrow('FRONTEND_URL cannot be localhost in production');
+
+      (env as any).frontendUrl = 'https://fly-with-safety.netlify.app';
+      (env as any).apiBaseUrl = 'http://localhost:5000';
+      expect(() => validateEnv()).toThrow('API_BASE_URL cannot be localhost in production');
+
+      (env as any).apiBaseUrl = 'https://fly-with-safety-server.vercel.app';
+      (env as any).corsOrigins = ['http://localhost:3000'];
+      expect(() => validateEnv()).toThrow('CORS origin cannot be localhost in production');
+
+      (env as any).corsOrigins = ['https://fly-with-safety.netlify.app'];
+      (env as any).googleCallbackUrl = 'http://localhost:5000/api/v1/auth/google/callback';
+      expect(() => validateEnv()).toThrow('GOOGLE_CALLBACK_URL cannot be localhost in production');
+    });
+
+    it('passes validation when production configuration is fully valid', () => {
+      (env as any).nodeEnv = 'production';
+      (env as any).frontendUrl = 'https://fly-with-safety.netlify.app';
+      (env as any).apiBaseUrl = 'https://fly-with-safety-server.vercel.app';
+      (env as any).corsOrigins = ['https://fly-with-safety.netlify.app'];
+      (env as any).googleClientId = 'mock-id.apps.googleusercontent.com';
+      (env as any).googleClientSecret = 'mock-secret';
+      (env as any).googleCallbackUrl = 'https://fly-with-safety-server.vercel.app/api/v1/auth/google/callback';
+      (env as any).jwtSecret = 'a-very-long-secret-key-that-is-at-least-32-chars-long';
+
+      expect(() => validateEnv()).not.toThrow();
     });
   });
 });
