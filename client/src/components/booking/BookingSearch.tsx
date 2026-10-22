@@ -278,8 +278,8 @@ export function BookingSearch({
       className={
         className ||
         (isOverlapping
-          ? 'relative w-full max-w-[1380px] mx-auto px-4 sm:px-6 -mt-24 sm:-mt-28 lg:-mt-32 z-30'
-          : 'relative w-full max-w-[1380px] mx-auto px-4 sm:px-6 my-8 z-30')
+          ? 'relative w-full max-w-365 mx-auto px-4 sm:px-6 -mt-24 sm:-mt-28 lg:-mt-32 z-30'
+          : 'relative w-full max-w-365 mx-auto px-4 sm:px-6 my-8 z-30')
       }
       role="search"
       aria-label="Travel booking search"
@@ -334,7 +334,7 @@ export function BookingSearch({
               {tripType !== 'multiCity' ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-3 items-stretch relative">
                   {/* Field A: FROM (col-span-3) */}
-                  <div className="lg:col-span-3 relative">
+                  <div className="lg:col-span-3 relative lg:mr-5">
                     <AirportSelectorPopover
                       label="FROM"
                       code={fromAirport}
@@ -344,7 +344,7 @@ export function BookingSearch({
                   </div>
 
                   {/* Route Swap Button - rounded-xs */}
-                  <div className="relative flex items-center justify-center -my-2 md:absolute md:left-1/2 md:top-7 md:-translate-x-1/2 md:my-0 lg:left-1/4 z-20">
+                  <div className="relative flex items-center justify-center -my-2 px-3 md:absolute md:left-1/2 md:top-7 md:-translate-x-1/2 md:my-0 lg:left-1/4 z-20">
                     <button
                       type="button"
                       onClick={handleSwapAirports}
@@ -357,7 +357,7 @@ export function BookingSearch({
                   </div>
 
                   {/* Field B: TO (col-span-3) */}
-                  <div className="lg:col-span-3 relative">
+                  <div className="lg:col-span-3 relative lg:ml-5">
                     <AirportSelectorPopover
                       label="TO"
                       code={toAirport}
@@ -401,7 +401,7 @@ export function BookingSearch({
                       </div>
 
                       {/* Vertical Divider */}
-                      <div className="h-8 w-[1px] bg-neutral-200 shrink-0" />
+                      <div className="h-8 w-px bg-neutral-200 shrink-0" />
 
                       {/* RETURN */}
                       <div className="relative flex-1">
@@ -819,7 +819,7 @@ export function BookingSearch({
             <button
               type="submit"
               disabled={isLoading}
-              className="h-[56px] sm:h-[62px] px-10 sm:px-14 rounded-xs bg-[#8B1D24] hover:bg-[#74181E] text-white font-black text-base sm:text-lg shadow-[0_12px_28px_rgba(139,29,36,0.38)] hover:shadow-[0_16px_36px_rgba(139,29,36,0.48)] flex items-center justify-center gap-2.5 transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer border-2 border-white select-none whitespace-nowrap"
+              className="h-14 sm:h-15.5 px-10 sm:px-14 rounded-xs bg-[#8B1D24] hover:bg-[#74181E] text-white font-black text-base sm:text-lg shadow-[0_12px_28px_rgba(139,29,36,0.38)] hover:shadow-[0_16px_36px_rgba(139,29,36,0.48)] flex items-center justify-center gap-2.5 transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer border-2 border-white select-none whitespace-nowrap"
             >
               {isLoading ? (
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-xs animate-spin" />

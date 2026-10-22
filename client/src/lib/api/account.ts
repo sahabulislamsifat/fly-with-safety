@@ -26,8 +26,10 @@ export interface AccountBooking {
   createdAt: string;
   updatedAt: string;
 }
+export type BookingStatus = AccountBooking['status'];
 export interface DashboardData {
   counts: { inquiries: number; pendingInquiries: number; bookings: number; confirmedBookings: number };
+  memberSince: string | null;
   recent: AccountInquiry[];
 }
 
@@ -41,6 +43,6 @@ function query(params: Record<string, string | number | undefined>): string {
 export function getDashboard(): Promise<DashboardData> { return get('/account/dashboard'); }
 export function getInquiries(params: { page?: number; limit?: number; type?: InquiryType; status?: InquiryStatus } = {}): Promise<{ inquiries: AccountInquiry[]; pagination: Pagination }> { return get(`/account/inquiries${query(params)}`); }
 export function getInquiry(type: InquiryType, reference: string): Promise<AccountInquiry> { return get(`/account/inquiries/${type}/${encodeURIComponent(reference)}`); }
-export function getBookings(params: { page?: number; limit?: number } = {}): Promise<{ bookings: AccountBooking[]; pagination: Pagination }> { return get(`/account/bookings${query(params)}`); }
+export function getBookings(params: { page?: number; limit?: number; status?: BookingStatus } = {}): Promise<{ bookings: AccountBooking[]; pagination: Pagination }> { return get(`/account/bookings${query(params)}`); }
 export function getBooking(reference: string): Promise<{ booking: AccountBooking & { passengers: Array<Record<string, unknown>>; statusHistory: Array<Record<string, unknown>> } }> { return get(`/account/bookings/${encodeURIComponent(reference)}`); }
 export function updateProfile(input: { name: string }): Promise<{ user: { id: string; email: string; name: string | null; role: string; emailVerified: boolean } }> { return patch('/account/profile', input); }

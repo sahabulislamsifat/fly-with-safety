@@ -3,7 +3,7 @@ import * as accountController from '../controllers/account.controller.js';
 import { requireAuth } from '../middleware/auth.middleware.js';
 import { validate, validateParams, validateQuery } from '../middleware/validation.middleware.js';
 import {
-  accountQuerySchema,
+  bookingListQuerySchema,
   bookingParamsSchema,
   inquiryListQuerySchema,
   inquiryParamsSchema,
@@ -23,7 +23,7 @@ router.get(
   validateParams(inquiryParamsSchema),
   accountController.getInquiry,
 );
-router.get('/account/bookings', validateQuery(accountQuerySchema), accountController.listBookings);
+router.get('/account/bookings', validateQuery(bookingListQuerySchema), accountController.listBookings);
 router.get(
   '/account/bookings/:reference',
   validateParams(bookingParamsSchema),

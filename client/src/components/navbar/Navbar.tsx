@@ -97,7 +97,7 @@ export function Navbar() {
           </div>
 
           {/* Center: Primary Navigation */}
-          <div className="hidden md:flex items-center gap-1 lg:gap-3">
+          <div className="hidden lg:flex items-center gap-1 lg:gap-3">
             {primaryNavItems.map((item) => {
               const active = isItemActive(item);
               return (
@@ -178,7 +178,7 @@ export function Navbar() {
           </div>
 
           {/* Right: Support and Sign In Actions */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-3">
             {/* Support button - rounded-xs */}
             <Link
               href="/contact"
@@ -210,7 +210,7 @@ export function Navbar() {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex md:hidden items-center gap-2">
+          <div className="flex lg:hidden items-center gap-2">
             <Link
               href="/contact"
               className="w-9 h-9 rounded-xs bg-neutral-100 text-neutral-700 flex items-center justify-center"

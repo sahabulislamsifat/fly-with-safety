@@ -56,7 +56,7 @@ function inquiryDetail(type: InquiryType, inquiry: Record<string, unknown> & { i
 }
 
 export async function getDashboard(userId: string) {
-  const [flightCount, hotelCount, packageCount, visaCount, pendingFlights, pendingHotels, pendingPackages, pendingVisas, bookingCount, confirmedBookingCount, recentFlights, recentHotels, recentPackages, recentVisas] = await Promise.all([
+  const [flightCount, hotelCount, packageCount, visaCount, pendingFlights, pendingHotels, pendingPackages, pendingVisas, bookingCount, confirmedBookingCount, recentFlights, recentHotels, recentPackages, recentVisas, user] = await Promise.all([
     prisma.flightInquiry.count({ where: { userId } }),
     prisma.hotelInquiry.count({ where: { userId } }),
     prisma.packageInquiry.count({ where: { userId } }),
@@ -71,6 +71,7 @@ export async function getDashboard(userId: string) {
     prisma.hotelInquiry.findMany({ where: { userId }, orderBy: { createdAt: 'desc' }, take: 4 }),
     prisma.packageInquiry.findMany({ where: { userId }, orderBy: { createdAt: 'desc' }, take: 4 }),
     prisma.visaInquiry.findMany({ where: { userId }, orderBy: { createdAt: 'desc' }, take: 4 }),
+    prisma.user.findUnique({ where: { id: userId }, select: { createdAt: true } }),
   ]);
 
   const recent = [
@@ -87,6 +88,7 @@ export async function getDashboard(userId: string) {
       bookings: bookingCount,
       confirmedBookings: confirmedBookingCount,
     },
+    memberSince: user?.createdAt ?? null,
     recent,
   };
 }
@@ -120,8 +122,8 @@ export async function getInquiry(userId: string, type: InquiryType, reference: s
   return inquiryDetail(type, inquiry);
 }
 
-export async function listBookings(userId: string, input: { page: number; limit: number }) {
-  const where = { userId };
+export async function listBookings(userId: string, input: { page: number; limit: number; status?: string }) {
+  const where = { userId, ...(input.status ? { status: input.status as never } : {}) };
   const [total, bookings] = await Promise.all([
     prisma.booking.count({ where }),
     prisma.booking.findMany({ where, orderBy: { createdAt: 'desc' }, skip: (input.page - 1) * input.limit, take: input.limit, select: { referenceNumber: true, bookingType: true, bookingModel: true, status: true, totalPrice: true, currency: true, bookingDetails: true, createdAt: true, updatedAt: true } }),

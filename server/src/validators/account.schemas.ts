@@ -10,6 +10,10 @@ export const inquiryListQuerySchema = accountQuerySchema.extend({
   status: z.enum(['PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED']).optional(),
 });
 
+export const bookingListQuerySchema = accountQuerySchema.extend({
+  status: z.enum(['PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED']).optional(),
+});
+
 export const inquiryParamsSchema = z.object({
   type: z.enum(['flight', 'hotel', 'package', 'visa']),
   reference: z.string().min(3).max(100),
