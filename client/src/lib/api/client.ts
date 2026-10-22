@@ -99,11 +99,13 @@ export class ApiError extends Error {
 export async function apiRequest<T>(path: string, options: RequestInit = {}): Promise<T> {
   const apiBaseUrl = await resolveApiBaseUrl();
   const url = `${apiBaseUrl}${path}`;
+  const headers = new Headers(options.headers);
+  if (!headers.has('Content-Type')) headers.set('Content-Type', 'application/json');
   let response: Response;
   try {
     response = await fetch(url, {
       ...options,
-      headers: { 'Content-Type': 'application/json', ...options.headers },
+      headers,
       credentials: 'include',
     });
   } catch {
@@ -115,6 +117,9 @@ export async function apiRequest<T>(path: string, options: RequestInit = {}): Pr
     data = await response.json();
   } catch {
     throw new ApiError('PARSE_ERROR', 'Invalid server response', response.status);
+  }
+  if (!response.ok && data.success) {
+    throw new ApiError('HTTP_ERROR', 'The server could not complete the request. Please try again.', response.status);
   }
   if (!data.success) {
     throw new ApiError(

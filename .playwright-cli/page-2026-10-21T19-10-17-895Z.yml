@@ -1,0 +1,131 @@
+- generic [active] [ref=f28e1]:
+  - banner [ref=f28e2]:
+    - navigation "Main navigation" [ref=f28e3]:
+      - generic [ref=f28e4]:
+        - link "FlyWithSafety Home" [ref=f28e6] [cursor=pointer]:
+          - /url: /
+          - generic [ref=f28e10]: FlyWithSafety
+        - generic [ref=f28e11]:
+          - link "Flight" [ref=f28e12] [cursor=pointer]:
+            - /url: /
+          - link "Visa" [ref=f28e17] [cursor=pointer]:
+            - /url: /visa-info
+          - link "Hotel" [ref=f28e22] [cursor=pointer]:
+            - /url: /hotels
+          - link "Holiday" [ref=f28e27] [cursor=pointer]:
+            - /url: /packages
+          - button "More navigation options" [ref=f28e35] [cursor=pointer]:
+            - generic [ref=f28e41]: More
+        - link "24/7 Support Desk" [ref=f28e45] [cursor=pointer]:
+          - /url: /contact
+  - main [ref=f28e48]:
+    - generic [ref=f28e49]:
+      - generic [ref=f28e52]:
+        - generic [ref=f28e53]:
+          - generic [ref=f28e54]:
+            - generic [ref=f28e55]: Flight Results
+            - generic [ref=f28e56]: ·
+            - generic [ref=f28e57]: One Way
+            - generic [ref=f28e58]: ·
+            - generic [ref=f28e59]: 1 Passenger(s)
+            - generic [ref=f28e60]: ·
+            - generic [ref=f28e61]: economy
+          - heading "DAC CXB" [level=1] [ref=f28e62]:
+            - generic [ref=f28e63]: DAC
+            - generic [ref=f28e66]: CXB
+          - paragraph [ref=f28e67]:
+            - text: "Departure:"
+            - strong [ref=f28e68]: 2027-06-20
+        - button "Modify Search" [ref=f28e70]
+      - generic [ref=f28e74]:
+        - generic [ref=f28e75]:
+          - generic [ref=f28e79]:
+            - strong [ref=f28e80]: "Demonstration Inventory:"
+            - text: Current offers are generated via FlyWithsafety's provider abstraction engine. Live reservations are confirmed by our ticketing desk upon inquiry.
+          - generic [ref=f28e81]: DEMO MODE
+        - generic [ref=f28e82]:
+          - complementary [ref=f28e83]:
+            - generic [ref=f28e84]:
+              - generic [ref=f28e85]:
+                - heading "Filters" [level=3] [ref=f28e86]
+                - button "Reset All" [ref=f28e89] [cursor=pointer]
+              - generic [ref=f28e90]:
+                - heading "Stops" [level=4] [ref=f28e91]
+                - generic [ref=f28e92]:
+                  - generic [ref=f28e93] [cursor=pointer]:
+                    - checkbox "Direct / Non-stop" [ref=f28e94]
+                    - generic [ref=f28e95]: Direct / Non-stop
+                  - generic [ref=f28e96] [cursor=pointer]:
+                    - checkbox "1 Stop" [ref=f28e97]
+                    - generic [ref=f28e98]: 1 Stop
+                  - generic [ref=f28e99] [cursor=pointer]:
+                    - checkbox "2+ Stops" [ref=f28e100]
+                    - generic [ref=f28e101]: 2+ Stops
+          - main [ref=f28e102]:
+            - generic [ref=f28e103]:
+              - button "Recommended Best balance of price & speed" [ref=f28e104] [cursor=pointer]:
+                - generic [ref=f28e105]: Recommended
+                - generic [ref=f28e106]: Best balance of price & speed
+              - button "Cheapest Lowest price" [ref=f28e107] [cursor=pointer]:
+                - generic [ref=f28e108]: Cheapest
+                - generic [ref=f28e109]: Lowest price
+              - button "Fastest Quickest route" [ref=f28e110] [cursor=pointer]:
+                - generic [ref=f28e111]: Fastest
+                - generic [ref=f28e112]: Quickest route
+  - contentinfo [ref=f28e113]:
+    - generic [ref=f28e114]:
+      - generic [ref=f28e115]:
+        - generic [ref=f28e116]:
+          - link "FlyWithSafety Home" [ref=f28e117] [cursor=pointer]:
+            - /url: /
+            - generic [ref=f28e120]: FlyWithSafety
+          - paragraph [ref=f28e121]: Thoughtful travel planning, easier bookings, and support that stays with you.
+        - navigation "Explore" [ref=f28e122]:
+          - heading "Explore" [level=3] [ref=f28e123]
+          - list [ref=f28e124]:
+            - listitem [ref=f28e125]:
+              - link "Home" [ref=f28e126] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=f28e127]:
+              - link "Flights" [ref=f28e128] [cursor=pointer]:
+                - /url: /flights
+            - listitem [ref=f28e129]:
+              - link "Hotels" [ref=f28e130] [cursor=pointer]:
+                - /url: /hotels
+            - listitem [ref=f28e131]:
+              - link "Packages" [ref=f28e132] [cursor=pointer]:
+                - /url: /packages
+            - listitem [ref=f28e133]:
+              - link "Visa Info" [ref=f28e134] [cursor=pointer]:
+                - /url: /visa-info
+            - listitem [ref=f28e135]:
+              - link "Track Booking" [ref=f28e136] [cursor=pointer]:
+                - /url: /track-booking
+        - navigation "Legal" [ref=f28e137]:
+          - heading "Legal" [level=3] [ref=f28e138]
+          - list [ref=f28e139]:
+            - listitem [ref=f28e140]:
+              - link "Contact Us" [ref=f28e141] [cursor=pointer]:
+                - /url: /contact
+            - listitem [ref=f28e142]:
+              - link "Privacy Policy" [ref=f28e143] [cursor=pointer]:
+                - /url: /privacy
+            - listitem [ref=f28e144]:
+              - link "Terms of Use" [ref=f28e145] [cursor=pointer]:
+                - /url: /terms
+        - generic [ref=f28e146]:
+          - heading "Payment Options" [level=3] [ref=f28e147]
+          - generic [ref=f28e148]:
+            - img "VISA" [ref=f28e149]
+            - img "Mastercard" [ref=f28e153]
+            - img "bKash" [ref=f28e157]
+      - generic [ref=f28e162]:
+        - paragraph [ref=f28e163]: © 2026 FlyWithSafety. All rights reserved.
+        - navigation "Social media" [ref=f28e164]:
+          - link "Facebook" [ref=f28e165] [cursor=pointer]:
+            - /url: https://facebook.com
+          - link "Instagram" [ref=f28e172] [cursor=pointer]:
+            - /url: https://instagram.com
+          - link "WhatsApp" [ref=f28e176] [cursor=pointer]:
+            - /url: https://wa.me
+  - button "Open Next.js Dev Tools" [ref=f28e184] [cursor=pointer]

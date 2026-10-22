@@ -1,0 +1,54 @@
+{
+  "checks": [
+    {
+      "name": "mobile navigation opens",
+      "passed": true
+    },
+    {
+      "name": "mobile navigation Escape closes",
+      "passed": true
+    },
+    {
+      "name": "desktop More opens",
+      "passed": true
+    },
+    {
+      "name": "sign-in modal opens",
+      "passed": true
+    },
+    {
+      "name": "sign-in Escape closes",
+      "passed": true
+    },
+    {
+      "name": "empty contact form blocked",
+      "passed": true
+    },
+    {
+      "name": "server error does not show success",
+      "passed": true
+    },
+    {
+      "name": "contact displays response reference",
+      "passed": true
+    },
+    {
+      "name": "contact retry preserves idempotency key",
+      "passed": true
+    },
+    {
+      "name": "inquiry displays response reference",
+      "passed": true
+    },
+    {
+      "name": "modify search preserves children and infants",
+      "passed": true
+    },
+    {
+      "name": "modify search adjusts round-trip return",
+      "passed": true
+    }
+  ],
+  "failed": [],
+  "note": "Success submissions use explicit intercepted fixtures; no persistence or email is verified."
+}

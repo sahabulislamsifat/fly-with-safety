@@ -1,0 +1,578 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "headings": [
+      "FlyWithSafe — Travel Made Reassuring"
+    ],
+    "widths": [
+      {
+        "width": 320,
+        "scrollWidth": 320
+      },
+      {
+        "width": 375,
+        "scrollWidth": 375
+      },
+      {
+        "width": 430,
+        "scrollWidth": 430
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440
+      }
+    ],
+    "errors": []
+  },
+  {
+    "path": "/flights",
+    "status": 200,
+    "headings": [
+      "Book flights with confidence"
+    ],
+    "widths": [
+      {
+        "width": 320,
+        "scrollWidth": 320
+      },
+      {
+        "width": 375,
+        "scrollWidth": 375
+      },
+      {
+        "width": 430,
+        "scrollWidth": 430
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440
+      }
+    ],
+    "errors": []
+  },
+  {
+    "path": "/hotels",
+    "status": 200,
+    "headings": [
+      "Find your perfect stay"
+    ],
+    "widths": [
+      {
+        "width": 320,
+        "scrollWidth": 320
+      },
+      {
+        "width": 375,
+        "scrollWidth": 375
+      },
+      {
+        "width": 430,
+        "scrollWidth": 430
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440
+      }
+    ],
+    "errors": []
+  },
+  {
+    "path": "/packages",
+    "status": 200,
+    "headings": [
+      "Curated travel packages"
+    ],
+    "widths": [
+      {
+        "width": 320,
+        "scrollWidth": 320
+      },
+      {
+        "width": 375,
+        "scrollWidth": 375
+      },
+      {
+        "width": 430,
+        "scrollWidth": 430
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440
+      }
+    ],
+    "errors": []
+  },
+  {
+    "path": "/visa-info",
+    "status": 200,
+    "headings": [
+      "Visa information and assistance"
+    ],
+    "widths": [
+      {
+        "width": 320,
+        "scrollWidth": 320
+      },
+      {
+        "width": 375,
+        "scrollWidth": 375
+      },
+      {
+        "width": 430,
+        "scrollWidth": 430
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440
+      }
+    ],
+    "errors": []
+  },
+  {
+    "path": "/contact",
+    "status": 200,
+    "headings": [
+      "We’re here to help"
+    ],
+    "widths": [
+      {
+        "width": 320,
+        "scrollWidth": 320
+      },
+      {
+        "width": 375,
+        "scrollWidth": 375
+      },
+      {
+        "width": 430,
+        "scrollWidth": 430
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440
+      }
+    ],
+    "errors": []
+  },
+  {
+    "path": "/privacy",
+    "status": 200,
+    "headings": [
+      "Privacy policy"
+    ],
+    "widths": [
+      {
+        "width": 320,
+        "scrollWidth": 320
+      },
+      {
+        "width": 375,
+        "scrollWidth": 375
+      },
+      {
+        "width": 430,
+        "scrollWidth": 430
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440
+      }
+    ],
+    "errors": []
+  },
+  {
+    "path": "/terms",
+    "status": 200,
+    "headings": [
+      "Terms of use"
+    ],
+    "widths": [
+      {
+        "width": 320,
+        "scrollWidth": 320
+      },
+      {
+        "width": 375,
+        "scrollWidth": 375
+      },
+      {
+        "width": 430,
+        "scrollWidth": 430
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440
+      }
+    ],
+    "errors": []
+  },
+  {
+    "path": "/register",
+    "status": 200,
+    "headings": [
+      "Create your account"
+    ],
+    "widths": [
+      {
+        "width": 320,
+        "scrollWidth": 320
+      },
+      {
+        "width": 375,
+        "scrollWidth": 375
+      },
+      {
+        "width": 430,
+        "scrollWidth": 430
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440
+      }
+    ],
+    "errors": []
+  },
+  {
+    "path": "/verify-email",
+    "status": 200,
+    "headings": [
+      "Verify your email"
+    ],
+    "widths": [
+      {
+        "width": 320,
+        "scrollWidth": 320
+      },
+      {
+        "width": 375,
+        "scrollWidth": 375
+      },
+      {
+        "width": 430,
+        "scrollWidth": 430
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440
+      }
+    ],
+    "errors": []
+  },
+  {
+    "path": "/forgot-password",
+    "status": 200,
+    "headings": [
+      "Reset your password"
+    ],
+    "widths": [
+      {
+        "width": 320,
+        "scrollWidth": 320
+      },
+      {
+        "width": 375,
+        "scrollWidth": 375
+      },
+      {
+        "width": 430,
+        "scrollWidth": 430
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440
+      }
+    ],
+    "errors": []
+  },
+  {
+    "path": "/reset-password",
+    "status": 200,
+    "headings": [
+      "Choose a new password"
+    ],
+    "widths": [
+      {
+        "width": 320,
+        "scrollWidth": 320
+      },
+      {
+        "width": 375,
+        "scrollWidth": 375
+      },
+      {
+        "width": 430,
+        "scrollWidth": 430
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440
+      }
+    ],
+    "errors": []
+  },
+  {
+    "path": "/account",
+    "status": 200,
+    "headings": [],
+    "widths": [
+      {
+        "width": 320,
+        "scrollWidth": 320
+      },
+      {
+        "width": 375,
+        "scrollWidth": 375
+      },
+      {
+        "width": 430,
+        "scrollWidth": 430
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440
+      }
+    ],
+    "errors": []
+  },
+  {
+    "path": "/admin",
+    "status": 200,
+    "headings": [
+      "Staff Authentication Required"
+    ],
+    "widths": [
+      {
+        "width": 320,
+        "scrollWidth": 320
+      },
+      {
+        "width": 375,
+        "scrollWidth": 375
+      },
+      {
+        "width": 430,
+        "scrollWidth": 430
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440
+      }
+    ],
+    "errors": []
+  },
+  {
+    "path": "/track-booking",
+    "status": 200,
+    "headings": [
+      "Track Booking & Inquiry Status"
+    ],
+    "widths": [
+      {
+        "width": 320,
+        "scrollWidth": 320
+      },
+      {
+        "width": 375,
+        "scrollWidth": 375
+      },
+      {
+        "width": 430,
+        "scrollWidth": 430
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440
+      }
+    ],
+    "errors": []
+  },
+  {
+    "path": "/flights/results?from=DAC&to=CXB&depart=2027-06-20&tripType=oneWay",
+    "status": 200,
+    "headings": [
+      "DACCXB"
+    ],
+    "widths": [
+      {
+        "width": 320,
+        "scrollWidth": 320
+      },
+      {
+        "width": 375,
+        "scrollWidth": 375
+      },
+      {
+        "width": 430,
+        "scrollWidth": 430
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440
+      }
+    ],
+    "errors": []
+  },
+  {
+    "path": "/hotels/results?destination=Bangkok&checkIn=2027-06-20&checkOut=2027-06-23",
+    "status": 200,
+    "headings": [
+      "Hotels in Bangkok"
+    ],
+    "widths": [
+      {
+        "width": 320,
+        "scrollWidth": 320
+      },
+      {
+        "width": 375,
+        "scrollWidth": 375
+      },
+      {
+        "width": 430,
+        "scrollWidth": 430
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440
+      }
+    ],
+    "errors": []
+  }
+]

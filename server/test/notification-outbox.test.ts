@@ -8,6 +8,7 @@ import {
   startOutboxWorker,
   stopOutboxWorker,
   setOutboxTableAvailable,
+  isOutboxTableAvailable,
 } from '../src/services/outbox.service.js';
 import * as notificationService from '../src/services/notification.service.js';
 
@@ -19,6 +20,27 @@ describe('Phase 7: Transactional Notification Resilience & Outbox', () => {
 
   afterEach(() => {
     stopOutboxWorker();
+    vi.useRealTimers();
+  });
+
+  it('does not cache a temporary connection failure as a missing outbox table', async () => {
+    setOutboxTableAvailable(null);
+    const error = Object.assign(new Error('Connection unavailable'), { code: 'P1001' });
+    vi.spyOn(prisma, '$queryRawUnsafe').mockRejectedValueOnce(error).mockResolvedValueOnce([]);
+    await expect(isOutboxTableAvailable()).rejects.toBe(error);
+    await expect(isOutboxTableAvailable()).resolves.toBe(true);
+  });
+
+  it('rechecks a missing table after the cache expires', async () => {
+    vi.useFakeTimers();
+    setOutboxTableAvailable(null);
+    const missing = { code: 'P2010', meta: { code: '42P01' } };
+    const probe = vi.spyOn(prisma, '$queryRawUnsafe').mockRejectedValueOnce(missing).mockResolvedValueOnce([]);
+    await expect(isOutboxTableAvailable()).resolves.toBe(false);
+    await expect(isOutboxTableAvailable()).resolves.toBe(false);
+    expect(probe).toHaveBeenCalledTimes(1);
+    vi.advanceTimersByTime(30_001);
+    await expect(isOutboxTableAvailable()).resolves.toBe(true);
   });
 
   // ─── 1. Enqueue & Atomic Persistence ─────────────────────────────────────────

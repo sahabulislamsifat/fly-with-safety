@@ -25,30 +25,36 @@ export interface OutboxStats {
 }
 
 let outboxTableAvailableState: boolean | null = null;
+let missingTableCacheExpiresAt = 0;
 
 /**
  * Checks whether the NotificationOutbox table exists in the database.
  * Results are cached in memory to avoid repeated queries.
  */
 export async function isOutboxTableAvailable(): Promise<boolean> {
-  if (outboxTableAvailableState !== null) {
+  if (outboxTableAvailableState === true || (outboxTableAvailableState === false && Date.now() < missingTableCacheExpiresAt)) {
     return outboxTableAvailableState;
   }
   try {
     if (!prisma.notificationOutbox) {
-      outboxTableAvailableState = false;
+      setOutboxTableAvailable(false);
       return false;
     }
     await prisma.$queryRawUnsafe('SELECT 1 FROM "NotificationOutbox" LIMIT 0');
     outboxTableAvailableState = true;
-  } catch {
-    outboxTableAvailableState = false;
+  } catch (error: unknown) {
+    const code = error && typeof error === 'object' && 'code' in error ? error.code : undefined;
+    const meta = error && typeof error === 'object' && 'meta' in error ? error.meta : undefined;
+    const sqlCode = meta && typeof meta === 'object' && 'code' in meta ? meta.code : undefined;
+    if (code !== '42P01' && sqlCode !== '42P01') throw error;
+    setOutboxTableAvailable(false);
   }
-  return outboxTableAvailableState;
+  return outboxTableAvailableState === true;
 }
 
 export function setOutboxTableAvailable(available: boolean | null): void {
   outboxTableAvailableState = available;
+  missingTableCacheExpiresAt = available === false ? Date.now() + 30_000 : 0;
 }
 
 /**

@@ -234,8 +234,10 @@ export function Navbar() {
         {/* Mobile menu dropdown */}
         <div
           id="mobile-menu"
+          inert={!isMobileMenuOpen}
+          aria-hidden={!isMobileMenuOpen}
           className={`md:hidden overflow-hidden transition-all duration-200 ease-in-out ${
-            isMobileMenuOpen ? 'max-h-125 opacity-100 pb-5' : 'max-h-0 opacity-0'
+            isMobileMenuOpen ? 'max-h-[calc(100dvh-70px)] overflow-y-auto opacity-100 pb-5' : 'max-h-0 opacity-0'
           }`}
           role="navigation"
           aria-label="Mobile navigation"

@@ -28,6 +28,7 @@ export function HomePageClient() {
 
   return (
     <div className="relative">
+      <h1 className="sr-only">FlyWithSafe — Travel Made Reassuring</h1>
       {/* 1. Hero Background Carousel + Floating Destination Card + Overlapping Booking Form + Trending Routes */}
       <Hero onSelectRoute={handleSelectRoute}>
         <BookingSearch externalRoute={syncedRoute} />

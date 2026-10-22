@@ -13,6 +13,8 @@ import {
 } from './PassengerClassPopover';
 import { PreferredAirlinePopover } from './PreferredAirlinePopover';
 import { InquiryDefaults, ServiceInquiryModal } from './ServiceInquiryModal';
+import { DateInput } from './DateInput';
+import { addTravelDays, travelToday } from '@/lib/travel-dates';
 
 interface BookingSearchProps {
   defaultTab?: SearchTab;
@@ -23,7 +25,7 @@ interface BookingSearchProps {
 
 function formatHumanDate(dateStr: string) {
   if (!dateStr) return { date: 'Select Date', weekday: 'Choose date' };
-  const d = new Date(dateStr);
+  const d = new Date(`${dateStr}T00:00:00`);
   if (isNaN(d.getTime())) return { date: dateStr, weekday: '' };
   const day = d.getDate();
   const month = d.toLocaleDateString('en-US', { month: 'short' });
@@ -49,17 +51,21 @@ export function BookingSearch({
   const [tripType, setTripType] = useState<TripType>('roundTrip');
   const [fromAirport, setFromAirport] = useState('DAC');
   const [toAirport, setToAirport] = useState('CXB');
+  const [appliedRoute, setAppliedRoute] = useState<typeof externalRoute>(null);
 
   // Dates default to today and +3 days
-  const todayStr = new Date().toISOString().split('T')[0];
-  const returnDefaultDate = (() => {
-    const d = new Date();
-    d.setDate(d.getDate() + 3);
-    return d.toISOString().split('T')[0];
-  })();
+  const todayStr = travelToday();
+  const returnDefaultDate = addTravelDays(todayStr, 3);
 
   const [departureDate, setDepartureDate] = useState(todayStr);
   const [returnDate, setReturnDate] = useState(returnDefaultDate);
+  const changeTripType = (next: TripType) => {
+    setTripType(next);
+    setValidationError(null);
+    if (next === 'roundTrip' && (!returnDate || returnDate < departureDate)) {
+      setReturnDate(departureDate);
+    }
+  };
 
   // Passenger & Cabin Class
   const [passengers, setPassengers] = useState<PassengerCounts>({
@@ -102,7 +108,8 @@ export function BookingSearch({
   const [inquiryDefaults, setInquiryDefaults] = useState<InquiryDefaults | null>(null);
 
   // Sync external route if triggered from Destination Card or Trending Routes
-  if (externalRoute && (externalRoute.from !== fromAirport || externalRoute.to !== toAirport)) {
+  if (externalRoute && externalRoute !== appliedRoute) {
+    setAppliedRoute(externalRoute);
     setFromAirport(externalRoute.from);
     setToAirport(externalRoute.to);
   }
@@ -155,13 +162,12 @@ export function BookingSearch({
     if (activeTab === 'flights') {
       if (tripType === 'multiCity') {
         // Multi city search
-        router.push(
-          `/flights/results?tripType=multiCity&from=${encodeURIComponent(
-            segments[0].from
-          )}&to=${encodeURIComponent(segments[0].to)}&depart=${encodeURIComponent(
-            segments[0].departureDate
-          )}&adults=${passengers.adults}&cabin=${cabinClass}`
-        );
+        if (segments.some((segment) => segment.from === segment.to)) {
+          setValidationError('Each flight must have different origin and destination airports.');
+          setIsLoading(false);
+          return;
+        }
+        openSpecialistInquiry();
       } else {
         // Validation
         if (fromAirport === toAirport) {
@@ -305,7 +311,7 @@ export function BookingSearch({
                         key={type}
                         type="button"
                         onClick={() => {
-                          setTripType(type);
+                          changeTripType(type);
                           setValidationError(null);
                         }}
                         className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xs text-xs transition-all cursor-pointer ${
@@ -338,7 +344,7 @@ export function BookingSearch({
                   </div>
 
                   {/* Route Swap Button - rounded-xs */}
-                  <div className="relative flex items-center justify-center lg:col-span-0 -my-2 lg:my-0 lg:-mx-3 z-20">
+                  <div className="relative flex items-center justify-center -my-2 md:absolute md:left-1/2 md:top-7 md:-translate-x-1/2 md:my-0 lg:left-1/4 z-20">
                     <button
                       type="button"
                       onClick={handleSwapAirports}
@@ -371,9 +377,9 @@ export function BookingSearch({
                         >
                           DEPARTURE
                         </label>
-                        <input
+                        <DateInput
                           id={dateInputIdDepart}
-                          type="date"
+                          required
                           value={departureDate}
                           min={todayStr}
                           onChange={(e) => {
@@ -382,7 +388,7 @@ export function BookingSearch({
                               setReturnDate(e.target.value);
                             }
                           }}
-                          className="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-10"
+                          className="absolute inset-0 opacity-0 focus:opacity-100 focus:bg-white focus:text-sm focus:text-neutral-900 focus:outline-2 focus:outline-brand-red cursor-pointer w-full h-full z-10"
                         />
                         <div className="pointer-events-none">
                           <p className="text-base sm:text-lg font-black text-neutral-900 leading-tight truncate">
@@ -407,13 +413,13 @@ export function BookingSearch({
                         </label>
                         {tripType === 'roundTrip' ? (
                           <>
-                            <input
+                            <DateInput
                               id={dateInputIdReturn}
-                              type="date"
+                              required
                               value={returnDate}
                               min={departureDate || todayStr}
                               onChange={(e) => setReturnDate(e.target.value)}
-                              className="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-10"
+                              className="absolute inset-0 opacity-0 focus:opacity-100 focus:bg-white focus:text-sm focus:text-neutral-900 focus:outline-2 focus:outline-brand-red cursor-pointer w-full h-full z-10"
                             />
                             <div className="flex items-center justify-between">
                               <div className="pointer-events-none min-w-0 pr-1">
@@ -428,7 +434,7 @@ export function BookingSearch({
                                 type="button"
                                 onClick={(e) => {
                                   e.stopPropagation();
-                                  setTripType('oneWay');
+                                  changeTripType('oneWay');
                                 }}
                                 title="Switch to One Way"
                                 className="text-neutral-400 hover:text-neutral-600 p-1 z-20"
@@ -441,7 +447,7 @@ export function BookingSearch({
                         ) : (
                           <button
                             type="button"
-                            onClick={() => setTripType('roundTrip')}
+                            onClick={() => changeTripType('roundTrip')}
                             className="text-left w-full cursor-pointer"
                           >
                             <p className="text-sm font-bold text-[#8B1D24] leading-tight mt-1">
@@ -496,10 +502,11 @@ export function BookingSearch({
                           <label className="block text-[10px] font-bold uppercase tracking-wider text-neutral-400 mb-0.5">
                             DATE
                           </label>
-                          <input
-                            type="date"
+                          <DateInput
+                            aria-label={`Flight ${idx + 1} departure date`}
+                            required
                             value={seg.departureDate}
-                            min={todayStr}
+                            min={idx > 0 ? segments[idx - 1].departureDate || todayStr : todayStr}
                             onChange={(e) =>
                               handleUpdateSegment(idx, 'departureDate', e.target.value)
                             }
@@ -522,7 +529,7 @@ export function BookingSearch({
                     </div>
                   ))}
 
-                  <div className="flex items-center justify-between pt-2">
+                  <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between pt-2">
                     <button
                       type="button"
                       onClick={handleAddSegment}
@@ -533,7 +540,7 @@ export function BookingSearch({
                       <span>Add Another Flight</span>
                     </button>
 
-                    <div className="w-64">
+                    <div className="w-full sm:w-64">
                       <PassengerClassPopover
                         passengers={passengers}
                         cabinClass={cabinClass}
@@ -551,9 +558,9 @@ export function BookingSearch({
               <div className="mt-4 flex flex-wrap items-center justify-between gap-3 pt-2">
                 <div className="text-xs text-neutral-400">
                   {validationError ? (
-                    <span className="text-red-600 font-semibold">{validationError}</span>
+                    <span role="alert" className="text-red-600 font-semibold">{validationError}</span>
                   ) : (
-                    <span>Best fare guarantee on domestic and international routes</span>
+                    <span>{tripType === 'multiCity' ? 'Multi-city itineraries are reviewed by a specialist. Every flight is included in your request.' : 'Compare demo fares and request confirmed options from our travel desk.'}</span>
                   )}
                 </div>
 
@@ -639,11 +646,16 @@ export function BookingSearch({
                   <label className="block text-[10px] font-bold uppercase tracking-wider text-neutral-400 mb-1">
                     CHECK-IN
                   </label>
-                  <input
-                    type="date"
+                  <DateInput
+                    aria-label="Check-in"
+                    required
                     value={hotelCheckIn}
                     min={todayStr}
-                    onChange={(e) => setHotelCheckIn(e.target.value)}
+                    onChange={(e) => {
+                      const next = e.target.value;
+                      setHotelCheckIn(next);
+                      if (next && hotelCheckOut <= next) setHotelCheckOut(addTravelDays(next, 1));
+                    }}
                     className="w-full text-sm font-bold text-neutral-900 bg-transparent focus:outline-none"
                   />
                   <p className="text-xs text-neutral-400 mt-1">Standard 2:00 PM check-in</p>
@@ -653,10 +665,11 @@ export function BookingSearch({
                   <label className="block text-[10px] font-bold uppercase tracking-wider text-neutral-400 mb-1">
                     CHECK-OUT
                   </label>
-                  <input
-                    type="date"
+                  <DateInput
+                    aria-label="Check-out"
+                    required
                     value={hotelCheckOut}
-                    min={hotelCheckIn || todayStr}
+                    min={addTravelDays(hotelCheckIn || todayStr, 1)}
                     onChange={(e) => setHotelCheckOut(e.target.value)}
                     className="w-full text-sm font-bold text-neutral-900 bg-transparent focus:outline-none"
                   />
@@ -741,8 +754,9 @@ export function BookingSearch({
                   <label className="block text-[10px] font-bold uppercase tracking-wider text-neutral-400 mb-1">
                     TRAVEL MONTH / DATE
                   </label>
-                  <input
-                    type="date"
+                  <DateInput
+                    aria-label="Travel date"
+                    required
                     value={holidayTravelDate}
                     min={todayStr}
                     onChange={(e) => setHolidayTravelDate(e.target.value)}
@@ -813,7 +827,7 @@ export function BookingSearch({
                 <Icon name="search" size={20} />
               )}
               <span>
-                {activeTab === 'flights' && 'Search'}
+                {activeTab === 'flights' && (tripType === 'multiCity' ? 'Request itinerary' : 'Search')}
                 {activeTab === 'hotels' && 'Search Hotels'}
                 {activeTab === 'packages' && 'Explore Packages'}
                 {activeTab === 'visa' && 'Check Visa Info'}

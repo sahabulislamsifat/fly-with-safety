@@ -20,6 +20,8 @@ import { Icon } from '@/components/ui/Icons';
 import { BookingModal } from '@/components/booking/BookingModal';
 import { FlightCompareDrawer } from '@/components/flights/FlightCompareDrawer';
 import { AirportCombobox } from '@/components/booking/AirportCombobox';
+import { travelToday } from '@/lib/travel-dates';
+import { formatFlightTime } from '@/lib/api/flights';
 
 function FlightResultsContent() {
   const searchParams = useSearchParams();
@@ -28,7 +30,7 @@ function FlightResultsContent() {
 
   const from = searchParams.get('from') || 'DAC';
   const to = searchParams.get('to') || 'KUL';
-  const depart = searchParams.get('depart') || new Date().toISOString().split('T')[0];
+  const depart = searchParams.get('depart') || travelToday();
   const returnDate = searchParams.get('return') || undefined;
   const rawTripType = searchParams.get('tripType');
   const tripType: 'roundTrip' | 'oneWay' | 'multiCity' =
@@ -132,11 +134,12 @@ function FlightResultsContent() {
 
   const handleApplyEdit = (e: React.FormEvent) => {
     e.preventDefault();
-    router.push(
-      `/flights/results?from=${encodeURIComponent(editFrom)}&to=${encodeURIComponent(
-        editTo
-      )}&depart=${encodeURIComponent(editDepart)}&tripType=${tripType}&cabin=${cabin}&adults=${adults}`
-    );
+    const query = new URLSearchParams(searchParams.toString());
+    query.set('from', editFrom);
+    query.set('to', editTo);
+    query.set('depart', editDepart);
+    if (tripType === 'roundTrip' && (!returnDate || returnDate < editDepart)) query.set('return', editDepart);
+    router.push(`/flights/results?${query.toString()}`);
     setIsEditingSearch(false);
   };
 
@@ -147,7 +150,7 @@ function FlightResultsContent() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-white/80 mb-1">
+              <div className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-white/80 mb-1">
                 <span>Flight Results</span>
                 <span>·</span>
                 <span>{tripType === 'roundTrip' ? 'Round Trip' : 'One Way'}</span>
@@ -197,8 +200,9 @@ function FlightResultsContent() {
                 label="Departure Date"
                 type="date"
                 value={editDepart}
+                required
                 onChange={(e) => setEditDepart(e.target.value)}
-                min={new Date().toISOString().split('T')[0]}
+                min={travelToday()}
               />
               <Button type="submit" variant="primary" className="w-full">
                 Update Results
@@ -324,7 +328,7 @@ function FlightResultsContent() {
           </aside>
 
           {/* Right Main Area: Sort Tabs & Offers List */}
-          <main className="lg:col-span-3 space-y-4">
+          <section aria-label="Flight search results" className="lg:col-span-3 space-y-4 min-w-0">
             {/* Sort Tabs */}
             <div className="grid grid-cols-3 gap-2 bg-white p-1 rounded-xs border border-neutral-200 shadow-xs">
               {[
@@ -502,8 +506,8 @@ function FlightResultsContent() {
                           {/* Outbound Itinerary */}
                           <div className="flex items-center justify-between gap-4 py-2 border-y border-neutral-100">
                             <div>
-                              <p className="text-xl font-bold text-text-primary">
-                                {outbound?.departureTime}
+                              <p className="text-sm sm:text-xl font-bold text-text-primary">
+                                {formatFlightTime(outbound?.departureTime)}
                               </p>
                               <p className="text-xs font-semibold text-text-secondary">
                                 {outbound?.origin?.code || from}
@@ -535,8 +539,8 @@ function FlightResultsContent() {
                             </div>
 
                             <div className="text-right">
-                              <p className="text-xl font-bold text-text-primary">
-                                {outbound?.arrivalTime}
+                              <p className="text-sm sm:text-xl font-bold text-text-primary">
+                                {formatFlightTime(outbound?.arrivalTime)}
                               </p>
                               <p className="text-xs font-semibold text-text-secondary">
                                 {outbound?.destination?.code || to}
@@ -619,7 +623,7 @@ function FlightResultsContent() {
                 })}
               </div>
             )}
-          </main>
+          </section>
         </div>
       </div>
 

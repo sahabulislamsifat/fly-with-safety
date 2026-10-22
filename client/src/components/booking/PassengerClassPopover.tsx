@@ -42,7 +42,17 @@ export function PassengerClassPopover({
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    function handleEscape(event: KeyboardEvent) {
+      if (event.key === 'Escape' && containerRef.current?.querySelector('[role="dialog"]')) {
+        setIsOpen(false);
+        containerRef.current.querySelector<HTMLElement>('[aria-haspopup]')?.focus();
+      }
+    }
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
   }, []);
 
   const totalPassengers = passengers.adults + passengers.children + passengers.infants;
@@ -52,7 +62,7 @@ export function PassengerClassPopover({
     const updated = Math.max(field === 'adults' ? 1 : 0, current + delta);
     // Limit total to 9
     if (delta > 0 && totalPassengers >= 9) return;
-    onChange({ ...passengers, [field]: updated }, cabinClass);
+    onChange({ ...passengers, [field]: updated, infants: field === 'adults' ? Math.min(passengers.infants, updated) : field === 'infants' ? Math.min(updated, passengers.adults) : passengers.infants }, cabinClass);
   };
 
   const handleCabinChange = (newCabin: CabinClass) => {
@@ -102,7 +112,7 @@ export function PassengerClassPopover({
         <div
           role="dialog"
           aria-label="Select passengers and cabin class"
-          className="absolute right-0 top-full mt-2 z-50 w-full min-w-[300px] sm:min-w-[340px] bg-white rounded-xs border border-neutral-200/90 shadow-2xl p-5 animate-in fade-in slide-in-from-top-2 duration-150"
+          className="absolute right-0 top-full mt-2 z-50 w-full sm:min-w-[340px] max-w-[calc(100vw-2rem)] bg-white rounded-xs border border-neutral-200/90 shadow-2xl p-3 sm:p-5 animate-in fade-in slide-in-from-top-2 duration-150"
         >
           {/* Passenger Types */}
           <div className="space-y-4 pb-4 border-b border-neutral-100">

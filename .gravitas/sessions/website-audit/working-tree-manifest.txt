@@ -1,0 +1,47 @@
+## development...origin/development
+ M client/app/flights/results/page.tsx
+ M client/app/hotels/results/page.tsx
+ M client/app/privacy/page.tsx
+ M client/app/terms/page.tsx
+ M client/src/components/admin/AdminPortal.tsx
+ M client/src/components/booking/AirportSelectorPopover.tsx
+ M client/src/components/booking/BookingModal.tsx
+ M client/src/components/booking/BookingSearch.tsx
+ M client/src/components/booking/PassengerClassPopover.tsx
+ M client/src/components/booking/PreferredAirlinePopover.tsx
+ M client/src/components/flights/FlightCompareDrawer.tsx
+ M client/src/components/footer/Footer.tsx
+ M client/src/components/home/HomePageClient.tsx
+ M client/src/components/navbar/Navbar.tsx
+ M client/src/components/ui/Input.tsx
+ M client/src/lib/api/client.ts
+ M client/src/lib/api/flights.ts
+ M server/src/services/outbox.service.ts
+ M server/test/notification-outbox.test.ts
+?? .gravitas/sessions/website-audit/contract.json
+?? .gravitas/sessions/website-audit/evidence.json
+?? .playwright-cli/page-2026-10-21T19-02-55-972Z.yml
+?? .playwright-cli/page-2026-10-21T19-03-47-545Z.yml
+?? .playwright-cli/page-2026-10-21T19-04-15-815Z.yml
+?? .playwright-cli/page-2026-10-21T19-04-48-460Z.yml
+?? .playwright-cli/page-2026-10-21T19-05-55-835Z.yml
+?? .playwright-cli/page-2026-10-21T19-10-17-895Z.yml
+?? .playwright-cli/page-2026-10-22T03-58-16-135Z.yml
+?? client/src/components/booking/DateInput.tsx
+?? client/src/lib/travel-dates.ts
+?? docs/WEBSITE_AUDIT_2026-10-22.md
+?? output/playwright/calendar-before.png
+?? output/playwright/calendar-check.js
+?? output/playwright/calendars-after.json
+?? output/playwright/compare-check.js
+?? output/playwright/flight-results-mobile.png
+?? output/playwright/form-check.js
+?? output/playwright/forms-after.json
+?? output/playwright/inspect-overflow.js
+?? output/playwright/interaction-check.js
+?? output/playwright/interactions-after.json
+?? output/playwright/production-routes-after.json
+?? output/playwright/route-audit.js
+?? output/playwright/routes-after.json
+?? output/playwright/verify-browser.cjs
+?? server/test/website-regressions.test.ts

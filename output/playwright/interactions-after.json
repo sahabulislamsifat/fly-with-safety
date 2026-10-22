@@ -1,0 +1,57 @@
+{
+  "checks": [
+    {
+      "name": "airport popover fits 320px",
+      "passed": true
+    },
+    {
+      "name": "passenger popover fits 320px",
+      "passed": true
+    },
+    {
+      "name": "reducing adults clamps infants",
+      "passed": true
+    },
+    {
+      "name": "passenger Escape closes",
+      "passed": true
+    },
+    {
+      "name": "airline popover fits 320px",
+      "passed": true
+    },
+    {
+      "name": "multi-city retains every leg in notes",
+      "passed": true
+    },
+    {
+      "name": "inquiry fits mobile viewport",
+      "passed": true
+    },
+    {
+      "name": "inquiry Escape closes",
+      "passed": true
+    },
+    {
+      "name": "premium economy returns offers",
+      "passed": true
+    },
+    {
+      "name": "flight results no zero fares",
+      "passed": true
+    },
+    {
+      "name": "demo clearly labeled",
+      "passed": true
+    },
+    {
+      "name": "booking modal visible",
+      "passed": true
+    },
+    {
+      "name": "booking modal Escape closes",
+      "passed": true
+    }
+  ],
+  "failed": []
+}
