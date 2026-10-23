@@ -8,15 +8,9 @@ const isTest = process.env.NODE_ENV === 'test';
 
 /** Reduce an unknown thrown value to loggable, secret-free fields. */
 export function serializeError(err: unknown): Meta {
-  if (err instanceof Error) {
-    return {
-      name: err.name,
-      message: err.message,
-      // Stack traces only outside production, and never sent to clients.
-      ...(isProd ? {} : { stack: err.stack }),
-    };
-  }
-  return { message: String(err) };
+  // Driver/transport error messages and stacks may embed submitted traveler data.
+  const code = err && typeof err === 'object' && 'code' in err ? String(err.code) : '';
+  return { name: 'OperationError', ...( /^P\d{4}$|^\d{5}$/.test(code) ? { code } : {}) };
 }
 
 function write(level: Level, message: string, meta: Meta = {}): void {

@@ -157,7 +157,7 @@ describe('Phase 7: Transactional Notification Resilience & Outbox', () => {
         },
       };
 
-      const sendEmailSpy = vi.spyOn(notificationService, 'sendEmailRaw').mockResolvedValue(true);
+      const sendEmailSpy = vi.spyOn(notificationService, 'sendEmailRaw').mockResolvedValue({ status: 'submitted' });
 
       const result = await enqueueNotification(mockTxClient as any, {
         recipient: 'passenger@example.com',
@@ -255,7 +255,7 @@ describe('Phase 7: Transactional Notification Resilience & Outbox', () => {
           where: expect.objectContaining({
             status: 'PROCESSING',
           }),
-          data: { status: 'PENDING' },
+          data: expect.objectContaining({ status: 'PENDING' }),
         })
       );
       expect(stats.recovered).toBe(2);
@@ -263,7 +263,7 @@ describe('Phase 7: Transactional Notification Resilience & Outbox', () => {
     });
 
     it('successfully processes pending records and marks them DELIVERED', async () => {
-      vi.spyOn(prisma.notificationOutbox, 'updateMany')
+      vi.spyOn(prisma.notificationOutbox, 'updateMany').mockResolvedValue({ count: 1 } as any)
         .mockResolvedValueOnce({ count: 0 } as any) // recovery
         .mockResolvedValueOnce({ count: 1 } as any); // lease
 
@@ -282,13 +282,14 @@ describe('Phase 7: Transactional Notification Resilience & Outbox', () => {
             },
           },
           status: 'PENDING',
+          updatedAt: new Date(0),
           attempts: 0,
           maxAttempts: 5,
         } as any,
       ]);
 
-      const rawSendSpy = vi.spyOn(notificationService, 'sendEmailRaw').mockResolvedValue(true);
-      const updateSpy = vi.spyOn(prisma.notificationOutbox, 'update').mockResolvedValue({} as any);
+      const rawSendSpy = vi.spyOn(notificationService, 'sendEmailRaw').mockResolvedValue({ status: 'submitted' });
+      const updateSpy = vi.mocked(prisma.notificationOutbox.updateMany);
 
       const stats = await processOutboxBatch(10);
 
@@ -302,7 +303,7 @@ describe('Phase 7: Transactional Notification Resilience & Outbox', () => {
         })
       );
       expect(updateSpy).toHaveBeenCalledWith({
-        where: { id: 'outbox-item-1' },
+        where: expect.objectContaining({ id: 'outbox-item-1', status: 'PROCESSING' }),
         data: expect.objectContaining({
           status: 'DELIVERED',
           error: null,
@@ -311,7 +312,7 @@ describe('Phase 7: Transactional Notification Resilience & Outbox', () => {
     });
 
     it('skips item if another concurrent worker leases it first', async () => {
-      vi.spyOn(prisma.notificationOutbox, 'updateMany')
+      vi.spyOn(prisma.notificationOutbox, 'updateMany').mockResolvedValue({ count: 1 } as any)
         .mockResolvedValueOnce({ count: 0 } as any) // recovery
         .mockResolvedValueOnce({ count: 0 } as any); // lease failed (count = 0)
 
@@ -321,6 +322,7 @@ describe('Phase 7: Transactional Notification Resilience & Outbox', () => {
           recipient: 'user@test.com',
           payload: { template: 'BOOKING_CONFIRMATION', params: {} },
           status: 'PENDING',
+          updatedAt: new Date(0),
           attempts: 0,
         } as any,
       ]);
@@ -334,7 +336,7 @@ describe('Phase 7: Transactional Notification Resilience & Outbox', () => {
     });
 
     it('schedules retry with bounded exponential backoff on transport failure', async () => {
-      vi.spyOn(prisma.notificationOutbox, 'updateMany')
+      vi.spyOn(prisma.notificationOutbox, 'updateMany').mockResolvedValue({ count: 1 } as any)
         .mockResolvedValueOnce({ count: 0 } as any) // recovery
         .mockResolvedValueOnce({ count: 1 } as any); // lease succeeded
 
@@ -344,30 +346,32 @@ describe('Phase 7: Transactional Notification Resilience & Outbox', () => {
           recipient: 'user@test.com',
           payload: { template: 'BOOKING_CONFIRMATION', params: {} },
           status: 'PENDING',
+          updatedAt: new Date(0),
           attempts: 1,
           maxAttempts: 5,
         } as any,
       ]);
 
       vi.spyOn(notificationService, 'sendEmailRaw').mockRejectedValue(new Error('Connection reset by peer'));
-      const updateSpy = vi.spyOn(prisma.notificationOutbox, 'update').mockResolvedValue({} as any);
+      const updateSpy = vi.mocked(prisma.notificationOutbox.updateMany);
 
       const stats = await processOutboxBatch(10);
 
       expect(stats.delivered).toBe(0);
       expect(stats.failed).toBe(0); // Not terminal yet
       expect(updateSpy).toHaveBeenCalledWith({
-        where: { id: 'outbox-retry-1' },
+        where: expect.objectContaining({ id: 'outbox-retry-1', status: 'PROCESSING' }),
         data: expect.objectContaining({
           status: 'PENDING',
+          updatedAt: expect.any(Date),
           attempts: 2,
-          error: expect.stringContaining('Connection reset by peer'),
+          error: 'EMAIL_TRANSPORT_FAILURE',
         }),
       });
     });
 
     it('marks record as permanently FAILED when maxAttempts is reached', async () => {
-      vi.spyOn(prisma.notificationOutbox, 'updateMany')
+      vi.spyOn(prisma.notificationOutbox, 'updateMany').mockResolvedValue({ count: 1 } as any)
         .mockResolvedValueOnce({ count: 0 } as any) // recovery
         .mockResolvedValueOnce({ count: 1 } as any); // lease succeeded
 
@@ -377,24 +381,25 @@ describe('Phase 7: Transactional Notification Resilience & Outbox', () => {
           recipient: 'user@test.com',
           payload: { template: 'BOOKING_CONFIRMATION', params: {} },
           status: 'PENDING',
+          updatedAt: new Date(0),
           attempts: 4,
           maxAttempts: 5,
         } as any,
       ]);
 
       vi.spyOn(notificationService, 'sendEmailRaw').mockRejectedValue(new Error('SMTP authentication rejected'));
-      const updateSpy = vi.spyOn(prisma.notificationOutbox, 'update').mockResolvedValue({} as any);
+      const updateSpy = vi.mocked(prisma.notificationOutbox.updateMany);
 
       const stats = await processOutboxBatch(10);
 
       expect(stats.delivered).toBe(0);
       expect(stats.failed).toBe(1); // Terminal failure
       expect(updateSpy).toHaveBeenCalledWith({
-        where: { id: 'outbox-terminal-1' },
+        where: expect.objectContaining({ id: 'outbox-terminal-1', status: 'PROCESSING' }),
         data: expect.objectContaining({
           status: 'FAILED',
           attempts: 5,
-          error: expect.stringContaining('SMTP authentication rejected'),
+          error: 'EMAIL_TRANSPORT_FAILURE',
         }),
       });
     });
@@ -403,15 +408,17 @@ describe('Phase 7: Transactional Notification Resilience & Outbox', () => {
   // ─── 3. Redrive & Operational Telemetry ───────────────────────────────────────
   describe('redriveFailedNotification & getOutboxStats', () => {
     it('resets a FAILED record to PENDING with attempts reset to 0', async () => {
+      vi.spyOn(prisma.notificationOutbox, 'findUnique').mockResolvedValue({ status: 'FAILED', updatedAt: new Date(0) } as any);
       const updateManySpy = vi.spyOn(prisma.notificationOutbox, 'updateMany').mockResolvedValue({ count: 1 } as any);
 
       const success = await redriveFailedNotification('outbox-failed-id');
 
       expect(success).toBe(true);
       expect(updateManySpy).toHaveBeenCalledWith({
-        where: { id: 'outbox-failed-id', status: 'FAILED' },
+        where: { id: 'outbox-failed-id', status: 'FAILED', updatedAt: new Date(0) },
         data: expect.objectContaining({
           status: 'PENDING',
+          updatedAt: expect.any(Date),
           attempts: 0,
           error: null,
         }),
@@ -419,6 +426,7 @@ describe('Phase 7: Transactional Notification Resilience & Outbox', () => {
     });
 
     it('returns false if notification is not in FAILED state or record not found', async () => {
+      vi.spyOn(prisma.notificationOutbox, 'findUnique').mockResolvedValue(null);
       vi.spyOn(prisma.notificationOutbox, 'updateMany').mockResolvedValue({ count: 0 } as any);
 
       const success = await redriveFailedNotification('outbox-not-failed');

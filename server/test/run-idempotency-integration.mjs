@@ -1,7 +1,9 @@
 import { spawnSync } from 'node:child_process';
 import { resolve } from 'node:path';
+import { assertDisposableTarget } from './integration-target.mjs';
 
 const integrationUrl = process.env.INTEGRATION_TEST_DATABASE_URL;
+assertDisposableTarget(process.env);
 
 if (process.env.RUN_IDEMPOTENCY_INTEGRATION !== 'true') {
   throw new Error('Set RUN_IDEMPOTENCY_INTEGRATION=true before running integration tests.');

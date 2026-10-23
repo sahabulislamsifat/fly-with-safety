@@ -1,3 +1,6 @@
+import { inquiryPageQuery } from './inquiry-page-query.js';
+import { inquiryListQuerySchema } from '../validators/account.schemas.js';
+import { bookingDTO } from '../utils/booking-dto.js';
 import { prisma } from '../lib/prisma.js';
 import { AppError } from '../utils/errors.js';
 import type { InquiryType } from '../validators/account.schemas.js';
@@ -27,27 +30,6 @@ function inquirySummary(type: InquiryType, inquiry: Record<string, unknown> & { 
         : inquiry.destination;
   const travelDate = type === 'flight' ? inquiry.departureDate : type === 'hotel' ? inquiry.checkIn : type === 'package' ? inquiry.travelDate : null;
   return { id: inquiry.id, referenceNumber: inquiry.referenceNumber, status: inquiry.status, createdAt: inquiry.createdAt, updatedAt: inquiry.updatedAt, type, summary: String(summary), travelDate: travelDate ? String(travelDate) : null };
-}
-
-async function findInquiries(type: InquiryType, userId: string, status?: string) {
-  const where = { userId, ...(status ? { status: status as never } : {}) };
-  switch (type) {
-    case 'flight': return prisma.flightInquiry.findMany({ where, orderBy: { createdAt: 'desc' } });
-    case 'hotel': return prisma.hotelInquiry.findMany({ where, orderBy: { createdAt: 'desc' } });
-    case 'package': return prisma.packageInquiry.findMany({ where, orderBy: { createdAt: 'desc' } });
-    case 'visa': return prisma.visaInquiry.findMany({ where, orderBy: { createdAt: 'desc' } });
-  }
-}
-
-async function findInquiryPage(type: InquiryType, userId: string, page: number, limit: number, status?: string) {
-  const where = { userId, ...(status ? { status: status as never } : {}) };
-  const args = { where, orderBy: { createdAt: 'desc' as const }, skip: (page - 1) * limit, take: limit };
-  switch (type) {
-    case 'flight': return Promise.all([prisma.flightInquiry.count({ where }), prisma.flightInquiry.findMany(args)]);
-    case 'hotel': return Promise.all([prisma.hotelInquiry.count({ where }), prisma.hotelInquiry.findMany(args)]);
-    case 'package': return Promise.all([prisma.packageInquiry.count({ where }), prisma.packageInquiry.findMany(args)]);
-    case 'visa': return Promise.all([prisma.visaInquiry.count({ where }), prisma.visaInquiry.findMany(args)]);
-  }
 }
 
 function inquiryDetail(type: InquiryType, inquiry: Record<string, unknown> & { id: string; referenceNumber: string; status: string; createdAt: Date; updatedAt: Date }) {
@@ -94,19 +76,19 @@ export async function getDashboard(userId: string) {
 }
 
 export async function listInquiries(userId: string, input: { page: number; limit: number; type?: InquiryType; status?: string }) {
-  const types: InquiryType[] = input.type ? [input.type] : ['flight', 'hotel', 'package', 'visa'];
-  if (!input.type) {
-    const records = await Promise.all(types.map(async (type) => {
-      const items = await findInquiries(type, userId, input.status);
-      return items.map((item) => inquirySummary(type, item));
-    }));
-    const all = records.flat().sort((a, b) => new Date(String(b.createdAt)).getTime() - new Date(String(a.createdAt)).getTime());
-    const start = (input.page - 1) * input.limit;
-    return { inquiries: all.slice(start, start + input.limit), pagination: pageMeta(input.page, input.limit, all.length) };
-  }
-
-  const [total, records] = await findInquiryPage(input.type, userId, input.page, input.limit, input.status);
-  return { inquiries: records.map((item) => inquirySummary(input.type!, item)), pagination: pageMeta(input.page, input.limit, total) };
+  const validated = inquiryListQuerySchema.safeParse(input);
+  if (!validated.success) throw AppError.badRequest('Invalid inquiry pagination or filter');
+  const query = validated.data;
+  // A single SQL statement gives page and count the same snapshot, including empty offset pages.
+  const rows = await prisma.$queryRaw<(Omit<DashboardInquiry, 'id'> & { total: bigint; id: string | null })[]>(inquiryPageQuery(userId, query));
+  const total = Number(rows[0]?.total ?? 0);
+  if (!Number.isSafeInteger(total)) throw AppError.internal('Inquiry count exceeds supported range');
+  const inquiries = rows.filter(row => row.id !== null).map(row => ({
+    id: row.id, referenceNumber: row.referenceNumber, status: row.status,
+    createdAt: row.createdAt, updatedAt: row.updatedAt, type: row.type,
+    summary: row.summary, travelDate: row.travelDate,
+  }));
+  return { inquiries, pagination: pageMeta(query.page, query.limit, total) };
 }
 
 export async function getInquiry(userId: string, type: InquiryType, reference: string) {
@@ -128,7 +110,7 @@ export async function listBookings(userId: string, input: { page: number; limit:
     prisma.booking.count({ where }),
     prisma.booking.findMany({ where, orderBy: { createdAt: 'desc' }, skip: (input.page - 1) * input.limit, take: input.limit, select: { referenceNumber: true, bookingType: true, bookingModel: true, status: true, totalPrice: true, currency: true, bookingDetails: true, createdAt: true, updatedAt: true } }),
   ]);
-  return { bookings, pagination: pageMeta(input.page, input.limit, total) };
+  return { bookings: bookings.map(b => bookingDTO(b, 'customer')), pagination: pageMeta(input.page, input.limit, total) };
 }
 
 export async function getBooking(userId: string, reference: string) {
@@ -137,7 +119,7 @@ export async function getBooking(userId: string, reference: string) {
     include: { passengers: { select: { firstName: true, lastName: true, passengerType: true, nationality: true } }, statusHistory: { orderBy: { createdAt: 'asc' }, select: { fromStatus: true, toStatus: true, reason: true, createdAt: true } } },
   });
   if (!booking) throw AppError.notFound('Booking not found');
-  return booking;
+  return bookingDTO(booking, 'customer');
 }
 
 export async function updateProfile(userId: string, input: { name: string }) {

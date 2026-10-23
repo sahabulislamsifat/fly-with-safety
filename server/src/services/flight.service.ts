@@ -1,3 +1,4 @@
+import { logger, serializeError } from '../lib/logger.js';
 import { flightAggregator } from './flight-aggregator.service.js';
 import { prisma } from '../lib/prisma.js';
 import { generateReferenceNumber, normalizeEmail, normalizePhone } from '../utils/helpers.js';
@@ -66,7 +67,7 @@ export async function submitFlightInquiry(input: FlightInquiryInput, userId: str
     name: input.name.trim(),
     referenceNumber,
     type: 'flight',
-  }).catch((err) => console.error('[Flight] Email send failed:', err));
+  }).catch((err) => logger.warn('inquiry_email_failed', serializeError(err)));
   return result;
 }
 
@@ -84,7 +85,7 @@ export async function getFlightInquiries(params: {
     prisma.flightInquiry.count({ where }),
     prisma.flightInquiry.findMany({
       where,
-      orderBy: { createdAt: 'desc' },
+      orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
       skip,
       take: limit,
     }),

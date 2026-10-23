@@ -11,7 +11,7 @@ import {
 } from '../validators/account.schemas.js';
 
 const router: Router = createRouter();
-router.use('/account', requireAuth);
+router.use('/account', requireAuth, (_req, res, next) => { res.set('Cache-Control', 'no-store'); next(); });
 router.get('/account/dashboard', accountController.getDashboard);
 router.get(
   '/account/inquiries',

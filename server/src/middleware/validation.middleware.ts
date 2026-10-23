@@ -47,7 +47,7 @@ function formatZodErrors(error: ZodError): Record<string, string[]> {
     if (!details[key]) {
       details[key] = [];
     }
-    details[key].push(issue.message);
+    details[key].push(issue.code === 'unrecognized_keys' ? 'Unsupported fields' : issue.message);
   }
   return details;
 }

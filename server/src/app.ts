@@ -7,6 +7,7 @@ import { env } from './config/env.js';
 import { errorHandler } from './middleware/error-handler.js';
 import { notFoundHandler } from './middleware/not-found.js';
 import { requestId } from './middleware/request-id.js';
+import { isAllowedOrigin, protectRequestOrigin } from './middleware/request-origin.js';
 import healthRoutes from './routes/health.routes.js';
 import authRoutes from './routes/auth.routes.js';
 import destinationRoutes from './routes/destinations.routes.js';
@@ -21,6 +22,7 @@ import airportsRoutes from './routes/airports.routes.js';
 import bookingRoutes from './routes/bookings.routes.js';
 import futureStubsRoutes from './routes/future-stubs.routes.js';
 import accountRoutes from './routes/account.routes.js';
+import outboxWorkerRoutes from './routes/outbox-worker.routes.js';
 
 const app: Express = express();
 
@@ -46,10 +48,7 @@ app.use(
       if (!requestOrigin) {
         return callback(null, true);
       }
-      const normalizedReqOrigin = requestOrigin.trim().replace(/\/+$/, '').toLowerCase();
-      const isAllowed = env.corsOrigins.some(
-        (allowed) => allowed.trim().replace(/\/+$/, '').toLowerCase() === normalizedReqOrigin,
-      );
+      const isAllowed = isAllowedOrigin(requestOrigin);
       if (isAllowed) {
         callback(null, true);
       } else {
@@ -64,6 +63,7 @@ app.use(
 );
 
 // Body parsing
+app.use(protectRequestOrigin);
 app.use(express.json({ limit: '100kb' }));
 app.use(express.urlencoded({ extended: true, limit: '100kb' }));
 app.use(cookieParser());
@@ -73,6 +73,7 @@ app.use(passport.initialize());
 const API_PREFIX = '/api/v1';
 
 app.use(API_PREFIX, healthRoutes);
+app.use(API_PREFIX, outboxWorkerRoutes);
 app.use(API_PREFIX, authRoutes);
 app.use(API_PREFIX, destinationRoutes);
 app.use(API_PREFIX, packageRoutes);

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "20260926202822_init",
+    "sha256": "efda6a0cd3d01b2503e4cc1557f8aba2807664db545a742e52eaca60a3b2e1cb"
+  },
+  {
+    "name": "20260927082715_full_schema",
+    "sha256": "ae3bcd7668f026858ee7e43cbceb9955c451a1bf648520e6afb7814ce2cc7921"
+  },
+  {
+    "name": "20261009000000_auth_sessions_and_password_resets",
+    "sha256": "e1eb929668d33cbe94f07e7512cb7174084150c50683a2e15f5709509b53e1b4"
+  },
+  {
+    "name": "20261011000000_inquiry_idempotency",
+    "sha256": "0316f0857663d04900e1ceae1e305490a9b97e49192f9aad2f74bb2f494c6706"
+  },
+  {
+    "name": "20261011120000_notification_outbox",
+    "sha256": "1ecc18d0e4381cdf0489a9919f61b58c3f9f1a3bd102303ccf1fa5f81e14eca2"
+  }
+]

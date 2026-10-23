@@ -1,3 +1,4 @@
+import { logger, serializeError } from '../lib/logger.js';
 import { prisma } from '../lib/prisma.js';
 import { AppError } from '../utils/errors.js';
 import { generateReferenceNumber, normalizeEmail, normalizePhone } from '../utils/helpers.js';
@@ -78,7 +79,7 @@ export async function submitVisaInquiry(input: VisaInquiryInput, userId: string 
     name: input.name.trim(),
     referenceNumber,
     type: 'visa',
-  }).catch((err) => console.error('[Visa] Email send failed:', err));
+  }).catch((err) => logger.warn('inquiry_email_failed', serializeError(err)));
   return result;
 }
 
@@ -92,7 +93,7 @@ export async function getVisaInquiries(params: { page?: number; limit?: number; 
     prisma.visaInquiry.count({ where }),
     prisma.visaInquiry.findMany({
       where,
-      orderBy: { createdAt: 'desc' },
+      orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
       skip,
       take: limit,
     }),

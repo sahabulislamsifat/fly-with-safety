@@ -1,6 +1,11 @@
 import nodemailer from 'nodemailer';
 import { env } from '../config/env.js';
 import { enqueueNotification } from './outbox.service.js';
+import { logger, serializeError } from '../lib/logger.js';
+
+export type EmailSendResult =
+  | { status: 'submitted' }
+  | { status: 'suppressed'; reason: 'EMAIL_DELIVERY_DISABLED' };
 
 export interface EmailOptions {
   to: string;
@@ -29,7 +34,7 @@ export function escapeHtml(value: string | null | undefined): string {
 }
 
 export function createTransporter() {
-  if (!env.emailDeliveryEnabled || !env.smtpUser || !env.smtpPassword) {
+  if (!env.emailDeliveryEnabled || !env.smtpUser || !env.smtpPassword || (!env.smtpService && !env.smtpHost)) {
     return null;
   }
   return nodemailer.createTransport({
@@ -37,6 +42,9 @@ export function createTransporter() {
     host: env.smtpService ? undefined : env.smtpHost,
     port: env.smtpService ? undefined : env.smtpPort,
     secure: env.smtpSecure,
+    connectionTimeout: 10_000,
+    greetingTimeout: 10_000,
+    socketTimeout: 20_000,
     auth: {
       user: env.smtpUser,
       pass: env.smtpPassword,
@@ -48,12 +56,13 @@ export function createTransporter() {
  * Underlying transport sender. Throws on error so caller (e.g. outbox processor)
  * can record retry or failure accurately.
  */
-export async function sendEmailRaw(options: EmailOptions): Promise<void> {
+export async function sendEmailRaw(options: EmailOptions): Promise<EmailSendResult> {
   const transporter = createTransporter();
   if (!transporter) {
     if (!env.emailDeliveryEnabled) {
-      // Disabled email delivery (e.g. testing mode) behaves as a mocked success
-      return;
+      // Suppression is explicit and must never be interpreted as transport submission.
+      logger.info('email_delivery_suppressed', { reason: 'EMAIL_DELIVERY_DISABLED' });
+      return { status: 'suppressed', reason: 'EMAIL_DELIVERY_DISABLED' };
     }
     throw new Error('SMTP transport not configured');
   }
@@ -64,13 +73,17 @@ export async function sendEmailRaw(options: EmailOptions): Promise<void> {
 
   const from = `"${env.smtpEmailFromName}" <${fromAddress}>`;
 
-  await transporter.sendMail({
+  const result = await transporter.sendMail({
     from,
     to: options.to,
     subject: options.subject,
     html: options.html,
     text: options.text,
   });
+  if (!Array.isArray(result.accepted) || result.accepted.length === 0) {
+    throw new Error('SMTP transport did not accept any recipients');
+  }
+  return { status: 'submitted' };
 }
 
 /**
@@ -80,7 +93,7 @@ async function sendEmail(options: EmailOptions): Promise<void> {
   try {
     await sendEmailRaw(options);
   } catch (err) {
-    console.error('[Email] Failed to send email:', err);
+    logger.error('email_send_failed', serializeError(err));
   }
 }
 

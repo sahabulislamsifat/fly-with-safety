@@ -1,3 +1,4 @@
+import { logger, serializeError } from '../lib/logger.js';
 import { MockHotelProvider } from './providers/mock-hotel.provider.js';
 import type { HotelProvider } from './providers/hotel.provider.js';
 import { prisma } from '../lib/prisma.js';
@@ -59,7 +60,7 @@ export async function submitHotelInquiry(input: HotelInquiryInput, userId: strin
     name: input.name.trim(),
     referenceNumber,
     type: 'hotel',
-  }).catch((err) => console.error('[Hotel] Email send failed:', err));
+  }).catch((err) => logger.warn('inquiry_email_failed', serializeError(err)));
   return result;
 }
 
@@ -73,7 +74,7 @@ export async function getHotelInquiries(params: { page?: number; limit?: number;
     prisma.hotelInquiry.count({ where }),
     prisma.hotelInquiry.findMany({
       where,
-      orderBy: { createdAt: 'desc' },
+      orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
       skip,
       take: limit,
     }),

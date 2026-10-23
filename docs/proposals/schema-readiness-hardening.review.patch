@@ -1,0 +1,19 @@
+diff --git a/docs/proposals/schema-readiness.readonly.sql b/docs/proposals/schema-readiness.readonly.sql
+--- a/docs/proposals/schema-readiness.readonly.sql
++++ b/docs/proposals/schema-readiness.readonly.sql
+@@ -1,5 +1,6 @@
+ -- Catalog inspection only. Run against 127.0.0.1:5432/flywithsafe_integration.
+ BEGIN READ ONLY;
++SET LOCAL search_path = pg_catalog;
+ SET LOCAL statement_timeout = '5s';
+ SELECT current_database() AS database, inet_server_addr() AS host,
+        inet_server_port() AS port, current_setting('transaction_read_only') AS read_only;
+@@ -11,7 +12,7 @@ ORDER BY 1,2;
+ -- Negative estimates mean statistics are unavailable, not an empty table.
+ SELECT migration_name, checksum, finished_at IS NOT NULL AS completed,
+        rolled_back_at IS NOT NULL AS rolled_back
+-FROM "_prisma_migrations" ORDER BY migration_name;
++FROM public."_prisma_migrations" ORDER BY migration_name;
+ SELECT table_name, column_name, data_type, udt_name, is_nullable, column_default,
+        datetime_precision
+ FROM information_schema.columns
