@@ -16,6 +16,7 @@ import { openBookingModal } from '@/redux/slices/bookingSlice';
 import { Button, Card, Input } from '@/components/ui';
 import { Icon } from '@/components/ui/Icons';
 import { BookingModal } from '@/components/booking/BookingModal';
+import { addTravelDays, travelToday } from '@/lib/travel-dates';
 
 function HotelResultsContent() {
   const searchParams = useSearchParams();
@@ -23,10 +24,8 @@ function HotelResultsContent() {
   const dispatch = useAppDispatch();
 
   const destination = searchParams.get('destination') || 'Bangkok';
-  const checkIn = searchParams.get('checkIn') || new Date().toISOString().split('T')[0];
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 2);
-  const checkOut = searchParams.get('checkOut') || tomorrow.toISOString().split('T')[0];
+  const checkIn = searchParams.get('checkIn') || travelToday();
+  const checkOut = searchParams.get('checkOut') || addTravelDays(checkIn, 2);
   const guests = parseInt(searchParams.get('guests') || '2', 10);
   const rooms = parseInt(searchParams.get('rooms') || '1', 10);
 
@@ -130,12 +129,20 @@ function HotelResultsContent() {
                 label="Check-in"
                 type="date"
                 value={editIn}
-                onChange={(e) => setEditIn(e.target.value)}
+                required
+                min={travelToday()}
+                onChange={(e) => {
+                  const next = e.target.value;
+                  setEditIn(next);
+                  if (next && editOut <= next) setEditOut(addTravelDays(next, 1));
+                }}
               />
               <Input
                 label="Check-out"
                 type="date"
                 value={editOut}
+                required
+                min={addTravelDays(editIn || travelToday(), 1)}
                 onChange={(e) => setEditOut(e.target.value)}
               />
               <Button type="submit" variant="primary">
@@ -231,7 +238,7 @@ function HotelResultsContent() {
           </aside>
 
           {/* Hotel Cards List */}
-          <main className="lg:col-span-3 space-y-4">
+          <section aria-label="Hotel search results" className="lg:col-span-3 space-y-4 min-w-0">
             {/* Sort bar */}
             <div className="flex items-center justify-between bg-white p-2.5 rounded-xs border border-neutral-200">
               <span className="text-xs text-text-secondary font-medium">
@@ -391,7 +398,7 @@ function HotelResultsContent() {
                   </div>
                 </Card>
               ))}
-          </main>
+          </section>
         </div>
       </div>
 

@@ -395,9 +395,9 @@ export function AdminBookingsTab() {
                             {idx + 1}. {p.firstName} {p.lastName}
                           </span>
                           <span className="text-neutral-500 ml-2">({p.passengerType})</span>
-                          {p.passportNumber && (
+                          {p.passportNumberMasked && (
                             <div className="text-[11px] text-neutral-600">
-                              Passport: {p.passportNumber} {p.nationality ? `(${p.nationality})` : ''}
+                              Passport: {p.passportNumberMasked} {p.nationality ? `(${p.nationality})` : ''}
                             </div>
                           )}
                         </div>

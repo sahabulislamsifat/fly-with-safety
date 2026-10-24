@@ -11,7 +11,7 @@ export default function TermsPage() {
   const lastUpdated = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
   return (
-    <main className="flex-1">
+    <div className="flex-1">
       <PageHero id="terms-heading" title="Terms of use" />
 
       <section className="page-surface">
@@ -155,6 +155,6 @@ export default function TermsPage() {
         </article>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

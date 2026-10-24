@@ -3,8 +3,19 @@ import { prisma } from '../src/lib/prisma.js';
 import request from 'supertest';
 import app from '../src/app.js';
 import { env } from '../src/config/env.js';
+import { bookingListQuerySchema } from '../src/validators/account.schemas.js';
 
 describe('FlyWithsafety Server API Tests', () => {
+  describe('Account booking filters', () => {
+    it('accepts pagination and the supported booking statuses', () => {
+      expect(bookingListQuerySchema.parse({ page: '2', limit: '10', status: 'CONFIRMED' })).toEqual({ page: 2, limit: 10, status: 'CONFIRMED' });
+      expect(bookingListQuerySchema.parse({ status: 'CANCELLED' }).status).toBe('CANCELLED');
+    });
+
+    it('rejects unsupported booking statuses', () => {
+      expect(bookingListQuerySchema.safeParse({ status: 'REFUNDED' }).success).toBe(false);
+    });
+  });
   describe('CORS', () => {
     it('allows credentialed requests from configured origins', async () => {
       const originalOrigins = [...env.corsOrigins];

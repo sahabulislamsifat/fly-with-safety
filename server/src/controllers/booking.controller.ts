@@ -1,3 +1,4 @@
+import { bookingDTO } from '../utils/booking-dto.js';
 import { Request, Response, NextFunction } from 'express';
 import * as bookingService from '../services/booking.service.js';
 import { success } from '../utils/response.js';
@@ -8,7 +9,7 @@ export async function createBooking(req: Request, res: Response, next: NextFunct
     const userId = (req as AuthenticatedRequest).user?.id;
     const headerIdempotencyKey = req.header('x-idempotency-key') || req.header('idempotency-key');
     const booking = await bookingService.createBooking(req.body, userId, headerIdempotencyKey);
-    res.status(201).json(
+    res.set('Cache-Control', 'no-store').status(201).json(
       success(
         {
           booking: {
@@ -34,7 +35,7 @@ export async function createBooking(req: Request, res: Response, next: NextFunct
 export async function lookupBooking(req: Request, res: Response, next: NextFunction) {
   try {
     const booking = await bookingService.lookupBooking(req.body);
-    res.json(success({ booking }));
+    res.set('Cache-Control', 'no-store').json(success({ booking: bookingDTO(booking, 'guest') }));
   } catch (err) {
     next(err);
   }
@@ -48,7 +49,7 @@ export async function adminGetBookings(req: Request, res: Response, next: NextFu
     const type = req.query.type as string | undefined;
 
     const result = await bookingService.adminGetBookings({ page, limit, status, type });
-    res.json(success(result));
+    res.set('Cache-Control', 'no-store').json(success({ ...result, bookings: result.bookings.map(b => bookingDTO(b, 'admin')) }));
   } catch (err) {
     next(err);
   }
@@ -64,7 +65,7 @@ export async function adminUpdateBookingStatus(req: Request, res: Response, next
       req.body.reason,
       staffId
     );
-    res.json(success({ booking }, 'Booking status updated successfully'));
+    res.set('Cache-Control', 'no-store').json(success({ booking: booking ? bookingDTO(booking, 'admin') : null }, 'Booking status updated successfully'));
   } catch (err) {
     next(err);
   }
@@ -75,7 +76,7 @@ export async function adminCreateBookingFromInquiry(req: Request, res: Response,
     const authUser = (req as AuthenticatedRequest).user;
     const staffId = authUser?.email || authUser?.id || 'STAFF';
     const booking = await bookingService.createBookingFromInquiry(req.body, staffId);
-    res.status(201).json(success({ booking }, 'Booking created from inquiry successfully'));
+    res.set('Cache-Control', 'no-store').status(201).json(success({ booking: bookingDTO(booking, 'admin') }, 'Booking created from inquiry successfully'));
   } catch (err) {
     next(err);
   }

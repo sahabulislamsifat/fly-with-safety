@@ -177,7 +177,7 @@ export function AirportSelectorPopover({
         <div
           role="listbox"
           aria-label={`Select ${label} airport`}
-          className="absolute left-0 top-full mt-2 z-50 w-full min-w-[320px] sm:min-w-[360px] bg-white rounded-xs border border-neutral-200/90 shadow-2xl overflow-hidden animate-in fade-in slide-in-from-top-2 duration-150"
+          className="absolute left-0 top-full mt-2 z-50 w-full sm:min-w-[360px] max-w-[calc(100vw-2rem)] bg-white rounded-xs border border-neutral-200/90 shadow-2xl overflow-hidden animate-in fade-in slide-in-from-top-2 duration-150"
         >
           {/* Popover Header with Search Input */}
           <div className="p-3 border-b border-neutral-100 bg-neutral-50/80">
@@ -189,6 +189,7 @@ export function AirportSelectorPopover({
               />
               <input
                 ref={searchInputRef}
+                aria-label={`Search ${label} airport`}
                 type="text"
                 value={searchQuery}
                 onChange={(e) => {
@@ -203,6 +204,7 @@ export function AirportSelectorPopover({
                 <button
                   type="button"
                   onClick={() => setSearchQuery('')}
+                  aria-label="Clear airport search"
                   className="absolute right-2.5 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600 p-0.5 rounded-xs"
                 >
                   <Icon name="x" size={14} />

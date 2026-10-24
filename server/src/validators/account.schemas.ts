@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { inquiryPage, inquiryLimit } from './inquiry-query.schemas.js';
 
 export const accountQuerySchema = z.object({
   page: z.coerce.number().int().min(1).default(1),
@@ -6,7 +7,13 @@ export const accountQuerySchema = z.object({
 });
 
 export const inquiryListQuerySchema = accountQuerySchema.extend({
+  page: inquiryPage,
+  limit: inquiryLimit.default(10),
   type: z.enum(['flight', 'hotel', 'package', 'visa']).optional(),
+  status: z.enum(['PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED']).optional(),
+});
+
+export const bookingListQuerySchema = accountQuerySchema.extend({
   status: z.enum(['PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED']).optional(),
 });
 

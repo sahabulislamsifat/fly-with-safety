@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { closeBookingModal, submitBookingThunk, clearBookingState } from '@/redux/slices/bookingSlice';
 import { Button, Input } from '@/components/ui';
@@ -19,6 +20,43 @@ export function BookingModal() {
   const [passengers, setPassengers] = useState<BookingPassenger[]>([
     { firstName: '', lastName: '', passengerType: 'adult' },
   ]);
+  const dialogRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isBookingModalOpen) return;
+    const trigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    dialogRef.current?.focus();
+    return () => {
+      document.body.style.overflow = overflow;
+      trigger?.focus();
+    };
+  }, [isBookingModalOpen]);
+
+  useEffect(() => {
+    if (!isBookingModalOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && submitStatus !== 'loading') {
+        dispatch(closeBookingModal());
+        dispatch(clearBookingState());
+      }
+      if (event.key !== 'Tab') return;
+      const items = dialogRef.current?.querySelectorAll<HTMLElement>('button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), a[href]');
+      if (!items?.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (event.shiftKey && (document.activeElement === first || document.activeElement === dialogRef.current)) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [dispatch, isBookingModalOpen, submitStatus]);
 
   if (!isBookingModalOpen || !bookingTarget) return null;
 
@@ -72,14 +110,16 @@ export function BookingModal() {
     dispatch(clearBookingState());
   };
 
-  return (
+  return createPortal(
     <div
+      ref={dialogRef}
+      tabIndex={-1}
       role="dialog"
       aria-modal="true"
       aria-labelledby="booking-modal-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs overflow-y-auto"
+      className="fixed inset-0 z-[300] flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs overflow-y-auto overscroll-contain"
     >
-      <div className="relative w-full max-w-2xl bg-white rounded-xs shadow-2xl overflow-hidden my-8 max-h-[90vh] flex flex-col">
+      <div className="relative w-full max-w-2xl bg-white rounded-xs shadow-2xl overflow-hidden max-h-[calc(100dvh-2rem)] flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-200 bg-neutral-50">
           <div>
@@ -312,6 +352,7 @@ export function BookingModal() {
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

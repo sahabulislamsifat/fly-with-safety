@@ -1,9 +1,14 @@
-import { beforeAll, describe, expect, it } from 'vitest';
+import { setupStep } from './setup-timing.js';
+import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
+import { assertPhase1hTarget as assertDisposableTarget } from './integration-target.mjs';
+import type supertest from 'supertest';
 
 const integrationUrl = process.env.INTEGRATION_TEST_DATABASE_URL;
 const enabled = process.env.RUN_IDEMPOTENCY_INTEGRATION === 'true';
+vi.mock('nodemailer', () => ({ default: { createTransport: () => { throw new Error('External SMTP forbidden'); } } }));
 
 function safeIntegrationTarget(): boolean {
+  try { assertDisposableTarget(process.env); } catch { return false; }
   if (!integrationUrl || process.env.EMAIL_DELIVERY_ENABLED !== 'false') return false;
   try {
     return new URL(integrationUrl).pathname.replace(/^\//, '').endsWith('_integration');
@@ -20,35 +25,67 @@ const run = enabled && safeIntegrationTarget();
 const runId = `idem-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 
 describe.runIf(run)('idempotency integration', () => {
-  let request: typeof import('supertest').default;
+  let request: typeof supertest;
   let app: typeof import('../src/app.js').default;
   let prisma: typeof import('../src/lib/prisma.js').prisma;
   let createIdempotentInquiry: typeof import('../src/services/idempotency.service.js').createIdempotentInquiry;
   let authCookie: string[];
+  let frontendOrigin: string;
+  const ownedKeys = new Set<string>();
+  const ownedEmails = new Set<string>([`${runId}-auth@integration.test`]);
 
-  const key = (suffix: string) => `${runId}-${suffix}-idempotency-key`;
-  const payload = (email: string, notes = 'Controlled idempotency integration request') => ({
+  const key = (suffix: string) => { const value = `${runId}-${suffix}-idempotency-key`; ownedKeys.add(value); return value; };
+  const payload = (email: string, notes = 'Controlled idempotency integration request') => { ownedEmails.add(email); return ({
     from: 'DAC', to: 'KUL', departureDate: '2027-06-10', tripType: 'oneWay',
     adults: 1, children: 0, infants: 0, passengers: 1, cabinClass: 'economy',
     name: 'Integration Test', email, notes,
+  }); };
+
+  afterAll(async () => {
+    // A hook timeout does not cancel asynchronous setup. Never race its writes with cleanup.
+    await setup?.catch(() => undefined);
+    if (!prisma) return;
+    assertDisposableTarget(process.env);
+    const emails = [...ownedEmails];
+    const inquiries = await prisma.flightInquiry.findMany({ where: { email: { in: emails } }, select: { id: true } });
+    const messages = await prisma.notificationOutbox.findMany({ where: { recipient: { in: emails } }, select: { id: true } });
+    const records = await prisma.idempotencyRecord.findMany({ where: { key: { in: [...ownedKeys] } }, select: { id: true } });
+    const users = await prisma.user.findMany({ where: { email: `${runId}-auth@integration.test` }, select: { id: true } });
+    await prisma.notificationOutbox.deleteMany({ where: { id: { in: messages.map(r => r.id) } } });
+    await prisma.idempotencyRecord.deleteMany({ where: { id: { in: records.map(r => r.id) } } });
+    await prisma.flightInquiry.deleteMany({ where: { id: { in: inquiries.map(r => r.id) } } });
+    await prisma.user.deleteMany({ where: { id: { in: users.map(r => r.id) } } });
+    await prisma.$disconnect();
+    vi.unstubAllGlobals();
   });
 
-  beforeAll(async () => {
+  let setup: Promise<void> | undefined;
+  beforeAll(() => {
+    setup = (async () => {
+    vi.stubGlobal('fetch', () => { throw new Error('External requests forbidden'); });
     if (process.env.NODE_ENV !== 'test' || process.env.DATABASE_URL !== integrationUrl || process.env.EMAIL_DELIVERY_ENABLED !== 'false') {
       throw new Error('Idempotency integration test environment was not initialized safely.');
     }
     request = (await import('supertest')).default;
-    app = (await import('../src/app.js')).default;
-    prisma = (await import('../src/lib/prisma.js')).prisma;
+    frontendOrigin = (await import('../src/config/env.js')).env.corsOrigins[0];
+    if (!frontendOrigin) throw new Error('Integration cookie requests require an allowed frontend origin.');
+    app = (await setupStep('inquiry: app import', () => import('../src/app.js'))).default;
+    prisma = (await setupStep('idempotency.integration.test.ts: prisma import', () => import('../src/lib/prisma.js'))).prisma;
     createIdempotentInquiry = (await import('../src/services/idempotency.service.js')).createIdempotentInquiry;
 
-    const registration = await request(app).post('/api/v1/auth/register').send({
+    const registration = await setupStep('inquiry: registration request', async () => request(app).post('/api/v1/auth/register').send({
       name: 'Integration Test User',
       email: `${runId}-auth@integration.test`,
       password: 'Integration9Pass!',
-    });
+    }));
     expect(registration.status).toBe(201);
-    authCookie = registration.headers['set-cookie'];
+    const cookies: unknown = registration.headers['set-cookie'];
+    if (!Array.isArray(cookies) || !cookies.every(cookie => typeof cookie === 'string')) {
+      throw new Error('Registration did not return session cookies');
+    }
+    authCookie = cookies;
+    })();
+    return setup;
   });
 
   it('creates once and replays an identical guest request', async () => {
@@ -101,7 +138,7 @@ describe.runIf(run)('idempotency integration', () => {
     const guestEmail = `${runId}-scope-guest@integration.test`;
     const authenticatedEmail = `${runId}-auth@integration.test`;
     const guest = await request(app).post('/api/v1/flights/inquiries').set('Idempotency-Key', idempotencyKey).send(payload(guestEmail));
-    const authenticated = await request(app).post('/api/v1/flights/inquiries').set('Cookie', authCookie).set('Idempotency-Key', idempotencyKey).send(payload(authenticatedEmail));
+    const authenticated = await request(app).post('/api/v1/flights/inquiries').set('Origin', frontendOrigin).set('Cookie', authCookie).set('Idempotency-Key', idempotencyKey).send(payload(authenticatedEmail));
     const hiddenGuest = await request(app).get(`/api/v1/account/inquiries/flight/${guest.body.data.referenceNumber}`).set('Cookie', authCookie);
 
     expect(guest.status).toBe(201);

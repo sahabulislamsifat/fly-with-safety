@@ -1,0 +1,18 @@
+[
+  {
+    "name": "20261022000100_contact_status_new",
+    "sha256": "4c9af2c97dd22a88cb3b7e5fe5422ac1023bcc86fcde999409033ac5180178a7",
+    "tables": 0,
+    "enums": 0,
+    "indexes": 0,
+    "foreignKeys": 0
+  },
+  {
+    "name": "20261022000200_booking_contact_schema",
+    "sha256": "bc10e7343b3c40769c43deee8b3164245319a9f35d7a3b50d4e3ee721895f32b",
+    "tables": 3,
+    "enums": 3,
+    "indexes": 7,
+    "foreignKeys": 3
+  }
+]

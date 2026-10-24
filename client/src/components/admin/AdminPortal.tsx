@@ -23,7 +23,7 @@ export function AdminPortal() {
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="space-y-4">
             <div className="h-10 w-64 animate-pulse rounded-xs bg-neutral-200" />
-            <div className="h-6 w-96 animate-pulse rounded-xs bg-neutral-200" />
+            <div className="h-6 w-96 max-w-full animate-pulse rounded-xs bg-neutral-200" />
             <div className="h-14 animate-pulse rounded-xs bg-neutral-200 mt-6" />
             <div className="h-96 animate-pulse rounded-xs bg-neutral-200 mt-4" />
           </div>

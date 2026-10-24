@@ -1,0 +1,222 @@
+{
+  "checks": [
+    {
+      "name": "320 DEPARTURE pointer opens",
+      "passed": true
+    },
+    {
+      "name": "320 DEPARTURE keyboard opens",
+      "passed": true
+    },
+    {
+      "name": "320 DEPARTURE calendar selection updates",
+      "passed": true
+    },
+    {
+      "name": "320 RETURN pointer opens",
+      "passed": true
+    },
+    {
+      "name": "320 RETURN keyboard opens",
+      "passed": true
+    },
+    {
+      "name": "320 RETURN calendar selection updates",
+      "passed": true
+    },
+    {
+      "name": "320 page fits",
+      "passed": true
+    },
+    {
+      "name": "375 DEPARTURE pointer opens",
+      "passed": true
+    },
+    {
+      "name": "375 DEPARTURE keyboard opens",
+      "passed": true
+    },
+    {
+      "name": "375 DEPARTURE calendar selection updates",
+      "passed": true
+    },
+    {
+      "name": "375 RETURN pointer opens",
+      "passed": true
+    },
+    {
+      "name": "375 RETURN keyboard opens",
+      "passed": true
+    },
+    {
+      "name": "375 RETURN calendar selection updates",
+      "passed": true
+    },
+    {
+      "name": "375 page fits",
+      "passed": true
+    },
+    {
+      "name": "430 DEPARTURE pointer opens",
+      "passed": true
+    },
+    {
+      "name": "430 DEPARTURE keyboard opens",
+      "passed": true
+    },
+    {
+      "name": "430 DEPARTURE calendar selection updates",
+      "passed": true
+    },
+    {
+      "name": "430 RETURN pointer opens",
+      "passed": true
+    },
+    {
+      "name": "430 RETURN keyboard opens",
+      "passed": true
+    },
+    {
+      "name": "430 RETURN calendar selection updates",
+      "passed": true
+    },
+    {
+      "name": "430 page fits",
+      "passed": true
+    },
+    {
+      "name": "768 DEPARTURE pointer opens",
+      "passed": true
+    },
+    {
+      "name": "768 DEPARTURE keyboard opens",
+      "passed": true
+    },
+    {
+      "name": "768 DEPARTURE calendar selection updates",
+      "passed": true
+    },
+    {
+      "name": "768 RETURN pointer opens",
+      "passed": true
+    },
+    {
+      "name": "768 RETURN keyboard opens",
+      "passed": true
+    },
+    {
+      "name": "768 RETURN calendar selection updates",
+      "passed": true
+    },
+    {
+      "name": "768 page fits",
+      "passed": true
+    },
+    {
+      "name": "1024 DEPARTURE pointer opens",
+      "passed": true
+    },
+    {
+      "name": "1024 DEPARTURE keyboard opens",
+      "passed": true
+    },
+    {
+      "name": "1024 DEPARTURE calendar selection updates",
+      "passed": true
+    },
+    {
+      "name": "1024 RETURN pointer opens",
+      "passed": true
+    },
+    {
+      "name": "1024 RETURN keyboard opens",
+      "passed": true
+    },
+    {
+      "name": "1024 RETURN calendar selection updates",
+      "passed": true
+    },
+    {
+      "name": "1024 page fits",
+      "passed": true
+    },
+    {
+      "name": "1440 DEPARTURE pointer opens",
+      "passed": true
+    },
+    {
+      "name": "1440 DEPARTURE keyboard opens",
+      "passed": true
+    },
+    {
+      "name": "1440 DEPARTURE calendar selection updates",
+      "passed": true
+    },
+    {
+      "name": "1440 RETURN pointer opens",
+      "passed": true
+    },
+    {
+      "name": "1440 RETURN keyboard opens",
+      "passed": true
+    },
+    {
+      "name": "1440 RETURN calendar selection updates",
+      "passed": true
+    },
+    {
+      "name": "1440 page fits",
+      "passed": true
+    },
+    {
+      "name": "return adjusts after departure",
+      "passed": true
+    },
+    {
+      "name": "earlier return invalid",
+      "passed": true
+    },
+    {
+      "name": "one-way removes return input",
+      "passed": true
+    },
+    {
+      "name": "round-trip restores valid return",
+      "passed": true
+    },
+    {
+      "name": "past departure invalid",
+      "passed": true
+    },
+    {
+      "name": "empty departure invalid",
+      "passed": true
+    },
+    {
+      "name": "multi-city calendar opens",
+      "passed": true
+    },
+    {
+      "name": "multi-city rejects out-of-order next leg",
+      "passed": true
+    },
+    {
+      "name": "hotel checkout advances",
+      "passed": true
+    },
+    {
+      "name": "same-day checkout invalid",
+      "passed": true
+    },
+    {
+      "name": "hotel calendar opens",
+      "passed": true
+    },
+    {
+      "name": "hotel calendar opens",
+      "passed": true
+    }
+  ],
+  "passed": 54,
+  "failed": []
+}

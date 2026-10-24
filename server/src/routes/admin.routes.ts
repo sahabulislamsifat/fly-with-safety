@@ -1,3 +1,5 @@
+import { adminInquiryListQuerySchema } from '../validators/inquiry-query.schemas.js';
+import { validateQuery } from '../middleware/validation.middleware.js';
 import { Router as createRouter, type Router, Request, Response, NextFunction } from 'express';
 import { requireAuth, requireRole } from '../middleware/auth.middleware.js';
 import * as contactController from '../controllers/contact.controller.js';
@@ -39,7 +41,7 @@ router.patch('/admin/testimonials/:id/status', testimonialController.updateTesti
 router.delete('/admin/testimonials/:id', testimonialController.deleteTestimonial);
 
 // ─── Flight Inquiries ────────────────────────────────────────────────────────
-router.get('/admin/inquiries/flights', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/admin/inquiries/flights', validateQuery(adminInquiryListQuerySchema), async (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = await flightService.getFlightInquiries({
       page: parseInt(req.query.page as string) || 1,
@@ -66,7 +68,7 @@ router.patch(
 );
 
 // ─── Hotel Inquiries ─────────────────────────────────────────────────────────
-router.get('/admin/inquiries/hotels', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/admin/inquiries/hotels', validateQuery(adminInquiryListQuerySchema), async (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = await hotelService.getHotelInquiries({
       page: parseInt(req.query.page as string) || 1,
@@ -93,7 +95,7 @@ router.patch(
 );
 
 // ─── Package Inquiries ────────────────────────────────────────────────────────
-router.get('/admin/inquiries/packages', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/admin/inquiries/packages', validateQuery(adminInquiryListQuerySchema), async (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = await packageService.getPackageInquiries({
       page: parseInt(req.query.page as string) || 1,
@@ -123,7 +125,7 @@ router.patch(
 );
 
 // ─── Visa Inquiries ───────────────────────────────────────────────────────────
-router.get('/admin/inquiries/visa', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/admin/inquiries/visa', validateQuery(adminInquiryListQuerySchema), async (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = await visaService.getVisaInquiries({
       page: parseInt(req.query.page as string) || 1,

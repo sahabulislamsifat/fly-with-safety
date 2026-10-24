@@ -68,12 +68,12 @@ describe('Google OAuth Route and Strategy Tests', () => {
     });
 
     it('GET /api/v1/auth/google/callback is registered and not returning 404', async () => {
-      // Without OAuth query params, Passport initiates redirect to Google
+      // A callback without browser-bound state must fail instead of restarting OAuth.
       const res = await request(app).get('/api/v1/auth/google/callback');
       expect(res.status).not.toBe(404);
       expect(res.body?.message).not.toBe('API NOT FOUND!');
       expect(res.status).toBe(302);
-      expect(res.headers.location).toContain('https://accounts.google.com');
+      expect(res.headers.location).toBe(`${env.frontendUrl}?auth=failed`);
     });
 
     it('GET /api/v1/auth/google/callback with provider error redirects to frontend failure URL', async () => {

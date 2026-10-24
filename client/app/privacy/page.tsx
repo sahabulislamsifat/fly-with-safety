@@ -11,7 +11,7 @@ export default function PrivacyPage() {
   const lastUpdated = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
   return (
-    <main className="flex-1">
+    <div className="flex-1">
       <PageHero id="privacy-heading" title="Privacy policy" />
 
       <section className="page-surface">
@@ -142,6 +142,6 @@ export default function PrivacyPage() {
         </article>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

@@ -1,13 +1,28 @@
 import { z } from 'zod';
 
+const calendarDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/).refine(value => {
+  const date = new Date(`${value}T00:00:00.000Z`);
+  return !Number.isNaN(+date) && date.toISOString().slice(0, 10) === value;
+}, 'Invalid calendar date');
+const boundedText = z.string().trim().max(128);
+// Flat, bounded itinerary metadata only. Payment/source fields are server-owned.
+export const bookingDetailsInputSchema = z.object({
+  offerId: boundedText.optional(), flightNumber: boundedText.optional(),
+  departureDate: calendarDate.optional(), returnDate: calendarDate.nullable().optional(),
+  cabinClass: boundedText.optional(), hotelId: boundedText.optional(),
+  checkIn: calendarDate.optional(), checkOut: calendarDate.optional(),
+  guests: z.number().int().min(1).max(50).optional(), rooms: z.number().int().min(1).max(50).optional(),
+  packageId: boundedText.optional(), packageTitle: boundedText.optional(), travelDate: calendarDate.optional(),
+}).strict().refine(value => Buffer.byteLength(JSON.stringify(value), 'utf8') <= 4096, 'Booking details exceed the size limit');
+
 export const passengerSchema = z.object({
   firstName: z.string().min(1, 'First name is required').max(50).trim(),
   lastName: z.string().min(1, 'Last name is required').max(50).trim(),
   passengerType: z.enum(['adult', 'child', 'infant']).default('adult'),
   gender: z.enum(['male', 'female', 'other']).optional(),
-  dateOfBirth: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Date of birth must be YYYY-MM-DD').optional(),
-  passportNumber: z.string().max(30).optional(),
-  passportExpiry: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Passport expiry must be YYYY-MM-DD').optional(),
+  dateOfBirth: calendarDate.refine(value => value <= new Date().toISOString().slice(0, 10), 'Birth date cannot be in the future').optional(),
+  passportNumber: z.string().trim().max(30).optional(),
+  passportExpiry: calendarDate.optional(),
   nationality: z.string().max(50).optional(),
 });
 
@@ -19,8 +34,8 @@ export const createBookingSchema = z.object({
   customerPhone: z.string().max(30).optional().or(z.literal('')),
   totalPrice: z.number().int().min(0).default(0),
   currency: z.string().max(10).default('BDT'),
-  bookingDetails: z.record(z.string(), z.any()).optional(),
-  passengers: z.array(passengerSchema).min(1, 'At least 1 passenger is required'),
+  bookingDetails: bookingDetailsInputSchema.optional(),
+  passengers: z.array(passengerSchema).min(1, 'At least 1 passenger is required').max(50),
   notes: z.string().max(1000).optional().or(z.literal('')),
   idempotencyKey: z.string().max(128).optional(),
 });
@@ -41,7 +56,7 @@ export const createBookingFromInquirySchema = z.object({
   totalPrice: z.number().int().min(0, 'Total price must be a non-negative integer'),
   currency: z.string().max(10).default('BDT'),
   notes: z.string().max(1000).optional().or(z.literal('')),
-  passengers: z.array(passengerSchema).min(1, 'At least 1 passenger is required').optional(),
+  passengers: z.array(passengerSchema).min(1, 'At least 1 passenger is required').max(50).optional(),
   paymentStatus: z
     .enum([
       'AWAITING_PAYMENT_INSTRUCTIONS',

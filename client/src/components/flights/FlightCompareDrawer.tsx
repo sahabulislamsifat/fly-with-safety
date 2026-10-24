@@ -9,6 +9,7 @@ import {
 import { openBookingModal } from '@/redux/slices/bookingSlice';
 import { Button } from '@/components/ui';
 import { Icon } from '@/components/ui/Icons';
+import { formatFlightTime } from '@/lib/api/flights';
 
 export function FlightCompareDrawer() {
   const dispatch = useAppDispatch();
@@ -122,7 +123,7 @@ export function FlightCompareDrawer() {
                   </div>
 
                   <div className="h-8 flex items-center text-xs">
-                    {outbound?.departureTime || '--:--'} → {outbound?.arrivalTime || '--:--'}
+                    {formatFlightTime(outbound?.departureTime)} → {formatFlightTime(outbound?.arrivalTime)}
                   </div>
 
                   <div className="h-8 flex items-center text-xs text-text-secondary">

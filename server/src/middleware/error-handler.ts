@@ -16,6 +16,10 @@ export function errorHandler(
 ): void {
   if (isAppError(err)) {
     if (err.statusCode >= 500) logger.error('app_error', serializeError(err));
+    if (err.statusCode >= 500) {
+      res.status(err.statusCode).json(errorResponse('INTERNAL_ERROR', 'Internal server error'));
+      return;
+    }
     res.status(err.statusCode).json(errorResponse(err.code, err.message, err.details));
     return;
   }

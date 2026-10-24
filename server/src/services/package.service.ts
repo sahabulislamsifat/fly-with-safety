@@ -1,3 +1,4 @@
+import { logger, serializeError } from '../lib/logger.js';
 import { prisma } from '../lib/prisma.js';
 import { generateReferenceNumber, normalizeEmail, normalizePhone } from '../utils/helpers.js';
 import { sendInquiryConfirmation } from './notification.service.js';
@@ -103,7 +104,7 @@ export async function submitPackageInquiry(
     name: input.name.trim(),
     referenceNumber,
     type: 'package',
-  }).catch((err) => console.error('[Package] Email send failed:', err));
+  }).catch((err) => logger.warn('inquiry_email_failed', serializeError(err)));
   return result;
 }
 
@@ -117,7 +118,7 @@ export async function getPackageInquiries(params: { page?: number; limit?: numbe
     prisma.packageInquiry.count({ where }),
     prisma.packageInquiry.findMany({
       where,
-      orderBy: { createdAt: 'desc' },
+      orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
       skip,
       take: limit,
     }),

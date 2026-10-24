@@ -1,0 +1,128 @@
+diff --git a/docs/proposals/01-contact-status-enum.review.sql b/docs/proposals/01-contact-status-enum.review.sql
+--- a/docs/proposals/01-contact-status-enum.review.sql
++++ b/docs/proposals/01-contact-status-enum.review.sql
+@@ -1,3 +1,9 @@
++-- REVIEW ONLY. Commit as a NEW Prisma migration only after explicit approval.
++BEGIN;
++SET LOCAL lock_timeout = '5s';
++SET LOCAL statement_timeout = '30s';
+ -- REVIEW ONLY. Not an active Prisma migration. Never executed.
+ -- Must commit before NEW is used as a default in the second migration.
+-ALTER TYPE "ContactStatus" ADD VALUE 'NEW';
++ALTER TYPE public."ContactStatus" ADD VALUE 'NEW';
++
++COMMIT;
+diff --git a/docs/proposals/02-booking-contact-schema.review.sql b/docs/proposals/02-booking-contact-schema.review.sql
+--- a/docs/proposals/02-booking-contact-schema.review.sql
++++ b/docs/proposals/02-booking-contact-schema.review.sql
+@@ -1,29 +1,33 @@
++-- REVIEW ONLY. Commit as a NEW Prisma migration only after explicit approval.
++BEGIN;
++SET LOCAL lock_timeout = '5s';
++SET LOCAL statement_timeout = '30s';
+ -- REVIEW ONLY. Not an active Prisma migration. Never executed.
+ -- Derived offline from a modeled migration baseline, NOT the live database.
+ -- Requires step 01 committed first. Validate catalog and preserve existing data before approval.
+ -- CreateEnum
+-CREATE TYPE "BookingType" AS ENUM ('FLIGHT', 'HOTEL', 'PACKAGE');
++CREATE TYPE public."BookingType" AS ENUM ('FLIGHT', 'HOTEL', 'PACKAGE');
+ 
+ -- CreateEnum
+-CREATE TYPE "BookingStatus" AS ENUM ('PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED');
++CREATE TYPE public."BookingStatus" AS ENUM ('PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED');
+ 
+ -- CreateEnum
+-CREATE TYPE "BookingModel" AS ENUM ('AGENCY_INQUIRY', 'PROVIDER_REDIRECT', 'DIRECT_API');
++CREATE TYPE public."BookingModel" AS ENUM ('AGENCY_INQUIRY', 'PROVIDER_REDIRECT', 'DIRECT_API');
+ 
+ -- AlterEnum
+ 
+ 
+ -- AlterTable
+-ALTER TABLE "ContactMessage" ADD COLUMN     "serviceType" TEXT,
++ALTER TABLE public."ContactMessage" ADD COLUMN     "serviceType" TEXT,
+ ALTER COLUMN "status" SET DEFAULT 'NEW';
+ 
+ -- CreateTable
+-CREATE TABLE "Booking" (
++CREATE TABLE public."Booking" (
+     "id" TEXT NOT NULL,
+     "referenceNumber" TEXT NOT NULL,
+-    "bookingType" "BookingType" NOT NULL DEFAULT 'FLIGHT',
+-    "bookingModel" "BookingModel" NOT NULL DEFAULT 'AGENCY_INQUIRY',
+-    "status" "BookingStatus" NOT NULL DEFAULT 'PENDING',
++    "bookingType" public."BookingType" NOT NULL DEFAULT 'FLIGHT',
++    "bookingModel" public."BookingModel" NOT NULL DEFAULT 'AGENCY_INQUIRY',
++    "status" public."BookingStatus" NOT NULL DEFAULT 'PENDING',
+     "customerName" TEXT NOT NULL,
+     "customerEmail" TEXT NOT NULL,
+     "customerPhone" TEXT,
+@@ -39,7 +43,7 @@ CREATE TABLE "Booking" (
+ );
+ 
+ -- CreateTable
+-CREATE TABLE "BookingPassenger" (
++CREATE TABLE public."BookingPassenger" (
+     "id" TEXT NOT NULL,
+     "bookingId" TEXT NOT NULL,
+     "firstName" TEXT NOT NULL,
+@@ -56,11 +60,11 @@ CREATE TABLE "BookingPassenger" (
+ );
+ 
+ -- CreateTable
+-CREATE TABLE "BookingStatusHistory" (
++CREATE TABLE public."BookingStatusHistory" (
+     "id" TEXT NOT NULL,
+     "bookingId" TEXT NOT NULL,
+-    "fromStatus" "BookingStatus" NOT NULL,
+-    "toStatus" "BookingStatus" NOT NULL,
++    "fromStatus" public."BookingStatus" NOT NULL,
++    "toStatus" public."BookingStatus" NOT NULL,
+     "reason" TEXT,
+     "changedBy" TEXT,
+     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+@@ -69,32 +73,34 @@ CREATE TABLE "BookingStatusHistory" (
+ );
+ 
+ -- CreateIndex
+-CREATE UNIQUE INDEX "Booking_referenceNumber_key" ON "Booking"("referenceNumber");
++CREATE UNIQUE INDEX "Booking_referenceNumber_key" ON public."Booking"("referenceNumber");
+ 
+ -- CreateIndex
+-CREATE INDEX "Booking_referenceNumber_idx" ON "Booking"("referenceNumber");
++CREATE INDEX "Booking_referenceNumber_idx" ON public."Booking"("referenceNumber");
+ 
+ -- CreateIndex
+-CREATE INDEX "Booking_customerEmail_idx" ON "Booking"("customerEmail");
++CREATE INDEX "Booking_customerEmail_idx" ON public."Booking"("customerEmail");
+ 
+ -- CreateIndex
+-CREATE INDEX "Booking_status_idx" ON "Booking"("status");
++CREATE INDEX "Booking_status_idx" ON public."Booking"("status");
+ 
+ -- CreateIndex
+-CREATE INDEX "Booking_createdAt_idx" ON "Booking"("createdAt");
++CREATE INDEX "Booking_createdAt_idx" ON public."Booking"("createdAt");
+ 
+ -- CreateIndex
+-CREATE INDEX "BookingPassenger_bookingId_idx" ON "BookingPassenger"("bookingId");
++CREATE INDEX "BookingPassenger_bookingId_idx" ON public."BookingPassenger"("bookingId");
+ 
+ -- CreateIndex
+-CREATE INDEX "BookingStatusHistory_bookingId_idx" ON "BookingStatusHistory"("bookingId");
++CREATE INDEX "BookingStatusHistory_bookingId_idx" ON public."BookingStatusHistory"("bookingId");
+ 
+ -- AddForeignKey
+-ALTER TABLE "Booking" ADD CONSTRAINT "Booking_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
++ALTER TABLE public."Booking" ADD CONSTRAINT "Booking_userId_fkey" FOREIGN KEY ("userId") REFERENCES public."User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ 
+ -- AddForeignKey
+-ALTER TABLE "BookingPassenger" ADD CONSTRAINT "BookingPassenger_bookingId_fkey" FOREIGN KEY ("bookingId") REFERENCES "Booking"("id") ON DELETE CASCADE ON UPDATE CASCADE;
++ALTER TABLE public."BookingPassenger" ADD CONSTRAINT "BookingPassenger_bookingId_fkey" FOREIGN KEY ("bookingId") REFERENCES public."Booking"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ 
+ -- AddForeignKey
+-ALTER TABLE "BookingStatusHistory" ADD CONSTRAINT "BookingStatusHistory_bookingId_fkey" FOREIGN KEY ("bookingId") REFERENCES "Booking"("id") ON DELETE CASCADE ON UPDATE CASCADE;
++ALTER TABLE public."BookingStatusHistory" ADD CONSTRAINT "BookingStatusHistory_bookingId_fkey" FOREIGN KEY ("bookingId") REFERENCES public."Booking"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ 
++
++COMMIT;

@@ -1,0 +1,24 @@
+diff --git a/server/test/run-postgres-integration.mjs b/server/test/run-postgres-integration.mjs
+--- a/server/test/run-postgres-integration.mjs
++++ b/server/test/run-postgres-integration.mjs
+@@ -7,8 +7,9 @@ import { verifyMigrationHistory } from './migration-history.mjs';
+ 
+ // Preparation does not authorize execution. Run only after separate target/write approval.
+ const target = assertDisposableTarget(process.env);
+-if (new URL(target).pathname !== '/flywithsafe_integration' || process.env.RUN_RELIABILITY_INTEGRATION !== 'true') {
+-  throw new Error('Reliability integration requires explicit opt-in to the approved flywithsafe_integration database.');
++const approvedDatabase = process.env.APPROVED_DISPOSABLE_DATABASE;
++if (new URL(target).pathname !== `/${approvedDatabase}` || process.env.RUN_RELIABILITY_INTEGRATION !== 'true') {
++  throw new Error('Reliability integration requires explicit opt-in to the exact approved local database.');
+ }
+ // Catalog-only preflight precedes the child process and every fixture write.
+ const db = new pg.Client({ connectionString: target, connectionTimeoutMillis: 5000,
+@@ -16,7 +17,7 @@ const db = new pg.Client({ connectionString: target, connectionTimeoutMillis: 50
+ try {
+   await db.connect();
+   const identity = await db.query('SELECT current_database() AS name, inet_server_addr()::text AS host');
+-  if (identity.rows[0]?.name !== 'flywithsafe_integration' || !['127.0.0.1', '::1'].includes(identity.rows[0]?.host)) throw new Error('Target identity mismatch');
++  if (identity.rows[0]?.name !== approvedDatabase || !['127.0.0.1', '::1'].includes(identity.rows[0]?.host)) throw new Error('Target identity mismatch');
+   const migrations = await db.query('SELECT migration_name, checksum, finished_at, rolled_back_at FROM public."_prisma_migrations"');
+   verifyMigrationHistory(migrations.rows);
+   const schemaIssues = await db.query(readFileSync(resolve('test/integration-schema-preflight.sql'), 'utf8'));

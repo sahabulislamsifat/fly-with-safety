@@ -13,6 +13,7 @@ import {
   tokenSchema,
 } from '../validators/auth.schemas.js';
 import { env } from '../config/env.js';
+import { beginGoogleState, verifyGoogleState } from '../middleware/oauth-state.js';
 
 const router: Router = createRouter();
 
@@ -74,12 +75,18 @@ router.post(
 router.get(
   '/auth/google',
   requireGoogleOAuth,
-  passport.authenticate('google', { scope: ['profile', 'email'], session: false }),
+  beginGoogleState,
+  (req: Request, res: Response, next: NextFunction) => {
+    passport.authenticate('google', {
+      scope: ['profile', 'email'], session: false, state: res.locals.googleOAuthState,
+    })(req, res, next);
+  },
 );
 
 router.get(
   '/auth/google/callback',
   requireGoogleOAuth,
+  verifyGoogleState,
   (req: Request, res: Response, next: NextFunction) => {
     passport.authenticate('google', {
       failureRedirect: `${env.frontendUrl}?auth=failed`,

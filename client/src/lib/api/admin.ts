@@ -84,16 +84,11 @@ export interface AdminVisaInquiry {
 
 export interface AdminBookingPassenger {
   id: string;
-  bookingId: string;
   firstName: string;
   lastName: string;
   passengerType: string;
-  gender: string | null;
-  dateOfBirth: string | null;
-  passportNumber: string | null;
-  passportExpiry: string | null;
+  passportNumberMasked?: string;
   nationality: string | null;
-  createdAt: string;
 }
 
 export interface AdminBookingStatusHistory {
@@ -261,7 +256,7 @@ export interface CreateBookingFromInquiryPayload {
     passengerType?: 'adult' | 'child' | 'infant';
     gender?: 'male' | 'female' | 'other';
     dateOfBirth?: string;
-    passportNumber?: string;
+    passportNumberMasked?: string;
     passportExpiry?: string;
     nationality?: string;
   }>;

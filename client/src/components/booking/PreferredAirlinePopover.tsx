@@ -86,13 +86,14 @@ export function PreferredAirlinePopover({
         <div
           role="dialog"
           aria-label="Select preferred airlines"
-          className="absolute right-0 bottom-full mb-2 z-50 w-72 sm:w-80 bg-white rounded-xs border border-neutral-200/90 shadow-2xl p-4 animate-in fade-in slide-in-from-bottom-2 duration-150"
+          className="absolute left-0 sm:left-auto sm:right-0 bottom-full mb-2 z-50 w-60 sm:w-80 max-w-[calc(100vw-4rem)] bg-white rounded-xs border border-neutral-200/90 shadow-2xl p-4 animate-in fade-in slide-in-from-bottom-2 duration-150"
         >
           <div className="flex items-center justify-between mb-3 pb-2 border-b border-neutral-100">
             <span className="text-xs font-bold text-neutral-900">Select Preferred Airlines</span>
             <button
               type="button"
               onClick={() => setIsOpen(false)}
+              aria-label="Close preferred airlines"
               className="text-neutral-400 hover:text-neutral-600 p-1 rounded-xs"
             >
               <Icon name="x" size={14} />
@@ -107,6 +108,7 @@ export function PreferredAirlinePopover({
             />
             <input
               type="text"
+              aria-label="Filter airlines"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Filter airlines..."

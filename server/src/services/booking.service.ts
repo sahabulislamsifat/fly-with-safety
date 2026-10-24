@@ -1,3 +1,5 @@
+import { Prisma } from '../generated/prisma/client.js';
+import { createIdempotentInquiry } from './idempotency.service.js';
 import { prisma } from '../lib/prisma.js';
 import { generateReferenceNumber, normalizeEmail, normalizePhone } from '../utils/helpers.js';
 import { sendBookingConfirmation, sendBookingStatusNotification } from './notification.service.js';
@@ -10,55 +12,14 @@ import type {
 } from '../validators/booking.schemas.js';
 import { logger, serializeError } from '../lib/logger.js';
 
-interface CachedBooking {
-  booking: any;
-  timestamp: number;
-}
-const idempotencyStore = new Map<string, CachedBooking>();
-
-// Periodically clean up entries older than 10 minutes
-setInterval(() => {
-  const now = Date.now();
-  for (const [key, value] of idempotencyStore.entries()) {
-    if (now - value.timestamp > 10 * 60 * 1000) {
-      idempotencyStore.delete(key);
-    }
-  }
-}, 60 * 1000);
-
 export async function createBooking(input: CreateBookingInput, userId?: string, headerIdempotencyKey?: string) {
   const idempotencyKey = input.idempotencyKey || headerIdempotencyKey;
-  if (idempotencyKey && idempotencyStore.has(idempotencyKey)) {
-    return idempotencyStore.get(idempotencyKey)!.booking;
-  }
-
   const normalizedEmail = normalizeEmail(input.customerEmail);
-
-  // Duplicate protection: if exact same booking request arrived within last 30s
-  const recentDuplicate = await prisma.booking.findFirst({
-    where: {
-      customerEmail: normalizedEmail,
-      totalPrice: input.totalPrice,
-      bookingType: input.bookingType,
-      customerName: input.customerName.trim(),
-      createdAt: { gte: new Date(Date.now() - 30 * 1000) },
-    },
-    include: {
-      passengers: true,
-      statusHistory: true,
-    },
-  });
-
-  if (recentDuplicate) {
-    if (idempotencyKey) {
-      idempotencyStore.set(idempotencyKey, { booking: recentDuplicate, timestamp: Date.now() });
-    }
-    return recentDuplicate;
-  }
+  const { idempotencyKey: _key, ...payload } = input;
 
   const referenceNumber = generateReferenceNumber();
 
-  const booking = await prisma.booking.create({
+  const create = (db: Prisma.TransactionClient) => db.booking.create({
     data: {
       referenceNumber,
       userId: userId || null,
@@ -99,9 +60,20 @@ export async function createBooking(input: CreateBookingInput, userId?: string, 
     },
   });
 
-  if (idempotencyKey) {
-    idempotencyStore.set(idempotencyKey, { booking, timestamp: Date.now() });
-  }
+  // Commit booking and unique operation/principal/key record together. Fail closed on storage errors.
+  const result = idempotencyKey
+    ? await createIdempotentInquiry({
+        operation: 'booking:create', key: idempotencyKey, userId,
+        email: normalizedEmail, payload, create,
+        findByReference: (referenceNumber) => prisma.booking.findFirst({
+          where: { referenceNumber, userId: userId || null,
+            ...(!userId ? { customerEmail: normalizedEmail } : {}) },
+          include: { passengers: true, statusHistory: true },
+        }),
+      })
+    : { inquiry: await create(prisma), replayed: false };
+  const booking = result.inquiry;
+  if (result.replayed) return booking;
 
   // Asynchronous confirmation email
   sendBookingConfirmation({
@@ -516,7 +488,7 @@ export async function adminGetBookings(params: {
       skip,
       take: limit,
       include: {
-        passengers: true,
+        passengers: { select: { id: true, firstName: true, lastName: true, passengerType: true, nationality: true, passportNumber: true } },
         statusHistory: true,
       },
     }),
