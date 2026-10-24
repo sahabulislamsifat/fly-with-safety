@@ -1,3 +1,8 @@
+> **Current status — 2026-10-25:** D-1 is authorized and executed; fresh review recommends **PASS WITH DOCUMENTED LIMITATIONS — REQUIRES OWNER REVIEW**. Only ADR-01/02/07/08's bounded synthetic contracts have M01 approval. Production decisions and all legal gates remain open. See [acceptance review](PHASE_1I_D_D1_ACCEPTANCE_REVIEW.md) and the R3 annex below; earlier status statements are historical.
+
+> **REVIEW DRAFT ONLY — REVISE REVIEW DRAFT. Not approved for implementation.**
+> The review integration annex below governs conflicts with retained earlier proposals. Every legal decision is BLOCKED.
+
 # Phase 1I-D — Passport encryption, key management and retention design
 
 Date: 2026-10-23. Status: proposed architecture; no implementation authorization implied.
@@ -286,3 +291,159 @@ No approval question is required to finish this design. The next review is D2 ar
 Design acceptance: inventory and trust boundaries documented; confirmed/source behavior separated from recommendations; authenticated envelope and key lifecycle specified; role/purpose and supplier boundaries defined; retention/legal uncertainty explicit; migration/rollback and classified tests proposed; future approvals identified. No production-readiness or legal-compliance claim.
 
 Verification scope: this document only. Check the 17 numbered sections, evidence paths, absence of unintended file edits, and git diff whitespace. Application/unit/database tests are intentionally not rerun for documentation-only work. Prior security, pagination, integration safety and application changes remain outside the write scope.
+
+
+## Review integration annex — 2026-10-23
+
+The original 17 sections are preserved verbatim as prior design evidence. Their prior completion wording is historical, not approval. Attached review/handoff input is merged here, subject to the owner’s documentation-only request. Full technical disposition and approval sequence: [architecture review](PHASE_1I_D_ARCHITECTURE_REVIEW.md). Infrastructure disposition: [KMS gap report](PHASE_1I_D_KMS_INFRASTRUCTURE_GAPS.md).
+
+### Conflict resolution and precedence
+
+- No design option is approved. Grouped-bundle/fresh-key-per-write remains the review recommendation; attachment per-field/passenger-key alternative requires ADR-01, exact nonce usage budget and independent review before selection. Never reuse the grouped-envelope format for multiple field encryptions under one nonce.
+- Original retention numbers in section 9 are retained for traceability only and superseded as active requirements: all durations are TBD until approved legal/business/security schedules. Statutory statements throughout both sources are unverified leads subject to the BLOCKED register, including VAT, processing-register scope and cross-border applicability.
+- Imported PARTIAL/PENDING labels describe supplied evidence only. They never override BLOCKED. Supplied commencement dates, section mappings and summaries have not been adopted as verified law.
+- Existing D2/D3/D4/D5 stage meanings in section 14 govern planning. Attachment stage numbering is not an authorization or a new schedule.
+- Preserve field-specific protections for outbox authentication secrets, status reasons, historical JSON, guest lookup and backups. No generic passport-encryption claim closes these hazards.
+
+### Input fingerprints
+
+- PHASE_1I_D_DEVELOPMENT_AGENT_HANDOFF.md: a2a31270e9e23251bbd2d7641a851ca257be1355640a8b788c6bce8fac60dd4c
+- PHASE_1I_D_DEVELOPMENT_AGENT_HANDOFF (1).md: a2a31270e9e23251bbd2d7641a851ca257be1355640a8b788c6bce8fac60dd4c
+- PHASE_1I_D_PASSPORT_ENCRYPTION_RETENTION_DESIGN_REVIEW_DRAFT.md: 86911ba232a8bd8ec8d07ead14cecabfaf907e3d803dd3583c0c00eecdc44f0c
+- PHASE_1I_D_PASSPORT_ENCRYPTION_RETENTION_DESIGN_REVIEW_DRAFT (1).md: 86911ba232a8bd8ec8d07ead14cecabfaf907e3d803dd3583c0c00eecdc44f0c
+- PHASE_1I_D_PASSPORT_ENCRYPTION_RETENTION_DESIGN.md: fe88c882ad193db134912f95f73812b5e2b9cf70d13011852c76bfb58891287e
+
+### Supplied legal source leads — not authenticated legal findings
+
+Official source entry points discovered on 23 October 2026:
+
+- Government Gazette listing, 10 April 2026, Act No. 63, pp. 16435–16462: https://www.dpp.gov.bd/bgpress/index.php/document/get_extraordinary/61156
+- Official law listing: https://bdlaws.minlaw.gov.bd/act-print-1692.html
+- Official Section 17 security page: https://bdlaws.minlaw.gov.bd/act-print-1692/section-print-57283.html
+- Official Section 18 retention page: https://bdlaws.minlaw.gov.bd/act-print-1692/section-print-57284.html
+- Official Chapter IV listing (including Section 19): https://bdlaws.minlaw.gov.bd/act-1692/act-chapter-print-2696.html
+- Official Chapter VII listing (classification/storage/transfer): https://bdlaws.minlaw.gov.bd/act-1692/act-chapter-print-2699.html
+- OWASP engineering guidance (not law): https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html and https://cheatsheetseries.owasp.org/cheatsheets/Key_Management_Cheat_Sheet.html
+
+**Source limitation:** Individual government-hosted section listings and indexed excerpts were accessible during research, but the entire official Gazette PDF and all current subordinate regulations/commencement notices were not authenticated end-to-end. The placeholders below must not be marked VERIFIED simply because a search result is indexed. The official Bangla law governs if an English text conflicts; refer to Section 45 and seek counsel verification. Record official file checksum and source retrieval date after obtaining the full text.
+
+
+### Imported legal decision register — all rows BLOCKED
+
+**Status definitions:** `PARTIAL` = indexed or individually available official provision but full authoritative-text/regulation check pending; `PENDING` = requires retrieval or lawyer confirmation; `VERIFIED` = exact authoritative text/version checked, cited, and recorded by reviewer. **No row below is approved for compliance sign-off.**
+
+| ID | Legal topic / indicative source | Provisional statutory indication — NOT final legal advice | Proposed FlyWithSafe technical or procedural control | Official Source Verification | Counsel Review | Release dependency | Overall status |
+|---|---|---|---|---|---|---|---|
+| L-01 | Act identity, application, commencement — §1 | Act No. 63/2026 dated 10 Apr 2026; commencement differs for specified provisions including §§23, 31–35 | Maintain law/version, commencement and regulation watch register | `[PARTIAL — full Gazette and notices pending]` | `[PENDING — counsel]` | Verify provisions operative for intended release  **BLOCKED — authoritative verification and qualified Bangladesh counsel required** |
+| L-02 | Data classification — §2 | Names/identifiers are personal data; statutory *sensitive personal data* is enumerated with potential additions by rules | Treat passport identifiers/DOB as **high-risk personal information** for engineering regardless of exact legal class | `[PARTIAL — definitions/rules pending]` | `[PENDING — confirm classification]` | Confirm obligations by category  **BLOCKED — authoritative verification and qualified Bangladesh counsel required** |
+| L-03 | Lawful basis/consent — §§5–8 | Processing depends on a lawful basis and conditions; notices and purpose restrictions matter | Purpose ledger; disclose collection purposes; capture appropriate consent evidence where required | `[PARTIAL — full text pending]` | `[PENDING — basis by workflow]` | No new collection flow without approved basis  **BLOCKED — authoritative verification and qualified Bangladesh counsel required** |
+| L-04 | Child travelers — §9 | Special conditions for children and guardian/authorized consent | Age-aware guardian authority and minimum passenger data; no unnecessary profiling | `[PARTIAL — rules pending]` | `[PENDING — legal guardian workflow]` | Child-traveler launch approval  **BLOCKED — authoritative verification and qualified Bangladesh counsel required** |
+| L-05 | Confidentiality/security — §§16–17, 22 | Appropriate technical/organizational safeguards; §17 expressly includes encryption and regular effectiveness assessment | Authenticated encryption, RBAC, minimal DTOs, audit trails, security reviews | `[PARTIAL — official §17 page retrieved]` | `[PENDING — required controls]` | Security sign-off and verified tests  **BLOCKED — authoritative verification and qualified Bangladesh counsel required** |
+| L-06 | Data subject rights — Chapter III | Mechanisms for requests and rights; procedural details may depend on regulations | Authenticated intake, identity verification, fulfillment logs, exception/appeal flow | `[PENDING — full sections/rules]` | `[PENDING — rights and timelines]` | Support workflow sign-off  **BLOCKED — authoritative verification and qualified Bangladesh counsel required** |
+| L-07 | Retention — §18 | Purpose-based retention limited by durations to be set by regulation, subject to applicable exceptions | Configurable retention matrix; legal holds; **no automatic deletion enabled** | `[PARTIAL — official §18 page retrieved; rules pending]` | `[PENDING — exact periods/exceptions]` | Retention jobs blocked  **BLOCKED — authoritative verification and qualified Bangladesh counsel required** |
+| L-08 | Processing records — §19 | A minimum five-year register/recordkeeping obligation appears in text, subject to provisions/other laws | Separate processing/audit register from original passport values; avoid five-year passport-retention assumption | `[PARTIAL — chapter text indexed]` | `[PENDING — precise scope & duration]` | Approve audit-record policy  **BLOCKED — authoritative verification and qualified Bangladesh counsel required** |
+| L-09 | Breach response — §20 | Risk-based breach notification; process/form/timing linked to regulations | Incident playbook, evidence preservation, notification decision tree | `[PARTIAL — section indexed]` | `[PENDING — timing and recipients]` | Operational readiness  **BLOCKED — authoritative verification and qualified Bangladesh counsel required** |
+| L-10 | Data protection planning — §22 | Controller planning and appropriate standards are contemplated | Versioned design, risk register, audit cadence, accountable owners | `[PARTIAL — official section indexed]` | `[PENDING — obligations]` | Document approval  **BLOCKED — authoritative verification and qualified Bangladesh counsel required** |
+| L-11 | Classification and international transfer — Chapter VII, starting §29 | Transfer/storage/classification conditions need full statute and current rule review | Supplier-country/hosting inventory; transfer assessment; contracts; restricted disclosure | `[PENDING — review complete Chapter VII and rules]` | `[PENDING — transfer/legal basis]` | **No live overseas passport transfer before sign-off**  **BLOCKED — authoritative verification and qualified Bangladesh counsel required** |
+| L-12 | Repeal/authoritative language — §§44–45 | 2026 Act repeals 2025 ordinance framework; official Bangla prevails in conflict | Cite 2026 Act and authoritative Bangla, track amendments | `[PARTIAL — official listing indexed]` | `[PENDING — transition interpretation]` | Legal baseline approval  **BLOCKED — authoritative verification and qualified Bangladesh counsel required** |
+
+**Critical distinction:** The Act's processing-register retention concept in §19 must **not** be used as blanket authorization to keep passport numbers or scans for five years. Exact record categories, exceptions, cross-border restrictions, subordinate regulations, and applicability must be signed off by counsel.
+
+**Register administration:** For each row add final statutory text/excerpt reference, Gazette page, official URL, SHA-256 checksum of full copy, retrieval date, regulation/notification references, reviewer name, counsel disposition (`approved`, `conditional`, `rejected`), risk owner, and re-review date. Retain no actual passport data in the register.
+
+
+### Additional blocked legal questions
+
+| ID | Question | Owner | Status / evidence required |
+|---|---|---|---|
+| L-13 | VAT/accounting vs passport retention and start events | Bangladesh tax/legal counsel | BLOCKED; current applicable primary text and scoped opinion |
+| L-14 | Cross-border supplier/hosting processing and any EU scope | Privacy counsel + supplier owner | BLOCKED; countries, roles, contracts, applicability and transfer opinion |
+
+For every L-01–L-14 row, record authenticated document URL/version/checksum, exact section/page, retrieval date, current rules/notices, applicability, named reviewer, qualified counsel disposition, owner and re-review date. All remain BLOCKED in this review. An accessible single section page is insufficient to close any row.
+
+### Merge acceptance
+
+Source findings retained; legal and infrastructure additions integrated with explicit precedence; technical defects tracked with owners/gates. Disposition: REVISE REVIEW DRAFT. Ready to convene formal review, not ready for architecture approval, compliance sign-off, implementation or production activation.
+
+## Architecture refinement R2 — 2026-10-24
+
+**REVIEW DRAFT — recommendations only.** This annex consolidates the three refinement addenda without removing the preceding review. R2 recommendations govern the next approval packet where historical proposals conflict; no recommendation is approved or implemented. All L-01 through L-14 remain BLOCKED. Numeric retention suggestions in the historical body remain inactive, with operational durations TBD.
+
+### Source reconciliation
+
+All required repository reports and all three addenda were found. Downloads source fingerprints (SHA-256):
+
+| Addendum | Hash | Integrated destination |
+|---|---|---|
+| PHASE_1I_D_ARCHITECTURE_REFINEMENT_ADDENDUM.md | 05820ea7983b075d156bbcabc624a7d3941a77f011800c36bda3626676042547 | This annex and architecture ADR register |
+| PHASE_1I_D_KMS_INFRASTRUCTURE_REFINEMENT_ADDENDUM.md | c2277da6a520cb41dda5ce5481e10eb38e5e7f91128a1b948cb6d732a189559f | KMS infrastructure report R2 |
+| PHASE_1I_D_SYNTHETIC_CRYPTO_SCOPE_AND_LEGAL_GATES.md | e439d2e0f306ad95946f921de387f83e7abe4d2c79addef0165d57ecc0154062 | Synthetic prototype specification |
+
+The architecture addendum's ADR-02/03/04/05/06/07 map respectively to this packet's ADR-06/07/08/03/09/10. Original ADR-01–05 retain their meanings. Original stage D4 and the new **approval gate D-1** both concern offline code, but D-1 is an authorization boundary, not a renumbering of historical stages.
+
+### Recommended envelope contract, not implementation
+
+Resolve the granularity conflict in favor of the original **grouped document bundle, fresh DEK per write**, pending ADR-01 approval. The addendum's per-field scheme permits selective decrypt but creates shared-DEK nonce/accounting and partial-retention complexity. It remains a viable alternative if product/counsel require independently encrypted field lifecycles. Grouped storage permits removing a field only by authorized decrypt, omission, and re-encryption of remaining fields with a fresh DEK; backups remain a separate retention issue. Do not implement a hybrid accidentally.
+
+Protected payload V1: strict object containing only optional passportNumber, passportExpiry and dateOfBirth. Omit absent fields, disallow unknown keys, distinguish omitted from empty, validate real calendar dates. Issuing country/document type require a separately reviewed schema/collection decision. Names/nationality remain personal information and require existing DTO controls; this proposal does not claim to encrypt all PII. No scans, bookingDetails, free text or supplier credentials enter this envelope.
+
+Proposed CryptoEnvelopeV1:
+- payloadVersion: 1; algorithm: AES-256-GCM; aadVersion: 1.
+- keyProvider: fixed approved adapter discriminator; keyRef: immutable allowlisted KEK resource identity; keyVersion: provider-specific version identifier when exposed. AWS symmetric KMS internal material version is not exposed as an application-selected version: store stable key ARN and opaque wrapped ciphertext, never invent a version.
+- wrapAlgorithm: adapter-specific allowlisted identifier; wrappedDek: canonical base64url encoded opaque blob, not plaintext or a secret-manager URL.
+- nonce: canonical base64url, exactly 12 decoded bytes; ciphertext: bounded bytes; tag: exactly 16 decoded bytes.
+- Envelope maximum 16 KiB encoded; plaintext maximum 4 KiB UTF-8. Reject malformed encoding, excessive length, unknown properties, algorithm confusion and unknown versions before unwrap. A future provider exceeding these limits requires versioned review.
+- DEK: exactly 32 cryptographically random bytes from provider generation or local CSPRNG before provider wrapping. One fresh DEK and nonce for each encryption, including retries and field removal. Persist ciphertext, wrapped DEK and binding IDs atomically in a future approved transaction. Never cache plaintext DEKs between requests.
+
+AAD V1 is deterministic UTF-8 encoding of a fixed-order string array:
+["FlyWithSafe", "passenger-document", "1", environmentId, bookingId, passengerId].
+Use canonical JSON serialization of these validated ASCII strings with no whitespace, not delimiter concatenation or arbitrary object serialization. Immutable IDs are allocated before persistence. Context comes from authenticated database relationships and configured environment, never solely from an untrusted envelope. Purpose is the stable cryptographic domain; a user's mutable access reason is evaluated separately.
+
+Do not include mutable customer email, booking status, owner, key alias or wrapped DEK in content AAD. Key references are independently allowlisted before KMS use. Bind wrapping context where supported (AWS non-secret encryption context; GCP authenticated data). Azure RSA wrapping does not supply equivalent application AAD; content authentication still binds context and must be tested. No PII in provider context because it may enter audit logs.
+
+Moving between environments or changing binding IDs requires an authorized decrypt/re-encrypt job with explicit source/target contexts; renaming a field requires payload-version migration. KEK rewrap preserves content AAD, nonce and ciphertext. Algorithm/payload migrations generate fresh content keys. No blind index is proposed; encrypted fields cannot participate in existing plaintext searches. Booking references and ownership indexes remain independent.
+
+AEAD final authentication must succeed before plaintext is returned. Best-effort buffer clearing cannot guarantee erasure of JavaScript strings, GC copies or process dumps. Restrict dumps/telemetry and lifetime. AAD does not detect replay of an older valid same-record envelope: use revision/CAS and independent audit, while acknowledging database-administrator rollback remains a threat.
+
+### Retrieval and identity boundary
+
+| Consumer | Permitted normal output | Unwrap permission | Required privileged control |
+|---|---|---|---|
+| Customer API | Existing minimized owned-booking DTO | None | Ownership check remains mandatory |
+| Guest lookup | Current minimized contract; further name reduction separately reviewed | None | Existing reference/access checks; rate limits |
+| Admin list | Summary and approved persisted mask metadata | None | ADMIN/STAFF plus existing filters; no hidden unwrap for masking |
+| Fulfillment operator | Only fields required for assigned booking/task | Separate privileged service only | Role AND assignment AND purpose AND expiry/step-up; recheck ownership/booking association |
+| Supplier adapter | Supplier-specific necessary fields transiently | No direct KMS/DB credentials | Privileged service grant tied to verified quote/reservation and supplier |
+| Notification worker | Minimized notification data | No passenger-key unwrap | Separate auth-delivery protection if required |
+| Incident/audit | Metadata first | Denied by default | Time-bounded dual-approved break-glass, independently audited |
+
+Audit admitted/denied access using opaque actor/task IDs, purpose code, policy version, key resource/version, request ID, result category and timestamp. Never log passport, DOB, token-bearing URLs, raw payloads, arbitrary reasons or provider error bodies. Audit storage/admission failure denies privileged retrieval under the proposed policy; review availability implications. KMS IAM is workload authorization, not customer authorization.
+
+### Outbox refinement
+
+Existing notification templates persist verification/reset URLs and customer-facing status reasons; document encryption alone does not protect these. Recommend a separately versioned auth-delivery envelope with a distinct purpose/key and worker identity, bounded by token expiry and approved retention. Keep durable token issuance and outbox creation atomic; retries reuse the intended credential, never mint a fresh valid token on every retry. A reference-only or just-in-time token design is an alternative requiring consumption/expiry and crash analysis before approval.
+
+Keep status reasons to approved codes plus sanitized customer-safe text; no passenger documents in retry/dead-letter payloads or provider errors. Expired/consumed auth messages must not be revived by redrive. Disabled transport remains truthfully suppressed/failed under existing F04 semantics, never falsely delivered. Preserve F01 durable idempotency and F03 lease fencing. Transport acceptance is not inbox delivery; any delivery/bounce webhook needs its own authenticated, idempotent design.
+
+### Supplier and payment boundaries
+
+Frontend -> authorized Express API -> encrypted storage; privileged fulfillment retrieves minimal document fields only when an approved supplier operation requires them. Search/inquiry must not collect passport by default. Flight and hotel inventory, quotes, reservations and fulfillment come from external approved systems, with server-side quote validation, supplier idempotency and reconciliation. Suppliers receive neither KMS nor database credentials. Future SSLCommerz receives only necessary payment identifiers/amounts, never passport envelopes. Notifications/support receive minimized summaries. Akij Air is public workflow inspiration only.
+
+### Review packet
+
+See [architecture decisions](PHASE_1I_D_ARCHITECTURE_REVIEW.md), [KMS evaluation](PHASE_1I_D_KMS_INFRASTRUCTURE_GAPS.md), [Cloudflare assessment](PHASE_1I_D_CLOUDFLARE_COMPATIBILITY.md), [synthetic specification](PHASE_1I_D_SYNTHETIC_CRYPTO_PROTOTYPE_SPEC.md), and [readiness/actions/handoff](PHASE_1I_D_REFINEMENT_READINESS_AND_HANDOFF.md). No application or database implementation is authorized by this annex.
+
+
+## R3 — synthetic acceptance and security refinements (2026-10-25)
+
+Current authority: ADR-01/02/07/08 received M01 approval only for M02/D-1's synthetic contract. Exact nine-file execution is complete; fresh checks pass 104 tests/two suites and no-emit TypeScript. [Acceptance verdict](PHASE_1I_D_D1_ACCEPTANCE_REVIEW.md): PASS WITH DOCUMENTED LIMITATIONS — REQUIRES OWNER REVIEW. Formal owner acceptance and broader production architecture remain pending.
+
+Grouped granularity is settled for the fake-data prototype only. Historical per-field alternatives and independent production retention requirements remain review context. No real ID allocation, privileged identity, revision/CAS, encryption persistence, mask metadata or key management was implemented.
+
+Acceptance §5 refines ADR-03: current token creation and outbox enqueue are separate writes. Atomic issuance, conditional single-use consumption, independent versioned auth-delivery encryption, expiry/redrive rules, lease fencing and legacy-reader rollout require future approval. Retry must reuse one credential identity and cannot promise exactly-once SMTP delivery.
+
+Acceptance §6 refines ADR-14: versioned HMAC of logical canonical requests; replay dispatch by stored version/key; preserve legacy vectors and operation/principal/key uniqueness. Never reconstruct a payload HMAC from only an old hash or silently change guest principal scope. OAuth markers are excluded. No idempotency/auth/outbox code changed.
+
+The acceptance report supplies current dispositions for 15 ADRs, 18 manual actions and proposed D-2–D-6 packages. These package labels do not renumber earlier D2–D5 roadmap stages or authorize execution. Hosting/KMS remain unselected; C-first/B-after-proof is only a recommendation.
+
+All L-01–L-14 rows above remain unchanged and BLOCKED: zero fully independently verified, zero formally approved. No statutory period/commencement/retention/transfer rule is adopted. Engineering controls are not legal conclusions. Database/schema/backfill/removal/restore/retention and supplier disclosure keep distinct gates. Phase 1I-D is incomplete; Phase 1I-E has not started.
