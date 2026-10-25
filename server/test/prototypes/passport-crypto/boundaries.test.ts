@@ -11,13 +11,28 @@ import dns from 'node:dns';
 import dgram from 'node:dgram';
 import childProcess from 'node:child_process';
 import ts from 'typescript';
-import { offlineBoundary } from './vitest.config.js';
+import { offlineBoundary } from './fixtures.js';
 
 const root = __dirname;
 const runtime = ['contracts.ts', 'envelope-codec.ts', 'passenger-document-crypto.ts', 'synthetic-kms-adapter.ts'];
 const source = (file: string) => readFileSync(resolve(root, file), 'utf8');
 
 describe('14 offline boundaries', () => {
+  it('R17/R18 installs setup guards before explicitly importing runtime modules', async () => {
+    expect(offlineBoundary.installed).toBe(true);
+    expect(() => net.connect({ host: 'synthetic.invalid', port: 443 })).toThrow('D1_OFFLINE_BOUNDARY');
+    const fixtureAst = ts.createSourceFile('fixtures.ts', source('fixtures.ts'), ts.ScriptTarget.Latest, true);
+    for (const node of fixtureAst.statements) {
+      if (ts.isImportDeclaration(node) && !node.importClause?.isTypeOnly) {
+        expect(ts.isStringLiteral(node.moduleSpecifier) && node.moduleSpecifier.text.startsWith('node:')).toBe(true);
+      }
+    }
+    const configAst = ts.createSourceFile('vitest.config.ts', source('vitest.config.ts'), ts.ScriptTarget.Latest, true);
+    expect(configAst.statements.some(n => ts.isImportDeclaration(n) || ts.isExportDeclaration(n) || ts.isExportAssignment(n))).toBe(false);
+    const loaded = await import('./passenger-document-crypto.js');
+    expect(typeof loaded.PassengerDocumentCrypto).toBe('function');
+    expect(offlineBoundary.installed).toBe(true);
+  });
   it('has exactly nine approved files and an isolated exact test configuration', () => {
     expect(readdirSync(root).sort()).toEqual(['README.md', 'boundaries.test.ts', 'contracts.ts', 'envelope-codec.ts', 'fixtures.ts', 'passport-crypto.test.ts', 'passenger-document-crypto.ts', 'synthetic-kms-adapter.ts', 'vitest.config.ts'].sort());
     const config = source('vitest.config.ts');
@@ -25,6 +40,10 @@ describe('14 offline boundaries', () => {
     expect(config).toContain('envDir: false');
     expect(config).toContain("setupFiles: ['./fixtures.ts']");
     expect(source('fixtures.ts')).toContain('installOfflineGuards();');
+    expect(config).toContain('module.exports = prototypeConfig');
+    expect(config).not.toContain('export default');
+    expect(config).not.toContain('export const');
+    expect(source('fixtures.ts')).not.toContain("from './vitest.config.js'");
     expect(offlineBoundary.installed).toBe(true);
   });
 
@@ -68,13 +87,14 @@ describe('14 offline boundaries', () => {
   it('loads and runs runtime modules in a VM with an inaccessible environment and no app/DB loader', async () => {
     let environmentReads = 0;
     let logCalls = 0;
-    const sandbox = createContext({ Buffer, Uint8Array,
+    const sandbox = createContext({ Buffer, Uint8Array, AbortController, performance, setTimeout, clearTimeout,
       process: new Proxy({}, { get() { environmentReads++; throw Error('ENVIRONMENT_FORBIDDEN'); } }),
       console: new Proxy({}, { get: () => () => { logCalls++; } }),
     });
     const trustedRequire = createRequire(__filename);
     const cache = new Map<string, { exports: Record<string, unknown> }>();
     const load = (name: string): unknown => {
+      expect(offlineBoundary.installed).toBe(true);
       if (name === 'node:crypto' || name === 'node:util') return trustedRequire(name);
       const file = name.replace(/^\.\//, '').replace(/\.js$/, '.ts');
       if (!runtime.includes(file)) throw Error('DEPENDENCY_FORBIDDEN');
@@ -95,7 +115,7 @@ describe('14 offline boundaries', () => {
       try {
         const context = {environmentId:'synthetic-vm',bookingId:'synthetic-booking',passengerId:'synthetic-passenger'};
         const grant = {...context,actorId:'synthetic-actor',role:'FULFILLMENT',purpose:'synthetic-fulfillment',expiresAtMs:200,stepUpVerified:true};
-        const crypto = new PassengerDocumentCrypto(provider,new SyntheticAuthorizationPolicy(()=>100));
+        const crypto = new PassengerDocumentCrypto(provider,new SyntheticAuthorizationPolicy(()=>100),3,{wallNow:()=>100});
         const result = await crypto.decrypt(await crypto.encrypt({passportNumber:'SYNTHETIC-VM'},context),context,grant);
         return result.passportNumber === 'SYNTHETIC-VM';
       } finally { provider.dispose(); }
