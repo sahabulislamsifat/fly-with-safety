@@ -36,8 +36,23 @@ export interface WrappedDataKey extends WrappingMetadata {
 }
 
 export interface DataKeyProvider {
-  createAndWrapDataKey(context: EncryptionContext): Promise<WrappedDataKey>;
-  unwrapDataKey(metadata: WrappingMetadata, context: EncryptionContext): Promise<Uint8Array>;
+  createAndWrapDataKey(context: EncryptionContext, control?: OperationControl): Promise<WrappedDataKey>;
+  unwrapDataKey(metadata: WrappingMetadata, context: EncryptionContext, control?: OperationControl): Promise<Uint8Array>;
+}
+
+/** Advisory signal: the unchanged fake does not support cancellation. */
+export interface OperationControl {
+  readonly signal: AbortSignal;
+  readonly deadlineAtMonotonicMs: number;
+}
+
+export interface CryptoOptions {
+  readonly authorizationMs?: number;
+  readonly providerMs?: number;
+  readonly totalMs?: number;
+  readonly retryDelaysMs?: readonly [number, number];
+  readonly monotonicNow?: () => number;
+  readonly wallNow?: () => number;
 }
 
 export interface SyntheticGrant {
@@ -52,7 +67,7 @@ export interface SyntheticGrant {
 }
 
 export interface DecryptionAuthorizationPolicy {
-  assertAllowed(grant: unknown, context: EncryptionContext): void;
+  assertAllowed(grant: unknown, context: EncryptionContext, control: OperationControl): Promise<void>;
 }
 
 export type CryptoErrorCode = 'INVALID_INPUT' | 'INVALID_ENVELOPE' | 'UNSUPPORTED_VERSION'
