@@ -1,5 +1,8 @@
 # Phase 1I-D — G3 Approval and Execution Readiness
 
+> **Current governance (owner-directed 2026-10-28):** [Tracker section 0](PHASE_1_INTERIM_STATUS_AND_EXIT_CHECKLIST.md#0-governing-owner-decision--2026-10-28-supersedes-prior-engineering-gate-wording) supersedes older bespoke legal-checklist and automatic counsel-signature requirements for G7 engineering acceptance. All technical controls remain mandatory. Real-data/production activation remains separately gated. Dated findings and acceptance evidence below are preserved, not re-certified.
+
+
 2026-10-25, Asia/Dhaka. **DOCUMENTATION READY; TARGET EXISTENCE, G3-P AND G3-X BLOCKED/PENDING AUTHORIZATION.** AUTH-02 is implemented and owner-accepted OFFLINE ONLY. All 14 legal decisions remain BLOCKED. No DB connection or test implementation/execution occurred in this session.
 
 ## 1. Evidence and scope

@@ -1,5 +1,6 @@
 import type { FlightOffer, FlightSearchParams, FlightProvider } from './providers/flight.provider.js';
 import { MockFlightProvider } from './providers/mock-flight.provider.js';
+import { logger, serializeError } from '../lib/logger.js';
 
 export interface AggregatedFlightResults {
   offers: FlightOffer[];
@@ -27,15 +28,18 @@ export class FlightAggregatorService {
 
   async aggregate(params: FlightSearchParams, timeoutMs = 5000): Promise<AggregatedFlightResults> {
     // Query providers in parallel with timeout shielding
-    const providerPromises = this.providers.map(async (provider) => {
+    const providerPromises = this.providers.map(async (provider, providerIndex) => {
+      let deadline: ReturnType<typeof setTimeout> | undefined;
       try {
-        const timeoutPromise = new Promise<FlightOffer[]>((_, reject) =>
-          setTimeout(() => reject(new Error(`Provider ${provider.name} timed out`)), timeoutMs)
-        );
+        const timeoutPromise = new Promise<FlightOffer[]>((_, reject) => {
+          deadline = setTimeout(() => reject(new Error('Flight provider deadline exceeded')), timeoutMs);
+        });
         return await Promise.race([provider.searchFlights(params), timeoutPromise]);
       } catch (err) {
-        console.warn(`[FlightAggregator] Provider error for ${provider.name}:`, (err as Error).message);
+        logger.warn('flight_provider_failed', { ...serializeError(err), providerIndex });
         return [];
+      } finally {
+        clearTimeout(deadline);
       }
     });
 

@@ -4,6 +4,8 @@ export interface ApiError {
   details?: Record<string, unknown>;
 }
 
+const applicationErrors = new WeakSet<object>();
+
 export class AppError extends Error {
   public readonly statusCode: number;
   public readonly code: string;
@@ -24,6 +26,7 @@ export class AppError extends Error {
     this.isOperational = isOperational;
 
     Object.setPrototypeOf(this, AppError.prototype);
+    applicationErrors.add(this);
   }
 
   static badRequest(message: string, details?: Record<string, unknown>): AppError {
@@ -60,5 +63,5 @@ export class AppError extends Error {
 }
 
 export function isAppError(error: unknown): error is AppError {
-  return error instanceof AppError;
+  return error !== null && typeof error === 'object' && applicationErrors.has(error);
 }

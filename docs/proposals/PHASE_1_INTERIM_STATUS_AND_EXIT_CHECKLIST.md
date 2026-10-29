@@ -1,6 +1,47 @@
 # FlyWithSafe — Phase 1 Interim Status and Exit Checklist
 
-2026-10-25, Asia/Dhaka. **INTERIM — PHASE 1 INCOMPLETE; G7 NOT REACHED; PHASE 2 NOT AUTHORIZED.** Documentation-only evidence review, not a completion certificate. All 14 legal decisions remain BLOCKED. No percentage complete or guaranteed completion date is asserted.
+> Current deliverable-based scope (2026-10-28): consolidated AUTH/OUT/DB CODE-ONLY implementation continues. The authorized reset9 group has already executed and FAILED at C16/R1 with clean postcheck; that attempt is spent. A fresh single-C16 diagnostic package is prepared only and requires new explicit live authorization. No retired legal-signature checklist is an automatic engineering blocker. Schema/data/KMS/provider/deployment operations remain separately gated. Section10.2/10.3 are authoritative current engineering status.
+
+2026-10-25, Asia/Dhaka. **INTERIM — PHASE 1 INCOMPLETE; G7 NOT REACHED; PHASE 2 NOT AUTHORIZED.** Documentation-only evidence review, not a completion certificate. Production/real-data activation remains separately gated; see section 0. No percentage complete or guaranteed completion date is asserted.
+
+## 0. Governing owner decision — 2026-10-28 (supersedes prior engineering gate wording)
+
+The owner's FINAL OWNER DIRECTIVE expressly adopts this internal governance change. This section is the single authoritative superseding decision; other documents link here.
+
+- Retire the bespoke fourteen-topic legal checklist, recurring BLOCKED reporting and automatic external-counsel-signature dependency from active engineering governance. Its research remains historical reference, not fourteen technical acceptance tasks. No historical result or legal conclusion is changed.
+- G7 engineering acceptance requires every mandatory AUTH/OUT/KMS/DB control, P01/P02, G3–G6 evidence, preserved F01–F07 behavior, documented residual technical risks and formal owner acceptance. No critical technical gap can be waived by this paperwork change.
+- Real-data and production activation are a separate release decision: lawful processing, truthful notices, child/guardian protection, passport confidentiality, international disclosures, marketing choices, rights, retention, incident handling and supplier/hosting contracts still require applicable facts and effective controls. No statutory exemption, legal certification or production permission is asserted.
+- Keep confidentiality/minimization/access in AUTH/OUT/KMS/DB; child and marketing notices/choices in P01/P02; retention/rights/incident/restore and provider-country controls in G4–G6 and the release runbook. Do not silently exclude intended child/passport/international/marketing workflows or ignore retained data.
+- No automatic Phase 2 transition: actual engineering evidence → G7 acceptance dossier → owner acceptance → separately scoped Phase 2 authorization.
+- Only the three-file G3 offline implementation and these documentation changes are currently authorized. Live Status, role/ACL/login, migrations, fixtures, providers and deployment require distinct exact-operation approvals.
+
+Sections 1–9 and section 11 below retain dated historical observations; any former legal-checklist engineering gate is superseded by this section. Section 10 is the active technical tracker. Research annexes are reference-only. This decision is governance adoption, not evidence that engineering work passed.
+
+### Persistent execution directive — owner adopted 2026-10-28
+
+The owner's PHASE 1 COMPLETE EXECUTION MASTER DIRECTIVE (pasted request 4838cb19-646f-4e4e-9d08-8641fdf436c2) now governs execution. It preserves the section 0 governance decision and all technical units below. No additional roadmap or parallel tracker is created. Existing exact code approvals remain valid only within their specified scopes; completed work is not reimplemented. New application-code scopes and consequential operations require bounded approval. The directive authorizes reconciliation, analysis and scope preparation; it does not itself provision the pending reader, authorize live Status, migrate, write fixtures or deploy.
+
+Current queue:
+
+| Package | Dependency | Authorization/state | Actual evidence | Next action |
+|---|---|---|---|---|
+| G3 restricted Status code | Completed exact three-file scope | VERIFIED OFFLINE PASS; no new edits needed | 139 documented assertions; hashes freshly matched in provisioning preparation | Preserve pins and helper bytes |
+| G3 reader provisioning | Fresh local identity/absence/empty-schema/ACL guards | VERIFIED PROVISIONING PASS | One approved private-console attempt; actual psqlExitCode0 with ON_ERROR_STOP and final preservation guard; Evidence Log records script/SQL hashes and limits | Separate reader authentication/preflight and live Status approvals; no automatic migration/test access |
+| Reader authentication/preflight R1 | Provisioning PASS; exact-delta correction and attempt03 explicitly approved | VERIFIED R1 PASS | Attempt03 actual reader login, identity/ACL/empty-target/settings guards; G3_STATUS_PREFLIGHT_PASS, ROLLBACK and native psqlExitCode0; owner console output corroborates result file | Separately authorize R2 fixed live STATUS-only; no migration or test access inferred |
+| Live STATUS-ONLY R2 | R1 PASS; explicit one-attempt R2 approval received | VERIFIED R2 PASS | Repeated preflight exit0, Prisma7.10.0 status exit1 with exact seven pending names, helper passed=true/pendingCount7/migrationExecuted=false; caller exit0 | Separate exact seven-migration initialization authorization; fresh admin guards mandatory |
+| Seven-migration initialization | Explicit one-attempt approval; fresh admin guards | VERIFIED INITIALIZATION PASS | Preflight0/pending1/final-preflight0/deploy0/postcheck0/role-postcheck0; seven completed checksums, catalog reviewed | Preserve initialized database; separate test-role access/P/X approvals |
+| OUT-04 lifecycle sink correction | Exact three-file owner approval received | IMPLEMENTED / VERIFIED OFFLINE | 21/21 per bundled and native loader, server and standalone strict no-emit checks exit0; exact production delta verified | Owner acceptance of this slice; broader OUT-04 sink/APM/worker review remains separate |
+| Other AUTH/OUT/KMS/DB and P01/P02 | Accelerated owner CODE-ONLY authorization received | IMPLEMENTATION AUTHORIZED / dependencies tracked | OUT-04-B and provider-neutral crypto verified offline; privacy disclosure draft corrected | Continue independent code batches; real DB/provider/deployment actions separately gated |
+| G4/G5/G6/G7 | Provider decisions, integrated tests, staging/recovery, all mandatory technical evidence | WAITING FOR PREREQUISITES | No new PASS or owner acceptance | Complete mandatory controls, prepare G7 dossier, then owner acceptance and separate Phase2 authorization |
+
+Independent bounded OUT-04-A scope (owner-authorized and implemented; original acceptance contract retained below):
+
+- MODIFY only server/src/server.ts; CREATE server/test/server-lifecycle-logging.test.ts and server/test/server-lifecycle-logging.vitest.config.ts. No schema, environment, dependency, application-flow or shared logger edits.
+- Replace raw error arguments at environment validation failure, database-disconnect failure, uncaughtException and unhandledRejection with fixed event messages through the existing logger. Do not inspect or stringify arbitrary exception messages, stacks, causes, custom properties or getters. Preserve exits, worker scheduling, listener registration, close/disconnect calls and shutdown timing. This addresses lifecycle sinks only, not all OUT-04/APM/trace surfaces.
+- Regression groups: four source sinks with sensitive Error messages/stacks/causes; arbitrary rejection/object/string and throwing-getter inputs; fixed allowed output; validation exit1; development-only worker startup; production/Vercel suppression; SIGINT/SIGTERM flow; disconnect-failure exit behavior; uncaught shutdown; rejection behavior; forced timeout; listener/timer cleanup; offline guard-before-import proof; source scope/API preservation. No real process.exit, listener leak, network, database, dotenv, SMTP, provider or application startup.
+- Isolated test config must disable envDir/config discovery/setup side effects, select only this test, and mock process/listeners/timers/app/env/prisma/outbox/passport before dynamically importing server.ts. Use the actual logger with synthetic context if safe; do not prove redaction by mocking the sink under test. Reuse existing offline guard patterns; importing the existing booking-privacy HTTP suite is unsafe for this purpose.
+- Verification after approval: targeted bundled/native Vitest loaders, strict standalone test no-emit checks and server tsc --noEmit, sentinel scans of captured logs, exact file-delta checks and git diff --check. Stop on isolation failure; do not broaden production changes or weaken assertions. Revert only this package's owned diff if separately required; preserve unrelated edits.
+- Acceptance: zero synthetic secrets in captured lifecycle output; unchanged lifecycle effects in executed scenarios; guards installed before real entrypoint import; exact result counts and limitations recorded. Remaining OUT-04 services/worker/provider/observability sinks require their own review and evidence, not a whole-unit PASS from this slice.
 
 ## 1. Authority and evidence status
 
@@ -110,3 +151,126 @@ Session baseline: development HEAD 7f8e569; one preexisting untracked G3-D plan.
 **Verdict: actionable documentation prepared; Phase1 exit BLOCKED.** AUTH-02 is implemented/offline accepted, actual DB proof pending. Legal evidence advanced, all14 decisions BLOCKED. Confirmed planning names are not a live preflight. Stop at separate approval boundaries; no automatic I-E, 1J, Phase2 or another change unit.
 
 Final documentation checks: PASS. All 655 preexisting tracked/nonignored-untracked files retain the baseline byte digest above, including the preexisting G3-D plan. Exactly the three requested documents were added. All 14 legal subjects match the original and decision cells remain BLOCKED; all 14 change-unit IDs and 30 G3 groups are present; local links/whitespace and git diff --check passed. No test/compiler/database execution occurred; zero fresh runtime passes are asserted.
+
+## 9. 2026-10-26 coordination addendum — later scoped evidence
+
+This preserves the October 25 snapshot above. Its statements about unknown G3 resource existence and future harness creation are historical, not current next actions.
+
+- Current reviewed source baseline: development HEAD bbeb862b03949056c1f93539631ad31c054a11ab.
+- G3-H harness source exists. Resource bootstrap and administrator migration preflight have saved exit-0 evidence. Owner subsequently directly confirmed the Windows PowerShell 5.1 Offline marker/exit 0.
+- No available live Prisma pending-status, initialization or G3-X execution evidence. Current database state was not queried in this documentation work.
+- Existing Initialize action cannot serve as standalone read-only status because its success path proceeds toward deployment. A one-file independent STATUS-ONLY source proposal is ready for code-only approval; no helper file has been created.
+- See [canonical Evidence Log](PHASE_1_EVIDENCE_LOG.md), [STATUS-ONLY approval package](G3_STATUS_ONLY_CODE_APPROVAL.md), [legal research refresh](PHASE_1I_D_LEGAL_EVIDENCE_REVIEW.md) and [data-flow/policy review draft](PHASE_1_DATA_FLOW_AND_POLICY_REVIEW_DRAFT.md).
+
+All 14 security units remain individually tracked by section 2. No AUTH-01/03, OUT-01–04, KMS-01–03, DB-01–04, G5, G6 or G7 work is skipped or marked complete. AUTH-02 retains offline acceptance only until authorized database evidence is accepted. All L-01–L-14 remain BLOCKED pending written qualified-reviewer disposition AND accountable owner acceptance.
+
+Next smallest task: code-only creation/offline verification of the one proposed STATUS-ONLY helper, after exact file-scope approval. Live read-only status, seven-migration initialization, restricted access/LOGIN, G3-P and G3-X retain their respective operation/acceptance boundaries. This addendum authorizes no migration, production processing or later phase.
+
+## 10. 2026-10-27 authoritative current issue-by-issue tracker
+
+This is the single CURRENT status/closure index. Sections 1–9 and prior logs remain dated evidence; they are not discarded or silently rewritten. The legal evidence review and policy draft are annexes, not competing decision registers. Baseline development bbeb862b03949056c1f93539631ad31c054a11ab; preexisting documentation edits preserved. No production-bound source, schema, migration, environment file or application test changed in this task.
+
+Status labels: PASS means only the specified evidence passed; OWNER-ACCEPTED applies only to the exact previously accepted milestone; IMPLEMENTED/OFFLINE does not imply live proof; BLOCKED identifies a missing release gate; PROPOSED means unapproved. Named individuals must be assigned by owner; role titles below are accountable functions, not fabricated reviewer appointments. All engineering rows require owner/security acceptance of current evidence at G7; production activation is assessed separately under section 0. No schedule bypass or critical-risk waiver is assumed.
+
+### 10.1 Production activation boundary — separate from engineering exit
+
+The retired bespoke checklist is no longer an active task table or signature dependency. Preserved research: [reference annex](PHASE_1I_D_LEGAL_EVIDENCE_REVIEW.md). Useful field, privacy and operational requirements remain in [policy/control inventory](PHASE_1_DATA_FLOW_AND_POLICY_REVIEW_DRAFT.md) and the technical rows below. Evidence gaps concerning actual real-data processing must be resolved for that activation, not reported as fourteen recurring engineering blockers.
+
+### 10.2 All fourteen security units — no omitted change unit
+
+Existing detailed requirements in section 2 remain binding; the following gives their current next action and gate.
+
+| ID / actual status | Existing evidence | Missing requirement / required verification | Owner/reviewer | Next executable action / approval boundary | G7 acceptance |
+|---|---|---|---|---|---|
+| AUTH-01 code implementation PARTIAL / offline PASS; route activation pending | New protected-auth.ts and parameterized PG adapter implement atomic credential/job/supersession and registration/account/session unit; tested failure rollback | Existing auth routes remain unchanged/pinned; request-idempotent issuance, generated schema mapping and real DB/provider integration remain | Auth/security/reliability | Continue compatible route/composition integration after current G3 evidence scope; additive schema execution and real provider activation separate | No orphan/double/unprotected job/session; actual constraints/concurrency and crash proof |
+| AUTH-02 partial real DB evidence; reset C16 preparation failure unresolved | Recovered reset9:6 PASS/1 FAIL/72 filtered-or-skipped/2 selected unexecuted; C2/C8 all repetitions PASS; final clean0. New source88 offline PASS per loader;115 original assertions intact | C16/R1 fails before transaction dispatch:8/16 arrived,9 internal,0 transaction requests. Safe lookup diagnostics added; precise underlying cause not yet known; full matrix and3 stronger gaps remain | Auth/DBA/security | New single-C16 diagnostic package requires separate ONE live authorization; no rerun of spent group | Current real concurrency/expiry/rollback/commit proof; no skipped-case promotion |
+| AUTH-03 durable lifecycle code implemented / inactive | Locked generation check, purpose/recipient/token/job AAD binding, durable revoke/generation increment; candidate identity-change trigger; offline rejection tests | Existing routes and operator identity writers need integration; SQL trigger/restore quarantine and away-back behavior need real DB proof | Auth/security/privacy | Continue approved code; schema and live lifecycle verification separate | Revoked/consumed/wrong-recipient/old-generation jobs cannot be newly admitted; recovery proof |
+| OUT-01 protected codec/writer code implemented / inactive | Strict V1 envelope/keyRef and AAD; ciphertext-only protected job; atomic writer and PG adapter; synthetic crypto/workflow tests | Existing notification route/worker still uses old path; real provider wrapping metadata and compatible rollout pending | Backend/security | Wire only after reviewed schema/provider/identity contracts; no plaintext protected fallback | Protected jobs contain no raw credential/recipient; real integration and deny tests |
+| OUT-02 admission/fencing/ambiguous-send code implemented / inactive | Explicit trusted worker policy; current recipient/digest/purpose check; DB-fenced send intent; SENDING/AMBIGUOUS terminal to automatic retry; no SMTP timeout race | Real workload identity/transport composition, concurrent lease/expiry/crash evidence and authorized redrive policy remain | Reliability/identity/security | Continue composition/regression; real provider/G5 actions separate | Denial causes no decrypt/send; no blind resend after uncertain submission |
+| OUT-03 compatibility classifier implemented; retained-data rollout incomplete | Ordinary allowlist vs unknown/legacy-auth quarantine; no downgrade/delete; protected jobs isolated from existing ordinary worker | Durable quarantine reader rollout, private inventory and restore/retention disposition remain; classifier alone does not protect existing auth jobs | Reliability/privacy/DBA | Continue code-only mixed-reader/cutoff integration; inventory/backfill/deletion separate | No retained-secret downgrade or restore resurrection; actual disposition evidence |
+| OUT-04 application sinks/error classification IMPLEMENTED/OFFLINE PASS; G6 pending | Existing logging35/lifecycle21 plus new outbox14 cases PASS each loader; own-data code/meta handling and no raw-message storage heuristic | Actual APM/access/referrer/mail-provider/staging evidence and protected admission integration | Security/operations | Continue independent code controls; preserve transactional no-fallback and safe metadata; G6 external verification separately gated | No secret exposure through complete deployed sink chain, not just mocks |
+| KMS-01 PARTIAL; provider-neutral data plane implemented | Actual AES-GCM src component23 tests per loader, limits/deadlines/owned-key cleanup/no fallback | Provider/runtime/region, wrap/unwrap adapter, key/version/wire mapping, availability/cost/recovery | Infra/security/finance | Continue provider-independent integration code; owner selects provider/runtime before provider-specific activation | Real selected-provider interoperability/denial/outage/key recovery tested |
+| KMS-02 PARTIAL contract; trusted identity absent | Awaited strict authorization before key access, immutable snapshots, timeout/mutation denial tests | Actual workload identity issuer/IAM/customer-purpose grants and revocation | Identity/security/infra | Implement trusted-boundary contracts without default allow; real identity/IAM provisioning separate | No unauthorized cross-context decrypt with actual identity evidence |
+| KMS-03 data plane/persistence code PARTIAL; current passenger path plaintext | AES-GCM, authorized passenger writer/reader and PG revision-CAS source;68 workflow regressions plus23 data-plane tests | Real key wrapping/provider/trusted reader composition, schema and current booking/DTO integration, retained data and recovery remain | Booking/security/privacy | Continue provider-neutral composition; no schema/backfill/deployment without exact approval | Actual persisted passenger fields protected and ordinary lists/guests never decrypt |
+| DB-01 parameterized storage code + additive draft prepared / NOT APPLIED | Credential/job reciprocal deferred linkage, uniqueness/purpose checks; atomic PG adapter; fake-connection protocol tests | SQL not PostgreSQL-validated/executed; Prisma mapping, compatible route wiring, issuance replay and real constraints/atomicity tests pending | DBA/backend/security | Review exact additive draft outside seven-migration directory; no schema operation now | Real FK/link/ordinary compatibility/atomicity and retry proof |
+| DB-02 lifecycle code + trigger draft prepared / NOT APPLIED | Stored generations/revokedAt; identity-change revocation and monotonic generation candidate; atomic consumption/session revoke adapter | Retained-account enrollment, lifecycle writer integration, actual concurrent/backup restore proof pending | Auth/DBA/security | Continue code-only integration; exact schema/restore actions separate | Revocation/generation preserved under real concurrency and recovery |
+| DB-03 encrypted persistence interfaces/PG CAS implemented / inactive | Passenger/booking/revision-bound AES-GCM writer/authorized reader, exact ownership join and revision CAS; candidate composite FK | Current booking fields remain plaintext; schema/provider/DTO integration, retained-data handling and real CAS/restore verification pending | DBA/security/privacy | Continue compatible composition; schema/backfill/data deletion require exact approval | Actual storage confidentiality/CAS/authorized DTOs and historical handling proven |
+| DB-04 versioned keyed canonical digest implemented / inactive | HMAC-SHA256 binds key version/domain/operation/principal and canonical logical data, not randomized ciphertext; malformed/cycle/accessor/proxy denial tests | Existing inquiry hash path unchanged; replay dispatch, key-version retention/rotation and request-idempotent protected issuance integration pending | Reliability/security/DBA | Continue replay compatibility code; do not silently invalidate existing SHA-256 records | Stable replay/isolation with accepted key lifecycle and legacy compatibility |
+
+### 10.3 Gates, public disclosures and foundations
+
+| ID / actual status | Existing evidence | Missing requirement / required verification | Owner/reviewer | Next action / approval boundary | G7 acceptance |
+|---|---|---|---|---|---|
+| G0/G1 roadmap/design PARTIAL accepted milestones | Prior roadmap and AUTH-02 design owner acceptance | Other lifecycle/host/wire/legacy decisions still proposed | Owner/security/architect | Review each unresolved ADR and exact package; no broad implementation authority | Versioned decisions/owners/dependencies and no skipped mandatory unit |
+| G2 consolidated code-only implementations PARTIAL / continuing | AUTH-02 accepted offline; OUT-04-B, actual provider-neutral crypto and draft disclosures verified; prototypes remain scoped | Actual protected AUTH/OUT/DB integration and real provider trust/persistence still missing | Engineering/security/owner | Continue independently authorized non-destructive code batches; external/database/deployment actions separately gated | Current working code and mandatory evidence accepted per control; no prototype-to-production promotion |
+| G3-H and resource/access foundations PASS; matrix pending | Harness,7 migrations, restricted LOGIN/rights and G3-P accepted | Current C16/full consumption matrix and stronger-evidence gaps remain | DBA/auth/owner | Preserve completed setup; no live attempt currently authorized after reset9 run was spent | Actual isolated database evidence, exact ledger cleanup and acceptance |
+| G3-STATUS historical restricted reader R1/R2 PASS | Reader provisioning/auth/rights PASS; exact7 pending names verified before migration | No repeat Status/provisioning needed for this work | Security/DBA/owner | Preserve accepted R1/R2 evidence; do not reopen completed Status audit | Historical identity/status evidence distinguished from current changed-path proof |
+| G3-MIGRATIONS VERIFIED PASS on exact G3 target | Seven reviewed names/checksums completed; deploy/postcheck/role-check exit0 | No new migration needed for current verification; new protected schemas still require separate execution approval | DBA/owner | Preserve accepted migration state; do not rerun initialization/access setup | Initialized schema evidence retained; actual protected-schema guarantees remain separate |
+| G3-ACCESS and G3-P VERIFIED PASS | Restricted identity, exact positive/negative rights, role/history/isolation checks accepted | Current full consumption matrix and3 stronger-evidence requirements remain | DBA/security/owner | Spent full/group authorities do not authorize another run; no new grants/LOGIN/preflight reprovisioning | Preserve effective restricted-role rights and accepted G3-P evidence |
+| G3-X reset9 VERIFIED FAIL; C16 lookup observability OFFLINE PASS; G3-A NOT ACCEPTED | Prior group6 PASS/1 FAIL/72 filtered-or-skipped/2 selected unexecuted; clean exit0 at2026-10-28 22:04:24 Asia/Dhaka. Source9407035f has88 offline tests,115 original assertions; actual auth service unchanged | C16 preparation8/16,9 internal,0 transaction requests; underlying lookup/hash failure unresolved; full matrix and3 stronger-evidence gaps remain | DBA/QA/auth/security | Fresh g3-x-reset-c16-diagnostic-20261028-01 single-case package prepared only; obtain ONE explicit live approval; no old group retry | RequiredN waiters/timeouts preserved; no critical or skipped evidence gap promoted to PASS |
+| G4 NOT READY; provider-independent coding continues | Node/Express + Next/React/PostgreSQL baseline; Cloudflare domain/hosting planned, runtime/KMS/region undecided | Hosting, workload identity/IAM, provider/region/cost/availability, backup/monitoring facts | Infra/security/finance/owner | Recommend/choose provider-specific topology only when needed; no paid resources/account/credentials/provisioning now | Real trust/provider and operational readiness evidence |
+| G5 / Phase1I-E UNAUTHORIZED | Historical Phase1H16/16 and offline privacy/pagination results are dated | Current changed-path DB/KMS/multi-instance/F01–F07 integration evidence | QA/security/DBA/owner | Prepare exact matrix/targets/providers/cleanup; authorize execution later | Mandatory integration/security tests passed with no false skipped-test promotion |
+| G6 / Phase1J UNAUTHORIZED | Staging/recovery checklist drafted | Actual-domain cookie/origin/OAuth, provider behavior, logs, backup/key recovery and runbooks | QA/ops/privacy/security | Prepare staging facts and separately approve deployment/provider/restore operations | Accepted staging/privacy/operational recovery proof; SMTP submit not inbox receipt |
+| P01 disclosure consistency corrected; guardian workflow incomplete | Draft accurately includes child travel and avoids invented age exclusion;7 disclosure regressions | Actual guardian authorization/handling controls and permitted production use | Product/privacy/security | Continue concrete guardian workflow implementation; do not substitute draft notice for enforcement | Child workflow, authorization, minimization and truthful notices agree |
+| P02 inaccurate claims removed in DRAFT; final facts pending | No fake contact/address/7-year/transfer/encryption claims or render-time date; noindex/draft banner;7 regressions | Verified company/support/privacy contacts, provider/country/retention/security facts and final release copy | Product/security/privacy | Owner supplies non-secret finalized facts before launch; no public deployment or final-policy claim now | Every published claim has current evidence and approved release scope |
+| F01–F07 foundations PRESERVED, not retested here | Phase1H16/16 previously accepted; F02 origin/F05 state/F03F04 worker/F07 DTO/F06 SQL pagination exist | Fresh regression on changed production paths at G5/G6; unresolved F07 integration remains | QA/security/reliability | Preserve sources/network/DB guards; authorize next exact regression packages | No previous isolation/lifecycle/privacy/pagination regression; historical results labeled |
+| G7 / Phase1 COMPLETE BLOCKED | This tracker plus legal/control/gate evidence | All mandatory technical security, DB, G5/G6 closure and named engineering acceptance | Accountable owner + security/privacy/QA/reliability | Review closure evidence only after dependencies pass | Explicit signed exit decision; no unresolved critical gap hidden by schedule |
+| Phase2 / Phase1I-E / Phase1J UNAUTHORIZED next-stage execution | Planning only | Separate stage-specific permission and prerequisites | Owner | No automatic transition | Later authorization independent of this task |
+
+### 10.4 Current deliverable queue — supersedes historical setup queue
+
+- CODE: protected workflow/storage modules and narrow C16 diagnostics implemented/offline verified; integrate compatible request-idempotent issuance, legacy reader/cutoff, routing and schema mapping without activating unapproved schema/provider/data operations. Mandatory units remain partial until those paths and actual guarantees are evidenced.
+- VERIFICATION: reset9 execution recovered as6 PASS/1 FAIL/2 selected unexecuted, historical clean check PASS. New single-C16 diagnostic package is prepared only; one fresh explicit live authorization required. No old group/full retry.
+- INFRASTRUCTURE: hosting/runtime, KMS provider/region/trusted identity and public contacts remain owner decisions. Continue independent code; actual G4–G6 operations and formal G7 acceptance remain separate.
+- Preserve all completed migrations, access/G3-P and targeted C8/R1 evidence. TX-08,UTC-04-FULL-SERVICE,COMMIT-04-WIRE remain unresolved. Phase2 unauthorized.
+
+## 11. Historical 2026-10-28 reconciliation — governance superseded by section 0
+
+Fresh read-only checks: development HEAD bbeb862b03949056c1f93539631ad31c054a11ab; same three modified and two untracked proposal documents. Git diff --check passed with line-ending advisories. Helper SHA256 a19efa3f2d90600c1ea474efaa53dc8b3ad5e5105bc93bddb03b565e2c1c0284 and status config SHA256 1854e94aeb72cf3034d98f4c3f02b71c99d250b1ab9ac236160a897775b4844d match October27 evidence. No tests or database operations rerun. Prior offline results remain dated evidence.
+
+The new MASTER directive's statement that two-file hardening is pending is superseded by October27 implementation. Its broad mission does not authorize the additional preflight SQL edit or live access. Section10 remains the authoritative full tracker. Legal status wording is AWAITING LEGAL REVIEW, with all14 release gates BLOCKED; historical decisions remain intact.
+
+Four-file reconciliation: 01_LEGAL_14_RESOLUTION_REGISTER feeds legal annex8 and policy annex11; 02_PHASE1_NO_SKIP_EXECUTION_AND_G3 maps to tracker10; 03_G3_CODE_ONLY_CODEX_APPROVAL covers the already completed two-file task only; README supplies navigation, not operational approval. Earlier package review is reused; no new legal-source or supplier entitlement verification is claimed today.
+
+Existing entity and VAT availability remain OWNER-REPORTED. Formal operating arrangement, certificates, licensing, tax applicability and launch authority remain unverified. Children, passports, international bookings and marketing remain mandatory intended first-release requirements, subject to the controls and acceptance criteria in tracker10. Candidate Trip.com/Booking.com/payment/Cloudflare/application-host/database/KMS/mail/log/backup arrangements do not establish contracts, API entitlement or approved processing countries.
+
+### Immediate manual queue
+
+1. G3: Evidence Log-এর শেষের তিন-ফাইল code-only proposal পর্যালোচনা করে স্পষ্ট অনুমোদন দিন। এখন Status command চালাবেন না। পরবর্তী ফল হবে offline implementation evidence; provisioning ও live access আলাদা অনুমোদনের বিষয়।
+2. Company/tax: নিরাপদ company folder-এর incorporation, trade licence, TIN/VAT/BIN, operator/brand authority, address, representative, merchant/invoicing ও travel-business permissions qualified counsel/tax counsel-কে ব্যক্তিগতভাবে দিন। মূল নথি বা sensitive identifiers chat-এ নয়; redacted written disposition ও private evidence reference দিন।
+3. Legal: legal annex8 ও policy annex11 reviewer-কে দিন। প্রত্যেক L-ID-এর authoritative instrument, assumptions, required controls, signed disposition ও review trigger চাইুন। Signed originals ব্যক্তিগত নিরাপদ store-এ রাখুন; repository-তে non-sensitive evidence reference দিন।
+4. Vendors/hosting: প্রকৃত contract/account dashboard থেকে entitlement, contracting entity, processing/backup/support countries এবং subprocessors-এর প্রমাণ সংগ্রহ করুন। কোনো purchase/API call বা credential disclosure প্রয়োজন নেই। তথ্যগুলো G4 এবং L-11/L-14 সিদ্ধান্তে ব্যবহৃত হবে।
+
+### Next exact ticket — proposed authorization text
+
+```text
+I authorize CODE-ONLY least-privileged G3 STATUS adaptation in exactly:
+Get-G3MigrationStatus.ps1, prisma.g3.status.config.cjs, preflight.readonly.sql
+within the existing g3-migration-initialization-20261026-01 artifact directory.
+
+Inspect current hashes, pinned migrations, SQL and Prisma7.10.0 behavior first.
+Document the proposed separate non-owner Status identity and minimum effective
+permissions; do not provision it or activate/reuse the G3-X test role.
+Implement exact target/role checks for only
+127.0.0.1:5432/flywithsafe_g3_auth02_disposable, without postgres fallback.
+Fail closed on inconsistent identity, owner/superuser/membership or effective
+write/CREATE/TEMP/unsafe-function permissions. Preserve catalog/history and
+empty-target checks, startup read-only/timeouts, private authentication,
+environment isolation, seven migration pins, fixed command allowlist,
+redaction and single-attempt stop behavior.
+
+Run offline PS5.1 syntax, blocked-network config loading, synthetic privilege
+and target rejection, fake-process timeout/isolation, integrity and redaction
+checks. No real psql/Prisma database connection or extra implementation files.
+Report exact pass/fail/skipped counts, hashes and preservation results.
+Mocked checks do not establish actual database privileges.
+
+Stop if another file or database operation is needed. No guard bypass.
+Prepare separate provisioning/live approval requests; execute neither.
+Exclude migrations, roles/grants/LOGIN/HBA changes, fixtures/cleanup,
+KMS/SMTP/suppliers/payments, deployment, commits/pushes and later phases.
+Record results in existing evidence/tracker documents. Preserve all14 legal
+release gates BLOCKED / AWAITING LEGAL REVIEW.
+```
+
+This text is a request template, not an issued approval. G7 remains NO-GO; Phase1 is incomplete. No public disclosure, production source, database or helper was changed during this reconciliation.

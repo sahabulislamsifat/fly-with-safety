@@ -1,5 +1,8 @@
 # Phase 1I-D — Legal Evidence Review
 
+> **REFERENCE-ONLY, removed from active engineering gating on 2026-10-28.** Research and useful technical/privacy requirements are preserved. Historical checklist statuses are not current engineering blockers or legal approvals. See [single governing owner decision](PHASE_1_INTERIM_STATUS_AND_EXIT_CHECKLIST.md#0-governing-owner-decision--2026-10-28-supersedes-prior-engineering-gate-wording). No redundant new legal package is created.
+
+
 2026-10-25, Asia/Dhaka. **RESEARCH ADDENDUM — ALL L-01–L-14 DECISIONS BLOCKED.** Public-source research is authorized; legal approval, compliance certification, retention/deletion execution and real-data processing are not. No qualified counsel review occurred here. Evidence confidence below is separate from decision status.
 
 ## 1. Register provenance and research scope
@@ -72,3 +75,161 @@ Current permitted parallel work: documentation, field inventories without person
 No Act-wide current-status certification is claimed. Searches of official legislation, ICT Division and Gazette sources did not establish a complete current subordinate-instrument set. The original register remains byte-for-byte unchanged; all decisions remain BLOCKED. See [G3 readiness](PHASE_1I_D_G3_APPROVAL_AND_EXECUTION_READINESS.md) and [interim exit checklist](PHASE_1_INTERIM_STATUS_AND_EXIT_CHECKLIST.md) for engineering actions.
 
 Documentation verification: PASS for exact match of all 14 original subjects/IDs, all 14 research-matrix decision cells BLOCKED, unchanged original registry/acceptance files, resolving local links and whitespace. This is not legal verification or counsel approval.
+
+## 6. 2026-10-26 controlled Phase 1 evidence refresh — REVIEW DRAFT
+
+Scope: the owner authorized documentation/research and package preparation, not legal closure or live processing. Current local source baseline is development HEAD bbeb862b03949056c1f93539631ad31c054a11ab. The preceding October 25 source index and fourteen-decision matrix are preserved as historical research.
+
+The supplied ZIP's counsel register and policy/data-flow files were read directly without extraction or execution. Their S01–S10 labels conflict with this document's existing S01–S14 meanings; DO NOT merge labels by number. This refresh uses U01–U16 below. Draft statements about owner legal acceptance are not evidence of qualified legal review. Canonical decision status remains BLOCKED for every original L-ID.
+
+### 6.1 Official source refresh and uncertainty
+
+Retrieved through public web tools on 2026-10-26 (Asia/Dhaka). These are limited textual observations, not authenticated Gazette binaries or exhaustive current-law findings.
+
+| Refresh ID | Official source | Actual result and boundary |
+|---|---|---|
+| U01 | [Act 63/2026 §1](https://bdlaws.minlaw.gov.bd/act-1692/section-57267.html) | Text retrieved; distinguishes general deemed operation and special commencement conditions for §§23,31–35. No future effective date calculated; notices/applicability remain unresolved. |
+| U02 | [§2 definitions, print view](https://bdlaws.minlaw.gov.bd/act-print-1692/section-print-57268.html) | Retrieved after non-print page timed out. Definitions/classification require field-specific counsel application. |
+| U03 | [Chapter II §§5–9](https://bdlaws.minlaw.gov.bd/act-1692/act-chapter-print-2694.html) and [§5](https://bdlaws.minlaw.gov.bd/act-1692/section-57271.html) | Retrieved lawful-basis, processor and guardian provisions; standalone §9 timed out. No general processing permission or adopted age threshold inferred. |
+| U04 | [Chapter III §§10–14](https://bdlaws.minlaw.gov.bd/act-1692/act-chapter-print-2695.html) and [§10](https://bdlaws.minlaw.gov.bd/act-1692/section-57276.html) | Retrieved rights/procedural/exception/propagation text. Operational procedures and deadlines require counsel/current regulations. |
+| U05 | [§17](https://bdlaws.minlaw.gov.bd/act-print-1692/section-print-57283.html) | Retrieved safeguards, resilience and assessment text; neither the site's controls nor a specific AES design is legally certified. |
+| U06 | [§18](https://bdlaws.minlaw.gov.bd/act-print-1692/section-print-57284.html) | Retrieved purpose/regulation-dependent retention provisions; no passport duration established. |
+| U07 | [§19](https://bdlaws.minlaw.gov.bd/act-1692/section-57285.html) | Retrieved record/register wording referencing five years subject to §18. Record scope and trigger require counsel; no passport-retention rule adopted. |
+| U08 | [§20](https://bdlaws.minlaw.gov.bd/act-1692/section-57286.html) | Retrieved harm/risk and regulation-dependent reporting provisions; no universal notification deadline established. |
+| U09 | [§22](https://bdlaws.minlaw.gov.bd/act-print-1692/section-print-57288.html) | Standalone planning text now retrieved; standards, organizational application and proof remain open. |
+| U10 | [Chapter VII §§29–30](https://bdlaws.minlaw.gov.bd/act-1692/act-chapter-print-2699.html) | Retrieved classification/transfer conditions and passport-related large-scale-transfer language; no vendor/country/threshold permission concluded. |
+| U11 | [§44](https://bdlaws.minlaw.gov.bd/act-1692/section-57310.html) | Retrieved repeal/savings wording; transition instruments need counsel authentication. |
+| U12 | [§45](https://bdlaws.minlaw.gov.bd/act-1692/section-57311.html) | Retrieved authentic-translation/Bangla-precedence wording. No authentic English Gazette was obtained. |
+| U13 | [VAT Act 2012 §107](https://bdlaws.minlaw.gov.bd/act-1106/section-42401.html) | Retrieved accounting-record, pending-proceeding and amendment-footnote text. Finance Act 2026 footnote is a lead; full amending instrument/company applicability not independently collated. |
+| U14 | [DPP April 2026 Gazette listing](https://dpp.gov.bd/bgpress/index.php/document/extraordinary_gazettes_monthly/2026-04-14) | Retrieved listing for Act 63/2026 dated 10 April, pp.16435–16462. Specific /61156 endpoint timed out. No binary/hash/page authentication. |
+| U15 | [Official Act index](https://bdlaws.minlaw.gov.bd/act-1692.html) | Retrieved; full-print URL timed out. Available chapter/section text is not a complete authenticated consolidation. |
+| U16 | [2026 amendment-ordinance official lead](https://bdlaws.minlaw.gov.bd/act-print-1616/section-print-56668.html) | Official search excerpt located; historical ordinance, not assumed operative current transfer law. Read alongside U11; full transition review outstanding. |
+
+Searches of official ICT Division, Bangladesh Laws and DPP sources for personal-data rules, regulations, notifications and amendments did not establish a complete operative instrument set. Queries used Bangla terms for the Act, regulations/rules, notifications and amendment. Index/search success is not proof of exhaustive coverage. An unrelated official Gazette PDF returned by search was excluded rather than treated as this Act. Prior S14 EUR-Lex research was not refreshed here; any EU applicability remains conditional on actual business facts and appropriate counsel.
+
+Package-to-canonical mapping: package S01/S03 feed existing S01–S03; package S04 feeds existing S03; package S05 feeds S04; package S06 feeds S05–S09; package S07 feeds S10; package S08 feeds S11–S12; package S09 feeds S13. Package S02 is a Gazette archival lead; package S10 is this research document, not independent authority. U-labels above prevent accidental source substitution.
+
+### 6.2 Fourteen counsel question sheets — every decision remains BLOCKED
+
+Each sheet requires a named qualified reviewer (currently **TBD — owner assignment required**), exact operative instrument/version/page and archived binary provenance; a written disposition with assumptions, permitted/prohibited activities and review triggers; accountable owner acceptance; and separate engineering evidence before activation. Research completion alone never closes a sheet.
+
+#### L-01 — Applicability and commencement
+Sources U01/U11/U12/U14/U15. Code/activity: all account, booking and notification processing. Counsel question: which provisions and notices apply to our legal entity, establishments, customer locations and actual release profile, and from when? Owner supplies corporate/market facts and authentic instruments. Reviewer: Bangladesh counsel + privacy owner. Closure: signed provision-by-provision applicability schedule and owner-approved release baseline.
+
+#### L-02 — Classification
+Sources U02/U10. Code: schema.prisma:48,73,88,102,115,374,401,442; booking.schemas.ts:19. Question: classify each field/purpose, including passports, DOB, child data, recipients, authentication material and derived hashes, under definitions and current schedules. Privacy/security supply the inventory linked below. Closure: signed field/category/necessity mapping; tests verify approved minimization and projections.
+
+#### L-03 — Basis and notices
+Sources U03. Code: auth.service.ts:55–92; booking.schemas.ts:30; notification.service.ts:287–316. Question: select basis, required notices and evidence per registration, recovery, inquiry, reservation, support and any distinct marketing purpose. Product supplies actual screens and contracts. Closure: purpose/basis register, approved notices and lawful consent/withdrawal evidence design where applicable; implementation tested separately.
+
+#### L-04 — Child travelers
+Sources U02/U03. Code: booking.schemas.ts:22; client/app/privacy/page.tsx:117–120. Question: what guardian, age and evidence requirements apply to supported child/infant bookings, given the public notice's contradictory no-child-collection claim? Reviewer: product/privacy + counsel. Closure: approved supported workflow or complete enforced exclusion; no statutory age chosen by this draft; guardian/exclusion tests required.
+
+#### L-05 — Confidentiality and safeguards
+Sources U05/U09. Code: booking.service.ts:42–44,175–177; booking-dto.ts:29; outbox.service.ts:110–115; server.ts:53–57. Question: which risk-specific protections and current technical/organizational standards apply to stored documents, token mail, logs, backups and privileged access? Security supplies fourteen-unit control/evidence matrix. Closure: counsel requirements plus actual G4/G5/G6 effectiveness evidence accepted by security/owner.
+
+#### L-06 — Rights
+Sources U04. Code: account.routes.ts:14–32 supports account views/profile, not proof of complete rights fulfillment or backup propagation. Question: what procedures, exceptions, identity checks, timing and recipient/restore propagation apply? Reviewer: privacy/support + counsel. Closure: approved rights matrix/runbook and separately authorized synthetic fulfillment/denial/propagation tests.
+
+#### L-07 — Retention
+Sources U06. Code: schema.prisma:401,442; auth.service.ts:239,251 shows supersession deletion, not a complete retention schedule. Question: what categories, purposes, start/end events, durations, holds and backup/supplier rules apply? Reviewer: privacy/counsel + DBA. Closure: signed category schedule with sources and disposal approvals; all durations in the current draft remain TBD.
+
+#### L-08 — Processing records
+Sources U07/U06. Code: idempotency.service.ts:43,49 and logger.ts:16 are technical evidence, not an implemented statutory processing register. Question: what minimal record/register fields, period, trigger and exceptions apply separately from original passenger records? Reviewer: privacy/security operations + counsel. Closure: approved metadata-only register design, access and retention controls; no blanket raw-document retention.
+
+#### L-09 — Incidents
+Sources U08. Code: logger.ts:10; error-handler.ts:18,51; server.ts:53–57. Question: which thresholds, recipients, forms, deadlines and preservation duties follow from operative rules for each incident type? Reviewer: security operations/privacy + counsel. Closure: named escalation contacts, approved playbook, notification decision form and synthetic tabletop evidence; no real notification authorized here.
+
+#### L-10 — Protection planning
+Sources U09/U05. Code: current AUTH/OUT/KMS/DB unit register and G0–G7 artifacts. Question: which planning, organizational, technical-standard and assurance requirements apply to this release? Reviewer: accountable owner/privacy + counsel/security. Closure: signed risk/control plan, named owners, applicable standards and evidence/review schedule.
+
+#### L-11 — Classification/transfers
+Sources U10/U02. Code: SMTP configuration in notification.service.ts:36–50; mock inventory selection in flight-aggregator.service.ts:25 and hotel.service.ts:11. Question: what classification, countries, volume thresholds and transfer conditions apply to each intended field/recipient? Reviewer: privacy/counsel + infrastructure/supplier owner. Closure: approved field-country-purpose map and contract/control evidence, not generic supplier consent.
+
+#### L-12 — Authoritative baseline/transition
+Sources U11/U12/U14/U16. Question: which Bangla instrument, amendments, saved actions, rules and notified English version form our current baseline? Reviewer: qualified Bangladesh counsel/privacy. Owner obtains authenticated instruments and hashes. Closure: versioned signed transition/authority memorandum; old ordinance requirements not carried forward by assumption.
+
+#### L-13 — Finance versus traveler records
+Sources U13/U06/U07. Code: booking-dto.ts:17–20 expresses manual-payment policy; booking.schemas.ts:63–77 carries operational payment status. Question: given actual VAT/tax registration and transaction records, which accounting records, periods, triggers and holds apply independently of passport copies? Reviewer: tax counsel/finance + privacy. Closure: separate finance and traveler schedules, source/version verification and owner acceptance.
+
+#### L-14 — Suppliers/foreign jurisdiction
+Sources U10 and historical S14, with no new EU conclusion. Code: flight/hotel provider interfaces and mock defaults; no verified live supplier contract or gateway integration. Question: which jurisdictions and processor/transfer terms attach to actual establishments, targeting/monitoring and provider/subprocessor access locations? Reviewer: privacy counsel + supplier/infra owners; foreign specialist if warranted. Closure: signed applicability/contract/transfer findings and approved narrowly minimized outbound fields.
+
+### 6.3 Manual evidence required and next gates
+
+1. **Business/privacy owner:** legal entity/address/establishments, customer markets, current enabled features, exact child workflow, collection purposes and current notices/screens. Supply descriptions or redacted templates, not customer records.
+2. **Qualified Bangladesh counsel:** authenticate Gazette pp.16435–16462 and current text; archive original PDF, official URL, retrieval date and SHA256; locate all amendments, commencement notices, rules/regulations, classification instruments and authentic English notices; provide per-ID signed dispositions.
+3. **Finance/tax reviewer:** actual VAT/tax status, accounting categories, transactions and hold triggers; authenticate relevant amending instruments. Do not provide payment credentials or card data.
+4. **Infrastructure/security:** actual hosting/DB/log/backup/KMS regions, support access countries, workload identity and IAM, recovery/cost/availability/monitoring facts. Candidate provider is not an approved recipient.
+5. **Supplier/payment/mail owners:** actual legal entities, agreements, field/API requirements, subprocessor/access countries, incident assistance, retention/return/deletion and suspension terms. No supplier/SMTP/payment request is authorized to collect this evidence.
+6. **Support/operations:** named privacy/incident contacts, real channel ownership, request verification, escalation and legally approved notification procedure; runbooks remain drafts.
+
+Counterparts: [code-derived inventory and policy review draft](PHASE_1_DATA_FLOW_AND_POLICY_REVIEW_DRAFT.md), [STATUS-ONLY code approval](G3_STATUS_ONLY_CODE_APPROVAL.md). No legal decision, retention interval, production processing, KMS region or vendor transfer is approved by this refresh.
+
+## 7. Independent legal archival progress — 2026-10-26, ALL DECISIONS BLOCKED
+
+The [official DPP April 2026 Gazette listing](https://dpp.gov.bd/bgpress/index.php/document/extraordinary_gazettes_monthly/2026-04-14) links Act No.63/2026, dated 10 April 2026, pp.16435–16462, to this exact official binary URL:
+
+[Original DPP PDF archival lead](https://www.dpp.gov.bd/upload_file/gazettes/61156_38449.pdf)
+
+The link was resolved from that listing during this review. Fetching the PDF timed out. No PDF bytes, SHA256, signature/visual authentication, page collation or complete instrument text were obtained. This improves the retrieval lead only; it does not complete L-01/L-12 or establish current commencement, amendments or subordinate rules.
+
+Manual owner/counsel action: obtain the original PDF from the official URL in an accessible browser; retain the unmodified file, official URL and retrieval date; compute its SHA256 locally with Get-FileHash; have qualified counsel compare identity/date/pages/text against the Bangladesh Laws version and authenticate applicable amendments, saved instruments and commencement/regulatory notices. Different official download URLs must not be assumed byte-identical or equally current without comparison.
+
+Prior fourteen question sheets, purpose/retention/rights/incident/vendor drafts and required corrections P01/P02 remain unchanged. No privacy page or operational policy is approved or published. All fourteen canonical dispositions remain BLOCKED pending written qualified review and accountable owner acceptance.
+
+## 8. 2026-10-27 consolidated counsel submission — REVIEW DRAFT, ALL 14 BLOCKED
+
+This addendum reconciles the October 26 Legal Resolution & G3 Handoff Package and identical Additional Project Context attachments with sections 1–7. Earlier evidence, source identifiers and research limitations remain intact. The attached register is a research input, not a second authoritative decision register. The current issue tracker is section 10 of [the Phase 1 exit checklist](PHASE_1_INTERIM_STATUS_AND_EXIT_CHECKLIST.md); this document remains its legal evidence and counsel-question annex. No row is CLOSED.
+
+### 8.1 Corrected business facts and evidence grading
+
+- **OWNER-REPORTED:** an existing legal entity and VAT registration are available for proposed FlyWithSafe operations. Their existence is no longer an unanswered owner question. Exact registered operator, business/trading-name authority, address, VAT/BIN/TIN applicability, permitted activities and travel-agency requirements still need private documentary verification by counsel/tax counsel. No certificates or identifiers were received or authenticated here.
+- **OWNER-INTENDED release profile:** children/infants, passports, international bookings and marketing are included. Their unresolved gates cannot be marked N/A. Candidate suppliers include Trip.com and/or Booking.com; agreements, actual integration, countries, subprocessors and permitted fields are UNVERIFIED. Akijair.com is a public workflow reference only.
+- Actual deployed features, records, hosting/backup/log countries, provider access locations and contracts remain UNVERIFIED. Mock inventory and manual payment state in source do not prove supplier reservation, ticket issuance or gateway settlement.
+- Qualified legal/tax reviewer appointment and written dispositions are outstanding. Owner acceptance of engineering or an intended feature is not counsel approval.
+- The supplied register reports an external visual check of Gazette page 1. This is attributed external evidence, not an independently reproduced local finding. The DPP PDF fetch timed out in this review; no binary/hash or complete Gazette collation was obtained.
+
+### 8.2 Targeted official-source refresh and remaining instrument gaps
+
+Retrieved October 27 through public official sources. These are research observations, not legal conclusions. Preserve original S/U identifiers; V identifiers record this refresh.
+
+| Evidence | Official source and result | Open dependency |
+|---|---|---|
+| V01 | [Full official Bangla Act 63/2026](https://bdlaws.minlaw.gov.bd/act-print-1692.html) now retrieved successfully; prior full-print timeout is historical. Section 1 differentiates commencement conditions. | Counsel must authenticate the operative consolidation, Gazette, amendments and relevant commencement notices. No special-section effective date calculated. |
+| V02 | [Definitions](https://bdlaws.minlaw.gov.bd/act-print-1692/section-print-57268.html) retrieved. | Field classification and applicable child definition/additions need qualified interpretation; do not adopt the website's under-16 statement as a legal threshold. |
+| V03 | [Processing/guardian chapter](https://bdlaws.minlaw.gov.bd/act-1692/act-chapter-print-2694.html) retrieved. | Basis, notices, guardian evidence and applicable procedures must be decided per actual purpose, including separate marketing. |
+| V04 | [Rights chapter](https://bdlaws.minlaw.gov.bd/act-1692/act-chapter-print-2695.html) retrieved. | Regulations, exceptions, verification and operating procedures require counsel; no response clock invented. |
+| V05 | [Safeguards/retention/records/incidents/planning chapter](https://bdlaws.minlaw.gov.bd/act-1692/act-chapter-print-2696.html) retrieved. | Retention and notification procedures depend on unresolved instruments and application. Processing records, finance records and passenger documents require separate schedules. |
+| V06 | [Classification/transfers chapter](https://bdlaws.minlaw.gov.bd/act-1692/act-chapter-print-2699.html) retrieved. | Country suitability, classification instruments, volume/notification application and actual recipient controls remain undecided. No blanket permission for overseas suppliers or cloud hosts. |
+| V07 | [Repeal/savings/language chapter](https://bdlaws.minlaw.gov.bd/act-1692/act-chapter-print-2701.html) retrieved. | Saved instruments, transition and authentic English publication require counsel authentication; historical ordinance search results are not substituted for current law. |
+| V08 | [VAT Act §107](https://bdlaws.minlaw.gov.bd/act-1106/section-42401.html) retrieved again. | Tax counsel must identify applicable entity/records, trigger, amendments and proceeding-related holds; this is not a passport-retention rule. |
+| V09 | [ICT Division laws index](https://ictd.gov.bd/pages/laws) and [Act publication page](https://ictd.gov.bd/pages/laws/%E0%A6%AC%E0%A7%8D%E0%A6%AF%E0%A6%95%E0%A7%8D%E0%A6%A4%E0%A6%BF%E0%A6%97%E0%A6%A4-%E0%A6%89%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A7%8D%E0%A6%A4-%E0%A6%B8%E0%A7%81%E0%A6%B0%E0%A6%95%E0%A7%8D%E0%A6%B7%E0%A6%BE-%E0%A6%86%E0%A6%87%E0%A6%A8-%E0%A7%A8%E0%A7%A6%E0%A7%A8%E0%A7%AC-70is1t-69df5ba2210b1799cc640412) located. | Bounded searches of ICTD, DPP and Bangladesh Laws did not establish the complete current rules/regulations/notifications set. This is UNVERIFIED, not “no rules exist.” |
+| V10 | [Official Gazette PDF](https://www.dpp.gov.bd/upload_file/gazettes/61156_38449.pdf) remains an archival lead. | Obtain original binary, retrieval provenance/hash and qualified page/text authentication. A different PDF returned by search is not adopted as this Act. |
+| V11 | [Official EUR-Lex GDPR URL](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng) returned a JavaScript/robot challenge. | Fresh text authentication unavailable here. Historical S14 remains a research lead only; actual territorial/vendor facts and qualified foreign-law review decide applicability. |
+
+Search terms included “ব্যক্তিগত উপাত্ত”, “প্রবিধান”, “প্রবিধানমালা”, “প্রজ্ঞাপন”, “সংশোধন”, “২০২৬” with official-domain filters. Search indexing is not an authoritative negative certificate. Counsel must supply an instrument register identifying title/issuing authority/number/date/official publication, commencement, amendments, applicability, saved instruments and explicit “not located / confirmation required” entries. Priority gaps: L-01 special commencement; L-02/L-04 classification/child procedures; L-06 rights procedures; L-07 category retention; L-09 breach procedure/time; L-10 standards/plans; L-11 country/transfer/classification instruments; L-12 savings/translation; L-13 current tax amendments.
+
+### 8.3 One consolidated review packet and exact disposition form
+
+Submit this document with [field/workflow/policy annex](PHASE_1_DATA_FLOW_AND_POLICY_REVIEW_DRAFT.md), the canonical checklist section 10 and current architecture/security unit designs. Sections 6.2's fourteen question sheets remain the substantive counsel brief. Their source refresh is V01–V11 above, not a new legal approval.
+
+Each L-01–L-14 response must contain: named qualified reviewer and qualification; dated written disposition; exact authoritative instrument/version/section and commencement; corroborated company/workflow/country assumptions; permitted and prohibited processing; required notice/basis/consent/guardian/rights/retention/incident/transfer controls as applicable; unresolved regulatory dependencies and interim opinion; owner decision; engineering tests/evidence; review trigger/date. “Research complete”, owner intent, draft policy or a missing regulation cannot replace this response.
+
+| Owner/reviewer | Exact manual facts/documents to obtain privately |
+|---|---|
+| Owner + Bangladesh counsel | Existing incorporation/registration and trading-name authorization, operator address/contact, permitted travel activities and required licensing; markets/establishments and release profile. Redacted reviewer-confirmed summaries suffice for this repository; do not paste identity documents here. |
+| Finance + qualified tax counsel | Existing VAT/BIN/TIN applicability to this operator and transactions; invoices/accounting categories, fiscal/filing events, current amendments, holds/disputes and separate finance retention disposition. |
+| Product + privacy/counsel | Search/inquiry/reservation/fulfillment screens and field necessity; child/guardian/customer relationship; passport handoff stage; marketing channels, audiences, consent/preference/unsubscribe requirements and evidence. Marketing is intended, not proven implemented or approved. |
+| Infrastructure + security | Actual host/database/mail/log/APM/backup/KMS vendors and legal entities, primary/replica/backup/support countries, access identities, keys/IAM, recovery, monitoring, cost/availability and subprocessors. Architecture candidates are not operating facts. |
+| Supplier/commercial + counsel | Actual Trip.com/Booking.com/other contracts and permitted business model; required fields by step, controller/processor roles, country/subprocessor access, onward transfer, incident assistance, deletion/return/retention, audits and termination. No supplier call authorized. |
+| Privacy/support/security operations | Verified private request/incident intake, accountable contacts, identity checks, escalation, hold/rights/recipient propagation and recovery workflows. No actual incident or rights request processed in this review. |
+| Counsel + archive owner | Authentic Gazette and current subordinate/amending/commencement instruments with binary provenance/hash and signed applicability/transition findings. Locate authoritative foreign-law text if relevant; no invented transfer mechanism. |
+
+### 8.4 Resolution sequence and enforceable exclusion fallback
+
+1. Corroborate operator/release/vendor/field facts; obtain counsel/tax review in parallel with authorized engineering.
+2. Decide each legal issue and control dependency; review P01/P02 drafts before any public edit. No deadline, period or recipient permission is inserted from assumption.
+3. Separately approve exact implementation scopes; verify controls with synthetic tests, then specifically authorized DB/KMS/staging evidence. No current code-only helper acceptance supplies application approval.
+4. Close a legal row only with written qualified disposition, owner acceptance and required implementation/effectiveness evidence in the canonical tracker. Current count: **14 BLOCKED, 0 CLOSED**.
+5. If a feature cannot be approved, propose an explicit exclusion for owner/counsel review: server rejection at every create/update/import/conversion/API entry, UI removal, no bypass through notes/JSON or notifications, denied supplier/marketing dispatch, and tests including legacy/retained data handling. Hiding UI or changing notice is insufficient. Retained-data obligations/holds/rights remain. Children/passports/international bookings/marketing remain intended release scope unless that exclusion is explicitly approved and proven. No exclusion or processing permission is implemented here.

@@ -1,6 +1,7 @@
 import { prisma } from '../lib/prisma.js';
 import type { Prisma } from '../generated/prisma/client.js';
 import { logger, serializeError } from '../lib/logger.js';
+import { errorDataField } from '../utils/error-fields.js';
 import {
   renderNotificationContent,
   sendEmailRaw,
@@ -44,9 +45,8 @@ export async function isOutboxTableAvailable(): Promise<boolean> {
     await prisma.$queryRawUnsafe('SELECT 1 FROM "NotificationOutbox" LIMIT 0');
     outboxTableAvailableState = true;
   } catch (error: unknown) {
-    const code = error && typeof error === 'object' && 'code' in error ? error.code : undefined;
-    const meta = error && typeof error === 'object' && 'meta' in error ? error.meta : undefined;
-    const sqlCode = meta && typeof meta === 'object' && 'code' in meta ? meta.code : undefined;
+    const code = errorDataField(error, 'code');
+    const sqlCode = errorDataField(errorDataField(error, 'meta'), 'code');
     if (code !== '42P01' && sqlCode !== '42P01') throw error;
     setOutboxTableAvailable(false);
   }
@@ -122,9 +122,9 @@ export async function enqueueNotification(
     });
 
     return record;
-  } catch (err: any) {
+  } catch (err: unknown) {
     // If duplicate idempotency key race occurred
-    if (err?.code === 'P2002' && input.idempotencyKey) {
+    if (errorDataField(err, 'code') === 'P2002' && input.idempotencyKey) {
       try {
         return await client.notificationOutbox.findUnique({
           where: { idempotencyKey: input.idempotencyKey },
@@ -310,10 +310,12 @@ export async function processOutboxBatch(batchSize = 20, options: {
         }
       }
     }
-  } catch (err: any) {
+  } catch (err: unknown) {
     if (options.throwOnError) throw err;
     // Gracefully handle if table does not exist
-    if (err?.code === 'P2021' || err?.message?.includes('does not exist')) {
+    const code = errorDataField(err, 'code');
+    const sqlCode = errorDataField(errorDataField(err, 'meta'), 'code');
+    if (code === 'P2021' || code === '42P01' || sqlCode === '42P01') {
       return { processed: 0, delivered: 0, failed: 0, recovered: 0 };
     }
     logger.warn('outbox_batch_processing_error', serializeError(err));

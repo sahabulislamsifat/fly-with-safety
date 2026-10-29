@@ -21,8 +21,10 @@ export function requestId(req: Request, res: Response, next: NextFunction): void
     const durationMs = Number(process.hrtime.bigint() - startedAt) / 1e6;
     logger.info('request', {
       requestId: id,
-      method: req.method,
-      path: req.originalUrl.split('?')[0],
+      method: /^(GET|HEAD|POST|PUT|PATCH|DELETE|OPTIONS|CONNECT|TRACE)$/.test(req.method) ? req.method : 'OTHER',
+      // Route templates retain endpoint visibility without persisting arbitrary
+      // URL segments (including secrets in unmatched paths or path parameters).
+      path: typeof req.route?.path === 'string' ? req.route.path : '[unmatched]',
       status: res.statusCode,
       durationMs: Math.round(durationMs),
     });

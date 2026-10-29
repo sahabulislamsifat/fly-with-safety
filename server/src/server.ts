@@ -1,3 +1,4 @@
+import { logger } from './lib/logger.js';
 import { env } from './config/env.js';
 import { validateEnv } from './config/env.js';
 import app from './app.js';
@@ -9,7 +10,7 @@ async function startServer(): Promise<void> {
   try {
     validateEnv();
   } catch (error) {
-    console.error('Environment validation failed:', error);
+    logger.error('Environment validation failed');
     process.exit(1);
   }
 
@@ -36,7 +37,7 @@ async function startServer(): Promise<void> {
         await prisma.$disconnect();
         console.log('Database connection closed.');
       } catch (err) {
-        console.error('Error closing database connection:', err);
+        logger.error('Error closing database connection');
       }
       process.exit(0);
     });
@@ -50,11 +51,11 @@ async function startServer(): Promise<void> {
   process.on('SIGINT', () => void shutdown('SIGINT'));
   process.on('SIGTERM', () => void shutdown('SIGTERM'));
   process.on('uncaughtException', (err) => {
-    console.error('Uncaught Exception:', err);
+    logger.error('Uncaught Exception');
     void shutdown('uncaughtException');
   });
   process.on('unhandledRejection', (reason) => {
-    console.error('Unhandled Rejection:', reason);
+    logger.error('Unhandled Rejection');
   });
 }
 

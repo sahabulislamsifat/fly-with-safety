@@ -1,5 +1,8 @@
 > **Current owner disposition — 2026-10-25:** **OWNER-ACCEPTED — SYNTHETIC D-1 SCOPE ONLY**, with D1-L01–L08/W1/W2 retained. See [formal acceptance](PHASE_1I_D_D1_FORMAL_ACCEPTANCE.md). [D-2 scope](PHASE_1I_D_D2_CRYPTO_HARDENING_SCOPE.md) is proposed only; implementation and later phases remain unauthorized. Earlier pending-acceptance statements are historical.
 
+> **Current governance (owner-directed 2026-10-28):** [Tracker section 0](PHASE_1_INTERIM_STATUS_AND_EXIT_CHECKLIST.md#0-governing-owner-decision--2026-10-28-supersedes-prior-engineering-gate-wording) supersedes older bespoke legal-checklist and automatic counsel-signature requirements for G7 engineering acceptance. All technical controls remain mandatory. Real-data/production activation remains separately gated. Dated findings and acceptance evidence below are preserved, not re-certified.
+
+
 > **Current status — 2026-10-25:** D-1 is authorized and executed; fresh review recommends **PASS WITH DOCUMENTED LIMITATIONS — REQUIRES OWNER REVIEW**. Only ADR-01/02/07/08's bounded synthetic contracts have M01 approval. Production decisions and all legal gates remain open. See [acceptance review](PHASE_1I_D_D1_ACCEPTANCE_REVIEW.md) and the R3 annex below; earlier status statements are historical.
 
 # Phase 1I-D — R2 readiness, manual actions and Phase 1I-E handoff

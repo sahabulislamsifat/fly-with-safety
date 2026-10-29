@@ -2,14 +2,10 @@ import { Request, Response, NextFunction } from 'express';
 import { isAppError } from '../utils/errors.js';
 import { error as errorResponse } from '../utils/response.js';
 import { logger, serializeError } from '../lib/logger.js';
-
-interface PrismaLikeError {
-  code?: string;
-  name?: string;
-}
+import { errorDataField, nativeSyntaxError } from '../utils/error-fields.js';
 
 export function errorHandler(
-  err: Error,
+  err: unknown,
   _req: Request,
   res: Response,
   _next: NextFunction
@@ -25,29 +21,30 @@ export function errorHandler(
   }
 
   // Malformed JSON body (body-parser)
-  if (err.name === 'SyntaxError' && (err as { status?: number }).status === 400) {
+  if (errorDataField(err, 'status') === 400 &&
+    (nativeSyntaxError(err) || errorDataField(err, 'name') === 'SyntaxError' || errorDataField(err, 'type') === 'entity.parse.failed')) {
     res.status(400).json(errorResponse('INVALID_JSON', 'Invalid JSON payload'));
     return;
   }
 
   // Body too large (body-parser)
-  if ((err as { type?: string }).type === 'entity.too.large') {
+  if (errorDataField(err, 'type') === 'entity.too.large') {
     res.status(413).json(errorResponse('PAYLOAD_TOO_LARGE', 'Request body too large'));
     return;
   }
 
   // Prisma known request errors — map without leaking internals
-  const prismaErr = err as PrismaLikeError;
-  if (prismaErr.code === 'P2025') {
+  const code = errorDataField(err, 'code');
+  if (code === 'P2025') {
     res.status(404).json(errorResponse('NOT_FOUND', 'Resource not found'));
     return;
   }
-  if (prismaErr.code === 'P2002') {
+  if (code === 'P2002') {
     res.status(409).json(errorResponse('CONFLICT', 'Resource already exists'));
     return;
   }
 
-  // Unknown: log full detail server-side, return a sanitised message always.
+  // Unknown: log only the fixed safe category/code, never submitted data or raw errors.
   logger.error('unhandled_error', serializeError(err));
   res.status(500).json(errorResponse('INTERNAL_ERROR', 'Internal server error'));
 }
