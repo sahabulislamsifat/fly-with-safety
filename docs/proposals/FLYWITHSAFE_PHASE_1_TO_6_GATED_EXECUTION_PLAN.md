@@ -1,5 +1,8 @@
 # FlyWithSafe — Phase 1–6 Gated Execution Master Plan
 
+> **Current governance (owner-directed 2026-10-28):** [Tracker section 0](PHASE_1_INTERIM_STATUS_AND_EXIT_CHECKLIST.md#0-governing-owner-decision--2026-10-28-supersedes-prior-engineering-gate-wording) supersedes older bespoke legal-checklist and automatic counsel-signature requirements for G7 engineering acceptance. All technical controls remain mandatory. Real-data/production activation remains separately gated. Dated findings and acceptance evidence below are preserved, not re-certified.
+
+
 Prepared 2026-10-25 (Asia/Dhaka). **PLANNING BASELINE — G0 ADOPTED ONLY.** G1 design acceptance, G2 implementation, database/provider operations and every later phase require separate explicit authorization. This session creates documentation only.
 
 ## 1. Executive Summary

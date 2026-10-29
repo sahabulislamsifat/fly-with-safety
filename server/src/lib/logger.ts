@@ -1,4 +1,5 @@
 import { getRequestId } from './request-context.js';
+import { errorDataField } from '../utils/error-fields.js';
 
 type Level = 'debug' | 'info' | 'warn' | 'error';
 type Meta = Record<string, unknown>;
@@ -9,7 +10,10 @@ const isTest = process.env.NODE_ENV === 'test';
 /** Reduce an unknown thrown value to loggable, secret-free fields. */
 export function serializeError(err: unknown): Meta {
   // Driver/transport error messages and stacks may embed submitted traveler data.
-  const code = err && typeof err === 'object' && 'code' in err ? String(err.code) : '';
+  // Only inspect an own data property: accessors, coercion and Proxy traps can
+  // execute arbitrary code while an error is being handled.
+  const value = errorDataField(err, 'code');
+  const code = typeof value === 'string' ? value : '';
   return { name: 'OperationError', ...( /^P\d{4}$|^\d{5}$/.test(code) ? { code } : {}) };
 }
 

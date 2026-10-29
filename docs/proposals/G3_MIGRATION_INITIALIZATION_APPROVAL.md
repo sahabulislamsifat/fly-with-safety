@@ -1,5 +1,8 @@
 # G3 Migration Initialization Approval Package
 
+> **Current governance (owner-directed 2026-10-28):** [Tracker section 0](PHASE_1_INTERIM_STATUS_AND_EXIT_CHECKLIST.md#0-governing-owner-decision--2026-10-28-supersedes-prior-engineering-gate-wording) supersedes older bespoke legal-checklist and automatic counsel-signature requirements for G7 engineering acceptance. All technical controls remain mandatory. Real-data/production activation remains separately gated. Dated findings and acceptance evidence below are preserved, not re-certified.
+
+
 Date: 2026-10-26. Status: **READ-ONLY PREFLIGHT PASS; MIGRATION EXECUTION REQUIRES SEPARATE APPROVAL**.
 
 ## Verified state and evidence
@@ -128,6 +131,10 @@ All **661** pre-existing repository files retain their original SHA256 values. T
 Not executed: live Prisma status, migrations, post-migration checks, restricted-role login/G3-P or G3-X tests.
 
 ### Exact next authorization request
+
+**COMPLETED 2026-10-28:** owner explicitly approved and the guarded initialization executed once. Deploy/postcheck/supplemental role-check all exit0; all seven completed raw checksums and catalog definitions reviewed against SQL. Canonical Evidence Log records PASS. The historical initialization request below is fulfilled: NEVER rerun it on this initialized database. Reader remains restricted LOGIN; test role remains restricted NOLOGIN with no table grants. Next step is a new narrowly reviewed test-role access/permission package and separately authorized read-only G3-P, not another initialization, R1 empty-target preflight or fixture run.
+
+**2026-10-28 readiness update (supersedes earlier dated 'live status not executed'):** R1 and R2 now PASS; actual reader identity/preflight exit0, fixed Prisma7.10.0 status exit1 with exactly seven reviewed pending names, helper passed=true and migrationExecuted=false. See canonical Evidence Log. Seven migrations are ready for a SEPARATE execution decision, not authorized by R2. Fresh administrator target/empty-schema/hash/pending guards remain mandatory at execution time. Use explicit installed Utility import in the private PowerShell caller; do not alter reviewed initialization wrapper, migration SQL or pins. Preserve new reader CONNECT/USAGE/settings and existing G3-X NOLOGIN, ownership/memberships/ACLs during read-only postchecks. Current empty-target Status preflight is unsuitable after migration; use approved initialization postcheck instead. No post-migration reader grants or G3-X activation implied. Previous scope/acceptance evidence below is retained as dated history.
 
 > I authorize one guarded initialization attempt applying exactly the seven migration names listed above, in chronological order, with Prisma 7.10.0 to 127.0.0.1:5432/flywithsafe_g3_auth02_disposable as postgres, subject to fresh identity/empty-target/checksum/pending-set guards. I also authorize read-only status and post-migration catalog verification and sanitized evidence capture. Stop on any mismatch or failure without retry, repair or history changes. This excludes every other database, additional schema changes, LOGIN activation, table grants, HBA/authentication changes, credential changes, fixtures/integration tests, suppliers/payments/SMTP and deployment.
 

@@ -16,6 +16,8 @@ import childProcess from 'node:child_process';
 import workerThreads from 'node:worker_threads';
 import { syncBuiltinESMExports } from 'node:module';
 import { createHash, randomBytes, randomUUID } from 'node:crypto';
+import { AsyncLocalStorage } from 'node:async_hooks';
+import { types } from 'node:util';
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { setTimeout as delay } from 'node:timers/promises';
@@ -32,8 +34,208 @@ type Service = Pick<typeof import('../src/services/auth.service.js'), 'verifyEma
 type Profile = 'UTC' | 'Asia/Dhaka' | 'timeout';
 interface Target { host: string; port: number; database: string; user: string; password: string }
 
+
+type DiagnosticStage = 'operation' | 'fixture' | 'lock' | 'dispatch' | 'preparation' | 'barrier' | 'outcomes' | 'persisted-state';
+const diagnosticStages: readonly DiagnosticStage[] = ['operation','fixture','lock','dispatch','preparation','barrier','outcomes','persisted-state'];
+const diagnosticScenarioIds = new Set<string>(["LOCK-01","LOCK-01-LEGACY-RAW","LOCK-01-AMBIGUOUS-LEGACY","LOCK-02","LOCK-04","LOCK-04-CONSUMED","LOCK-05","LOCK-06","TX-03","TX-04","TX-05","TX-06-COMMIT","TX-06-ROLLBACK","TX-09","TX-09-DELETE","TX-10","UTC-01","UTC-02","UTC-03","UTC-05","UTC-06","UTC-08","UTC-07","COMMIT-01","COMMIT-02","COMMIT-03","COMMIT-04","COMMIT-05","COMMIT-06","TX-07","UTC-04","TX-01","TX-02","LOCK-03-C2-R1","LOCK-03-C2-R2","LOCK-03-C2-R3","LOCK-03-C8-R1","LOCK-03-C8-R2","LOCK-03-C8-R3","LOCK-03-C16-R1","LOCK-03-C16-R2","LOCK-03-C16-R3"]);
+const diagnosticLabels = new WeakMap<object, string>();
+const diagnosticFailureLabels = new Set(['LOCK_BARRIER_INCONCLUSIVE','CONTENTION_OUTCOMES',
+ 'UNSANITIZED_SERVICE_ERROR','USER_DISAPPEARED','CONSUMPTION_STATE','VERIFICATION_STATE',
+ 'PASSWORD_STATE','SESSION_STATE','CLIENT_NOT_READY','SERVICE_NOT_READY',
+ 'BLOCKER_RELEASE_FAILED_PRESERVE_FIXTURES','PREPARATION_BARRIER_INCONCLUSIVE']);
+function harnessError(label: string): Error {
+ const error = new Error('G3_'+label);
+ if (diagnosticFailureLabels.has(label)) diagnosticLabels.set(error,label);
+ return error;
+}
+function diagnosticCategory(error: unknown): string {
+ // Identity metadata only: do not read message/code/stack/cause or invoke getters.
+ return typeof error === 'object' && error !== null
+  ? diagnosticLabels.get(error) ?? 'UNCLASSIFIED_ERROR' : 'UNCLASSIFIED_ERROR';
+}
+interface ScenarioDiagnostic {
+ purpose: Purpose | 'unspecified'; stage: DiagnosticStage; started: number; phaseStarted: number;
+ durations: Partial<Record<DiagnosticStage,number>>; concurrency:number; repetition:number;
+ success:number; invalid:number; internal:number; rejected:number; releaseFailure:string|null; stageFailure:string|null; releaseElapsedMs:number;
+ barrier?: BarrierObservation;
+ preparation?:ReturnType<typeof preparationGate>;
+}
+
+/** Shared reset rendezvous: no real transaction starts until all contenders arrive. */
+function preparationGate(expected:number,budgetMs:number) {
+ let state:'collecting'|'ready'|'opened'|'cancelled'='collecting';
+ const started=performance.now(),deadline=started+Math.max(0,budgetMs);
+ const queue:Array<{invoke:()=>Promise<unknown>;resolve:(value:unknown)=>void;reject:(error:unknown)=>void}>=[];
+ let readyResolve:()=>void=()=>{},readyReject:(error:unknown)=>void=()=>{};
+ const ready=new Promise<void>((resolve,reject)=>{readyResolve=resolve;readyReject=reject;});
+ void ready.catch(()=>undefined);
+ const failure=()=>harnessError('PREPARATION_BARRIER_INCONCLUSIVE');
+ let timer:ReturnType<typeof setTimeout>|undefined;
+ function cancel():void {
+  if(state==='opened'||state==='cancelled')return;
+  state='cancelled';clearTimeout(timer);const error=failure();readyReject(error);
+  for(const item of queue)item.reject(error);
+ }
+ timer=setTimeout(cancel,Math.max(0,budgetMs));
+ return {
+  ready,cancel,
+  arrive(invoke:()=>Promise<unknown>):Promise<unknown>{
+   if(state!=='collecting'||performance.now()>=deadline){cancel();return Promise.reject(failure());}
+   const result=new Promise<unknown>((resolve,reject)=>queue.push({invoke,resolve,reject}));
+   if(queue.length===expected){state='ready';clearTimeout(timer);readyResolve();}
+   return result;
+  },
+  open():void {
+   if(state!=='ready'||queue.length!==expected)throw failure();
+   state='opened';clearTimeout(timer);
+   for(const item of queue){try{item.invoke().then(item.resolve,item.reject);}catch(error){item.reject(error);}}
+  },
+  snapshot(){return {required:boundedCount(expected),arrived:boundedCount(queue.length),state,elapsedMs:boundedMs(performance.now()-started)};},
+ };
+}
+let contentionPreparation:ReturnType<typeof preparationGate>|undefined;
+const preparationContext=new AsyncLocalStorage<ReturnType<typeof preparationGate>|undefined>();
+interface LookupObservation {
+ requested:number;completed:number;failed:number;lastFailure:string|null;
+ pools:Array<{total:number;idle:number;waiting:number}>;
+}
+const preparationLookups=new WeakMap<object,LookupObservation>();
+function safeLookupCode(error:unknown):string {
+ const field=(value:unknown,name:string):unknown=>{
+  if(!value||typeof value!=='object'||types.isProxy(value))return undefined;
+  const d=Object.getOwnPropertyDescriptor(value,name);return d&&'value' in d?d.value:undefined;
+ };
+ const code=field(error,'code'),sqlCode=field(field(error,'meta'),'code');
+ if(code==='P2024')return 'POOL_ACQUISITION_TIMEOUT';
+ if(code==='P1008'||code==='57014'||sqlCode==='57014')return 'QUERY_TIMEOUT';
+ if(code==='53300'||sqlCode==='53300')return 'CONNECTION_CAPACITY';
+ if(code==='P1001'||code==='08006'||sqlCode==='08006')return 'CONNECTION_FAILURE';
+ return 'UNCLASSIFIED';
+}
+function observeResetLookup<T>(invoke:()=>PromiseLike<T>):PromiseLike<T> {
+ const gate=preparationContext.getStore();
+ if(!gate)return invoke();
+ let observation=preparationLookups.get(gate);
+ if(!observation){observation={requested:0,completed:0,failed:0,lastFailure:null,pools:[]};preparationLookups.set(gate,observation);}
+ const o=observation;o.requested++;
+ const failed=(error:unknown):never=>{
+  o.failed++;o.lastFailure=safeLookupCode(error);
+  o.pools=pools.map(pool=>({total:boundedCount(pool?.totalCount??0),idle:boundedCount(pool?.idleCount??0),waiting:boundedCount(pool?.waitingCount??0)}));
+  throw error; // Preserve exact thrown-value identity; only allowlisted aggregate metadata is emitted.
+ };
+ try{return invoke().then(value=>{o.completed++;return value;},failed);}catch(error){return failed(error);}
+}
+function lookupText(gate:object):object {
+ const o=preparationLookups.get(gate);
+ return {requested:boundedCount(o?.requested??0),completed:boundedCount(o?.completed??0),failed:boundedCount(o?.failed??0),
+  lastFailure:o?.lastFailure??null,poolAtFailure:o?.pools??[]};
+}
+
+function preparationBudget(started:number,now=performance.now()):number {
+ const elapsed=now-started;
+ // Reserve unchanged admission/transaction/lock-observation budgets inside the existing case bound.
+ return Number.isFinite(elapsed)&&elapsed>=0?Math.max(0,15000-2000-5000-1500-elapsed):0;
+}
+function resetPreparation(purpose:Purpose,concurrency:number,started:number):ReturnType<typeof preparationGate>|undefined {
+ return purpose==='reset'?preparationGate(concurrency,preparationBudget(started)):undefined;
+}
+
+type PollState = 'not-started' | 'polling' | 'ready' | 'deadline-exhausted' | 'observation-failed';
+interface BarrierObservation {
+ started:number; required:number; polls:number; last:number|null; maximum:number;
+ state:PollState; pollStarted:number|null; elapsed:number; lastPollMs:number; maximumPollMs:number;
+ requested:number; entered:number; firstRequestedMs:number|null; lastRequestedMs:number|null;
+ firstEnteredMs:number|null; lastEnteredMs:number|null;
+}
+let contentionObservation:BarrierObservation|undefined;
+function newBarrierObservation(required:number):BarrierObservation {
+ return {started:performance.now(),required,polls:0,last:null,maximum:0,state:'not-started',
+ pollStarted:null,elapsed:0,lastPollMs:0,maximumPollMs:0,requested:0,entered:0,
+ firstRequestedMs:null,lastRequestedMs:null,firstEnteredMs:null,lastEnteredMs:null};
+}
+function transactionSignal(o:BarrierObservation,kind:'requested'|'entered'):void {
+ o[kind]=Math.min(16,o[kind]+1);
+ const elapsed=boundedMs(performance.now()-o.started);
+ if(kind==='requested'){o.firstRequestedMs??=elapsed;o.lastRequestedMs=elapsed;}
+ else{o.firstEnteredMs??=elapsed;o.lastEnteredMs=elapsed;}
+}
+/** No added await, error inspection, promise substitution or transaction-option change. */
+function forwardTransaction<Owner,Tx,Options,Result>(owner:Owner,
+ original:(this:Owner,callback:(this:unknown,tx:Tx)=>Promise<Result>,options:Options)=>Promise<Result>,
+ callback:(this:unknown,tx:Tx)=>Promise<Result>,options:Options,o?:BarrierObservation):Promise<Result> {
+ if(!o)return original.call(owner,callback,options);
+ transactionSignal(o,'requested');
+ return original.call(owner,function(this:unknown,tx:Tx){
+  transactionSignal(o,'entered');return callback.call(this,tx);
+ },options);
+}
+function pollSample(o:BarrierObservation,value:unknown,started:number):void {
+ o.polls=Math.min(10000,o.polls+1);
+ o.last=typeof value==='number'&&Number.isFinite(value)&&Number.isInteger(value)&&value>=0?boundedCount(value):null;
+ o.maximum=Math.max(o.maximum,o.last??0);
+ o.lastPollMs=boundedMs(performance.now()-started);o.maximumPollMs=Math.max(o.maximumPollMs,o.lastPollMs);
+}
+function barrierText(o:BarrierObservation,pending:number,settled:number):object {
+ const count=(n:number)=>boundedCount(n);
+ const ms=(n:number|null)=>n===null?null:boundedMs(n);
+ const last=o.last===null?null:count(o.last);
+ const states:readonly PollState[]=['not-started','polling','ready','deadline-exhausted','observation-failed'];
+ return {
+ required:count(o.required),lastWaiters:last,maxWaiters:count(o.maximum),
+ polls:Number.isFinite(o.polls)?Math.min(10000,Math.max(0,Math.floor(o.polls))):0,
+ polling:states.includes(o.state)?o.state:'observation-failed',
+ progress:last===null?'unavailable':last>=count(o.required)?'lock-ready':o.requested===0?'before-transaction-request':
+  o.entered===0?'transaction-admission':'entered-without-required-lock-observation',
+ transactionRequests:count(o.requested),callbackEntries:count(o.entered),
+ pendingBeforeRequestLowerBound:count(pending-count(o.requested)),
+ pendingBeforeEntryLowerBound:count(pending-count(o.entered)),
+ // Aggregate/non-simultaneous samples cannot identify a particular request's PostgreSQL state.
+ entryWaitSampleDifference:last===null?null:count(count(o.entered)-last-settled),
+ perRequestDatabaseState:'unavailable',
+ pollElapsedMs:boundedMs(o.elapsed),lastPollMs:boundedMs(o.lastPollMs),maxPollMs:boundedMs(o.maximumPollMs),
+ firstRequestMs:ms(o.firstRequestedMs),lastRequestMs:ms(o.lastRequestedMs),
+ firstEntryMs:ms(o.firstEnteredMs),lastEntryMs:ms(o.lastEnteredMs),
+ };
+}
+const boundedMs=(n:number):number=>Number.isFinite(n)?Math.max(0,Math.min(120000,Math.round(n))):0;
+const boundedCount=(n:number):number=>Number.isFinite(n)?Math.max(0,Math.min(16,Math.floor(n))):0;
+function newDiagnostic():ScenarioDiagnostic {
+ const now=performance.now();
+ return {purpose:'unspecified',stage:'operation',started:now,phaseStarted:now,durations:{},
+ concurrency:0,repetition:0,success:0,invalid:0,internal:0,rejected:0,releaseFailure:null,stageFailure:null,releaseElapsedMs:0};
+}
+function diagnosticPhase(d:ScenarioDiagnostic,next:DiagnosticStage):void {
+ const now=performance.now();
+ d.durations[d.stage]=boundedMs((d.durations[d.stage]??0)+now-d.phaseStarted);
+ d.stage=next;d.phaseStarted=now;
+}
+async function diagnosticRelease(d:ScenarioDiagnostic,action:()=>Promise<void>):Promise<void> {
+ const start=performance.now();
+ try {await action();}catch(error){d.releaseFailure=diagnosticCategory(error);throw error;}
+ finally{d.releaseElapsedMs=boundedMs(performance.now()-start);}
+}
+function diagnosticText(id:string,d:ScenarioDiagnostic,operationFailure:string|null,teardownFailure:string|null):string {
+ const durations:Partial<Record<DiagnosticStage,number>>={};
+ for(const stage of diagnosticStages){const value=d.durations[stage];if(value!==undefined)durations[stage]=boundedMs(value);}
+ const category=(s:string|null)=>s===null?null:diagnosticFailureLabels.has(s)?s:'UNCLASSIFIED_ERROR';
+ return 'G3_SCENARIO_DIAGNOSTIC '+JSON.stringify({
+ scenario:diagnosticScenarioIds.has(id)?id:'UNRECOGNIZED_SCENARIO',
+ purpose:d.purpose==='verification'||d.purpose==='reset'?d.purpose:'unspecified',
+ stage:diagnosticStages.includes(d.stage)?d.stage:'operation',
+ elapsedMs:boundedMs(performance.now()-d.started),phaseElapsedMs:boundedMs(performance.now()-d.phaseStarted),
+ durationsMs:durations,concurrency:boundedCount(d.concurrency),repetition:Math.min(3,boundedCount(d.repetition)),
+ outcomes:{success:boundedCount(d.success),invalid:boundedCount(d.invalid),internal:boundedCount(d.internal),
+ rejected:boundedCount(d.rejected),pending:boundedCount(d.concurrency-d.success-d.invalid-d.internal-d.rejected)},
+ preparation:d.preparation?{...d.preparation.snapshot(),lookup:lookupText(d.preparation)}:undefined,
+ barrier:d.barrier?barrierText(d.barrier,boundedCount(d.concurrency-d.success-d.invalid-d.internal-d.rejected),
+  boundedCount(d.success+d.invalid+d.internal+d.rejected)):undefined,
+ failureKind:teardownFailure!==null?'teardown-release':d.releaseFailure!==null?'release':'operation',
+ stageFailure:category(d.stageFailure),releaseElapsedMs:boundedMs(d.releaseElapsedMs),
+ operationFailure:category(operationFailure),releaseFailure:category(d.releaseFailure),teardownReleaseFailure:category(teardownFailure)});
+}
+
 function check(condition: unknown, label: string): asserts condition {
-  if (!condition) throw new Error(`G3_${label}`);
+  if (!condition) throw harnessError(label);
 }
 
 /** Pure parser: errors never contain input/URL/credentials. No process env mutation or fallback. */
@@ -336,7 +538,31 @@ async function openPool(index: number, profile: Profile): Promise<void> {
   // Installed pg-pool awaits onConnect before delivering any client (offline source-checked).
   const prisma = new PrismaConstructor({ adapter: new Adapter(pool, { disposeExternalPool: false }) });
   clients[index] = prisma;
-  services[index] = await bindService(prisma);
+  const transaction = function(this:PrismaClient,callback:(tx:Prisma.TransactionClient)=>Promise<unknown>,
+    options:{isolationLevel:'ReadCommitted';maxWait:number;timeout:number}):Promise<unknown> {
+    return this.$transaction(callback,options);
+  };
+  const observedTransaction = (callback:(tx:Prisma.TransactionClient)=>Promise<unknown>,
+    options:{isolationLevel:'ReadCommitted';maxWait:number;timeout:number}) =>
+  {
+    const dispatch=()=>forwardTransaction(prisma,transaction,callback,options,contentionObservation);
+    const preparation=preparationContext.getStore();
+    return preparation?preparation.arrive(dispatch):dispatch();
+  };
+  services[index] = await bindService(new Proxy(prisma,{
+    get(owner,key){
+      if(key==='$transaction')return observedTransaction;
+      if(key==='passwordResetToken'){
+        const delegate=owner.passwordResetToken;
+        return new Proxy(delegate,{get(target,method){
+          const original=Reflect.get(target,method,target);
+          return method==='findFirst'&&typeof original==='function'
+            ? (args:Prisma.PasswordResetTokenFindFirstArgs)=>observeResetLookup(()=>target.findFirst(args)) : original;
+        }});
+      }
+      return Reflect.get(owner,key,owner);
+    },
+  }));
   const probe = await prisma.$queryRaw<Array<{ level: string; timezone: string; schemas: string }>>`SELECT current_setting('transaction_isolation') AS level,current_setting('TimeZone') AS timezone,current_schemas(false)::text AS schemas`;
   check(probe[0]?.level === 'read committed' && probe[0].timezone === (profile === 'Asia/Dhaka' ? 'Asia/Dhaka' : 'UTC') && probe[0].schemas === '{public}', 'POOL_PROFILE');
 }
@@ -389,7 +615,7 @@ async function fixture(purpose: Purpose, seconds = 60, legacy = false, tokenOver
 }
 function instance(index = 0): Service { const s = services[index]; check(s, 'SERVICE_NOT_READY'); return s; }
 function redeem(f: Fixture, service = instance()): Promise<Outcome> {
-  const operation = f.purpose === 'verification' ? service.verifyEmail(f.token) : service.resetPassword({ token: f.token, password: f.password });
+  const operation = preparationContext.run(contentionPreparation,()=>f.purpose === 'verification' ? service.verifyEmail(f.token) : service.resetPassword({ token: f.token, password: f.password }));
   const observed = operation.then<Outcome, Outcome>(() => 'success', (error: unknown) => {
     if (typeof error !== 'object' || error === null || !('statusCode' in error) || !('message' in error)) return 'internal';
     const expected = f.purpose === 'verification' ? 'This verification link is invalid or expired.' : 'This password reset link is invalid or expired.';
@@ -424,18 +650,27 @@ async function lock(f: Fixture, table: 'token' | 'user' | 'session' = 'token'): 
 async function release(commit = false): Promise<void> {
   if (!blockedTransaction) return;
   try { await db('blocker').query(commit ? 'COMMIT' : 'ROLLBACK'); blockedTransaction = false; }
-  catch { aborted = true; throw new Error('G3_BLOCKER_RELEASE_FAILED_PRESERVE_FIXTURES'); }
+  catch { aborted = true; throw harnessError('BLOCKER_RELEASE_FAILED_PRESERVE_FIXTURES'); }
 }
-async function waiting(minimum = 1, deadlineMs = 1500): Promise<void> {
+async function waiting(minimum = 1, deadlineMs = 1500, observation?:BarrierObservation): Promise<void> {
   const start = performance.now();
+  if(observation){observation.pollStarted=start;observation.state='polling';}
+  try {
   while (performance.now() - start < deadlineMs) {
+    const pollStarted=performance.now();
     const r = await db('observer').query<{ n: number }>(`SELECT count(*)::int AS n FROM pg_stat_activity
       WHERE datname=current_database() AND usename=current_user AND pid=ANY($1::int[]) AND wait_event_type='Lock' AND cardinality(pg_blocking_pids(pid))>0`, [[...servicePids]]);
-    if (r.rows[0]?.n >= minimum) return;
+    if(observation)pollSample(observation,r.rows[0]?.n,pollStarted);
+    if (r.rows[0]?.n >= minimum) {if(observation)observation.state='ready';return;}
     if (blockedTransaction) await db('blocker').query('SELECT 1');
     await delay(20); // Bounded polling of actual lock evidence, never a guessed synchronization sleep.
   }
-  throw new Error('G3_LOCK_BARRIER_INCONCLUSIVE');
+  if(observation)observation.state='deadline-exhausted';
+  throw harnessError('LOCK_BARRIER_INCONCLUSIVE');
+  } catch(error) {
+    if(observation&&observation.state!=='deadline-exhausted')observation.state='observation-failed';
+    throw error;
+  } finally {if(observation)observation.elapsed=boundedMs(performance.now()-start);}
 }
 async function expiryPassed(f: Fixture): Promise<void> {
   const start = performance.now();
@@ -468,12 +703,18 @@ async function injected(index: number, fault: 'before-commit' | 'after-commit'):
   } });
   return bindService(facade);
 }
-function scenario(id: string, evidence: Evidence, operation: () => Promise<void>): void {
-  it(`${id} [${evidence}]`, async () => {
-    try { await operation(); }
-    catch { aborted = true; throw new Error(`G3_${id.replace(/[^A-Z0-9-]/g, '_')}_FAILED_REQUIRES_REVIEW`); }
-    finally { await release(); }
-  });
+async function executeScenario(id:string,operation:(diagnostic:ScenarioDiagnostic)=>Promise<void>,cleanup:()=>Promise<void>):Promise<void> {
+ const diagnostic=newDiagnostic();
+ const previousObservation=contentionObservation;
+ const previousPreparation=contentionPreparation;
+ let operationFailure:string|null=null;let teardownFailure:string|null=null;
+ try{await operation(diagnostic);}catch(error){aborted=true;operationFailure=diagnosticCategory(error);}
+ finally{contentionPreparation?.cancel();try{await cleanup();}catch(error){aborted=true;teardownFailure=diagnosticCategory(error);}
+  finally{contentionObservation=previousObservation;contentionPreparation=previousPreparation;}}
+ if(operationFailure!==null||teardownFailure!==null)throw new Error(diagnosticText(id,diagnostic,operationFailure,teardownFailure));
+}
+function scenario(id:string,evidence:Evidence,operation:(diagnostic:ScenarioDiagnostic)=>Promise<void>):void {
+ it(id+' ['+evidence+']',()=>executeScenario(id,operation,()=>release()));
 }
 function blocked(id: string, reason: string): void { it.skip(`${id} [BLOCKED: ${reason}]`, () => {}); }
 
@@ -506,12 +747,35 @@ databaseDescribe('AUTH-02 PostgreSQL verification — separate G3-X authorizatio
         await stored(f, true);
       });
       for (const concurrency of [2,8,16]) for (let repeat = 1; repeat <= 3; repeat++) {
-        scenario(`LOCK-03-C${concurrency}-R${repeat}`, 'REAL SERVICE', async () => {
-          const f = await fixture(purpose); await lock(f);
+        scenario(`LOCK-03-C${concurrency}-R${repeat}`, 'REAL SERVICE', async diagnostic => {
+          diagnostic.purpose=purpose;diagnostic.concurrency=concurrency;diagnostic.repetition=repeat;
+          diagnosticPhase(diagnostic,'fixture');
+          const f = await fixture(purpose);
+          const preparation=resetPreparation(purpose,concurrency,diagnostic.started);
+          diagnostic.preparation=preparation;contentionPreparation=preparation;
+          if(!preparation){diagnosticPhase(diagnostic,'lock');await lock(f);}
+          diagnosticPhase(diagnostic,'dispatch');
+          diagnostic.barrier=newBarrierObservation(concurrency);contentionObservation=diagnostic.barrier;
           const jobs = Array.from({ length: concurrency }, (_, n) => redeem(f, instance(n % 2)));
-          try { await waiting(concurrency); } finally { await release(); }
+          for(const job of jobs)void job.then(outcome=>{diagnostic[outcome]++;},()=>{diagnostic.rejected++;});
+          if(preparation)diagnosticPhase(diagnostic,'preparation');
+          try {
+            if(preparation){
+              // Early service settlement cannot silently strand the other pre-transaction contenders.
+              for(const job of jobs)void job.then(()=>preparation.cancel(),()=>preparation.cancel());
+              await preparation.ready;
+              diagnosticPhase(diagnostic,'lock');await lock(f);
+              preparation.open();
+            }
+            diagnosticPhase(diagnostic,'barrier');
+            await waiting(concurrency,1500,diagnostic.barrier);
+          }
+          catch(error){diagnostic.stageFailure=diagnosticCategory(error);throw error;}
+          finally { preparation?.cancel();await diagnosticRelease(diagnostic,()=>release()); }
+          diagnosticPhase(diagnostic,'outcomes');
           const results = await Promise.all(jobs);
           check(results.filter(x => x === 'success').length === 1 && results.filter(x => x === 'invalid').length === concurrency - 1, 'CONTENTION_OUTCOMES');
+          diagnosticPhase(diagnostic,'persisted-state');
           await stored(f, true);
         });
       }
@@ -750,6 +1014,359 @@ if (!offlineMode) afterAll(async () => {
 }, 20000);
 
 if (offlineMode) {
+  describe('offline-only pre-transaction lookup diagnostics',()=>{
+    it('does not observe or wrap calls outside a preparation context',()=>{
+      const promise=Promise.resolve(42);expect(observeResetLookup(()=>promise)).toBe(promise);
+    });
+    it('forwards genuine result identity and bounded lookup counts',async()=>{
+      const gate=preparationGate(1,1000),result={id:'synthetic'};
+      await expect(preparationContext.run(gate,()=>observeResetLookup(async()=>result))).resolves.toBe(result);
+      expect(lookupText(gate)).toMatchObject({requested:1,completed:1,failed:0,lastFailure:null});gate.cancel();
+    });
+    it('preserves rejected exception identity without emitting its message or values',async()=>{
+      const gate=preparationGate(1,1000),secret={code:'P2024',message:'SYNTHETIC-PRIVATE',password:'SYNTHETIC-PRIVATE'};
+      await expect(preparationContext.run(gate,()=>observeResetLookup(()=>Promise.reject(secret)))).rejects.toBe(secret);
+      expect(lookupText(gate)).toMatchObject({requested:1,completed:0,failed:1,lastFailure:'POOL_ACQUISITION_TIMEOUT'});
+      expect(JSON.stringify(lookupText(gate))).not.toContain('SYNTHETIC-PRIVATE');gate.cancel();
+    });
+    it('preserves synchronous exceptions without a retry',()=>{
+      const gate=preparationGate(1,1000),error={private:'SYNTHETIC-PRIVATE'};let calls=0;
+      expect(()=>preparationContext.run(gate,()=>observeResetLookup(()=>{calls++;throw error;}))).toThrow();
+      expect(calls).toBe(1);expect(lookupText(gate)).toMatchObject({failed:1,lastFailure:'UNCLASSIFIED'});gate.cancel();
+    });
+    it('classifies only fixed codes and does not invoke accessors or proxy traps',()=>{
+      let calls=0;
+      expect(safeLookupCode({get code(){calls++;return 'P2024';}})).toBe('UNCLASSIFIED');
+      expect(safeLookupCode(new Proxy({},{getOwnPropertyDescriptor(){calls++;throw new Error();}}))).toBe('UNCLASSIFIED');
+      expect(safeLookupCode({code:'secret-unrecognized'})).toBe('UNCLASSIFIED');expect(calls).toBe(0);
+      expect(safeLookupCode({meta:{code:'53300'}})).toBe('CONNECTION_CAPACITY');
+      expect(safeLookupCode({code:'P1008'})).toBe('QUERY_TIMEOUT');
+      expect(safeLookupCode({code:'P1001'})).toBe('CONNECTION_FAILURE');
+    });
+    it('keeps concurrent preparation diagnostics isolated',async()=>{
+      const a=preparationGate(1,1000),b=preparationGate(1,1000);
+      await preparationContext.run(a,()=>observeResetLookup(async()=>1));
+      await preparationContext.run(b,()=>observeResetLookup(()=>Promise.reject({code:'57014'}))).then(()=>undefined,()=>undefined);
+      expect(lookupText(a)).toMatchObject({completed:1,failed:0});expect(lookupText(b)).toMatchObject({completed:0,failed:1});a.cancel();b.cancel();
+    });
+    it('adds sanitized lookup evidence to the existing diagnostic envelope',async()=>{
+      const gate=preparationGate(1,1000),d=newDiagnostic();d.preparation=gate;
+      await preparationContext.run(gate,()=>observeResetLookup(async()=>1));
+      const data=JSON.parse(diagnosticText('LOCK-03-C16-R1',d,'PREPARATION_BARRIER_INCONCLUSIVE',null).slice('G3_SCENARIO_DIAGNOSTIC '.length));
+      expect(data.preparation.lookup.completed).toBe(1);expect(data.scenario).toBe('LOCK-03-C16-R1');gate.cancel();
+    });
+  });
+
+  describe('shared reset LOCK-03 synchronization profiles',()=>{
+    const profiles=[2,8,16].flatMap(concurrency=>[1,2,3].map(repetition=>({concurrency,repetition})));
+    it.each(profiles)('gates every real transaction for reset C$concurrency R$repetition',async({concurrency})=>{
+      const gate=resetPreparation('reset',concurrency,performance.now());
+      if(!gate)throw new Error('RESET_PREPARATION_MISSING');
+      expect(resetPreparation('verification',concurrency,performance.now())).toBe(undefined);
+      let calls=0;
+      const jobs=Array.from({length:concurrency},(_,index)=>gate.arrive(async()=>{calls++;return index;}));
+      await gate.ready;expect(calls).toBe(0);expect(gate.snapshot().required).toBe(concurrency);
+      expect(gate.snapshot().arrived).toBe(concurrency);expect(gate.snapshot().state).toBe('ready');
+      gate.open();expect(calls).toBe(concurrency);
+      expect(await Promise.all(jobs)).toEqual(Array.from({length:concurrency},(_,index)=>index));
+      expect(gate.snapshot().state).toBe('opened');
+    });
+    it.each(profiles)('cancels early failure and late pre-transaction work for reset C$concurrency R$repetition',async({concurrency})=>{
+      const gate=resetPreparation('reset',concurrency,performance.now());
+      if(!gate)throw new Error('RESET_PREPARATION_MISSING');
+      let calls=0,release:()=>void=()=>{};
+      const held=new Promise<void>(resolve=>{release=resolve;});
+      const jobs=Array.from({length:concurrency-1},()=>gate.arrive(async()=>{calls++;}));
+      const late=preparationContext.run(gate,async()=>{
+        await held;const captured=preparationContext.getStore();
+        if(!captured)throw new Error('ASYNC_GATE_LOST');
+        return captured.arrive(async()=>{calls++;});
+      });
+      const settled=Promise.allSettled([...jobs,late,gate.ready]);
+      expect(()=>gate.open()).toThrow('G3_PREPARATION_BARRIER_INCONCLUSIVE');
+      gate.cancel();release();
+      expect((await settled).every(result=>result.status==='rejected')).toBe(true);
+      expect(calls).toBe(0);expect(gate.snapshot().state).toBe('cancelled');
+      expect(preparationContext.getStore()).toBe(undefined);
+    });
+    it.each(profiles)('bounds incomplete preparation for reset C$concurrency R$repetition',async({concurrency})=>{
+      vi.useFakeTimers();
+      try{
+        const gate=resetPreparation('reset',concurrency,performance.now());
+        if(!gate)throw new Error('RESET_PREPARATION_MISSING');
+        let calls=0;
+        const jobs=Array.from({length:concurrency-1},()=>gate.arrive(async()=>{calls++;}));
+        const settled=Promise.allSettled([...jobs,gate.ready]);
+        await vi.advanceTimersByTimeAsync(6500);
+        expect((await settled).every(result=>result.status==='rejected')).toBe(true);
+        expect(gate.snapshot().state).toBe('cancelled');expect(calls).toBe(0);expect(vi.getTimerCount()).toBe(0);
+      }finally{vi.useRealTimers();}
+    });
+    it.each([0,1,1500,6499,6500,10000])('deducts elapsed case time %sms from the unchanged preparation allowance',elapsed=>{
+      const budget=preparationBudget(10000,10000+elapsed);
+      expect(budget).toBe(Math.max(0,6500-elapsed));expect(budget+2000+5000+1500).toBeLessThanOrEqual(15000);
+    });
+    it.each([[NaN,0],[0,NaN],[Infinity,0],[1,0]])('fails closed for invalid/regressed monotonic inputs %#',(started,now)=>{
+      expect(preparationBudget(started,now)).toBe(0);
+    });
+  });
+
+  describe('PROPOSED offline pre-transaction rendezvous',()=>{
+    it('requires all eight arrivals and starts no transaction before explicit release',async()=>{
+      const gate=preparationGate(8,1000);let calls=0;
+      const jobs=Array.from({length:8},()=>gate.arrive(async()=>{calls++;return 1;}));
+      await gate.ready;expect(calls).toBe(0);expect(gate.snapshot().arrived).toBe(8);
+      gate.open();expect(calls).toBe(8);expect(await Promise.all(jobs)).toEqual(Array(8).fill(1));
+    });
+    it('never substitutes two arrivals for eight',async()=>{
+      const gate=preparationGate(8,1000);let calls=0;
+      const jobs=Array.from({length:2},()=>gate.arrive(async()=>{calls++;}));
+      expect(()=>gate.open()).toThrow('G3_PREPARATION_BARRIER_INCONCLUSIVE');
+      gate.cancel();await expect(gate.ready).rejects.toThrow('G3_PREPARATION_BARRIER_INCONCLUSIVE');
+      expect((await Promise.allSettled(jobs)).every(x=>x.status==='rejected')).toBe(true);expect(calls).toBe(0);
+    });
+    it('cancels incomplete preparation without dispatching any transaction',async()=>{
+      const gate=preparationGate(8,1000);let calls=0;
+      const job=gate.arrive(async()=>{calls++;});gate.cancel();gate.cancel();
+      await expect(job).rejects.toThrow('G3_PREPARATION_BARRIER_INCONCLUSIVE');
+      await expect(gate.arrive(async()=>{calls++;})).rejects.toThrow('G3_PREPARATION_BARRIER_INCONCLUSIVE');expect(calls).toBe(0);
+    });
+    it('fails closed on its bounded preparation deadline',async()=>{
+      vi.useFakeTimers();
+      try{
+        const gate=preparationGate(8,1000),job=gate.arrive(async()=>1);
+        const result=Promise.allSettled([gate.ready,job]);await vi.advanceTimersByTimeAsync(1000);
+        expect((await result).every(x=>x.status==='rejected')).toBe(true);expect(gate.snapshot().state).toBe('cancelled');
+      }finally{vi.useRealTimers();}
+    });
+    it('keeps gates across separate scenario preparations isolated',async()=>{
+      const a=preparationGate(1,1000),b=preparationGate(1,1000);
+      const first=a.arrive(async()=>1),second=b.arrive(async()=>2);
+      await Promise.all([a.ready,b.ready]);a.cancel();b.open();
+      await expect(first).rejects.toThrow('G3_PREPARATION_BARRIER_INCONCLUSIVE');await expect(second).resolves.toBe(2);
+    });
+    it('preserves the original owner, callback, options and returned value after opening',async()=>{
+      const gate=preparationGate(1,1000),owner={},tx={},options={timeout:5000};let calls=0;
+      const callback=(value:object)=>{expect(value).toBe(tx);return Promise.resolve(42);};
+      const original=function(this:object,cb:typeof callback,o:typeof options){expect(this).toBe(owner);expect(o).toBe(options);calls++;return cb(tx);};
+      const job=gate.arrive(()=>forwardTransaction(owner,original,callback,options));await gate.ready;
+      expect(calls).toBe(0);gate.open();await expect(job).resolves.toBe(42);expect(calls).toBe(1);
+    });
+    it('preserves synchronous and rejected thrown-value identity without serializing secrets',async()=>{
+      const secret={password:'SYNTHETIC-SECRET'},gate=preparationGate(2,1000);
+      const a=gate.arrive(()=>{throw secret;}),b=gate.arrive(()=>Promise.reject(secret));
+      await gate.ready;gate.open();await expect(a).rejects.toBe(secret);await expect(b).rejects.toBe(secret);
+      expect(JSON.stringify(gate.snapshot())).not.toContain('SYNTHETIC-SECRET');
+    });
+    it('does not retry or cancel already-started transaction work',async()=>{
+      const gate=preparationGate(1,1000);let calls=0;
+      const job=gate.arrive(async()=>{calls++;return 1;});await gate.ready;gate.open();gate.cancel();
+      expect(()=>gate.open()).toThrow('G3_PREPARATION_BARRIER_INCONCLUSIVE');await expect(job).resolves.toBe(1);expect(calls).toBe(1);
+    });
+    it('retains a cancelled gate across late pre-transaction async work',async()=>{
+      const gate=preparationGate(8,1000);let release:()=>void=()=>{},calls=0;
+      const deferred=new Promise<void>(resolve=>{release=resolve;});
+      const job=preparationContext.run(gate,async()=>{
+        await deferred;const captured=preparationContext.getStore();
+        expect(captured).toBe(gate);
+        return captured?captured.arrive(async()=>{calls++;}):Promise.resolve();
+      });
+      gate.cancel();release();
+      await expect(job).rejects.toThrow('G3_PREPARATION_BARRIER_INCONCLUSIVE');
+      expect(calls).toBe(0);expect(preparationContext.getStore()).toBe(undefined);
+    });
+    it('opens no gate on a nonpositive readiness budget',async()=>{
+      const gate=preparationGate(8,0);await expect(gate.arrive(async()=>1)).rejects.toThrow('G3_PREPARATION_BARRIER_INCONCLUSIVE');
+      await expect(gate.ready).rejects.toThrow('G3_PREPARATION_BARRIER_INCONCLUSIVE');
+    });
+  });
+
+  describe('offline-only lock readiness observations',()=>{
+    const snapshot=(o:BarrierObservation,pending=8,settled=0)=>JSON.parse(JSON.stringify(barrierText(o,pending,settled)));
+    it('separates pending work before any transaction request from admission',()=>{
+      const o=newBarrierObservation(8);pollSample(o,0,performance.now());
+      expect(snapshot(o).progress).toBe('before-transaction-request');
+      expect(snapshot(o).pendingBeforeRequestLowerBound).toBe(8);
+      for(let i=0;i<8;i++)transactionSignal(o,'requested');
+      expect(snapshot(o).progress).toBe('transaction-admission');
+      expect(snapshot(o).pendingBeforeRequestLowerBound).toBe(0);
+      expect(snapshot(o).pendingBeforeEntryLowerBound).toBe(8);
+    });
+    it('distinguishes callback entry from observed PostgreSQL lock readiness',()=>{
+      const o=newBarrierObservation(8);
+      for(let i=0;i<8;i++){transactionSignal(o,'requested');transactionSignal(o,'entered');}
+      pollSample(o,3,performance.now());
+      expect(snapshot(o).progress).toBe('entered-without-required-lock-observation');
+      expect(snapshot(o).entryWaitSampleDifference).toBe(5);
+      pollSample(o,8,performance.now());o.state='ready';
+      expect(snapshot(o).progress).toBe('lock-ready');expect(snapshot(o).polling).toBe('ready');
+      expect(snapshot(o).maxWaiters).toBe(8);expect(snapshot(o).polls).toBe(2);
+      expect(snapshot(o).perRequestDatabaseState).toBe('unavailable');
+    });
+    it('reports missing/invalid observations as unavailable rather than zero waiters',()=>{
+      const o=newBarrierObservation(8);
+      for(const value of [undefined,null,-1,NaN,Infinity,'SYNTHETIC-SECRET']){
+        pollSample(o,value,performance.now());
+        expect(snapshot(o).lastWaiters).toBe(null);expect(snapshot(o).progress).toBe('unavailable');
+      }
+    });
+    it.each(['deadline-exhausted','observation-failed'] as const)('retains the polling outcome %s independently of progress',state=>{
+      const o=newBarrierObservation(8);pollSample(o,0,performance.now());o.state=state;
+      expect(snapshot(o).polling).toBe(state);expect(snapshot(o).progress).toBe('before-transaction-request');
+    });
+    it('bounds counts and timing and drops unknown observation fields',()=>{
+      const o=newBarrierObservation(999);o.requested=999;o.entered=-2;o.polls=Infinity;
+      o.elapsed=Infinity;o.lastPollMs=-1;o.maximumPollMs=999999;o.firstRequestedMs=NaN;
+      Reflect.set(o,'sql','SYNTHETIC-SECRET');Reflect.set(o,'state','SYNTHETIC-SECRET');
+      pollSample(o,999,performance.now());
+      const result=snapshot(o);
+      expect(result.required).toBe(16);expect(result.lastWaiters).toBe(16);
+      expect(result.transactionRequests).toBe(16);expect(result.callbackEntries).toBe(0);
+      expect(result.polls).toBe(10000);expect(result.pollElapsedMs).toBe(0);
+      expect(result.maxPollMs).toBe(120000);expect(result.firstRequestMs).toBe(0);
+      expect(result.polling).toBe('observation-failed');expect(JSON.stringify(result)).not.toContain('SYNTHETIC-SECRET');
+    });
+    it('forwards owner, callback receiver, options, transaction object and original promise unchanged',async()=>{
+      const owner={id:1},tx={id:2},receiver={id:3},options={timeout:5000};
+      const promise=Promise.resolve(42),o=newBarrierObservation(8);
+      const callback=function(this:unknown,value:typeof tx){expect(this).toBe(receiver);expect(value).toBe(tx);return promise;};
+      const original=function(this:typeof owner,cb:(this:unknown,value:typeof tx)=>Promise<number>,opts:typeof options){
+        expect(this).toBe(owner);expect(opts).toBe(options);expect(o.requested).toBe(1);expect(o.entered).toBe(0);
+        return cb.call(receiver,tx);
+      };
+      expect(forwardTransaction(owner,original,callback,options,o)).toBe(promise);
+      expect(o.entered).toBe(1);expect(await promise).toBe(42);
+      expect(o.firstRequestedMs).toBeGreaterThanOrEqual(0);expect(o.firstEnteredMs).toBeGreaterThanOrEqual(0);
+    });
+    it('passes the exact callback through when observation is disabled',()=>{
+      const owner={},options={},promise=Promise.resolve(1),callback=(_tx:unknown)=>promise;
+      const original=function(this:object,cb:typeof callback,opts:object){
+        expect(this).toBe(owner);expect(cb).toBe(callback);expect(opts).toBe(options);return promise;
+      };
+      expect(forwardTransaction(owner,original,callback,options)).toBe(promise);
+    });
+    it('preserves synchronous dispatch and callback exceptions without inspecting them',()=>{
+      const secret=Object.defineProperty({},'message',{get(){throw new Error('DO_NOT_READ');}});
+      const callback=(_tx:unknown):Promise<number>=>{throw secret;};
+      const original=(_cb:typeof callback,_options:object):Promise<number>=>{throw secret;};
+      const o=newBarrierObservation(8);
+      try{forwardTransaction({},original,callback,{},o);expect.fail('must throw');}catch(error){expect(error).toBe(secret);}
+      expect(o.requested).toBe(1);expect(o.entered).toBe(0);
+      const invoke=(cb:typeof callback)=>cb(undefined);
+      try{forwardTransaction({},invoke,callback,{},o);expect.fail('must throw');}catch(error){expect(error).toBe(secret);}
+      expect(o.requested).toBe(2);expect(o.entered).toBe(1);
+    });
+    it('returns the same rejected promise and never serializes its rejection',async()=>{
+      const secret={password:'SYNTHETIC-SECRET'},promise=Promise.reject(secret);
+      const o=newBarrierObservation(8),callback=()=>promise;
+      const returned=forwardTransaction({},cb=>cb(undefined),callback,{},o);
+      expect(returned).toBe(promise);await expect(returned).rejects.toBe(secret);
+      expect(JSON.stringify(snapshot(o))).not.toContain('SYNTHETIC-SECRET');
+    });
+    it('keeps independent scenario observations and bounds late/settled sample differences',async()=>{
+      const o=newBarrierObservation(8),previous=contentionObservation;
+      await executeScenario('LOCK-03-C8-R1',async d=>{d.barrier=o;contentionObservation=o;},async()=>{});
+      expect(contentionObservation).toBe(previous);
+      transactionSignal(o,'entered');pollSample(o,8,performance.now());
+      expect(snapshot(o,0,8).pendingBeforeEntryLowerBound).toBe(0);
+      expect(snapshot(o,0,8).entryWaitSampleDifference).toBe(0);
+    });
+    it('emits only explicit readiness fields alongside existing safe scenario fields',()=>{
+      const d=newDiagnostic();d.concurrency=8;d.purpose='reset';d.barrier=newBarrierObservation(8);
+      Reflect.set(d.barrier,'token','SYNTHETIC-SECRET');
+      const data=JSON.parse(diagnosticText('LOCK-03-C8-R1',d,'LOCK_BARRIER_INCONCLUSIVE',null).slice('G3_SCENARIO_DIAGNOSTIC '.length));
+      expect(data.scenario).toBe('LOCK-03-C8-R1');expect(data.outcomes.pending).toBe(8);
+      expect(data.operationFailure).toBe('LOCK_BARRIER_INCONCLUSIVE');
+      expect(data.barrier.perRequestDatabaseState).toBe('unavailable');expect(JSON.stringify(data)).not.toContain('SYNTHETIC-SECRET');
+    });
+  });
+
+  describe('offline-only structured scenario diagnostics',()=>{
+    const secret='SYNTHETIC-SECRET-passport-token-URL';
+    it('classifies only identity-tagged finite check labels',()=>{
+      expect(diagnosticCategory(harnessError('CONTENTION_OUTCOMES'))).toBe('CONTENTION_OUTCOMES');
+      expect(diagnosticCategory(new Error('G3_CONTENTION_OUTCOMES'))).toBe('UNCLASSIFIED_ERROR');
+      expect(diagnosticCategory(harnessError(secret))).toBe('UNCLASSIFIED_ERROR');
+    });
+    it.each([null,undefined,secret,42,Symbol('synthetic')])('does not serialize arbitrary thrown primitives',value=>{
+      expect(diagnosticCategory(value)).toBe('UNCLASSIFIED_ERROR');
+      expect(diagnosticText(secret,newDiagnostic(),diagnosticCategory(value),null)).not.toContain(secret);
+    });
+    it('never reads unknown exception getters or proxy traps',()=>{
+      let reads=0;
+      const hostile=Object.defineProperties({},Object.fromEntries(['message','stack','cause','code','toJSON','toString'].map(key=>[key,{get(){reads++;throw new Error(secret);}}])));
+      const proxy=new Proxy(hostile,{get(){reads++;throw new Error(secret);}});
+      expect(diagnosticCategory(hostile)).toBe('UNCLASSIFIED_ERROR');
+      expect(diagnosticCategory(proxy)).toBe('UNCLASSIFIED_ERROR');
+      expect(diagnosticCategory(()=>secret)).toBe('UNCLASSIFIED_ERROR');
+      expect(reads).toBe(0);
+    });
+    it('drops arbitrary identifiers, categories and duration keys',()=>{
+      const d=newDiagnostic();
+      Reflect.set(d,'purpose',secret);Reflect.set(d,'stage',secret);Reflect.set(d,'releaseFailure',secret);Reflect.set(d,'stageFailure',secret);
+      Reflect.set(d.durations,secret,secret);
+      const output=diagnosticText(secret,d,secret,secret);
+      expect(output).not.toContain(secret);
+      const data=JSON.parse(output.slice('G3_SCENARIO_DIAGNOSTIC '.length));
+      expect(data.scenario).toBe('UNRECOGNIZED_SCENARIO');
+      expect(data.purpose).toBe('unspecified');expect(data.stage).toBe('operation');
+      expect(data.operationFailure).toBe('UNCLASSIFIED_ERROR');expect(data.teardownReleaseFailure).toBe('UNCLASSIFIED_ERROR');
+    });
+    it('bounds nonfinite/negative timing and outcome counters',()=>{
+      const d=newDiagnostic();d.started=-Infinity;d.phaseStarted=NaN;
+      d.concurrency=Infinity;d.repetition=999;d.success=-1;d.invalid=100;d.internal=NaN;d.rejected=Infinity;
+      d.durations.barrier=Infinity;d.releaseElapsedMs=-4;
+      const data=JSON.parse(diagnosticText('LOCK-03-C8-R1',d,null,null).slice('G3_SCENARIO_DIAGNOSTIC '.length));
+      expect(data.elapsedMs).toBe(0);expect(data.phaseElapsedMs).toBe(0);expect(data.releaseElapsedMs).toBe(0);
+      expect(data.concurrency).toBe(0);expect(data.repetition).toBe(3);
+      expect(data.outcomes).toEqual({success:0,invalid:16,internal:0,rejected:0,pending:0});
+    });
+    it('reports actual contention context with fixed stages and outcomes',()=>{
+      const d=newDiagnostic();d.purpose='reset';d.concurrency=8;d.repetition=1;
+      diagnosticPhase(d,'barrier');d.success=1;d.invalid=5;d.internal=1;
+      const data=JSON.parse(diagnosticText('LOCK-03-C8-R1',d,'LOCK_BARRIER_INCONCLUSIVE',null).slice('G3_SCENARIO_DIAGNOSTIC '.length));
+      expect(data.scenario).toBe('LOCK-03-C8-R1');expect(data.purpose).toBe('reset');expect(data.stage).toBe('barrier');
+      expect(data.outcomes).toEqual({success:1,invalid:5,internal:1,rejected:0,pending:1});
+      expect(data.failureKind).toBe('operation');expect(data.elapsedMs).toBeGreaterThanOrEqual(0);
+    });
+    it('separates operation and teardown failures and always runs cleanup',async()=>{
+      const oldAborted=aborted;let cleaned=0;
+      try{
+        await expect(executeScenario('LOCK-03-C8-R1',async()=>{throw harnessError('CONTENTION_OUTCOMES');},async()=>{cleaned++;throw harnessError('BLOCKER_RELEASE_FAILED_PRESERVE_FIXTURES');}))
+          .rejects.toThrow(/"operationFailure":"CONTENTION_OUTCOMES".*"teardownReleaseFailure":"BLOCKER_RELEASE_FAILED_PRESERVE_FIXTURES"/);
+        expect(cleaned).toBe(1);expect(aborted).toBe(true);
+      }finally{aborted=oldAborted;}
+    });
+    it('separates inner release failure from the preceding barrier failure',async()=>{
+      const d=newDiagnostic();d.stage='barrier';d.stageFailure='LOCK_BARRIER_INCONCLUSIVE';
+      await expect(diagnosticRelease(d,async()=>{throw harnessError('BLOCKER_RELEASE_FAILED_PRESERVE_FIXTURES');})).rejects.toThrow('G3_BLOCKER_RELEASE_FAILED_PRESERVE_FIXTURES');
+      const data=JSON.parse(diagnosticText('LOCK-03-C8-R1',d,'BLOCKER_RELEASE_FAILED_PRESERVE_FIXTURES',null).slice('G3_SCENARIO_DIAGNOSTIC '.length));
+      expect(data.failureKind).toBe('release');expect(data.stageFailure).toBe('LOCK_BARRIER_INCONCLUSIVE');
+      expect(data.releaseFailure).toBe('BLOCKER_RELEASE_FAILED_PRESERVE_FIXTURES');
+    });
+    it('preserves successful execution and cleanup without aborting',async()=>{
+      const oldAborted=aborted;let operations=0;let cleanups=0;
+      await executeScenario('LOCK-03-C8-R1',async()=>{operations++;},async()=>{cleanups++;});
+      expect(operations).toBe(1);expect(cleanups).toBe(1);expect(aborted).toBe(oldAborted);
+    });
+    it('does not expose unknown operation/teardown exceptions',async()=>{
+      const oldAborted=aborted;
+      try{
+        const error=await executeScenario(secret,async()=>{throw new Error(secret);},async()=>{throw {password:secret};}).catch((error:unknown)=>error);
+        expect(error).toBeInstanceOf(Error);
+        if(error instanceof Error){expect(error.message).not.toContain(secret);expect(error.message).toContain('UNCLASSIFIED_ERROR');expect('cause' in error).toBe(false);}
+      }finally{aborted=oldAborted;}
+    });
+    it('keeps source/config timeout, barrier and concurrency contracts',()=>{
+      const source=readFileSync(resolve(__dirname,'auth-consumption.pg.test.ts'),'utf8');
+      const config=readFileSync(resolve(__dirname,'auth-consumption.pg.vitest.config.ts'),'utf8');
+      expect(source).toContain('deadlineMs = 1500');expect(source).toContain('connectionTimeoutMillis: 2000, query_timeout: 8000');
+      expect(source).toContain('for (const concurrency of [2,8,16]) for (let repeat = 1; repeat <= 3; repeat++)');
+      expect(source).toContain("check(results.filter(x => x === 'success').length === 1 && results.filter(x => x === 'invalid').length === concurrency - 1, 'CONTENTION_OUTCOMES')");
+      expect(config).toContain('testTimeout: 15000, hookTimeout: 20000');expect(config).toContain('bail: 1');
+    });
+  });
+
   describe('G3-H offline guards', () => {
     function approvedEnvironment(raw = 'postgresql://flywithsafe_g3_auth02_test:offline-placeholder@127.0.0.1:5432/flywithsafe_g3_auth02_disposable'): Record<string, string> {
       return {

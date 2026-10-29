@@ -1,5 +1,8 @@
 # Phase 1I-D — Production Integration Roadmap and Phase 1 Exit
 
+> **Current governance (owner-directed 2026-10-28):** [Tracker section 0](PHASE_1_INTERIM_STATUS_AND_EXIT_CHECKLIST.md#0-governing-owner-decision--2026-10-28-supersedes-prior-engineering-gate-wording) supersedes older bespoke legal-checklist and automatic counsel-signature requirements for G7 engineering acceptance. All technical controls remain mandatory. Real-data/production activation remains separately gated. Dated findings and acceptance evidence below are preserved, not re-certified.
+
+
 Prepared 2026-10-25 (Asia/Dhaka). **REVIEW DRAFT — ROADMAP READY, AWAITING OWNER REVIEW.** Planning and documentation only. Every implementation, database, provider, infrastructure and phase-transition gate below is proposed, not approved. L-01–L-14 remain **BLOCKED**.
 
 ## 1. Executive Summary
