@@ -1,4 +1,5 @@
 import { bookingDetailsInputSchema } from '../validators/booking.schemas.js';
+import { commercialSchema } from '../services/booking-commercial.service.js';
 
 type Row = Record<string, any>;
 const pick = (row: Row, keys: string[]) => Object.fromEntries(keys.filter(key => row[key] !== undefined).map(key => [key, row[key]]));
@@ -15,7 +16,7 @@ export function bookingDetailsDTO(value: unknown, admin = false) {
   if (paymentStates.includes(row.paymentStatus)) details.paymentStatus = row.paymentStatus;
   // Free-form legacy policies can contain unrelated traveler data. Return a fixed public policy.
   details.paymentPolicy = 'Manual agency booking. No immediate card charge. Payment instructions are provided by the operations team.';
-  details.supportContact = 'support@flywithsafe.com';
+  // No public support contact has been verified; never invent one or expose legacy JSON contact fields.
   if (admin) {
     for (const key of ['sourceInquiryId', 'sourceInquiryReference', 'sourceInquiryType']) {
       if (typeof row[key] === 'string' && row[key].length <= 128) details[key] = row[key];
@@ -32,6 +33,11 @@ export function bookingDTO(booking: Row, audience: 'admin' | 'customer' | 'guest
   else Object.assign(result, { customerName: 'Booking customer', customerEmail: '••••' });
   if (admin) Object.assign(result, pick(booking, ['notes']));
   result.bookingDetails = bookingDetailsDTO(booking.bookingDetails, admin);
+  if (audience !== 'guest') {
+    const parsed = commercialSchema.safeParse(booking.bookingDetails?.commercial);
+    if (parsed.success) result.commercial = { version: parsed.data.version, revision: parsed.data.revision,
+      quotes: parsed.data.quotes, payments: parsed.data.payments };
+  }
   if (Array.isArray(booking.passengers)) result.passengers = booking.passengers.map((p: Row) => {
     const passenger = pick(p, ['id', 'firstName', 'lastName', 'passengerType', 'nationality']);
     if (admin && typeof p.passportNumber === 'string' && p.passportNumber.length) {

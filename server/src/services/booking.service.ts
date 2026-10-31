@@ -338,8 +338,6 @@ export async function lookupBooking(input: LookupBookingInput) {
     details.paymentStatus ||
     (booking.status === 'CONFIRMED'
       ? 'AWAITING_PAYMENT_CONFIRMATION'
-      : booking.status === 'COMPLETED'
-      ? 'PAYMENT_VERIFIED'
       : booking.status === 'CANCELLED'
       ? 'CANCELLED'
       : 'AWAITING_PAYMENT_INSTRUCTIONS');
@@ -382,6 +380,7 @@ export async function updateBookingStatus(
   let customerToNotify: { email: string; name: string; ref: string } | null = null;
 
   const updatedBooking = await prisma.$transaction(async (tx) => {
+    await tx.$queryRaw(Prisma.sql`SELECT id FROM public."Booking" WHERE id = ${id} FOR UPDATE`);
     const booking = await tx.booking.findUnique({
       where: { id },
       include: {
@@ -409,8 +408,6 @@ export async function updateBookingStatus(
     let details = (booking.bookingDetails as Record<string, any>) || {};
     if (newStatus === 'CONFIRMED' && (!details.paymentStatus || details.paymentStatus === 'AWAITING_PAYMENT_INSTRUCTIONS')) {
       details = { ...details, paymentStatus: 'AWAITING_PAYMENT_CONFIRMATION' };
-    } else if (newStatus === 'COMPLETED') {
-      details = { ...details, paymentStatus: 'PAYMENT_VERIFIED' };
     } else if (newStatus === 'CANCELLED') {
       details = { ...details, paymentStatus: 'CANCELLED' };
     }

@@ -5,8 +5,25 @@ import { errorDataField } from '../utils/error-fields.js';
 import {
   renderNotificationContent,
   sendEmailRaw,
+  createProtectedNotificationDelivery,
   type NotificationTemplateType,
 } from './notification.service.js';
+import { deliverProtectedCredential, type ProtectedAuthStore, type TrustedDelivery } from '../security/protected-auth.js';
+import type { EnvelopeKeys } from '../security/protected-envelope.js';
+import type { RecoveryAdmission } from '../security/issuance-replay.js';
+export { readCompatibleNotification, quarantineIncompatible, quarantineRestoredBatch } from '../security/notification-recovery.js';
+
+/** Explicit protected-worker entry; never routed through ordinary enqueue/direct-send fallback. */
+export async function processProtectedNotificationJob(input: {
+  store: ProtectedAuthStore; keys: EnvelopeKeys; frontendOrigin: string;
+  authorize: TrustedDelivery['authorize']; recovery:RecoveryAdmission; jobId: string; workerId: string;
+}): Promise<'submitted'|'suppressed'|'ambiguous'|'denied'> {
+  try {
+    if(await input.recovery.admit('deliver')!==true)return 'denied';
+    const delivery=createProtectedNotificationDelivery({frontendOrigin:input.frontendOrigin,authorize:input.authorize});
+    return await deliverProtectedCredential(input.store,input.keys,delivery,input.jobId,input.workerId);
+  } catch { return 'denied'; }
+}
 
 export interface EnqueueNotificationInput {
   channel?: string;

@@ -1,4 +1,4 @@
-import { post } from './client';
+import { ApiError, apiRequest, post } from './client';
 
 export interface BookingPassenger {
   firstName: string;
@@ -54,7 +54,7 @@ export interface BookingRecord {
   }[];
 }
 
-export async function createBooking(payload: CreateBookingPayload): Promise<{
+export interface CreateBookingResponse {
   booking: {
     id: string;
     referenceNumber: string;
@@ -66,8 +66,14 @@ export async function createBooking(payload: CreateBookingPayload): Promise<{
     passengerCount: number;
     createdAt: string;
   };
-}> {
-  return post('/bookings', payload);
+}
+
+export async function createBooking(payload: CreateBookingPayload, requestId: string): Promise<CreateBookingResponse> {
+  if(!/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(requestId))throw new ApiError('INVALID_REQUEST_ID','Please start a new booking request.',400);
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),30000);
+  try {
+    return await apiRequest<CreateBookingResponse>('/bookings',{method:'POST',body:JSON.stringify(payload),headers:{'Idempotency-Key':requestId.toLowerCase()},signal:controller.signal});
+  } finally {clearTimeout(timer);}
 }
 
 export async function lookupBooking(referenceNumber: string, email: string): Promise<{

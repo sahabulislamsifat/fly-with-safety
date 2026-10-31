@@ -1,4 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import {ApiError} from '@/lib/api/client';
+import {isTerminalBookingFailure} from '@/lib/api/booking-attempt';
 import {
   createBooking,
   lookupBooking,
@@ -10,6 +12,7 @@ export interface BookingState {
   submitStatus: 'idle' | 'loading' | 'succeeded' | 'failed';
   lookupStatus: 'idle' | 'loading' | 'succeeded' | 'failed';
   submitError: string | null;
+  activeSubmitRequest: string | null;
   lookupError: string | null;
   recentBooking: {
     id: string;
@@ -37,6 +40,7 @@ const initialState: BookingState = {
   submitStatus: 'idle',
   lookupStatus: 'idle',
   submitError: null,
+  activeSubmitRequest: null,
   lookupError: null,
   recentBooking: null,
   lookupRecord: null,
@@ -46,17 +50,17 @@ const initialState: BookingState = {
 
 export const submitBookingThunk = createAsyncThunk<
   { booking: NonNullable<BookingState['recentBooking']> },
-  CreateBookingPayload,
-  { rejectValue: string }
->('booking/submit', async (payload, { rejectWithValue }) => {
+  {payload: CreateBookingPayload; requestId: string},
+  { rejectValue: {message:string;terminal:boolean} }
+>('booking/submit', async ({payload,requestId}, { rejectWithValue }) => {
   try {
-    const res = await createBooking(payload);
+    const res = await createBooking(payload,requestId);
     return res;
   } catch (err: unknown) {
-    const msg = err instanceof Error ? err.message : 'Failed to submit booking';
-    return rejectWithValue(msg);
+    const message = err instanceof ApiError && err.status>=400 && err.status<500 ? err.message : 'We could not confirm your booking request. Retry without changing the form.';
+    return rejectWithValue({message,terminal:isTerminalBookingFailure(err)});
   }
-});
+},{condition:(_input,{getState})=>(getState() as {booking:BookingState}).booking.submitStatus!=='loading'});
 
 export const lookupBookingThunk = createAsyncThunk<
   { booking: BookingRecord },
@@ -80,18 +84,24 @@ export const bookingSlice = createSlice({
       state,
       action: PayloadAction<NonNullable<BookingState['bookingTarget']>>
     ) {
+      if(state.submitStatus==='loading')return;
       state.bookingTarget = action.payload;
       state.isBookingModalOpen = true;
       state.submitStatus = 'idle';
       state.submitError = null;
+      state.recentBooking = null;
+      state.activeSubmitRequest = null;
     },
     closeBookingModal(state) {
+      if(state.submitStatus==='loading')return;
       state.isBookingModalOpen = false;
     },
     clearBookingState(state) {
+      if(state.submitStatus==='loading')return;
       state.submitStatus = 'idle';
       state.submitError = null;
       state.recentBooking = null;
+      state.activeSubmitRequest = null;
     },
     clearLookupState(state) {
       state.lookupStatus = 'idle';
@@ -101,18 +111,23 @@ export const bookingSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(submitBookingThunk.pending, (state) => {
+      .addCase(submitBookingThunk.pending, (state,action) => {
         state.submitStatus = 'loading';
         state.submitError = null;
+        state.activeSubmitRequest=action.meta.requestId;
       })
       .addCase(submitBookingThunk.fulfilled, (state, action) => {
+        if(state.activeSubmitRequest!==action.meta.requestId)return;
         state.submitStatus = 'succeeded';
         state.recentBooking = action.payload.booking;
         state.submitError = null;
+        state.activeSubmitRequest=null;
       })
       .addCase(submitBookingThunk.rejected, (state, action) => {
+        if(state.activeSubmitRequest!==action.meta.requestId)return;
         state.submitStatus = 'failed';
-        state.submitError = action.payload || 'Failed to submit booking';
+        state.submitError = action.payload?.message || 'Failed to submit booking';
+        state.activeSubmitRequest=null;
       })
       .addCase(lookupBookingThunk.pending, (state) => {
         state.lookupStatus = 'loading';

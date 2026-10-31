@@ -1,0 +1,83 @@
+{
+  "clientDate": "2026-10-31",
+  "scope": "Phase2 synthetic booking quotation payment-record status dashboards",
+  "bundled": {
+    "liveCaseSkipped": 1,
+    "passed": 115,
+    "failed": 0,
+    "new": 43
+  },
+  "native": {
+    "liveCaseSkipped": 1,
+    "passed": 115,
+    "failed": 0,
+    "new": 43
+  },
+  "typeScript": {
+    "strict": 0,
+    "client": 0,
+    "server": 0
+  },
+  "scopedLintExit": 0,
+  "browser": "Local search results and booking modal observed; no submission",
+  "postgresLive": "NOT_EXECUTED_RESOURCE_EXISTENCE_UNKNOWN",
+  "phase1": "G7_ACCEPTED_UNCHANGED",
+  "files": [
+    {
+      "path": "server/src/services/booking-commercial.service.ts",
+      "sha256": "9CEA9F1DA32BA116AC889EA4DD9B744FA8A6904103045CD3BEA4C07C5C4DFF7B"
+    },
+    {
+      "path": "server/src/controllers/booking-commercial.controller.ts",
+      "sha256": "20D1AF74158951CC03D47F071FB06D02996837929A878C403E939C747A89F9FD"
+    },
+    {
+      "path": "server/test/phase2-commercial.test.ts",
+      "sha256": "E529823A28D7F9890A7B481A1A0EB3048592356686D3DE34122FDB71C4B552AA"
+    },
+    {
+      "path": "server/test/phase2-commercial-http.test.ts",
+      "sha256": "B9BD47C0BD46E7DF52280B520DB698E84CDD1C56EF962DD60121A4EE72A4EDB6"
+    },
+    {
+      "path": "server/test/phase2-status.test.ts",
+      "sha256": "883AD9140C3120120C2C1A99D477711EB748430578BD7FF2C80AD522822EF1FA"
+    },
+    {
+      "path": "server/test/phase2-booking.pg.test.ts",
+      "sha256": "44E37001FA799BA2B0241FDCB28DD2A3D229648FC4B1F843D00F6DA0E31666BE"
+    },
+    {
+      "path": "client/src/components/booking/BookingCommercialPanel.tsx",
+      "sha256": "8CB3E21887B0CFF571D870BDE159C91DF7D1E7C0F62A163BF7BA6EA2A5F8EB2B"
+    },
+    {
+      "path": "client/src/lib/api/booking-commercial.ts",
+      "sha256": "DF485859DF4357946BE80336BFB17101E713F31FEA954618A5DC0410BC5E5ABB"
+    },
+    {
+      "path": "client/src/components/account/AccountDashboard.tsx",
+      "sha256": "2043D96E6147DA80D743497028AB9D1A23B79E1A91BE479B53BF12F076A473F6"
+    },
+    {
+      "path": "client/src/components/admin/AdminBookingsTab.tsx",
+      "sha256": "A27045557A25F735620F6E6C540E80E38A02F2124CB2D4E41E0CE4C288F06254"
+    },
+    {
+      "path": "server/src/services/booking.service.ts",
+      "sha256": "C0B25D69E4181457D714E711340DF319F1778FE6C034D8CDACAFBC8E0942BFDA"
+    },
+    {
+      "path": "server/src/utils/booking-dto.ts",
+      "sha256": "5E4E32D83336A20746793940283F87CECE3C450C145A8B48A830737F772D520F"
+    },
+    {
+      "path": "server/src/routes/account.routes.ts",
+      "sha256": "F192A3403041765E27D39C4E536528CD13E310F4E6F8D60AD9955D912A6358DB"
+    },
+    {
+      "path": "server/src/routes/admin.routes.ts",
+      "sha256": "F7F35A21EF3DA21FC7694E6A5DDACD537FE0666050152AE6D21618FD2E65E83E"
+    }
+  ]
+}

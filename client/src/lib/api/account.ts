@@ -16,6 +16,7 @@ export interface AccountInquiry {
   [key: string]: unknown;
 }
 export interface AccountBooking {
+  commercial?: import('./booking-commercial').BookingCommercial;
   referenceNumber: string;
   bookingType: 'FLIGHT' | 'HOTEL' | 'PACKAGE';
   bookingModel: string;

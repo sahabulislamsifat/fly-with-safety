@@ -2,6 +2,7 @@ import { createHash } from 'crypto';
 import { Prisma } from '../generated/prisma/client.js';
 import { prisma } from '../lib/prisma.js';
 import { AppError } from '../utils/errors.js';
+import { inquiryDigest, matchesInquiryDigest, type LogicalDigestPolicy } from '../security/idempotency-digest.js';
 
 type Transaction = Prisma.TransactionClient;
 
@@ -20,32 +21,6 @@ function isPrismaUniqueConstraintError(error: unknown): boolean {
   return (error as unknown as { code?: unknown }).code === 'P2002';
 }
 
-/**
- * Recursively sort object keys to ensure equivalent payloads produce
- * the same hash regardless of property insertion order.
- */
-function stableValue(value: unknown): unknown {
-  if (Array.isArray(value)) {
-    return value.map(stableValue);
-  }
-
-  if (value !== null && typeof value === 'object') {
-    return Object.fromEntries(
-      Object.entries(value as Record<string, unknown>)
-        .sort(([a], [b]) => a.localeCompare(b))
-        .map(([key, item]) => [key, stableValue(item)]),
-    );
-  }
-
-  return value;
-}
-
-function payloadHash(payload: unknown): string {
-  return createHash('sha256')
-    .update(JSON.stringify(stableValue(payload)))
-    .digest('hex');
-}
-
 export function idempotencyPrincipal(userId: string | undefined, email: string): string {
   if (userId) {
     return `user:${userId}`;
@@ -60,11 +35,16 @@ export async function createIdempotentInquiry<T extends { referenceNumber: strin
   userId?: string;
   email: string;
   payload: unknown;
+  // Opt-in from trusted server composition only; existing callers retain historical SHA-256.
+  digestPolicy?: LogicalDigestPolicy;
   create: (tx: Transaction) => Promise<T>;
   findByReference: (referenceNumber: string) => Promise<T | null>;
 }): Promise<{ inquiry: T; replayed: boolean }> {
   const principal = idempotencyPrincipal(input.userId, input.email);
-  const hash = payloadHash(input.payload);
+  const scope = { operation: input.operation, principal };
+  let hash: string;
+  try { hash = inquiryDigest(input.payload,scope,input.digestPolicy); }
+  catch { throw AppError.internal(); }
 
   try {
     const inquiry = await prisma.$transaction(async (tx) => {
@@ -106,7 +86,10 @@ export async function createIdempotentInquiry<T extends { referenceNumber: strin
       throw error;
     }
 
-    if (existing.payloadHash !== hash) {
+    let matches: boolean;
+    try { matches = matchesInquiryDigest(existing.payloadHash,input.payload,scope,input.digestPolicy); }
+    catch { throw AppError.internal(); }
+    if (!matches) {
       throw AppError.conflict('This Idempotency-Key was already used with a different request.');
     }
 

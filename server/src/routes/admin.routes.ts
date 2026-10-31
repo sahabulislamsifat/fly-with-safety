@@ -19,6 +19,8 @@ import {
 } from '../validators/booking.schemas.js';
 import * as outboxService from '../services/outbox.service.js';
 import { AppError } from '../utils/errors.js';
+import { changeCommercial } from '../controllers/booking-commercial.controller.js';
+import { commercialCommandSchema } from '../services/booking-commercial.service.js';
 
 const router: Router = createRouter();
 
@@ -210,6 +212,7 @@ router.get('/admin/visa', async (req: Request, res: Response, next: NextFunction
 
 // ─── Bookings ─────────────────────────────────────────────────────────────────
 router.get('/admin/bookings', bookingController.adminGetBookings);
+router.post('/admin/bookings/:reference/commercial', validate(commercialCommandSchema), changeCommercial);
 router.post(
   '/admin/bookings/from-inquiry',
   validate(createBookingFromInquirySchema),

@@ -1,44 +1,114 @@
 import type { Pool, PoolClient } from 'pg';
 import type { AccountBinding, AuthTransaction, Credential, Lease, ProtectedAuthStore, ProtectedJob } from './protected-auth.js';
 import { parseEnvelope } from './protected-envelope.js';
+import type { IssuanceRecord, IssuanceStore, IssuanceTransaction } from './issuance-replay.js';
+import { isIssuanceRequestConflict, IssuanceRequestConflict } from './issuance-replay.js';
 
 // No Pool constructor, environment loading, startup query or implicit connection.
 // Only trusted composition may supply a separately approved pool after schema activation.
-export class PostgresProtectedAuthStore implements ProtectedAuthStore {
+export class PostgresProtectedAuthStore implements ProtectedAuthStore, IssuanceStore {
   constructor(private readonly pool: Pick<Pool, 'connect'>) {}
 
+  lookupAccount(email: string): Promise<(AccountBinding & { emailVerified: boolean }) | null> {
+    return this.unit(async db=>{
+      const r=await db.query<AccountBinding & { emailVerified: boolean }>(`SELECT u.id AS "userId",u.email AS recipient,u."emailVerified",s.generation
+        FROM public."User" u JOIN public."AuthSecurityState" s ON s."userId"=u.id WHERE u.email=$1 AND s."legacyRetiredAt" IS NOT NULL`,[email]);
+      return r.rows[0]??null;
+    });
+  }
+  lookupCredential(digest: string, purpose: 'verification' | 'reset'): Promise<{ id: string } | null> {
+    return this.unit(async db=>{
+      const r=await db.query<{id:string}>(`SELECT c.id FROM public."ProtectedCredential" c
+        JOIN public."AuthSecurityState" s ON s."userId"=c."userId" AND s.generation=c.generation
+        WHERE c.digest=$1 AND c.purpose=$2 AND s."legacyRetiredAt" IS NOT NULL AND c."consumedAt" IS NULL AND c."revokedAt" IS NULL
+          AND c."expiresAt">clock_timestamp()`,[digest,purpose]);
+      return r.rows[0]??null;
+    });
+  }
+
   private async unit<T>(work: (db: PoolClient) => Promise<T>): Promise<T> {
-    const db = await this.pool.connect();
-    let discard = false;
+    let db:PoolClient|undefined,discard=false,committing=false,transportFailed=false;
+    // pg-pool removes its idle error listener while a client is leased. A wire
+    // disconnect also emits Client.error, independently of the rejected query.
+    // Handle that event locally: no raw error logging and never reuse this lease.
+    const onTransportError=()=>{transportFailed=true;discard=true;};
     try {
+      db=await this.pool.connect();
+      db.on('error',onTransportError);
       await db.query('BEGIN');
       await db.query("SET LOCAL statement_timeout='5s'");
       await db.query("SET LOCAL lock_timeout='5s'");
+      await db.query('SET TRANSACTION ISOLATION LEVEL READ COMMITTED');
       const result = await work(db);
-      await db.query('COMMIT');
+      if(transportFailed)throw new Error('PROTECTED_STORAGE_FAILED');
+      committing=true;await db.query('COMMIT');
+      if(transportFailed)throw new Error('PROTECTED_STORAGE_FAILED');
       return result;
-    } catch {
+    } catch(error) {
       // A failed COMMIT may be ambiguous; never retry the transaction automatically.
-      try { await db.query('ROLLBACK'); } catch { discard = true; }
+      discard=discard||committing;if(db){try { await db.query('ROLLBACK'); } catch { discard = true; }}
+      if(!discard&&isIssuanceRequestConflict(error))throw new IssuanceRequestConflict();
       throw new Error('PROTECTED_STORAGE_FAILED');
-    } finally { db.release(discard); }
+    } finally {
+      if(db){try{db.release(discard);}finally{db.removeListener('error',onTransportError);}}
+    }
   }
 
   transaction<T>(work: (tx: AuthTransaction) => Promise<T>): Promise<T> {
-    return this.unit(db => work({
+    return this.unit(db=>work(this.commands(db)));
+  }
+  lookupRequest(keyHash:string):Promise<IssuanceRecord|null> {
+    return this.unit(async db=>{
+      const r=await db.query<IssuanceRecord>(`SELECT fingerprint,receipt FROM public."AuthIssuanceRequest"
+        WHERE "keyHash"=$1 AND state='COMMITTED'`,[keyHash]);return r.rows[0]??null;
+    });
+  }
+  issuanceTransaction<T>(work:(tx:IssuanceTransaction)=>Promise<T>):Promise<T> {
+    return this.unit(async db=>{
+      let pending:string|null=null;
+      const result=await work({...this.commands(db),
+        reserveRequest:async(keyHash,fingerprint)=>{
+          if(pending!==null)throw new Error('ISSUANCE_RESERVATION_INVALID');
+          const inserted=await db.query(`INSERT INTO public."AuthIssuanceRequest" ("keyHash",fingerprint,state)
+            VALUES ($1,$2,'RESERVED') ON CONFLICT ("keyHash") DO NOTHING RETURNING "keyHash"`,[keyHash,fingerprint]);
+          if(inserted.rowCount===1){pending=keyHash;return {created:true,record:null};}
+          const r=await db.query<IssuanceRecord>(`SELECT fingerprint,receipt FROM public."AuthIssuanceRequest"
+            WHERE "keyHash"=$1 AND state='COMMITTED' FOR UPDATE`,[keyHash]);
+          return {created:false,record:r.rows[0]??null};
+        },
+        completeRequest:async(keyHash,receipt)=>{
+          if(pending!==keyHash)throw new Error('ISSUANCE_RESERVATION_INVALID');
+          const r=await db.query(`UPDATE public."AuthIssuanceRequest" SET state='COMMITTED',receipt=$2::jsonb,"completedAt"=clock_timestamp(),
+            "userId"=$3,"credentialId"=$4,"jobId"=$5,"sessionId"=$6
+            WHERE "keyHash"=$1 AND state='RESERVED'`,[keyHash,JSON.stringify(receipt),receipt.userId,receipt.credentialId,receipt.jobId,receipt.sessionId]);
+          if(r.rowCount!==1)throw new Error('ISSUANCE_RESERVATION_INVALID');pending=null;
+        },
+      });
+      if(pending!==null)throw new Error('ISSUANCE_RESERVATION_INCOMPLETE');
+      return result;
+    });
+  }
+  private commands(db:PoolClient):AuthTransaction {
+    return {
       createAccount: async input => {
         await db.query(`INSERT INTO public."User" (id,email,password,name,role,"emailVerified","updatedAt")
           VALUES ($1,$2,$3,$4,'CUSTOMER',false,clock_timestamp() AT TIME ZONE 'UTC')`,[input.id,input.email,input.passwordHash,input.name]);
+        // Protected registration creates no legacy token. Mark only this newly inserted account.
+        const marked=await db.query('UPDATE public."AuthSecurityState" SET "legacyRetiredAt"=clock_timestamp() WHERE "userId"=$1 AND "legacyRetiredAt" IS NULL',[input.id]);
+        if(marked.rowCount!==1)throw new Error('PROTECTED_ACCOUNT_ENROLLMENT_FAILED');
       },
       createSession: async input => {
         await db.query(`INSERT INTO public."Session" (id,"userId","refreshTokenHash","expiresAt") VALUES ($1,$2,$3,$4)`,
-          [input.id,input.userId,input.digest,input.expiresAt]);
+          // Prisma's timestamp-without-zone column stores UTC wall fields.
+          // pg's default Date serializer uses host-local fields; a UTC ISO
+          // string prevents an offset being silently discarded by PostgreSQL.
+          [input.id,input.userId,input.digest,input.expiresAt.toISOString()]);
       },
       account: async userId => {
         await db.query('SELECT id FROM public."User" WHERE id=$1 FOR UPDATE', [userId]);
         const r = await db.query<AccountBinding>(`SELECT u.id AS "userId", s.generation, u.email AS recipient
           FROM public."User" u JOIN public."AuthSecurityState" s ON s."userId"=u.id
-          WHERE u.id=$1 FOR UPDATE OF s`, [userId]);
+          WHERE u.id=$1 AND s."legacyRetiredAt" IS NOT NULL FOR UPDATE OF s`, [userId]);
         return r.rows[0] ?? null;
       },
       supersede: async (userId, purpose) => {
@@ -61,7 +131,7 @@ export class PostgresProtectedAuthStore implements ProtectedAuthStore {
         await db.query(`UPDATE public."Session" SET "revokedAt"=clock_timestamp() AT TIME ZONE 'UTC'
           WHERE "userId"=$1 AND "revokedAt" IS NULL`, [userId]);
       },
-    }));
+    };
   }
 
   /** New protected-token reader only; existing AUTH-02 path remains pinned and unchanged. */
@@ -77,7 +147,7 @@ export class PostgresProtectedAuthStore implements ProtectedAuthStore {
       const r = await db.query<{ userId: string }>(`UPDATE public."ProtectedCredential" c SET "consumedAt"=clock_timestamp()
         FROM public."AuthSecurityState" s WHERE c.id=$1 AND c.digest=$2 AND c.purpose=$3
           AND c."consumedAt" IS NULL AND c."revokedAt" IS NULL AND c."expiresAt">clock_timestamp()
-          AND s."userId"=c."userId" AND s.generation=c.generation RETURNING c."userId"`,[id,digest,purpose]);
+          AND s."userId"=c."userId" AND s.generation=c.generation AND s."legacyRetiredAt" IS NOT NULL RETURNING c."userId"`,[id,digest,purpose]);
       const userId = r.rows[0]?.userId;
       if (!userId) return false;
       if (purpose === 'verification') await db.query('UPDATE public."User" SET "emailVerified"=true,"updatedAt"=clock_timestamp() AT TIME ZONE \'UTC\' WHERE id=$1',[userId]);
@@ -96,6 +166,7 @@ export class PostgresProtectedAuthStore implements ProtectedAuthStore {
       const r = await db.query<Lease>(`UPDATE public."ProtectedAuthJob" SET state='LEASED',
         version=version+1,"workerId"=$2,"leaseUntil"=clock_timestamp()+interval '5 minutes'
         WHERE id=$1 AND (state='PENDING' OR (state='LEASED' AND "leaseUntil"<clock_timestamp()))
+        AND NOT EXISTS(SELECT 1 FROM public."NotificationQuarantine" q WHERE q.source='protected' AND q."recordId"="ProtectedAuthJob".id)
         RETURNING id AS "jobId",version,"workerId"`, [jobId,workerId]);
       return r.rows[0] ?? null;
     });
@@ -108,8 +179,9 @@ export class PostgresProtectedAuthStore implements ProtectedAuthStore {
         JOIN public."AuthSecurityState" s ON s."userId"=c."userId" AND s.generation=c.generation
         JOIN public."User" u ON u.id=s."userId"
         WHERE j.id=$1 AND j.version=$2 AND j."workerId"=$3 AND j.state='LEASED'
-          AND j."leaseUntil">clock_timestamp() AND c."expiresAt">clock_timestamp()
-          AND c."revokedAt" IS NULL AND c."consumedAt" IS NULL`, [lease.jobId,lease.version,lease.workerId]);
+          AND s."legacyRetiredAt" IS NOT NULL AND j."leaseUntil">clock_timestamp() AND c."expiresAt">clock_timestamp()
+          AND c."revokedAt" IS NULL AND c."consumedAt" IS NULL
+          AND NOT EXISTS(SELECT 1 FROM public."NotificationQuarantine" q WHERE q.source='protected' AND q."recordId"=j.id)`, [lease.jobId,lease.version,lease.workerId]);
       const c = r.rows[0];
       if (!c) return null;
       return { credential: c, job: { id: lease.jobId, credentialId: c.id, envelope: parseEnvelope(c.envelope) } };
@@ -129,7 +201,8 @@ export class PostgresProtectedAuthStore implements ProtectedAuthStore {
         WHERE j.id=$1 AND j.version=$2 AND j."workerId"=$3 AND j.state='LEASED'
           AND j."leaseUntil">clock_timestamp() AND c.id=j."credentialId" AND c."jobId"=j.id
           AND c."expiresAt">clock_timestamp() AND c."revokedAt" IS NULL AND c."consumedAt" IS NULL
-          AND s."userId"=c."userId" AND s.generation=c.generation AND u.id=s."userId"`,
+          AND s."userId"=c."userId" AND s.generation=c.generation AND u.id=s."userId" AND s."legacyRetiredAt" IS NOT NULL
+          AND NOT EXISTS(SELECT 1 FROM public."NotificationQuarantine" q WHERE q.source='protected' AND q."recordId"=j.id)`,
       [lease.jobId,lease.version,lease.workerId]);
       return r.rowCount === 1;
     });
@@ -138,7 +211,8 @@ export class PostgresProtectedAuthStore implements ProtectedAuthStore {
   finish(lease: Lease, outcome: 'submitted' | 'suppressed' | 'ambiguous'): Promise<boolean> {
     return this.unit(async db => {
       const r = await db.query(`UPDATE public."ProtectedAuthJob" SET state=$4
-        WHERE id=$1 AND version=$2 AND "workerId"=$3 AND state='SENDING' AND "leaseUntil">clock_timestamp()`,
+        WHERE id=$1 AND version=$2 AND "workerId"=$3 AND state='SENDING' AND "leaseUntil">clock_timestamp()
+          AND NOT EXISTS(SELECT 1 FROM public."NotificationQuarantine" q WHERE q.source='protected' AND q."recordId"="ProtectedAuthJob".id)`,
       [lease.jobId,lease.version,lease.workerId,{ submitted:'SUBMITTED',suppressed:'SUPPRESSED',ambiguous:'AMBIGUOUS' }[outcome]]);
       return r.rowCount === 1;
     });

@@ -2,6 +2,35 @@ import nodemailer from 'nodemailer';
 import { env } from '../config/env.js';
 import { enqueueNotification } from './outbox.service.js';
 import { logger, serializeError } from '../lib/logger.js';
+import type { TrustedDelivery } from '../security/protected-auth.js';
+
+/** Only protected-worker composition calls this adapter after durable fenced admission. */
+export function createProtectedNotificationDelivery(input: {
+  frontendOrigin: string;
+  authorize: TrustedDelivery['authorize'];
+}): TrustedDelivery {
+  let url:URL;
+  try{url=new URL(input.frontendOrigin);}catch{throw new Error('PROTECTED_NOTIFICATION_CONFIGURATION_INVALID');}
+  if(url.origin!==input.frontendOrigin || url.username || url.password ||
+      url.protocol!=='https:' && !(url.protocol==='http:' && ['localhost','127.0.0.1','[::1]'].includes(url.hostname)) ||
+      typeof input.authorize!=='function') throw new Error('PROTECTED_NOTIFICATION_CONFIGURATION_INVALID');
+  const origin=url.origin,authorize=input.authorize;
+  return {
+    authorize,
+    async send(data){
+      try {
+        if(data.purpose!=='reset'&&data.purpose!=='verification' || !/^[A-Za-z0-9_-]{64}$/.test(data.token) ||
+            typeof data.recipient!=='string' || data.recipient.length>254 || !/^[^\s@<>]+@[^\s@<>]+$/.test(data.recipient)) throw new Error();
+        const link=new URL(data.purpose==='reset'?'/reset-password':'/verify-email',origin);
+        link.searchParams.set('token',data.token);
+        const template=data.purpose==='reset'?'PASSWORD_RESET':'EMAIL_VERIFICATION';
+        const content=renderNotificationContent(template,data.purpose==='reset'?{resetUrl:link.href}:{verificationUrl:link.href});
+        const result=await sendEmailRaw({to:data.recipient,...content});
+        return result.status;
+      } catch { throw new Error('PROTECTED_NOTIFICATION_TRANSPORT_FAILED'); }
+    },
+  };
+}
 
 export type EmailSendResult =
   | { status: 'submitted' }

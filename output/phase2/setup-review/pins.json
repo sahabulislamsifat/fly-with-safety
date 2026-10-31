@@ -1,0 +1,62 @@
+[
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\setup-review\\create-target.sql",
+    "sha256": "E0AAF1F682185EB8D592BA023109FE4376AF337F8411586FB5F9792EA07A92EB"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\setup-review\\role.sql",
+    "sha256": "6A77E181F8855BE1FB7288C62072A39C4CCE384A9B3F9523ACD75714AB92CCBE"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\setup-review\\prisma.config.cjs",
+    "sha256": "FC013814BBA9553B71642B314BAB3310B62A274710D4BF95971720E437661D33"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\prisma\\schema.prisma",
+    "sha256": "60B262C2D5E60EC1820A01C95D7A9293854F4C2998C17BFEC56CCD2FD28120A0"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\prisma\\migrations\\migration_lock.toml",
+    "sha256": "BC487C02C71AD9CAE8694647129E3EA7F32B1FE7007D0A6CED064E51022CD3FB"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\node_modules\\prisma\\build\\index.js",
+    "sha256": "763611D694B08952CED7C5ABB3B9D61906FED0A8997D9214AC918A43928E0FC8"
+  },
+  {
+    "path": "C:\\Program Files\\PostgreSQL\\18\\bin\\psql.exe",
+    "sha256": "945EB0BBF8475A7FB0C863D85E36F2E15CF6B2D9FADB4D617BE4E59D4BB17BB0"
+  },
+  {
+    "path": "C:\\Program Files\\nodejs\\node.exe",
+    "sha256": "8490398F5E0082772DFB0AE5A6EBDFF98A97696A20CB9778B4F82EEC79B6D0A1"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\prisma\\migrations\\20260926202822_init\\migration.sql",
+    "sha256": "EFDA6A0CD3D01B2503E4CC1557F8ABA2807664DB545A742E52EACA60A3B2E1CB"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\prisma\\migrations\\20260927082715_full_schema\\migration.sql",
+    "sha256": "AE3BCD7668F026858EE7E43CBCEB9955C451A1BF648520E6AFB7814CE2CC7921"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\prisma\\migrations\\20261009000000_auth_sessions_and_password_resets\\migration.sql",
+    "sha256": "E1EB929668D33CBE94F07E7512CB7174084150C50683A2E15F5709509B53E1B4"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\prisma\\migrations\\20261011000000_inquiry_idempotency\\migration.sql",
+    "sha256": "0316F0857663D04900E1CEAE1E305490A9B97E49192F9AAD2F74BB2F494C6706"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\prisma\\migrations\\20261011120000_notification_outbox\\migration.sql",
+    "sha256": "1ECC18D0E4381CDF0489A9919F61B58C3F9F1A3BD102303CCF1FA5F81E14ECA2"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\prisma\\migrations\\20261022000100_contact_status_new\\migration.sql",
+    "sha256": "4C9AF2C97DD22A88CB3B7E5FE5422AC1023BCC86FCDE999409033AC5180178A7"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\prisma\\migrations\\20261022000200_booking_contact_schema\\migration.sql",
+    "sha256": "BC10E7343B3C40769C43DEEE8B3164245319A9F35D7A3B50D4E3EE721895F32B"
+  }
+]

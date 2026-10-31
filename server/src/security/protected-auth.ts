@@ -34,9 +34,11 @@ function context(c: Credential): Buffer {
 }
 
 /** No transport or direct-send fallback. Token and encrypted job persist in one transaction. */
-export async function issueProtectedCredential(store: ProtectedAuthStore, keys: EnvelopeKeys, keyRef: string,
+export async function prepareProtectedIssuance(keys: EnvelopeKeys, keyRef: string,
   binding: AccountBinding, purpose: Purpose, expiresAt: Date,
-  registration?: { passwordHash: string; name: string | null; sessionId: string; sessionDigest: string; sessionExpiresAt: Date }): Promise<{ credentialId: string; jobId: string }> {
+  registration?: { passwordHash: string; name: string | null; sessionId: string; sessionDigest: string; sessionExpiresAt: Date }): Promise<{
+    credentialId: string; jobId: string; apply(tx: AuthTransaction): Promise<void>;
+  }> {
   let plaintext: Buffer | undefined;
   try {
     if (!identifier(binding.userId) || !recipient(binding.recipient) || !Number.isSafeInteger(binding.generation) || binding.generation < 0 ||
@@ -50,7 +52,9 @@ export async function issueProtectedCredential(store: ProtectedAuthStore, keys: 
         !Number.isFinite(account.sessionExpiresAt.getTime()) || account.sessionExpiresAt.getTime() <= Date.now())) throw safe();
     plaintext = Buffer.from(JSON.stringify({ token, recipient: binding.recipient }));
     const envelope = await sealEnvelope(plaintext, 'auth-notification', context(credential), keyRef, keys);
-    await store.transaction(async tx => {
+    let applied=false;
+    return {credentialId:id,jobId,async apply(tx){
+      if(applied)throw safe();applied=true;
       if (account) await tx.createAccount({ id:credential.userId,email:credential.recipient,passwordHash:account.passwordHash,name:account.name });
       const current = await tx.account(credential.userId);
       if (!current || current.generation !== credential.generation || current.recipient !== credential.recipient) throw safe();
@@ -58,10 +62,19 @@ export async function issueProtectedCredential(store: ProtectedAuthStore, keys: 
       await tx.insertCredential(credential);
       await tx.insertJob({ id: jobId, credentialId: id, envelope });
       if (account) await tx.createSession({ id:account.sessionId,userId:credential.userId,digest:account.sessionDigest,expiresAt:account.sessionExpiresAt });
-    });
-    return { credentialId: id, jobId };
+    }};
   } catch { throw safe(); }
   finally { plaintext?.fill(0); }
+}
+
+export async function issueProtectedCredential(store: ProtectedAuthStore, keys: EnvelopeKeys, keyRef: string,
+  binding: AccountBinding, purpose: Purpose, expiresAt: Date,
+  registration?: Parameters<typeof prepareProtectedIssuance>[5]): Promise<{credentialId:string;jobId:string}> {
+  try {
+    const prepared=await prepareProtectedIssuance(keys,keyRef,binding,purpose,expiresAt,registration);
+    await store.transaction(tx=>prepared.apply(tx));
+    return {credentialId:prepared.credentialId,jobId:prepared.jobId};
+  } catch {throw safe();}
 }
 
 /** Trusted registration composition hashes passwords before calling; no session returned before commit. */
