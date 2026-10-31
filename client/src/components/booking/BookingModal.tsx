@@ -7,6 +7,7 @@ import { closeBookingModal, submitBookingThunk, clearBookingState } from '@/redu
 import { Button, Input } from '@/components/ui';
 import { Icon } from '@/components/ui/Icons';
 import { BookingPassenger } from '@/lib/api/bookings';
+import {createBookingAttempt} from '@/lib/api/booking-attempt';
 
 export function BookingModal() {
   const dispatch = useAppDispatch();
@@ -21,6 +22,9 @@ export function BookingModal() {
     { firstName: '', lastName: '', passengerType: 'adult' },
   ]);
   const dialogRef = useRef<HTMLDivElement>(null);
+  const attempt=useRef(createBookingAttempt());
+  const attemptTarget=useRef(bookingTarget);
+  const [attemptError,setAttemptError]=useState<string|null>(null);
 
   useEffect(() => {
     if (!isBookingModalOpen) return;
@@ -36,14 +40,15 @@ export function BookingModal() {
 
   useEffect(() => {
     if (!isBookingModalOpen) return;
+    if(submitStatus==='loading')dialogRef.current?.focus();
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape' && submitStatus !== 'loading') {
         dispatch(closeBookingModal());
         dispatch(clearBookingState());
       }
       if (event.key !== 'Tab') return;
-      const items = dialogRef.current?.querySelectorAll<HTMLElement>('button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), a[href]');
-      if (!items?.length) return;
+      const items = dialogRef.current?.querySelectorAll<HTMLElement>('button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), a[href]');
+      if (!items?.length) {event.preventDefault();dialogRef.current?.focus();return;}
       const first = items[0];
       const last = items[items.length - 1];
       if (event.shiftKey && (document.activeElement === first || document.activeElement === dialogRef.current)) {
@@ -61,6 +66,7 @@ export function BookingModal() {
   if (!isBookingModalOpen || !bookingTarget) return null;
 
   const handleAddPassenger = () => {
+    attempt.current.invalidate();
     setPassengers((prev) => [
       ...prev,
       { firstName: '', lastName: '', passengerType: 'adult' },
@@ -69,6 +75,7 @@ export function BookingModal() {
 
   const handleRemovePassenger = (index: number) => {
     if (passengers.length > 1) {
+      attempt.current.invalidate();
       setPassengers((prev) => prev.filter((_, i) => i !== index));
     }
   };
@@ -88,9 +95,16 @@ export function BookingModal() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!customerName || !customerEmail) return;
+    if(attemptTarget.current!==bookingTarget){attempt.current.invalidate();attemptTarget.current=bookingTarget;}
+    let ticket:ReturnType<ReturnType<typeof createBookingAttempt>['begin']>;
+    try{ticket=attempt.current.begin();}catch{setAttemptError('We could not start your request. Please try again.');return;}
+    if(!ticket)return;
+    setAttemptError(null);
 
     dispatch(
       submitBookingThunk({
+        requestId:ticket.requestId,
+        payload:{
         bookingType: bookingTarget.type,
         bookingModel: 'AGENCY_INQUIRY',
         customerName,
@@ -101,11 +115,13 @@ export function BookingModal() {
         bookingDetails: bookingTarget.details,
         passengers,
         notes,
+        },
       })
-    );
+    ).then(action=>ticket.settle(submitBookingThunk.fulfilled.match(action)||action.payload?.terminal===true));
   };
 
   const handleClose = () => {
+    if(submitStatus==='loading')return;
     dispatch(closeBookingModal());
     dispatch(clearBookingState());
   };
@@ -116,6 +132,7 @@ export function BookingModal() {
       tabIndex={-1}
       role="dialog"
       aria-modal="true"
+      aria-busy={submitStatus==='loading'}
       aria-labelledby="booking-modal-title"
       className="fixed inset-0 z-[300] flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs overflow-y-auto overscroll-contain"
     >
@@ -133,6 +150,7 @@ export function BookingModal() {
           <button
             type="button"
             onClick={handleClose}
+            disabled={submitStatus==='loading'}
             className="p-2 text-text-tertiary hover:text-text-primary rounded-xs hover:bg-neutral-200 transition-colors"
             aria-label="Close dialog"
           >
@@ -192,7 +210,8 @@ export function BookingModal() {
               </div>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} onChangeCapture={()=>{attempt.current.invalidate();setAttemptError(null);}}>
+              <fieldset disabled={submitStatus==='loading'} className="m-0 min-w-0 space-y-6 border-0 p-0">
               {/* Summary Banner */}
               <div className="p-4 bg-brand-primary/5 border border-brand-primary/15 rounded-xs flex items-center justify-between">
                 <div>
@@ -215,9 +234,9 @@ export function BookingModal() {
                 </span>
               </div>
 
-              {submitError && (
-                <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-xs">
-                  {submitError}
+              {(submitError || attemptError) && (
+                <div role="alert" className="p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-xs">
+                  {submitError || attemptError}
                 </div>
               )}
 
@@ -348,6 +367,7 @@ export function BookingModal() {
                   )}
                 </Button>
               </div>
+              </fieldset>
             </form>
           )}
         </div>

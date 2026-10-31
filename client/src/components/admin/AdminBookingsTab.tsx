@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { Button } from '@/components/ui';
 import { Icon } from '@/components/ui/Icons';
 import { ApiError } from '@/lib/api';
+import { BookingCommercialPanel } from '@/components/booking/BookingCommercialPanel';
 import {
   AdminBooking,
   BookingStatus,
@@ -70,6 +71,7 @@ export function AdminBookingsTab() {
       });
       setBookings(res.bookings);
       setPagination(res.pagination);
+      setSelected(current => current ? res.bookings.find(booking => booking.id === current.id) || null : null);
     } catch (err) {
       setError(err instanceof ApiError ? err.message : 'Failed to load bookings');
     } finally {
@@ -373,7 +375,7 @@ export function AdminBookingsTab() {
                     <div className="flex items-center justify-between">
                       <span className="text-[11px] text-neutral-600 font-medium">Payment State:</span>
                       <span className="font-bold text-[11px] font-mono px-2 py-0.5 rounded-xs border border-neutral-300 bg-white text-neutral-800">
-                        {String((selected.bookingDetails as AdminBookingDetailsMeta | null)?.paymentStatus || (selected.status === 'CONFIRMED' ? 'AWAITING_PAYMENT_CONFIRMATION' : selected.status === 'COMPLETED' ? 'PAYMENT_VERIFIED' : 'AWAITING_PAYMENT_INSTRUCTIONS'))}
+                        {String((selected.bookingDetails as AdminBookingDetailsMeta | null)?.paymentStatus || (selected.status === 'CONFIRMED' ? 'AWAITING_PAYMENT_CONFIRMATION' : 'AWAITING_PAYMENT_INSTRUCTIONS'))}
                       </span>
                     </div>
                     <p className="text-[11px] text-neutral-500 leading-relaxed">
@@ -438,6 +440,7 @@ export function AdminBookingsTab() {
                 </div>
               </div>
 
+              <BookingCommercialPanel key={`${selected.referenceNumber}:${selected.commercial?.revision || 0}`} reference={selected.referenceNumber} currency={selected.currency} initial={selected.commercial} staff onChanged={() => void loadData()} />
               {/* Status Update Form */}
               <div className="border-t border-neutral-200 pt-4 space-y-3">
                 <span className="text-xs font-bold uppercase tracking-wider text-neutral-900 block">

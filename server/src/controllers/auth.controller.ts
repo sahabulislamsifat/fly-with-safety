@@ -5,6 +5,40 @@ import { success } from '../utils/response.js';
 import { AppError } from '../utils/errors.js';
 import { env } from '../config/env.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
+import type { ProtectedAuthServices } from '../services/protected-auth.service.js';
+
+function issuanceRequestId(req:Request):string {
+  const value=req.headers['idempotency-key'];
+  if(typeof value!=='string'||!/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(value))throw AppError.badRequest('A UUIDv4 Idempotency-Key is required.');
+  return value.toLowerCase();
+}
+
+/** Explicit future controller composition; existing named handlers/routes below remain unchanged. */
+export function createProtectedAuthController(service:ProtectedAuthServices) {
+  return {
+    async register(req:Request,res:Response,next:NextFunction):Promise<void>{
+      try{
+        const result=await service.registerRequest(req.body,issuanceRequestId(req));
+        res.set('Cache-Control','no-store');
+        if(result.status==='replayed') {res.status(200).json(success({registration:'replayed',requiresSignIn:true}));return;}
+        setAuthCookies(res,result.session);
+        res.status(201).json(success({registration:'created',user:result.session.user}));
+      }catch(error){next(error);}
+    },
+    async resendVerification(req:Request,res:Response,next:NextFunction):Promise<void>{
+      try{await service.resendVerificationOnce(req.body.email,issuanceRequestId(req));res.set('Cache-Control','no-store');res.json(success({message:'If the account needs verification, a verification request has been recorded.'}));}catch(error){next(error);}
+    },
+    async forgotPassword(req:Request,res:Response,next:NextFunction):Promise<void>{
+      try{await service.requestPasswordResetOnce(req.body.email,issuanceRequestId(req));res.set('Cache-Control','no-store');res.json(success({message:'If an account exists, a password reset request has been recorded.'}));}catch(error){next(error);}
+    },
+    async verifyEmail(req:Request,res:Response,next:NextFunction):Promise<void>{
+      try{await service.verifyEmail(req.body.token);res.set('Cache-Control','no-store');res.json(success({message:'Email verified successfully'}));}catch(error){next(error);}
+    },
+    async resetPassword(req:Request,res:Response,next:NextFunction):Promise<void>{
+      try{await service.resetPassword(req.body);clearAuthCookies(res);res.set('Cache-Control','no-store');res.json(success({message:'Password reset successfully. Please sign in.'}));}catch(error){next(error);}
+    },
+  };
+}
 
 function getCookieOptions() {
   const isProd = env.nodeEnv === 'production';

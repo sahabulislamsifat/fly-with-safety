@@ -1,0 +1,107 @@
+// Appended to the full candidate schema, not loaded by the active Prisma config.
+model AuthSecurityState {
+  userId String @id
+  generation Int
+  legacyRetiredAt DateTime? @db.Timestamptz(6)
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  credentials ProtectedCredential[]
+}
+
+model ProtectedCredential {
+  id String @id
+  userId String
+  generation Int
+  purpose String
+  digest String @unique
+  expiresAt DateTime @db.Timestamptz(6)
+  consumedAt DateTime? @db.Timestamptz(6)
+  revokedAt DateTime? @db.Timestamptz(6)
+  jobId String @unique
+  securityState AuthSecurityState @relation(fields: [userId], references: [userId], onDelete: Restrict, onUpdate: NoAction)
+  job ProtectedAuthJob @relation("CredentialJob", fields: [jobId, id], references: [id, credentialId], onDelete: NoAction, onUpdate: NoAction, map: "protected_credential_job_binding")
+  originatingJob ProtectedAuthJob? @relation("JobCredential")
+  subjectReceipts AuthIssuanceRequest[] @relation("ReceiptSubject")
+  jobReceipts AuthIssuanceRequest[] @relation("ReceiptJob")
+  @@unique([id, jobId])
+  @@unique([jobId, id])
+  @@unique([id, userId], map: "protected_credential_subject")
+  @@index([userId, generation], map: "protected_credential_subject_lookup")
+  // SQL-only: partial UNIQUE(userId,purpose) for unconsumed/unrevoked rows.
+}
+
+model ProtectedAuthJob {
+  id String @id
+  credentialId String @unique
+  envelope Json @db.JsonB
+  state String @default("PENDING")
+  version Int @default(0)
+  workerId String?
+  leaseUntil DateTime? @db.Timestamptz(6)
+  createdAt DateTime @default(dbgenerated("clock_timestamp()")) @db.Timestamptz(6)
+  credential ProtectedCredential @relation("JobCredential", fields: [credentialId, id], references: [id, jobId], onDelete: NoAction, onUpdate: NoAction)
+  boundCredential ProtectedCredential? @relation("CredentialJob")
+  @@unique([id, credentialId])
+  @@unique([credentialId, id])
+  @@index([state, createdAt, id], map: "protected_job_dispatch")
+  // SQL-only: cyclic FKs DEFERRABLE INITIALLY DEFERRED, version/terminal-state trigger.
+}
+
+model PassengerSecret {
+  passengerId String @id
+  bookingId String
+  revision Int
+  envelope Json @db.JsonB
+  updatedAt DateTime @default(dbgenerated("clock_timestamp()")) @db.Timestamptz(6)
+  passenger BookingPassenger @relation("SecretPassenger", fields: [passengerId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  booking Booking @relation("SecretBooking", fields: [bookingId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  boundPassenger BookingPassenger @relation("SecretPassengerBooking", fields: [passengerId, bookingId], references: [id, bookingId], onDelete: Restrict, onUpdate: NoAction)
+  @@index([bookingId], map: "passenger_secret_booking")
+  @@unique([passengerId, bookingId])
+}
+
+model AuthIssuanceRequest {
+  keyHash String @id
+  fingerprint String
+  state String
+  createdAt DateTime @default(dbgenerated("clock_timestamp()")) @db.Timestamptz(6)
+  completedAt DateTime? @db.Timestamptz(6)
+  receipt Json? @db.JsonB
+  userId String?
+  credentialId String?
+  jobId String?
+  sessionId String?
+  subject ProtectedCredential? @relation("ReceiptSubject", fields: [credentialId, userId], references: [id, userId], onDelete: Restrict, onUpdate: NoAction)
+  credentialJob ProtectedCredential? @relation("ReceiptJob", fields: [credentialId, jobId], references: [id, jobId], onDelete: Restrict, onUpdate: NoAction)
+  session Session? @relation("ReceiptSession", fields: [sessionId, userId], references: [id, userId], onDelete: Restrict, onUpdate: NoAction)
+  @@index([credentialId, userId], map: "issuance_receipt_subject")
+  @@index([credentialId, jobId], map: "issuance_receipt_job")
+  @@index([sessionId, userId], map: "issuance_receipt_session")
+  // SQL-only: immutable receipt, deferred RESERVED-completion trigger and receipt/FK checks.
+}
+
+model NotificationQuarantine {
+  source String
+  recordId String
+  reason String
+  observedVersion String
+  createdAt DateTime @default(dbgenerated("clock_timestamp()")) @db.Timestamptz(6)
+  @@id([source, recordId])
+  // Polymorphic reference is checked under a source-row lock by the adapter.
+}
+
+model CompatibleNotificationLease {
+  recordId String @id
+  version DateTime @db.Timestamp(3)
+  workerId String
+  leaseUntil DateTime @db.Timestamptz(6)
+  notification NotificationOutbox @relation(fields: [recordId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+}
+
+model NotificationSendIntent {
+  recordId String
+  version DateTime @db.Timestamp(3)
+  state String
+  createdAt DateTime @default(dbgenerated("clock_timestamp()")) @db.Timestamptz(6)
+  notification NotificationOutbox @relation(fields: [recordId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  @@id([recordId, version])
+}

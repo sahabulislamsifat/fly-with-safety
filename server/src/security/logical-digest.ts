@@ -35,6 +35,13 @@ export function logicalDigest(key: Uint8Array, keyVersion: string, operation: st
   return `h1:${keyVersion}:${digest}`;
 }
 
+/** Snapshot before any asynchronous admission/storage call; rejects accessors and non-JSON values. */
+export function snapshotLogicalInput(value:unknown):unknown {
+  const json=canonical(value,new Set(),0,{nodes:2048});
+  if(Buffer.byteLength(json)>16384)throw new Error('DIGEST_INPUT_INVALID');
+  return JSON.parse(json);
+}
+
 export function sameLogicalDigest(a: string, b: string): boolean {
   const shape = /^h1:[A-Za-z0-9_-]{1,48}:[a-f0-9]{64}$/;
   return shape.test(a) && shape.test(b) && a.length === b.length && timingSafeEqual(Buffer.from(a), Buffer.from(b));

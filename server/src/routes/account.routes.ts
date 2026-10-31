@@ -1,6 +1,8 @@
 import { Router as createRouter, type Router } from 'express';
 import * as accountController from '../controllers/account.controller.js';
 import { requireAuth } from '../middleware/auth.middleware.js';
+import { changeCommercial } from '../controllers/booking-commercial.controller.js';
+import { commercialCommandSchema } from '../services/booking-commercial.service.js';
 import { validate, validateParams, validateQuery } from '../middleware/validation.middleware.js';
 import {
   bookingListQuerySchema,
@@ -13,6 +15,7 @@ import {
 const router: Router = createRouter();
 router.use('/account', requireAuth, (_req, res, next) => { res.set('Cache-Control', 'no-store'); next(); });
 router.get('/account/dashboard', accountController.getDashboard);
+router.post('/account/bookings/:reference/commercial', validate(commercialCommandSchema.refine(command => command.action === 'ACCEPT_QUOTE', 'Only quotation acceptance is permitted')), changeCommercial);
 router.get(
   '/account/inquiries',
   validateQuery(inquiryListQuerySchema),

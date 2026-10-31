@@ -102,6 +102,7 @@ export interface AdminBookingStatusHistory {
 }
 
 export interface AdminBooking {
+  commercial?: import('./booking-commercial').BookingCommercial;
   id: string;
   referenceNumber: string;
   bookingType: 'FLIGHT' | 'HOTEL' | 'PACKAGE';

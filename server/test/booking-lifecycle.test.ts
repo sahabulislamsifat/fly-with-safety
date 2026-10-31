@@ -284,6 +284,7 @@ describe('Phase 6: Booking Lifecycle & Processing Tests', () => {
 
       vi.spyOn(prisma, '$transaction').mockImplementation(async (cb: any) => {
         const tx = {
+          $queryRaw: vi.fn().mockResolvedValue([]),
           booking: {
             findUnique: vi.fn().mockResolvedValue(pendingBooking),
             update: vi.fn().mockResolvedValue(updatedBooking),
@@ -323,6 +324,7 @@ describe('Phase 6: Booking Lifecycle & Processing Tests', () => {
 
       vi.spyOn(prisma, '$transaction').mockImplementation(async (cb: any) => {
         const tx = {
+          $queryRaw: vi.fn().mockResolvedValue([]),
           booking: {
             findUnique: vi.fn().mockResolvedValue(cancelledBooking),
           },

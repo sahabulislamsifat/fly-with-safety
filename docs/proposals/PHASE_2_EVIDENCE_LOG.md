@@ -1,0 +1,16 @@
+# Phase 2 — synthetic booking development
+
+Phase 1 local Gate A/G7 remains ACCEPTED. This log does not reopen its accepted gates, databases or historical attempts. Gate B blocks real sensitive data; Gate C blocks production.
+
+## 2026-10-31 — quotation/payment/status/dashboard batch
+
+- Implemented server-owned quotation issue/acceptance and append-only unverified manual payment records in the existing Booking JSON field. No schema migration required. Staff issuance/recording and customer ownership are enforced independently of request payloads.
+- Booking row locks serialize financial and status writes. Revision checks reject stale commands; actor-scoped request receipts replay identical commands and reject changed payloads. Receipts are retained, bounded at 100, never evicted to admit another write. Expiry uses database time after locking. All new records remain inside the transaction; notification/provider operations are absent from the financial transaction.
+- Customer/admin dashboards use the existing routes, layouts and history. Added quote/payment panel; customer accepts only their latest unexpired quote. Payments explicitly remain RECORDED_UNVERIFIED. Completion no longer fabricates payment verification. No live charge, supplier reservation or real passenger handling was activated.
+- Verification observed: commercial/status/HTTP component 40 PASS, client booking foundation 31 PASS, existing booking lifecycle/privacy/idempotency 44 PASS, per bundled/native loader: **115 PASS / 0 FAIL** (43 new). Dedicated real-PG case: **1 SKIPPED per loader**, because no live mode/credentials were supplied. It is not live PASS evidence.
+- Strict standalone tests, server/client TypeScript: exit 0. Scoped client/new server ESLint: exit 0 (root-context plugin advisory only). Git diff whitespace check: exit 0. New setup SQL parsed with the existing PostgreSQL18 parser (25 statements, 3 DO blocks); Windows PowerShell5.1 AST parse passed. Setup has NOT executed.
+- Real local browser: homepage search navigated to demo flight results; Book with Agent opened the booking dialog with contact/passenger fields and demo notice. No submission was made. Existing browser session belonged to the user; it was not used to create synthetic records on an unknown backend. Full browser/API/PostgreSQL verification remains PENDING.
+- Proposed isolated target/role: flywithsafe_phase2_booking_integration / flywithsafe_phase2_booking_test. Owner has not yet returned actual existence query output; both existence states remain UNKNOWN. Prepared setup scope is at `output/phase2/setup-review/REVIEW.md`; privileged operations require explicit approval. No Phase 1 role, schema, grants, evidence or G3-X file was changed by this batch.
+- PostgreSQL suite is prepared for real restricted-role persisted replay, eight concurrent quote acceptances, four payment replays, ownership denial, status/history and dashboards. It does not claim real-DB proof before execution. Records remain journaled for separate cleanup approval.
+
+Next milestone: review the actual existence output, approve/provision only absent dedicated Phase 2 resources, then run restricted API/PostgreSQL proof and real browser submission. Offline tests do not substitute for that milestone. Production accounting/settlement verification and live payments are outside this foundation.

@@ -22,8 +22,8 @@ CREATE TABLE public."ProtectedAuthJob" (
   version integer NOT NULL DEFAULT 0 CHECK (version >= 0), "workerId" text, "leaseUntil" timestamptz,
   FOREIGN KEY ("credentialId",id) REFERENCES public."ProtectedCredential"(id,"jobId") DEFERRABLE INITIALLY DEFERRED,
   UNIQUE(id,"credentialId"),
-  CHECK ((state='PENDING' AND "workerId" IS NULL AND "leaseUntil" IS NULL) OR
-    (state<>'PENDING' AND "workerId" IS NOT NULL AND "leaseUntil" IS NOT NULL))
+  CHECK ((state IN ('PENDING','QUARANTINED') AND "workerId" IS NULL AND "leaseUntil" IS NULL) OR
+    (state NOT IN ('PENDING','QUARANTINED') AND "workerId" IS NOT NULL AND "leaseUntil" IS NOT NULL))
 );
 ALTER TABLE public."ProtectedCredential" ADD CONSTRAINT protected_credential_job_binding
   FOREIGN KEY ("jobId",id) REFERENCES public."ProtectedAuthJob"(id,"credentialId") DEFERRABLE INITIALLY DEFERRED;

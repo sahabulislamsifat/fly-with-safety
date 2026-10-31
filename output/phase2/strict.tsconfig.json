@@ -1,0 +1,32 @@
+{
+  "extends": "E:/Programming/Project/fly-with-safety/server/tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "E:/Programming/Project/fly-with-safety",
+    "baseUrl": "E:/Programming/Project/fly-with-safety",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "paths": {
+      "@/*": [
+        "client/src/*"
+      ],
+      "@reduxjs/toolkit": [
+        "client/node_modules/@reduxjs/toolkit/dist/index.d.ts"
+      ]
+    },
+    "noEmit": true,
+    "typeRoots": [
+      "E:/Programming/Project/fly-with-safety/server/node_modules/@types",
+      "E:/Programming/Project/fly-with-safety/client/node_modules/@types"
+    ]
+  },
+  "include": [
+    "E:\\Programming\\Project\\fly-with-safety\\server\\test\\phase2-commercial.test.ts",
+    "E:\\Programming\\Project\\fly-with-safety\\server\\test\\phase2-commercial-http.test.ts",
+    "E:\\Programming\\Project\\fly-with-safety\\server\\test\\phase2-status.test.ts",
+    "E:\\Programming\\Project\\fly-with-safety\\server\\test\\phase2-booking-foundation.test.ts",
+    "E:\\Programming\\Project\\fly-with-safety\\server\\test\\phase2-booking.pg.test.ts"
+  ]
+}

@@ -1,0 +1,580 @@
+// REVIEW CANDIDATE ONLY. Never use db push/migrate dev to replace authoritative custom SQL.
+// CHECK/partial index/deferrable/trigger semantics are maintained in the four SQL drafts.
+generator client {
+  provider        = "prisma-client-js"
+  output          = "../../src/generated/phase1-candidate"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum UserRole {
+  CUSTOMER
+  STAFF
+  ADMIN
+}
+
+enum ContentStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum TestimonialStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum InquiryStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+enum ContactStatus {
+  NEW
+  IN_PROGRESS
+  RESOLVED
+  // Legacy values kept so existing rows stay valid. OPEN behaves as NEW, CLOSED as RESOLVED.
+  OPEN
+  CLOSED
+}
+
+// ─── User & Auth ─────────────────────────────────────────────────────────────
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  password      String?
+  name          String?
+  role          UserRole @default(CUSTOMER)
+  emailVerified Boolean  @default(false)
+  avatar        String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  accounts                 Account[]
+  emailVerificationTokens  EmailVerificationToken[]
+  passwordResetTokens      PasswordResetToken[]
+  sessions                 Session[]
+  idempotencyRecords       IdempotencyRecord[]
+  flightInquiries          FlightInquiry[]
+  hotelInquiries           HotelInquiry[]
+  packageInquiries         PackageInquiry[]
+  visaInquiries            VisaInquiry[]
+  bookings                 Booking[]
+
+  @@index([email])
+  authSecurityState AuthSecurityState?
+}
+
+model Account {
+  id                String @id @default(cuid())
+  userId            String
+  provider          String
+  providerAccountId String
+  accessToken       String?
+  refreshToken      String?
+  createdAt         DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model EmailVerificationToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([userId])
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  tokenHash String   @unique
+  userId    String
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Session {
+  id               String   @id @default(cuid())
+  userId           String
+  refreshTokenHash String   @unique
+  expiresAt        DateTime
+  revokedAt        DateTime?
+  createdAt        DateTime @default(now())
+  lastUsedAt       DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+  issuanceReceipts AuthIssuanceRequest[] @relation("ReceiptSession")
+  @@unique([id, userId], map: "protected_session_subject")
+}
+
+model IdempotencyRecord {
+  id              String   @id @default(cuid())
+  operation       String
+  principal       String
+  key             String
+  payloadHash     String
+  referenceNumber String
+  userId          String?
+  createdAt       DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@unique([operation, principal, key])
+  @@index([userId])
+  @@index([referenceNumber])
+}
+
+// ─── Destinations ────────────────────────────────────────────────────────────
+
+model Destination {
+  id            String        @id @default(cuid())
+  slug          String        @unique
+  name          String
+  country       String
+  description   String?
+  startingPrice Int           @default(0)
+  image         String?
+  featured      Boolean       @default(false)
+  status        ContentStatus @default(PUBLISHED)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  packages Package[]
+
+  @@index([slug])
+  @@index([status, featured])
+}
+
+// ─── Packages ─────────────────────────────────────────────────────────────
+
+model Package {
+  id             String        @id @default(cuid())
+  slug           String        @unique
+  title          String
+  destinationId  String
+  description    String?
+  price          Int           @default(0)
+  durationDays   Int           @default(1)
+  featuredImage  String?
+  gallery        String[]      @default([])
+  itinerary      Json?
+  inclusions     String[]      @default([])
+  exclusions     String[]      @default([])
+  featured       Boolean       @default(false)
+  status         ContentStatus @default(PUBLISHED)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  destination      Destination      @relation(fields: [destinationId], references: [id])
+  packageInquiries PackageInquiry[]
+
+  @@index([slug])
+  @@index([destinationId])
+  @@index([status, featured])
+}
+
+// ─── Visa ────────────────────────────────────────────────────────────────────
+
+model VisaInfo {
+  id             String        @id @default(cuid())
+  country        String        @unique
+  slug           String        @unique
+  visaRequired   Boolean       @default(true)
+  processingTime String?
+  fee            String?
+  documents      String[]      @default([])
+  notes          String?
+  status         ContentStatus @default(PUBLISHED)
+  updatedAt      DateTime      @updatedAt
+  createdAt      DateTime      @default(now())
+
+  @@index([slug])
+  @@index([country])
+}
+
+// ─── Inquiries ───────────────────────────────────────────────────────────────
+
+model FlightInquiry {
+  id              String        @id @default(cuid())
+  referenceNumber String        @unique
+  userId          String?
+  fromAirport     String
+  toAirport       String
+  departureDate   String
+  returnDate      String?
+  passengers      Int           @default(1)
+  cabinClass      String        @default("economy")
+  name            String
+  email           String
+  phone           String?
+  notes           String?
+  status          InquiryStatus @default(PENDING)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  user User? @relation(fields: [userId], references: [id])
+
+  @@index([referenceNumber])
+  @@index([email])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model HotelInquiry {
+  id              String        @id @default(cuid())
+  referenceNumber String        @unique
+  userId          String?
+  destination     String
+  checkIn         String
+  checkOut        String
+  guests          Int           @default(1)
+  rooms           Int           @default(1)
+  name            String
+  email           String
+  phone           String?
+  notes           String?
+  status          InquiryStatus @default(PENDING)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  user User? @relation(fields: [userId], references: [id])
+
+  @@index([referenceNumber])
+  @@index([email])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model PackageInquiry {
+  id              String        @id @default(cuid())
+  referenceNumber String        @unique
+  userId          String?
+  packageId       String?
+  packageTitle    String?
+  travellers      Int           @default(1)
+  travelDate      String?
+  name            String
+  email           String
+  phone           String?
+  notes           String?
+  status          InquiryStatus @default(PENDING)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  user    User?    @relation(fields: [userId], references: [id])
+  package Package? @relation(fields: [packageId], references: [id])
+
+  @@index([referenceNumber])
+  @@index([email])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model VisaInquiry {
+  id              String        @id @default(cuid())
+  referenceNumber String        @unique
+  userId          String?
+  destination     String
+  nationality     String
+  travelPurpose   String?
+  name            String
+  email           String
+  phone           String?
+  notes           String?
+  status          InquiryStatus @default(PENDING)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  user User? @relation(fields: [userId], references: [id])
+
+  @@index([referenceNumber])
+  @@index([email])
+  @@index([status])
+  @@index([createdAt])
+}
+
+// ─── Contact ─────────────────────────────────────────────────────────────────
+
+model ContactMessage {
+  id              String        @id @default(cuid())
+  referenceNumber String        @unique
+  firstName       String
+  lastName        String
+  email           String
+  phone           String?
+  subject         String
+  serviceType     String?
+  message         String
+  status          ContactStatus @default(NEW)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([referenceNumber])
+  @@index([email])
+  @@index([status])
+  @@index([createdAt])
+}
+
+// ─── Testimonials ────────────────────────────────────────────────────────────
+
+model Testimonial {
+  id        String            @id @default(cuid())
+  quote     String
+  author    String
+  role      String?
+  rating    Int               @default(5)
+  status    TestimonialStatus @default(PENDING)
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  @@index([status])
+}
+
+// ─── Booking ─────────────────────────────────────────────────────────────────
+
+enum BookingType {
+  FLIGHT
+  HOTEL
+  PACKAGE
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+enum BookingModel {
+  AGENCY_INQUIRY
+  PROVIDER_REDIRECT
+  DIRECT_API
+}
+
+model Booking {
+  id              String        @id @default(cuid())
+  referenceNumber String        @unique
+  bookingType     BookingType   @default(FLIGHT)
+  bookingModel    BookingModel  @default(AGENCY_INQUIRY)
+  status          BookingStatus @default(PENDING)
+  customerName    String
+  customerEmail   String
+  customerPhone   String?
+  totalPrice      Int           @default(0)
+  currency        String        @default("BDT")
+  bookingDetails  Json?
+  notes           String?
+  userId          String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  user          User?                  @relation(fields: [userId], references: [id])
+  passengers    BookingPassenger[]
+  statusHistory BookingStatusHistory[]
+
+  @@index([referenceNumber])
+  @@index([customerEmail])
+  @@index([status])
+  @@index([createdAt])
+  passengerSecrets PassengerSecret[] @relation("SecretBooking")
+}
+
+model BookingPassenger {
+  id             String   @id @default(cuid())
+  bookingId      String
+  firstName      String
+  lastName       String
+  passengerType  String   @default("adult")
+  gender         String?
+  dateOfBirth    String?
+  passportNumber String?
+  passportExpiry String?
+  nationality    String?
+  createdAt      DateTime @default(now())
+
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  @@index([bookingId])
+  passengerSecret PassengerSecret? @relation("SecretPassenger")
+  boundSecret PassengerSecret? @relation("SecretPassengerBooking")
+  @@unique([id, bookingId], map: "passenger_booking_identity")
+}
+
+model BookingStatusHistory {
+  id        String        @id @default(cuid())
+  bookingId String
+  fromStatus BookingStatus
+  toStatus   BookingStatus
+  reason    String?
+  changedBy String?
+  createdAt DateTime      @default(now())
+
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  @@index([bookingId])
+}
+
+// ─── Notification Outbox ──────────────────────────────────────────────────────
+
+enum NotificationStatus {
+  PENDING
+  PROCESSING
+  DELIVERED
+  FAILED
+}
+
+model NotificationOutbox {
+  id             String             @id @default(cuid())
+  channel        String             @default("EMAIL")
+  recipient      String
+  subject        String
+  payload        Json
+  status         NotificationStatus @default(PENDING)
+  attempts       Int                @default(0)
+  maxAttempts    Int                @default(5)
+  nextAttemptAt  DateTime           @default(now())
+  processedAt    DateTime?
+  error          String?
+  idempotencyKey String?            @unique
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+
+  @@index([status, nextAttemptAt])
+  @@index([createdAt])
+  compatibleLease CompatibleNotificationLease?
+  sendIntents NotificationSendIntent[]
+}
+
+
+// Appended to the full candidate schema, not loaded by the active Prisma config.
+model AuthSecurityState {
+  userId String @id
+  generation Int
+  legacyRetiredAt DateTime? @db.Timestamptz(6)
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  credentials ProtectedCredential[]
+}
+
+model ProtectedCredential {
+  id String @id
+  userId String
+  generation Int
+  purpose String
+  digest String @unique
+  expiresAt DateTime @db.Timestamptz(6)
+  consumedAt DateTime? @db.Timestamptz(6)
+  revokedAt DateTime? @db.Timestamptz(6)
+  jobId String @unique
+  securityState AuthSecurityState @relation(fields: [userId], references: [userId], onDelete: Restrict, onUpdate: NoAction)
+  job ProtectedAuthJob @relation("CredentialJob", fields: [jobId, id], references: [id, credentialId], onDelete: NoAction, onUpdate: NoAction, map: "protected_credential_job_binding")
+  originatingJob ProtectedAuthJob? @relation("JobCredential")
+  subjectReceipts AuthIssuanceRequest[] @relation("ReceiptSubject")
+  jobReceipts AuthIssuanceRequest[] @relation("ReceiptJob")
+  @@unique([id, jobId])
+  @@unique([jobId, id])
+  @@unique([id, userId], map: "protected_credential_subject")
+  @@index([userId, generation], map: "protected_credential_subject_lookup")
+  // SQL-only: partial UNIQUE(userId,purpose) for unconsumed/unrevoked rows.
+}
+
+model ProtectedAuthJob {
+  id String @id
+  credentialId String @unique
+  envelope Json @db.JsonB
+  state String @default("PENDING")
+  version Int @default(0)
+  workerId String?
+  leaseUntil DateTime? @db.Timestamptz(6)
+  createdAt DateTime @default(dbgenerated("clock_timestamp()")) @db.Timestamptz(6)
+  credential ProtectedCredential @relation("JobCredential", fields: [credentialId, id], references: [id, jobId], onDelete: NoAction, onUpdate: NoAction)
+  boundCredential ProtectedCredential? @relation("CredentialJob")
+  @@unique([id, credentialId])
+  @@unique([credentialId, id])
+  @@index([state, createdAt, id], map: "protected_job_dispatch")
+  // SQL-only: cyclic FKs DEFERRABLE INITIALLY DEFERRED, version/terminal-state trigger.
+}
+
+model PassengerSecret {
+  passengerId String @id
+  bookingId String
+  revision Int
+  envelope Json @db.JsonB
+  updatedAt DateTime @default(dbgenerated("clock_timestamp()")) @db.Timestamptz(6)
+  passenger BookingPassenger @relation("SecretPassenger", fields: [passengerId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  booking Booking @relation("SecretBooking", fields: [bookingId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  boundPassenger BookingPassenger @relation("SecretPassengerBooking", fields: [passengerId, bookingId], references: [id, bookingId], onDelete: Restrict, onUpdate: NoAction)
+  @@index([bookingId], map: "passenger_secret_booking")
+  @@unique([passengerId, bookingId])
+}
+
+model AuthIssuanceRequest {
+  keyHash String @id
+  fingerprint String
+  state String
+  createdAt DateTime @default(dbgenerated("clock_timestamp()")) @db.Timestamptz(6)
+  completedAt DateTime? @db.Timestamptz(6)
+  receipt Json? @db.JsonB
+  userId String?
+  credentialId String?
+  jobId String?
+  sessionId String?
+  subject ProtectedCredential? @relation("ReceiptSubject", fields: [credentialId, userId], references: [id, userId], onDelete: Restrict, onUpdate: NoAction)
+  credentialJob ProtectedCredential? @relation("ReceiptJob", fields: [credentialId, jobId], references: [id, jobId], onDelete: Restrict, onUpdate: NoAction)
+  session Session? @relation("ReceiptSession", fields: [sessionId, userId], references: [id, userId], onDelete: Restrict, onUpdate: NoAction)
+  @@index([credentialId, userId], map: "issuance_receipt_subject")
+  @@index([credentialId, jobId], map: "issuance_receipt_job")
+  @@index([sessionId, userId], map: "issuance_receipt_session")
+  // SQL-only: immutable receipt, deferred RESERVED-completion trigger and receipt/FK checks.
+}
+
+model NotificationQuarantine {
+  source String
+  recordId String
+  reason String
+  observedVersion String
+  createdAt DateTime @default(dbgenerated("clock_timestamp()")) @db.Timestamptz(6)
+  @@id([source, recordId])
+  // Polymorphic reference is checked under a source-row lock by the adapter.
+}
+
+model CompatibleNotificationLease {
+  recordId String @id
+  version DateTime @db.Timestamp(3)
+  workerId String
+  leaseUntil DateTime @db.Timestamptz(6)
+  notification NotificationOutbox @relation(fields: [recordId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+}
+
+model NotificationSendIntent {
+  recordId String
+  version DateTime @db.Timestamp(3)
+  state String
+  createdAt DateTime @default(dbgenerated("clock_timestamp()")) @db.Timestamptz(6)
+  notification NotificationOutbox @relation(fields: [recordId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  @@id([recordId, version])
+}
