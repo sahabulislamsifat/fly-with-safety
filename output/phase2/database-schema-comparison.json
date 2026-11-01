@@ -1,0 +1,21 @@
+{
+  "modelCount": 19,
+  "applicationColumns": 206,
+  "missingColumns": [],
+  "extraColumns": [],
+  "cloudApplicationColumnNamesMatch": true,
+  "migrationNamesAbsent": [
+    "20261022000100_contact_status_new",
+    "20261022000200_booking_contact_schema"
+  ],
+  "checksumDifferences": [
+    "20260926202822_init",
+    "20260927082715_full_schema",
+    "20261009000000_auth_sessions_and_password_resets",
+    "20261011000000_inquiry_idempotency"
+  ],
+  "completedDistinctMigrations": 5,
+  "rolledBackAttempts": 1,
+  "foreignKeys": 14,
+  "interpretation": "Physical application column names match is distinct from migration-ledger equivalence; local live catalog and enum/default comparisons remain pending."
+}

@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "parser": "existing PostgreSQL18 WASM libpg-query",
+  "statements": 6,
+  "plpgsqlBlocks": 1,
+  "databaseExecuted": false
+}

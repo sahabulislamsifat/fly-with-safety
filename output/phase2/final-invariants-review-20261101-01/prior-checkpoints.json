@@ -1,0 +1,20 @@
+{
+  "allRequiredCheckpointsPassed": true,
+  "httpCheckpoints": 45,
+  "concurrencyResponseCounts": [
+    8,
+    4,
+    8
+  ],
+  "expiryObserved": true,
+  "rollbackProofPassed": true,
+  "historicalCaseResult": "FAILED",
+  "historicalSuiteExit": 1,
+  "stoppedStage": "persisted-final-invariants",
+  "oldStaffActorExpectation": "STAFF_ID",
+  "verifiedControllerContract": "STAFF_EMAIL",
+  "actualPersistedStaffActors": "PENDING_READONLY_OBSERVATION",
+  "businessRerunRequired": false,
+  "requiresReadOnlyFinalVerification": true,
+  "priorCaseSourceMatchesApprovedPin": true
+}

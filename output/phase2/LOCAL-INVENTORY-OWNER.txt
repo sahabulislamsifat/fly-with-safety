@@ -1,0 +1,10 @@
+& {
+ $ErrorActionPreference='Stop'
+ $sql='E:\Programming\Project\fly-with-safety\output\phase2\local-database-inventory.readonly.sql'
+ $out='E:\Programming\Project\fly-with-safety\output\phase2\local-database-inventory-output.txt'
+ if(Test-Path -LiteralPath $out){throw 'STOP: existing inventory output; preserve it'}
+ if((Get-FileHash -LiteralPath $sql -Algorithm SHA256).Hash -cne '24B6B7CFA60C2324E2812111040D6D769C593AA647260345D3584D6E725CDFD6'){throw 'STOP: SQL integrity mismatch'}
+ foreach($name in @('PGPASSWORD','PGHOSTADDR','PGOPTIONS','PGSERVICE','PGSERVICEFILE')){if([Environment]::GetEnvironmentVariable($name,'Process')){throw 'STOP: PostgreSQL override present'}}
+ & 'C:\Program Files\PostgreSQL\18\bin\psql.exe' -X -W -h 127.0.0.1 -p 5432 -U flywithsafe_phase2_booking_test -d flywithsafe_phase2_booking_integration -v ON_ERROR_STOP=1 -f $sql | Tee-Object -FilePath $out
+ Write-Host ('Local read-only inventory exit: '+$LASTEXITCODE)
+}

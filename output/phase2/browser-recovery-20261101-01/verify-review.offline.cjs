@@ -1,0 +1,12 @@
+const fs = require('node:fs'), path = require('node:path'), crypto = require('node:crypto'), assert = require('node:assert/strict');
+const sha = file => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex').toUpperCase();
+assert.equal(process.argv[2], '--outputFile'); assert.equal(process.argv[3], path.join(__dirname, 'vitest-result.json'));
+const preserved = JSON.parse(fs.readFileSync(path.join(__dirname, 'preservation.json')));
+for (const pin of preserved) assert.equal(sha(pin.path), pin.sha256);
+const pins = JSON.parse(fs.readFileSync(path.join(__dirname, 'pins.json')));
+for (const pin of pins) assert.equal(sha(pin.path), pin.sha256);
+const caller = fs.readFileSync(path.join(__dirname, 'Invoke-BrowserHost.ps1'), 'utf8');
+assert.ok(caller.includes(sha(path.join(__dirname, 'pins.json'))));
+assert.ok(caller.includes('--outputFile (Join-Path'));
+for (const file of ['attempt-started.json','caller-result.json','vitest-result.json','ready.json','host-result.json','host-journal.jsonl','host-stdout.txt','finalization.json','stop-request.json']) assert.equal(fs.existsSync(path.join(__dirname, file)), false);
+console.log(JSON.stringify({ passed: true, nativeReportArgument: true, pins: pins.length, preservedFiles: preserved.length, noAttempt: true, databaseExecuted: false }));

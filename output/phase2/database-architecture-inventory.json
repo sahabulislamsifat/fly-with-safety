@@ -1,0 +1,5151 @@
+{
+  "observedUTC": "2026-11-01T20:55:10.916Z",
+  "sourceSchemaSHA256": "60b262c2d5e60ec1820a01c95d7a9293854f4c2998c17bfec56ccd2fd28120a0",
+  "sourceMigrations": [
+    {
+      "name": "20260926202822_init",
+      "checksum": "efda6a0cd3d01b2503e4cc1557f8aba2807664db545a742e52eaca60a3b2e1cb"
+    },
+    {
+      "name": "20260927082715_full_schema",
+      "checksum": "ae3bcd7668f026858ee7e43cbceb9955c451a1bf648520e6afb7814ce2cc7921"
+    },
+    {
+      "name": "20261009000000_auth_sessions_and_password_resets",
+      "checksum": "e1eb929668d33cbe94f07e7512cb7174084150c50683a2e15f5709509b53e1b4"
+    },
+    {
+      "name": "20261011000000_inquiry_idempotency",
+      "checksum": "0316f0857663d04900e1ceae1e305490a9b97e49192f9aad2f74bb2f494c6706"
+    },
+    {
+      "name": "20261011120000_notification_outbox",
+      "checksum": "1ecc18d0e4381cdf0489a9919f61b58c3f9f1a3bd102303ccf1fa5f81e14eca2"
+    },
+    {
+      "name": "20261022000100_contact_status_new",
+      "checksum": "4c9af2c97dd22a88cb3b7e5fe5422ac1023bcc86fcde999409033ac5180178a7"
+    },
+    {
+      "name": "20261022000200_booking_contact_schema",
+      "checksum": "bc10e7343b3c40769c43deee8b3164245319a9f35d7a3b50d4e3ee721895f32b"
+    }
+  ],
+  "results": [
+    {
+      "label": "server-env-DATABASE_URL",
+      "readOnly": true,
+      "identity": {
+        "database": "postgres",
+        "role": "prisma_migration",
+        "server_address": "10.0.44.77",
+        "server_port": 5432,
+        "version": "17.2",
+        "timezone": "UTC",
+        "read_only": "on"
+      },
+      "tables": [
+        "Account",
+        "Booking",
+        "BookingPassenger",
+        "BookingStatusHistory",
+        "ContactMessage",
+        "Destination",
+        "EmailVerificationToken",
+        "FlightInquiry",
+        "HotelInquiry",
+        "IdempotencyRecord",
+        "NotificationOutbox",
+        "Package",
+        "PackageInquiry",
+        "PasswordResetToken",
+        "Session",
+        "Testimonial",
+        "User",
+        "VisaInfo",
+        "VisaInquiry",
+        "_prisma_migrations"
+      ],
+      "columns": [
+        {
+          "table_name": "Account",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Account",
+          "column_name": "userId",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Account",
+          "column_name": "provider",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Account",
+          "column_name": "providerAccountId",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Account",
+          "column_name": "accessToken",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Account",
+          "column_name": "refreshToken",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Account",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "referenceNumber",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "bookingType",
+          "udt_name": "BookingType",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "bookingModel",
+          "udt_name": "BookingModel",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "status",
+          "udt_name": "BookingStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "customerName",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "customerEmail",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "customerPhone",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "totalPrice",
+          "udt_name": "int4",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "currency",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "bookingDetails",
+          "udt_name": "jsonb",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "notes",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "userId",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "updatedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "BookingPassenger",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingPassenger",
+          "column_name": "bookingId",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingPassenger",
+          "column_name": "firstName",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingPassenger",
+          "column_name": "lastName",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingPassenger",
+          "column_name": "passengerType",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingPassenger",
+          "column_name": "gender",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingPassenger",
+          "column_name": "dateOfBirth",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingPassenger",
+          "column_name": "passportNumber",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingPassenger",
+          "column_name": "passportExpiry",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingPassenger",
+          "column_name": "nationality",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingPassenger",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "BookingStatusHistory",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingStatusHistory",
+          "column_name": "bookingId",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingStatusHistory",
+          "column_name": "fromStatus",
+          "udt_name": "BookingStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingStatusHistory",
+          "column_name": "toStatus",
+          "udt_name": "BookingStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingStatusHistory",
+          "column_name": "reason",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingStatusHistory",
+          "column_name": "changedBy",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingStatusHistory",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "ContactMessage",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "ContactMessage",
+          "column_name": "referenceNumber",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "ContactMessage",
+          "column_name": "firstName",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "ContactMessage",
+          "column_name": "lastName",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "ContactMessage",
+          "column_name": "email",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "ContactMessage",
+          "column_name": "phone",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "ContactMessage",
+          "column_name": "subject",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "ContactMessage",
+          "column_name": "message",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "ContactMessage",
+          "column_name": "status",
+          "udt_name": "ContactStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "ContactMessage",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "ContactMessage",
+          "column_name": "updatedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "ContactMessage",
+          "column_name": "serviceType",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Destination",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Destination",
+          "column_name": "slug",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Destination",
+          "column_name": "name",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Destination",
+          "column_name": "country",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Destination",
+          "column_name": "description",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Destination",
+          "column_name": "startingPrice",
+          "udt_name": "int4",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Destination",
+          "column_name": "image",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Destination",
+          "column_name": "featured",
+          "udt_name": "bool",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Destination",
+          "column_name": "status",
+          "udt_name": "ContentStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Destination",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "Destination",
+          "column_name": "updatedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "EmailVerificationToken",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "EmailVerificationToken",
+          "column_name": "token",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "EmailVerificationToken",
+          "column_name": "userId",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "EmailVerificationToken",
+          "column_name": "expiresAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "EmailVerificationToken",
+          "column_name": "usedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "YES",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "EmailVerificationToken",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "referenceNumber",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "userId",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "fromAirport",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "toAirport",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "departureDate",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "returnDate",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "passengers",
+          "udt_name": "int4",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "cabinClass",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "name",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "email",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "phone",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "notes",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "status",
+          "udt_name": "InquiryStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "updatedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "referenceNumber",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "userId",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "destination",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "checkIn",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "checkOut",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "guests",
+          "udt_name": "int4",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "rooms",
+          "udt_name": "int4",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "name",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "email",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "phone",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "notes",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "status",
+          "udt_name": "InquiryStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "updatedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "IdempotencyRecord",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "IdempotencyRecord",
+          "column_name": "operation",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "IdempotencyRecord",
+          "column_name": "principal",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "IdempotencyRecord",
+          "column_name": "key",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "IdempotencyRecord",
+          "column_name": "payloadHash",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "IdempotencyRecord",
+          "column_name": "referenceNumber",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "IdempotencyRecord",
+          "column_name": "userId",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "IdempotencyRecord",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "channel",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "recipient",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "subject",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "payload",
+          "udt_name": "jsonb",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "status",
+          "udt_name": "NotificationStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "attempts",
+          "udt_name": "int4",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "maxAttempts",
+          "udt_name": "int4",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "nextAttemptAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "processedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "YES",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "error",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "idempotencyKey",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "updatedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "Package",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "slug",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "title",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "destinationId",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "description",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "price",
+          "udt_name": "int4",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "durationDays",
+          "udt_name": "int4",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "featuredImage",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "gallery",
+          "udt_name": "_text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "itinerary",
+          "udt_name": "jsonb",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "inclusions",
+          "udt_name": "_text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "exclusions",
+          "udt_name": "_text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "featured",
+          "udt_name": "bool",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "status",
+          "udt_name": "ContentStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "Package",
+          "column_name": "updatedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "referenceNumber",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "userId",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "packageId",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "packageTitle",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "travellers",
+          "udt_name": "int4",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "travelDate",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "name",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "email",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "phone",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "notes",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "status",
+          "udt_name": "InquiryStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "updatedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "PasswordResetToken",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PasswordResetToken",
+          "column_name": "tokenHash",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PasswordResetToken",
+          "column_name": "userId",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PasswordResetToken",
+          "column_name": "expiresAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "PasswordResetToken",
+          "column_name": "usedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "YES",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "PasswordResetToken",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "Session",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Session",
+          "column_name": "userId",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Session",
+          "column_name": "refreshTokenHash",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Session",
+          "column_name": "expiresAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "Session",
+          "column_name": "revokedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "YES",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "Session",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "Session",
+          "column_name": "lastUsedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "Testimonial",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Testimonial",
+          "column_name": "quote",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Testimonial",
+          "column_name": "author",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Testimonial",
+          "column_name": "role",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Testimonial",
+          "column_name": "rating",
+          "udt_name": "int4",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Testimonial",
+          "column_name": "status",
+          "udt_name": "TestimonialStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Testimonial",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "Testimonial",
+          "column_name": "updatedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "User",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "User",
+          "column_name": "email",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "User",
+          "column_name": "name",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "User",
+          "column_name": "avatar",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "User",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "User",
+          "column_name": "emailVerified",
+          "udt_name": "bool",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "User",
+          "column_name": "password",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "User",
+          "column_name": "role",
+          "udt_name": "UserRole",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "User",
+          "column_name": "updatedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "VisaInfo",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInfo",
+          "column_name": "country",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInfo",
+          "column_name": "slug",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInfo",
+          "column_name": "visaRequired",
+          "udt_name": "bool",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInfo",
+          "column_name": "processingTime",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInfo",
+          "column_name": "fee",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInfo",
+          "column_name": "documents",
+          "udt_name": "_text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInfo",
+          "column_name": "notes",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInfo",
+          "column_name": "status",
+          "udt_name": "ContentStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInfo",
+          "column_name": "updatedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "VisaInfo",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "referenceNumber",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "userId",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "destination",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "nationality",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "travelPurpose",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "name",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "email",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "phone",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "notes",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "status",
+          "udt_name": "InquiryStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "updatedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "_prisma_migrations",
+          "column_name": "id",
+          "udt_name": "varchar",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "_prisma_migrations",
+          "column_name": "checksum",
+          "udt_name": "varchar",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "_prisma_migrations",
+          "column_name": "finished_at",
+          "udt_name": "timestamptz",
+          "is_nullable": "YES",
+          "datetime_precision": 6
+        },
+        {
+          "table_name": "_prisma_migrations",
+          "column_name": "migration_name",
+          "udt_name": "varchar",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "_prisma_migrations",
+          "column_name": "logs",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "_prisma_migrations",
+          "column_name": "rolled_back_at",
+          "udt_name": "timestamptz",
+          "is_nullable": "YES",
+          "datetime_precision": 6
+        },
+        {
+          "table_name": "_prisma_migrations",
+          "column_name": "started_at",
+          "udt_name": "timestamptz",
+          "is_nullable": "NO",
+          "datetime_precision": 6
+        },
+        {
+          "table_name": "_prisma_migrations",
+          "column_name": "applied_steps_count",
+          "udt_name": "int4",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "userid",
+          "udt_name": "oid",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "dbid",
+          "udt_name": "oid",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "toplevel",
+          "udt_name": "bool",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "queryid",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "query",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "plans",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "total_plan_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "min_plan_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "max_plan_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "mean_plan_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "stddev_plan_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "calls",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "total_exec_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "min_exec_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "max_exec_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "mean_exec_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "stddev_exec_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "rows",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "shared_blks_hit",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "shared_blks_read",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "shared_blks_dirtied",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "shared_blks_written",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "local_blks_hit",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "local_blks_read",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "local_blks_dirtied",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "local_blks_written",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "temp_blks_read",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "temp_blks_written",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "shared_blk_read_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "shared_blk_write_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "local_blk_read_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "local_blk_write_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "temp_blk_read_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "temp_blk_write_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "wal_records",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "wal_fpi",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "wal_bytes",
+          "udt_name": "numeric",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "jit_functions",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "jit_generation_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "jit_inlining_count",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "jit_inlining_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "jit_optimization_count",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "jit_optimization_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "jit_emission_count",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "jit_emission_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "jit_deform_count",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "jit_deform_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "stats_since",
+          "udt_name": "timestamptz",
+          "is_nullable": "YES",
+          "datetime_precision": 6
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "minmax_stats_since",
+          "udt_name": "timestamptz",
+          "is_nullable": "YES",
+          "datetime_precision": 6
+        },
+        {
+          "table_name": "pg_stat_statements_info",
+          "column_name": "dealloc",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements_info",
+          "column_name": "stats_reset",
+          "udt_name": "timestamptz",
+          "is_nullable": "YES",
+          "datetime_precision": 6
+        }
+      ],
+      "indexes": [
+        {
+          "tablename": "Account",
+          "indexname": "Account_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"Account_pkey\" ON public.\"Account\" USING btree (id)"
+        },
+        {
+          "tablename": "Account",
+          "indexname": "Account_provider_providerAccountId_key",
+          "indexdef": "CREATE UNIQUE INDEX \"Account_provider_providerAccountId_key\" ON public.\"Account\" USING btree (provider, \"providerAccountId\")"
+        },
+        {
+          "tablename": "Account",
+          "indexname": "Account_userId_idx",
+          "indexdef": "CREATE INDEX \"Account_userId_idx\" ON public.\"Account\" USING btree (\"userId\")"
+        },
+        {
+          "tablename": "Booking",
+          "indexname": "Booking_createdAt_idx",
+          "indexdef": "CREATE INDEX \"Booking_createdAt_idx\" ON public.\"Booking\" USING btree (\"createdAt\")"
+        },
+        {
+          "tablename": "Booking",
+          "indexname": "Booking_customerEmail_idx",
+          "indexdef": "CREATE INDEX \"Booking_customerEmail_idx\" ON public.\"Booking\" USING btree (\"customerEmail\")"
+        },
+        {
+          "tablename": "Booking",
+          "indexname": "Booking_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"Booking_pkey\" ON public.\"Booking\" USING btree (id)"
+        },
+        {
+          "tablename": "Booking",
+          "indexname": "Booking_referenceNumber_idx",
+          "indexdef": "CREATE INDEX \"Booking_referenceNumber_idx\" ON public.\"Booking\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "Booking",
+          "indexname": "Booking_referenceNumber_key",
+          "indexdef": "CREATE UNIQUE INDEX \"Booking_referenceNumber_key\" ON public.\"Booking\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "Booking",
+          "indexname": "Booking_status_idx",
+          "indexdef": "CREATE INDEX \"Booking_status_idx\" ON public.\"Booking\" USING btree (status)"
+        },
+        {
+          "tablename": "BookingPassenger",
+          "indexname": "BookingPassenger_bookingId_idx",
+          "indexdef": "CREATE INDEX \"BookingPassenger_bookingId_idx\" ON public.\"BookingPassenger\" USING btree (\"bookingId\")"
+        },
+        {
+          "tablename": "BookingPassenger",
+          "indexname": "BookingPassenger_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"BookingPassenger_pkey\" ON public.\"BookingPassenger\" USING btree (id)"
+        },
+        {
+          "tablename": "BookingStatusHistory",
+          "indexname": "BookingStatusHistory_bookingId_idx",
+          "indexdef": "CREATE INDEX \"BookingStatusHistory_bookingId_idx\" ON public.\"BookingStatusHistory\" USING btree (\"bookingId\")"
+        },
+        {
+          "tablename": "BookingStatusHistory",
+          "indexname": "BookingStatusHistory_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"BookingStatusHistory_pkey\" ON public.\"BookingStatusHistory\" USING btree (id)"
+        },
+        {
+          "tablename": "ContactMessage",
+          "indexname": "ContactMessage_createdAt_idx",
+          "indexdef": "CREATE INDEX \"ContactMessage_createdAt_idx\" ON public.\"ContactMessage\" USING btree (\"createdAt\")"
+        },
+        {
+          "tablename": "ContactMessage",
+          "indexname": "ContactMessage_email_idx",
+          "indexdef": "CREATE INDEX \"ContactMessage_email_idx\" ON public.\"ContactMessage\" USING btree (email)"
+        },
+        {
+          "tablename": "ContactMessage",
+          "indexname": "ContactMessage_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"ContactMessage_pkey\" ON public.\"ContactMessage\" USING btree (id)"
+        },
+        {
+          "tablename": "ContactMessage",
+          "indexname": "ContactMessage_referenceNumber_idx",
+          "indexdef": "CREATE INDEX \"ContactMessage_referenceNumber_idx\" ON public.\"ContactMessage\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "ContactMessage",
+          "indexname": "ContactMessage_referenceNumber_key",
+          "indexdef": "CREATE UNIQUE INDEX \"ContactMessage_referenceNumber_key\" ON public.\"ContactMessage\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "ContactMessage",
+          "indexname": "ContactMessage_status_idx",
+          "indexdef": "CREATE INDEX \"ContactMessage_status_idx\" ON public.\"ContactMessage\" USING btree (status)"
+        },
+        {
+          "tablename": "Destination",
+          "indexname": "Destination_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"Destination_pkey\" ON public.\"Destination\" USING btree (id)"
+        },
+        {
+          "tablename": "Destination",
+          "indexname": "Destination_slug_idx",
+          "indexdef": "CREATE INDEX \"Destination_slug_idx\" ON public.\"Destination\" USING btree (slug)"
+        },
+        {
+          "tablename": "Destination",
+          "indexname": "Destination_slug_key",
+          "indexdef": "CREATE UNIQUE INDEX \"Destination_slug_key\" ON public.\"Destination\" USING btree (slug)"
+        },
+        {
+          "tablename": "Destination",
+          "indexname": "Destination_status_featured_idx",
+          "indexdef": "CREATE INDEX \"Destination_status_featured_idx\" ON public.\"Destination\" USING btree (status, featured)"
+        },
+        {
+          "tablename": "EmailVerificationToken",
+          "indexname": "EmailVerificationToken_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"EmailVerificationToken_pkey\" ON public.\"EmailVerificationToken\" USING btree (id)"
+        },
+        {
+          "tablename": "EmailVerificationToken",
+          "indexname": "EmailVerificationToken_token_idx",
+          "indexdef": "CREATE INDEX \"EmailVerificationToken_token_idx\" ON public.\"EmailVerificationToken\" USING btree (token)"
+        },
+        {
+          "tablename": "EmailVerificationToken",
+          "indexname": "EmailVerificationToken_token_key",
+          "indexdef": "CREATE UNIQUE INDEX \"EmailVerificationToken_token_key\" ON public.\"EmailVerificationToken\" USING btree (token)"
+        },
+        {
+          "tablename": "EmailVerificationToken",
+          "indexname": "EmailVerificationToken_userId_idx",
+          "indexdef": "CREATE INDEX \"EmailVerificationToken_userId_idx\" ON public.\"EmailVerificationToken\" USING btree (\"userId\")"
+        },
+        {
+          "tablename": "FlightInquiry",
+          "indexname": "FlightInquiry_createdAt_idx",
+          "indexdef": "CREATE INDEX \"FlightInquiry_createdAt_idx\" ON public.\"FlightInquiry\" USING btree (\"createdAt\")"
+        },
+        {
+          "tablename": "FlightInquiry",
+          "indexname": "FlightInquiry_email_idx",
+          "indexdef": "CREATE INDEX \"FlightInquiry_email_idx\" ON public.\"FlightInquiry\" USING btree (email)"
+        },
+        {
+          "tablename": "FlightInquiry",
+          "indexname": "FlightInquiry_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"FlightInquiry_pkey\" ON public.\"FlightInquiry\" USING btree (id)"
+        },
+        {
+          "tablename": "FlightInquiry",
+          "indexname": "FlightInquiry_referenceNumber_idx",
+          "indexdef": "CREATE INDEX \"FlightInquiry_referenceNumber_idx\" ON public.\"FlightInquiry\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "FlightInquiry",
+          "indexname": "FlightInquiry_referenceNumber_key",
+          "indexdef": "CREATE UNIQUE INDEX \"FlightInquiry_referenceNumber_key\" ON public.\"FlightInquiry\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "FlightInquiry",
+          "indexname": "FlightInquiry_status_idx",
+          "indexdef": "CREATE INDEX \"FlightInquiry_status_idx\" ON public.\"FlightInquiry\" USING btree (status)"
+        },
+        {
+          "tablename": "HotelInquiry",
+          "indexname": "HotelInquiry_createdAt_idx",
+          "indexdef": "CREATE INDEX \"HotelInquiry_createdAt_idx\" ON public.\"HotelInquiry\" USING btree (\"createdAt\")"
+        },
+        {
+          "tablename": "HotelInquiry",
+          "indexname": "HotelInquiry_email_idx",
+          "indexdef": "CREATE INDEX \"HotelInquiry_email_idx\" ON public.\"HotelInquiry\" USING btree (email)"
+        },
+        {
+          "tablename": "HotelInquiry",
+          "indexname": "HotelInquiry_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"HotelInquiry_pkey\" ON public.\"HotelInquiry\" USING btree (id)"
+        },
+        {
+          "tablename": "HotelInquiry",
+          "indexname": "HotelInquiry_referenceNumber_idx",
+          "indexdef": "CREATE INDEX \"HotelInquiry_referenceNumber_idx\" ON public.\"HotelInquiry\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "HotelInquiry",
+          "indexname": "HotelInquiry_referenceNumber_key",
+          "indexdef": "CREATE UNIQUE INDEX \"HotelInquiry_referenceNumber_key\" ON public.\"HotelInquiry\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "HotelInquiry",
+          "indexname": "HotelInquiry_status_idx",
+          "indexdef": "CREATE INDEX \"HotelInquiry_status_idx\" ON public.\"HotelInquiry\" USING btree (status)"
+        },
+        {
+          "tablename": "IdempotencyRecord",
+          "indexname": "IdempotencyRecord_operation_principal_key_key",
+          "indexdef": "CREATE UNIQUE INDEX \"IdempotencyRecord_operation_principal_key_key\" ON public.\"IdempotencyRecord\" USING btree (operation, principal, key)"
+        },
+        {
+          "tablename": "IdempotencyRecord",
+          "indexname": "IdempotencyRecord_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"IdempotencyRecord_pkey\" ON public.\"IdempotencyRecord\" USING btree (id)"
+        },
+        {
+          "tablename": "IdempotencyRecord",
+          "indexname": "IdempotencyRecord_referenceNumber_idx",
+          "indexdef": "CREATE INDEX \"IdempotencyRecord_referenceNumber_idx\" ON public.\"IdempotencyRecord\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "IdempotencyRecord",
+          "indexname": "IdempotencyRecord_userId_idx",
+          "indexdef": "CREATE INDEX \"IdempotencyRecord_userId_idx\" ON public.\"IdempotencyRecord\" USING btree (\"userId\")"
+        },
+        {
+          "tablename": "NotificationOutbox",
+          "indexname": "NotificationOutbox_createdAt_idx",
+          "indexdef": "CREATE INDEX \"NotificationOutbox_createdAt_idx\" ON public.\"NotificationOutbox\" USING btree (\"createdAt\")"
+        },
+        {
+          "tablename": "NotificationOutbox",
+          "indexname": "NotificationOutbox_idempotencyKey_key",
+          "indexdef": "CREATE UNIQUE INDEX \"NotificationOutbox_idempotencyKey_key\" ON public.\"NotificationOutbox\" USING btree (\"idempotencyKey\")"
+        },
+        {
+          "tablename": "NotificationOutbox",
+          "indexname": "NotificationOutbox_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"NotificationOutbox_pkey\" ON public.\"NotificationOutbox\" USING btree (id)"
+        },
+        {
+          "tablename": "NotificationOutbox",
+          "indexname": "NotificationOutbox_status_nextAttemptAt_idx",
+          "indexdef": "CREATE INDEX \"NotificationOutbox_status_nextAttemptAt_idx\" ON public.\"NotificationOutbox\" USING btree (status, \"nextAttemptAt\")"
+        },
+        {
+          "tablename": "Package",
+          "indexname": "Package_destinationId_idx",
+          "indexdef": "CREATE INDEX \"Package_destinationId_idx\" ON public.\"Package\" USING btree (\"destinationId\")"
+        },
+        {
+          "tablename": "Package",
+          "indexname": "Package_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"Package_pkey\" ON public.\"Package\" USING btree (id)"
+        },
+        {
+          "tablename": "Package",
+          "indexname": "Package_slug_idx",
+          "indexdef": "CREATE INDEX \"Package_slug_idx\" ON public.\"Package\" USING btree (slug)"
+        },
+        {
+          "tablename": "Package",
+          "indexname": "Package_slug_key",
+          "indexdef": "CREATE UNIQUE INDEX \"Package_slug_key\" ON public.\"Package\" USING btree (slug)"
+        },
+        {
+          "tablename": "Package",
+          "indexname": "Package_status_featured_idx",
+          "indexdef": "CREATE INDEX \"Package_status_featured_idx\" ON public.\"Package\" USING btree (status, featured)"
+        },
+        {
+          "tablename": "PackageInquiry",
+          "indexname": "PackageInquiry_createdAt_idx",
+          "indexdef": "CREATE INDEX \"PackageInquiry_createdAt_idx\" ON public.\"PackageInquiry\" USING btree (\"createdAt\")"
+        },
+        {
+          "tablename": "PackageInquiry",
+          "indexname": "PackageInquiry_email_idx",
+          "indexdef": "CREATE INDEX \"PackageInquiry_email_idx\" ON public.\"PackageInquiry\" USING btree (email)"
+        },
+        {
+          "tablename": "PackageInquiry",
+          "indexname": "PackageInquiry_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"PackageInquiry_pkey\" ON public.\"PackageInquiry\" USING btree (id)"
+        },
+        {
+          "tablename": "PackageInquiry",
+          "indexname": "PackageInquiry_referenceNumber_idx",
+          "indexdef": "CREATE INDEX \"PackageInquiry_referenceNumber_idx\" ON public.\"PackageInquiry\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "PackageInquiry",
+          "indexname": "PackageInquiry_referenceNumber_key",
+          "indexdef": "CREATE UNIQUE INDEX \"PackageInquiry_referenceNumber_key\" ON public.\"PackageInquiry\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "PackageInquiry",
+          "indexname": "PackageInquiry_status_idx",
+          "indexdef": "CREATE INDEX \"PackageInquiry_status_idx\" ON public.\"PackageInquiry\" USING btree (status)"
+        },
+        {
+          "tablename": "PasswordResetToken",
+          "indexname": "PasswordResetToken_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"PasswordResetToken_pkey\" ON public.\"PasswordResetToken\" USING btree (id)"
+        },
+        {
+          "tablename": "PasswordResetToken",
+          "indexname": "PasswordResetToken_tokenHash_key",
+          "indexdef": "CREATE UNIQUE INDEX \"PasswordResetToken_tokenHash_key\" ON public.\"PasswordResetToken\" USING btree (\"tokenHash\")"
+        },
+        {
+          "tablename": "PasswordResetToken",
+          "indexname": "PasswordResetToken_userId_idx",
+          "indexdef": "CREATE INDEX \"PasswordResetToken_userId_idx\" ON public.\"PasswordResetToken\" USING btree (\"userId\")"
+        },
+        {
+          "tablename": "Session",
+          "indexname": "Session_expiresAt_idx",
+          "indexdef": "CREATE INDEX \"Session_expiresAt_idx\" ON public.\"Session\" USING btree (\"expiresAt\")"
+        },
+        {
+          "tablename": "Session",
+          "indexname": "Session_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"Session_pkey\" ON public.\"Session\" USING btree (id)"
+        },
+        {
+          "tablename": "Session",
+          "indexname": "Session_refreshTokenHash_key",
+          "indexdef": "CREATE UNIQUE INDEX \"Session_refreshTokenHash_key\" ON public.\"Session\" USING btree (\"refreshTokenHash\")"
+        },
+        {
+          "tablename": "Session",
+          "indexname": "Session_userId_idx",
+          "indexdef": "CREATE INDEX \"Session_userId_idx\" ON public.\"Session\" USING btree (\"userId\")"
+        },
+        {
+          "tablename": "Testimonial",
+          "indexname": "Testimonial_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"Testimonial_pkey\" ON public.\"Testimonial\" USING btree (id)"
+        },
+        {
+          "tablename": "Testimonial",
+          "indexname": "Testimonial_status_idx",
+          "indexdef": "CREATE INDEX \"Testimonial_status_idx\" ON public.\"Testimonial\" USING btree (status)"
+        },
+        {
+          "tablename": "User",
+          "indexname": "User_email_idx",
+          "indexdef": "CREATE INDEX \"User_email_idx\" ON public.\"User\" USING btree (email)"
+        },
+        {
+          "tablename": "User",
+          "indexname": "User_email_key",
+          "indexdef": "CREATE UNIQUE INDEX \"User_email_key\" ON public.\"User\" USING btree (email)"
+        },
+        {
+          "tablename": "User",
+          "indexname": "User_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"User_pkey\" ON public.\"User\" USING btree (id)"
+        },
+        {
+          "tablename": "VisaInfo",
+          "indexname": "VisaInfo_country_idx",
+          "indexdef": "CREATE INDEX \"VisaInfo_country_idx\" ON public.\"VisaInfo\" USING btree (country)"
+        },
+        {
+          "tablename": "VisaInfo",
+          "indexname": "VisaInfo_country_key",
+          "indexdef": "CREATE UNIQUE INDEX \"VisaInfo_country_key\" ON public.\"VisaInfo\" USING btree (country)"
+        },
+        {
+          "tablename": "VisaInfo",
+          "indexname": "VisaInfo_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"VisaInfo_pkey\" ON public.\"VisaInfo\" USING btree (id)"
+        },
+        {
+          "tablename": "VisaInfo",
+          "indexname": "VisaInfo_slug_idx",
+          "indexdef": "CREATE INDEX \"VisaInfo_slug_idx\" ON public.\"VisaInfo\" USING btree (slug)"
+        },
+        {
+          "tablename": "VisaInfo",
+          "indexname": "VisaInfo_slug_key",
+          "indexdef": "CREATE UNIQUE INDEX \"VisaInfo_slug_key\" ON public.\"VisaInfo\" USING btree (slug)"
+        },
+        {
+          "tablename": "VisaInquiry",
+          "indexname": "VisaInquiry_createdAt_idx",
+          "indexdef": "CREATE INDEX \"VisaInquiry_createdAt_idx\" ON public.\"VisaInquiry\" USING btree (\"createdAt\")"
+        },
+        {
+          "tablename": "VisaInquiry",
+          "indexname": "VisaInquiry_email_idx",
+          "indexdef": "CREATE INDEX \"VisaInquiry_email_idx\" ON public.\"VisaInquiry\" USING btree (email)"
+        },
+        {
+          "tablename": "VisaInquiry",
+          "indexname": "VisaInquiry_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"VisaInquiry_pkey\" ON public.\"VisaInquiry\" USING btree (id)"
+        },
+        {
+          "tablename": "VisaInquiry",
+          "indexname": "VisaInquiry_referenceNumber_idx",
+          "indexdef": "CREATE INDEX \"VisaInquiry_referenceNumber_idx\" ON public.\"VisaInquiry\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "VisaInquiry",
+          "indexname": "VisaInquiry_referenceNumber_key",
+          "indexdef": "CREATE UNIQUE INDEX \"VisaInquiry_referenceNumber_key\" ON public.\"VisaInquiry\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "VisaInquiry",
+          "indexname": "VisaInquiry_status_idx",
+          "indexdef": "CREATE INDEX \"VisaInquiry_status_idx\" ON public.\"VisaInquiry\" USING btree (status)"
+        },
+        {
+          "tablename": "_prisma_migrations",
+          "indexname": "_prisma_migrations_pkey",
+          "indexdef": "CREATE UNIQUE INDEX _prisma_migrations_pkey ON public._prisma_migrations USING btree (id)"
+        }
+      ],
+      "constraints": [
+        {
+          "table_name": "Account",
+          "conname": "Account_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "Account",
+          "conname": "Account_userId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"userId\") REFERENCES \"User\"(id) ON UPDATE CASCADE ON DELETE CASCADE"
+        },
+        {
+          "table_name": "Booking",
+          "conname": "Booking_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "Booking",
+          "conname": "Booking_userId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"userId\") REFERENCES \"User\"(id) ON UPDATE CASCADE ON DELETE SET NULL"
+        },
+        {
+          "table_name": "BookingPassenger",
+          "conname": "BookingPassenger_bookingId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"bookingId\") REFERENCES \"Booking\"(id) ON UPDATE CASCADE ON DELETE CASCADE"
+        },
+        {
+          "table_name": "BookingPassenger",
+          "conname": "BookingPassenger_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "BookingStatusHistory",
+          "conname": "BookingStatusHistory_bookingId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"bookingId\") REFERENCES \"Booking\"(id) ON UPDATE CASCADE ON DELETE CASCADE"
+        },
+        {
+          "table_name": "BookingStatusHistory",
+          "conname": "BookingStatusHistory_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "ContactMessage",
+          "conname": "ContactMessage_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "Destination",
+          "conname": "Destination_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "EmailVerificationToken",
+          "conname": "EmailVerificationToken_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "EmailVerificationToken",
+          "conname": "EmailVerificationToken_userId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"userId\") REFERENCES \"User\"(id) ON UPDATE CASCADE ON DELETE CASCADE"
+        },
+        {
+          "table_name": "FlightInquiry",
+          "conname": "FlightInquiry_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "FlightInquiry",
+          "conname": "FlightInquiry_userId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"userId\") REFERENCES \"User\"(id) ON UPDATE CASCADE ON DELETE SET NULL"
+        },
+        {
+          "table_name": "HotelInquiry",
+          "conname": "HotelInquiry_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "HotelInquiry",
+          "conname": "HotelInquiry_userId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"userId\") REFERENCES \"User\"(id) ON UPDATE CASCADE ON DELETE SET NULL"
+        },
+        {
+          "table_name": "IdempotencyRecord",
+          "conname": "IdempotencyRecord_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "IdempotencyRecord",
+          "conname": "IdempotencyRecord_userId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"userId\") REFERENCES \"User\"(id) ON UPDATE CASCADE ON DELETE SET NULL"
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "conname": "NotificationOutbox_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "Package",
+          "conname": "Package_destinationId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"destinationId\") REFERENCES \"Destination\"(id) ON UPDATE CASCADE ON DELETE RESTRICT"
+        },
+        {
+          "table_name": "Package",
+          "conname": "Package_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "PackageInquiry",
+          "conname": "PackageInquiry_packageId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"packageId\") REFERENCES \"Package\"(id) ON UPDATE CASCADE ON DELETE SET NULL"
+        },
+        {
+          "table_name": "PackageInquiry",
+          "conname": "PackageInquiry_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "PackageInquiry",
+          "conname": "PackageInquiry_userId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"userId\") REFERENCES \"User\"(id) ON UPDATE CASCADE ON DELETE SET NULL"
+        },
+        {
+          "table_name": "PasswordResetToken",
+          "conname": "PasswordResetToken_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "PasswordResetToken",
+          "conname": "PasswordResetToken_userId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"userId\") REFERENCES \"User\"(id) ON UPDATE CASCADE ON DELETE CASCADE"
+        },
+        {
+          "table_name": "Session",
+          "conname": "Session_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "Session",
+          "conname": "Session_userId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"userId\") REFERENCES \"User\"(id) ON UPDATE CASCADE ON DELETE CASCADE"
+        },
+        {
+          "table_name": "Testimonial",
+          "conname": "Testimonial_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "User",
+          "conname": "User_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "VisaInfo",
+          "conname": "VisaInfo_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "VisaInquiry",
+          "conname": "VisaInquiry_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "VisaInquiry",
+          "conname": "VisaInquiry_userId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"userId\") REFERENCES \"User\"(id) ON UPDATE CASCADE ON DELETE SET NULL"
+        },
+        {
+          "table_name": "_prisma_migrations",
+          "conname": "_prisma_migrations_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        }
+      ],
+      "migrations": [
+        {
+          "migration_name": "20260926202822_init",
+          "checksum": "ad6f19d4e4562c0e2b9f616ba2f2470a28d3bfc2bdca20b611be938598de7e63",
+          "completed": true,
+          "rolled_back": false
+        },
+        {
+          "migration_name": "20260927082715_full_schema",
+          "checksum": "db3f1dd416c8f58f98ee0f3fa93dae8c5d699e93c3387f413ebd9d8ee52a04bb",
+          "completed": true,
+          "rolled_back": false
+        },
+        {
+          "migration_name": "20261009000000_auth_sessions_and_password_resets",
+          "checksum": "4a2dbeb8ed993d62c542de82d3bbb3fe6f9dda12e44df86e2d13e6c36c231f11",
+          "completed": false,
+          "rolled_back": true
+        },
+        {
+          "migration_name": "20261009000000_auth_sessions_and_password_resets",
+          "checksum": "4a2dbeb8ed993d62c542de82d3bbb3fe6f9dda12e44df86e2d13e6c36c231f11",
+          "completed": true,
+          "rolled_back": false
+        },
+        {
+          "migration_name": "20261011000000_inquiry_idempotency",
+          "checksum": "409bb80db5028a3d12d291981120a8c5985c0991ff2741c41774c7b8b512014e",
+          "completed": true,
+          "rolled_back": false
+        },
+        {
+          "migration_name": "20261011120000_notification_outbox",
+          "checksum": "1ecc18d0e4381cdf0489a9919f61b58c3f9f1a3bd102303ccf1fa5f81e14eca2",
+          "completed": true,
+          "rolled_back": false
+        }
+      ],
+      "matchesSourceMigrations": false,
+      "counts": {
+        "User": 9,
+        "Booking": 9,
+        "BookingPassenger": 10,
+        "Session": 127
+      },
+      "schemaFingerprint": "22520ad49613a4028744769249914f1a062ec752bfb05b68c890317d69c8655a",
+      "rolledBack": true
+    },
+    {
+      "label": "server-env-DIRECT_URL",
+      "readOnly": true,
+      "identity": {
+        "database": "postgres",
+        "role": "prisma_migration",
+        "server_address": "10.0.44.77",
+        "server_port": 5432,
+        "version": "17.2",
+        "timezone": "UTC",
+        "read_only": "on"
+      },
+      "tables": [
+        "Account",
+        "Booking",
+        "BookingPassenger",
+        "BookingStatusHistory",
+        "ContactMessage",
+        "Destination",
+        "EmailVerificationToken",
+        "FlightInquiry",
+        "HotelInquiry",
+        "IdempotencyRecord",
+        "NotificationOutbox",
+        "Package",
+        "PackageInquiry",
+        "PasswordResetToken",
+        "Session",
+        "Testimonial",
+        "User",
+        "VisaInfo",
+        "VisaInquiry",
+        "_prisma_migrations"
+      ],
+      "columns": [
+        {
+          "table_name": "Account",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Account",
+          "column_name": "userId",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Account",
+          "column_name": "provider",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Account",
+          "column_name": "providerAccountId",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Account",
+          "column_name": "accessToken",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Account",
+          "column_name": "refreshToken",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Account",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "referenceNumber",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "bookingType",
+          "udt_name": "BookingType",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "bookingModel",
+          "udt_name": "BookingModel",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "status",
+          "udt_name": "BookingStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "customerName",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "customerEmail",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "customerPhone",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "totalPrice",
+          "udt_name": "int4",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "currency",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "bookingDetails",
+          "udt_name": "jsonb",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "notes",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "userId",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "Booking",
+          "column_name": "updatedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "BookingPassenger",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingPassenger",
+          "column_name": "bookingId",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingPassenger",
+          "column_name": "firstName",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingPassenger",
+          "column_name": "lastName",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingPassenger",
+          "column_name": "passengerType",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingPassenger",
+          "column_name": "gender",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingPassenger",
+          "column_name": "dateOfBirth",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingPassenger",
+          "column_name": "passportNumber",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingPassenger",
+          "column_name": "passportExpiry",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingPassenger",
+          "column_name": "nationality",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingPassenger",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "BookingStatusHistory",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingStatusHistory",
+          "column_name": "bookingId",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingStatusHistory",
+          "column_name": "fromStatus",
+          "udt_name": "BookingStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingStatusHistory",
+          "column_name": "toStatus",
+          "udt_name": "BookingStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingStatusHistory",
+          "column_name": "reason",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingStatusHistory",
+          "column_name": "changedBy",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "BookingStatusHistory",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "ContactMessage",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "ContactMessage",
+          "column_name": "referenceNumber",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "ContactMessage",
+          "column_name": "firstName",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "ContactMessage",
+          "column_name": "lastName",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "ContactMessage",
+          "column_name": "email",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "ContactMessage",
+          "column_name": "phone",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "ContactMessage",
+          "column_name": "subject",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "ContactMessage",
+          "column_name": "message",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "ContactMessage",
+          "column_name": "status",
+          "udt_name": "ContactStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "ContactMessage",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "ContactMessage",
+          "column_name": "updatedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "ContactMessage",
+          "column_name": "serviceType",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Destination",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Destination",
+          "column_name": "slug",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Destination",
+          "column_name": "name",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Destination",
+          "column_name": "country",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Destination",
+          "column_name": "description",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Destination",
+          "column_name": "startingPrice",
+          "udt_name": "int4",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Destination",
+          "column_name": "image",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Destination",
+          "column_name": "featured",
+          "udt_name": "bool",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Destination",
+          "column_name": "status",
+          "udt_name": "ContentStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Destination",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "Destination",
+          "column_name": "updatedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "EmailVerificationToken",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "EmailVerificationToken",
+          "column_name": "token",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "EmailVerificationToken",
+          "column_name": "userId",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "EmailVerificationToken",
+          "column_name": "expiresAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "EmailVerificationToken",
+          "column_name": "usedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "YES",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "EmailVerificationToken",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "referenceNumber",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "userId",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "fromAirport",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "toAirport",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "departureDate",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "returnDate",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "passengers",
+          "udt_name": "int4",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "cabinClass",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "name",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "email",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "phone",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "notes",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "status",
+          "udt_name": "InquiryStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "FlightInquiry",
+          "column_name": "updatedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "referenceNumber",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "userId",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "destination",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "checkIn",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "checkOut",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "guests",
+          "udt_name": "int4",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "rooms",
+          "udt_name": "int4",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "name",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "email",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "phone",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "notes",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "status",
+          "udt_name": "InquiryStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "HotelInquiry",
+          "column_name": "updatedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "IdempotencyRecord",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "IdempotencyRecord",
+          "column_name": "operation",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "IdempotencyRecord",
+          "column_name": "principal",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "IdempotencyRecord",
+          "column_name": "key",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "IdempotencyRecord",
+          "column_name": "payloadHash",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "IdempotencyRecord",
+          "column_name": "referenceNumber",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "IdempotencyRecord",
+          "column_name": "userId",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "IdempotencyRecord",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "channel",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "recipient",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "subject",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "payload",
+          "udt_name": "jsonb",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "status",
+          "udt_name": "NotificationStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "attempts",
+          "udt_name": "int4",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "maxAttempts",
+          "udt_name": "int4",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "nextAttemptAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "processedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "YES",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "error",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "idempotencyKey",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "column_name": "updatedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "Package",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "slug",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "title",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "destinationId",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "description",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "price",
+          "udt_name": "int4",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "durationDays",
+          "udt_name": "int4",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "featuredImage",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "gallery",
+          "udt_name": "_text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "itinerary",
+          "udt_name": "jsonb",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "inclusions",
+          "udt_name": "_text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "exclusions",
+          "udt_name": "_text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "featured",
+          "udt_name": "bool",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "status",
+          "udt_name": "ContentStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Package",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "Package",
+          "column_name": "updatedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "referenceNumber",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "userId",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "packageId",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "packageTitle",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "travellers",
+          "udt_name": "int4",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "travelDate",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "name",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "email",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "phone",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "notes",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "status",
+          "udt_name": "InquiryStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "PackageInquiry",
+          "column_name": "updatedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "PasswordResetToken",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PasswordResetToken",
+          "column_name": "tokenHash",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PasswordResetToken",
+          "column_name": "userId",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "PasswordResetToken",
+          "column_name": "expiresAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "PasswordResetToken",
+          "column_name": "usedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "YES",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "PasswordResetToken",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "Session",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Session",
+          "column_name": "userId",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Session",
+          "column_name": "refreshTokenHash",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Session",
+          "column_name": "expiresAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "Session",
+          "column_name": "revokedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "YES",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "Session",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "Session",
+          "column_name": "lastUsedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "Testimonial",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Testimonial",
+          "column_name": "quote",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Testimonial",
+          "column_name": "author",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Testimonial",
+          "column_name": "role",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Testimonial",
+          "column_name": "rating",
+          "udt_name": "int4",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Testimonial",
+          "column_name": "status",
+          "udt_name": "TestimonialStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "Testimonial",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "Testimonial",
+          "column_name": "updatedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "User",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "User",
+          "column_name": "email",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "User",
+          "column_name": "name",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "User",
+          "column_name": "avatar",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "User",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "User",
+          "column_name": "emailVerified",
+          "udt_name": "bool",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "User",
+          "column_name": "password",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "User",
+          "column_name": "role",
+          "udt_name": "UserRole",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "User",
+          "column_name": "updatedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "VisaInfo",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInfo",
+          "column_name": "country",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInfo",
+          "column_name": "slug",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInfo",
+          "column_name": "visaRequired",
+          "udt_name": "bool",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInfo",
+          "column_name": "processingTime",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInfo",
+          "column_name": "fee",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInfo",
+          "column_name": "documents",
+          "udt_name": "_text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInfo",
+          "column_name": "notes",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInfo",
+          "column_name": "status",
+          "udt_name": "ContentStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInfo",
+          "column_name": "updatedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "VisaInfo",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "id",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "referenceNumber",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "userId",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "destination",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "nationality",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "travelPurpose",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "name",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "email",
+          "udt_name": "text",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "phone",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "notes",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "status",
+          "udt_name": "InquiryStatus",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "createdAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "VisaInquiry",
+          "column_name": "updatedAt",
+          "udt_name": "timestamp",
+          "is_nullable": "NO",
+          "datetime_precision": 3
+        },
+        {
+          "table_name": "_prisma_migrations",
+          "column_name": "id",
+          "udt_name": "varchar",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "_prisma_migrations",
+          "column_name": "checksum",
+          "udt_name": "varchar",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "_prisma_migrations",
+          "column_name": "finished_at",
+          "udt_name": "timestamptz",
+          "is_nullable": "YES",
+          "datetime_precision": 6
+        },
+        {
+          "table_name": "_prisma_migrations",
+          "column_name": "migration_name",
+          "udt_name": "varchar",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "_prisma_migrations",
+          "column_name": "logs",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "_prisma_migrations",
+          "column_name": "rolled_back_at",
+          "udt_name": "timestamptz",
+          "is_nullable": "YES",
+          "datetime_precision": 6
+        },
+        {
+          "table_name": "_prisma_migrations",
+          "column_name": "started_at",
+          "udt_name": "timestamptz",
+          "is_nullable": "NO",
+          "datetime_precision": 6
+        },
+        {
+          "table_name": "_prisma_migrations",
+          "column_name": "applied_steps_count",
+          "udt_name": "int4",
+          "is_nullable": "NO",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "userid",
+          "udt_name": "oid",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "dbid",
+          "udt_name": "oid",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "toplevel",
+          "udt_name": "bool",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "queryid",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "query",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "plans",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "total_plan_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "min_plan_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "max_plan_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "mean_plan_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "stddev_plan_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "calls",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "total_exec_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "min_exec_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "max_exec_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "mean_exec_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "stddev_exec_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "rows",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "shared_blks_hit",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "shared_blks_read",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "shared_blks_dirtied",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "shared_blks_written",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "local_blks_hit",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "local_blks_read",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "local_blks_dirtied",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "local_blks_written",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "temp_blks_read",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "temp_blks_written",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "shared_blk_read_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "shared_blk_write_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "local_blk_read_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "local_blk_write_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "temp_blk_read_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "temp_blk_write_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "wal_records",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "wal_fpi",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "wal_bytes",
+          "udt_name": "numeric",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "jit_functions",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "jit_generation_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "jit_inlining_count",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "jit_inlining_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "jit_optimization_count",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "jit_optimization_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "jit_emission_count",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "jit_emission_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "jit_deform_count",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "jit_deform_time",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "stats_since",
+          "udt_name": "timestamptz",
+          "is_nullable": "YES",
+          "datetime_precision": 6
+        },
+        {
+          "table_name": "pg_stat_statements",
+          "column_name": "minmax_stats_since",
+          "udt_name": "timestamptz",
+          "is_nullable": "YES",
+          "datetime_precision": 6
+        },
+        {
+          "table_name": "pg_stat_statements_info",
+          "column_name": "dealloc",
+          "udt_name": "int8",
+          "is_nullable": "YES",
+          "datetime_precision": null
+        },
+        {
+          "table_name": "pg_stat_statements_info",
+          "column_name": "stats_reset",
+          "udt_name": "timestamptz",
+          "is_nullable": "YES",
+          "datetime_precision": 6
+        }
+      ],
+      "indexes": [
+        {
+          "tablename": "Account",
+          "indexname": "Account_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"Account_pkey\" ON public.\"Account\" USING btree (id)"
+        },
+        {
+          "tablename": "Account",
+          "indexname": "Account_provider_providerAccountId_key",
+          "indexdef": "CREATE UNIQUE INDEX \"Account_provider_providerAccountId_key\" ON public.\"Account\" USING btree (provider, \"providerAccountId\")"
+        },
+        {
+          "tablename": "Account",
+          "indexname": "Account_userId_idx",
+          "indexdef": "CREATE INDEX \"Account_userId_idx\" ON public.\"Account\" USING btree (\"userId\")"
+        },
+        {
+          "tablename": "Booking",
+          "indexname": "Booking_createdAt_idx",
+          "indexdef": "CREATE INDEX \"Booking_createdAt_idx\" ON public.\"Booking\" USING btree (\"createdAt\")"
+        },
+        {
+          "tablename": "Booking",
+          "indexname": "Booking_customerEmail_idx",
+          "indexdef": "CREATE INDEX \"Booking_customerEmail_idx\" ON public.\"Booking\" USING btree (\"customerEmail\")"
+        },
+        {
+          "tablename": "Booking",
+          "indexname": "Booking_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"Booking_pkey\" ON public.\"Booking\" USING btree (id)"
+        },
+        {
+          "tablename": "Booking",
+          "indexname": "Booking_referenceNumber_idx",
+          "indexdef": "CREATE INDEX \"Booking_referenceNumber_idx\" ON public.\"Booking\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "Booking",
+          "indexname": "Booking_referenceNumber_key",
+          "indexdef": "CREATE UNIQUE INDEX \"Booking_referenceNumber_key\" ON public.\"Booking\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "Booking",
+          "indexname": "Booking_status_idx",
+          "indexdef": "CREATE INDEX \"Booking_status_idx\" ON public.\"Booking\" USING btree (status)"
+        },
+        {
+          "tablename": "BookingPassenger",
+          "indexname": "BookingPassenger_bookingId_idx",
+          "indexdef": "CREATE INDEX \"BookingPassenger_bookingId_idx\" ON public.\"BookingPassenger\" USING btree (\"bookingId\")"
+        },
+        {
+          "tablename": "BookingPassenger",
+          "indexname": "BookingPassenger_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"BookingPassenger_pkey\" ON public.\"BookingPassenger\" USING btree (id)"
+        },
+        {
+          "tablename": "BookingStatusHistory",
+          "indexname": "BookingStatusHistory_bookingId_idx",
+          "indexdef": "CREATE INDEX \"BookingStatusHistory_bookingId_idx\" ON public.\"BookingStatusHistory\" USING btree (\"bookingId\")"
+        },
+        {
+          "tablename": "BookingStatusHistory",
+          "indexname": "BookingStatusHistory_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"BookingStatusHistory_pkey\" ON public.\"BookingStatusHistory\" USING btree (id)"
+        },
+        {
+          "tablename": "ContactMessage",
+          "indexname": "ContactMessage_createdAt_idx",
+          "indexdef": "CREATE INDEX \"ContactMessage_createdAt_idx\" ON public.\"ContactMessage\" USING btree (\"createdAt\")"
+        },
+        {
+          "tablename": "ContactMessage",
+          "indexname": "ContactMessage_email_idx",
+          "indexdef": "CREATE INDEX \"ContactMessage_email_idx\" ON public.\"ContactMessage\" USING btree (email)"
+        },
+        {
+          "tablename": "ContactMessage",
+          "indexname": "ContactMessage_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"ContactMessage_pkey\" ON public.\"ContactMessage\" USING btree (id)"
+        },
+        {
+          "tablename": "ContactMessage",
+          "indexname": "ContactMessage_referenceNumber_idx",
+          "indexdef": "CREATE INDEX \"ContactMessage_referenceNumber_idx\" ON public.\"ContactMessage\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "ContactMessage",
+          "indexname": "ContactMessage_referenceNumber_key",
+          "indexdef": "CREATE UNIQUE INDEX \"ContactMessage_referenceNumber_key\" ON public.\"ContactMessage\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "ContactMessage",
+          "indexname": "ContactMessage_status_idx",
+          "indexdef": "CREATE INDEX \"ContactMessage_status_idx\" ON public.\"ContactMessage\" USING btree (status)"
+        },
+        {
+          "tablename": "Destination",
+          "indexname": "Destination_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"Destination_pkey\" ON public.\"Destination\" USING btree (id)"
+        },
+        {
+          "tablename": "Destination",
+          "indexname": "Destination_slug_idx",
+          "indexdef": "CREATE INDEX \"Destination_slug_idx\" ON public.\"Destination\" USING btree (slug)"
+        },
+        {
+          "tablename": "Destination",
+          "indexname": "Destination_slug_key",
+          "indexdef": "CREATE UNIQUE INDEX \"Destination_slug_key\" ON public.\"Destination\" USING btree (slug)"
+        },
+        {
+          "tablename": "Destination",
+          "indexname": "Destination_status_featured_idx",
+          "indexdef": "CREATE INDEX \"Destination_status_featured_idx\" ON public.\"Destination\" USING btree (status, featured)"
+        },
+        {
+          "tablename": "EmailVerificationToken",
+          "indexname": "EmailVerificationToken_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"EmailVerificationToken_pkey\" ON public.\"EmailVerificationToken\" USING btree (id)"
+        },
+        {
+          "tablename": "EmailVerificationToken",
+          "indexname": "EmailVerificationToken_token_idx",
+          "indexdef": "CREATE INDEX \"EmailVerificationToken_token_idx\" ON public.\"EmailVerificationToken\" USING btree (token)"
+        },
+        {
+          "tablename": "EmailVerificationToken",
+          "indexname": "EmailVerificationToken_token_key",
+          "indexdef": "CREATE UNIQUE INDEX \"EmailVerificationToken_token_key\" ON public.\"EmailVerificationToken\" USING btree (token)"
+        },
+        {
+          "tablename": "EmailVerificationToken",
+          "indexname": "EmailVerificationToken_userId_idx",
+          "indexdef": "CREATE INDEX \"EmailVerificationToken_userId_idx\" ON public.\"EmailVerificationToken\" USING btree (\"userId\")"
+        },
+        {
+          "tablename": "FlightInquiry",
+          "indexname": "FlightInquiry_createdAt_idx",
+          "indexdef": "CREATE INDEX \"FlightInquiry_createdAt_idx\" ON public.\"FlightInquiry\" USING btree (\"createdAt\")"
+        },
+        {
+          "tablename": "FlightInquiry",
+          "indexname": "FlightInquiry_email_idx",
+          "indexdef": "CREATE INDEX \"FlightInquiry_email_idx\" ON public.\"FlightInquiry\" USING btree (email)"
+        },
+        {
+          "tablename": "FlightInquiry",
+          "indexname": "FlightInquiry_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"FlightInquiry_pkey\" ON public.\"FlightInquiry\" USING btree (id)"
+        },
+        {
+          "tablename": "FlightInquiry",
+          "indexname": "FlightInquiry_referenceNumber_idx",
+          "indexdef": "CREATE INDEX \"FlightInquiry_referenceNumber_idx\" ON public.\"FlightInquiry\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "FlightInquiry",
+          "indexname": "FlightInquiry_referenceNumber_key",
+          "indexdef": "CREATE UNIQUE INDEX \"FlightInquiry_referenceNumber_key\" ON public.\"FlightInquiry\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "FlightInquiry",
+          "indexname": "FlightInquiry_status_idx",
+          "indexdef": "CREATE INDEX \"FlightInquiry_status_idx\" ON public.\"FlightInquiry\" USING btree (status)"
+        },
+        {
+          "tablename": "HotelInquiry",
+          "indexname": "HotelInquiry_createdAt_idx",
+          "indexdef": "CREATE INDEX \"HotelInquiry_createdAt_idx\" ON public.\"HotelInquiry\" USING btree (\"createdAt\")"
+        },
+        {
+          "tablename": "HotelInquiry",
+          "indexname": "HotelInquiry_email_idx",
+          "indexdef": "CREATE INDEX \"HotelInquiry_email_idx\" ON public.\"HotelInquiry\" USING btree (email)"
+        },
+        {
+          "tablename": "HotelInquiry",
+          "indexname": "HotelInquiry_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"HotelInquiry_pkey\" ON public.\"HotelInquiry\" USING btree (id)"
+        },
+        {
+          "tablename": "HotelInquiry",
+          "indexname": "HotelInquiry_referenceNumber_idx",
+          "indexdef": "CREATE INDEX \"HotelInquiry_referenceNumber_idx\" ON public.\"HotelInquiry\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "HotelInquiry",
+          "indexname": "HotelInquiry_referenceNumber_key",
+          "indexdef": "CREATE UNIQUE INDEX \"HotelInquiry_referenceNumber_key\" ON public.\"HotelInquiry\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "HotelInquiry",
+          "indexname": "HotelInquiry_status_idx",
+          "indexdef": "CREATE INDEX \"HotelInquiry_status_idx\" ON public.\"HotelInquiry\" USING btree (status)"
+        },
+        {
+          "tablename": "IdempotencyRecord",
+          "indexname": "IdempotencyRecord_operation_principal_key_key",
+          "indexdef": "CREATE UNIQUE INDEX \"IdempotencyRecord_operation_principal_key_key\" ON public.\"IdempotencyRecord\" USING btree (operation, principal, key)"
+        },
+        {
+          "tablename": "IdempotencyRecord",
+          "indexname": "IdempotencyRecord_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"IdempotencyRecord_pkey\" ON public.\"IdempotencyRecord\" USING btree (id)"
+        },
+        {
+          "tablename": "IdempotencyRecord",
+          "indexname": "IdempotencyRecord_referenceNumber_idx",
+          "indexdef": "CREATE INDEX \"IdempotencyRecord_referenceNumber_idx\" ON public.\"IdempotencyRecord\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "IdempotencyRecord",
+          "indexname": "IdempotencyRecord_userId_idx",
+          "indexdef": "CREATE INDEX \"IdempotencyRecord_userId_idx\" ON public.\"IdempotencyRecord\" USING btree (\"userId\")"
+        },
+        {
+          "tablename": "NotificationOutbox",
+          "indexname": "NotificationOutbox_createdAt_idx",
+          "indexdef": "CREATE INDEX \"NotificationOutbox_createdAt_idx\" ON public.\"NotificationOutbox\" USING btree (\"createdAt\")"
+        },
+        {
+          "tablename": "NotificationOutbox",
+          "indexname": "NotificationOutbox_idempotencyKey_key",
+          "indexdef": "CREATE UNIQUE INDEX \"NotificationOutbox_idempotencyKey_key\" ON public.\"NotificationOutbox\" USING btree (\"idempotencyKey\")"
+        },
+        {
+          "tablename": "NotificationOutbox",
+          "indexname": "NotificationOutbox_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"NotificationOutbox_pkey\" ON public.\"NotificationOutbox\" USING btree (id)"
+        },
+        {
+          "tablename": "NotificationOutbox",
+          "indexname": "NotificationOutbox_status_nextAttemptAt_idx",
+          "indexdef": "CREATE INDEX \"NotificationOutbox_status_nextAttemptAt_idx\" ON public.\"NotificationOutbox\" USING btree (status, \"nextAttemptAt\")"
+        },
+        {
+          "tablename": "Package",
+          "indexname": "Package_destinationId_idx",
+          "indexdef": "CREATE INDEX \"Package_destinationId_idx\" ON public.\"Package\" USING btree (\"destinationId\")"
+        },
+        {
+          "tablename": "Package",
+          "indexname": "Package_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"Package_pkey\" ON public.\"Package\" USING btree (id)"
+        },
+        {
+          "tablename": "Package",
+          "indexname": "Package_slug_idx",
+          "indexdef": "CREATE INDEX \"Package_slug_idx\" ON public.\"Package\" USING btree (slug)"
+        },
+        {
+          "tablename": "Package",
+          "indexname": "Package_slug_key",
+          "indexdef": "CREATE UNIQUE INDEX \"Package_slug_key\" ON public.\"Package\" USING btree (slug)"
+        },
+        {
+          "tablename": "Package",
+          "indexname": "Package_status_featured_idx",
+          "indexdef": "CREATE INDEX \"Package_status_featured_idx\" ON public.\"Package\" USING btree (status, featured)"
+        },
+        {
+          "tablename": "PackageInquiry",
+          "indexname": "PackageInquiry_createdAt_idx",
+          "indexdef": "CREATE INDEX \"PackageInquiry_createdAt_idx\" ON public.\"PackageInquiry\" USING btree (\"createdAt\")"
+        },
+        {
+          "tablename": "PackageInquiry",
+          "indexname": "PackageInquiry_email_idx",
+          "indexdef": "CREATE INDEX \"PackageInquiry_email_idx\" ON public.\"PackageInquiry\" USING btree (email)"
+        },
+        {
+          "tablename": "PackageInquiry",
+          "indexname": "PackageInquiry_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"PackageInquiry_pkey\" ON public.\"PackageInquiry\" USING btree (id)"
+        },
+        {
+          "tablename": "PackageInquiry",
+          "indexname": "PackageInquiry_referenceNumber_idx",
+          "indexdef": "CREATE INDEX \"PackageInquiry_referenceNumber_idx\" ON public.\"PackageInquiry\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "PackageInquiry",
+          "indexname": "PackageInquiry_referenceNumber_key",
+          "indexdef": "CREATE UNIQUE INDEX \"PackageInquiry_referenceNumber_key\" ON public.\"PackageInquiry\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "PackageInquiry",
+          "indexname": "PackageInquiry_status_idx",
+          "indexdef": "CREATE INDEX \"PackageInquiry_status_idx\" ON public.\"PackageInquiry\" USING btree (status)"
+        },
+        {
+          "tablename": "PasswordResetToken",
+          "indexname": "PasswordResetToken_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"PasswordResetToken_pkey\" ON public.\"PasswordResetToken\" USING btree (id)"
+        },
+        {
+          "tablename": "PasswordResetToken",
+          "indexname": "PasswordResetToken_tokenHash_key",
+          "indexdef": "CREATE UNIQUE INDEX \"PasswordResetToken_tokenHash_key\" ON public.\"PasswordResetToken\" USING btree (\"tokenHash\")"
+        },
+        {
+          "tablename": "PasswordResetToken",
+          "indexname": "PasswordResetToken_userId_idx",
+          "indexdef": "CREATE INDEX \"PasswordResetToken_userId_idx\" ON public.\"PasswordResetToken\" USING btree (\"userId\")"
+        },
+        {
+          "tablename": "Session",
+          "indexname": "Session_expiresAt_idx",
+          "indexdef": "CREATE INDEX \"Session_expiresAt_idx\" ON public.\"Session\" USING btree (\"expiresAt\")"
+        },
+        {
+          "tablename": "Session",
+          "indexname": "Session_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"Session_pkey\" ON public.\"Session\" USING btree (id)"
+        },
+        {
+          "tablename": "Session",
+          "indexname": "Session_refreshTokenHash_key",
+          "indexdef": "CREATE UNIQUE INDEX \"Session_refreshTokenHash_key\" ON public.\"Session\" USING btree (\"refreshTokenHash\")"
+        },
+        {
+          "tablename": "Session",
+          "indexname": "Session_userId_idx",
+          "indexdef": "CREATE INDEX \"Session_userId_idx\" ON public.\"Session\" USING btree (\"userId\")"
+        },
+        {
+          "tablename": "Testimonial",
+          "indexname": "Testimonial_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"Testimonial_pkey\" ON public.\"Testimonial\" USING btree (id)"
+        },
+        {
+          "tablename": "Testimonial",
+          "indexname": "Testimonial_status_idx",
+          "indexdef": "CREATE INDEX \"Testimonial_status_idx\" ON public.\"Testimonial\" USING btree (status)"
+        },
+        {
+          "tablename": "User",
+          "indexname": "User_email_idx",
+          "indexdef": "CREATE INDEX \"User_email_idx\" ON public.\"User\" USING btree (email)"
+        },
+        {
+          "tablename": "User",
+          "indexname": "User_email_key",
+          "indexdef": "CREATE UNIQUE INDEX \"User_email_key\" ON public.\"User\" USING btree (email)"
+        },
+        {
+          "tablename": "User",
+          "indexname": "User_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"User_pkey\" ON public.\"User\" USING btree (id)"
+        },
+        {
+          "tablename": "VisaInfo",
+          "indexname": "VisaInfo_country_idx",
+          "indexdef": "CREATE INDEX \"VisaInfo_country_idx\" ON public.\"VisaInfo\" USING btree (country)"
+        },
+        {
+          "tablename": "VisaInfo",
+          "indexname": "VisaInfo_country_key",
+          "indexdef": "CREATE UNIQUE INDEX \"VisaInfo_country_key\" ON public.\"VisaInfo\" USING btree (country)"
+        },
+        {
+          "tablename": "VisaInfo",
+          "indexname": "VisaInfo_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"VisaInfo_pkey\" ON public.\"VisaInfo\" USING btree (id)"
+        },
+        {
+          "tablename": "VisaInfo",
+          "indexname": "VisaInfo_slug_idx",
+          "indexdef": "CREATE INDEX \"VisaInfo_slug_idx\" ON public.\"VisaInfo\" USING btree (slug)"
+        },
+        {
+          "tablename": "VisaInfo",
+          "indexname": "VisaInfo_slug_key",
+          "indexdef": "CREATE UNIQUE INDEX \"VisaInfo_slug_key\" ON public.\"VisaInfo\" USING btree (slug)"
+        },
+        {
+          "tablename": "VisaInquiry",
+          "indexname": "VisaInquiry_createdAt_idx",
+          "indexdef": "CREATE INDEX \"VisaInquiry_createdAt_idx\" ON public.\"VisaInquiry\" USING btree (\"createdAt\")"
+        },
+        {
+          "tablename": "VisaInquiry",
+          "indexname": "VisaInquiry_email_idx",
+          "indexdef": "CREATE INDEX \"VisaInquiry_email_idx\" ON public.\"VisaInquiry\" USING btree (email)"
+        },
+        {
+          "tablename": "VisaInquiry",
+          "indexname": "VisaInquiry_pkey",
+          "indexdef": "CREATE UNIQUE INDEX \"VisaInquiry_pkey\" ON public.\"VisaInquiry\" USING btree (id)"
+        },
+        {
+          "tablename": "VisaInquiry",
+          "indexname": "VisaInquiry_referenceNumber_idx",
+          "indexdef": "CREATE INDEX \"VisaInquiry_referenceNumber_idx\" ON public.\"VisaInquiry\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "VisaInquiry",
+          "indexname": "VisaInquiry_referenceNumber_key",
+          "indexdef": "CREATE UNIQUE INDEX \"VisaInquiry_referenceNumber_key\" ON public.\"VisaInquiry\" USING btree (\"referenceNumber\")"
+        },
+        {
+          "tablename": "VisaInquiry",
+          "indexname": "VisaInquiry_status_idx",
+          "indexdef": "CREATE INDEX \"VisaInquiry_status_idx\" ON public.\"VisaInquiry\" USING btree (status)"
+        },
+        {
+          "tablename": "_prisma_migrations",
+          "indexname": "_prisma_migrations_pkey",
+          "indexdef": "CREATE UNIQUE INDEX _prisma_migrations_pkey ON public._prisma_migrations USING btree (id)"
+        }
+      ],
+      "constraints": [
+        {
+          "table_name": "Account",
+          "conname": "Account_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "Account",
+          "conname": "Account_userId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"userId\") REFERENCES \"User\"(id) ON UPDATE CASCADE ON DELETE CASCADE"
+        },
+        {
+          "table_name": "Booking",
+          "conname": "Booking_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "Booking",
+          "conname": "Booking_userId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"userId\") REFERENCES \"User\"(id) ON UPDATE CASCADE ON DELETE SET NULL"
+        },
+        {
+          "table_name": "BookingPassenger",
+          "conname": "BookingPassenger_bookingId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"bookingId\") REFERENCES \"Booking\"(id) ON UPDATE CASCADE ON DELETE CASCADE"
+        },
+        {
+          "table_name": "BookingPassenger",
+          "conname": "BookingPassenger_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "BookingStatusHistory",
+          "conname": "BookingStatusHistory_bookingId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"bookingId\") REFERENCES \"Booking\"(id) ON UPDATE CASCADE ON DELETE CASCADE"
+        },
+        {
+          "table_name": "BookingStatusHistory",
+          "conname": "BookingStatusHistory_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "ContactMessage",
+          "conname": "ContactMessage_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "Destination",
+          "conname": "Destination_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "EmailVerificationToken",
+          "conname": "EmailVerificationToken_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "EmailVerificationToken",
+          "conname": "EmailVerificationToken_userId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"userId\") REFERENCES \"User\"(id) ON UPDATE CASCADE ON DELETE CASCADE"
+        },
+        {
+          "table_name": "FlightInquiry",
+          "conname": "FlightInquiry_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "FlightInquiry",
+          "conname": "FlightInquiry_userId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"userId\") REFERENCES \"User\"(id) ON UPDATE CASCADE ON DELETE SET NULL"
+        },
+        {
+          "table_name": "HotelInquiry",
+          "conname": "HotelInquiry_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "HotelInquiry",
+          "conname": "HotelInquiry_userId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"userId\") REFERENCES \"User\"(id) ON UPDATE CASCADE ON DELETE SET NULL"
+        },
+        {
+          "table_name": "IdempotencyRecord",
+          "conname": "IdempotencyRecord_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "IdempotencyRecord",
+          "conname": "IdempotencyRecord_userId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"userId\") REFERENCES \"User\"(id) ON UPDATE CASCADE ON DELETE SET NULL"
+        },
+        {
+          "table_name": "NotificationOutbox",
+          "conname": "NotificationOutbox_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "Package",
+          "conname": "Package_destinationId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"destinationId\") REFERENCES \"Destination\"(id) ON UPDATE CASCADE ON DELETE RESTRICT"
+        },
+        {
+          "table_name": "Package",
+          "conname": "Package_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "PackageInquiry",
+          "conname": "PackageInquiry_packageId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"packageId\") REFERENCES \"Package\"(id) ON UPDATE CASCADE ON DELETE SET NULL"
+        },
+        {
+          "table_name": "PackageInquiry",
+          "conname": "PackageInquiry_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "PackageInquiry",
+          "conname": "PackageInquiry_userId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"userId\") REFERENCES \"User\"(id) ON UPDATE CASCADE ON DELETE SET NULL"
+        },
+        {
+          "table_name": "PasswordResetToken",
+          "conname": "PasswordResetToken_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "PasswordResetToken",
+          "conname": "PasswordResetToken_userId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"userId\") REFERENCES \"User\"(id) ON UPDATE CASCADE ON DELETE CASCADE"
+        },
+        {
+          "table_name": "Session",
+          "conname": "Session_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "Session",
+          "conname": "Session_userId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"userId\") REFERENCES \"User\"(id) ON UPDATE CASCADE ON DELETE CASCADE"
+        },
+        {
+          "table_name": "Testimonial",
+          "conname": "Testimonial_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "User",
+          "conname": "User_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "VisaInfo",
+          "conname": "VisaInfo_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "VisaInquiry",
+          "conname": "VisaInquiry_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "VisaInquiry",
+          "conname": "VisaInquiry_userId_fkey",
+          "contype": "f",
+          "definition": "FOREIGN KEY (\"userId\") REFERENCES \"User\"(id) ON UPDATE CASCADE ON DELETE SET NULL"
+        },
+        {
+          "table_name": "_prisma_migrations",
+          "conname": "_prisma_migrations_pkey",
+          "contype": "p",
+          "definition": "PRIMARY KEY (id)"
+        }
+      ],
+      "migrations": [
+        {
+          "migration_name": "20260926202822_init",
+          "checksum": "ad6f19d4e4562c0e2b9f616ba2f2470a28d3bfc2bdca20b611be938598de7e63",
+          "completed": true,
+          "rolled_back": false
+        },
+        {
+          "migration_name": "20260927082715_full_schema",
+          "checksum": "db3f1dd416c8f58f98ee0f3fa93dae8c5d699e93c3387f413ebd9d8ee52a04bb",
+          "completed": true,
+          "rolled_back": false
+        },
+        {
+          "migration_name": "20261009000000_auth_sessions_and_password_resets",
+          "checksum": "4a2dbeb8ed993d62c542de82d3bbb3fe6f9dda12e44df86e2d13e6c36c231f11",
+          "completed": false,
+          "rolled_back": true
+        },
+        {
+          "migration_name": "20261009000000_auth_sessions_and_password_resets",
+          "checksum": "4a2dbeb8ed993d62c542de82d3bbb3fe6f9dda12e44df86e2d13e6c36c231f11",
+          "completed": true,
+          "rolled_back": false
+        },
+        {
+          "migration_name": "20261011000000_inquiry_idempotency",
+          "checksum": "409bb80db5028a3d12d291981120a8c5985c0991ff2741c41774c7b8b512014e",
+          "completed": true,
+          "rolled_back": false
+        },
+        {
+          "migration_name": "20261011120000_notification_outbox",
+          "checksum": "1ecc18d0e4381cdf0489a9919f61b58c3f9f1a3bd102303ccf1fa5f81e14eca2",
+          "completed": true,
+          "rolled_back": false
+        }
+      ],
+      "matchesSourceMigrations": false,
+      "counts": {
+        "User": 9,
+        "Booking": 9,
+        "BookingPassenger": 10,
+        "Session": 127
+      },
+      "schemaFingerprint": "22520ad49613a4028744769249914f1a062ec752bfb05b68c890317d69c8655a",
+      "rolledBack": true
+    }
+  ],
+  "localLiveInventory": "PENDING_AVAILABLE_RUNTIME_OR_PRIVATE_OWNER_CONNECTION"
+}

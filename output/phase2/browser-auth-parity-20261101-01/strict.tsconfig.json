@@ -1,0 +1,4 @@
+{
+  "extends": "../strict.tsconfig.json",
+  "include": ["../../../server/test/phase2-browser-connection.test.ts", "../../../server/test/phase2-browser-host.pg.test.ts"]
+}

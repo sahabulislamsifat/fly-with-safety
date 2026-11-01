@@ -1,0 +1,54 @@
+{
+  "sqlParser": {
+    "passed": true,
+    "parser": "existing PostgreSQL18 WASM libpg-query",
+    "statements": 6,
+    "plpgsqlBlocks": 1,
+    "databaseExecuted": false
+  },
+  "loaders": [
+    {
+      "sha256": "27BF902EBAC479413E054D14E595008AB0C42C5094122DBA39B1A46E43130A78",
+      "success": true,
+      "skipped": 0,
+      "passed": 9,
+      "loader": "offline-bundle",
+      "failed": 0
+    },
+    {
+      "sha256": "F9F371E00B90E68A9509043182220E527E9BA59B885202BF2B33D3E14EC07840",
+      "success": true,
+      "skipped": 0,
+      "passed": 9,
+      "loader": "offline-native",
+      "failed": 0
+    }
+  ],
+  "callerSha256": "6497E5A9DE62303A73B6E2A2C042B751F424FBFC3C3C0A4FE07C8D15333ACA6E",
+  "newOwnerApprovalRequired": true,
+  "sqlSha256": "6D7931E9FCD4868305F985CDF7A7D04CE29237885369BB5B204B5566873D337B",
+  "historicalCase": {
+    "failed": 1,
+    "skipped": 0,
+    "unchanged": true,
+    "exit": 1,
+    "passed": 0
+  },
+  "liveDatabaseExecuted": false,
+  "powershellParser": {
+    "databaseExecuted": false,
+    "version": "5.1.26100.9818",
+    "parserErrors": 0
+  },
+  "processExits": {
+    "serverTypeScript": 0,
+    "diffCheck": 0,
+    "strictTypeScript": 0,
+    "browserHostTypeScript": 0,
+    "scopedESLint": 0,
+    "bundled": 0,
+    "prismaValidation": 0,
+    "native": 0
+  },
+  "sourcePins": 38
+}

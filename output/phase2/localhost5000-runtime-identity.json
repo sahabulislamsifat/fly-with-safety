@@ -1,0 +1,10 @@
+{
+  "pid": 30120,
+  "readOnly": true,
+  "actualRunningClient": true,
+  "runtimeClientAvailable": true,
+  "databaseMatches": false,
+  "roleMatches": false,
+  "localServer": false,
+  "portMatches": true
+}

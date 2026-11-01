@@ -1,0 +1,46 @@
+{
+  "observedUTC": "2026-11-01T22:08:14.181Z",
+  "results": [
+    {
+      "configurationKey": "DATABASE_URL",
+      "readOnly": true,
+      "identity": {
+        "database": "postgres",
+        "role": "prisma_migration",
+        "server_address": "10.0.44.77",
+        "server_port": 5432
+      },
+      "counts": {
+        "users": 9,
+        "bookings": 9
+      },
+      "sameObservedIdentity": true,
+      "sameUserBookingCounts": true,
+      "sameMigrationLedger": true,
+      "rolledBack": true,
+      "currentCredentialAccepted": true
+    },
+    {
+      "configurationKey": "DIRECT_URL",
+      "readOnly": true,
+      "identity": {
+        "database": "postgres",
+        "role": "prisma_migration",
+        "server_address": "10.0.44.77",
+        "server_port": 5432
+      },
+      "counts": {
+        "users": 9,
+        "bookings": 9
+      },
+      "sameObservedIdentity": true,
+      "sameUserBookingCounts": true,
+      "sameMigrationLedger": true,
+      "rolledBack": true,
+      "currentCredentialAccepted": true
+    }
+  ],
+  "resourceIdsIndependentlyVerified": false,
+  "stagingCredentialAvailable": false,
+  "comparisonDoesNotProveFullRowEquality": true
+}

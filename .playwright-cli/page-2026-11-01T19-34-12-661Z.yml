@@ -1,0 +1,72 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation "Main navigation" [ref=e3]:
+      - generic [ref=e4]:
+        - link "FlyWithSafety Home" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e10]: FlyWithSafety
+        - generic [ref=e11]:
+          - link "Support Desk" [ref=e12] [cursor=pointer]:
+            - /url: /contact
+          - button "Open navigation menu" [ref=e15]
+  - main [ref=e17]:
+    - generic [ref=e19]:
+      - heading "404" [level=1] [ref=e20]
+      - heading "This page could not be found." [level=2] [ref=e22]
+  - contentinfo [ref=e23]:
+    - generic [ref=e24]:
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - link "FlyWithSafety Home" [ref=e27] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e30]: FlyWithSafety
+          - paragraph [ref=e31]: Thoughtful travel planning, easier bookings, and support that stays with you.
+        - navigation "Explore" [ref=e32]:
+          - heading "Explore" [level=3] [ref=e33]
+          - list [ref=e34]:
+            - listitem [ref=e35]:
+              - link "Home" [ref=e36] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=e37]:
+              - link "Flights" [ref=e38] [cursor=pointer]:
+                - /url: /flights
+            - listitem [ref=e39]:
+              - link "Hotels" [ref=e40] [cursor=pointer]:
+                - /url: /hotels
+            - listitem [ref=e41]:
+              - link "Packages" [ref=e42] [cursor=pointer]:
+                - /url: /packages
+            - listitem [ref=e43]:
+              - link "Visa Info" [ref=e44] [cursor=pointer]:
+                - /url: /visa-info
+            - listitem [ref=e45]:
+              - link "Track Booking" [ref=e46] [cursor=pointer]:
+                - /url: /track-booking
+        - navigation "Legal" [ref=e47]:
+          - heading "Legal" [level=3] [ref=e48]
+          - list [ref=e49]:
+            - listitem [ref=e50]:
+              - link "Contact Us" [ref=e51] [cursor=pointer]:
+                - /url: /contact
+            - listitem [ref=e52]:
+              - link "Privacy Policy" [ref=e53] [cursor=pointer]:
+                - /url: /privacy
+            - listitem [ref=e54]:
+              - link "Terms of Use" [ref=e55] [cursor=pointer]:
+                - /url: /terms
+        - generic [ref=e56]:
+          - heading "Payment Options" [level=3] [ref=e57]
+          - generic [ref=e58]:
+            - img "VISA" [ref=e59]
+            - img "Mastercard" [ref=e63]
+            - img "bKash" [ref=e67]
+      - generic [ref=e72]:
+        - paragraph [ref=e73]: © 2026 FlyWithSafety. All rights reserved.
+        - navigation "Social media" [ref=e74]:
+          - link "Facebook" [ref=e75] [cursor=pointer]:
+            - /url: https://facebook.com
+          - link "Instagram" [ref=e82] [cursor=pointer]:
+            - /url: https://instagram.com
+          - link "WhatsApp" [ref=e86] [cursor=pointer]:
+            - /url: https://wa.me
+  - button "Open Next.js Dev Tools" [ref=e94] [cursor=pointer]

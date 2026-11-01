@@ -1,0 +1,37 @@
+const fs = require('node:fs'), path = require('node:path'), crypto = require('node:crypto'), assert = require('node:assert/strict');
+const read = name => fs.readFileSync(path.join(__dirname, name), 'utf8');
+const sha = file => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex').toUpperCase();
+const previous = path.resolve(__dirname, '../commercial-continuation-20261101-01');
+const preserved = JSON.parse(read('preservation.json'));
+for (const pin of preserved.originalEvidence) assert.equal(sha(pin.path), pin.sha256);
+assert.equal(sha(path.join(__dirname, 'original-source/phase2-commercial-continuation.pg.test.ts')), preserved.originalSourceHash);
+const ledger = fs.readFileSync(path.join(previous, 'fixture-ledger.jsonl'), 'utf8').trim().split(/\r?\n/).map(JSON.parse);
+const http = ledger.filter(row => row.kind === 'http-checkpoint');
+assert.equal(http.length, 45); assert.ok(http.every(row => row.status === row.expectedStatus));
+const groups = ledger.filter(row => row.kind === 'http-group');
+assert.equal(groups.length, 3);
+assert.deepEqual(groups.map(row => row.outcomes.length), [8, 4, 8]);
+assert.ok(groups.every(row => row.outcomes.every(outcome => outcome.status === 200)));
+assert.ok(ledger.some(row => row.kind === 'expiry-observation' && row.observedExpired === true));
+assert.ok(ledger.some(row => row.kind === 'rollback-proof-pass' && row.rejectedIdAbsent === true));
+assert.equal(JSON.parse(fs.readFileSync(path.join(previous, 'diagnostic.json'), 'utf8')).stage, 'persisted-final-invariants');
+const sql = read('verify-final.readonly.sql');
+assert.match(sql, /BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY;/);
+assert.doesNotMatch(sql, /\b(?:INSERT|UPDATE|DELETE|TRUNCATE|GRANT|REVOKE|ALTER|DROP|CREATE|CALL|COPY)\b/i);
+const ids = [...sql.matchAll(/^\('([A-Za-z_]+)',/gm)].map(match => match[1]);
+// Fixture VALUES tuples contain UUIDs, not these closed invariant labels.
+assert.equal(ids.length, 39); assert.equal(new Set(ids).size, 39);
+assert.match(sql, /ROLLBACK;[\s\S]*\\if :all_matched/);
+assert.ok(sql.includes("'legacyExpected'") && sql.includes('"STAFF_ID"'));
+const caller = read('Invoke-FinalStateReadOnly.ps1');
+assert.ok(!caller.includes('MANIFEST_HASH_PENDING'));
+assert.match(caller, /OwnerApprovedReadOnlyFinalVerification/);
+assert.match(caller, /FileMode\]::CreateNew/);
+assert.match(caller, /-X -W -h 127\.0\.0\.1 -p 5432 -U flywithsafe_phase2_booking_test -d flywithsafe_phase2_booking_integration/);
+assert.doesNotMatch(caller, /Invoke-CommercialContinuation|vitest|ExecutionPolicy\s+Bypass|Start-Process|Remove-Item|Set-ExecutionPolicy/);
+const pins = JSON.parse(read('pins.json'));
+for (const pin of pins) assert.equal(sha(pin.path), pin.sha256);
+assert.ok(caller.includes(sha(path.join(__dirname, 'pins.json'))));
+for (const name of ['attempt-started.json', 'result.json', 'readonly-output.txt', 'invariant-observations.json']) assert.equal(fs.existsSync(path.join(__dirname, name)), false);
+console.log(JSON.stringify({ passed: true, sourcePins: pins.length, originalEvidenceFilesPreserved: preserved.originalEvidence.length,
+  priorHttpCheckpoints: http.length, readonlyInvariants: ids.length, noAttempt: true, databaseExecuted: false }));

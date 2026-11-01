@@ -1,0 +1,10 @@
+# PREPARED ONLY: execute once after explicit approval of this new read-only final-state verification.
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p=Join-Path -Path 'E:\Programming\Project\fly-with-safety' -ChildPath 'output\phase2\final-invariants-review-20261101-01\Invoke-FinalStateReadOnly.ps1'
+ if(-not (Test-Path -LiteralPath $p -PathType Leaf)){throw 'STOP: reviewed read-only caller missing'}
+ if((Get-Item -LiteralPath $p -Stream * | Where-Object Stream -eq 'Zone.Identifier')){throw 'STOP: unexpected script zone marking'}
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne '6497E5A9DE62303A73B6E2A2C042B751F424FBFC3C3C0A4FE07C8D15333ACA6E'){throw 'STOP: caller integrity mismatch'}
+ & $p -OwnerApprovedReadOnlyFinalVerification
+}

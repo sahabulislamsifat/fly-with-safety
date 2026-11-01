@@ -1,0 +1,6 @@
+{
+  "include": [
+    "./localhost-api.ts"
+  ],
+  "extends": "./strict.tsconfig.json"
+}

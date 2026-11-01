@@ -1,0 +1,4 @@
+Loaded Prisma config from output\phase2\setup-review\prisma.config.cjs.
+
+Prisma schema loaded from server\prisma\schema.prisma.
+The schema at server\prisma\schema.prisma is valid 🚀

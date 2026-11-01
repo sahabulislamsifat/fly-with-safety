@@ -1,0 +1,1 @@
+{"db":"flywithsafe_phase2_booking_integration","role":"flywithsafe_phase2_booking_test","host":"127.0.0.1","port":5432,"api":"http://localhost:5000/api/v1","frontend":"http://localhost:3000","existingBookingId":"cmvxtcxe80004q4f4e7e9rceb","readyUTC":"2026-11-01T20:16:58.248Z"}

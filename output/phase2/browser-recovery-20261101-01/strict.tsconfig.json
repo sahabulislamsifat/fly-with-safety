@@ -1,0 +1,8 @@
+{
+  "extends": "../strict.tsconfig.json",
+  "include": [
+    "../../../server/test/phase2-browser-preflight.ts",
+    "../../../server/test/phase2-browser-preflight.test.ts",
+    "../../../server/test/phase2-browser-host.pg.test.ts"
+  ]
+}

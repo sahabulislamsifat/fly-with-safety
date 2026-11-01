@@ -1,0 +1,53 @@
+{
+  "sourcePins": 184,
+  "encodingDefectProven": false,
+  "policy": {
+    "context_depth": "dependency",
+    "verification_depth": "impact",
+    "planning": "compact",
+    "reason_codes": [
+      "authentication-path-parity"
+    ],
+    "delegation": "none"
+  },
+  "vitest": [
+    {
+      "loader": "bundle",
+      "passed": 2,
+      "exit": 0,
+      "skipped": 0,
+      "failed": 0
+    },
+    {
+      "loader": "native",
+      "passed": 2,
+      "exit": 0,
+      "skipped": 0,
+      "failed": 0
+    }
+  ],
+  "databaseExecuted": false,
+  "scopedLintExit": 0,
+  "preservedFailedFiles": 22,
+  "strictTypeScriptExit": 0,
+  "acceptedCommercialInvariants": 39,
+  "nativePS51": {
+    "exit": 0,
+    "skipped": 0,
+    "urlPaths": 18,
+    "casesPassed": 10,
+    "failed": 0
+  },
+  "prismaValidation": "NOT_RERUN_NO_SCHEMA_OR_ADAPTER_CHANGE",
+  "historicalFailure": {
+    "hostExit": 1,
+    "classification": "DATABASE_AUTHENTICATION",
+    "prismaCode": "P2010",
+    "stage": "identity-query",
+    "sqlState": "28P01"
+  },
+  "nativePS51ParserErrors": 0,
+  "callerSha256": "56E735DD8815E74243FE10584C2E185E8CDFCAFE4507CDA2FB05581A4DF8F429",
+  "sqlAndVerifierByteIdenticalToSuccessfulReference": true,
+  "privateInputsHistoricallyComparable": false
+}

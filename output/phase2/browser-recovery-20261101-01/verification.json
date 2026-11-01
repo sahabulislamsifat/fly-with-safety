@@ -1,0 +1,25 @@
+{
+  "callerSha256": "98959C549CF7F08B5E89E8E23D00E356D7BCF225938D91342C0860293A4F7CDD",
+  "schemaChanged": false,
+  "nativePS51ParserErrors": 0,
+  "strictTypeScriptExit": 0,
+  "rootCause": "UNDETERMINED_ORIGINAL_EXCEPTION_NOT_RETAINED",
+  "scopedLintExit": 0,
+  "databaseExecuted": false,
+  "offlineBundle": {
+    "skipped": 0,
+    "passed": 11,
+    "exit": 0,
+    "failed": 0
+  },
+  "offlineNative": {
+    "skipped": 0,
+    "passed": 11,
+    "exit": 0,
+    "failed": 0
+  },
+  "prismaValidation": "NOT_RERUN_NO_SCHEMA_OR_ADAPTER_CHANGES",
+  "preservedOriginalPackageFiles": 7,
+  "sourcePins": 152,
+  "nativeReportArgumentPass": true
+}

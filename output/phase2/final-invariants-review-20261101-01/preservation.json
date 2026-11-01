@@ -1,0 +1,99 @@
+{
+  "reviewedUTC": "2026-11-01T15:44:34.2333255Z",
+  "originalEvidence": [
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\commercial-continuation-20261101-01\\attempt-started.json",
+      "sha256": "2B842618312978C445598D5391B1F717649816DECABDE19C63E53595908B1F48"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\commercial-continuation-20261101-01\\contract-bundle.json",
+      "sha256": "84F6A70F9C14FD71014CBCE119640F67986C08019CC2BADC80DCAF8329E07802"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\commercial-continuation-20261101-01\\contract-native.json",
+      "sha256": "41330A81B0E1ED1C7862861A22855A2041824930FED6E5697E11825E7EB862EA"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\commercial-continuation-20261101-01\\diagnostic-bundle.json",
+      "sha256": "1D8A43169EF5617072B69B57AF86FCB890FDAEB5FBAB318220EDC2E58E85EDA4"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\commercial-continuation-20261101-01\\diagnostic-native.json",
+      "sha256": "4CB6F81E88FD2EC80E4B94AE6D6D175AAD5920373122EDA4AEE16329DAD38DC3"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\commercial-continuation-20261101-01\\diagnostic.json",
+      "sha256": "8DCD562A38CB07307937747EB9D4656E1FF2D0FB7FED3886D989D5641557D8DF"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\commercial-continuation-20261101-01\\execution-policy.json",
+      "sha256": "D4AA75B6A971707F782E17E3672A9010F56DDEF559426014836F15623ADEBE86"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\commercial-continuation-20261101-01\\fixture-ledger.jsonl",
+      "sha256": "ADE0B287E124D23BB3B753D40422CED8C73321660F1CC20B47476E3EBB09571D"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\commercial-continuation-20261101-01\\FOREGROUND-AFTER-APPROVAL.txt",
+      "sha256": "F2C3835DBAE471EF4EEB910C450E9D3BB21D539F990E1C2E7E81D7E2B0061A2B"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\commercial-continuation-20261101-01\\gated-bundle.json",
+      "sha256": "9D73525BB0F5B7A7996BEE9BF9C50436CC8050BAD1E5D32F1ABA80D9CF173C3E"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\commercial-continuation-20261101-01\\gated-native.json",
+      "sha256": "93CE70FFD4F20C08BFA9B31BB5CAF0346635DDD004714BB4BAB59CA0499E76C2"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\commercial-continuation-20261101-01\\inventory-acceptance.json",
+      "sha256": "438DA33F8CFB7F221DD1F3FCDC182D8F0E7DC3E43AE22A582C54987A29FCE82B"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\commercial-continuation-20261101-01\\Invoke-CommercialContinuation.ps1",
+      "sha256": "1F0D7595377921A4404B53B733B3B2BDEDC9A62CF280B573A298ED7B23A22B0A"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\commercial-continuation-20261101-01\\offline-verification.json",
+      "sha256": "AAF773E9942528712CA4D3B1A6371ACE052A729EE8B2D928BD8C0629AB91F63B"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\commercial-continuation-20261101-01\\pins.json",
+      "sha256": "46A7D751B849B44175968CA50718FFC0A759656B9DD66970B9E6FA88EF1374ED"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\commercial-continuation-20261101-01\\result.json",
+      "sha256": "E3428517660D1E1AFE1635B021B75D4AF246192451D1C7FAB6B8EBC51F00D331"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\commercial-continuation-20261101-01\\retained-contract.json",
+      "sha256": "2CF87A5C771C5FC56D662BB78D3F33E23AA088FA193CAD1B3FB67D45BD2DADBC"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\commercial-continuation-20261101-01\\REVIEW.md",
+      "sha256": "87E363BDD5D0512481B4D8A881F82422B32304EC9E827A760D4735FD3B0B6AC6"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\commercial-continuation-20261101-01\\static-verification.json",
+      "sha256": "6B71635412C4090907AC7846CE92ACC54B8188EB406BEC9B82095AFE1C038D3A"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\commercial-continuation-20261101-01\\strict.tsconfig.json",
+      "sha256": "42D6490D0F7627D88AE70879A25E8F2450CBFBA0A8E6F66FF1BE0203B2E82E9B"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\commercial-continuation-20261101-01\\verify-package.offline.cjs",
+      "sha256": "706ECEB5636AA8DCB2F9F45561928C7994545BE45016B98C63E43136BD146052"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\commercial-continuation-20261101-01\\vitest-result.json",
+      "sha256": "644B7871A5A64ECB4EF1C51E9B82584A01C04C610D3094DFC3BAFFDC950A1A6A"
+    }
+  ],
+  "originalSourceHash": "23138D7945AB8234C7133966882863D4F7EFDEC52BEA63F9217EE21824714AC9",
+  "oldInventoryRows": 13,
+  "observedFinalSnapshotRows": 23,
+  "failedStage": "persisted-final-invariants",
+  "actorFieldsPreservedInLedger": false,
+  "readOnlyFinalVerificationExecuted": false
+}

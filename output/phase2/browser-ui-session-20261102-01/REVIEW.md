@@ -1,0 +1,7 @@
+# One UI-ready browser API session
+
+Previous current-credential host authenticated successfully, verified four actors and reached READY. Its unchanged15-minute browser-handoff window expired before owner-private account sign-in. Main failure is handoff timeout; final snapshot/close/disconnect all succeeded and retained counts remain23 (users4,sessions9,booking1,passenger1,history4,idempotency1,outbox3).
+
+The isolated real-source frontend is now ready at phase2.localhost:3002, explicitly targeting API5002. The owner's localhost3000 server remains untouched. Actual anonymous account/admin/booking-detail and malformed-session API checks passed401. Customer sign-in modal is open in the headed Playwright browser, email filled; owner privately enters existing synthetic account password in the page, never chat.
+
+Approve ONE new bounded API host session using unchanged reviewed caller/helper and fresh artifacts. No native psql/commercial proof rerun, auth reset, migration, grant, cleanup or startup fixture creation. Exact target/role/actor guards, original15-minute host limit and safe diagnostics remain. Only manifest/artifact binding changes; completed prior evidence is pinned. No automatic restart or execution. Once READY, promptly complete private browser sign-in and actual UI verification. Ordinary session creation from sign-in is tracked by the existing shutdown exact-ID ledger. New booking mutations and privileged cleanup still require their explicit scopes.

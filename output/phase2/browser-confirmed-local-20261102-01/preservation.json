@@ -1,0 +1,90 @@
+[
+  {
+    "sha256": "5B1843025C5D2990FBC2D3A7C737721EE46E5C5F596885A2D8F02341B7BE96C8",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\attempt-started.json"
+  },
+  {
+    "sha256": "26DF900CA499B2EE8EE15BEEB6D9CEDE6F627263D668E3927CDDD657AE5EEBE6",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\BROWSER-CHECKS.md"
+  },
+  {
+    "sha256": "0477ED878A78C5BE0C8395F3044734DB08D46E9AB8658F6A2AFEFBFCF985B689",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\bundle.txt"
+  },
+  {
+    "sha256": "F33094B0DE16CF698E60D64AE33BB4578CB62540B23D6B5259BB7B1717B51E9F",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\caller-result.json"
+  },
+  {
+    "sha256": "2E09DEA9B28C774209CF67FFD77E9C926A4D16F1CC4266CB9D4BA51C1C43F1D8",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\credential-preflight.readonly.sql"
+  },
+  {
+    "sha256": "99C6AF992C1FAE45DD6207D2E98F4CCEE712BBDCAA202796C540DD8EE2556DB5",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\FOREGROUND-AFTER-APPROVAL.txt"
+  },
+  {
+    "sha256": "56E735DD8815E74243FE10584C2E185E8CDFCAFE4507CDA2FB05581A4DF8F429",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\Invoke-BrowserAuthParity.ps1"
+  },
+  {
+    "sha256": "523BFCB87143DE1E48986BAEBFE9282660820B5CD12B04FF8167A0042F1A99BE",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\lint.txt"
+  },
+  {
+    "sha256": "95D819604C719FCCE1E6BFCA04E244DE2B7F371FA29FADF1288096F9C65DEEDA",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\native.txt"
+  },
+  {
+    "sha256": "5FAF0B33A491E2FA87124F5D3946711C10AC998212273B72CC1CA3985D29D41D",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\offline-bundle.json"
+  },
+  {
+    "sha256": "6368591E9A631D951ABBEBFAA868864825AC5888FC1BB8345182D115A722299B",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\offline-native.json"
+  },
+  {
+    "sha256": "036479FB59A1F640E0379096453AAFE6939F96FE9CEBDE42A0AF522E386E8F33",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\pins.json"
+  },
+  {
+    "sha256": "BD7A8A2248D9D51C27064FBE1907C664EA2A7951608A4DC54EA9B4AD53464335",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\preservation.json"
+  },
+  {
+    "sha256": "2DA311A076A187D22DC4B56B938BF75DE12D18F5B7F5940152D25D7B2B07860D",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\REVIEW.md"
+  },
+  {
+    "sha256": "BC8666127A0F6733828AD3979F80F5C14207F61D579908521431A6547F82AA22",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\Run-ConnectionOffline.ps1"
+  },
+  {
+    "sha256": "B2EC09C829E5F6ECEA7E7B19459554F4BD292F245DC709DE07B32D4B2D715AC0",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\Set-PrivatePhase2Connection.ps1"
+  },
+  {
+    "sha256": "8BCE9B086B0535B891CC4C4990E39A6EDC4BC7F052363D45741F71F0FC19DB06",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\strict.tsconfig.json"
+  },
+  {
+    "sha256": "2E6CC2271B114953D0A03F969A292026442915095D66C2006E9354EE01D79F3B",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\Test-PrivateConnection.offline.ps1"
+  },
+  {
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\typescript.txt"
+  },
+  {
+    "sha256": "FF8673FFB337EC4E0A93AC4457C6EA283B82D2D76206BB5051096EDEC34F0736",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\verification.json"
+  },
+  {
+    "sha256": "022C9AE0E816C9FBE26E271628958E36A9D395C4D85766BD7A6CE34D6944007B",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\verify-package.offline.cjs"
+  },
+  {
+    "sha256": "78D5C77AB67E425363B88CB1FED9F45FF026785CE1D3336B975177D13AB7D3BD",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\verify-private-url.cjs"
+  }
+]

@@ -1,0 +1,10 @@
+const fs=require('node:fs'),path=require('node:path'),{createRequire}=require('node:module');
+const local=createRequire(path.resolve(__dirname,'../../server/package.json'));
+const env=local('dotenv').parse(fs.readFileSync('server/.env'));
+const client=new(local('pg').Client)({connectionString:env.DIRECT_URL,connectionTimeoutMillis:8000,query_timeout:8000});client.on('error',()=>{});
+(async()=>{try{await client.connect();await client.query('BEGIN READ ONLY');await client.query('SET LOCAL statement_timeout=5000');
+const enums=(await client.query("SELECT t.typname AS name,e.enumlabel AS value FROM pg_type t JOIN pg_namespace n ON n.oid=t.typnamespace JOIN pg_enum e ON e.enumtypid=t.oid WHERE n.nspname='public' ORDER BY t.typname,e.enumsortorder")).rows;
+const defaults=(await client.query("SELECT table_name,column_name,column_default FROM information_schema.columns WHERE table_schema='public' AND table_name='ContactMessage' AND column_name='status'")).rows;
+await client.query('ROLLBACK');fs.writeFileSync('output/phase2/database-catalog-details.json',JSON.stringify({readOnly:true,rolledBack:true,enums,defaults},null,2),{flag:'wx'});
+console.log(JSON.stringify({readOnly:true,rolledBack:true,enumTypes:new Set(enums.map(x=>x.name)).size,contactHasNEW:enums.some(x=>x.name==='ContactStatus'&&x.value==='NEW'),contactDefault:defaults[0]?.column_default}));
+}finally{await client.end();}})().catch(()=>{console.error('READONLY_CATALOG_DETAILS_STOP');process.exitCode=1;});

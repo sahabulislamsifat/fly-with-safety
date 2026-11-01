@@ -1,0 +1,24 @@
+{
+  "historicalCommercialResult": "FAILED",
+  "preservedAttemptFiles": 31,
+  "diffExit": 0,
+  "nativePS51": {
+    "passed": 10,
+    "skipped": 0,
+    "failed": 0,
+    "exit": 0,
+    "correctedRecordCount": 39,
+    "originalOuterCount": 1
+  },
+  "acceptedSqlInvariants": 39,
+  "powerShellParser": {
+    "files": 4,
+    "exit": 0,
+    "errors": 0
+  },
+  "historicalWrapperResult": "FAILED",
+  "browserExecuted": false,
+  "browserHostTypeScriptExit": 0,
+  "scopedLintExit": 0,
+  "databaseExecuted": false
+}

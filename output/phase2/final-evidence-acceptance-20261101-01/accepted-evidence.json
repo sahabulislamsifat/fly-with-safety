@@ -1,0 +1,55 @@
+{
+    "composedBusinessEvidence":  true,
+    "acceptedUTC":  "2026-11-01T16:44:33.3529926Z",
+    "passed":  true,
+    "historicalWrapperResult":  "FAILED",
+    "evidenceHashes":  [
+                           {
+                               "sha256":  "04549AA32509D2E67FD91F6A10F84C4D6F4657E886EDC758ABA8AD267BFB0F9F",
+                               "path":  "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\attempt-started.json"
+                           },
+                           {
+                               "sha256":  "BC6C882A0E1484FF4E4D135D2835BEE7B578AC8873B7094F9C7A888093CD1722",
+                               "path":  "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\invariant-observations.json"
+                           },
+                           {
+                               "sha256":  "68DA947DD51FFAA6D2B49E960C0309D93088F063759707A6F39E96F4CBFFE79F",
+                               "path":  "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\pins.json"
+                           },
+                           {
+                               "sha256":  "61CF8E89FBBFCE398C5306F0DEED53D590666618A1F98AA8FA7971F7157A9BF8",
+                               "path":  "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\prior-checkpoints.json"
+                           },
+                           {
+                               "sha256":  "E7F0925E1F7C9D357F1D80AB81C765DAF6A9945FFE38607558E40B8486F5A7E4",
+                               "path":  "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\readonly-output.txt"
+                           },
+                           {
+                               "sha256":  "0E73F5B0D50ADACFA6FDF0D2D2C5EB9921DE1A5ADDD0CF203A569D9DBEB807D6",
+                               "path":  "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\result.json"
+                           },
+                           {
+                               "sha256":  "6D7931E9FCD4868305F985CDF7A7D04CE29237885369BB5B204B5566873D337B",
+                               "path":  "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\verify-final.readonly.sql"
+                           }
+                       ],
+    "readOnly":  true,
+    "sourceObservedUTC":  "2026-11-01T16:37:28.3315685Z",
+    "databaseReexecuted":  false,
+    "acceptedFromSavedEvidence":  true,
+    "checkedInvariants":  39,
+    "historicalVitestResult":  "FAILED",
+    "wrapperDefect":  "PS51_JSON_ARRAY_PIPELINE_CONTAINER_COUNT",
+    "businessOperationsRerun":  false,
+    "queryExit":  0,
+    "observedInventory":  {
+                              "notifications":  3,
+                              "passengers":  1,
+                              "users":  4,
+                              "sessions":  9,
+                              "idempotency":  1,
+                              "bookings":  1,
+                              "history":  4
+                          },
+    "statusActor":  "STAFF_EMAIL"
+}

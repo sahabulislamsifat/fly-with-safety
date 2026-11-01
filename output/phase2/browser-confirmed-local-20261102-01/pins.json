@@ -1,0 +1,826 @@
+[
+  {
+    "sha256": "8490398F5E0082772DFB0AE5A6EBDFF98A97696A20CB9778B4F82EEC79B6D0A1",
+    "path": "C:\\Program Files\\nodejs\\node.exe"
+  },
+  {
+    "sha256": "39DB22F579ACF5639BBB17A261408DEBBDE03F4692C0C439E77E7F13AEBA74D6",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\node_modules\\vitest\\vitest.mjs"
+  },
+  {
+    "sha256": "EFDA6A0CD3D01B2503E4CC1557F8ABA2807664DB545A742E52EACA60A3B2E1CB",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\prisma\\migrations\\20260926202822_init\\migration.sql"
+  },
+  {
+    "sha256": "AE3BCD7668F026858EE7E43CBCEB9955C451A1BF648520E6AFB7814CE2CC7921",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\prisma\\migrations\\20260927082715_full_schema\\migration.sql"
+  },
+  {
+    "sha256": "E1EB929668D33CBE94F07E7512CB7174084150C50683A2E15F5709509B53E1B4",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\prisma\\migrations\\20261009000000_auth_sessions_and_password_resets\\migration.sql"
+  },
+  {
+    "sha256": "0316F0857663D04900E1CEAE1E305490A9B97E49192F9AAD2F74BB2F494C6706",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\prisma\\migrations\\20261011000000_inquiry_idempotency\\migration.sql"
+  },
+  {
+    "sha256": "1ECC18D0E4381CDF0489A9919F61B58C3F9F1A3BD102303CCF1FA5F81E14ECA2",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\prisma\\migrations\\20261011120000_notification_outbox\\migration.sql"
+  },
+  {
+    "sha256": "4C9AF2C97DD22A88CB3B7E5FE5422AC1023BCC86FCDE999409033AC5180178A7",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\prisma\\migrations\\20261022000100_contact_status_new\\migration.sql"
+  },
+  {
+    "sha256": "BC10E7343B3C40769C43DEEE8B3164245319A9F35D7A3B50D4E3EE721895F32B",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\prisma\\migrations\\20261022000200_booking_contact_schema\\migration.sql"
+  },
+  {
+    "sha256": "60B262C2D5E60EC1820A01C95D7A9293854F4C2998C17BFEC56CCD2FD28120A0",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\prisma\\schema.prisma"
+  },
+  {
+    "sha256": "DD0A9A0D562B9126B84614C47A6A95BCCAD03ECCD37C841BB49F34B371670D2D",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\app.ts"
+  },
+  {
+    "sha256": "1D1402615E4929597E7A867906B45CD9E641928BC23DEF1689E8977B6CA9468A",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\config\\env.ts"
+  },
+  {
+    "sha256": "F2CBF4261A8C8092C431EF7B6E85A6392AC6E5252C134FC43FBA9F1C1B452B2E",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\config\\passport.ts"
+  },
+  {
+    "sha256": "122A58E5B6FAA79E8C165B9FC5CF29823EF703B73537C4BDAEFE9AFE7A52FFEC",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\controllers\\account.controller.ts"
+  },
+  {
+    "sha256": "46534B323FE22E93CF42E13253DF35DDBAB272EF86179C52CF6485075CA2069E",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\controllers\\airport.controller.ts"
+  },
+  {
+    "sha256": "EF64165990F9D24DC00574FAB242A5D80AE5BDBC0FB910774FE9A692371A3A63",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\controllers\\auth.controller.ts"
+  },
+  {
+    "sha256": "20D1AF74158951CC03D47F071FB06D02996837929A878C403E939C747A89F9FD",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\controllers\\booking-commercial.controller.ts"
+  },
+  {
+    "sha256": "94E6050E7CBE707F6F0F34A8D5B81CB6580FC59F3F1B79DD77DD0335F2B7E81B",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\controllers\\booking.controller.ts"
+  },
+  {
+    "sha256": "2A4818C3515A054E140FE655845A516C73397A7B71DC290049C870128D24ABA2",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\controllers\\compatible-outbox.controller.ts"
+  },
+  {
+    "sha256": "54B4D166B8103A3E3A7C65FD52EC4007324FFADF197D66FA13D6BFAC5B3B72D9",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\controllers\\contact.controller.ts"
+  },
+  {
+    "sha256": "9DF8C7FD87F48ECCF64CD6C22D5919D788C3435EC96F74904B6254B527DC4F83",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\controllers\\destination.controller.ts"
+  },
+  {
+    "sha256": "DFB88DA222EEA5A10DA5674242DB288322E25BB183E1AC434E621DFF9C64AF4F",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\controllers\\flight.controller.ts"
+  },
+  {
+    "sha256": "6AB406B0773E452B246230939AC2828CB5F64CE06C5758B921B5B304FEBC3EB7",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\controllers\\hotel.controller.ts"
+  },
+  {
+    "sha256": "57897B6C4FF4FB36DA3D845B459127053F0F6DD8AF92957C5EEACE128C33BB3F",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\controllers\\package.controller.ts"
+  },
+  {
+    "sha256": "3510054D271F0082E4067DB985505D676DF005261083943A2ED76812B7F9E162",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\controllers\\testimonial.controller.ts"
+  },
+  {
+    "sha256": "97F004B953463729AF7AC0DC2C4E750EF97C3D500EAAB68AAFD9034A69E5C9E4",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\controllers\\visa.controller.ts"
+  },
+  {
+    "sha256": "D5EB5865D4CBAA9985CC3CFB920B230CDCF3363F1E70903A08DC4BAAB80B0CE1",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\generated\\prisma\\client.d.ts"
+  },
+  {
+    "sha256": "B0537DE53ACB6A4FE87EBA90C26538E5328748F110C6CDFA4C658E6618E1B37D",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\generated\\prisma\\client.js"
+  },
+  {
+    "sha256": "D5EB5865D4CBAA9985CC3CFB920B230CDCF3363F1E70903A08DC4BAAB80B0CE1",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\generated\\prisma\\default.d.ts"
+  },
+  {
+    "sha256": "27F67F5742440CC51256289D9122F2ACB0715FBC346E2FD8FA9F1D9DC8C6E38D",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\generated\\prisma\\default.js"
+  },
+  {
+    "sha256": "7378DD41401BA1ACFF435B9C317A5B919A3D38479ED3DBD4A25C8B4FD623A224",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\generated\\prisma\\edge.d.ts"
+  },
+  {
+    "sha256": "6366F67E1E9263A824993E41AA07C928FE3CB63A313976AA6D4D8EC70519BAEC",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\generated\\prisma\\edge.js"
+  },
+  {
+    "sha256": "EBCA720345E13ECB7E9887826918B72EEBA03D853389046762BB7E57E19495E4",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\generated\\prisma\\index-browser.js"
+  },
+  {
+    "sha256": "FB4DD2AFCF008B14F1C7FDB3B0B2259312C1258E68BE470AA3B56B04A3A976E3",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\generated\\prisma\\index.d.ts"
+  },
+  {
+    "sha256": "95796FAB1A4EC062174F6A7A848738B5FC432DC833D2E4690254ACD3C133F26F",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\generated\\prisma\\index.js"
+  },
+  {
+    "sha256": "B2371D753AAD726DA699B0A3748071C67325FB673E7C7EEB3CD6CBE87FEF8CFE",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\generated\\prisma\\query_compiler_fast_bg.js"
+  },
+  {
+    "sha256": "E7BCD37E164457509EACEF7D577A66F15DF134FCE01EAEEA699789775535C9FD",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\generated\\prisma\\query_compiler_fast_bg.wasm-base64.js"
+  },
+  {
+    "sha256": "2E3533BC1651AA968A274740771D2189270BD9D28253708E887BFB9B70532AC5",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\generated\\prisma\\runtime\\client.d.ts"
+  },
+  {
+    "sha256": "CBCE5CCA44BE796F822C2D84748AA52430541A1A1D1574DA8A86456A2A8B21D7",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\generated\\prisma\\runtime\\client.js"
+  },
+  {
+    "sha256": "64604F63C6F4540EB43BC6C10C1E33D36F44391E24A51CDAB314DFED2BAB37B2",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\generated\\prisma\\runtime\\index-browser.d.ts"
+  },
+  {
+    "sha256": "96E3CB68F7AAF44959F05718489C0976D5A2C7B6A54AA1F0DB1DEEC7223B9BB4",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\generated\\prisma\\runtime\\index-browser.js"
+  },
+  {
+    "sha256": "BC0765C97569A96A6ABD835B538F33A83923119E4AFD5C79064F839E497ABDB5",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\generated\\prisma\\runtime\\wasm-compiler-edge.js"
+  },
+  {
+    "sha256": "C7BFDA67A8DAFD10B4A54BDD4F1451A5349098693003FBE4CB6749C6352AD3F0",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\lib\\logger.ts"
+  },
+  {
+    "sha256": "F4285907DA50D4189774C76C5F7C191ED53A254616B31679EF9FCB058DDADD3D",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\lib\\prisma.ts"
+  },
+  {
+    "sha256": "F4A6BD094E8AF6BDCBFEF7A662857DE85FF26DFBC3BF89DE860E40B1AD143313",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\lib\\request-context.ts"
+  },
+  {
+    "sha256": "6133FF051F2187C3BD89F7CE263A1E8873489841DE756C0CE597EFE7128A775E",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\middleware\\auth.middleware.ts"
+  },
+  {
+    "sha256": "6C021672A745F62CC9E334209A2F79FEE80E1B6545DE5C28CABF40E883F4BA3D",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\middleware\\error-handler.ts"
+  },
+  {
+    "sha256": "B5A566167F64FFAA547D3FA72D49295F78E136334460C83F4A9AF016641CA1DD",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\middleware\\idempotency.middleware.ts"
+  },
+  {
+    "sha256": "EA8481FB28E4BAEFD092FA4FDE89262CD32E3DEF90CB93644733B50070D615C4",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\middleware\\not-found.ts"
+  },
+  {
+    "sha256": "7FF2B8DAF7FBF7A44E76C9FFD9DC51401F5D7B58676FC386513894D5A16501F1",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\middleware\\oauth-state.ts"
+  },
+  {
+    "sha256": "FC547DC41346129662393877C4FDC3009376397FEDBB50D07015E98A89730167",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\middleware\\rate-limit.ts"
+  },
+  {
+    "sha256": "85FDEC0FDB57451D26BBD726C4046624FFA1C7D789064BA782CE4211F7A49AB5",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\middleware\\request-id.ts"
+  },
+  {
+    "sha256": "5349FE0C320E5F3A387DC5B04E7902DADF16DCB402602789D9ABFB9727C5ED61",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\middleware\\request-origin.ts"
+  },
+  {
+    "sha256": "E16D9CC8DAED1FFCC41B9AC236AA45C63B36E9F73633648C6ED88068B3FB3480",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\middleware\\validation.middleware.ts"
+  },
+  {
+    "sha256": "F192A3403041765E27D39C4E536528CD13E310F4E6F8D60AD9955D912A6358DB",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\routes\\account.routes.ts"
+  },
+  {
+    "sha256": "F7F35A21EF3DA21FC7694E6A5DDACD537FE0666050152AE6D21618FD2E65E83E",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\routes\\admin.routes.ts"
+  },
+  {
+    "sha256": "940345F22F731B51E407AA156591C32B0B48CCC99C4795580982C9E64EA624C2",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\routes\\airports.routes.ts"
+  },
+  {
+    "sha256": "F09AD3A3473E5D9C59622D55DA4D879E23D9F3EE81AF4AF58106C57453D76316",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\routes\\auth.routes.ts"
+  },
+  {
+    "sha256": "B4401684E69749B4FF39848EEE949214C2C0C3902621CA5461F5B7456C60E4D0",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\routes\\bookings.routes.ts"
+  },
+  {
+    "sha256": "A4DC70F594265CD33A206ECC50D7CB6A5E0F2D10462BC4CAEB5A62226B71E971",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\routes\\contact.routes.ts"
+  },
+  {
+    "sha256": "E2C0C34AE86F54C195B9B409B882CFDFF62E23428B979BFDAB5207CD75F1EC74",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\routes\\destinations.routes.ts"
+  },
+  {
+    "sha256": "814CD89997D94BE1F49F332493F7930D46764B353CFC1404FD7A2E3F04F507A2",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\routes\\flights.routes.ts"
+  },
+  {
+    "sha256": "1D6DFB7899D5CC9252CFBB0E25101D44B192EF2CEE6D214CF142F02451165A23",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\routes\\future-stubs.routes.ts"
+  },
+  {
+    "sha256": "F1AA4D0495F1AB2E3F43243CED4D790839F04EC0C98A24760E44B9F2D972BDB5",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\routes\\health.routes.ts"
+  },
+  {
+    "sha256": "06ADDEE66C4F9F7249C6260C9EE87F2185AEF3FF6DDD28E22F2773E86954A800",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\routes\\hotels.routes.ts"
+  },
+  {
+    "sha256": "837B10C34320174FD37FF65CD7067B31321659A9DCC8DD2F51D798C521079604",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\routes\\outbox-worker.routes.ts"
+  },
+  {
+    "sha256": "A425BB63908C429E14FE281854E4A1FD5EBE283E34416D82009CD964B66D4628",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\routes\\packages.routes.ts"
+  },
+  {
+    "sha256": "CAEA8D2588662C0D65A4AFED3E3EC4700C2EC83B09CB93D942D03829EA854A69",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\routes\\testimonials.routes.ts"
+  },
+  {
+    "sha256": "8A789BEE6B5BC41B18BF38A72BE18F4A0C7BAEEA6A118EAD5762A1C491E064A2",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\routes\\visa.routes.ts"
+  },
+  {
+    "sha256": "A014C4DB7E4A16B0B520E2F01D491E9EAC479583792AD640C558E2EFDF132F8C",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\security\\compatible-outbox.pg.ts"
+  },
+  {
+    "sha256": "6E0B102EB09D0F9A2541755E8D9544EDD338DD292257DC6B9FC3F7B44FCCB7E2",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\security\\enrollment-cutover.ts"
+  },
+  {
+    "sha256": "8CCDA0717C181C42997103EF549E20A54D69D35DFA3E103CA851781C84C99446",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\security\\idempotency-digest.ts"
+  },
+  {
+    "sha256": "6D4DCCDD92EA74FA4074E426FDA8DA21B55CA6D50FC024FC2506A53FB744E12C",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\security\\issuance-replay.ts"
+  },
+  {
+    "sha256": "627D2CEE51CDAEC7E72A23D41B4BBE708B04815A6C1B679993F454D000928A13",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\security\\logical-digest.ts"
+  },
+  {
+    "sha256": "4D01D0926B2144E6C5B0A5A5827EB2E0F3A7C390F3F33B919FF42A79D624A675",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\security\\notification-recovery.pg.ts"
+  },
+  {
+    "sha256": "D1DCE67CE3FD110524CF6697865CAB7ECDDC80CD0038DF0A36F09A719E77F090",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\security\\notification-recovery.ts"
+  },
+  {
+    "sha256": "6EF8C8C10F23F2C173B08BFE06316D898D98FBCEA0E29B84238D12AB28D236DA",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\security\\passenger-secrets.ts"
+  },
+  {
+    "sha256": "2C73A466AF1F7E9FA9C746BD591EAF5DC02C444AF8EF67F2461FC2D49286AD49",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\security\\protected-auth.pg.ts"
+  },
+  {
+    "sha256": "49A24FDBAA13DFE07B003B08A9C897D2A2BA882488777725799BF40D47538CF1",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\security\\protected-auth.ts"
+  },
+  {
+    "sha256": "D13BF6B44BE586DE061727D656C67E1B0505BBDCC16D9ACEA4BF850FA9556F87",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\security\\protected-envelope.ts"
+  },
+  {
+    "sha256": "94F6F0BB014AFE3A0461BAE635E08F0DCB67FE3FD49B5FB102CC65507EDD9ADF",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\security\\recovery-epoch.ts"
+  },
+  {
+    "sha256": "11DC65AB5B26183F1FD94234F23BD652B8A641E07E63D83278B2EFCA0B8E148B",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\security\\secret-data-plane.ts"
+  },
+  {
+    "sha256": "E89EBCE8260109338FB307BF14A3522F3709CD81A39656B1C7358AD9E60AE42B",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\server.ts"
+  },
+  {
+    "sha256": "7E49B181C7A490CCAF11CE81C8E2D18D4E8AEE20A535662A0AE07B5C8DA718AF",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\services\\account.service.ts"
+  },
+  {
+    "sha256": "B4A6541FCD9095A57BAEB9AFECC349AFA8E388D822E5410BC72C28D4BFCEFE44",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\services\\airport.service.ts"
+  },
+  {
+    "sha256": "0BB7E8E72BD221D55D2FC78F660F9E89328E90F75F39C14CEEF6B98841F2639E",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\services\\auth.service.ts"
+  },
+  {
+    "sha256": "5B20774A785028A5AF5069D136B3455291F258F23B4B65932AC0A4C8BC8CFB6A",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\services\\booking-commercial.service.ts"
+  },
+  {
+    "sha256": "BB4D57A1EB5151E9D82963F26672C599C5C36A5D47B3C5516F01BA4EA796D80B",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\services\\booking.service.ts"
+  },
+  {
+    "sha256": "24FD4C76F31B61E66BC5537145D07078FA1BF348F6E9D25193F0387622EDB849",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\services\\compatible-outbox.service.ts"
+  },
+  {
+    "sha256": "EFEF713514BA0989512B12FC86956639CB528D12DED5A009690E1CA031EE3D4E",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\services\\contact.service.ts"
+  },
+  {
+    "sha256": "64AD79E91A83C208DE8D95AE4BBD0EFCDB23B20AF547456C34DDA6DB0FC7185B",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\services\\destination.service.ts"
+  },
+  {
+    "sha256": "6CDEE07CFAD3EFB74907024BBAE42D4A04EF7CA8771E1DF94E1BEE4FAEA75858",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\services\\flight-aggregator.service.ts"
+  },
+  {
+    "sha256": "C9C404D9CFF1DDD512E0BE78336C60E5BF05E2A7500413A1378EE30627F117BD",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\services\\flight.service.ts"
+  },
+  {
+    "sha256": "173194A752BCB384BF18C92E539181A102926BE394E6D290E28D436CFEA873F3",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\services\\hotel.service.ts"
+  },
+  {
+    "sha256": "464AEDE40872D062981F8C53984E08097729E41EC004FE897138E0A731A0FD5A",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\services\\idempotency.service.ts"
+  },
+  {
+    "sha256": "E7D4E8973604C5AB26C2C9E0960227DDE536D5AE50E0C522239D05FCDE8E3D57",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\services\\inquiry-page-query.ts"
+  },
+  {
+    "sha256": "950AA955B990E82FD2E2269DB016D274D5468D8389B10661747D2B8DEA1334CF",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\services\\inquiry-status.service.ts"
+  },
+  {
+    "sha256": "9F5E407A51F6B18AA29F09E254E3F8724F397C381B20D69B5E6C2DE5F3C790B4",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\services\\notification.service.ts"
+  },
+  {
+    "sha256": "270273CE702FEAB19A195F3EBD3292943176E809E5AF06025DD9D86763F7DF41",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\services\\outbox.service.ts"
+  },
+  {
+    "sha256": "F7D7958D911579496EB153CFB3620D63645F7117795B1B78DA53BE7CD7AA9162",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\services\\package.service.ts"
+  },
+  {
+    "sha256": "E844B59C9887145CDBD9028DE5EF170CFE5824E52EA9242D6C372D45139F3465",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\services\\protected-auth.service.ts"
+  },
+  {
+    "sha256": "CC22658CA440D0B598AA43A051424D26A90534A1BE9F5BEEE06728474E005E35",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\services\\protected-phase1.composition.ts"
+  },
+  {
+    "sha256": "9D6F937875D46F7E9850125B1F5062E2CB9D68F0F5FA20885576E3B0B6D01C3D",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\services\\providers\\flight.provider.ts"
+  },
+  {
+    "sha256": "2FF3EB639A5098C45AF455CE8060921F8ADCAB2181FFB1B2D5174F4E1008E9B6",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\services\\providers\\hotel.provider.ts"
+  },
+  {
+    "sha256": "5E470A0A45E40AF4ADA3408651789610B35801AAA3988E1BCFF6BD73EC8033DB",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\services\\providers\\mock-flight.provider.ts"
+  },
+  {
+    "sha256": "843713D15EE4B25B2579637C67CDD05D9ADBFE4545989031C2F59470C421EDC8",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\services\\providers\\mock-hotel.provider.ts"
+  },
+  {
+    "sha256": "B181E48D41CE78683ADD073530FCCCE7B01F0161936F14BD5928EB15527A138C",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\services\\testimonial.service.ts"
+  },
+  {
+    "sha256": "066F989F3431FD2878DA2A3DFE693D5850D5C8A6EBD5BD7DA3A5676BAD7690FA",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\services\\visa.service.ts"
+  },
+  {
+    "sha256": "16ACC6456DCA34588F9C0ADE85442C1403435C511DB28AB20D08BBE3C522E6C5",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\utils\\booking-dto.ts"
+  },
+  {
+    "sha256": "0C09D8AC652439F7064C37AA5EDE9FBCAE42CDEB8CF15B7A1AFFD233456B5583",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\utils\\error-fields.ts"
+  },
+  {
+    "sha256": "BCDA3E9F567E7A7D5063A3614129FF93FD53661866D16B462E8900CB2CE55E92",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\utils\\errors.ts"
+  },
+  {
+    "sha256": "91C2D81C35FE6D6BBE39DC418B272BADA3D74484CC58F25CD8DE3D3DBB8D005D",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\utils\\helpers.ts"
+  },
+  {
+    "sha256": "34B0A7198818BDC20166195EE10FA6538C952EEF696F3E8D2F3E998BE855B416",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\utils\\response.ts"
+  },
+  {
+    "sha256": "008773DC1DBF1AC3EFAE8F9C56F771A3C614FED2ADFE565B5C8FF294B3FDEB59",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\utils\\status-transitions.ts"
+  },
+  {
+    "sha256": "196EC670DDF4284A1B5D72DED25168A1915A977928DE51F9974F112266FA515B",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\validators\\account.schemas.ts"
+  },
+  {
+    "sha256": "397F0E4EB936C391649C26AEE1EEA14473A493007B53762569B57332740808E2",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\validators\\admin.schemas.ts"
+  },
+  {
+    "sha256": "D8DDADFDB92A52E3E22F09793D03ED18B5BC73FC50E82000FBA808816A214221",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\validators\\auth.schemas.ts"
+  },
+  {
+    "sha256": "45A40880761674B1F3AA977D445AF82F6A9D815EFB0519F566B829E55AD30E63",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\validators\\booking.schemas.ts"
+  },
+  {
+    "sha256": "14A92905877A135BC91326B9323F7D2277D2A200E498F952EA76F1681A185D1D",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\validators\\contact.schemas.ts"
+  },
+  {
+    "sha256": "6BCDC3FC69CBB09F6123B58A75D6BCD9B3A51095C3990708317ED326D0651617",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\validators\\flight.schemas.ts"
+  },
+  {
+    "sha256": "982078CD25AF0B3E02A89C577A13FD49EBD82E1BB9853E69E06FF01D96CCAA55",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\validators\\hotel.schemas.ts"
+  },
+  {
+    "sha256": "512D60473F30D13DE7B999D71E7D311FEB865E3F39DFCB74B4A1DE6C4E213B84",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\validators\\inquiry-query.schemas.ts"
+  },
+  {
+    "sha256": "EA629BC44B7CED0B80429B8CD83B14BCA231593083A81826CE5CB68C42ADD82E",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\validators\\package.schemas.ts"
+  },
+  {
+    "sha256": "03BCD23C786D70C88B339484CE1E55BA6097697BA11601B6E3C092C7E1D95B89",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\src\\validators\\visa.schemas.ts"
+  },
+  {
+    "sha256": "B5C72B2E26AE0C1D8C8D9BF52CE08C19C07E9DEF399FFC42D67B0DFA8B41DBE0",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\test\\phase2-booking.pg.test.ts"
+  },
+  {
+    "sha256": "E3ECE8A8BF27DF5BCEE24E281EA9DDAB7B4D3AE46140ACF7A7B37807DCC94A79",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\test\\phase2-booking.pg.vitest.config.ts"
+  },
+  {
+    "sha256": "4A3493415F9A8ABD8CA59A066E4288BA5BEC3FF5D165D6CA997F7D49EB394FA7",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\setup-review\\role.sql"
+  },
+  {
+    "sha256": "F454612D0B39454553D1F50AB20867AF4A5257BAC6F6EC66DAD53A01B0BEE0CD",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\test\\phase2-browser-host.pg.test.ts"
+  },
+  {
+    "sha256": "A8D25F930B1B6C2812476A17BCDF03B2733783E5AAA12D6CEC49BC68262D30EF",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\test\\phase2-browser-host.pg.vitest.config.ts"
+  },
+  {
+    "sha256": "5830E954E389AE9E338E0F5AAB8D1A97A08EE366F13A82C89A7D6F5E1135AA50",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-evidence-acceptance-20261101-01\\accepted-evidence.json"
+  },
+  {
+    "sha256": "1D472A358BBC1EE0E0522EAAEBBEF48BE5E4E04F73EB3AA564FC3A5F28CEA2C7",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-evidence-acceptance-20261101-01\\Read-FinalInvariantEvidence.ps1"
+  },
+  {
+    "sha256": "7167BD18DE8E995003BDF9E6C1E0CB3065C40ABFC9E5B6A1FB5D1735CF6149D0",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-evidence-acceptance-20261101-01\\Accept-SavedEvidence.offline.ps1"
+  },
+  {
+    "sha256": "04549AA32509D2E67FD91F6A10F84C4D6F4657E886EDC758ABA8AD267BFB0F9F",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\attempt-started.json"
+  },
+  {
+    "sha256": "BC6C882A0E1484FF4E4D135D2835BEE7B578AC8873B7094F9C7A888093CD1722",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\invariant-observations.json"
+  },
+  {
+    "sha256": "68DA947DD51FFAA6D2B49E960C0309D93088F063759707A6F39E96F4CBFFE79F",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\pins.json"
+  },
+  {
+    "sha256": "61CF8E89FBBFCE398C5306F0DEED53D590666618A1F98AA8FA7971F7157A9BF8",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\prior-checkpoints.json"
+  },
+  {
+    "sha256": "E7F0925E1F7C9D357F1D80AB81C765DAF6A9945FFE38607558E40B8486F5A7E4",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\readonly-output.txt"
+  },
+  {
+    "sha256": "0E73F5B0D50ADACFA6FDF0D2D2C5EB9921DE1A5ADDD0CF203A569D9DBEB807D6",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\result.json"
+  },
+  {
+    "sha256": "6D7931E9FCD4868305F985CDF7A7D04CE29237885369BB5B204B5566873D337B",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\verify-final.readonly.sql"
+  },
+  {
+    "sha256": "A5AF3190120766FBF274B76F4E5572BC7FC982461438768BA362766F32CA6081",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\test\\phase2-browser-preflight.ts"
+  },
+  {
+    "sha256": "D5E3CF0A38DEC743C4B9D9F4031A25BF4B35BEC1B9CFF3939678D1AEF528A294",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\test\\phase2-browser-preflight.test.ts"
+  },
+  {
+    "sha256": "46791FE40F6889534C880D5B5072651137A935DEFAF77963C8770E20E635E389",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\test\\phase2-browser-preflight.vitest.config.ts"
+  },
+  {
+    "sha256": "2D825C1C4DD7420F9E08FE442B7C35C114DAD1EEA0FB9E8308BA7D47D7053D59",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\REVIEW.md"
+  },
+  {
+    "sha256": "63B947A1EA348399859291AA3F5CCF4AB44083DC95C6FB25287AAD2D1DECD0E0",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\preservation.json"
+  },
+  {
+    "sha256": "F8DB48F0953D1BEBB259BE37C72DB37FF57BDA28E6774F18C76512F539D51566",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-journey-20261101-01\\attempt-started.json"
+  },
+  {
+    "sha256": "8A87D3C570DEEB94B300A2A161EDF089AB9ED52753884C1DDD5B677C8DF664E0",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-journey-20261101-01\\FOREGROUND.txt"
+  },
+  {
+    "sha256": "DDB0792C2F1DAD1D39A03FB358D9359472DAAD13BE312B76064755FC9660DDBB",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-journey-20261101-01\\host-result.json"
+  },
+  {
+    "sha256": "5E547A28DD414805D3408A89AB056FDFF361910607F303E394DE28E4C78A9047",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-journey-20261101-01\\Invoke-BrowserHost.ps1"
+  },
+  {
+    "sha256": "1349B207C49DC31AF851962F0D9B667857A52042F992CA27726F8D60403E9A0B",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-journey-20261101-01\\pins.json"
+  },
+  {
+    "sha256": "BCC407950A69CA3F52F45CBC371FB881B23209FF96FAE59F7ACCDB75EA5461F6",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-journey-20261101-01\\retained-records-unavailable.json"
+  },
+  {
+    "sha256": "0F751128089E703B2CACA7D98F49B33B23DA8B7D98AA85737105E0ED37DFD52D",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-journey-20261101-01\\REVIEW.md"
+  },
+  {
+    "sha256": "FD903B05DF75B684E8716CAD99DDA7C7E7B8E427583577700653C37DBFD66DD5",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\original-source\\phase2-browser-host.pg.test.ts"
+  },
+  {
+    "sha256": "CC9FA040CC8BC370E49D9438D23BED9FAEB9C5D926F87D45FAD5C45985F1DE56",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\attempt-started.json"
+  },
+  {
+    "sha256": "210C5DBAF98A3F86376275FFBF5BC9838687A8246D3CB31B79880835D53A0EE5",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\bundle.txt"
+  },
+  {
+    "sha256": "D6E00C2D1205C710C368F4892B10F3C0D780ECE04DB04855E18E4F45AB6B22E3",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\caller-result.json"
+  },
+  {
+    "sha256": "644574DA144320778F6107B49CC2178E11E9DECAA60F5FB3D866BBD694E2360D",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\finalization.json"
+  },
+  {
+    "sha256": "BBDCDD1B9C4A56FF5BC251BF86A30319D6945C057126D650DE21B2052DBECC6A",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\FOREGROUND-AFTER-APPROVAL.txt"
+  },
+  {
+    "sha256": "1C9F8B82036B0B50CE49ECAA6154D472DE572A2589DBAFBEEBF576BDAA42FD58",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\host-journal.jsonl"
+  },
+  {
+    "sha256": "C84AFE7721ED178A1EBE597B0C036E20D284BFE2FA64F488CE7614AC7E9DAD35",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\host-result.json"
+  },
+  {
+    "sha256": "55FA0FF3023A1DF635A6208306BCC7624C568CEED8C57BAEAD15E0302C0C711D",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\host-stdout.txt"
+  },
+  {
+    "sha256": "98959C549CF7F08B5E89E8E23D00E356D7BCF225938D91342C0860293A4F7CDD",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\Invoke-BrowserHost.ps1"
+  },
+  {
+    "sha256": "523BFCB87143DE1E48986BAEBFE9282660820B5CD12B04FF8167A0042F1A99BE",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\lint.txt"
+  },
+  {
+    "sha256": "65F4808125CB5CE75CF5A6F87696A235002A11EBAA4955E5142799A8E8DD4CD5",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\native.txt"
+  },
+  {
+    "sha256": "C58449A3D4BE30F763D782EE3C0648BEE4191D201D1AC2C1653CD97FA8A887D9",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\offline-bundle.json"
+  },
+  {
+    "sha256": "3DFF52F263A0638F573517A62E248449DDCC9BFAB0BE910AB5E70D7A71C999B2",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\offline-native.json"
+  },
+  {
+    "sha256": "3C3BD9FF5351AD26178638509EFD7286B327F94DE14DA39A7FEB01720E66423F",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\pins.json"
+  },
+  {
+    "sha256": "457C104B5C4BECFE66C5597A557C78DC6501D1CAC2ABB2EEA6922E5366E1696B",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\strict.tsconfig.json"
+  },
+  {
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\typescript.txt"
+  },
+  {
+    "sha256": "CAD3AD53B9523ED36F72E1EC7196D254DEF7A601C98506FB3C2F5C0E373984B2",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\verification.json"
+  },
+  {
+    "sha256": "EF6AAD57FB44A29BBC155048C7ABE28E16E6A947332C4EA65E897EEAB34414C8",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\verify-review.offline.cjs"
+  },
+  {
+    "sha256": "AD0E1A59D33ACD5ACAB65208B3805A909C29F57E27E833129768269C6EB56539",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\vitest-result.json"
+  },
+  {
+    "sha256": "B2EC09C829E5F6ECEA7E7B19459554F4BD292F245DC709DE07B32D4B2D715AC0",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\Set-PrivatePhase2Connection.ps1"
+  },
+  {
+    "sha256": "78D5C77AB67E425363B88CB1FED9F45FF026785CE1D3336B975177D13AB7D3BD",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\verify-private-url.cjs"
+  },
+  {
+    "sha256": "2E09DEA9B28C774209CF67FFD77E9C926A4D16F1CC4266CB9D4BA51C1C43F1D8",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\credential-preflight.readonly.sql"
+  },
+  {
+    "sha256": "BD7A8A2248D9D51C27064FBE1907C664EA2A7951608A4DC54EA9B4AD53464335",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\preservation.json"
+  },
+  {
+    "sha256": "2DA311A076A187D22DC4B56B938BF75DE12D18F5B7F5940152D25D7B2B07860D",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\REVIEW.md"
+  },
+  {
+    "sha256": "9FACA546867AEFB9EB09B4E526EB9D30A60DB67794ED80EB5773B93B20CAE778",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\test\\phase2-browser-connection.test.ts"
+  },
+  {
+    "sha256": "9CFE15E795F53DDCA36A823CD4C37844ED2CC5EA83510238A9641FD0F16248B3",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\test\\phase2-browser-connection.vitest.config.ts"
+  },
+  {
+    "sha256": "FF1F67F6120E1F6B66A052AFC6DBAB0FE40DB399636CFC684A70C9522CD0B4FE",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-recovery-20261101-01\\Invoke-Phase2Recovery.ps1"
+  },
+  {
+    "sha256": "2E09DEA9B28C774209CF67FFD77E9C926A4D16F1CC4266CB9D4BA51C1C43F1D8",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-recovery-20261101-01\\credential-preflight.readonly.sql"
+  },
+  {
+    "sha256": "78D5C77AB67E425363B88CB1FED9F45FF026785CE1D3336B975177D13AB7D3BD",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-recovery-20261101-01\\verify-private-url.cjs"
+  },
+  {
+    "sha256": "8AA8A8BCFAF76696F40743EFB9D16924412EBB900FECA26F64EF336E96686450",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-recovery-20261101-01\\identity-diagnostic.json"
+  },
+  {
+    "sha256": "F8CFCCBBFB0A307420BAA5F421D33F1F77FA406B489F9ABAD870BECD6ECB56F7",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-recovery-20261101-01\\result.json"
+  },
+  {
+    "sha256": "945EB0BBF8475A7FB0C863D85E36F2E15CF6B2D9FADB4D617BE4E59D4BB17BB0",
+    "path": "C:\\Program Files\\PostgreSQL\\18\\bin\\psql.exe"
+  },
+  {
+    "sha256": "5B1843025C5D2990FBC2D3A7C737721EE46E5C5F596885A2D8F02341B7BE96C8",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\attempt-started.json"
+  },
+  {
+    "sha256": "26DF900CA499B2EE8EE15BEEB6D9CEDE6F627263D668E3927CDDD657AE5EEBE6",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\BROWSER-CHECKS.md"
+  },
+  {
+    "sha256": "0477ED878A78C5BE0C8395F3044734DB08D46E9AB8658F6A2AFEFBFCF985B689",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\bundle.txt"
+  },
+  {
+    "sha256": "F33094B0DE16CF698E60D64AE33BB4578CB62540B23D6B5259BB7B1717B51E9F",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\caller-result.json"
+  },
+  {
+    "sha256": "99C6AF992C1FAE45DD6207D2E98F4CCEE712BBDCAA202796C540DD8EE2556DB5",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\FOREGROUND-AFTER-APPROVAL.txt"
+  },
+  {
+    "sha256": "56E735DD8815E74243FE10584C2E185E8CDFCAFE4507CDA2FB05581A4DF8F429",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\Invoke-BrowserAuthParity.ps1"
+  },
+  {
+    "sha256": "523BFCB87143DE1E48986BAEBFE9282660820B5CD12B04FF8167A0042F1A99BE",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\lint.txt"
+  },
+  {
+    "sha256": "95D819604C719FCCE1E6BFCA04E244DE2B7F371FA29FADF1288096F9C65DEEDA",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\native.txt"
+  },
+  {
+    "sha256": "5FAF0B33A491E2FA87124F5D3946711C10AC998212273B72CC1CA3985D29D41D",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\offline-bundle.json"
+  },
+  {
+    "sha256": "6368591E9A631D951ABBEBFAA868864825AC5888FC1BB8345182D115A722299B",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\offline-native.json"
+  },
+  {
+    "sha256": "036479FB59A1F640E0379096453AAFE6939F96FE9CEBDE42A0AF522E386E8F33",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\pins.json"
+  },
+  {
+    "sha256": "BC8666127A0F6733828AD3979F80F5C14207F61D579908521431A6547F82AA22",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\Run-ConnectionOffline.ps1"
+  },
+  {
+    "sha256": "8BCE9B086B0535B891CC4C4990E39A6EDC4BC7F052363D45741F71F0FC19DB06",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\strict.tsconfig.json"
+  },
+  {
+    "sha256": "2E6CC2271B114953D0A03F969A292026442915095D66C2006E9354EE01D79F3B",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\Test-PrivateConnection.offline.ps1"
+  },
+  {
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\typescript.txt"
+  },
+  {
+    "sha256": "FF8673FFB337EC4E0A93AC4457C6EA283B82D2D76206BB5051096EDEC34F0736",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\verification.json"
+  },
+  {
+    "sha256": "022C9AE0E816C9FBE26E271628958E36A9D395C4D85766BD7A6CE34D6944007B",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-auth-parity-20261101-01\\verify-package.offline.cjs"
+  },
+  {
+    "sha256": "B2EC09C829E5F6ECEA7E7B19459554F4BD292F245DC709DE07B32D4B2D715AC0",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-confirmed-local-20261102-01\\Set-PrivatePhase2Connection.ps1"
+  },
+  {
+    "sha256": "78D5C77AB67E425363B88CB1FED9F45FF026785CE1D3336B975177D13AB7D3BD",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-confirmed-local-20261102-01\\verify-private-url.cjs"
+  },
+  {
+    "sha256": "2E09DEA9B28C774209CF67FFD77E9C926A4D16F1CC4266CB9D4BA51C1C43F1D8",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-confirmed-local-20261102-01\\credential-preflight.readonly.sql"
+  },
+  {
+    "sha256": "8637DE33C18F0DB8F183BD68FCCBBE306A34931E34A90E4B73DCE8B4FA1E2A74",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-confirmed-local-20261102-01\\preservation.json"
+  },
+  {
+    "sha256": "088EAACB5EFAB9D166E16064596DF3D7B1BC4AE45957716B9353D8FFEBF1F91D",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-confirmed-local-20261102-01\\REVIEW.md"
+  }
+]

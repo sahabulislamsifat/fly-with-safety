@@ -1,0 +1,20 @@
+[
+  {
+    "path": "/api/v1/account/bookings",
+    "status": 401,
+    "expected": 401,
+    "passed": true
+  },
+  {
+    "path": "/api/v1/admin/bookings",
+    "status": 401,
+    "expected": 401,
+    "passed": true
+  },
+  {
+    "path": "/api/v1/account/bookings/FWS-2026-53YFS3",
+    "status": 401,
+    "expected": 401,
+    "passed": true
+  }
+]
