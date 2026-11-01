@@ -1,0 +1,13 @@
+# Phase 2 identity failure: bounded read-only investigation
+
+Original attempt is spent. Preserve `integration-review` unchanged. Original suite: 0 passed, 1 failed, 0 skipped, exit 1, at identity query/assertion. The catch discarded the original exception. No stdout/stderr capture or fixture ledger exists in that directory. `fixturesRetained:true` is an unconditional caller flag, not evidence of committed records. Source never reached fixture planning/writes; actual clean database state is still unverified.
+
+This separate diagnostic is within the owner's read-only investigation authorization, NOT a replacement synthetic integration execution. It must be run manually in the existing private interactive Windows PowerShell 5.1 console. Use only the existing restricted role password. No account password is needed. No new window, policy bypass, retry, fixture, mutation, grant, migration or cleanup.
+
+The server receives startup options enforcing `default_transaction_read_only=on`, statement timeout 5000ms and lock timeout 2000ms. The diagnostic verifies read-only state, executes the byte-identical original identity SELECT through Prisma, checks session identity, then reads fixed aggregate counts for User, Session, Booking, BookingPassenger, BookingStatusHistory, IdempotencyRecord, NotificationOutbox and seven migration names. It requires zero application rows and seven migrations. No record values, secret fields or IDs are selected. If identity cannot be confirmed, later queries do not run.
+
+Persist only fixed stage names, monotonic elapsed time, identity-match booleans, bounded aggregate counts and allowlisted Prisma/SQLSTATE/network codes. Raw exception messages, stacks, SQL, parameters, URL, credentials and arbitrary error objects are not forwarded. Operation and disconnect failures are separate. If a fresh read-only diagnostic passes, this establishes current identity/empty state, not the missing original cause or business integration acceptance.
+
+31 diagnostic regressions passed independently under bundled and native loaders. Strict TypeScript and scoped ESLint exit 0. Actual Windows PowerShell 5.1.26100.9818 parser: zero errors. Original 127 source pins still match. New manifest has 138 entries including historical failure evidence and the diagnostic files. No live diagnostic was executed during preparation.
+
+Next owner action: use `FOREGROUND-READONLY.txt` once, then supply `Phase2 read-only identity diagnostic exit:` and sanitized diagnostic/PASS/STOP output. On any failure preserve the new directory. A future fixture-mutating integration attempt requires a new reviewed identity and explicit owner approval after diagnosis; neither this command nor the old approval authorizes it.

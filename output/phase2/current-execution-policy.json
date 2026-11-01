@@ -1,0 +1,1 @@
+{"planning":"compact","context_depth":"dependency","verification_depth":"impact","delegation":"none","reason_codes":["existing-live-gate-awaiting-private-execution","missing-readonly-passenger-view"],"databaseOperations":false,"pinnedApiSourceEdits":false}

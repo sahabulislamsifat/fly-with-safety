@@ -8,7 +8,11 @@ function trimTrailingSlash(url: string): string {
 
 function isLocalBrowser(): boolean {
   if (typeof window === 'undefined') return false;
-  return window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+  return isLocalHostname(window.location.hostname);
+}
+
+function isLocalHostname(hostname: string): boolean {
+  return hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '[::1]' || hostname.endsWith('.localhost');
 }
 
 function productionApiBaseUrl(): string {
@@ -23,7 +27,16 @@ function productionApiBaseUrl(): string {
 
 function localApiBaseUrl(): string {
   const configuredUrl = process.env.NEXT_PUBLIC_LOCAL_API_BASE_URL;
-  if (configuredUrl) return trimTrailingSlash(configuredUrl);
+  if (configuredUrl) {
+    let url: URL;
+    try { url = new URL(trimTrailingSlash(configuredUrl)); }
+    catch { throw new ApiError('LOCAL_API_CONFIG', 'Invalid isolated local API configuration.', 0); }
+    if (!isLocalHostname(url.hostname) || !['http:', 'https:'].includes(url.protocol) ||
+        url.username || url.password || url.search || url.hash || url.pathname !== '/api/v1') {
+      throw new ApiError('LOCAL_API_CONFIG', 'Invalid isolated local API configuration.', 0);
+    }
+    return trimTrailingSlash(url.href);
+  }
   return `http://${window.location.hostname}:5000/api/v1`;
 }
 
@@ -46,6 +59,10 @@ async function isHealthy(apiBaseUrl: string): Promise<boolean> {
 
 /** Resolves before sending a request. Requests are never replayed against another API. */
 export async function resolveApiBaseUrl(): Promise<string> {
+  // An explicitly selected synthetic backend must never fall back to production,
+  // including local development SSR. Unconfigured local browsing keeps its existing resolver.
+  if (process.env.NEXT_PUBLIC_LOCAL_API_BASE_URL &&
+      (isLocalBrowser() || (typeof window === 'undefined' && process.env.NODE_ENV !== 'production'))) return localApiBaseUrl();
   if (!isLocalBrowser()) return productionApiBaseUrl();
   if (cachedApiBaseUrl && Date.now() < cacheExpiresAt) return cachedApiBaseUrl;
   if (pendingResolution) return pendingResolution;

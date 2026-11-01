@@ -1,0 +1,28 @@
+{
+  "accepted": true,
+  "reviewedUTC": "2026-11-01T13:25:36.5335378Z",
+  "actualReviewFinishedUTC": "2026-11-01T13:00:53.2596484Z",
+  "source": "output/phase2/quotation-review-20261101-01/readonly-output.txt",
+  "sourceSha256": "32D18D20154A26CFE8E5F485B154363A72B75975DD01244A278329FC5638F1C7",
+  "actualQueryExit": 0,
+  "database": "flywithsafe_phase2_booking_integration",
+  "role": "flywithsafe_phase2_booking_test",
+  "timeZone": "Asia/Dhaka",
+  "counts": {
+    "users": 4,
+    "sessions": 4,
+    "bookings": 1,
+    "passengers": 1,
+    "history": 1,
+    "idempotency": 1,
+    "notifications": 1
+  },
+  "matchedCountsEqualTotal": true,
+  "bookingStatus": "PENDING",
+  "totalPrice": 0,
+  "commercialPresent": false,
+  "quotations": 0,
+  "payments": 0,
+  "acceptedQuotations": 0,
+  "liveContinuationAuthorized": false
+}

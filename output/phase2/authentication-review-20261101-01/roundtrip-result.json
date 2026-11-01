@@ -1,0 +1,9 @@
+﻿{
+    "passed":  true,
+    "scope":  "offline-construction-only",
+    "powerShell":  "5.1.26100.9818",
+    "syntheticCases":  10,
+    "actualCredentialsRead":  false,
+    "connectionPathsChecked":  30,
+    "databaseConnections":  0
+}

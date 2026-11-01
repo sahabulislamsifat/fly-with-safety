@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "checks": 182,
+  "pins": 144,
+  "registeredLiveCases": 1,
+  "caseTimeoutMs": 60000,
+  "dispatchedLiveCases": 0,
+  "databaseConnections": 0,
+  "originalRecoveryEvidencePreserved": true,
+  "expectedInitialRows": 13,
+  "plannedMaximumNewRows": 10,
+  "expectedSuccessRows": 23,
+  "createsUserOrBooking": false
+}

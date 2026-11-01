@@ -1,0 +1,16 @@
+{
+  "retainedSnapshotCounts": {
+    "idempotency": 1,
+    "users": 4,
+    "sessions": 4,
+    "notifications": 1,
+    "bookings": 1,
+    "passengers": 1,
+    "history": 1
+  },
+  "beforeAssertions": 43,
+  "afterAssertions": 43,
+  "sqlSha256": "CDB1FC4C76AB0C586F2C7ABF2A7B6894F159FE40F8AF782CA969AC1D2A373A6A",
+  "ledgerSha256": "2F688CF6A9D7994DE2929C14F55BEA8063E2905D6A95A949EEC754B2B045D8C3",
+  "historicalEvidenceUnchanged": true
+}

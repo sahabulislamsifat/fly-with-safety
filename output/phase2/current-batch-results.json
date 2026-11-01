@@ -1,0 +1,94 @@
+{
+  "clientDate": "2026-11-01",
+  "codeOfflinePass": true,
+  "phase1": "G7_ACCEPTED_UNCHANGED",
+  "phase2Accepted": false,
+  "setupApproved": true,
+  "setupExecutionVerified": false,
+  "realPostgresProofExecuted": false,
+  "totals": {
+    "bundle": {
+      "passed": 144,
+      "failed": 0,
+      "skipped": 1
+    },
+    "native": {
+      "passed": 144,
+      "failed": 0,
+      "skipped": 1
+    }
+  },
+  "typeScript": {
+    "strict": 0,
+    "server": 0,
+    "client": 0
+  },
+  "prismaValidation": 0,
+  "lint": {
+    "passed": true,
+    "introducedErrors": 0,
+    "introducedWarnings": 0,
+    "results": [
+      {
+        "file": "server/src/services/booking.service.ts",
+        "currentErrors": 6,
+        "currentWarnings": 2,
+        "baselineErrors": 6,
+        "baselineWarnings": 2
+      },
+      {
+        "file": "server/src/utils/booking-dto.ts",
+        "currentErrors": 1,
+        "currentWarnings": 0,
+        "baselineErrors": 1,
+        "baselineWarnings": 0
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "server/src/services/booking-commercial.service.ts",
+      "sha256": "17235c269f0562ac9f08e4773d80df14e830c2569e899233cf6c4810ba25a9da"
+    },
+    {
+      "path": "server/src/services/booking.service.ts",
+      "sha256": "bb4d57a1eb5151e9d82963f26672c599c5c36a5d47b3c5516f01ba4ea796d80b"
+    },
+    {
+      "path": "server/src/utils/booking-dto.ts",
+      "sha256": "16acc6456dca34588f9c0ade85442c1403435c511db28ab20d08bbe3c522e6c5"
+    },
+    {
+      "path": "server/src/controllers/booking.controller.ts",
+      "sha256": "94e6050e7cbe707f6f0f34a8d5b81cb6580fc59f3f1b79dd77dd0335f2b7e81b"
+    },
+    {
+      "path": "server/src/validators/booking.schemas.ts",
+      "sha256": "45a40880761674b1f3aa977d445af82f6a9d815efb0519f566b829e55ad30e63"
+    },
+    {
+      "path": "client/src/components/account/AccountDashboard.tsx",
+      "sha256": "a6fee7a6c4e9cd3776a0fc6eb6c7b0235f4dbdb1a400d21ad177e757f03a3c55"
+    },
+    {
+      "path": "client/src/components/admin/AdminBookingsTab.tsx",
+      "sha256": "3f679015d2871bd3e8a41e62406e70f981576c849419c6cd53b5e7bc6d7f421e"
+    },
+    {
+      "path": "client/src/components/booking/BookingCommercialPanel.tsx",
+      "sha256": "44bdacb1fcdc70f36d50278affb2ff90c5f065397ea5f80a3f6f8e9b2a39c943"
+    },
+    {
+      "path": "client/src/lib/api/client.ts",
+      "sha256": "ba20babc731dc49e76d6c174e7b6756391adda4462aabf0bf6ff6859a088f79d"
+    },
+    {
+      "path": "client/src/lib/api/latest-request.ts",
+      "sha256": "3e7ec62d29637743956670dec93babe1487a542a5aae218889ce566d4ccfe4a2"
+    },
+    {
+      "path": "server/test/phase2-booking.pg.test.ts",
+      "sha256": "cb4e038892f8721b659fcf53c9ee7e6ad64185a36e77183261dd6b58710033f1"
+    }
+  ]
+}

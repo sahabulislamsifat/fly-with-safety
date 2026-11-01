@@ -1,0 +1,9 @@
+{
+ "extends": "../strict.tsconfig.json",
+ "include": [
+  "../../../server/test/phase2-commercial-continuation.pg.test.ts",
+  "../../../server/test/phase2-continuation-contract.test.ts",
+  "../../../server/test/phase2-identity-diagnostic.test.ts",
+  "../../../server/test/phase2-quotation-clock.test.ts"
+ ]
+}

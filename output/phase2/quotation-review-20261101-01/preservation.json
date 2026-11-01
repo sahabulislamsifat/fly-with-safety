@@ -1,0 +1,86 @@
+{
+  "reviewedUTC": "2026-11-01T12:50:36.3096583Z",
+  "oldAttemptEvidence": [
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-recovery-20261101-01\\attempt-started.json",
+      "sha256": "691B0F9E25BFD6FD9C1A50073E4CAFC9364382DE3B70413B89B5E4A43B47BD7E"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-recovery-20261101-01\\credential-preflight.readonly.sql",
+      "sha256": "2E09DEA9B28C774209CF67FFD77E9C926A4D16F1CC4266CB9D4BA51C1C43F1D8"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-recovery-20261101-01\\fixture-ledger.jsonl",
+      "sha256": "2F688CF6A9D7994DE2929C14F55BEA8063E2905D6A95A949EEC754B2B045D8C3"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-recovery-20261101-01\\FOREGROUND-AFTER-APPROVAL.txt",
+      "sha256": "5B880CE1C453B94BEAC43BACD0D9BD641C65D80DB99D0940E20863B6A7039338"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-recovery-20261101-01\\identity-diagnostic.json",
+      "sha256": "8AA8A8BCFAF76696F40743EFB9D16924412EBB900FECA26F64EF336E96686450"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-recovery-20261101-01\\identity-vitest-result.json",
+      "sha256": "BAF4B8B7892317819286F052DB6E84EE3B9EDE63422BC218235D33B84EA7EEDC"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-recovery-20261101-01\\Invoke-Phase2Recovery.ps1",
+      "sha256": "FF1F67F6120E1F6B66A052AFC6DBAB0FE40DB399636CFC684A70C9522CD0B4FE"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-recovery-20261101-01\\offline-guard-result.json",
+      "sha256": "4FBE9456A5C98348261397226E733721C4C812B4C11DEAAC02F250910BD7374B"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-recovery-20261101-01\\pins.json",
+      "sha256": "BF599CE85A79FA26D32A756A8244F363031AB269E28CCE68C7F15477CD893A2D"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-recovery-20261101-01\\result.json",
+      "sha256": "F8CFCCBBFB0A307420BAA5F421D33F1F77FA406B489F9ABAD870BECD6ECB56F7"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-recovery-20261101-01\\review-result.json",
+      "sha256": "299F98E0A87807DBE1283D20580BA74FC16336A732A0BF9270BB89072B51CBEA"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-recovery-20261101-01\\REVIEW.md",
+      "sha256": "DF6250E085A3FD857B2835808D2EC6362A170426954264412D30BFF255C20807"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-recovery-20261101-01\\verify-guards.offline.cjs",
+      "sha256": "F380E2E75569C953837F8F4BDA24B8E0F099BDE9872883038C9ACF8F4BF236A3"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-recovery-20261101-01\\verify-private-url.cjs",
+      "sha256": "78D5C77AB67E425363B88CB1FED9F45FF026785CE1D3336B975177D13AB7D3BD"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-recovery-20261101-01\\vitest-result.json",
+      "sha256": "F836A72A27EA2A23640CF13A2361B809321ECC2113F55D3E6F6F2B5BF80377A4"
+    }
+  ],
+  "sourceSnapshots": [
+    {
+      "path": "server/src/services/booking-commercial.service.ts",
+      "sha256": "17235C269F0562AC9F08E4773D80DF14E830C2569E899233CF6C4810BA25A9DA"
+    },
+    {
+      "path": "server/test/phase2-booking.pg.test.ts",
+      "sha256": "50047F0F967DCE3671BA0A8DEE0C78383F693CD2117D7D6150BFA6BCBAC68F2F"
+    },
+    {
+      "path": "server/test/phase2-identity-diagnostic.ts",
+      "sha256": "D00769F2B23DE3E563605C3A46D15B4D6785E7B85AB0058057C688ADBBBDF45E"
+    },
+    {
+      "path": "server/test/phase2-identity-diagnostic.test.ts",
+      "sha256": "CF8679F320A3C306EEAC9C29B91219E81FA20DB352778A036E5D68F7BAC0F7A2"
+    }
+  ],
+  "originalCause": "NOT_PRESERVED",
+  "mutationStage": "QUOTATION_UNRESOLVED",
+  "liveReadOnlyReviewExecuted": false
+}

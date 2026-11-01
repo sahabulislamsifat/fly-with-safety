@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "introducedErrors": 0,
+  "introducedWarnings": 0,
+  "results": [
+    {
+      "file": "server/src/services/booking.service.ts",
+      "currentErrors": 6,
+      "currentWarnings": 2,
+      "baselineErrors": 6,
+      "baselineWarnings": 2
+    },
+    {
+      "file": "server/src/utils/booking-dto.ts",
+      "currentErrors": 1,
+      "currentWarnings": 0,
+      "baselineErrors": 1,
+      "baselineWarnings": 0
+    }
+  ]
+}

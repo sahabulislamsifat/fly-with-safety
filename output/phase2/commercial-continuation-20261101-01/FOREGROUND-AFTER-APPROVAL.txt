@@ -1,0 +1,10 @@
+# PREPARED ONLY. Requires separate explicit owner approval for this new bounded continuation.
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p=Join-Path -Path 'E:\Programming\Project\fly-with-safety' -ChildPath 'output\phase2\commercial-continuation-20261101-01\Invoke-CommercialContinuation.ps1'
+ if(-not (Test-Path -LiteralPath $p -PathType Leaf)){throw 'STOP: reviewed continuation caller missing'}
+ if((Get-Item -LiteralPath $p -Stream * | Where-Object Stream -eq 'Zone.Identifier')){throw 'STOP: unexpected script zone marking'}
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne '1F0D7595377921A4404B53B733B3B2BDEDC9A62CF280B573A298ED7B23A22B0A'){throw 'STOP: caller integrity mismatch'}
+ & $p -OwnerApprovedRetainedContinuation
+}

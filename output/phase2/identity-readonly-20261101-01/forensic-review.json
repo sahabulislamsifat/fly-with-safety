@@ -1,0 +1,46 @@
+{
+  "reviewedUTC": "2026-11-01T12:04:54.7211207Z",
+  "originalPinsMatched": 127,
+  "originalAttempt": {
+    "startedUTC": "2026-11-01T11:53:14.406407Z",
+    "target": "flywithsafe_phase2_booking_integration",
+    "role": "flywithsafe_phase2_booking_test"
+  },
+  "originalResult": {
+    "finishedUTC": "2026-11-01T11:53:18.9960645Z",
+    "fixturesRetained": true,
+    "privilegedOperations": false,
+    "suiteExit": 1,
+    "passed": false
+  },
+  "originalEvidence": [
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-review\\attempt-started.json",
+      "sha256": "606CE052A6758090A4BA82F6BD22D2F56FD301F96AA2199EE30D4AD3DEA8557A"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-review\\result.json",
+      "sha256": "8F37D614C95F43AA9C99A9094A2DC1BA9B0D69EE7C7BB941346478F19610BA01"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-review\\vitest-result.json",
+      "sha256": "42CF8DF0ED62ABE6EBB535B0F8D024378BB51034FBBA11C6677C2A89D78C3FBC"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-review\\Invoke-Phase2Integration.ps1",
+      "sha256": "53D4C9B73264EB9703C36D4CBC18D96B1AE50A0CB8CB227A86B6916678D37A71"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-review\\pins.json",
+      "sha256": "B46824F561E7DF5D2362550FDA25E96DAC5261588FC0EEFD605F3790E044D808"
+    }
+  ],
+  "originalExceptionPreserved": false,
+  "fixtureLedgerExists": false,
+  "databaseCleanState": "UNVERIFIED_PENDING_READONLY",
+  "sourceEstablishedWriteStageReached": false,
+  "newDiagnosticExecuted": false,
+  "newPinCount": 138,
+  "newManifestSha256": "BBC432A5C4004CB2C2F979538385DA88BEE8BDDB103C041235ABDF5542512506",
+  "newCallerSha256": "1902A465DE06A3AF4635E8F0AE1B0AFE9B8EDF44146AA5ED0E3A019C11B69812"
+}

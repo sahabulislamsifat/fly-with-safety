@@ -45,7 +45,11 @@ export function bookingDTO(booking: Row, audience: 'admin' | 'customer' | 'guest
     }
     return passenger;
   });
-  if (Array.isArray(booking.statusHistory)) result.statusHistory = booking.statusHistory.map((h: Row) =>
-    pick(h, admin ? ['id', 'fromStatus', 'toStatus', 'reason', 'changedBy', 'createdAt'] : ['id', 'fromStatus', 'toStatus', 'createdAt']));
+  if (Array.isArray(booking.statusHistory)) result.statusHistory = booking.statusHistory.map((h: Row) => ({
+    ...pick(h, admin ? ['id', 'fromStatus', 'toStatus', 'reason', 'changedBy', 'createdAt'] : ['id', 'fromStatus', 'toStatus', 'createdAt']),
+    // Only this fixed public business event may supplement the minimized customer timeline.
+    ...(!admin && audience === 'customer' && h.reason === 'Quotation accepted; awaiting staff processing'
+      ? { reason: 'Quotation accepted; awaiting staff processing' } : {}),
+  }));
   return result;
 }

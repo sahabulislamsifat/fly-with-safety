@@ -375,7 +375,8 @@ export async function updateBookingStatus(
   id: string,
   newStatus: 'PENDING' | 'CONFIRMED' | 'CANCELLED' | 'COMPLETED',
   reason?: string,
-  changedBy?: string
+  changedBy?: string,
+  expected?: { status?: string; updatedAt?: string }
 ) {
   let customerToNotify: { email: string; name: string; ref: string } | null = null;
 
@@ -395,6 +396,11 @@ export async function updateBookingStatus(
 
     if (booking.status === newStatus) {
       return booking;
+    }
+
+    if ((expected?.status && expected.status !== booking.status) ||
+      (expected?.updatedAt && +new Date(expected.updatedAt) !== +booking.updatedAt)) {
+      throw AppError.conflict('Booking changed; refresh before updating status');
     }
 
     if (!canTransitionStatus('booking', booking.status, newStatus)) {

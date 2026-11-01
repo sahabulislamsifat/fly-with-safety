@@ -1,0 +1,10 @@
+{
+  "setupAccepted": true,
+  "setupExit": 0,
+  "apiCaller": "53D4C9B73264EB9703C36D4CBC18D96B1AE50A0CB8CB227A86B6916678D37A71",
+  "apiPins": 127,
+  "apiAttemptPresent": false,
+  "apiResultPresent": false,
+  "browserHostStarted": false,
+  "databaseOperationByAgent": false
+}

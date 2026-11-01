@@ -1,0 +1,1 @@
+{"passed":false,"stage":"read-only-guard","elapsedMs":606,"proof":null,"identityComparison":null,"counts":null,"failure":{"classification":"DATABASE_AUTHENTICATION","prismaCode":"P2010","sqlState":"28P01","networkCode":null},"disconnectFailure":null,"readOnlyScope":true}

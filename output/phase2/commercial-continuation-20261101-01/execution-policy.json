@@ -1,0 +1,16 @@
+{
+  "planning": "compact",
+  "context_depth": "dependency",
+  "verification_depth": "impact",
+  "delegation": "none",
+  "reason_codes": [
+    "reuse-accepted-retained-fixtures",
+    "single-commercial-continuation"
+  ],
+  "allowedScope": [
+    "test-only continuation and diagnostics",
+    "evidence and owner-reviewed caller"
+  ],
+  "productionCodeChanges": false,
+  "databaseOperationsPerformed": false
+}

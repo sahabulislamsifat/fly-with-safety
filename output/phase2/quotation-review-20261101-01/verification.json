@@ -1,0 +1,81 @@
+{
+  "finishedUTC": "2026-11-01T12:56:35.1765227Z",
+  "reports": [
+    {
+      "loader": "bundle",
+      "suites": [
+        {
+          "suite": "clock",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "exit": 0
+        },
+        {
+          "suite": "diagnostic",
+          "passed": 33,
+          "failed": 0,
+          "skipped": 0,
+          "exit": 0
+        },
+        {
+          "suite": "commercial",
+          "passed": 60,
+          "failed": 0,
+          "skipped": 0,
+          "exit": 0
+        }
+      ],
+      "passed": 98.0,
+      "failed": 0.0,
+      "skipped": 0.0
+    },
+    {
+      "loader": "native",
+      "suites": [
+        {
+          "suite": "clock",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "exit": 0
+        },
+        {
+          "suite": "diagnostic",
+          "passed": 33,
+          "failed": 0,
+          "skipped": 0,
+          "exit": 0
+        },
+        {
+          "suite": "commercial",
+          "passed": 60,
+          "failed": 0,
+          "skipped": 0,
+          "exit": 0
+        }
+      ],
+      "passed": 98.0,
+      "failed": 0.0,
+      "skipped": 0.0
+    }
+  ],
+  "strictTypeScriptExit": 0,
+  "serverTypeScriptExit": 0,
+  "scopedEslintExit": 0,
+  "powerShellParserVersion": "5.1.26100.9818",
+  "powerShellParserErrors": 0,
+  "originalAssertions": 43,
+  "currentAssertions": 43,
+  "concurrency": 8,
+  "originalCaseTimeoutMs": 60000,
+  "historicalFailureEvidenceUnchanged": true,
+  "clockDefectReproducedOffline": true,
+  "liveFailureExactOperation": "UNRECOVERABLE_FROM_ORIGINAL_REPORT",
+  "liveCurrentState": "READONLY_RECONCILIATION_PENDING",
+  "originalBusinessSuiteRerun": false,
+  "readonlyReviewExecuted": false,
+  "serviceSha256": "5B20774A785028A5AF5069D136B3455291F258F23B4B65932AC0A4C8BC8CFB6A",
+  "testSha256": "B5C72B2E26AE0C1D8C8D9BF52CE08C19C07E9DEF399FFC42D67B0DFA8B41DBE0",
+  "readonlyCallerSha256": "FF537DC95D980281F40F087F315BEE2506047968325CA33DAD28F7E59E25E262"
+}

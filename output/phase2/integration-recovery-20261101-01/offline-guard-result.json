@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "privateUrlCases": 9,
+  "originalPinsMatched": 127,
+  "stageOrderChecks": 4,
+  "noDatabaseConnections": true,
+  "noCallerExecuted": true
+}

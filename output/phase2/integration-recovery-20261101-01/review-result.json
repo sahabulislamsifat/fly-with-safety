@@ -1,0 +1,14 @@
+{
+  "checkedUTC": "2026-11-01T12:27:30.9306194Z",
+  "pins": 148,
+  "pinMismatches": 0,
+  "callerSha256": "FF1F67F6120E1F6B66A052AFC6DBAB0FE40DB399636CFC684A70C9522CD0B4FE",
+  "attemptExists": false,
+  "liveExecuted": false,
+  "productionSourceChanges": false,
+  "gitDiffCheckExit": 0,
+  "requiresNewOwnerApproval": true,
+  "verifiedRootCause": "Prisma session authentication rejection; historical input equivalence and URL defect not established",
+  "psqlSuccess": "OWNER_OBSERVED_IDENTITY_ONLY",
+  "originalFailuresPreserved": true
+}
