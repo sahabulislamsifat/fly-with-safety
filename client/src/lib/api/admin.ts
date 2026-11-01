@@ -273,9 +273,11 @@ export function createBookingFromInquiry(
 export function updateAdminBookingStatus(
   id: string,
   status: BookingStatus,
-  reason?: string
+  reason?: string,
+  expected?: { status: BookingStatus; updatedAt: string }
 ): Promise<{ booking: AdminBooking }> {
-  return patch(`/admin/bookings/${encodeURIComponent(id)}/status`, { status, reason });
+  return patch(`/admin/bookings/${encodeURIComponent(id)}/status`, { status, reason,
+    ...(expected ? { expectedStatus: expected.status, expectedUpdatedAt: expected.updatedAt } : {}) });
 }
 
 // ─── Contact Messages ────────────────────────────────────────────────────────

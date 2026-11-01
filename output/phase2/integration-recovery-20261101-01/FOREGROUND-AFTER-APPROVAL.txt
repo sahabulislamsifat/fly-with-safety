@@ -1,0 +1,10 @@
+# PREPARED ONLY. Do not run before separate explicit owner approval for this new workflow.
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p=Join-Path -Path 'E:\Programming\Project\fly-with-safety' -ChildPath 'output\phase2\integration-recovery-20261101-01\Invoke-Phase2Recovery.ps1'
+ if(-not (Test-Path -LiteralPath $p -PathType Leaf)){throw 'STOP: reviewed new caller missing'}
+ if((Get-Item -LiteralPath $p -Stream * | Where-Object Stream -eq 'Zone.Identifier')){throw 'STOP: unexpected script zone marking'}
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne 'FF1F67F6120E1F6B66A052AFC6DBAB0FE40DB399636CFC684A70C9522CD0B4FE'){throw 'STOP: caller integrity mismatch'}
+ & $p -OwnerApprovedNewAttempt
+}

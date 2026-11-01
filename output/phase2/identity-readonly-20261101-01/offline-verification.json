@@ -1,0 +1,32 @@
+{
+  "checkedUTC": "2026-11-01T12:07:36.0133264Z",
+  "reports": [
+    {
+      "loader": "bundle",
+      "passed": 31,
+      "failed": 0,
+      "skipped": 0,
+      "processExit": 0
+    },
+    {
+      "loader": "native",
+      "passed": 31,
+      "failed": 0,
+      "skipped": 0,
+      "processExit": 0
+    }
+  ],
+  "strictTypeScriptExit": 0,
+  "scopedEslintExit": 0,
+  "powerShellParserVersion": "5.1.26100.9818",
+  "powerShellParseErrors": 0,
+  "gitDiffCheckExit": 0,
+  "pins": 138,
+  "mismatches": 0,
+  "callerSha256": "1902A465DE06A3AF4635E8F0AE1B0AFE9B8EDF44146AA5ED0E3A019C11B69812",
+  "liveExecuted": false,
+  "attemptExists": false,
+  "originalIntegrationUnchanged": true,
+  "originalFailedResultPreserved": true,
+  "actualDatabaseCleanState": "UNVERIFIED"
+}

@@ -28,3 +28,27 @@ it('propagates failed history insertion and suppresses post-commit notification'
   await expect(updateBookingStatus('synthetic', 'COMPLETED')).rejects.toBe(failure);
   expect(sendBookingStatusNotification).not.toHaveBeenCalled();
 });
+it('rejects a stale expected state before writing a new history row', async () => {
+  const update = vi.fn(), history = vi.fn();
+  db.$transaction.mockImplementation(cb => cb({ $queryRaw: vi.fn().mockResolvedValue([]), booking: {
+    findUnique: vi.fn().mockResolvedValue({ ...booking, updatedAt: new Date('2026-11-01T00:00:00Z') }), update,
+  }, bookingStatusHistory: { create: history } }));
+  await expect(updateBookingStatus('synthetic', 'CANCELLED', undefined, 'synthetic-staff', { status: 'PENDING' })).rejects.toMatchObject({ statusCode: 409 });
+  expect(update).not.toHaveBeenCalled(); expect(history).not.toHaveBeenCalled();
+});
+it('rejects stale update timestamps even when the status still matches', async () => {
+  const update = vi.fn();
+  db.$transaction.mockImplementation(cb => cb({ $queryRaw: vi.fn().mockResolvedValue([]), booking: {
+    findUnique: vi.fn().mockResolvedValue({ ...booking, updatedAt: new Date('2026-11-01T00:00:00Z') }), update,
+  } }));
+  await expect(updateBookingStatus('synthetic', 'CANCELLED', undefined, 'synthetic-staff', { status: 'CONFIRMED', updatedAt: '2026-10-31T00:00:00Z' })).rejects.toMatchObject({ statusCode: 409 });
+  expect(update).not.toHaveBeenCalled();
+});
+it('repeated identical terminal status is a no-op, not another history/notification', async () => {
+  vi.mocked(sendBookingStatusNotification).mockClear(); const update = vi.fn(); const history = vi.fn();
+  db.$transaction.mockImplementation(cb => cb({ $queryRaw: vi.fn().mockResolvedValue([]), booking: {
+    findUnique: vi.fn().mockResolvedValue({ ...booking, status: 'COMPLETED' }), update,
+  }, bookingStatusHistory: { create: history } }));
+  await updateBookingStatus('synthetic', 'COMPLETED', undefined, 'synthetic-staff', { status: 'CONFIRMED' });
+  expect(update).not.toHaveBeenCalled(); expect(history).not.toHaveBeenCalled(); expect(sendBookingStatusNotification).not.toHaveBeenCalled();
+});

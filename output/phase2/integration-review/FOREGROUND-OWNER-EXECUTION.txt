@@ -1,0 +1,9 @@
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p=Join-Path -Path 'E:\Programming\Project\fly-with-safety' -ChildPath 'output\phase2\integration-review\Invoke-Phase2Integration.ps1'
+ if(-not (Test-Path -LiteralPath $p -PathType Leaf)){throw 'STOP: reviewed caller missing'}
+ if((Get-Item -LiteralPath $p -Stream * | Where-Object Stream -eq 'Zone.Identifier')){throw 'STOP: unexpected script zone marking'}
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne '53D4C9B73264EB9703C36D4CBC18D96B1AE50A0CB8CB227A86B6916678D37A71'){throw 'STOP: caller integrity mismatch'}
+ & $p -RunAuthorizedSyntheticProof
+}

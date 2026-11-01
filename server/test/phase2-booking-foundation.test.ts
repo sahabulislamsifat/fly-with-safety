@@ -1,9 +1,11 @@
 import {afterEach,beforeEach,describe,expect,it,vi} from 'vitest';
 import {configureStore} from '@reduxjs/toolkit';
 import {createBookingAttempt,isTerminalBookingFailure} from '../../client/src/lib/api/booking-attempt.js';
-import {ApiError} from '../../client/src/lib/api/client.js';
+import {ApiError,resolveApiBaseUrl} from '../../client/src/lib/api/client.js';
 import {createBooking,type CreateBookingPayload} from '../../client/src/lib/api/bookings.js';
 import {changeBookingCommercial} from '../../client/src/lib/api/booking-commercial.js';
+import {createLatestRequestScope} from '../../client/src/lib/api/latest-request.js';
+import {getAdminBookings} from '../../client/src/lib/api/admin.js';
 import reducer,{openBookingModal,closeBookingModal,clearBookingState,submitBookingThunk} from '../../client/src/redux/slices/bookingSlice.js';
 
 vi.mock('pg',()=>{throw new Error('PHASE2_DATABASE_FORBIDDEN');});
@@ -25,6 +27,35 @@ beforeEach(()=>{
 afterEach(()=>{vi.useRealTimers();vi.unstubAllGlobals();vi.unstubAllEnvs();});
 
 describe('Phase2 booking request identity lifecycle — OFFLINE',()=>{
+  it('does not overwrite a newer admin result with an older slow API response',async()=>{
+    const reads=createLatestRequestScope();let visible='';let finish!:(response:Response)=>void;
+    fetcher.mockImplementationOnce(()=>new Promise<Response>(resolve=>{finish=resolve;}));
+    fetcher.mockResolvedValueOnce(new Response(JSON.stringify({success:true,data:{bookings:[{id:'new'}]}}),{status:200}));
+    const load=async()=>{const current=reads.begin();const result=await getAdminBookings();if(current())visible=result.bookings[0].id;};
+    const old=load();await load();finish(new Response(JSON.stringify({success:true,data:{bookings:[{id:'old'}]}}),{status:200}));await old;
+    expect(visible).toBe('new');
+  });
+  it('invalidates an in-flight read on navigation/unmount without touching the API',()=>{
+    const reads=createLatestRequestScope(),current=reads.begin();expect(current()).toBe(true);reads.cancel();expect(current()).toBe(false);expect(fetcher).not.toHaveBeenCalled();
+  });
+  it('supersedes old error/finally handlers when a newer read begins',()=>{
+    const reads=createLatestRequestScope(),old=reads.begin(),current=reads.begin();
+    let error='';let loading=true;if(old()) {error='old';loading=false;}
+    expect(error).toBe('');expect(loading).toBe(true);expect(current()).toBe(true);
+  });
+  it('pins an explicitly isolated local browser backend without probing or production fallback',async()=>{
+    vi.stubGlobal('window',{location:{hostname:'phase2.localhost'}});
+    vi.stubEnv('NEXT_PUBLIC_LOCAL_API_BASE_URL','http://phase2.localhost:5002/api/v1');
+    expect(await resolveApiBaseUrl()).toBe('http://phase2.localhost:5002/api/v1');expect(fetcher).not.toHaveBeenCalled();
+  });
+  it('pins isolated development SSR to the same backend',async()=>{
+    vi.stubEnv('NEXT_PUBLIC_LOCAL_API_BASE_URL','http://localhost:5002/api/v1');
+    expect(await resolveApiBaseUrl()).toBe('http://localhost:5002/api/v1');expect(fetcher).not.toHaveBeenCalled();
+  });
+  for(const [index,url] of ['https://remote.invalid/api/v1','http://user:private@localhost:5002/api/v1','http://localhost:5002/api/v1?password=private','invalid-private-value'].entries())it('fails closed on an unsafe isolated target '+index,async()=>{
+    vi.stubGlobal('window',{location:{hostname:'localhost'}});vi.stubEnv('NEXT_PUBLIC_LOCAL_API_BASE_URL',url);
+    await expect(resolveApiBaseUrl()).rejects.toMatchObject({code:'LOCAL_API_CONFIG'});expect(fetcher).not.toHaveBeenCalled();
+  });
   it('routes customer quotation acceptance through the authenticated account boundary', async()=>{
     fetcher.mockResolvedValueOnce(new Response(JSON.stringify({success:true,data:{booking:{commercial:{version:1,revision:2,quotes:[],payments:[]}}}}),{status:200}));
     await changeBookingCommercial('FWS-SYNTHETIC','account',{action:'ACCEPT_QUOTE',requestId:id,quoteId:id,expectedRevision:1});

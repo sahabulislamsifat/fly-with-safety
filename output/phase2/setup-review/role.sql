@@ -31,7 +31,7 @@ GRANT SELECT(migration_name,checksum,finished_at,rolled_back_at) ON public._pris
 \password flywithsafe_phase2_booking_test
 ALTER ROLE flywithsafe_phase2_booking_test LOGIN;
 DO $guard$
-DECLARE r oid; c record;
+DECLARE r oid; c record; column_row record; expected_select boolean; expected_insert boolean; expected_update boolean;
 BEGIN
  SELECT oid INTO STRICT r FROM pg_roles WHERE rolname='flywithsafe_phase2_booking_test' AND rolcanlogin AND NOT rolsuper AND NOT rolcreatedb AND NOT rolcreaterole AND NOT rolinherit AND NOT rolreplication AND NOT rolbypassrls AND rolconnlimit=12;
  IF EXISTS(SELECT FROM pg_auth_members WHERE member=r OR roleid=r)
@@ -39,7 +39,25 @@ BEGIN
  OR has_schema_privilege(r,'public','CREATE') THEN RAISE EXCEPTION 'ROLE_RESTRICTIONS_FAILED'; END IF;
  FOR c IN SELECT oid,relname FROM pg_class WHERE relnamespace='public'::regnamespace AND relkind IN('r','p') LOOP
    IF has_table_privilege(r,c.oid,'DELETE') OR has_table_privilege(r,c.oid,'TRUNCATE') OR has_table_privilege(r,c.oid,'TRIGGER') OR has_table_privilege(r,c.oid,'REFERENCES') THEN RAISE EXCEPTION 'DANGEROUS_TABLE_PRIVILEGE'; END IF;
+   FOR column_row IN SELECT attname,attnum FROM pg_attribute WHERE attrelid=c.oid AND attnum>0 AND NOT attisdropped LOOP
+     expected_select := c.relname IN ('User','Session','Booking','BookingPassenger','BookingStatusHistory','IdempotencyRecord','NotificationOutbox','FlightInquiry','HotelInquiry','PackageInquiry','VisaInquiry')
+       OR (c.relname='_prisma_migrations' AND column_row.attname IN ('migration_name','checksum','finished_at','rolled_back_at'));
+     expected_insert := c.relname IN ('User','Session','Booking','BookingPassenger','BookingStatusHistory','IdempotencyRecord','NotificationOutbox');
+     expected_update := (c.relname='User' AND column_row.attname='name')
+       OR (c.relname='Session' AND column_row.attname IN ('revokedAt','lastUsedAt'))
+       OR (c.relname='Booking' AND column_row.attname IN ('status','bookingDetails','totalPrice','updatedAt'));
+     IF has_column_privilege(r,c.oid,column_row.attnum,'SELECT')<>expected_select
+       OR has_column_privilege(r,c.oid,column_row.attnum,'INSERT')<>expected_insert
+       OR has_column_privilege(r,c.oid,column_row.attnum,'UPDATE')<>expected_update
+       OR has_column_privilege(r,c.oid,column_row.attnum,'REFERENCES') THEN RAISE EXCEPTION 'EXACT_COLUMN_MATRIX_FAILED'; END IF;
+   END LOOP;
  END LOOP;
+ IF EXISTS(SELECT FROM pg_class WHERE relowner=r)
+ OR EXISTS(SELECT FROM pg_namespace WHERE nspowner=r)
+ OR EXISTS(SELECT FROM pg_class acl_relation CROSS JOIN LATERAL aclexplode(acl_relation.relacl) acl_entry WHERE acl_entry.grantee=r AND acl_entry.is_grantable)
+ OR EXISTS(SELECT FROM pg_attribute acl_attribute CROSS JOIN LATERAL aclexplode(acl_attribute.attacl) acl_entry WHERE acl_entry.grantee=r AND acl_entry.is_grantable)
+ OR EXISTS(SELECT FROM pg_database target_database CROSS JOIN LATERAL aclexplode(target_database.datacl) acl_entry WHERE target_database.datname=current_database() AND acl_entry.grantee=0)
+ THEN RAISE EXCEPTION 'OWNERSHIP_GRANT_OPTION_OR_PUBLIC_ACCESS_FAILED'; END IF;
  IF NOT has_column_privilege(r,'public."Booking"','bookingDetails','UPDATE')
  OR has_column_privilege(r,'public."Booking"','userId','UPDATE')
  OR has_column_privilege(r,'public."User"','role','UPDATE')

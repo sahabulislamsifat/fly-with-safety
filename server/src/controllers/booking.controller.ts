@@ -63,7 +63,8 @@ export async function adminUpdateBookingStatus(req: Request, res: Response, next
       req.params.id,
       req.body.status,
       req.body.reason,
-      staffId
+      staffId,
+      { status: req.body.expectedStatus, updatedAt: req.body.expectedUpdatedAt }
     );
     res.set('Cache-Control', 'no-store').json(success({ booking: booking ? bookingDTO(booking, 'admin') : null }, 'Booking status updated successfully'));
   } catch (err) {

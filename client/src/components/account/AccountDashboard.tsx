@@ -1,7 +1,8 @@
 'use client';
 import { BookingCommercialPanel } from '@/components/booking/BookingCommercialPanel';
 
-import { FormEvent, useCallback, useEffect, useState } from 'react';
+import { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { createLatestRequestScope } from '@/lib/api/latest-request';
 import Link from 'next/link';
 import { Button, Input } from '@/components/ui';
 import { Icon, IconName } from '@/components/ui/Icons';
@@ -33,7 +34,7 @@ const views: Array<{ id: View; label: string; icon: IconName }> = [
 const bookingStatuses: Array<{ value: BookingStatus | ''; label: string }> = [
   { value: '', label: 'All bookings' },
   { value: 'PENDING', label: 'Pending' },
-  { value: 'CONFIRMED', label: 'Confirmed' },
+  { value: 'CONFIRMED', label: 'Confirmed by staff' },
   { value: 'COMPLETED', label: 'Completed' },
   { value: 'CANCELLED', label: 'Cancelled' },
 ];
@@ -51,7 +52,7 @@ const errorText = (error: unknown) => error instanceof ApiError
   : 'We could not load this information. Try again.';
 
 function Status({ value }: { value: BookingStatus }) {
-  return <span className={`inline-flex rounded-xs border px-2 py-1 text-xs font-bold ${statusClass[value]}`}>{value.charAt(0) + value.slice(1).toLowerCase()}</span>;
+  return <span className={`inline-flex rounded-xs border px-2 py-1 text-xs font-bold ${statusClass[value]}`}>{value === 'CONFIRMED' ? 'Confirmed by staff' : value.charAt(0) + value.slice(1).toLowerCase()}</span>;
 }
 
 function EmptyState({ title, detail, action }: { title: string; detail: string; action?: React.ReactNode }) {
@@ -66,6 +67,7 @@ function Pager({ pagination, onPage }: { pagination: Pagination | null; onPage: 
 export function AccountDashboard() {
   const { user, logout, refreshUser } = useAuth();
   const [view, setView] = useState<View>('overview');
+  const [navigationRevision, setNavigationRevision] = useState(0);
   const [dashboard, setDashboard] = useState<DashboardData | null>(null);
   const [recentBookings, setRecentBookings] = useState<AccountBooking[]>([]);
   const [inquiries, setInquiries] = useState<AccountInquiry[]>([]);
@@ -81,34 +83,41 @@ export function AccountDashboard() {
   const [name, setName] = useState(user?.name || '');
   const [editingProfile, setEditingProfile] = useState(false);
   const [profileState, setProfileState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+  const reads = useRef(createLatestRequestScope());
 
   const load = useCallback(async (target: View = view) => {
+    const current = reads.current.begin();
     setLoading(true);
     setError(null);
     setSelected(null);
     try {
       if (target === 'overview') {
         const [summary, recent] = await Promise.all([getDashboard(), getBookings({ limit: 4 })]);
+        if (!current()) return;
         setDashboard(summary);
         setRecentBookings(recent.bookings);
       } else if (target === 'requests') {
         const result = await getInquiries({ type: requestType || undefined, status: requestStatus || undefined, page, limit: 10 });
+        if (!current()) return;
         setInquiries(result.inquiries);
         setPagination(result.pagination);
       } else if (target === 'bookings') {
         const result = await getBookings({ status: bookingStatus || undefined, page, limit: 10 });
+        if (!current()) return;
         setBookings(result.bookings);
         setPagination(result.pagination);
       }
     } catch (cause) {
-      setError(errorText(cause));
+      if (current()) setError(errorText(cause));
     } finally {
-      setLoading(false);
+      if (current()) setLoading(false);
     }
   }, [bookingStatus, page, requestStatus, requestType, view]);
 
   useEffect(() => {
     const syncFromAddress = () => {
+      reads.current.cancel(); setSelected(null); setError(null); setLoading(true);
+      setNavigationRevision(value => value + 1);
       const value = new URLSearchParams(window.location.search).get('tab');
       setView(views.some((item) => item.id === value) ? value as View : 'overview');
     };
@@ -118,12 +127,14 @@ export function AccountDashboard() {
   }, []);
 
   useEffect(() => {
-    if (view === 'profile') return;
-    const timer = window.setTimeout(() => void load(view), 0);
-    return () => window.clearTimeout(timer);
-  }, [view, load]);
+    const timer = window.setTimeout(() => void load(view === 'profile' ? 'overview' : view), 0);
+    const scope = reads.current;
+    return () => { window.clearTimeout(timer); scope.cancel(); };
+  }, [view, load, navigationRevision]);
 
   const chooseView = (target: View) => {
+    reads.current.cancel(); setLoading(true);
+    setNavigationRevision(value => value + 1);
     const params = new URLSearchParams(window.location.search);
     params.set('tab', target);
     window.history.pushState({}, '', `/account?${params.toString()}`);
@@ -131,23 +142,24 @@ export function AccountDashboard() {
     setPage(1);
     setSelected(null);
     setError(null);
-    if (target === 'profile') void load('overview');
   };
 
   const showInquiry = async (item: AccountInquiry) => {
+    const current = reads.current.begin();
     setLoading(true);
     setError(null);
-    try { setSelected(await getInquiry(item.type, item.referenceNumber)); }
-    catch (cause) { setError(errorText(cause)); }
-    finally { setLoading(false); }
+    try { const result = await getInquiry(item.type, item.referenceNumber); if (current()) setSelected(result); }
+    catch (cause) { if (current()) setError(errorText(cause)); }
+    finally { if (current()) setLoading(false); }
   };
 
   const showBooking = async (item: AccountBooking) => {
+    const current = reads.current.begin();
     setLoading(true);
     setError(null);
-    try { setSelected((await getBooking(item.referenceNumber)).booking); }
-    catch (cause) { setError(errorText(cause)); }
-    finally { setLoading(false); }
+    try { const result = await getBooking(item.referenceNumber); if (current()) setSelected(result.booking); }
+    catch (cause) { if (current()) setError(errorText(cause)); }
+    finally { if (current()) setLoading(false); }
   };
 
   const saveProfile = async (event: FormEvent<HTMLFormElement>) => {
@@ -255,5 +267,5 @@ function Detail({ item, back, onBookingChanged }: { item: AccountInquiry | (Acco
   const values: Array<[string, string]> = inquiry
     ? [['Service', item.type], ['Reference', item.referenceNumber], ['Status', item.status], ['Submitted', formatDate(item.createdAt)], ['Travel date', formatDate(item.travelDate)], ['Summary', item.summary], ['Notes', String(item.notes || '—')]]
     : [['Reference', item.referenceNumber], ['Status', item.status], ['Service', item.bookingType], ['Booking method', item.bookingModel.replaceAll('_', ' ').toLowerCase()], ['Amount', `${item.totalPrice.toLocaleString()} ${item.currency}`], ['Created', formatDate(item.createdAt)]];
-  return <Panel><button type="button" onClick={back} className="text-sm font-bold text-brand-red hover:underline">Back to {inquiry ? 'requests' : 'bookings'}</button><h3 className="mt-4 text-lg font-black text-text-primary">{inquiry ? 'Request details' : 'Booking details'}</h3><dl className="mt-4 divide-y divide-neutral-100">{values.map(([label, value]) => <div key={label} className="grid gap-1 py-3 sm:grid-cols-[150px_1fr]"><dt className="text-sm font-semibold text-text-secondary">{label}</dt><dd className="break-words text-sm text-text-primary">{label === 'Status' ? <Status value={value as BookingStatus} /> : value}</dd></div>)}</dl>{!inquiry && <BookingCommercialPanel key={item.referenceNumber} reference={item.referenceNumber} currency={item.currency} initial={item.commercial} onChanged={onBookingChanged} />}{!inquiry && 'statusHistory' in item && item.statusHistory?.length ? <div className="mt-5 border-t border-neutral-100 pt-4"><h4 className="font-bold text-text-primary">Status history</h4><ol className="mt-3 space-y-3">{item.statusHistory.map((entry, index) => <li key={index} className="flex flex-wrap justify-between gap-2 text-sm"><span>{String(entry.fromStatus || 'Created')} {entry.toStatus ? `to ${String(entry.toStatus)}` : ''}{entry.reason ? ` · ${String(entry.reason)}` : ''}</span><time className="text-text-secondary">{formatDate(String(entry.createdAt || ''))}</time></li>)}</ol></div> : null}</Panel>;
+  return <Panel><button type="button" onClick={back} className="text-sm font-bold text-brand-red hover:underline">Back to {inquiry ? 'requests' : 'bookings'}</button><h3 className="mt-4 text-lg font-black text-text-primary">{inquiry ? 'Request details' : 'Booking details'}</h3><dl className="mt-4 divide-y divide-neutral-100">{values.map(([label, value]) => <div key={label} className="grid gap-1 py-3 sm:grid-cols-[150px_1fr]"><dt className="text-sm font-semibold text-text-secondary">{label}</dt><dd className="break-words text-sm text-text-primary">{label === 'Status' ? <Status value={value as BookingStatus} /> : value}</dd></div>)}</dl>{!inquiry && Array.isArray(item.passengers) && <section className="mt-5 border-t border-neutral-100 pt-4" aria-label="Booking passengers"><h4 className="font-bold text-text-primary">Passengers ({item.passengers.length})</h4><p className="mt-1 text-xs text-text-secondary">Passenger details are read-only here.</p><ol className="mt-3 divide-y divide-neutral-100">{item.passengers.map((passenger, index) => <li key={index} className="flex flex-wrap justify-between gap-2 py-2 text-sm"><span>{[passenger.firstName, passenger.lastName].filter((name): name is string => typeof name === 'string').join(' ') || 'Passenger'}</span><span className="text-text-secondary">{typeof passenger.passengerType === 'string' ? passenger.passengerType : 'Traveller'}</span></li>)}</ol></section>}{!inquiry && <BookingCommercialPanel key={item.referenceNumber} reference={item.referenceNumber} currency={item.currency} initial={item.commercial} onChanged={onBookingChanged} />}{!inquiry && 'statusHistory' in item && item.statusHistory?.length ? <div className="mt-5 border-t border-neutral-100 pt-4"><h4 className="font-bold text-text-primary">Status history</h4><ol className="mt-3 space-y-3">{item.statusHistory.map((entry, index) => <li key={index} className="flex flex-wrap justify-between gap-2 text-sm"><span>{String(entry.fromStatus || 'Created')} {entry.toStatus ? `to ${String(entry.toStatus)}` : ''}{entry.reason ? ` · ${String(entry.reason)}` : ''}</span><time className="text-text-secondary">{formatDate(String(entry.createdAt || ''))}</time></li>)}</ol></div> : null}</Panel>;
 }

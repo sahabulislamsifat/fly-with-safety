@@ -40,6 +40,10 @@ it('returns a no-store minimized staff result', async () => {
   expect(response.status).toBe(200); expect(response.headers['cache-control']).toBe('no-store');
   expect(response.body.data.booking.commercial).toEqual({ version: 1, revision: 0, quotes: [], payments: [] });
 });
+it('admits the ADMIN role through the same mutation authorization boundary', async () => {
+  mocks.change.mockResolvedValue({ referenceNumber: 'FWS-SYNTHETIC', bookingDetails: {} });
+  expect((await request(app).post('/admin/bookings/FWS-SYNTHETIC/commercial').set('Authorization', `Bearer ${token('ADMIN')}`).send(command)).status).toBe(200);
+});
 it('rejects a revoked session', async () => {
   const value = token(); mocks.session.mockResolvedValueOnce(null);
   expect((await request(app).post('/account/bookings/x/commercial').set('Authorization', `Bearer ${value}`).send(command)).status).toBe(401);

@@ -1,0 +1,9 @@
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p=Join-Path -Path 'E:\Programming\Project\fly-with-safety' -ChildPath 'output\phase2\identity-readonly-20261101-01\Invoke-IdentityReadOnly.ps1'
+ if(-not (Test-Path -LiteralPath $p -PathType Leaf)){throw 'STOP: reviewed read-only caller missing'}
+ if((Get-Item -LiteralPath $p -Stream * | Where-Object Stream -eq 'Zone.Identifier')){throw 'STOP: unexpected script zone marking'}
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne '1902A465DE06A3AF4635E8F0AE1B0AFE9B8EDF44146AA5ED0E3A019C11B69812'){throw 'STOP: caller integrity mismatch'}
+ & $p -ReadOnlyInvestigationAuthorized
+}

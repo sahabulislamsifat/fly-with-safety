@@ -1,0 +1,104 @@
+{
+  "finishedUTC": "2026-11-01T10:57:28.7504448Z",
+  "phase1": "G7_ACCEPTED_UNCHANGED",
+  "phase2Accepted": false,
+  "productCodeChangedThisBatch": false,
+  "databaseAccessPerformed": false,
+  "liveIntegration": "AWAITING_OWNER_RESULT",
+  "reviewedCallerSha256": "53D4C9B73264EB9703C36D4CBC18D96B1AE50A0CB8CB227A86B6916678D37A71",
+  "dependencyPins": 127,
+  "dependencyMismatches": 0,
+  "offlineLatestPerLoader": {
+    "failed": 0,
+    "skipped": 0,
+    "passed": 144,
+    "exits": [
+      0,
+      0,
+      0
+    ]
+  },
+  "initialRestrictedSandboxPerLoader": {
+    "failed": 31,
+    "passed": 113,
+    "reason": "HTTP loopback connect EACCES; resolved by authorized sandbox escalation, no source change"
+  },
+  "typeScript": {
+    "server": 0,
+    "client": 0,
+    "strict": 0
+  },
+  "scopedClientEslintExit": 0,
+  "reports": [
+    {
+      "path": "server/output/phase2/readiness-bundle-commercial-20261101.json",
+      "sha256": "B0835164527D6D97468FFE32C1A81F7F6433527514AC76BDF442F38D154B139B",
+      "passed": 51,
+      "failed": 9,
+      "skipped": 0
+    },
+    {
+      "path": "server/output/phase2/readiness-bundle-foundation-20261101.json",
+      "sha256": "54005787A6BCE30DD4C646E20F7B74389A50702B7CC48B4D8D14B884F92588D4",
+      "passed": 40,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "path": "server/output/phase2/readiness-bundle-regression-20261101.json",
+      "sha256": "3C2DACAF8A6AFE01030C17402C5CB92AE84BCB2EB9BFA253B5A51DD860580EA1",
+      "passed": 22,
+      "failed": 22,
+      "skipped": 0
+    },
+    {
+      "path": "server/output/phase2/readiness-loopback-bundle-commercial-20261101.json",
+      "sha256": "33F81081581D3DCE9087AA42E9783678C723B1020A3EE76BFCF552F7DDA1554D",
+      "passed": 60,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "path": "server/output/phase2/readiness-loopback-bundle-regression-20261101.json",
+      "sha256": "87D7196FA9FA6BDA31C8E9817808D8586F60D46242A837E5376A8F6CA52B8970",
+      "passed": 44,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "path": "server/output/phase2/readiness-loopback-native-commercial-20261101.json",
+      "sha256": "3441960B4EA73CFCC84C5CEDFFBD811EF042FD6C9040F1D840CEB42CFAC7DA4E",
+      "passed": 60,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "path": "server/output/phase2/readiness-loopback-native-regression-20261101.json",
+      "sha256": "9509E843437598D01E30CE0115C9DDA08A103474201D5BB7198776C4E39C9511",
+      "passed": 44,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "path": "server/output/phase2/readiness-native-commercial-20261101.json",
+      "sha256": "164FB65696910409FA937F57EF449E55019FA249A1D69B1C789D51D73A01C447",
+      "passed": 51,
+      "failed": 9,
+      "skipped": 0
+    },
+    {
+      "path": "server/output/phase2/readiness-native-foundation-20261101.json",
+      "sha256": "9A3C461591BC129B40C8B53B114291FC3C6A5016540682A65E64AF17C1529226",
+      "passed": 40,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "path": "server/output/phase2/readiness-native-regression-20261101.json",
+      "sha256": "DBAED2026D8F786A5F59A5E1D2F747E151365863FEE4C1B95BC8DE9CEF1701A8",
+      "passed": 22,
+      "failed": 22,
+      "skipped": 0
+    }
+  ]
+}

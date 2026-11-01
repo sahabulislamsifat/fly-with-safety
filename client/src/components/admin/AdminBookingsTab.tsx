@@ -1,10 +1,11 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui';
 import { Icon } from '@/components/ui/Icons';
 import { ApiError } from '@/lib/api';
 import { BookingCommercialPanel } from '@/components/booking/BookingCommercialPanel';
+import { createLatestRequestScope } from '@/lib/api/latest-request';
 import {
   AdminBooking,
   BookingStatus,
@@ -58,8 +59,11 @@ export function AdminBookingsTab() {
   const [reason, setReason] = useState<string>('');
   const [actionLoading, setActionLoading] = useState<boolean>(false);
   const [actionError, setActionError] = useState<string | null>(null);
+  const statusFlight = useRef(false);
+  const reads = useRef(createLatestRequestScope());
 
   const loadData = useCallback(async () => {
+    const current = reads.current.begin();
     setLoading(true);
     setError(null);
     try {
@@ -69,19 +73,21 @@ export function AdminBookingsTab() {
         status: statusFilter || undefined,
         type: typeFilter || undefined,
       });
+      if (!current()) return;
       setBookings(res.bookings);
       setPagination(res.pagination);
       setSelected(current => current ? res.bookings.find(booking => booking.id === current.id) || null : null);
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : 'Failed to load bookings');
+      if (current()) setError(err instanceof ApiError ? err.message : 'Failed to load bookings');
     } finally {
-      setLoading(false);
+      if (current()) setLoading(false);
     }
   }, [page, statusFilter, typeFilter]);
 
   useEffect(() => {
     const timer = window.setTimeout(() => void loadData(), 0);
-    return () => window.clearTimeout(timer);
+    const scope = reads.current;
+    return () => { window.clearTimeout(timer); scope.cancel(); };
   }, [loadData]);
 
   const handleSelectBooking = (b: AdminBooking) => {
@@ -95,18 +101,20 @@ export function AdminBookingsTab() {
 
   const handleUpdateStatus = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!selected) return;
+    if (!selected || statusFlight.current) return;
+    statusFlight.current = true;
+    const submittedId = selected.id;
 
     setActionLoading(true);
     setActionError(null);
     try {
-      const res = await updateAdminBookingStatus(selected.id, targetStatus, reason.trim() || undefined);
-      setSelected(res.booking);
-      setReason('');
+      const res = await updateAdminBookingStatus(selected.id, targetStatus, reason.trim() || undefined, { status: selected.status, updatedAt: selected.updatedAt });
+      setSelected(current => current?.id === submittedId ? res.booking : current);
       await loadData();
     } catch (err) {
       setActionError(err instanceof ApiError ? err.message : 'Failed to update booking status');
     } finally {
+      statusFlight.current = false;
       setActionLoading(false);
     }
   };

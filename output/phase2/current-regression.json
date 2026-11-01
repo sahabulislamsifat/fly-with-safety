@@ -1,0 +1,71 @@
+{
+  "passed": true,
+  "finishedUTC": "2026-11-01T08:25:02.658Z",
+  "realDatabaseExecution": false,
+  "results": [
+    {
+      "loader": "bundle",
+      "config": "phase2-commercial.vitest.config.ts",
+      "exit": 0,
+      "passed": 60,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "loader": "bundle",
+      "config": "phase2-booking-foundation.vitest.config.ts",
+      "exit": 0,
+      "passed": 40,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "loader": "bundle",
+      "config": "phase2-booking-regression.vitest.config.ts",
+      "exit": 0,
+      "passed": 44,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "loader": "bundle",
+      "config": "phase2-booking.pg.vitest.config.ts",
+      "exit": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1
+    },
+    {
+      "loader": "native",
+      "config": "phase2-commercial.vitest.config.ts",
+      "exit": 0,
+      "passed": 60,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "loader": "native",
+      "config": "phase2-booking-foundation.vitest.config.ts",
+      "exit": 0,
+      "passed": 40,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "loader": "native",
+      "config": "phase2-booking-regression.vitest.config.ts",
+      "exit": 0,
+      "passed": 44,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "loader": "native",
+      "config": "phase2-booking.pg.vitest.config.ts",
+      "exit": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1
+    }
+  ]
+}

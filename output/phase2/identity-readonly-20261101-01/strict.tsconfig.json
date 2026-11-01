@@ -1,0 +1,10 @@
+{
+  "extends": "../strict.tsconfig.json",
+  "include": [
+    "../../../server/test/phase2-identity-diagnostic.ts",
+    "../../../server/test/phase2-identity-diagnostic.test.ts",
+    "../../../server/test/phase2-identity-readonly.pg.test.ts",
+    "../../../server/test/phase2-identity-readonly.pg.vitest.config.ts",
+    "../../../server/test/phase2-identity-diagnostic.vitest.config.ts"
+  ]
+}

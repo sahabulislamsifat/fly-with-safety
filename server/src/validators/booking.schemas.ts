@@ -48,6 +48,8 @@ export const lookupBookingSchema = z.object({
 export const updateBookingStatusSchema = z.object({
   status: z.enum(['PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED']),
   reason: z.string().max(500).optional(),
+  expectedStatus: z.enum(['PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED']).optional(),
+  expectedUpdatedAt: z.iso.datetime().optional(),
 });
 
 export const createBookingFromInquirySchema = z.object({

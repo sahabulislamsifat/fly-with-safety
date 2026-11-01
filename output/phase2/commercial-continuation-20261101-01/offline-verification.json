@@ -1,0 +1,54 @@
+{
+  "verifiedUTC": "2026-11-01T14:13:41.8227184Z",
+  "results": [
+    {
+      "loader": "bundle",
+      "contractPassed": 27,
+      "diagnosticPassed": 33,
+      "offlinePassed": 60,
+      "offlineFailed": 0,
+      "offlineSkipped": 0,
+      "defaultLiveCasePassed": 0,
+      "defaultLiveCaseSkipped": 1
+    },
+    {
+      "loader": "native",
+      "contractPassed": 27,
+      "diagnosticPassed": 33,
+      "offlinePassed": 60,
+      "offlineFailed": 0,
+      "offlineSkipped": 0,
+      "defaultLiveCasePassed": 0,
+      "defaultLiveCaseSkipped": 1
+    }
+  ],
+  "strictTypeScriptExit": 0,
+  "serverTypeScriptExit": 0,
+  "browserHostTypeScriptExit": 0,
+  "productionClockFixUnchanged": true,
+  "historicalClockCodecProofReused": true,
+  "liveExecuted": false,
+  "newAttemptExists": false,
+  "sourceHashes": [
+    {
+      "path": "server/test/phase2-commercial-continuation.pg.test.ts",
+      "sha256": "23138D7945AB8234C7133966882863D4F7EFDEC52BEA63F9217EE21824714AC9"
+    },
+    {
+      "path": "server/test/phase2-continuation-contract.ts",
+      "sha256": "1651291BCEA39E9B9D1483AB1DB275E8926F6C00B76357E8CE83DA864FAD484A"
+    },
+    {
+      "path": "server/test/phase2-browser-host.pg.test.ts",
+      "sha256": "DCA05836BBE587CCCA548B9ADB2CF14318102780155A7F6442E3A1C9DE20549B"
+    }
+  ],
+  "scopedEslintExit": 0,
+  "gitDiffCheckExit": 0,
+  "powerShellVersion": "5.1.26100.9818",
+  "powerShellParseErrors": 0,
+  "liveAuthorizationStatus": "AWAITING_EXPLICIT_OWNER_APPROVAL",
+  "callerSha256": "1F0D7595377921A4404B53B733B3B2BDEDC9A62CF280B573A298ED7B23A22B0A",
+  "pinCount": 144,
+  "staticChecks": 182
+}
