@@ -20,5 +20,21 @@ export async function browserPreflight(
 }
 export function browserFailure(error: unknown, stage: string) {
   const failure = safeFailure(error);
-  return { ...failure, classification: stage === 'identity-assertion' || stage === 'actor-assertion' ? 'ASSERTION_MISMATCH' : failure.classification };
+  return { ...failure, classification: stage === 'identity-assertion' || stage === 'actor-assertion' || stage === 'auth-readiness-assertion' ? 'ASSERTION_MISMATCH' : failure.classification };
+}
+
+export function requireBrowserAuthReadiness(rows: unknown): void {
+  if (!Array.isArray(rows) || rows.length !== 1 || rows[0]?.ready !== true)
+    throw new Error('PHASE2_BROWSER_AUTH_READINESS_MISMATCH');
+}
+
+/** Operator-owned browser session; no deadline on private sign-in or UI review. */
+export function waitForBrowserStop(stopRequested: () => boolean): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const timer = setInterval(() => {
+      try {
+        if (stopRequested()) { clearInterval(timer); resolve(); }
+      } catch (error) { clearInterval(timer); reject(error); }
+    }, 500);
+  });
 }

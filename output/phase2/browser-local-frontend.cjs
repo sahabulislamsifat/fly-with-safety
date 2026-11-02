@@ -1,4 +1,5 @@
 // Session-only local frontend; preserve the owner's existing Next server and config.
+throw new Error('RETIRED_OWNER_REQUIRES_ORIGINAL_LOCALHOST_3000_5000');
 const path = require('node:path'), { pathToFileURL } = require('node:url'), { createRequire } = require('node:module');
 const dir = path.resolve(__dirname, '../../client'), local = createRequire(path.join(dir, 'package.json'));
 process.env.NEXT_PUBLIC_LOCAL_API_BASE_URL = 'http://phase2.localhost:5002/api/v1';

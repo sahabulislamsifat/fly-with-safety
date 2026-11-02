@@ -4,7 +4,7 @@ import { readFileSync, writeFileSync, appendFileSync, existsSync } from 'node:fs
 import { resolve } from 'node:path';
 import type { Express } from 'express';
 import type { Server } from 'node:http';
-import { browserFailure, browserPreflight } from './phase2-browser-preflight.js';
+import { browserFailure, browserPreflight, waitForBrowserStop, requireBrowserAuthReadiness } from './phase2-browser-preflight.js';
 
 // Only environment-file discovery is disabled. Authentication, API and PG are real.
 vi.mock('dotenv', () => ({ default: { config: () => ({ parsed: {} }) }, config: () => ({ parsed: {} }) }));
@@ -22,7 +22,7 @@ it.skipIf(process.env.PHASE2_BROWSER_MODE !== 'owner-approved-synthetic')('loopb
     .map(line => JSON.parse(line) as { kind: string; userId: string; email: string; role: string }).filter(row => row.kind === 'created-user');
   if (actors.length !== 4 || actors.some(row => row.email !== `${row.userId}@example.invalid` || !/^[a-f0-9-]{36}$/.test(row.userId))) throw new Error('PHASE2_BROWSER_ACTOR_LEDGER_INVALID');
   Object.assign(process.env, { NODE_ENV: 'development', DATABASE_URL: target.href, EMAIL_DELIVERY_ENABLED: 'false',
-    FRONTEND_URL: 'http://phase2.localhost:3002', CORS_ORIGINS: 'http://phase2.localhost:3002', API_BASE_URL: 'http://phase2.localhost:5002',
+    FRONTEND_URL: 'http://localhost:3000', CORS_ORIGINS: 'http://localhost:3000', API_BASE_URL: 'http://localhost:5000',
     GOOGLE_CLIENT_ID: '', GOOGLE_CLIENT_SECRET: '', SMTP_HOST: '', SMTP_USER: '', SMTP_PASSWORD: '', JWT_SECRET: randomBytes(32).toString('hex') });
   let prisma: typeof import('../src/lib/prisma.js').prisma | undefined;
   let server: Server | undefined;
@@ -41,23 +41,29 @@ it.skipIf(process.env.PHASE2_BROWSER_MODE !== 'owner-approved-synthetic')('loopb
       actors, value => { stage = value; journal({ kind: 'stage', stage }); }, journal,
     );
     identityVerified = true;
+    stage = 'auth-readiness-query'; journal({ kind: 'stage', stage });
+    const readiness = await client.$queryRaw`
+      SELECT count(*)=4 AND count(*) FILTER (WHERE "emailVerified" AND length(password)=60
+        AND left(password,7) IN ('$2a$12$','$2b$12$','$2y$12$'))=4
+        AND has_table_privilege(current_user,'public."Session"','INSERT')
+        AND has_column_privilege(current_user,'public."Session"','revokedAt','UPDATE')
+        AND has_column_privilege(current_user,'public."Session"','lastUsedAt','UPDATE')
+        AND NOT has_table_privilege(current_user,'public."User"','DELETE')
+        AND NOT has_schema_privilege(current_user,'public','CREATE') AS ready
+      FROM public."User" WHERE id IN (${actors[0].userId},${actors[1].userId},${actors[2].userId},${actors[3].userId})`;
+    stage = 'auth-readiness-assertion'; journal({ kind: 'stage', stage });
+    requireBrowserAuthReadiness(readiness);
     stage = 'app-import'; journal({ kind: 'stage', stage });
     const imported = await import('../src/app.js'); const candidate: unknown = imported.default;
     const app = (typeof candidate === 'function' ? candidate : (candidate as { default: Express }).default) as Express;
     stage = 'loopback-listen'; journal({ kind: 'stage', stage });
-    server = await new Promise<Server>((accept, reject) => { const local = app.listen(5002, '127.0.0.1', () => accept(local)); local.once('error', reject); });
-    save('ready.json', { state: 'HOST_READY_NOT_BUSINESS_ACCEPTANCE', api: 'http://phase2.localhost:5002/api/v1', frontend: 'http://phase2.localhost:3002', actors: actualActors, readyUTC: new Date().toISOString() });
+    server = await new Promise<Server>((accept, reject) => { const local = app.listen(5000, 'localhost', () => accept(local)); local.once('error', reject); });
+    save('ready.json', { state: 'HOST_READY_NOT_BUSINESS_ACCEPTANCE', api: 'http://localhost:5000/api/v1', frontend: 'http://localhost:3000', actors: actualActors, readyUTC: new Date().toISOString() });
     console.log('PHASE2_BROWSER_API_READY_NOT_ACCEPTANCE');
     stage = 'browser-handoff';
     // The operator/agent closes only this owned host after actual browser work.
     // A stop signal is not a PASS receipt for the business journey.
-    const expires = Date.now() + 15 * 60 * 1000;
-    await new Promise<void>((accept, reject) => {
-      const timer = setInterval(() => {
-        if (existsSync(resolve(base, 'stop-request.json'))) { clearInterval(timer); accept(); }
-        else if (Date.now() >= expires) { clearInterval(timer); reject(new Error('BROWSER_HANDOFF_TIMEOUT')); }
-      }, 500);
-    });
+    await waitForBrowserStop(() => existsSync(resolve(base, 'stop-request.json')));
     save('host-result.json', { hostClosedNormally: true, businessAcceptance: false, finishedUTC: new Date().toISOString() });
   } catch (error) {
     const failure = browserFailure(error, stage);
@@ -90,4 +96,4 @@ it.skipIf(process.env.PHASE2_BROWSER_MODE !== 'owner-approved-synthetic')('loopb
     save('finalization.json', { closeFailure, snapshotFailure, disconnectFailure, snapshotSkipped: !identityVerified, finishedUTC: new Date().toISOString() });
     if (closeFailure || snapshotFailure || disconnectFailure) throw new Error('PHASE2_BROWSER_FINALIZATION_INCOMPLETE');
   }
-}, 920000);
+}, 0);

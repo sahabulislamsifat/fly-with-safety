@@ -1,9 +1,37 @@
 import { expect, it, vi } from 'vitest';
-import { browserFailure, browserPreflight } from './phase2-browser-preflight.js';
+import { browserFailure, browserPreflight, waitForBrowserStop, requireBrowserAuthReadiness } from './phase2-browser-preflight.js';
 import { EXPECTED_IDENTITY } from './phase2-identity-diagnostic.js';
 vi.mock('pg', () => { throw new Error('OFFLINE_CONNECTION_FORBIDDEN'); });
 const actor = { userId: 'synthetic-id', email: 'synthetic@example.invalid', role: 'CUSTOMER' };
 const actual = { id: actor.userId, email: actor.email, role: actor.role };
+it('admits only an exact successful aggregate readiness result', () => {
+  expect(() => requireBrowserAuthReadiness([{ ready: true }])).not.toThrow();
+});
+it.each([[], [{ ready: false }], [{ ready: 'true' }], [{ ready: true }, { ready: true }], [null]].map(rows => ({ rows })))('denies missing or malformed auth readiness %#', ({ rows }) => {
+  expect(() => requireBrowserAuthReadiness(rows)).toThrow('AUTH_READINESS_MISMATCH');
+  expect(browserFailure(new Error('synthetic-private'), 'auth-readiness-assertion').classification).toBe('ASSERTION_MISMATCH');
+});
+it('keeps the operator-owned host available past the historical handoff deadline until explicit stop', async () => {
+  vi.useFakeTimers();
+  try {
+    let stop = false, closed = false;
+    const done = waitForBrowserStop(() => stop).then(() => { closed = true; });
+    await vi.advanceTimersByTimeAsync(16 * 60 * 1000);
+    expect(closed).toBe(false);
+    stop = true;
+    await vi.advanceTimersByTimeAsync(500); await done;
+    expect(closed).toBe(true); expect(vi.getTimerCount()).toBe(0);
+  } finally { vi.useRealTimers(); }
+});
+it('fails closed on stop-signal observation errors and releases the polling timer', async () => {
+  vi.useFakeTimers();
+  try {
+    const failure = new Error('synthetic-observation-failure');
+    const observed = waitForBrowserStop(() => { throw failure; }).catch(error => error);
+    await vi.advanceTimersByTimeAsync(500);
+    expect(await observed).toBe(failure); expect(vi.getTimerCount()).toBe(0);
+  } finally { vi.useRealTimers(); }
+});
 it('forwards each read-only operation once and records bounded comparisons in order', async () => {
   const identity = vi.fn().mockResolvedValue([EXPECTED_IDENTITY]), actors = vi.fn().mockResolvedValue([actual]), stages: string[] = [], observations: object[] = [];
   expect(await browserPreflight(identity, actors, [actor], stage => stages.push(stage), value => observations.push(value))).toEqual([actual]);

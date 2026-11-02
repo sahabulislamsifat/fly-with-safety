@@ -1,0 +1,240 @@
+{
+  "users": [
+    {
+      "id": "7a504831-759c-4c1c-8325-4a187f711d91"
+    },
+    {
+      "id": "e3061e7a-ac46-4ed5-b3f3-fbc8b52feac6"
+    },
+    {
+      "id": "698a9431-d269-4c63-ae57-23e14503d477"
+    },
+    {
+      "id": "76374639-4185-4f99-a451-155c2250503d"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "cmvxtcwrn0000q4f4ym1qxcn5",
+      "userId": "7a504831-759c-4c1c-8325-4a187f711d91"
+    },
+    {
+      "id": "cmvxtcwz00001q4f4pukspax6",
+      "userId": "e3061e7a-ac46-4ed5-b3f3-fbc8b52feac6"
+    },
+    {
+      "id": "cmvxtcx680002q4f4sdhkii3t",
+      "userId": "698a9431-d269-4c63-ae57-23e14503d477"
+    },
+    {
+      "id": "cmvxtcxda0003q4f4ktzdgsfs",
+      "userId": "76374639-4185-4f99-a451-155c2250503d"
+    },
+    {
+      "id": "cmvxzb07h0000ucf4hfq0bxok",
+      "userId": "7a504831-759c-4c1c-8325-4a187f711d91"
+    },
+    {
+      "id": "cmvxzb0ez0001ucf4gtc5l61h",
+      "userId": "e3061e7a-ac46-4ed5-b3f3-fbc8b52feac6"
+    },
+    {
+      "id": "cmvxzb0m50002ucf47xrprkkq",
+      "userId": "698a9431-d269-4c63-ae57-23e14503d477"
+    },
+    {
+      "id": "cmvxzb0t90003ucf4vs8murjr",
+      "userId": "76374639-4185-4f99-a451-155c2250503d"
+    },
+    {
+      "id": "cmvxzb3rf0009ucf4skt9ngjk",
+      "userId": "7a504831-759c-4c1c-8325-4a187f711d91"
+    },
+    {
+      "id": "cmvz3ldum000370f44n27ffkl",
+      "userId": "7a504831-759c-4c1c-8325-4a187f711d91"
+    },
+    {
+      "id": "cmvz492ct001970f4shfd00uw",
+      "userId": "7a504831-759c-4c1c-8325-4a187f711d91"
+    },
+    {
+      "id": "cmvz4lt3l001a70f45s16qj1z",
+      "userId": "76374639-4185-4f99-a451-155c2250503d"
+    },
+    {
+      "id": "cmvz4m7ec001b70f44c9rjs15",
+      "userId": "698a9431-d269-4c63-ae57-23e14503d477"
+    },
+    {
+      "id": "cmvz4moaw001c70f4ayzyvby5",
+      "userId": "e3061e7a-ac46-4ed5-b3f3-fbc8b52feac6"
+    }
+  ],
+  "bookings": [
+    {
+      "id": "cmvxtcxe80004q4f4e7e9rceb",
+      "referenceNumber": "FWS-2026-53YFS3",
+      "userId": "7a504831-759c-4c1c-8325-4a187f711d91",
+      "status": "COMPLETED",
+      "totalPrice": 12000,
+      "currency": "BDT",
+      "bookingDetails": {
+        "commercial": {
+          "quotes": [
+            {
+              "id": "d2b23d02-adb7-423a-8458-248fadd9b669",
+              "amount": 11000,
+              "currency": "BDT",
+              "createdAt": "2026-11-01T15:22:27.203Z",
+              "acceptedAt": null,
+              "validUntil": "2026-11-01T15:22:30.197Z",
+              "description": "Synthetic assisted itinerary; no reservation"
+            },
+            {
+              "id": "87b9d786-e51b-4c41-a429-d96de3cf03a7",
+              "amount": 12500,
+              "currency": "BDT",
+              "createdAt": "2026-11-01T15:22:30.238Z",
+              "acceptedAt": null,
+              "validUntil": "2026-11-01T15:32:30.232Z",
+              "description": "Synthetic assisted itinerary; no reservation"
+            },
+            {
+              "id": "58b4daf8-c952-4f38-8c36-93ae8ae29389",
+              "amount": 12000,
+              "currency": "BDT",
+              "createdAt": "2026-11-01T15:22:30.279Z",
+              "acceptedAt": "2026-11-01T15:22:30.323Z",
+              "validUntil": "2026-11-01T15:32:30.244Z",
+              "description": "Synthetic assisted itinerary; no reservation"
+            }
+          ],
+          "version": 1,
+          "payments": [
+            {
+              "id": "9716680f-f5a3-41e9-9ee6-3448d02773bc",
+              "amount": 12000,
+              "method": "BANK_TRANSFER",
+              "status": "RECORDED_UNVERIFIED",
+              "quoteId": "58b4daf8-c952-4f38-8c36-93ae8ae29389",
+              "currency": "BDT",
+              "reference": "SYN-CONT-PAY-001",
+              "recordedAt": "2026-11-01T15:22:30.437Z"
+            }
+          ],
+          "receipts": [
+            {
+              "id": "d2b23d02-adb7-423a-8458-248fadd9b669",
+              "actor": "698a9431-d269-4c63-ae57-23e14503d477",
+              "command": "sha256:c7e4f10e5540d1c529fbdf82e6517b83505fd9927c764776fdf8b9edaf3f74fb"
+            },
+            {
+              "id": "87b9d786-e51b-4c41-a429-d96de3cf03a7",
+              "actor": "698a9431-d269-4c63-ae57-23e14503d477",
+              "command": "sha256:c52a6ac0bca3e0678f26d99d6b5928f709494a466722d55902e01ad0a43a1d2d"
+            },
+            {
+              "id": "58b4daf8-c952-4f38-8c36-93ae8ae29389",
+              "actor": "698a9431-d269-4c63-ae57-23e14503d477",
+              "command": "sha256:64389618a31555e32d8e021e0ac98e4ce95495dd5e669ae0d9b2c9abe6d142a3"
+            },
+            {
+              "id": "9e3da892-2951-4344-becb-a2117f7808fa",
+              "actor": "7a504831-759c-4c1c-8325-4a187f711d91",
+              "command": "sha256:3d73cc7c80d6d7bf0e8c1c14c2265cee5bb2774a95d1f61a5b5a425cdacc9d79"
+            },
+            {
+              "id": "9716680f-f5a3-41e9-9ee6-3448d02773bc",
+              "actor": "698a9431-d269-4c63-ae57-23e14503d477",
+              "command": "sha256:b82b5b8befdacc86bc43a37f70482b86d8a6992a9e65ba81593b4d2f9c9b201d"
+            }
+          ],
+          "revision": 5
+        },
+        "paymentStatus": "AWAITING_PAYMENT_CONFIRMATION"
+      }
+    },
+    {
+      "id": "cmvz42149000570f405mxse71",
+      "referenceNumber": "FWS-2026-5LA6DA",
+      "userId": "7a504831-759c-4c1c-8325-4a187f711d91",
+      "status": "PENDING",
+      "totalPrice": 38940,
+      "currency": "BDT",
+      "bookingDetails": {
+        "offerId": "fws-offer-dac-cxb-bg-0",
+        "cabinClass": "economy",
+        "returnDate": "2026-11-05",
+        "flightNumber": "BG 300",
+        "departureDate": "2026-11-02"
+      }
+    }
+  ],
+  "passengers": [
+    {
+      "id": "cmvxtcxeb0005q4f4lxyq0c21",
+      "bookingId": "cmvxtcxe80004q4f4e7e9rceb"
+    },
+    {
+      "id": "cmvz4214k000670f4oaoi8uqb",
+      "bookingId": "cmvz42149000570f405mxse71"
+    }
+  ],
+  "history": [
+    {
+      "id": "cmvxtcxee0006q4f43zuw60dt",
+      "bookingId": "cmvxtcxe80004q4f4e7e9rceb",
+      "fromStatus": "PENDING",
+      "toStatus": "PENDING"
+    },
+    {
+      "id": "cmvxzb3930004ucf4kr4rnpqy",
+      "bookingId": "cmvxtcxe80004q4f4e7e9rceb",
+      "fromStatus": "PENDING",
+      "toStatus": "PENDING"
+    },
+    {
+      "id": "cmvxzb3e30005ucf46kldngun",
+      "bookingId": "cmvxtcxe80004q4f4e7e9rceb",
+      "fromStatus": "PENDING",
+      "toStatus": "CONFIRMED"
+    },
+    {
+      "id": "cmvxzb3g30007ucf4vemq7gq0",
+      "bookingId": "cmvxtcxe80004q4f4e7e9rceb",
+      "fromStatus": "CONFIRMED",
+      "toStatus": "COMPLETED"
+    },
+    {
+      "id": "cmvz4214o000770f4ncd1mw42",
+      "bookingId": "cmvz42149000570f405mxse71",
+      "fromStatus": "PENDING",
+      "toStatus": "PENDING"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "cmvxtcxf20008q4f4hr0mqb79"
+    },
+    {
+      "id": "cmvxzb3eb0006ucf4icuoxdcu"
+    },
+    {
+      "id": "cmvxzb3g70008ucf4tpebixcr"
+    },
+    {
+      "id": "cmvz42161000o70f47jyl8myp"
+    }
+  ],
+  "idempotency": [
+    {
+      "id": "cmvxtcxek0007q4f4yqrnouxi",
+      "referenceNumber": "FWS-2026-53YFS3"
+    },
+    {
+      "id": "cmvz42150000d70f48peu4ibz",
+      "referenceNumber": "FWS-2026-5LA6DA"
+    }
+  ]
+}

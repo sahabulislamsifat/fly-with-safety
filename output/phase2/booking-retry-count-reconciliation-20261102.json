@@ -1,0 +1,1 @@
+{"passed":true,"readOnly":true,"customerBookingCount":2,"newReferenceOccurrences":1,"immutableDetailIdMatches":true,"reason":"list intentionally omits internal IDs; unique reference plus authorized detail ID","noCreationOrRetryRepeated":true}

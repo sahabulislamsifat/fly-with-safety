@@ -1,0 +1,902 @@
+[
+  {
+    "path": "server\\src\\app.ts",
+    "sha256": "dd0a9a0d562b9126b84614c47a6a95bccad03eccd37c841bb49f34b371670d2d"
+  },
+  {
+    "path": "server\\src\\config\\env.ts",
+    "sha256": "1d1402615e4929597e7a867906b45cd9e641928bc23def1689e8977b6ca9468a"
+  },
+  {
+    "path": "server\\src\\config\\passport.ts",
+    "sha256": "f2cbf4261a8c8092c431ef7b6e85a6392ac6e5252c134fc43fba9f1c1b452b2e"
+  },
+  {
+    "path": "server\\src\\controllers\\account.controller.ts",
+    "sha256": "122a58e5b6faa79e8c165b9fc5cf29823ef703b73537c4bdaefe9afe7a52ffec"
+  },
+  {
+    "path": "server\\src\\controllers\\airport.controller.ts",
+    "sha256": "46534b323fe22e93cf42e13253df35ddbab272ef86179c52cf6485075ca2069e"
+  },
+  {
+    "path": "server\\src\\controllers\\auth.controller.ts",
+    "sha256": "ef64165990f9d24dc00574fab242a5d80ae5bdbc0fb910774fe9a692371a3a63"
+  },
+  {
+    "path": "server\\src\\controllers\\booking-commercial.controller.ts",
+    "sha256": "20d1af74158951cc03d47f071fb06d02996837929a878c403e939c747a89f9fd"
+  },
+  {
+    "path": "server\\src\\controllers\\booking.controller.ts",
+    "sha256": "94e6050e7cbe707f6f0f34a8d5b81cb6580fc59f3f1b79dd77dd0335f2b7e81b"
+  },
+  {
+    "path": "server\\src\\controllers\\compatible-outbox.controller.ts",
+    "sha256": "2a4818c3515a054e140fe655845a516c73397a7b71dc290049c870128d24aba2"
+  },
+  {
+    "path": "server\\src\\controllers\\contact.controller.ts",
+    "sha256": "54b4d166b8103a3e3a7c65fd52ec4007324ffadf197d66fa13d6bfac5b3b72d9"
+  },
+  {
+    "path": "server\\src\\controllers\\destination.controller.ts",
+    "sha256": "9df8c7fd87f48eccf64cd6c22d5919d788c3435ec96f74904b6254b527dc4f83"
+  },
+  {
+    "path": "server\\src\\controllers\\flight.controller.ts",
+    "sha256": "dfb88da222eea5a10da5674242db288322e25bb183e1ac434e621dff9c64af4f"
+  },
+  {
+    "path": "server\\src\\controllers\\hotel.controller.ts",
+    "sha256": "6ab406b0773e452b246230939ac2828cb5f64ce06c5758b921b5b304febc3eb7"
+  },
+  {
+    "path": "server\\src\\controllers\\package.controller.ts",
+    "sha256": "57897b6c4ff4fb36da3d845b459127053f0f6dd8af92957c5eeace128c33bb3f"
+  },
+  {
+    "path": "server\\src\\controllers\\testimonial.controller.ts",
+    "sha256": "3510054d271f0082e4067db985505d676df005261083943a2ed76812b7f9e162"
+  },
+  {
+    "path": "server\\src\\controllers\\visa.controller.ts",
+    "sha256": "97f004b953463729af7ac0dc2c4e750ef97c3d500eaab68aafd9034a69e5c9e4"
+  },
+  {
+    "path": "server\\src\\lib\\logger.ts",
+    "sha256": "c7bfda67a8dafd10b4a54bdd4f1451a5349098693003fbe4cb6749c6352ad3f0"
+  },
+  {
+    "path": "server\\src\\lib\\prisma.ts",
+    "sha256": "f4285907da50d4189774c76c5f7c191ed53a254616b31679ef9fcb058ddadd3d"
+  },
+  {
+    "path": "server\\src\\lib\\request-context.ts",
+    "sha256": "f4a6bd094e8af6bdcbfef7a662857de85ff26dfbc3bf89de860e40b1ad143313"
+  },
+  {
+    "path": "server\\src\\middleware\\auth.middleware.ts",
+    "sha256": "6133ff051f2187c3bd89f7ce263a1e8873489841de756c0ce597efe7128a775e"
+  },
+  {
+    "path": "server\\src\\middleware\\error-handler.ts",
+    "sha256": "6c021672a745f62cc9e334209a2f79fee80e1b6545de5c28cabf40e883f4ba3d"
+  },
+  {
+    "path": "server\\src\\middleware\\idempotency.middleware.ts",
+    "sha256": "b5a566167f64ffaa547d3fa72d49295f78e136334460c83f4a9af016641ca1dd"
+  },
+  {
+    "path": "server\\src\\middleware\\not-found.ts",
+    "sha256": "ea8481fb28e4baefd092fa4fde89262cd32e3def90cb93644733b50070d615c4"
+  },
+  {
+    "path": "server\\src\\middleware\\oauth-state.ts",
+    "sha256": "7ff2b8daf7fbf7a44e76c9ffd9dc51401f5d7b58676fc386513894d5a16501f1"
+  },
+  {
+    "path": "server\\src\\middleware\\rate-limit.ts",
+    "sha256": "fc547dc41346129662393877c4fdc3009376397fedbb50d07015e98a89730167"
+  },
+  {
+    "path": "server\\src\\middleware\\request-id.ts",
+    "sha256": "85fdec0fdb57451d26bbd726c4046624ffa1c7d789064ba782ce4211f7a49ab5"
+  },
+  {
+    "path": "server\\src\\middleware\\request-origin.ts",
+    "sha256": "5349fe0c320e5f3a387dc5b04e7902dadf16dcb402602789d9abfb9727c5ed61"
+  },
+  {
+    "path": "server\\src\\middleware\\validation.middleware.ts",
+    "sha256": "e16d9cc8daed1ffcc41b9ac236aa45c63b36e9f73633648c6ed88068b3fb3480"
+  },
+  {
+    "path": "server\\src\\routes\\account.routes.ts",
+    "sha256": "f192a3403041765e27d39c4e536528cd13e310f4e6f8d60ad9955d912a6358db"
+  },
+  {
+    "path": "server\\src\\routes\\admin.routes.ts",
+    "sha256": "f7f35a21ef3da21fc7694e6a5ddacd537fe0666050152ae6d21618fd2e65e83e"
+  },
+  {
+    "path": "server\\src\\routes\\airports.routes.ts",
+    "sha256": "940345f22f731b51e407aa156591c32b0b48ccc99c4795580982c9e64ea624c2"
+  },
+  {
+    "path": "server\\src\\routes\\auth.routes.ts",
+    "sha256": "f09ad3a3473e5d9c59622d55da4d879e23d9f3ee81af4af58106c57453d76316"
+  },
+  {
+    "path": "server\\src\\routes\\bookings.routes.ts",
+    "sha256": "b4401684e69749b4ff39848eee949214c2c0c3902621ca5461f5b7456c60e4d0"
+  },
+  {
+    "path": "server\\src\\routes\\contact.routes.ts",
+    "sha256": "a4dc70f594265cd33a206ecc50d7cb6a5e0f2d10462bc4caeb5a62226b71e971"
+  },
+  {
+    "path": "server\\src\\routes\\destinations.routes.ts",
+    "sha256": "e2c0c34ae86f54c195b9b409b882cfdff62e23428b979bfdab5207cd75f1ec74"
+  },
+  {
+    "path": "server\\src\\routes\\flights.routes.ts",
+    "sha256": "814cd89997d94be1f49f332493f7930d46764b353cfc1404fd7a2e3f04f507a2"
+  },
+  {
+    "path": "server\\src\\routes\\future-stubs.routes.ts",
+    "sha256": "1d6dfb7899d5cc9252cfbb0e25101d44b192ef2cee6d214cf142f02451165a23"
+  },
+  {
+    "path": "server\\src\\routes\\health.routes.ts",
+    "sha256": "f1aa4d0495f1ab2e3f43243ced4d790839f04ec0c98a24760e44b9f2d972bdb5"
+  },
+  {
+    "path": "server\\src\\routes\\hotels.routes.ts",
+    "sha256": "06addee66c4f9f7249c6260c9ee87f2185aef3ff6ddd28e22f2773e86954a800"
+  },
+  {
+    "path": "server\\src\\routes\\outbox-worker.routes.ts",
+    "sha256": "837b10c34320174fd37ff65cd7067b31321659a9dcc8dd2f51d798c521079604"
+  },
+  {
+    "path": "server\\src\\routes\\packages.routes.ts",
+    "sha256": "a425bb63908c429e14fe281854e4a1fd5ebe283e34416d82009cd964b66d4628"
+  },
+  {
+    "path": "server\\src\\routes\\testimonials.routes.ts",
+    "sha256": "caea8d2588662c0d65a4afed3e3ec4700c2ec83b09cb93d942d03829ea854a69"
+  },
+  {
+    "path": "server\\src\\routes\\visa.routes.ts",
+    "sha256": "8a789bee6b5bc41b18bf38a72be18f4a0c7baeea6a118ead5762a1c491e064a2"
+  },
+  {
+    "path": "server\\src\\security\\compatible-outbox.pg.ts",
+    "sha256": "a014c4db7e4a16b0b520e2f01d491e9eac479583792ad640c558e2efdf132f8c"
+  },
+  {
+    "path": "server\\src\\security\\enrollment-cutover.ts",
+    "sha256": "6e0b102eb09d0f9a2541755e8d9544edd338dd292257dc6b9fc3f7b44fccb7e2"
+  },
+  {
+    "path": "server\\src\\security\\idempotency-digest.ts",
+    "sha256": "8ccda0717c181c42997103ef549e20a54d69d35dfa3e103ca851781c84c99446"
+  },
+  {
+    "path": "server\\src\\security\\issuance-replay.ts",
+    "sha256": "6d4dccdd92ea74fa4074e426fda8da21b55ca6d50fc024fc2506a53fb744e12c"
+  },
+  {
+    "path": "server\\src\\security\\logical-digest.ts",
+    "sha256": "627d2cee51cdaec7e72a23d41b4bbe708b04815a6c1b679993f454d000928a13"
+  },
+  {
+    "path": "server\\src\\security\\notification-recovery.pg.ts",
+    "sha256": "4d01d0926b2144e6c5b0a5a5827eb2e0f3a7c390f3f33b919ff42a79d624a675"
+  },
+  {
+    "path": "server\\src\\security\\notification-recovery.ts",
+    "sha256": "d1dce67ce3fd110524cf6697865cab7ecddc80cd0038df0a36f09a719e77f090"
+  },
+  {
+    "path": "server\\src\\security\\passenger-secrets.ts",
+    "sha256": "6ef8c8c10f23f2c173b08bfe06316d898d98fbcea0e29b84238d12ab28d236da"
+  },
+  {
+    "path": "server\\src\\security\\protected-auth.pg.ts",
+    "sha256": "2c73a466af1f7e9fa9c746bd591eaf5dc02c444af8ef67f2461fc2d49286ad49"
+  },
+  {
+    "path": "server\\src\\security\\protected-auth.ts",
+    "sha256": "49a24fdbaa13dfe07b003b08a9c897d2a2ba882488777725799bf40d47538cf1"
+  },
+  {
+    "path": "server\\src\\security\\protected-envelope.ts",
+    "sha256": "d13bf6b44be586de061727d656c67e1b0505bbdcc16d9acea4bf850fa9556f87"
+  },
+  {
+    "path": "server\\src\\security\\recovery-epoch.ts",
+    "sha256": "94f6f0bb014afe3a0461bae635e08f0dcb67fe3fd49b5fb102cc65507edd9adf"
+  },
+  {
+    "path": "server\\src\\security\\secret-data-plane.ts",
+    "sha256": "11dc65ab5b26183f1fd94234f23bd652b8a641e07e63d83278b2efca0b8e148b"
+  },
+  {
+    "path": "server\\src\\server.ts",
+    "sha256": "21ca39eb33e82e000c63a844afe3b6b3331ab81cf2f5eaff96f92df9c12cd550"
+  },
+  {
+    "path": "server\\src\\services\\account.service.ts",
+    "sha256": "7e49b181c7a490ccaf11ce81c8e2d18d4e8aee20a535662a0ae07b5c8da718af"
+  },
+  {
+    "path": "server\\src\\services\\airport.service.ts",
+    "sha256": "b4a6541fcd9095a57baeb9afecc349afa8e388d822e5410bc72c28d4bfcefe44"
+  },
+  {
+    "path": "server\\src\\services\\auth.service.ts",
+    "sha256": "0bb7e8e72bd221d55d2fc78f660f9e89328e90f75f39c14ceef6b98841f2639e"
+  },
+  {
+    "path": "server\\src\\services\\booking-commercial.service.ts",
+    "sha256": "5b20774a785028a5af5069d136b3455291f258f23b4b65932ac0a4c8bc8cfb6a"
+  },
+  {
+    "path": "server\\src\\services\\booking.service.ts",
+    "sha256": "bb4d57a1eb5151e9d82963f26672c599c5c36a5d47b3c5516f01ba4ea796d80b"
+  },
+  {
+    "path": "server\\src\\services\\compatible-outbox.service.ts",
+    "sha256": "24fd4c76f31b61e66bc5537145d07078fa1bf348f6e9d25193f0387622edb849"
+  },
+  {
+    "path": "server\\src\\services\\contact.service.ts",
+    "sha256": "efef713514ba0989512b12fc86956639cb528d12ded5a009690e1ca031ee3d4e"
+  },
+  {
+    "path": "server\\src\\services\\destination.service.ts",
+    "sha256": "64ad79e91a83c208de8d95ae4bbd0efcdb23b20af547456c34dda6db0fc7185b"
+  },
+  {
+    "path": "server\\src\\services\\flight-aggregator.service.ts",
+    "sha256": "6cdee07cfad3efb74907024bbae42d4a04ef7ca8771e1df94e1bee4faea75858"
+  },
+  {
+    "path": "server\\src\\services\\flight.service.ts",
+    "sha256": "c9c404d9cff1ddd512e0be78336c60e5bf05e2a7500413a1378ee30627f117bd"
+  },
+  {
+    "path": "server\\src\\services\\hotel.service.ts",
+    "sha256": "173194a752bcb384bf18c92e539181a102926be394e6d290e28d436cfea873f3"
+  },
+  {
+    "path": "server\\src\\services\\idempotency.service.ts",
+    "sha256": "464aede40872d062981f8c53984e08097729e41ec004fe897138e0a731a0fd5a"
+  },
+  {
+    "path": "server\\src\\services\\inquiry-page-query.ts",
+    "sha256": "e7d4e8973604c5ab26c2c9e0960227dde536d5ae50e0c522239d05fcde8e3d57"
+  },
+  {
+    "path": "server\\src\\services\\inquiry-status.service.ts",
+    "sha256": "950aa955b990e82fd2e2269db016d274d5468d8389b10661747d2b8dea1334cf"
+  },
+  {
+    "path": "server\\src\\services\\notification.service.ts",
+    "sha256": "9f5e407a51f6b18aa29f09e254e3f8724f397c381b20d69b5e6c2de5f3c790b4"
+  },
+  {
+    "path": "server\\src\\services\\outbox.service.ts",
+    "sha256": "270273ce702feab19a195f3ebd3292943176e809e5af06025dd9d86763f7df41"
+  },
+  {
+    "path": "server\\src\\services\\package.service.ts",
+    "sha256": "f7d7958d911579496eb153cfb3620d63645f7117795b1b78da53be7cd7aa9162"
+  },
+  {
+    "path": "server\\src\\services\\protected-auth.service.ts",
+    "sha256": "e844b59c9887145cdbd9028de5ef170cfe5824e52ea9242d6c372d45139f3465"
+  },
+  {
+    "path": "server\\src\\services\\protected-phase1.composition.ts",
+    "sha256": "cc22658ca440d0b598aa43a051424d26a90534a1be9f5beee06728474e005e35"
+  },
+  {
+    "path": "server\\src\\services\\providers\\flight.provider.ts",
+    "sha256": "9d6f937875d46f7e9850125b1f5062e2cb9d68f0f5fa20885576e3b0b6d01c3d"
+  },
+  {
+    "path": "server\\src\\services\\providers\\hotel.provider.ts",
+    "sha256": "2ff3eb639a5098c45af455ce8060921f8adcab2181ffb1b2d5174f4e1008e9b6"
+  },
+  {
+    "path": "server\\src\\services\\providers\\mock-flight.provider.ts",
+    "sha256": "5e470a0a45e40af4ada3408651789610b35801aaa3988e1bcff6bd73ec8033db"
+  },
+  {
+    "path": "server\\src\\services\\providers\\mock-hotel.provider.ts",
+    "sha256": "843713d15ee4b25b2579637c67cdd05d9adbfe4545989031c2f59470c421edc8"
+  },
+  {
+    "path": "server\\src\\services\\testimonial.service.ts",
+    "sha256": "b181e48d41ce78683add073530fccce7b01f0161936f14bd5928eb15527a138c"
+  },
+  {
+    "path": "server\\src\\services\\visa.service.ts",
+    "sha256": "066f989f3431fd2878da2a3dfe693d5850d5c8a6ebd5bd7da3a5676bad7690fa"
+  },
+  {
+    "path": "server\\src\\utils\\booking-dto.ts",
+    "sha256": "16acc6456dca34588f9c0ade85442c1403435c511db28ab20d08bbe3c522e6c5"
+  },
+  {
+    "path": "server\\src\\utils\\error-fields.ts",
+    "sha256": "0c09d8ac652439f7064c37aa5ede9fbcae42cdeb8cf15b7a1affd233456b5583"
+  },
+  {
+    "path": "server\\src\\utils\\errors.ts",
+    "sha256": "bcda3e9f567e7a7d5063a3614129ff93fd53661866d16b462e8900cb2ce55e92"
+  },
+  {
+    "path": "server\\src\\utils\\helpers.ts",
+    "sha256": "91c2d81c35fe6d6bbe39dc418b272bada3d74484cc58f25cd8de3d3dbb8d005d"
+  },
+  {
+    "path": "server\\src\\utils\\response.ts",
+    "sha256": "34b0a7198818bdc20166195ee10fa6538c952eef696f3e8d2f3e998be855b416"
+  },
+  {
+    "path": "server\\src\\utils\\status-transitions.ts",
+    "sha256": "008773dc1dbf1ac3efae8f9c56f771a3c614fed2adfe565b5c8ff294b3fdeb59"
+  },
+  {
+    "path": "server\\src\\validators\\account.schemas.ts",
+    "sha256": "196ec670ddf4284a1b5d72ded25168a1915a977928de51f9974f112266fa515b"
+  },
+  {
+    "path": "server\\src\\validators\\admin.schemas.ts",
+    "sha256": "397f0e4eb936c391649c26aee1eea14473a493007b53762569b57332740808e2"
+  },
+  {
+    "path": "server\\src\\validators\\auth.schemas.ts",
+    "sha256": "d8ddadfdb92a52e3e22f09793d03ed18b5bc73fc50e82000fba808816a214221"
+  },
+  {
+    "path": "server\\src\\validators\\booking.schemas.ts",
+    "sha256": "45a40880761674b1f3aa977d445af82f6a9d815efb0519f566b829e55ad30e63"
+  },
+  {
+    "path": "server\\src\\validators\\contact.schemas.ts",
+    "sha256": "14a92905877a135bc91326b9323f7d2277d2a200e498f952ea76f1681a185d1d"
+  },
+  {
+    "path": "server\\src\\validators\\flight.schemas.ts",
+    "sha256": "6bcdc3fc69cbb09f6123b58a75d6bcd9b3a51095c3990708317ed326d0651617"
+  },
+  {
+    "path": "server\\src\\validators\\hotel.schemas.ts",
+    "sha256": "982078cd25af0b3e02a89c577a13fd49ebd82e1bb9853e69e06ff01d96ccaa55"
+  },
+  {
+    "path": "server\\src\\validators\\inquiry-query.schemas.ts",
+    "sha256": "512d60473f30d13de7b999d71e7d311feb865e3f39dfcb74b4a1de6c4e213b84"
+  },
+  {
+    "path": "server\\src\\validators\\package.schemas.ts",
+    "sha256": "ea629bc44b7ced0b80429b8cd83b14bca231593083a81826ce5cb68c42add82e"
+  },
+  {
+    "path": "server\\src\\validators\\visa.schemas.ts",
+    "sha256": "03bcd23c786d70c88b339484ce1e55ba6097697ba11601b6e3c092c7e1d95b89"
+  },
+  {
+    "path": "client\\src\\components\\account\\AccountDashboard.tsx",
+    "sha256": "284bc574bbe744fc295efacaee558925a8b35de562f7581d5ea2bef72fbdd349"
+  },
+  {
+    "path": "client\\src\\components\\admin\\AdminBookingsTab.tsx",
+    "sha256": "3f679015d2871bd3e8a41e62406e70f981576c849419c6cd53b5e7bc6d7f421e"
+  },
+  {
+    "path": "client\\src\\components\\admin\\AdminContactTab.tsx",
+    "sha256": "ed18cdbefb73f06bfabde5129df98cabcef93c4cb4d5571843d27cb40d3919db"
+  },
+  {
+    "path": "client\\src\\components\\admin\\AdminInquiriesTab.tsx",
+    "sha256": "a75e39fccd72efd9917a8d8e14f7fac357eca1915974e8404bf9e9c4e49d0010"
+  },
+  {
+    "path": "client\\src\\components\\admin\\AdminPortal.tsx",
+    "sha256": "376f544f76f5857dd5954eeae4c1df0a4a19454c110c4274f399ae52311424c0"
+  },
+  {
+    "path": "client\\src\\components\\admin\\AdminTestimonialsTab.tsx",
+    "sha256": "f02412ceb1fa26e33a322322de4270ad984799849a245477adf63e4ae14bb3e7"
+  },
+  {
+    "path": "client\\src\\components\\auth\\AuthFlowPage.tsx",
+    "sha256": "31320001bc523f573e1584cda55558df8f43db2c32b36c387d212cc6b4a0be59"
+  },
+  {
+    "path": "client\\src\\components\\auth\\AuthProvider.tsx",
+    "sha256": "a82b79594186ed160bcd6aa69b561ed0a777146f19e71c386496c59848d8b662"
+  },
+  {
+    "path": "client\\src\\components\\auth\\SignInModal.tsx",
+    "sha256": "1277260864be61d8a0fcc0a5da594bad72b172396279ebccd723c4ac58fd27b4"
+  },
+  {
+    "path": "client\\src\\components\\banners\\TravelBenefitsBanner.tsx",
+    "sha256": "5da67d2badd54330da8231e87d86b198cc1a59cf6e9456df9223102d0c222dbf"
+  },
+  {
+    "path": "client\\src\\components\\booking\\AirportCombobox.tsx",
+    "sha256": "b9f37cdc85589b63714c6c037d5aff8b9fb2f094d238198c608495aa6c8b0f70"
+  },
+  {
+    "path": "client\\src\\components\\booking\\AirportSelectorPopover.tsx",
+    "sha256": "c8180ba237be0ea945af8b0349ca2e824852a158f1b69ad698edbc38ce68b05e"
+  },
+  {
+    "path": "client\\src\\components\\booking\\BookingCommercialPanel.tsx",
+    "sha256": "44bdacb1fcdc70f36d50278affb2ff90c5f065397ea5f80a3f6f8e9b2a39c943"
+  },
+  {
+    "path": "client\\src\\components\\booking\\BookingModal.tsx",
+    "sha256": "c9366cc024ae4dba2526db6375306d33e094fcf723de929bfb7ab865f63e7b39"
+  },
+  {
+    "path": "client\\src\\components\\booking\\BookingSearch.tsx",
+    "sha256": "6cae105659a4109039d5b0679b91f6553246f34e138e6bb1474447bc02884179"
+  },
+  {
+    "path": "client\\src\\components\\booking\\CategoryTabs.tsx",
+    "sha256": "051e1f4b7d19491cf2c773b8eb0130f3720ab1b59852754497dcdb02231d3813"
+  },
+  {
+    "path": "client\\src\\components\\booking\\DateInput.tsx",
+    "sha256": "9941e80a40b7188e211cc63d1138c99a41c96854ffe4f197fbdda275916aa6bc"
+  },
+  {
+    "path": "client\\src\\components\\booking\\PassengerClassPopover.tsx",
+    "sha256": "2c49967c66bbaab4268580f45650aa4c548a848d3cef8f9b42582061a513e621"
+  },
+  {
+    "path": "client\\src\\components\\booking\\PreferredAirlinePopover.tsx",
+    "sha256": "644f055ab44de463fdc14bcb5e161aac8b2d487cdf38a58bcc0b59a0199f9cbb"
+  },
+  {
+    "path": "client\\src\\components\\booking\\ServiceInquiryModal.tsx",
+    "sha256": "f45ae47c746d42bb814ac45ff9b98c953a5b931717a3aafcc8ba1b9e5d22b63c"
+  },
+  {
+    "path": "client\\src\\components\\booking\\TrendingRoutes.tsx",
+    "sha256": "e786c16606413fbf89306392da38ef850e7062689f4c6ea97cb6c93f23b2affb"
+  },
+  {
+    "path": "client\\src\\components\\contact\\ContactForm.tsx",
+    "sha256": "1cbe00ae35b2b3d8dc93a477993efb11821cfe5e48caa97c3300547e90fb2d5a"
+  },
+  {
+    "path": "client\\src\\components\\deals\\ExclusiveDeals.tsx",
+    "sha256": "4f6e8730a08ab78ffd9a86493f6389505c9d428d06465cb0149755deb7ad7d01"
+  },
+  {
+    "path": "client\\src\\components\\destinations\\Destinations.tsx",
+    "sha256": "58e03aee2863099fc4972738ca7c2a643f161b3805fd89e2094dff23a8a62fe6"
+  },
+  {
+    "path": "client\\src\\components\\destinations\\PopularDestinations.tsx",
+    "sha256": "461f15b7ad8f521d1204e086c51bf3169df49b53fe009a1b86e71c1be6fef36c"
+  },
+  {
+    "path": "client\\src\\components\\features\\Features.tsx",
+    "sha256": "11c8c11ed4637a5608d71c059bd5ad61940a434490530ece471f9ece7fee1631"
+  },
+  {
+    "path": "client\\src\\components\\features\\WhyFlyWithSafe.tsx",
+    "sha256": "f2b9e1f8d379c2690134525d553a0f9c513e740809345239d9e92e9c9ce7b18b"
+  },
+  {
+    "path": "client\\src\\components\\features\\WhyFlyWithsafety.tsx",
+    "sha256": "4b9e320152059ac5b89b7dbb2796567aa6214b64dc52a5ca482072bb4b7e5d8e"
+  },
+  {
+    "path": "client\\src\\components\\flights\\FlightCompareDrawer.tsx",
+    "sha256": "4723d71517b005aeac8510338021c8479bc00acafd29e5a3df3b81050f5bd888"
+  },
+  {
+    "path": "client\\src\\components\\footer\\Footer.tsx",
+    "sha256": "0f336a90bb229b488ed4a719e09a60830ebc96082d02803e88dbec159fe632cf"
+  },
+  {
+    "path": "client\\src\\components\\help\\BookingHelpStrip.tsx",
+    "sha256": "6f72963d69af6e72ecf17e3fadffbd6c955f20439dd01d38fd467eed5453f396"
+  },
+  {
+    "path": "client\\src\\components\\hero\\DestinationDiscoveryCard.tsx",
+    "sha256": "959eda328c4692bcbabe42a26c6c96ec2f5f81672cf2efa6b80b099ba6e1a331"
+  },
+  {
+    "path": "client\\src\\components\\hero\\Hero.tsx",
+    "sha256": "5d774ee92b688f383839f1ea77c0c39a6aa8d2f6ab376161c26e0d85cf8a5343"
+  },
+  {
+    "path": "client\\src\\components\\hero\\HeroCarousel.tsx",
+    "sha256": "25a39a4e2431909f8b917dba74c6cd1fb87ebe928e045d206d87473a51378a0f"
+  },
+  {
+    "path": "client\\src\\components\\hero\\HomeHeroSection.tsx",
+    "sha256": "5011e51d458a6f5ce5ef610009f45525259495f9d4d188f3efcfe986f02a7da4"
+  },
+  {
+    "path": "client\\src\\components\\home\\HomePageClient.tsx",
+    "sha256": "54f2b1ceef1f3055a0a313a2c738254635da071315c6108b71c9417837c5fa16"
+  },
+  {
+    "path": "client\\src\\components\\how-it-works\\HowItWorks.tsx",
+    "sha256": "f17ff525667e698648f5a467281456a7d9a42cea07463cc5feef7f6ca9605f98"
+  },
+  {
+    "path": "client\\src\\components\\mobile\\MobileExperience.tsx",
+    "sha256": "7d709673a3e762c3e5a41d89fba52647a8bb18a5fb5291e495c77870909ea044"
+  },
+  {
+    "path": "client\\src\\components\\navbar\\Navbar.tsx",
+    "sha256": "b8d3e8c3dae5b475eaa954c35c6eb5625f0f6749884a0251eb3021fa227d1f8e"
+  },
+  {
+    "path": "client\\src\\components\\packages\\HolidayPackages.tsx",
+    "sha256": "5cabad3ff5f44837582099e4c3c581f5c2ddc625b18d944a7eadb211e89da838"
+  },
+  {
+    "path": "client\\src\\components\\partners\\AirlinePartners.tsx",
+    "sha256": "fd810075ae8e09675be13e9f75bfd500e1874406fd372b33afb42440032d7ead"
+  },
+  {
+    "path": "client\\src\\components\\partners\\Partners.tsx",
+    "sha256": "489550404c1a33714697ba44e4d6b8e9912608d9520377b523c661c9dbd9b112"
+  },
+  {
+    "path": "client\\src\\components\\testimonials\\Testimonials.tsx",
+    "sha256": "a066db86b91caac945f19cf13e5926a705026da9e368e96a465e2efbedbe2ce3"
+  },
+  {
+    "path": "client\\src\\components\\testimonials\\TravellerStories.tsx",
+    "sha256": "1cd50f68816f718b06f6787ff199e1c08be8be08a273d8e7d4e155b06b716cb0"
+  },
+  {
+    "path": "client\\src\\components\\ui\\BackToTop.tsx",
+    "sha256": "87d6f83d2f4efa1f7ccd474b75204427971ffd24b8c98b34a87a2c3652940dd2"
+  },
+  {
+    "path": "client\\src\\components\\ui\\Badge.tsx",
+    "sha256": "df00abfdd1bdbea121b5b36a88e79dab39e783103de37cf86c36a7ba9fe0c403"
+  },
+  {
+    "path": "client\\src\\components\\ui\\Button.tsx",
+    "sha256": "21822911f39a228ce102455196a89262449ea368986a43fc088520a5d31232cd"
+  },
+  {
+    "path": "client\\src\\components\\ui\\Card.tsx",
+    "sha256": "a89ec87a29a35832e143f2a6366c144f099d591fda0c05ba44f2e9b5849f95b0"
+  },
+  {
+    "path": "client\\src\\components\\ui\\Icons.tsx",
+    "sha256": "c457182398b68c6be4fa3ce3dd77898970b1fd9bf2589163035362317b9a9242"
+  },
+  {
+    "path": "client\\src\\components\\ui\\index.ts",
+    "sha256": "021ceeb78d1966754ba9dd2333f593452c25e0dfe72b590b166222688a0f2cc2"
+  },
+  {
+    "path": "client\\src\\components\\ui\\Input.tsx",
+    "sha256": "9b361f565698be452049ab5ecd01ebb873aec03551e1f2753f84c97ad2d73081"
+  },
+  {
+    "path": "client\\src\\components\\ui\\PageHero.tsx",
+    "sha256": "75a389040cdeb7a8afc62a519fe113ea9f4556374ef299ed57313f810a5397b7"
+  },
+  {
+    "path": "client\\src\\lib\\api\\account.ts",
+    "sha256": "36ca9cf51fe7ee8fe87e54f75cf5124401a5cfb6518fb411cc34663c866ac279"
+  },
+  {
+    "path": "client\\src\\lib\\api\\admin.ts",
+    "sha256": "92d164c77bfd59aee6428c7f772783b876210fd9e84e24a4aa6ae2d699094961"
+  },
+  {
+    "path": "client\\src\\lib\\api\\auth-attempt.ts",
+    "sha256": "ba8b56d224654afe54ad79349352ebcf06ce5174b9fb99355f9c15153a2928b1"
+  },
+  {
+    "path": "client\\src\\lib\\api\\auth.ts",
+    "sha256": "bc67ee3bf3f45f02179c3b46bafbfbee2c1e053f7b187f3e838ed9311fa4d7c2"
+  },
+  {
+    "path": "client\\src\\lib\\api\\booking-attempt.ts",
+    "sha256": "e00f1544658bcd2b230b6ec72b1987568e5c7e9cb9ad520c82d81f54290068f2"
+  },
+  {
+    "path": "client\\src\\lib\\api\\booking-commercial.ts",
+    "sha256": "0e61fe712ace998e717b9619925c34f078a85e5eb456be3e75a23f989fcc64fa"
+  },
+  {
+    "path": "client\\src\\lib\\api\\bookings.ts",
+    "sha256": "a5e9c93202cabbdaf85c77204181764d8200a7395f47026df02b0c6e2c2f4d8b"
+  },
+  {
+    "path": "client\\src\\lib\\api\\client.ts",
+    "sha256": "ba20babc731dc49e76d6c174e7b6756391adda4462aabf0bf6ff6859a088f79d"
+  },
+  {
+    "path": "client\\src\\lib\\api\\contact.ts",
+    "sha256": "e88face4d92e550223d41d37e0ecbf6245fddc6f424338108098f1e288b0b332"
+  },
+  {
+    "path": "client\\src\\lib\\api\\flights.ts",
+    "sha256": "4a57f9bbf353ced984582cdb1ec427ab33b2e994b5a9e19c5e5e6e6e50a3ec08"
+  },
+  {
+    "path": "client\\src\\lib\\api\\hotels.ts",
+    "sha256": "4307b17a67010b1409a9baca7ce0b895cfd43fd362cd8bbd1e9b8e03d8acf25b"
+  },
+  {
+    "path": "client\\src\\lib\\api\\index.ts",
+    "sha256": "3ff4d27ff7647b25cb9bfeb5f9ad120bf1e270ee03d182d6e330b3cdaf9133b8"
+  },
+  {
+    "path": "client\\src\\lib\\api\\latest-request.ts",
+    "sha256": "3e7ec62d29637743956670dec93babe1487a542a5aae218889ce566d4ccfe4a2"
+  },
+  {
+    "path": "client\\src\\lib\\api\\packages.ts",
+    "sha256": "eb2108ab49ab2eac53daceba4ad0d30d3cff6bd9fd444919d6c217122c2ba894"
+  },
+  {
+    "path": "client\\src\\lib\\api\\visa.ts",
+    "sha256": "121f58d63d31f212664994955528c0b1a9287bae7423cdef033f9b28cb206459"
+  },
+  {
+    "path": "client\\src\\lib\\data\\site-data.ts",
+    "sha256": "1c37bd6b390176d784337d87521b2ed1e317d6898ff37cb9cb7f81133b221ae1"
+  },
+  {
+    "path": "client\\src\\lib\\travel-dates.ts",
+    "sha256": "97ffb2647ee4b2d0f8d94322d06f0faf84b08ec4db1001d8337fc783ba80edb8"
+  },
+  {
+    "path": "client\\src\\lib\\utils.ts",
+    "sha256": "682ae794c1e436fe4a9f330af03d5178603e8b3448e1fd59528f5db19ebd1745"
+  },
+  {
+    "path": "client\\src\\redux\\hooks.ts",
+    "sha256": "6c79afc7dd863a34482f8521ff346da230ba757d94af99e838b0ed243cbab87e"
+  },
+  {
+    "path": "client\\src\\redux\\ReduxProvider.tsx",
+    "sha256": "3e1463492654f039c71beb55a54d0a0b8557ac4bd64221abed8cbab2a625008a"
+  },
+  {
+    "path": "client\\src\\redux\\slices\\bookingSlice.ts",
+    "sha256": "5a6dbde38507e697dccad08b41a6ea1e1046d57638bdf5e3675917ba9b3e2713"
+  },
+  {
+    "path": "client\\src\\redux\\slices\\compareSlice.ts",
+    "sha256": "b854ffd0c92f5d22ca7df07bc66bd43a8c5fab0c4f1f48d02b3b574de66f1697"
+  },
+  {
+    "path": "client\\src\\redux\\slices\\flightSearchSlice.ts",
+    "sha256": "68edc49dc271e8b77dcbcf353c9f6a0d16f9288af60af920af8519286b797e3b"
+  },
+  {
+    "path": "client\\src\\redux\\slices\\hotelSearchSlice.ts",
+    "sha256": "19f485b31855d83e93ba20a7789f6f55d8e9fe876659fb3fc542987a0b6f66c2"
+  },
+  {
+    "path": "client\\src\\redux\\store.ts",
+    "sha256": "ef95e1b8de98632201a4f4ffe11b7d68d836cdc14f10fc8c4d89ae77c62c4ad4"
+  },
+  {
+    "path": "client\\src\\types\\index.ts",
+    "sha256": "cf523149b73bccb0e25589cf98042619ed1a1fb9b854066233cccaffb31990be"
+  },
+  {
+    "path": "client\\app\\account\\page.tsx",
+    "sha256": "111f44b6107178f2513d469716656851ded5a3596bfc839dd287e5c998b0d0c3"
+  },
+  {
+    "path": "client\\app\\admin\\page.tsx",
+    "sha256": "e9133b22a80608f4614fbc74f39a083ed2e8d4ffa0b71067421ed9b3e9f85230"
+  },
+  {
+    "path": "client\\app\\bookings\\lookup\\page.tsx",
+    "sha256": "d4b25ed03120a870a03107f8aa957ecc3583f7d3276d2661999c076a5fe45539"
+  },
+  {
+    "path": "client\\app\\contact\\page.tsx",
+    "sha256": "f9df34d783f29975db13a425529370f307903ac477fe0b9792be808bad2dabfa"
+  },
+  {
+    "path": "client\\app\\flights\\page.tsx",
+    "sha256": "84d9985923ee46f62cd5d8b2ca203476cc3b91d9c754b482cc77bf0d29b4c945"
+  },
+  {
+    "path": "client\\app\\flights\\results\\page.tsx",
+    "sha256": "140b916613100de2104e932b504072e91c8cc561a5b3b9c36923d7a55a3a660e"
+  },
+  {
+    "path": "client\\app\\forgot-password\\page.tsx",
+    "sha256": "2e6377ced41be95c541a6224d703590594f1e9601b4d4b97f6a583b9bd0d0b84"
+  },
+  {
+    "path": "client\\app\\hotels\\page.tsx",
+    "sha256": "b2a82c3ee74299b5e06ce809bc0c7e28e358c00a06eded1df5858a4dd97dffb1"
+  },
+  {
+    "path": "client\\app\\hotels\\results\\page.tsx",
+    "sha256": "ec09ff03f6922002f1a5bd596ac6277ec2ca402a9771d9454c55a1d540c85788"
+  },
+  {
+    "path": "client\\app\\layout.tsx",
+    "sha256": "1fd086dea98ee85df4c60da2c3ac8d4bc02cd5b348e7d9c518c38bf0d1610ef7"
+  },
+  {
+    "path": "client\\app\\packages\\page.tsx",
+    "sha256": "a516d94a75dc817e1aeb78ff4ef3a1283cb29162f4f012da2f90f8458487b8d7"
+  },
+  {
+    "path": "client\\app\\page.tsx",
+    "sha256": "8fd2f0200abc7e865f5932226a8085901bf084cfd99cf35061d88fe7c537267b"
+  },
+  {
+    "path": "client\\app\\privacy\\page.tsx",
+    "sha256": "ef8129b3894a504f92dd3eb2439e2c0bf55090ca60067ea01b0f37be6ed6389d"
+  },
+  {
+    "path": "client\\app\\register\\page.tsx",
+    "sha256": "e5976d29bea6c4caa696ddbed702db663ce824c0c4194b3b5918d90000c8c1ca"
+  },
+  {
+    "path": "client\\app\\reset-password\\page.tsx",
+    "sha256": "537b6efa0967d32534513998bed3ec88fa8e4ba2fa47c4e06ace77210f67a40a"
+  },
+  {
+    "path": "client\\app\\robots.ts",
+    "sha256": "81f73b6fc26b027b3600062c3f691ea81f8884b39b65e4d3203b08f27114cb52"
+  },
+  {
+    "path": "client\\app\\sitemap.ts",
+    "sha256": "eae1a85757f3c2e0ce05509c116ee71859b55cd5297aabed414e40c155d0bc65"
+  },
+  {
+    "path": "client\\app\\terms\\page.tsx",
+    "sha256": "3bb01d030083b82b47da2cd8bdecd7abe2ba66ce367a4a8772241b8bec9b50b0"
+  },
+  {
+    "path": "client\\app\\track-booking\\page.tsx",
+    "sha256": "5946527cd0cb70e6a2e7f25749ea43eda72de7793719acf9386f933d692e0d19"
+  },
+  {
+    "path": "client\\app\\verify-email\\page.tsx",
+    "sha256": "e10b4ec37c7eb89d78bf398d25f70429ef952fc59bca36fad191b5db94293c03"
+  },
+  {
+    "path": "client\\app\\visa-info\\page.tsx",
+    "sha256": "cd681cd46d5576f3a7a45eba4dcccf9a9261768edf063d66db73679991f180da"
+  },
+  {
+    "path": "server\\prisma\\migrations\\20260926202822_init\\migration.sql",
+    "sha256": "efda6a0cd3d01b2503e4cc1557f8aba2807664db545a742e52eaca60a3b2e1cb"
+  },
+  {
+    "path": "server\\prisma\\migrations\\20260927082715_full_schema\\migration.sql",
+    "sha256": "ae3bcd7668f026858ee7e43cbceb9955c451a1bf648520e6afb7814ce2cc7921"
+  },
+  {
+    "path": "server\\prisma\\migrations\\20261009000000_auth_sessions_and_password_resets\\migration.sql",
+    "sha256": "e1eb929668d33cbe94f07e7512cb7174084150c50683a2e15f5709509b53e1b4"
+  },
+  {
+    "path": "server\\prisma\\migrations\\20261011000000_inquiry_idempotency\\migration.sql",
+    "sha256": "0316f0857663d04900e1ceae1e305490a9b97e49192f9aad2f74bb2f494c6706"
+  },
+  {
+    "path": "server\\prisma\\migrations\\20261011120000_notification_outbox\\migration.sql",
+    "sha256": "1ecc18d0e4381cdf0489a9919f61b58c3f9f1a3bd102303ccf1fa5f81e14eca2"
+  },
+  {
+    "path": "server\\prisma\\migrations\\20261022000100_contact_status_new\\migration.sql",
+    "sha256": "4c9af2c97dd22a88cb3b7e5fe5422ac1023bcc86fcde999409033ac5180178a7"
+  },
+  {
+    "path": "server\\prisma\\migrations\\20261022000200_booking_contact_schema\\migration.sql",
+    "sha256": "bc10e7343b3c40769c43deee8b3164245319a9f35d7a3b50d4e3ee721895f32b"
+  },
+  {
+    "path": "server\\prisma\\phase1\\schema.prisma",
+    "sha256": "6ce1bce3eeda3b92e297093af4d8d30f6d349b0c916df5228b45bf1e2e3e3ff8"
+  },
+  {
+    "path": "server\\prisma\\schema.prisma",
+    "sha256": "60b262c2d5e60ec1820a01c95d7a9293854f4c2998c17bfec56ccd2fd28120a0"
+  },
+  {
+    "path": "server\\prisma\\seed.ts",
+    "sha256": "7af2d8ef8024b924ddde3037a77cdf1edccf084c7d7f79a524533c41af689ad8"
+  },
+  {
+    "path": "server\\test\\phase2-commercial.vitest.config.ts",
+    "sha256": "5e72005d1b2b471522eb90c554994de8377be4cb45f76eef0f1ca43f85b4ae4a"
+  },
+  {
+    "path": "server\\test\\phase2-booking-foundation.vitest.config.ts",
+    "sha256": "d89c6f5021db02876faadfbab33cb396e37a430b29abcb34d87e34806e3c708b"
+  },
+  {
+    "path": "server\\test\\phase2-booking-regression.vitest.config.ts",
+    "sha256": "3f363c1c0ca81e9e96246cde9924d0dd836f5c5346060c6d989469a7877cbae0"
+  },
+  {
+    "path": "server\\test\\phase2-browser-preflight.vitest.config.ts",
+    "sha256": "46791fe40f6889534c880d5b5072651137a935defaf77963c8770e20e635e389"
+  },
+  {
+    "path": "server\\test\\phase2-booking-foundation.test.ts",
+    "sha256": "a2511c7290f6460d3abbb7fadc0c5a4aaf6b29cd70d4c1c44c349f2b6b02af3c"
+  },
+  {
+    "path": "server\\test\\phase2-booking.pg.test.ts",
+    "sha256": "b5c72b2e26ae0c1d8c8d9bf52ce08c19c07e9def399ffc42d67b0dfa8b41dbe0"
+  },
+  {
+    "path": "server\\test\\phase2-browser-connection.test.ts",
+    "sha256": "9faca546867aefb9eb09b4e526eb9d30a60db67794ed80eb5773b93b20cae778"
+  },
+  {
+    "path": "server\\test\\phase2-browser-host.pg.test.ts",
+    "sha256": "b5912f4815f606cd1d28441da17eb80b0527acf30e3b8071d69508c59396855b"
+  },
+  {
+    "path": "server\\test\\phase2-browser-preflight.test.ts",
+    "sha256": "a1067e81ad60bc96329d380361097d8608ebd7e3d606c538fa5ec5862cb9173c"
+  },
+  {
+    "path": "server\\test\\phase2-commercial-continuation.pg.test.ts",
+    "sha256": "e00e0751a8509ee4e10d9ef2a66fce4cd708b572f57356107f8f42b803a4aa7d"
+  },
+  {
+    "path": "server\\test\\phase2-commercial-http.test.ts",
+    "sha256": "26b4c6506262c59fc6da15cfae8ee895e9596c5aad7c59b42e2764cc59aa1274"
+  },
+  {
+    "path": "server\\test\\phase2-commercial.test.ts",
+    "sha256": "df99bc415028622ebb083cfe5a12f4ae2a2d19772906bb9ad648e71e9494bcc1"
+  },
+  {
+    "path": "server\\test\\phase2-continuation-contract.test.ts",
+    "sha256": "5749c3f93ddd2a006d109eeaf11b48ce110411f75bf6641d3ebe435a7804cee5"
+  },
+  {
+    "path": "server\\test\\phase2-final-invariants.test.ts",
+    "sha256": "ca9407d7fadd919fee597c1052ccc6336693b69fa5f662639ad359ed9f5fe35c"
+  },
+  {
+    "path": "server\\test\\phase2-identity-diagnostic.test.ts",
+    "sha256": "4d3b69de1435e88cf2a4355d6cd25680acec0761819e9ec131a34697eed5e773"
+  },
+  {
+    "path": "server\\test\\phase2-identity-readonly.pg.test.ts",
+    "sha256": "868cc3b8ce5c9b8f3b75f3e069921a84676f14bb2597e1b3e6329e88364fe04b"
+  },
+  {
+    "path": "server\\test\\phase2-quotation-clock.test.ts",
+    "sha256": "53c512a3f7c8eb62e8b2e5cb3d2f567478afb5045ebe647f7e40636478992a2e"
+  },
+  {
+    "path": "server\\test\\phase2-status.test.ts",
+    "sha256": "f775ee8f882f440657c66b10e320a3d60624cd48e1adfd976f211abe5c6c357f"
+  }
+]

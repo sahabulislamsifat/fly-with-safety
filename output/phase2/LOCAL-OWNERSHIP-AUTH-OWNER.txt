@@ -1,0 +1,10 @@
+& {
+ $ErrorActionPreference='Stop'
+ $sql='E:\Programming\Project\fly-with-safety\output\phase2\local-ownership-auth.readonly.sql'
+ $out='E:\Programming\Project\fly-with-safety\output\phase2\local-ownership-auth-output.txt'
+ if(Test-Path -LiteralPath $out){throw 'STOP: existing ownership output; preserve it'}
+ if((Get-FileHash -LiteralPath $sql -Algorithm SHA256).Hash -cne '68DE5EEB58C30E9C18B9D05371D6C7C1FC739F9C2AF760AA6E694FF1C32E7DFD'){throw 'STOP: SQL integrity mismatch'}
+ foreach($name in @('PGPASSWORD','PGHOSTADDR','PGOPTIONS','PGSERVICE','PGSERVICEFILE')){if([Environment]::GetEnvironmentVariable($name,'Process')){throw 'STOP: PostgreSQL override present'}}
+ & 'C:\Program Files\PostgreSQL\18\bin\psql.exe' -X -W -h 127.0.0.1 -p 5432 -U flywithsafe_phase2_booking_test -d flywithsafe_phase2_booking_integration -v ON_ERROR_STOP=1 -f $sql | Tee-Object -FilePath $out
+ Write-Host ('Local ownership/auth read-only exit: '+$LASTEXITCODE)
+}

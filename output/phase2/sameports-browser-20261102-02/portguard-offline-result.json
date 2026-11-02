@@ -1,0 +1,45 @@
+{
+    "passed":  9,
+    "testListenersCreated":  false,
+    "failed":  0,
+    "databaseConnected":  false,
+    "skipped":  0,
+    "results":  [
+                    {
+                        "name":  "empty_snapshot",
+                        "passed":  true
+                    },
+                    {
+                        "name":  "unrelated_frontend",
+                        "passed":  true
+                    },
+                    {
+                        "name":  "ipv4_loopback_busy",
+                        "passed":  true
+                    },
+                    {
+                        "name":  "ipv6_loopback_busy",
+                        "passed":  true
+                    },
+                    {
+                        "name":  "ipv4_wildcard_busy",
+                        "passed":  true
+                    },
+                    {
+                        "name":  "ipv6_wildcard_busy",
+                        "passed":  true
+                    },
+                    {
+                        "name":  "enumeration_failure",
+                        "passed":  true
+                    },
+                    {
+                        "name":  "invalid_metadata",
+                        "passed":  true
+                    },
+                    {
+                        "name":  "null_metadata",
+                        "passed":  true
+                    }
+                ]
+}

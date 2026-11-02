@@ -1,0 +1,70 @@
+{
+  "expectedRows": 33,
+  "counts": {
+    "NotificationOutbox": 4,
+    "BookingStatusHistory": 5,
+    "BookingPassenger": 2,
+    "IdempotencyRecord": 2,
+    "Session": 14,
+    "Booking": 2,
+    "User": 4
+  },
+  "ids": {
+    "NotificationOutbox": [
+      "cmvxtcxf20008q4f4hr0mqb79",
+      "cmvxzb3eb0006ucf4icuoxdcu",
+      "cmvxzb3g70008ucf4tpebixcr",
+      "cmvz42161000o70f47jyl8myp"
+    ],
+    "BookingStatusHistory": [
+      "cmvxtcxee0006q4f43zuw60dt",
+      "cmvxzb3930004ucf4kr4rnpqy",
+      "cmvxzb3e30005ucf46kldngun",
+      "cmvxzb3g30007ucf4vemq7gq0",
+      "cmvz4214o000770f4ncd1mw42"
+    ],
+    "BookingPassenger": [
+      "cmvxtcxeb0005q4f4lxyq0c21",
+      "cmvz4214k000670f4oaoi8uqb"
+    ],
+    "IdempotencyRecord": [
+      "cmvxtcxek0007q4f4yqrnouxi",
+      "cmvz42150000d70f48peu4ibz"
+    ],
+    "Session": [
+      "cmvxtcwrn0000q4f4ym1qxcn5",
+      "cmvxtcwz00001q4f4pukspax6",
+      "cmvxtcx680002q4f4sdhkii3t",
+      "cmvxtcxda0003q4f4ktzdgsfs",
+      "cmvxzb07h0000ucf4hfq0bxok",
+      "cmvxzb0ez0001ucf4gtc5l61h",
+      "cmvxzb0m50002ucf47xrprkkq",
+      "cmvxzb0t90003ucf4vs8murjr",
+      "cmvxzb3rf0009ucf4skt9ngjk",
+      "cmvz3ldum000370f44n27ffkl",
+      "cmvz492ct001970f4shfd00uw",
+      "cmvz4lt3l001a70f45s16qj1z",
+      "cmvz4m7ec001b70f44c9rjs15",
+      "cmvz4moaw001c70f4ayzyvby5"
+    ],
+    "Booking": [
+      "cmvxtcxe80004q4f4e7e9rceb",
+      "cmvz42149000570f405mxse71"
+    ],
+    "User": [
+      "7a504831-759c-4c1c-8325-4a187f711d91",
+      "e3061e7a-ac46-4ed5-b3f3-fbc8b52feac6",
+      "698a9431-d269-4c63-ae57-23e14503d477",
+      "76374639-4185-4f99-a451-155c2250503d"
+    ]
+  },
+  "unknownUsers": "ALL unlisted IDs preserved, including five baseline extras and any later non-ledger account",
+  "commercialJsonRemovedWithOwnedBooking": {
+    "quotations": 3,
+    "payments": 1,
+    "receipts": 5
+  },
+  "target": "127.0.0.1:5432/flywithsafe_phase2_booking_integration",
+  "privilegedRole": "postgres",
+  "databaseExecuted": false
+}

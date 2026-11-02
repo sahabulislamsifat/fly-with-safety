@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-02",
+  "regressionComplete": true,
+  "regressionPassed": true,
+  "perLoader": [
+    {
+      "loader": "bundle",
+      "passed": 164,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "loader": "native",
+      "passed": 164,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "serverTsExit": 0,
+  "clientTsExit": 0,
+  "strictTsExit": 0,
+  "scopedEslintExit": 0,
+  "prismaValidationExit": 0,
+  "diffExit": 0,
+  "finalCleanupExecuted": false,
+  "acceptedIds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "pendingIds": [
+    13,
+    14
+  ],
+  "normalRestoration": {
+    "pid": 27724,
+    "readOnly": true,
+    "actualRunningClient": true,
+    "runtimeClientAvailable": true,
+    "database": "postgres",
+    "role": "prisma_migration",
+    "serverAddress": "10.0.44.77",
+    "serverPort": 5432
+  },
+  "realNormalCustomerLoginRetested": false,
+  "normalGoogleOauthConfigured": true,
+  "earlierSandboxHttpFailurePreserved": true
+}

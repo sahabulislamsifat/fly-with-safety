@@ -1,0 +1,71 @@
+{
+  "clientDate": "2026-11-02",
+  "normalDevelopment": {
+    "frontend": "http://localhost:3000",
+    "api": "http://localhost:5000/api/v1",
+    "httpStatus": [
+      200,
+      200
+    ],
+    "environmentFilesChanged": false,
+    "configuration": "unchanged main-cloud development configuration; no fresh SQL identity query",
+    "outboxWorkerPaused": true,
+    "processesTerminated": false
+  },
+  "isolatedFrontend": {
+    "url": "http://phase2.localhost:3002",
+    "apiBinding": "http://phase2.localhost:5002/api/v1",
+    "identicalSourceFilesChecked": 113,
+    "sourceDifferences": 0,
+    "privateEnvFiles": 0,
+    "running": true,
+    "apiRunning": false
+  },
+  "browser": {
+    "agentOwnedSession": "phase2-finish",
+    "protectedAccountRedirectObserved": true,
+    "signInDialogObserved": true,
+    "passwordFields": 1,
+    "credentialsEntered": false,
+    "authenticatedCustomer": "NOT_EXECUTED",
+    "authenticatedStaff": "NOT_EXECUTED",
+    "postgresBackedE2E": "NOT_EXECUTED"
+  },
+  "regression": [
+    {
+      "loader": "bundle",
+      "pass": 13,
+      "fail": 0,
+      "skip": 0
+    },
+    {
+      "loader": "native",
+      "pass": 13,
+      "fail": 0,
+      "skip": 0
+    }
+  ],
+  "newRegressionTestsPerLoader": 2,
+  "checks": {
+    "serverTypeScriptExit": 0,
+    "strictHostTypeScriptExit": 0,
+    "strictNewTestsTypeScriptExit": 0,
+    "scopedEslintExit": 0,
+    "diffExit": 0
+  },
+  "consumedPackagesExecuted": false,
+  "databaseMutationsExecuted": false,
+  "canonicalAccepted": [
+    1,
+    2
+  ],
+  "blocker": "private ownership/auth output absent; local restricted-role and synthetic account inputs unavailable to agent",
+  "reviewedUnusedCaller": {
+    "pins": 158,
+    "staleBeforeLifecycleFix": [
+      "server/src/server.ts"
+    ],
+    "eligibleForExecution": false
+  },
+  "proposedNextScope": "output/phase2/PHASE2-EXECUTION-SCOPE.md"
+}

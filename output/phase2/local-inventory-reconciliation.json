@@ -1,0 +1,59 @@
+{
+  "observedFromSavedOutput": true,
+  "readOnlyEndedWithRollback": true,
+  "database": "flywithsafe_phase2_booking_integration",
+  "role": "flywithsafe_phase2_booking_test",
+  "server": "127.0.0.1:5432",
+  "version": "18.6",
+  "completedMigrations": 7,
+  "sourceMigrationCount": 7,
+  "migrationDiffs": [],
+  "applicationColumns": 206,
+  "columnTypeNullabilityDiffs": [
+    [
+      "Package",
+      "gallery",
+      "text",
+      "t"
+    ],
+    [
+      "Package",
+      "inclusions",
+      "text",
+      "t"
+    ],
+    [
+      "Package",
+      "exclusions",
+      "text",
+      "t"
+    ],
+    [
+      "VisaInfo",
+      "documents",
+      "text",
+      "t"
+    ]
+  ],
+  "extraApplicationColumns": [],
+  "indexCount": 82,
+  "indexDifferencesVersusSavedCloud": [],
+  "enumValues": 32,
+  "enumDiffs": [
+    "ContactStatus"
+  ],
+  "counts": {
+    "users": 9,
+    "bookings": 1,
+    "sessions": 9
+  },
+  "additionalUsersVersusHistoricalOwnedFour": 5,
+  "additionalUserOwnership": "UNVERIFIED: aggregate inventory has no user IDs",
+  "notCovered": [
+    "column defaults",
+    "foreign-key definitions",
+    "current cloud state",
+    "user identity/password or ownership"
+  ],
+  "passed": false
+}

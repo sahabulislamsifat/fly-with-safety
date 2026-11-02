@@ -1,0 +1,9 @@
+{
+  "previousCaller": "sameports-browser-20261102-01",
+  "oldCallerPreserved": true,
+  "changedBlockOnly": "port guard and new manifest hash binding",
+  "removed": "$probe=New-Object Net.Sockets.TcpClient\ntry {\n $pending=$probe.BeginConnect('localhost',5000,$null,$null)\n if(-not $pending.AsyncWaitHandle.WaitOne(2000)){throw 'STOP: backend port state inconclusive'}\n try {$probe.EndConnect($pending); $busy=$true} catch [Net.Sockets.SocketException] {if($_.Exception.SocketErrorCode -ne [Net.Sockets.SocketError]::ConnectionRefused){throw 'STOP: backend port state inconclusive'}; $busy=$false}\n if($busy){throw 'STOP: port5000 occupied; approved normal-backend interruption must happen first'}\n} finally {$probe.Dispose()}\n",
+  "replacement": ". (Join-Path $PSScriptRoot 'Assert-Phase2BackendPortFree.ps1')\nAssert-Phase2BackendPortFree\n",
+  "databaseAndAuthGuardsUnchanged": true,
+  "executed": false
+}

@@ -1,0 +1,78 @@
+[
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\exact-cleanup-20261102-01\\cleanup.review.sql",
+    "sha256": "DBB52D74330DBEBEB0F870D929B1FAFD349FE53EB5EF611E173F47C4AF5E92CD"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\exact-cleanup-20261102-01\\exact-ledger.json",
+    "sha256": "7BEA7A23D00E31CD06D3FDEFBE303C61893E9500248E74F1FB32946AE81D6B1B"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\sameports-browser-20261102-02\\retained-records.json",
+    "sha256": "0541469D32676354133D61BBF53E381793EEF1D2566779A325E0357F55281917"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\sameports-browser-20261102-02\\caller-result.json",
+    "sha256": "E31D361DBED1B4DE4D6B7423F07EB3257913D107E167FB920C42FB0E8822740F"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\sameports-browser-20261102-02\\finalization.json",
+    "sha256": "8F395D8C6BF30C5BB7296943EEF091D51A05CDDA7C71C8460EB101B6AE911B41"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\sameports-browser-20261102-02\\host-result.json",
+    "sha256": "A38BA87402FDC86BC7CA24BFFBD0BD67B29637FF9415D83ECBBA47982A47C13D"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\sameports-browser-20261102-02\\ready.json",
+    "sha256": "E7091797AEBF15B293A6C66BD810EDBCCA238C85ADCF36D86B582F95B0A656E7"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\integration-recovery-20261101-01\\fixture-ledger.jsonl",
+    "sha256": "2F688CF6A9D7994DE2929C14F55BEA8063E2905D6A95A949EEC754B2B045D8C3"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-evidence-acceptance-20261101-01\\accepted-evidence.json",
+    "sha256": "5830E954E389AE9E338E0F5AAB8D1A97A08EE366F13A82C89A7D6F5E1135AA50"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\prisma\\schema.prisma",
+    "sha256": "60B262C2D5E60EC1820A01C95D7A9293854F4C2998C17BFEC56CCD2FD28120A0"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\setup-review\\role.sql",
+    "sha256": "4A3493415F9A8ABD8CA59A066E4288BA5BEC3FF5D165D6CA997F7D49EB394FA7"
+  },
+  {
+    "path": "C:\\Program Files\\PostgreSQL\\18\\bin\\psql.exe",
+    "sha256": "945EB0BBF8475A7FB0C863D85E36F2E15CF6B2D9FADB4D617BE4E59D4BB17BB0"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\prisma\\migrations\\20260926202822_init\\migration.sql",
+    "sha256": "EFDA6A0CD3D01B2503E4CC1557F8ABA2807664DB545A742E52EACA60A3B2E1CB"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\prisma\\migrations\\20260927082715_full_schema\\migration.sql",
+    "sha256": "AE3BCD7668F026858EE7E43CBCEB9955C451A1BF648520E6AFB7814CE2CC7921"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\prisma\\migrations\\20261009000000_auth_sessions_and_password_resets\\migration.sql",
+    "sha256": "E1EB929668D33CBE94F07E7512CB7174084150C50683A2E15F5709509B53E1B4"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\prisma\\migrations\\20261011000000_inquiry_idempotency\\migration.sql",
+    "sha256": "0316F0857663D04900E1CEAE1E305490A9B97E49192F9AAD2F74BB2F494C6706"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\prisma\\migrations\\20261011120000_notification_outbox\\migration.sql",
+    "sha256": "1ECC18D0E4381CDF0489A9919F61B58C3F9F1A3BD102303CCF1FA5F81E14ECA2"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\prisma\\migrations\\20261022000100_contact_status_new\\migration.sql",
+    "sha256": "4C9AF2C97DD22A88CB3B7E5FE5422AC1023BCC86FCDE999409033AC5180178A7"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\prisma\\migrations\\20261022000200_booking_contact_schema\\migration.sql",
+    "sha256": "BC10E7343B3C40769C43DEEE8B3164245319A9F35D7A3B50D4E3EE721895F32B"
+  }
+]

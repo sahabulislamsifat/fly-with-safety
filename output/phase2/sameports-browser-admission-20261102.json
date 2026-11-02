@@ -1,0 +1,61 @@
+{
+  "date": "2026-11-02",
+  "package": "sameports-browser-20261102-02",
+  "actualReady": true,
+  "identityJournalPassed": true,
+  "fourLedgerActorsReady": true,
+  "ownedBooking": {
+    "status": "COMPLETED",
+    "amount": 12000,
+    "currency": "BDT",
+    "passengers": 1,
+    "histories": 4
+  },
+  "unattributedUsersProtected": 5,
+  "apiNegatives": [
+    {
+      "id": "anonymous-account",
+      "status": 401,
+      "expected": 401,
+      "passed": true,
+      "corsOrigin": "http://localhost:3000",
+      "credentialedCors": true
+    },
+    {
+      "id": "anonymous-admin",
+      "status": 401,
+      "expected": 401,
+      "passed": true,
+      "corsOrigin": "http://localhost:3000",
+      "credentialedCors": true
+    },
+    {
+      "id": "anonymous-owned-detail",
+      "status": 401,
+      "expected": 401,
+      "passed": true,
+      "corsOrigin": "http://localhost:3000",
+      "credentialedCors": true
+    },
+    {
+      "id": "invalid-session",
+      "status": 401,
+      "expected": 401,
+      "passed": true,
+      "corsOrigin": "http://localhost:3000",
+      "credentialedCors": true
+    }
+  ],
+  "authenticatedAdmission": {
+    "httpStatus": 200,
+    "approvedActor": false,
+    "classification": "NON_LEDGER_ACCOUNT",
+    "knownFiveExtraActor": false,
+    "passwordRead": false,
+    "fixtureWritesByAgent": 0,
+    "action": "stopped new scenarios; cleared only agent-owned browser cookies; original customer email prepared; private synthetic credential requested"
+  },
+  "sessionRevokedByAgent": false,
+  "accountCreatedByAgent": false,
+  "callerRerun": false
+}
