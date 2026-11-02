@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "sqlStatements": 14,
+  "plpgsqlBlocks": 4,
+  "cleanupPins": 19,
+  "regressionSourcePins": 225,
+  "cleanupAttemptArtifacts": [],
+  "databaseExecuted": false,
+  "readOnlySQLSha256": "363D84842D3F85A65861AFFFEE0AD1C5838DE2E7012482AF93D6D63DFDBF6590"
+}
