@@ -1,0 +1,10 @@
+{
+  "pins": 169,
+  "plannedChecks": 64,
+  "callerSha256": "07BFCB319F14E9C9412564A4901E02D03765B708D7C42903B2ED2C6BA3045026",
+  "manifestSha256": "D79720E8CC35E6C341974E30B5600CF3921E64E396FE37B1AB75B03CC290CD14",
+  "originalPreparedTestPreserved": true,
+  "runtimeSchemaPinsUnchanged": true,
+  "approved": false,
+  "databaseExecuted": false
+}

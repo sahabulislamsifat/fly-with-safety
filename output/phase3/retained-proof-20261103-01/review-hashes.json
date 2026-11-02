@@ -1,0 +1,11 @@
+{
+  "pins": 203,
+  "checks": 64,
+  "callerSha256": "DBA2493CBD8580D4D98E02B5343283AEE6519341A1222534E41C3D8691147711",
+  "manifestSha256": "DDBF3030DB846B59EEDD96260D721B2E3929E793DA2571A6F01EAFF5A3C4B091",
+  "fixtureCreation": false,
+  "quoteRefresh": false,
+  "approved": false,
+  "databaseExecuted": false,
+  "providerCalled": false
+}

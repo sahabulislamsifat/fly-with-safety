@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "pins": 203,
+  "unchangedCheckpointIds": 64,
+  "financialOperationsAndAssertionsUnchanged": true,
+  "unchangedCaseTimeoutMs": 60000,
+  "unchangedAdmissionBudgetMs": 45000,
+  "newFixtureGuardTestsPerLoader": 14,
+  "failures": 0,
+  "skips": 0,
+  "preflightStatements": 9,
+  "plpgsqlBlocks": 2,
+  "integrationQueriesParsed": 12,
+  "privateConnectionHelperUnchanged": true,
+  "fixtureCreation": false,
+  "quoteRefresh": false,
+  "liveAttemptExists": false,
+  "databaseExecuted": false,
+  "providerCalled": false,
+  "callerSha256": "DBA2493CBD8580D4D98E02B5343283AEE6519341A1222534E41C3D8691147711"
+}

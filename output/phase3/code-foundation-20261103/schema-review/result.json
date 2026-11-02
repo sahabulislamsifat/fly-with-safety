@@ -1,0 +1,10 @@
+﻿{
+    "passed":  true,
+    "exit":  0,
+    "finishedUTC":  "2026-11-02T19:30:08.2310577Z",
+    "businessTestsExecuted":  false,
+    "commitState":  "CONFIRMED_BY_OUTPUT",
+    "postcheckPassed":  true,
+    "providerCalled":  false,
+    "commitMarkerObserved":  true
+}

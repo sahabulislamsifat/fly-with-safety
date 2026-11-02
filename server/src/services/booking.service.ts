@@ -412,6 +412,9 @@ export async function updateBookingStatus(
     }
 
     let details = (booking.bookingDetails as Record<string, any>) || {};
+    if (newStatus === 'COMPLETED' && details.gatewayPayment) {
+      throw AppError.conflict('Gateway payment does not authorize supplier fulfillment; operations integration is required');
+    }
     if (newStatus === 'CONFIRMED' && (!details.paymentStatus || details.paymentStatus === 'AWAITING_PAYMENT_INSTRUCTIONS')) {
       details = { ...details, paymentStatus: 'AWAITING_PAYMENT_CONFIRMATION' };
     } else if (newStatus === 'CANCELLED') {

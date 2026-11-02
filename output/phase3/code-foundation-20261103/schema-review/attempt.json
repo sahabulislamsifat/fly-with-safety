@@ -1,0 +1,7 @@
+{
+    "scope":  "Phase3 additive local schema only",
+    "noRetry":  true,
+    "database":  "flywithsafety_local_integration",
+    "startedUTC":  "2026-11-02T19:30:02.9217839Z",
+    "oid":  34701
+}

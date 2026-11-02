@@ -1,0 +1,14 @@
+{
+  "verifiedUTC": "2026-11-02T19:27:03.909Z",
+  "checks": [
+    {
+      "endpoint": "http://localhost:3000",
+      "status": 200
+    },
+    {
+      "endpoint": "http://localhost:5000/api/v1/health",
+      "status": 200
+    }
+  ],
+  "readOnly": true
+}

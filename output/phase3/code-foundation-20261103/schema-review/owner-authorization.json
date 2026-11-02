@@ -1,0 +1,13 @@
+{
+  "approvedDate": "2026-11-03",
+  "source": "Explicit owner reply: one local schema-only execution approved",
+  "executionsAuthorized": 1,
+  "callerSha256": "6FCDED4588137814D02BE628E78DB5B5865D9B8C3D609C1BCEFD5BAF57F6263A",
+  "database": "flywithsafety_local_integration",
+  "oid": 34701,
+  "scope": "Reviewed additive schema, scoped new-object privileges, eighth migration ledger row and preservation postchecks only",
+  "automaticExecutionAuthorized": false,
+  "businessTestsAuthorizedByThisApproval": false,
+  "providerCallsAuthorizedByThisApproval": false,
+  "executionObserved": false
+}

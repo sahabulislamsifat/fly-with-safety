@@ -1,0 +1,18 @@
+{
+  "errors": 0,
+  "warnings": 0,
+  "files": [
+    {
+      "path": "server\\test\\phase3-ledger.pg.integration.ts",
+      "messages": []
+    },
+    {
+      "path": "server\\test\\phase3-retained-fixtures.ts",
+      "messages": []
+    },
+    {
+      "path": "server\\test\\phase3-retained-fixtures.test.ts",
+      "messages": []
+    }
+  ]
+}

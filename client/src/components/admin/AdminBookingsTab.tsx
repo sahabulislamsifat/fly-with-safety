@@ -5,6 +5,7 @@ import { Button } from '@/components/ui';
 import { Icon } from '@/components/ui/Icons';
 import { ApiError } from '@/lib/api';
 import { BookingCommercialPanel } from '@/components/booking/BookingCommercialPanel';
+import { GatewayOperationsQueue } from '@/components/booking/GatewayPaymentPanel';
 import { createLatestRequestScope } from '@/lib/api/latest-request';
 import {
   AdminBooking,
@@ -127,6 +128,7 @@ export function AdminBookingsTab() {
 
   return (
     <div className="space-y-6">
+      <GatewayOperationsQueue />
       {/* Filters Bar */}
       <div className="rounded-xs border border-neutral-200 bg-white p-4 shadow-xs">
         <div className="flex flex-wrap items-center justify-between gap-4">
@@ -378,10 +380,10 @@ export function AdminBookingsTab() {
                 )}
 
                 <div className="pt-2">
-                  <span className="font-semibold text-neutral-500 block mb-1">Payment Readiness &amp; Settlement</span>
+                  <span className="font-semibold text-neutral-500 block mb-1">Manual Settlement Readiness</span>
                   <div className="rounded-xs border border-neutral-200 bg-neutral-50/80 p-2.5 space-y-1.5">
                     <div className="flex items-center justify-between">
-                      <span className="text-[11px] text-neutral-600 font-medium">Payment State:</span>
+                      <span className="text-[11px] text-neutral-600 font-medium">Manual Workflow:</span>
                       <span className="font-bold text-[11px] font-mono px-2 py-0.5 rounded-xs border border-neutral-300 bg-white text-neutral-800">
                         {String((selected.bookingDetails as AdminBookingDetailsMeta | null)?.paymentStatus || (selected.status === 'CONFIRMED' ? 'AWAITING_PAYMENT_CONFIRMATION' : 'AWAITING_PAYMENT_INSTRUCTIONS'))}
                       </span>

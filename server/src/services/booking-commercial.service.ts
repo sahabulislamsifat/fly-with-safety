@@ -3,6 +3,7 @@ import { prisma } from '../lib/prisma.js';
 import { Prisma } from '../generated/prisma/client.js';
 import { AppError } from '../utils/errors.js';
 import { createHash } from 'node:crypto';
+import { gatewayConfig, paymentEnabled } from '../payments/sslcommerz.js';
 
 // Amounts use the existing booking whole-currency unit, never floating point.
 const amount = z.number().int().min(1).max(2_000_000_000);
@@ -99,6 +100,11 @@ export async function changeBookingCommercial(reference: string, actor: BookingA
     const [{ now }] = await tx.$queryRaw<{ now: Date }[]>(Prisma.sql`SELECT clock_timestamp() AT TIME ZONE 'UTC' AS now`);
     const result = applyCommercial(booking, actor, command, now);
     if (result.replayed) return booking;
+    if (command.action === 'RECORD_PAYMENT' && paymentEnabled()) {
+      gatewayConfig(); // Fail closed before touching the additive ledger on an unapproved environment.
+      const outstanding = await tx.$queryRaw<Array<{ id: string }>>(Prisma.sql`SELECT id FROM public."GatewayPayment" WHERE "bookingId"=${booking.id} AND status NOT IN ('FAILED','CANCELLED','EXPIRED') LIMIT 1`);
+      if (outstanding.length) throw AppError.conflict('Gateway payment requires reconciliation before recording manual funds');
+    }
     const details = booking.bookingDetails && typeof booking.bookingDetails === 'object' && !Array.isArray(booking.bookingDetails) ? booking.bookingDetails : {};
     const updated = await tx.booking.update({ where: { id: booking.id }, data: {
       bookingDetails: { ...details, commercial: result.state } as Prisma.InputJsonValue,

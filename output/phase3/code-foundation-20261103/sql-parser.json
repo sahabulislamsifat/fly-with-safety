@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "statements": 17,
+  "functions": 2,
+  "accessStatements": 7,
+  "accessGuards": 1,
+  "databaseExecuted": false,
+  "parser": "PostgreSQL18 WASM"
+}

@@ -66,6 +66,7 @@ model User {
   packageInquiries         PackageInquiry[]
   visaInquiries            VisaInquiry[]
   bookings                 Booking[]
+  gatewayPayments          GatewayPayment[]
 
   @@index([email])
 }
@@ -391,11 +392,55 @@ model Booking {
   user          User?                  @relation(fields: [userId], references: [id])
   passengers    BookingPassenger[]
   statusHistory BookingStatusHistory[]
+  gatewayPayments GatewayPayment[]
 
   @@index([referenceNumber])
   @@index([customerEmail])
   @@index([status])
   @@index([createdAt])
+}
+
+// Prepared only. Explicit local schema/least-privilege approval is required before activation.
+model GatewayPayment {
+  id        String @id
+  bookingId String
+  userId    String
+  requestId String
+  tranId    String @unique @db.VarChar(30)
+  status    String
+  valId     String? @unique
+  bankId    String? @unique
+  dueAt     DateTime? @db.Timestamptz(6)
+  state     Json
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Restrict)
+  user      User @relation(fields: [userId], references: [id], onDelete: Restrict)
+  events    GatewayPaymentEvent[]
+  refunds   GatewayRefund[]
+  @@unique([userId, requestId])
+  @@index([bookingId])
+  @@index([dueAt])
+}
+
+model GatewayPaymentEvent {
+  id        String @id
+  paymentId String
+  kind      String
+  actor     String
+  data      Json
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  payment   GatewayPayment @relation(fields: [paymentId], references: [id], onDelete: Restrict)
+  @@index([paymentId, createdAt])
+}
+
+model GatewayRefund {
+  id        String @id @db.VarChar(30)
+  paymentId String
+  requestId String
+  actorId   String
+  state     Json
+  payment   GatewayPayment @relation(fields: [paymentId], references: [id], onDelete: Restrict)
+  @@unique([actorId, requestId])
+  @@index([paymentId])
 }
 
 model BookingPassenger {
