@@ -1,0 +1,48 @@
+{
+  "scope": "Five test/helper files,six exact local database-name literals;no app/runtime/env/schema/migration change",
+  "sources": [
+    {
+      "source": "server/test/phase2-booking.pg.test.ts",
+      "beforeSha256": "B5C72B2E26AE0C1D8C8D9BF52CE08C19C07E9DEF399FFC42D67B0DFA8B41DBE0",
+      "archivedBefore": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\source-before\\phase2-booking.pg.test.ts",
+      "candidateAfter": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\candidate\\phase2-booking.pg.test.ts",
+      "afterSha256": "D122BF6FA533C916F1B5E83270EEF451AB0948AF77FEECFF93554EAA75070585",
+      "occurrences": 2
+    },
+    {
+      "source": "server/test/phase2-browser-host.pg.test.ts",
+      "beforeSha256": "B5912F4815F606CD1D28441DA17EB80B0527ACF30E3B8071D69508C59396855B",
+      "archivedBefore": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\source-before\\phase2-browser-host.pg.test.ts",
+      "candidateAfter": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\candidate\\phase2-browser-host.pg.test.ts",
+      "afterSha256": "703553469A54BBFDC7696AA05ADA820C911C5CF9EEC292B7C63C6CFE4FC6683E",
+      "occurrences": 1
+    },
+    {
+      "source": "server/test/phase2-browser-connection.test.ts",
+      "beforeSha256": "9FACA546867AEFB9EB09B4E526EB9D30A60DB67794ED80EB5773B93B20CAE778",
+      "archivedBefore": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\source-before\\phase2-browser-connection.test.ts",
+      "candidateAfter": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\candidate\\phase2-browser-connection.test.ts",
+      "afterSha256": "14EBA4E778E9C747E4357719CDD5299C7203276FBB57D6577655548D03AEC75C",
+      "occurrences": 1
+    },
+    {
+      "source": "server/test/phase2-identity-diagnostic.ts",
+      "beforeSha256": "0AFB05556EDF61A51401DC69D54728D673BF4080FEA0357146B980CB0001EB69",
+      "archivedBefore": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\source-before\\phase2-identity-diagnostic.ts",
+      "candidateAfter": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\candidate\\phase2-identity-diagnostic.ts",
+      "afterSha256": "0A9210AE428FEB0F282C9CF607FF2010405755F91140FB5042B61324073772C1",
+      "occurrences": 1
+    },
+    {
+      "source": "server/test/phase2-identity-diagnostic.test.ts",
+      "beforeSha256": "4D3B69DE1435E88CF2A4355D6CD25680ACEC0761819E9EC131A34697EED5E773",
+      "archivedBefore": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\source-before\\phase2-identity-diagnostic.test.ts",
+      "candidateAfter": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\candidate\\phase2-identity-diagnostic.test.ts",
+      "afterSha256": "481E4349E00CB35E0D94AE9547A34F8F68E5256C98AAD1B244C20A155EEE5BCA",
+      "occurrences": 1
+    }
+  ],
+  "applied": false,
+  "applyCondition": "Only after successful actual rename+restricted-role verification,source-before hashes rechecked;preserve unrelated edits",
+  "historicalEvidence": "Archived original source bytes preserve pre-rename accepted integrity;do not edit old pins or packages"
+}

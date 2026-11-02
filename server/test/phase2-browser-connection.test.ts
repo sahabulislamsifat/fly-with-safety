@@ -13,7 +13,7 @@ it('forwards the shared private-connection environment through the real Vitest w
     const config = (client as unknown as { connectionParameters: { password: string; user: string; database: string; host: string; port: number; ssl: unknown } }).connectionParameters;
     expect(config.password === reference).toBe(true);
     expect(config.user).toBe('flywithsafe_phase2_booking_test');
-    expect(config.database).toBe('flywithsafe_phase2_booking_integration');
+    expect(config.database).toBe('flywithsafety_local_integration');
     expect(config.host).toBe('127.0.0.1'); expect(config.port).toBe(5432); expect(config.ssl).toBe(false);
     expect(process.env.DATABASE_URL === undefined).toBe(true); expect(process.env.DIRECT_URL === undefined).toBe(true);
     expect(forbid).not.toHaveBeenCalled();

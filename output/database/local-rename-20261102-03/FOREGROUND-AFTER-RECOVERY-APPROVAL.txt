@@ -1,0 +1,7 @@
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p='E:\Programming\Project\fly-with-safety\output\database\local-rename-20261102-03\Invoke-LocalRename.ps1'
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne 'EDB88D0D859FBBE6F72D96182E1F5CB1C27753A7BA948E357C4193FD9EA54570'){throw 'STOP: reviewed source-auth-confirmed rename caller mismatch'}
+ & $p -OwnerApprovedInPlaceLocalRename
+}

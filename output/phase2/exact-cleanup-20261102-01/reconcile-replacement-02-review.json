@@ -1,0 +1,20 @@
+{
+  "prepared": true,
+  "change": "Only attempt/output/result filenames receive -02; SQL, target, guards, original caller and pins unchanged",
+  "replacementCommandSha256": "05E5CD77CD54C393DA2D6520B2076D1C143D04F7BEB00641FDEF0CD69A310454",
+  "changedOccurrences": {
+    "reconcile-readonly-attempt.json": 2,
+    "reconcile-readonly-output.txt": 2,
+    "reconcile-readonly-result.json": 2
+  },
+  "cleanupPinsVerified": 19,
+  "sqlSha256": "363D84842D3F85A65861AFFFEE0AD1C5838DE2E7012482AF93D6D63DFDBF6590",
+  "originalFailedArtifacts": {
+    "reconcile-readonly-attempt.json": "385E62DC6EA64188A81483BCA4AEFF23B0C9E033A0EB38577AA148E0756F6636",
+    "reconcile-readonly-result.json": "75D87A01DE2E1B0150C57D2C9FB229BE9DD154FBA277620497E6F8061A4F5FEE"
+  },
+  "oldStdoutExists": false,
+  "originalCleanupArtifacts": [],
+  "newLiveExecution": "NOT_AUTHORIZED_OR_EXECUTED",
+  "databaseExecuted": false
+}

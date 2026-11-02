@@ -1,0 +1,97 @@
+{
+  "status": "LOCAL DATABASE RENAME — FORMALLY VERIFIED",
+  "verifiedUTC": "2026-11-02T16:39:17.060Z",
+  "database": "flywithsafety_local_integration",
+  "oid": 34701,
+  "oldNameAbsent": true,
+  "oldName": "flywithsafe_phase2_booking_integration",
+  "adminPostcheck": {
+    "exit": 0,
+    "renameCommitted": true,
+    "preservationResult": 1
+  },
+  "restrictedPostcheck": {
+    "exit": 0,
+    "passed": true,
+    "role": "flywithsafe_phase2_booking_test",
+    "originalV03RestrictedExit": 2,
+    "originalV03OverallPassed": false,
+    "followupFinishedUTC": "2026-11-02T16:17:47.7413251Z"
+  },
+  "preserved": {
+    "migrations": 7,
+    "users": 6,
+    "sessions": 1,
+    "bookings": 0,
+    "ownership": true,
+    "privileges": true,
+    "otherRecordsAndSchema": "Admin metadata/count/ID comparison passed;only database-name mutation"
+  },
+  "sourceTransition": {
+    "applied": true,
+    "files": 5,
+    "literals": 6,
+    "matchesReviewedCandidate": true,
+    "unchangedOtherHistoricalSourcePins": 221,
+    "currentSourcePins": 225,
+    "totalArchivedOriginalSourceFiles": 5,
+    "historicalManifestCoveredByArchives": 4
+  },
+  "targetedTests": {
+    "bundle": {
+      "passed": 54,
+      "failed": 0,
+      "skipped": 0
+    },
+    "native": {
+      "passed": 54,
+      "failed": 0,
+      "skipped": 0
+    },
+    "strictActualTypeScriptFiles": 5,
+    "strictTypeScriptExit": 0,
+    "pgHarnessSyntaxFiles": 2,
+    "pgHarnessSyntaxExit": 0,
+    "livePGSuiteRerun": false,
+    "phase2FullRegressionRerun": false,
+    "prismaConfigurationValidation": {
+      "configs": 2,
+      "exit": 0,
+      "syntheticProcessOnlyURLs": true,
+      "databaseConnected": false
+    },
+    "diffCheckExit": 0
+  },
+  "environment": {
+    "runtimePrismaKey": "DATABASE_URL",
+    "cliPrismaKey": "DIRECT_URL",
+    "localExplicitProcessTarget": "127.0.0.1:5432/flywithsafety_local_integration",
+    "normalMainCloudEnvRewritten": false,
+    "credentialsPersisted": false,
+    "prismaSchemaOrCLIConfigChanged": false,
+    "normalFrontendPort": 3000,
+    "normalBackendPort": 5000,
+    "frontendHttpStatus": 200,
+    "apiHealthHttpStatus": 200,
+    "normalDatabaseHealth": "up",
+    "credentialedCors": true,
+    "processesRestarted": false
+  },
+  "cloud": "No task write/migration/rename/credential change to main flywithsafety or staging flywithsafety_integration;normal health uses read-only SELECT1. Not a universal third-party activity audit.",
+  "backup": "Existing private archive preserved;no restore rehearsal or new backup export",
+  "historicalArtifacts": {
+    "output/database/local-rename-20261102-03/attempt.json": "037CA0DDA6F5DC0F55A1FABFE8032B3411230049596E69015A2CE0D8807C5F20",
+    "output/database/local-rename-20261102-03/result.json": "B4CC7021DB10EC049DFA1341C7997A425131BF0A68E9658019C55A78F48ED890",
+    "output/database/local-rename-20261102-03/admin-stdout.txt": "513B91FE512C1B6F86785DE7AD81B3DF202D0552C583EDB1CB7685DF4245BA5B",
+    "output/database/local-rename-20261102-03/restricted-followup-attempt.json": "B859276A8FB51E576588022EEF9A6749F5C38FB1DFEBDC337D4E473CE1F1690D",
+    "output/database/local-rename-20261102-03/restricted-followup-result.json": "DAF2CC6E3478F8A02D0436910935BBAD4EC3C071FACBF09550089F6BA89EE84D",
+    "output/database/local-rename-20261102-03/restricted-followup-stdout.txt": "D44608A2AD30402CAE20B511AF1AC3726A9846DECCB48878ABA1CED6B7A883BC",
+    "output/database/local-rename-20261102-03/restricted.verify.readonly.sql": "2218BED8C13A4763A582D3F00D764C7D7EB8D59F465FDEE21C56B244F42B60FE",
+    "output/database/local-rename-20261102-03/rename.review.sql": "59449D6273403EC380FB7B77AC7067334E26F9F95925B095E4C1F038D37A2F7D"
+  },
+  "previousAuthenticationCause": "UNDETERMINED_NO_PASSWORD_OR_CONFIG_BUG_CLAIM",
+  "phase1G7": "ACCEPTED_UNCHANGED",
+  "phase2": "FORMALLY_ACCEPTED_14_OF_14",
+  "phase3": "SANDBOX_CODE_IMPLEMENTATION_READY;NO_PROVIDER_TRANSACTION_OR_LIVE_ACTIVATION_PERFORMED",
+  "phase3Plan": "docs/proposals/PHASE_3_SSLCOMMERZ_SANDBOX_PLAN.md"
+}

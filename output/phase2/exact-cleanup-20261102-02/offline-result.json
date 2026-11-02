@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "checks": 277,
+  "statements": 37,
+  "plpgsqlBlocks": 15,
+  "savedActualCatalogColumns": 14,
+  "originalFilesPreserved": 17,
+  "cleanupPins": 19,
+  "unchangedRegressionSourcePins": 225,
+  "originalBadColumnsDetected": [
+    "params",
+    "template"
+  ],
+  "databaseExecuted": false,
+  "liveNotificationPayloadShape": "UNVERIFIED_REQUIRES_APPROVED_READONLY_EXECUTION"
+}

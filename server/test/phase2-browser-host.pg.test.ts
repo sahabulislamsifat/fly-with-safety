@@ -13,7 +13,7 @@ it.skipIf(process.env.PHASE2_BROWSER_MODE !== 'owner-approved-synthetic')('loopb
   if (!base) throw new Error('PHASE2_BROWSER_ARTIFACT_REQUIRED');
   let target: URL;
   try { target = new URL(process.env.PHASE2_BOOKING_DATABASE_URL || ''); } catch { throw new Error('PHASE2_BROWSER_TARGET_INVALID'); }
-  if (target.hostname !== '127.0.0.1' || target.port !== '5432' || target.pathname !== '/flywithsafe_phase2_booking_integration' ||
+  if (target.hostname !== '127.0.0.1' || target.port !== '5432' || target.pathname !== '/flywithsafety_local_integration' ||
       target.username !== 'flywithsafe_phase2_booking_test' || !target.password || target.search) throw new Error('PHASE2_BROWSER_TARGET_INVALID');
   const proofDirectory = resolve(__dirname, '../../output/phase2/final-evidence-acceptance-20261101-01');
   const proof = JSON.parse(readFileSync(resolve(proofDirectory, 'accepted-evidence.json'), 'utf8'));

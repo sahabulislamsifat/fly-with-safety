@@ -1,0 +1,47 @@
+{
+  "sourceFiles": [
+    {
+      "path": "server/test/phase2-booking.pg.test.ts",
+      "sha256": "B5C72B2E26AE0C1D8C8D9BF52CE08C19C07E9DEF399FFC42D67B0DFA8B41DBE0",
+      "occurrences": 2,
+      "proposedChange": "Only active local identity literals to flywithsafety_local_integration after approved rename; do not replay consumed suites"
+    },
+    {
+      "path": "server/test/phase2-browser-host.pg.test.ts",
+      "sha256": "B5912F4815F606CD1D28441DA17EB80B0527ACF30E3B8071D69508C59396855B",
+      "occurrences": 1,
+      "proposedChange": "Only active local identity literals to flywithsafety_local_integration after approved rename; do not replay consumed suites"
+    },
+    {
+      "path": "server/test/phase2-browser-connection.test.ts",
+      "sha256": "9FACA546867AEFB9EB09B4E526EB9D30A60DB67794ED80EB5773B93B20CAE778",
+      "occurrences": 1,
+      "proposedChange": "Only active local identity literals to flywithsafety_local_integration after approved rename; do not replay consumed suites"
+    },
+    {
+      "path": "server/test/phase2-identity-diagnostic.ts",
+      "sha256": "0AFB05556EDF61A51401DC69D54728D673BF4080FEA0357146B980CB0001EB69",
+      "occurrences": 1,
+      "proposedChange": "Only active local identity literals to flywithsafety_local_integration after approved rename; do not replay consumed suites"
+    },
+    {
+      "path": "server/test/phase2-identity-diagnostic.test.ts",
+      "sha256": "4D3B69DE1435E88CF2A4355D6CD25680ACEC0761819E9EC131A34697EED5E773",
+      "occurrences": 1,
+      "proposedChange": "Only active local identity literals to flywithsafety_local_integration after approved rename; do not replay consumed suites"
+    }
+  ],
+  "environmentFilesInspectedByKeyOnly": [
+    "server/.env",
+    "server/.env.example",
+    "server/.env.staging.local",
+    "client/.env",
+    "client/.env.example"
+  ],
+  "oldLocalTargetInEnvironmentFiles": false,
+  "prismaRuntimeKey": "DATABASE_URL",
+  "prismaCliKey": "DIRECT_URL",
+  "normalMainCloudEnvironment": "PRESERVE_UNCHANGED",
+  "historicalPackages": "DO_NOT_MASS_REPLACE",
+  "sourceEditsApplied": false
+}

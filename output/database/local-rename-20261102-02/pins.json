@@ -1,0 +1,170 @@
+[
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\snapshot.readonly.sql",
+    "sha256": "7353D4FDE6C3BBD9F86934BAA3FAD8CF1A49902B8F5D77D191032C27711785DC"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-02\\rename.review.sql",
+    "sha256": "59449D6273403EC380FB7B77AC7067334E26F9F95925B095E4C1F038D37A2F7D"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\restricted.verify.readonly.sql",
+    "sha256": "2218BED8C13A4763A582D3F00D764C7D7EB8D59F465FDEE21C56B244F42B60FE"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\local-target.review.patch",
+    "sha256": "7C3DC7F879DF8CF4E0765DB2A878F8D4E97B1B15A1CCF4D06043A93822F411BA"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\backup.review.json",
+    "sha256": "0CB05FF72D8630998E82362E2FF6E98D217136B06ABD04C2470D137D1B8CCC84"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\candidate-typescript-result.json",
+    "sha256": "791334E788C35B1504D869E6A953CF99AB5418B553668634F126A8CB4DDD11BE"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\candidate.vitest.config.cjs",
+    "sha256": "324E9D8861107DCF7FCAB659A47E1C5C0E211A8F3CF199A9EAA715C2BE4D790F"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\candidate-bundle-esm-fixed.json",
+    "sha256": "7A3340747A9D9074FC4981D3E5953733601CA472C01E50DF563EC6B727BE9EA7"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\candidate-native-esm-fixed.json",
+    "sha256": "E2071F4C9D92BDF7FD06FE8FF194B9ABE77A3371B4A798AD41E359CAD7AFCFCB"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-preparation-20261102-01\\reference-inventory.json",
+    "sha256": "94CA1DBB040DCEC43650A9D44E1AFC6C0D7D64A0E3E2A4E75A8EE6D6329F4027"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-preparation-20261102-01\\attempt.json",
+    "sha256": "4729F53E3AF4E832208FBE830C726EE087A3D2F81A83047B058293526E5BB5EF"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-preparation-20261102-01\\result.json",
+    "sha256": "FD7B1F3A4E623D8167B1FABEAFB268F1A165F242ACBBDCDFC04A0543547A2B10"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-preparation-20261102-01\\stdout.txt",
+    "sha256": "1A3894195C74B5208CFE12BC953935B493A435B9301582840951ACE6F3466250"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\phase2-formal-acceptance-20261102.json",
+    "sha256": "95CF279F68E56B9EEFFBF321231A7D6C226854AB36417D2DB40B43254A0C5F91"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\exact-cleanup-20261102-02\\result.json",
+    "sha256": "F7873501DCFA9663C00EB66F4280996CC9C6655633641C7C753A7261A71FB034"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\exact-cleanup-20261102-02\\stdout.txt",
+    "sha256": "9C1BE00B06C35F456A9A1AFB736A1E63EF26F1CCF107EC4788FC2EA4103C4022"
+  },
+  {
+    "path": "C:\\Program Files\\PostgreSQL\\18\\bin\\psql.exe",
+    "sha256": "945EB0BBF8475A7FB0C863D85E36F2E15CF6B2D9FADB4D617BE4E59D4BB17BB0"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\test\\phase2-booking.pg.test.ts",
+    "sha256": "B5C72B2E26AE0C1D8C8D9BF52CE08C19C07E9DEF399FFC42D67B0DFA8B41DBE0"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\candidate\\phase2-booking.pg.test.ts",
+    "sha256": "D122BF6FA533C916F1B5E83270EEF451AB0948AF77FEECFF93554EAA75070585"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\test\\phase2-browser-host.pg.test.ts",
+    "sha256": "B5912F4815F606CD1D28441DA17EB80B0527ACF30E3B8071D69508C59396855B"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\candidate\\phase2-browser-host.pg.test.ts",
+    "sha256": "703553469A54BBFDC7696AA05ADA820C911C5CF9EEC292B7C63C6CFE4FC6683E"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\test\\phase2-browser-connection.test.ts",
+    "sha256": "9FACA546867AEFB9EB09B4E526EB9D30A60DB67794ED80EB5773B93B20CAE778"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\candidate\\phase2-browser-connection.test.ts",
+    "sha256": "14EBA4E778E9C747E4357719CDD5299C7203276FBB57D6577655548D03AEC75C"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\test\\phase2-identity-diagnostic.ts",
+    "sha256": "0AFB05556EDF61A51401DC69D54728D673BF4080FEA0357146B980CB0001EB69"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\candidate\\phase2-identity-diagnostic.ts",
+    "sha256": "0A9210AE428FEB0F282C9CF607FF2010405755F91140FB5042B61324073772C1"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\server\\test\\phase2-identity-diagnostic.test.ts",
+    "sha256": "4D3B69DE1435E88CF2A4355D6CD25680ACEC0761819E9EC131A34697EED5E773"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\candidate\\phase2-identity-diagnostic.test.ts",
+    "sha256": "481E4349E00CB35E0D94AE9547A34F8F68E5256C98AAD1B244C20A155EEE5BCA"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\source-before\\phase2-booking.pg.test.ts",
+    "sha256": "B5C72B2E26AE0C1D8C8D9BF52CE08C19C07E9DEF399FFC42D67B0DFA8B41DBE0"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\source-before\\phase2-browser-host.pg.test.ts",
+    "sha256": "B5912F4815F606CD1D28441DA17EB80B0527ACF30E3B8071D69508C59396855B"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\source-before\\phase2-browser-connection.test.ts",
+    "sha256": "9FACA546867AEFB9EB09B4E526EB9D30A60DB67794ED80EB5773B93B20CAE778"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\source-before\\phase2-identity-diagnostic.ts",
+    "sha256": "0AFB05556EDF61A51401DC69D54728D673BF4080FEA0357146B980CB0001EB69"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\source-before\\phase2-identity-diagnostic.test.ts",
+    "sha256": "4D3B69DE1435E88CF2A4355D6CD25680ACEC0761819E9EC131A34697EED5E773"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\source-transition.review.json",
+    "sha256": "1C3550125853779ED95E2E164C5CE521993C6C1A70EB351EB6EDC607B418D66F"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-02\\snapshot.readonly.sql",
+    "sha256": "7353D4FDE6C3BBD9F86934BAA3FAD8CF1A49902B8F5D77D191032C27711785DC"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-02\\restricted.verify.readonly.sql",
+    "sha256": "2218BED8C13A4763A582D3F00D764C7D7EB8D59F465FDEE21C56B244F42B60FE"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-02\\recovery-review.json",
+    "sha256": "5FDB6063F002764CAE30150EF241438D7DB25EB024F698891EEF88F1553A3A24"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\attempt.json",
+    "sha256": "36D6985B82A0903DC3F076293E8120F94CAFE864EC72710B3A268EC4E5A1204E"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\admin-stdout.txt",
+    "sha256": "5D2C054C93095DF34A3D30D6D568ADAE04176F924490EEB66A54964F932383AF"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\result.json",
+    "sha256": "87A99A6A2FA63A96054F5EB12D8CC9AB08717A49BE066B5DEA38129C092088FA"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\rename.review.sql",
+    "sha256": "A08075E1AD9DD67EA1C54B46CC35FE6C0F2D5A13BA9C07A188D860B414932DFC"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\Invoke-LocalRename.ps1",
+    "sha256": "8A77A31735AAE9EBFF14AFB49B5F1C00B2A7837FC19DC4730F56A2DF1BE10A97"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\pins.json",
+    "sha256": "AB122A39C4A2193037F5C817AD5703FBD4E8287F2FB8510814FDC144CD7CE55F"
+  }
+]

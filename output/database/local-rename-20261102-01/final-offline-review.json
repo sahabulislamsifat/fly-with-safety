@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "checks": 270,
+  "sqlStatementsAcrossThreeFiles": 36,
+  "plpgsqlBlocks": 11,
+  "mutationStatements": 1,
+  "pins": 33,
+  "acceptedSourcePins": 225,
+  "sourceArchives": 5,
+  "candidateTestsPerLoader": {
+    "passed": 56,
+    "failed": 0,
+    "skipped": 0
+  },
+  "strictTypeScript": "PASS",
+  "sourcePatchApplied": false,
+  "actualRenameExecuted": false
+}

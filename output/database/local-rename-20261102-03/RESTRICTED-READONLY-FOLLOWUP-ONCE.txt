@@ -1,0 +1,7 @@
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p='E:\Programming\Project\fly-with-safety\output\database\local-rename-20261102-03\Verify-RestrictedReadOnly.ps1'
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne '8AA622988A8A41C2036FB2F7CE679D0447AC6F76FDC33EC71A5F0B3361FE78D4'){throw 'STOP: read-only follow-up caller mismatch'}
+ & $p -ReadOnlyVerification
+}

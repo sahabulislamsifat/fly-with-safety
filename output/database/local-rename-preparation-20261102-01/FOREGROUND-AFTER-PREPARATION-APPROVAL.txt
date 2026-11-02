@@ -1,0 +1,7 @@
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p='E:\Programming\Project\fly-with-safety\output\database\local-rename-preparation-20261102-01\Prepare-LocalRename.ps1'
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne '5F4B5D95137370294C5CC2A781A99EA4D640C3BFB92536BFA705233558FA48CD'){throw 'STOP: rename preparation caller integrity mismatch'}
+ & $p -OwnerApprovedReadOnlyBackupPreparation
+}

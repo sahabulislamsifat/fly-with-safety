@@ -1,0 +1,27 @@
+{
+  "archivePath": "C:\\Users\\sahab\\AppData\\Local\\FlyWithSafe\\Backups\\local-rename-20261102-01\\integration-before-rename.dump",
+  "bytes": 63951,
+  "sha256": "E4F1A6129710141BE78A9A4EF8BD0CC8FE565C55AF32979454EF49961A99BFDE",
+  "directoryInheritanceDisabled": true,
+  "allowedIdentitiesOnly": [
+    "CURRENT_OWNER",
+    "SYSTEM"
+  ],
+  "fileAclRules": [
+    {
+      "SID": "S-1-5-18",
+      "Type": "Allow",
+      "Rights": "FullControl",
+      "Inherited": true
+    },
+    {
+      "SID": "S-1-5-21-532926829-2275715003-1353518931-1001",
+      "Type": "Allow",
+      "Rights": "FullControl",
+      "Inherited": true
+    }
+  ],
+  "priorFullArchiveReadExit": 0,
+  "restoreRehearsalExecuted": false,
+  "databaseRenameExecuted": false
+}

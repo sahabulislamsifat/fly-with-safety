@@ -1,0 +1,40 @@
+{
+  "observedFailure": {
+    "adminExit": 2,
+    "renameCommitted": false,
+    "restrictedExit": null,
+    "adminStdoutExists": false,
+    "stage": "FIRST_ADMIN_AUTHENTICATION_BEFORE_SQL",
+    "provenance": "Saved result + owner-provided native FATAL;stderr was not durably redirected"
+  },
+  "ownerDirectLogin": {
+    "exit": 0,
+    "database": "postgres",
+    "role": "postgres",
+    "host": "127.0.0.1",
+    "port": 5432,
+    "provenance": "Owner console output,no agent query"
+  },
+  "knownDifference": {
+    "failedDatabase": "flywithsafe_phase2_booking_integration",
+    "successfulDatabase": "postgres",
+    "failedSQLMode": "-f guarded file",
+    "successfulSQLMode": "-c SELECT",
+    "credentialTransport": "Both native psql -X -W;no connection URL,SecureString conversion or credential-env assignment"
+  },
+  "cause": "Authentication rejection confirmed;reason for private input/target difference remains undetermined;no configuration bug proven",
+  "latestSourceCatalog": "Owner previous catalog after v01:OID34701 oldname present,newname absent;v02 cannot have renamed because first connection rejected;fresh source-target catalog not independently observed now",
+  "originalFiles": {
+    "output/database/local-rename-20261102-02/attempt.json": "7A24580ED48CD897BA7B76D1A650D00558E8B10BD2CB831548B0B0CDD5BDF573",
+    "output/database/local-rename-20261102-02/result.json": "B5174D979689250AC961FCCA5D506610AAB0E631C8B855A4EF83587D43F87A3F",
+    "output/database/local-rename-20261102-02/Invoke-LocalRename.ps1": "9EDA61F9E74D8E05DC428272A002A5686466AD9B54B2D97E89452E330BC32456",
+    "output/database/local-rename-20261102-02/rename.review.sql": "59449D6273403EC380FB7B77AC7067334E26F9F95925B095E4C1F038D37A2F7D",
+    "output/database/local-rename-20261102-02/pins.json": "EC8B833F371FEE8745417DDED2E60B5849A4BE37FD72AE57DD3AB523B2B50AD9"
+  },
+  "pinsVerified": 42,
+  "nextAction": "ONE standalone native readonly login to exact failed source database plus catalog names/OIDs;no rename or password reset",
+  "phase2": "FORMALLY_ACCEPTED_14_OF_14",
+  "phase3": "BLOCKED_PENDING_VERIFIED_RENAME",
+  "newRenamePackagePrepared": false,
+  "databaseExecutedByReview": false
+}

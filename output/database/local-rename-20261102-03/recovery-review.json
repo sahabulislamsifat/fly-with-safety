@@ -1,0 +1,36 @@
+{
+  "sourceAuthentication": {
+    "provenance": "Owner-supplied successful standalone native source-database SELECT and ROLLBACK;no agent query repeated",
+    "exit": 0,
+    "role": "postgres",
+    "database": "flywithsafe_phase2_booking_integration",
+    "host": "127.0.0.1",
+    "port": 5432,
+    "sourceOID": 34701,
+    "destinationNameAbsent": "flywithsafety_local_integration"
+  },
+  "comparison": {
+    "binary": "C:/Program Files/PostgreSQL/18/bin/psql.exe",
+    "hostPortRoleDatabaseMatch": true,
+    "privatePrompt": "native -X -W in both",
+    "differences": [
+      "Post-authentication SQL mode -c versus -f",
+      "stdout captured by Tee-Object in caller"
+    ],
+    "credentialConversionOrForwarding": false,
+    "exactPrivateInputComparison": "NOT_CAPTURED_OR_PERFORMED",
+    "verifiedAuthenticationDefect": "UNDETERMINED_NO_CONFIGURATION_OR_INPUT_CAUSE_PROVEN"
+  },
+  "originalArtifacts": {
+    "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-02\\attempt.json": "7A24580ED48CD897BA7B76D1A650D00558E8B10BD2CB831548B0B0CDD5BDF573",
+    "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-02\\result.json": "B5174D979689250AC961FCCA5D506610AAB0E631C8B855A4EF83587D43F87A3F",
+    "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-02\\Invoke-LocalRename.ps1": "9EDA61F9E74D8E05DC428272A002A5686466AD9B54B2D97E89452E330BC32456",
+    "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-02\\rename.review.sql": "59449D6273403EC380FB7B77AC7067334E26F9F95925B095E4C1F038D37A2F7D",
+    "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-02\\pins.json": "EC8B833F371FEE8745417DDED2E60B5849A4BE37FD72AE57DD3AB523B2B50AD9"
+  },
+  "contextChange": "Exact failed source administrator authentication independently succeeded;fresh one-time approval required,not an automatic retry",
+  "sqlChanges": "NONE versus v02",
+  "scope": "Same single in-place rename OID34701;all data/migration/access/active-connection/backup guards unchanged",
+  "actualRenameExecuted": false,
+  "sourcePatchApplied": false
+}

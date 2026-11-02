@@ -1,0 +1,62 @@
+[
+  {
+    "path": "output/database/local-rename-20261102-03/attempt.json",
+    "sha256": "037CA0DDA6F5DC0F55A1FABFE8032B3411230049596E69015A2CE0D8807C5F20"
+  },
+  {
+    "path": "output/database/local-rename-20261102-03/result.json",
+    "sha256": "B4CC7021DB10EC049DFA1341C7997A425131BF0A68E9658019C55A78F48ED890"
+  },
+  {
+    "path": "output/database/local-rename-20261102-03/admin-stdout.txt",
+    "sha256": "513B91FE512C1B6F86785DE7AD81B3DF202D0552C583EDB1CB7685DF4245BA5B"
+  },
+  {
+    "path": "output/database/local-rename-20261102-03/restricted-followup-attempt.json",
+    "sha256": "B859276A8FB51E576588022EEF9A6749F5C38FB1DFEBDC337D4E473CE1F1690D"
+  },
+  {
+    "path": "output/database/local-rename-20261102-03/restricted-followup-result.json",
+    "sha256": "DAF2CC6E3478F8A02D0436910935BBAD4EC3C071FACBF09550089F6BA89EE84D"
+  },
+  {
+    "path": "output/database/local-rename-20261102-03/restricted-followup-stdout.txt",
+    "sha256": "D44608A2AD30402CAE20B511AF1AC3726A9846DECCB48878ABA1CED6B7A883BC"
+  },
+  {
+    "path": "output/database/local-rename-20261102-03/restricted.verify.readonly.sql",
+    "sha256": "2218BED8C13A4763A582D3F00D764C7D7EB8D59F465FDEE21C56B244F42B60FE"
+  },
+  {
+    "path": "output/database/local-rename-20261102-03/rename.review.sql",
+    "sha256": "59449D6273403EC380FB7B77AC7067334E26F9F95925B095E4C1F038D37A2F7D"
+  },
+  {
+    "path": "docs/proposals/LOCAL_DATABASE_RENAME_ACCEPTANCE.md",
+    "sha256": "341864658AC206AA2E49DEEFCE41191F2CBF3ABB8CC914C78185225FE6AECFF5"
+  },
+  {
+    "path": "docs/proposals/PHASE_3_SSLCOMMERZ_SANDBOX_PLAN.md",
+    "sha256": "DD577F9B278FDA587B366D8687C7703AEA740E59DFEF7B765C44CA22841497C3"
+  },
+  {
+    "path": "output/database/local-rename-closure-20261102/rename-acceptance.json",
+    "sha256": "CA11049A32D36D48A70E137FF83CC799C428BF7B6560AE897D72E6BFE35C952E"
+  },
+  {
+    "path": "output/database/local-rename-closure-20261102/targeted-results.json",
+    "sha256": "049900A37BC45791F7D5032D2E4FC35424B2171EE5552F125310224D5376F617"
+  },
+  {
+    "path": "output/database/local-rename-closure-20261102/normal-health.json",
+    "sha256": "7D3583FA55DB6720A072D2029E1795590B2F9E635514965860D67CEC896ACEDE"
+  },
+  {
+    "path": "output/database/local-rename-closure-20261102/prisma-local-config-results.json",
+    "sha256": "18F6369B2707BD1D45B3482114407AC128EA8D003E29678D950DD1EDCEF5F4EA"
+  },
+  {
+    "path": "output/database/local-rename-closure-20261102/postrename-source-pins.json",
+    "sha256": "881D73B65F9D8C49B6045D0D8060EF4C5C5B0E93F4AC927F89C662EDFF701730"
+  }
+]

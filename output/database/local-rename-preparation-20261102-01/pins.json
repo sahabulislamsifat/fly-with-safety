@@ -1,0 +1,34 @@
+[
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-preparation-20261102-01\\preflight.readonly.sql",
+    "sha256": "33DAE915106BD7E5B77743FEAD5B0BE7DCC064420CD4C8E34DC5666BCACF8645"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-preparation-20261102-01\\reference-inventory.json",
+    "sha256": "94CA1DBB040DCEC43650A9D44E1AFC6C0D7D64A0E3E2A4E75A8EE6D6329F4027"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\phase2-formal-acceptance-20261102.json",
+    "sha256": "95CF279F68E56B9EEFFBF321231A7D6C226854AB36417D2DB40B43254A0C5F91"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\exact-cleanup-20261102-02\\result.json",
+    "sha256": "F7873501DCFA9663C00EB66F4280996CC9C6655633641C7C753A7261A71FB034"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\exact-cleanup-20261102-02\\stdout.txt",
+    "sha256": "9C1BE00B06C35F456A9A1AFB736A1E63EF26F1CCF107EC4788FC2EA4103C4022"
+  },
+  {
+    "path": "C:\\Program Files\\PostgreSQL\\18\\bin\\psql.exe",
+    "sha256": "945EB0BBF8475A7FB0C863D85E36F2E15CF6B2D9FADB4D617BE4E59D4BB17BB0"
+  },
+  {
+    "path": "C:\\Program Files\\PostgreSQL\\18\\bin\\pg_dump.exe",
+    "sha256": "6316F6C6B8651277DE87E190146B668AA7B17BE6F8C420E85C6209C961F303C5"
+  },
+  {
+    "path": "C:\\Program Files\\PostgreSQL\\18\\bin\\pg_restore.exe",
+    "sha256": "A4C17EEA648A713009208E4AD82E34E5840E2EA9D66908F0818F7CA9B173E703"
+  }
+]
