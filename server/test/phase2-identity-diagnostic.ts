@@ -43,7 +43,7 @@ export function safeHttpOutcome(status: unknown, body: unknown) {
 }
 
 export const ORIGINAL_IDENTITY_SQL = 'SELECT current_database() AS db,current_user AS role,host(inet_server_addr()) AS host,inet_server_port() AS port';
-export const EXPECTED_IDENTITY = { db: 'flywithsafe_phase2_booking_integration', role: 'flywithsafe_phase2_booking_test', host: '127.0.0.1', port: 5432 };
+export const EXPECTED_IDENTITY = { db: 'flywithsafety_local_integration', role: 'flywithsafe_phase2_booking_test', host: '127.0.0.1', port: 5432 };
 export function compareIdentity(value: unknown) {
   const row = Array.isArray(value) && value.length === 1 ? value[0] : undefined;
   return { singleRow: !!row, databaseMatches: own(row, 'db') === EXPECTED_IDENTITY.db,

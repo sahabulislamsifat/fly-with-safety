@@ -1,0 +1,162 @@
+{
+  "actors": [
+    {
+      "id": "7a504831-759c-4c1c-8325-4a187f711d91",
+      "email": "7a504831-759c-4c1c-8325-4a187f711d91@example.invalid",
+      "role": "CUSTOMER"
+    },
+    {
+      "id": "e3061e7a-ac46-4ed5-b3f3-fbc8b52feac6",
+      "email": "e3061e7a-ac46-4ed5-b3f3-fbc8b52feac6@example.invalid",
+      "role": "CUSTOMER"
+    },
+    {
+      "id": "698a9431-d269-4c63-ae57-23e14503d477",
+      "email": "698a9431-d269-4c63-ae57-23e14503d477@example.invalid",
+      "role": "STAFF"
+    },
+    {
+      "id": "76374639-4185-4f99-a451-155c2250503d",
+      "email": "76374639-4185-4f99-a451-155c2250503d@example.invalid",
+      "role": "ADMIN"
+    }
+  ],
+  "snapshot": {
+    "kind": "actual-retained-record-ids",
+    "counts": {
+      "users": 4,
+      "sessions": 9,
+      "bookings": 1,
+      "passengers": 1,
+      "history": 4,
+      "idempotency": 1,
+      "notifications": 3
+    },
+    "users": [
+      {
+        "id": "7a504831-759c-4c1c-8325-4a187f711d91"
+      },
+      {
+        "id": "e3061e7a-ac46-4ed5-b3f3-fbc8b52feac6"
+      },
+      {
+        "id": "698a9431-d269-4c63-ae57-23e14503d477"
+      },
+      {
+        "id": "76374639-4185-4f99-a451-155c2250503d"
+      }
+    ],
+    "sessions": [
+      {
+        "id": "cmvxtcwrn0000q4f4ym1qxcn5",
+        "userId": "7a504831-759c-4c1c-8325-4a187f711d91"
+      },
+      {
+        "id": "cmvxtcwz00001q4f4pukspax6",
+        "userId": "e3061e7a-ac46-4ed5-b3f3-fbc8b52feac6"
+      },
+      {
+        "id": "cmvxtcx680002q4f4sdhkii3t",
+        "userId": "698a9431-d269-4c63-ae57-23e14503d477"
+      },
+      {
+        "id": "cmvxtcxda0003q4f4ktzdgsfs",
+        "userId": "76374639-4185-4f99-a451-155c2250503d"
+      },
+      {
+        "id": "cmvxzb07h0000ucf4hfq0bxok",
+        "userId": "7a504831-759c-4c1c-8325-4a187f711d91"
+      },
+      {
+        "id": "cmvxzb0ez0001ucf4gtc5l61h",
+        "userId": "e3061e7a-ac46-4ed5-b3f3-fbc8b52feac6"
+      },
+      {
+        "id": "cmvxzb0m50002ucf47xrprkkq",
+        "userId": "698a9431-d269-4c63-ae57-23e14503d477"
+      },
+      {
+        "id": "cmvxzb0t90003ucf4vs8murjr",
+        "userId": "76374639-4185-4f99-a451-155c2250503d"
+      },
+      {
+        "id": "cmvxzb3rf0009ucf4skt9ngjk",
+        "userId": "7a504831-759c-4c1c-8325-4a187f711d91"
+      }
+    ],
+    "bookings": [
+      {
+        "id": "cmvxtcxe80004q4f4e7e9rceb",
+        "referenceNumber": "FWS-2026-53YFS3",
+        "userId": "7a504831-759c-4c1c-8325-4a187f711d91",
+        "status": "COMPLETED",
+        "totalPrice": 12000,
+        "currency": "BDT",
+        "commercialRevision": 5,
+        "quoteIds": [
+          "d2b23d02-adb7-423a-8458-248fadd9b669",
+          "87b9d786-e51b-4c41-a429-d96de3cf03a7",
+          "58b4daf8-c952-4f38-8c36-93ae8ae29389"
+        ],
+        "paymentIds": [
+          "9716680f-f5a3-41e9-9ee6-3448d02773bc"
+        ],
+        "receiptIds": [
+          "d2b23d02-adb7-423a-8458-248fadd9b669",
+          "87b9d786-e51b-4c41-a429-d96de3cf03a7",
+          "58b4daf8-c952-4f38-8c36-93ae8ae29389",
+          "9e3da892-2951-4344-becb-a2117f7808fa",
+          "9716680f-f5a3-41e9-9ee6-3448d02773bc"
+        ],
+        "commercialSnapshotUnavailable": false
+      }
+    ],
+    "passengers": [
+      {
+        "id": "cmvxtcxeb0005q4f4lxyq0c21",
+        "bookingId": "cmvxtcxe80004q4f4e7e9rceb"
+      }
+    ],
+    "history": [
+      {
+        "id": "cmvxtcxee0006q4f43zuw60dt",
+        "bookingId": "cmvxtcxe80004q4f4e7e9rceb"
+      },
+      {
+        "id": "cmvxzb3930004ucf4kr4rnpqy",
+        "bookingId": "cmvxtcxe80004q4f4e7e9rceb"
+      },
+      {
+        "id": "cmvxzb3e30005ucf46kldngun",
+        "bookingId": "cmvxtcxe80004q4f4e7e9rceb"
+      },
+      {
+        "id": "cmvxzb3g30007ucf4vemq7gq0",
+        "bookingId": "cmvxtcxe80004q4f4e7e9rceb"
+      }
+    ],
+    "idempotency": [
+      {
+        "id": "cmvxtcxek0007q4f4yqrnouxi",
+        "referenceNumber": "FWS-2026-53YFS3"
+      }
+    ],
+    "notifications": [
+      {
+        "id": "cmvxtcxf20008q4f4hr0mqb79"
+      },
+      {
+        "id": "cmvxzb3eb0006ucf4icuoxdcu"
+      },
+      {
+        "id": "cmvxzb3g70008ucf4tpebixcr"
+      }
+    ]
+  },
+  "rollbackOnly": {
+    "kind": "rollback-only-history",
+    "id": "4790b9f9-5f9d-49b4-83e2-04d22d495af8",
+    "absentBookingId": "128a2112-7865-4055-8a3c-07751a7136cb"
+  },
+  "namedInvariants": 39
+}

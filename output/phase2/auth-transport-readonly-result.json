@@ -1,0 +1,14 @@
+{
+    "finishedUTC":  "2026-11-01T18:53:41.7604412Z",
+    "node":  {
+                 "passed":  false,
+                 "stage":  "connect",
+                 "failure":  "28P01",
+                 "disconnectFailed":  false,
+                 "readOnly":  true
+             },
+    "readOnly":  true,
+    "nativeExit":  2,
+    "hostDispatched":  false,
+    "nodeExit":  1
+}

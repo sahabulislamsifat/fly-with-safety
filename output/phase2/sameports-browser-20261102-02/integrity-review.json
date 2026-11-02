@@ -1,0 +1,11 @@
+{
+  "exactDeltaPass": true,
+  "oldCallerHash": "544FD6C40035768B6E40E33A7C8D48DAD1933CFDAC9A24BA7FCB1F0A5EEBD89E",
+  "newCallerHash": "38E69EFC239B0EDE4C8A495D433418CD0A3C47113C6D926830E8B4A058DCB43B",
+  "pins": 163,
+  "manifestHash": "32A4C022F927847AD40DC12D645B8590C9A594148FEC0E139A8F6DB191DA1C40",
+  "oldArtifactsUntouched": true,
+  "newAttemptExists": false,
+  "privateHelperByteIdentical": true,
+  "liveExecution": false
+}

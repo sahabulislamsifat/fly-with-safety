@@ -1,0 +1,23 @@
+{
+  "databaseExecution": false,
+  "results": [
+    {
+      "loader": "bundle",
+      "config": "phase2-commercial.vitest.config.ts",
+      "exit": 1,
+      "passed": 51,
+      "failed": 9,
+      "skipped": 0
+    },
+    {
+      "loader": "native",
+      "config": "phase2-commercial.vitest.config.ts",
+      "exit": 1,
+      "passed": 51,
+      "failed": 9,
+      "skipped": 0
+    }
+  ],
+  "complete": false,
+  "passed": false
+}

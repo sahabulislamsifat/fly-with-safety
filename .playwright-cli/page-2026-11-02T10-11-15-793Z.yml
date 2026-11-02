@@ -1,0 +1,203 @@
+- generic [active] [ref=f16e1]:
+  - banner [ref=f16e2]:
+    - navigation "Main navigation" [ref=f16e3]:
+      - generic [ref=f16e4]:
+        - link "FlyWithSafety Home" [ref=f16e6] [cursor=pointer]:
+          - /url: /
+          - generic [ref=f16e10]: FlyWithSafety
+        - generic [ref=f16e11]:
+          - link "Flight" [ref=f16e12] [cursor=pointer]:
+            - /url: /
+          - link "Visa" [ref=f16e16] [cursor=pointer]:
+            - /url: /visa-info
+          - link "Hotel" [ref=f16e21] [cursor=pointer]:
+            - /url: /hotels
+          - link "Holiday" [ref=f16e26] [cursor=pointer]:
+            - /url: /packages
+          - button "More navigation options" [ref=f16e34] [cursor=pointer]:
+            - generic [ref=f16e40]: More
+        - generic [ref=f16e43]:
+          - link "24/7 Support Desk" [ref=f16e44] [cursor=pointer]:
+            - /url: /contact
+          - generic [ref=f16e47]:
+            - link "Synthetic Phase2" [ref=f16e48] [cursor=pointer]:
+              - /url: /account
+            - button "Sign out" [ref=f16e49]
+  - main [ref=f16e50]:
+    - generic [ref=f16e52]:
+      - generic [ref=f16e53]:
+        - generic [ref=f16e54]:
+          - paragraph [ref=f16e55]: Your travel account
+          - heading "Account dashboard" [level=1] [ref=f16e56]
+        - link "Contact support" [ref=f16e57] [cursor=pointer]:
+          - /url: /contact
+      - generic [ref=f16e60]:
+        - generic [ref=f16e61]: Travel Made Reassuring.
+        - generic [ref=f16e66]:
+          - generic "Synthetic Phase2 avatar" [ref=f16e67]: S
+          - generic [ref=f16e68]:
+            - heading "Synthetic Phase2" [level=2] [ref=f16e69]
+            - paragraph [ref=f16e70]: 7a504831-759c-4c1c-8325-4a187f711d91@example.invalid
+            - paragraph [ref=f16e71]: Email verified
+          - button "Edit profile" [ref=f16e75]
+      - generic [ref=f16e79]:
+        - generic [ref=f16e80]:
+          - generic [ref=f16e81]: Co-travellers
+          - paragraph [ref=f16e87]: Not stored
+          - paragraph [ref=f16e88]: No traveller records
+        - generic [ref=f16e89]:
+          - generic [ref=f16e90]: Passport
+          - paragraph [ref=f16e94]: Not stored
+          - paragraph [ref=f16e95]: Document data not collected
+        - generic [ref=f16e96]:
+          - generic [ref=f16e97]: Frequent flyer
+          - paragraph [ref=f16e100]: Not saved
+          - paragraph [ref=f16e101]: No loyalty profile
+        - generic [ref=f16e102]:
+          - generic [ref=f16e103]: Member since
+          - paragraph [ref=f16e106]: Nov 1, 2026
+          - paragraph [ref=f16e107]: Account registration
+      - generic [ref=f16e108]:
+        - complementary [ref=f16e109]:
+          - generic [ref=f16e110]:
+            - paragraph [ref=f16e111]: Synthetic Phase2
+            - paragraph [ref=f16e112]: 7a504831-759c-4c1c-8325-4a187f711d91@example.invalid
+          - generic [ref=f16e113]:
+            - paragraph [ref=f16e114]: ACCOUNT
+            - navigation "Account navigation" [ref=f16e115]:
+              - button "Overview" [ref=f16e116]
+              - button "My requests" [ref=f16e122]
+              - button "My bookings" [ref=f16e126]
+              - button "Manage profile" [ref=f16e129]
+          - button "Sign out" [ref=f16e134]
+          - generic [ref=f16e138]:
+            - paragraph [ref=f16e139]: Need help with a trip?
+            - link "Talk to our travel desk" [ref=f16e140] [cursor=pointer]:
+              - /url: /contact
+        - main [ref=f16e143]:
+          - generic [ref=f16e145]:
+            - paragraph [ref=f16e146]: Your account
+            - heading "Booking details" [level=2] [ref=f16e316]
+          - generic [ref=f16e317]:
+            - button "Back to bookings" [ref=f16e318]
+            - heading "Booking details" [level=3] [ref=f16e319]
+            - generic [ref=f16e320]:
+              - generic [ref=f16e321]:
+                - term [ref=f16e322]: Reference
+                - definition [ref=f16e323]: FWS-2026-53YFS3
+              - generic [ref=f16e324]:
+                - term [ref=f16e325]: Status
+                - definition [ref=f16e326]:
+                  - generic [ref=f16e327]: Completed
+              - generic [ref=f16e328]:
+                - term [ref=f16e329]: Service
+                - definition [ref=f16e330]: FLIGHT
+              - generic [ref=f16e331]:
+                - term [ref=f16e332]: Booking method
+                - definition [ref=f16e333]: agency inquiry
+              - generic [ref=f16e334]:
+                - term [ref=f16e335]: Amount
+                - definition [ref=f16e336]: 12,000 BDT
+              - generic [ref=f16e337]:
+                - term [ref=f16e338]: Created
+                - definition [ref=f16e339]: Nov 1, 2026
+            - region "Booking passengers" [ref=f16e340]:
+              - heading "Passengers (1)" [level=4] [ref=f16e341]
+              - paragraph [ref=f16e342]: Passenger details are read-only here.
+              - list [ref=f16e343]:
+                - listitem [ref=f16e344]:
+                  - generic [ref=f16e345]: Synthetic Traveller
+                  - generic [ref=f16e346]: adult
+            - generic [ref=f16e347]:
+              - heading "Quotations & payment records" [level=4] [ref=f16e348]
+              - paragraph [ref=f16e349]: Manual agency workflow. Quotation acceptance does not reserve inventory or charge a payment.
+              - generic [ref=f16e350]:
+                - paragraph [ref=f16e351]: 11,000 BDT · Superseded
+                - paragraph [ref=f16e352]: Synthetic assisted itinerary; no reservation
+                - paragraph [ref=f16e353]: Valid until 11/1/2026, 9:22:30 PM
+                - paragraph [ref=f16e354]: Issued 11/1/2026, 9:22:27 PM
+              - generic [ref=f16e355]:
+                - paragraph [ref=f16e356]: 12,500 BDT · Superseded
+                - paragraph [ref=f16e357]: Synthetic assisted itinerary; no reservation
+                - paragraph [ref=f16e358]: Valid until 11/1/2026, 9:32:30 PM
+                - paragraph [ref=f16e359]: Issued 11/1/2026, 9:22:30 PM
+              - generic [ref=f16e360]:
+                - paragraph [ref=f16e361]: 12,000 BDT · Accepted
+                - paragraph [ref=f16e362]: Synthetic assisted itinerary; no reservation
+                - paragraph [ref=f16e363]: Valid until 11/1/2026, 9:32:30 PM
+                - paragraph [ref=f16e364]: Issued 11/1/2026, 9:22:30 PM · Accepted 11/1/2026, 9:22:30 PM
+              - paragraph [ref=f16e365]: 12,000 BDT · BANK TRANSFER · Reference SYN-CONT-PAY-001 · Recorded, not verified · 11/1/2026, 9:22:30 PM
+              - button "Refresh records" [ref=f16e366]
+            - generic [ref=f16e367]:
+              - heading "Status history" [level=4] [ref=f16e368]
+              - list [ref=f16e369]:
+                - listitem [ref=f16e370]:
+                  - generic [ref=f16e371]: PENDING to PENDING
+                  - time [ref=f16e372]: Nov 1, 2026
+                - listitem [ref=f16e373]:
+                  - generic [ref=f16e374]: PENDING to PENDING · Quotation accepted; awaiting staff processing
+                  - time [ref=f16e375]: Nov 1, 2026
+                - listitem [ref=f16e376]:
+                  - generic [ref=f16e377]: PENDING to CONFIRMED
+                  - time [ref=f16e378]: Nov 1, 2026
+                - listitem [ref=f16e379]:
+                  - generic [ref=f16e380]: CONFIRMED to COMPLETED
+                  - time [ref=f16e381]: Nov 1, 2026
+  - contentinfo [ref=f16e240]:
+    - generic [ref=f16e241]:
+      - generic [ref=f16e242]:
+        - generic [ref=f16e243]:
+          - link "FlyWithSafety Home" [ref=f16e244] [cursor=pointer]:
+            - /url: /
+            - generic [ref=f16e247]: FlyWithSafety
+          - paragraph [ref=f16e248]: Thoughtful travel planning, easier bookings, and support that stays with you.
+        - navigation "Explore" [ref=f16e249]:
+          - heading "Explore" [level=3] [ref=f16e250]
+          - list [ref=f16e251]:
+            - listitem [ref=f16e252]:
+              - link "Home" [ref=f16e253] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=f16e254]:
+              - link "Flights" [ref=f16e255] [cursor=pointer]:
+                - /url: /flights
+            - listitem [ref=f16e256]:
+              - link "Hotels" [ref=f16e257] [cursor=pointer]:
+                - /url: /hotels
+            - listitem [ref=f16e258]:
+              - link "Packages" [ref=f16e259] [cursor=pointer]:
+                - /url: /packages
+            - listitem [ref=f16e260]:
+              - link "Visa Info" [ref=f16e261] [cursor=pointer]:
+                - /url: /visa-info
+            - listitem [ref=f16e262]:
+              - link "Track Booking" [ref=f16e263] [cursor=pointer]:
+                - /url: /track-booking
+        - navigation "Legal" [ref=f16e264]:
+          - heading "Legal" [level=3] [ref=f16e265]
+          - list [ref=f16e266]:
+            - listitem [ref=f16e267]:
+              - link "Contact Us" [ref=f16e268] [cursor=pointer]:
+                - /url: /contact
+            - listitem [ref=f16e269]:
+              - link "Privacy Policy" [ref=f16e270] [cursor=pointer]:
+                - /url: /privacy
+            - listitem [ref=f16e271]:
+              - link "Terms of Use" [ref=f16e272] [cursor=pointer]:
+                - /url: /terms
+        - generic [ref=f16e273]:
+          - heading "Payment Options" [level=3] [ref=f16e274]
+          - generic [ref=f16e275]:
+            - img "VISA" [ref=f16e276]
+            - img "Mastercard" [ref=f16e280]
+            - img "bKash" [ref=f16e284]
+      - generic [ref=f16e289]:
+        - paragraph [ref=f16e290]: © 2026 FlyWithSafety. All rights reserved.
+        - navigation "Social media" [ref=f16e291]:
+          - link "Facebook" [ref=f16e292] [cursor=pointer]:
+            - /url: https://facebook.com
+          - link "Instagram" [ref=f16e299] [cursor=pointer]:
+            - /url: https://instagram.com
+          - link "WhatsApp" [ref=f16e303] [cursor=pointer]:
+            - /url: https://wa.me
+  - button "Open Next.js Dev Tools" [ref=f16e311] [cursor=pointer]
+  - alert [ref=f16e315]: Account dashboard

@@ -1,0 +1,28 @@
+{
+  "newStartupTests": {
+    "exit": 0,
+    "skipped": 0,
+    "passed": 2,
+    "failed": 0
+  },
+  "mainConsoleDesignation": "OWNER_CONFIRMED",
+  "ownerDesignatedMain": "fly-with-safety",
+  "normalFrontendHTTP": 200,
+  "serverTypeScriptExit": 0,
+  "outboxPaused": true,
+  "normalBackendHTTP": 200,
+  "rolledBack": true,
+  "reusableLocal": "flywithsafe_phase2_booking_integration",
+  "remoteIntegrationLiveCatalog": "UNAVAILABLE_CONNECTION",
+  "preservedRemote": "flywithsafe_integration",
+  "existingServerLint": {
+    "exit": 1,
+    "unchangedWarnings": 4,
+    "errors": 0
+  },
+  "newTestLintExit": 0,
+  "cloudMutationsExecuted": false,
+  "consoleIndependentlyInspected": false,
+  "localLiveCatalog": "PENDING_OWNER_PRIVATE_CONNECTION",
+  "cloudReadOnlySessions": 3
+}

@@ -41,7 +41,7 @@ it('classifies the actual Vitest assertion error without forwarding expected/act
   expect(result?.classification).toBe('ASSERTION_MISMATCH');
   expect(JSON.stringify(result)).not.toContain('secret');
 });
-const target = 'postgresql://flywithsafe_phase2_booking_test:synthetic-only@127.0.0.1:5432/flywithsafe_phase2_booking_integration';
+const target = 'postgresql://flywithsafe_phase2_booking_test:synthetic-only@127.0.0.1:5432/flywithsafety_local_integration';
 it('adds server read-only and bounded query settings to the exact restricted target', () => {
   const url = new URL(readOnlyTarget(target));
   expect(url.searchParams.get('options')).toBe('-c default_transaction_read_only=on -c statement_timeout=5000 -c lock_timeout=2000');

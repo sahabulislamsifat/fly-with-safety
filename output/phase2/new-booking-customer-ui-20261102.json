@@ -1,0 +1,1 @@
+{"checks":[{"id":"new-reference-ui","passed":true},{"id":"new-amount-status-ui","passed":true},{"id":"new-passenger-ui","passed":true},{"id":"new-history-ui","passed":true}],"passed":4,"failed":0,"reference":"FWS-2026-5LA6DA","noSupplierOrPayment":true}

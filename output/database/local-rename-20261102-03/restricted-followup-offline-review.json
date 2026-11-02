@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "sqlStatements": 9,
+  "sqlChanged": false,
+  "callerSha256": "8AA622988A8A41C2036FB2F7CE679D0447AC6F76FDC33EC71A5F0B3361FE78D4",
+  "existingResultUnchanged": true,
+  "scope": "ONE native restricted-role READONLY login and existing full postcheck;current owner task requests this scope",
+  "renameExecuted": false,
+  "databaseExecutedByPreparation": false
+}

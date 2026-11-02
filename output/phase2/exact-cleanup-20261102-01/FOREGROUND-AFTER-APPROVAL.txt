@@ -1,0 +1,7 @@
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p='E:\Programming\Project\fly-with-safety\output\phase2\exact-cleanup-20261102-01\Invoke-ExactCleanup.ps1'
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne '44663BFA874B07837CC60D9BCC9CE4A4762A6355A724E2BC8B11E7580872DD32'){throw 'STOP: cleanup caller integrity mismatch'}
+ & $p -OwnerApprovedExactCleanup
+}

@@ -44,13 +44,21 @@ describe('Phase2 booking request identity lifecycle — OFFLINE',()=>{
     expect(error).toBe('');expect(loading).toBe(true);expect(current()).toBe(true);
   });
   it('pins an explicitly isolated local browser backend without probing or production fallback',async()=>{
-    vi.stubGlobal('window',{location:{hostname:'phase2.localhost'}});
-    vi.stubEnv('NEXT_PUBLIC_LOCAL_API_BASE_URL','http://phase2.localhost:5002/api/v1');
-    expect(await resolveApiBaseUrl()).toBe('http://phase2.localhost:5002/api/v1');expect(fetcher).not.toHaveBeenCalled();
+    vi.stubGlobal('window',{location:{hostname:'localhost'}});
+    vi.stubEnv('NEXT_PUBLIC_LOCAL_API_BASE_URL','http://localhost:5000/api/v1');
+    expect(await resolveApiBaseUrl()).toBe('http://localhost:5000/api/v1');expect(fetcher).not.toHaveBeenCalled();
   });
   it('pins isolated development SSR to the same backend',async()=>{
-    vi.stubEnv('NEXT_PUBLIC_LOCAL_API_BASE_URL','http://localhost:5002/api/v1');
-    expect(await resolveApiBaseUrl()).toBe('http://localhost:5002/api/v1');expect(fetcher).not.toHaveBeenCalled();
+    vi.stubEnv('NEXT_PUBLIC_LOCAL_API_BASE_URL','http://localhost:5000/api/v1');
+    expect(await resolveApiBaseUrl()).toBe('http://localhost:5000/api/v1');expect(fetcher).not.toHaveBeenCalled();
+  });
+  it('fails closed on unavailable localhost5000 without sending the booking to cloud',async()=>{
+    vi.stubGlobal('window',{location:{hostname:'localhost'}});
+    vi.stubEnv('NEXT_PUBLIC_LOCAL_API_BASE_URL','http://localhost:5000/api/v1');
+    fetcher.mockRejectedValueOnce(new TypeError('synthetic-offline'));
+    await expect(createBooking(payload,id)).rejects.toMatchObject({code:'NETWORK_ERROR'});
+    expect(fetcher).toHaveBeenCalledTimes(1);
+    expect(fetcher.mock.calls[0][0]).toBe('http://localhost:5000/api/v1/bookings');
   });
   for(const [index,url] of ['https://remote.invalid/api/v1','http://user:private@localhost:5002/api/v1','http://localhost:5002/api/v1?password=private','invalid-private-value'].entries())it('fails closed on an unsafe isolated target '+index,async()=>{
     vi.stubGlobal('window',{location:{hostname:'localhost'}});vi.stubEnv('NEXT_PUBLIC_LOCAL_API_BASE_URL',url);

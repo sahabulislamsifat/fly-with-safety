@@ -1,0 +1,3 @@
+warning: in the working copy of 'docs/proposals/PHASE_2_EVIDENCE_LOG.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'server/test/phase2-browser-host.pg.test.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'server/test/phase2-commercial-continuation.pg.test.ts', LF will be replaced by CRLF the next time Git touches it

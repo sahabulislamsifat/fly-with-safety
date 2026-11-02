@@ -1,0 +1,114 @@
+{
+  "planning": "compact",
+  "delegation": "none",
+  "scope": "tooling SQL column correction only",
+  "originalFileHashes": {
+    "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\exact-cleanup-20261102-01\\cleanup.review.sql": "DBB52D74330DBEBEB0F870D929B1FAFD349FE53EB5EF611E173F47C4AF5E92CD",
+    "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\exact-cleanup-20261102-01\\exact-ledger.json": "7BEA7A23D00E31CD06D3FDEFBE303C61893E9500248E74F1FB32946AE81D6B1B",
+    "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\exact-cleanup-20261102-01\\FOREGROUND-AFTER-APPROVAL.txt": "2A0B6F0C9C5941ED2D170BF510070705F86B227DD269BBC9936CC1E3A5759FF0",
+    "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\exact-cleanup-20261102-01\\Invoke-ExactCleanup.ps1": "44663BFA874B07837CC60D9BCC9CE4A4762A6355A724E2BC8B11E7580872DD32",
+    "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\exact-cleanup-20261102-01\\parser-static-result.json": "4453AE2E909B1CC2E56AC3D7C9C3D12F6BE3565EFB88228A81C91A29F72EC8FC",
+    "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\exact-cleanup-20261102-01\\pins.json": "25460883F5488E657A9F90E4B9AB6347B2AA344CF1D6AB4AE909CE810049F042",
+    "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\exact-cleanup-20261102-01\\reconcile-readonly-02-attempt.json": "0CCE54F6D5E1CD993D75A05055E3CD002F26821C9F380AE7122BFBC2BC65AA6C",
+    "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\exact-cleanup-20261102-01\\RECONCILE-READONLY-02-ONCE.txt": "05E5CD77CD54C393DA2D6520B2076D1C143D04F7BEB00641FDEF0CD69A310454",
+    "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\exact-cleanup-20261102-01\\reconcile-readonly-02-output.txt": "9B7878FF7B27209941E78C836C8D0F1452B5B02EAD9F224D755E1B3CF3F1AF0D",
+    "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\exact-cleanup-20261102-01\\reconcile-readonly-02-result.json": "5ADC764A68F401A51933E3A1E29B27E499EE974D4B4B9689C2CFDCB6E22F329D",
+    "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\exact-cleanup-20261102-01\\reconcile-readonly-attempt.json": "385E62DC6EA64188A81483BCA4AEFF23B0C9E033A0EB38577AA148E0756F6636",
+    "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\exact-cleanup-20261102-01\\RECONCILE-READONLY-ONCE.txt": "1D562E4047006F01E95E2F2CB312A15721CE353AFDF138A27DC4DCB62AB77659",
+    "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\exact-cleanup-20261102-01\\reconcile-readonly-result.json": "75D87A01DE2E1B0150C57D2C9FB229BE9DD154FBA277620497E6F8061A4F5FEE",
+    "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\exact-cleanup-20261102-01\\reconcile-replacement-02-review.json": "36D93E441BE6C6083A5023AA2995CB193E9C1D075D3FCA65E547031A9ADACFEB",
+    "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\exact-cleanup-20261102-01\\reconcile.offline-verification.json": "8AAB9513BEFCB0DAD17CEC62C24EA504138421354EDE17AC58AB185C24E4EA45",
+    "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\exact-cleanup-20261102-01\\reconcile.readonly.sql": "363D84842D3F85A65861AFFFEE0AD1C5838DE2E7012482AF93D6D63DFDBF6590",
+    "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\exact-cleanup-20261102-01\\REVIEW.md": "162DD37C15DBC06953731781BF26FF5703B83D6CFE99F4D892BAD0A66594143D"
+  },
+  "catalogSource": "output/phase2/local-database-inventory-output.txt",
+  "catalogSha256": "CFB66F678AC3DBE91A00F534EF4B11CF807FD0E64F6FE5E0E6FC525E278D78CF",
+  "actualCatalogColumns": [
+    {
+      "name": "id",
+      "type": "text",
+      "notNull": true
+    },
+    {
+      "name": "channel",
+      "type": "text",
+      "notNull": true
+    },
+    {
+      "name": "recipient",
+      "type": "text",
+      "notNull": true
+    },
+    {
+      "name": "subject",
+      "type": "text",
+      "notNull": true
+    },
+    {
+      "name": "payload",
+      "type": "jsonb",
+      "notNull": true
+    },
+    {
+      "name": "status",
+      "type": "NotificationStatus",
+      "notNull": true
+    },
+    {
+      "name": "attempts",
+      "type": "int4",
+      "notNull": true
+    },
+    {
+      "name": "maxAttempts",
+      "type": "int4",
+      "notNull": true
+    },
+    {
+      "name": "nextAttemptAt",
+      "type": "timestamp",
+      "notNull": true
+    },
+    {
+      "name": "processedAt",
+      "type": "timestamp",
+      "notNull": false
+    },
+    {
+      "name": "error",
+      "type": "text",
+      "notNull": false
+    },
+    {
+      "name": "idempotencyKey",
+      "type": "text",
+      "notNull": false
+    },
+    {
+      "name": "createdAt",
+      "type": "timestamp",
+      "notNull": true
+    },
+    {
+      "name": "updatedAt",
+      "type": "timestamp",
+      "notNull": true
+    }
+  ],
+  "corrections": [
+    [
+      "template NOT IN(",
+      "coalesce(payload->>'template','') NOT IN("
+    ],
+    [
+      "coalesce(params->>'referenceNumber','')",
+      "coalesce(payload->'params'->>'referenceNumber','')"
+    ]
+  ],
+  "addedValidationSQL": "DO $outbox_catalog$ BEGIN\n IF (SELECT count(*) FROM (SELECT a.attname::text AS column_name,t.typname::text AS type_name,a.attnotnull AS not_null FROM pg_attribute a JOIN pg_type t ON t.oid=a.atttypid WHERE a.attrelid='public.\"NotificationOutbox\"'::regclass AND a.attnum>0 AND NOT a.attisdropped) actual)<>14 OR EXISTS(SELECT FROM (VALUES ('id','text',true),('channel','text',true),('recipient','text',true),('subject','text',true),('payload','jsonb',true),('status','NotificationStatus',true),('attempts','int4',true),('maxAttempts','int4',true),('nextAttemptAt','timestamp',true),('processedAt','timestamp',false),('error','text',false),('idempotencyKey','text',false),('createdAt','timestamp',true),('updatedAt','timestamp',true)) expected(column_name,type_name,not_null) WHERE NOT EXISTS(SELECT FROM (SELECT a.attname::text AS column_name,t.typname::text AS type_name,a.attnotnull AS not_null FROM pg_attribute a JOIN pg_type t ON t.oid=a.atttypid WHERE a.attrelid='public.\"NotificationOutbox\"'::regclass AND a.attnum>0 AND NOT a.attisdropped) actual WHERE actual.column_name=expected.column_name AND actual.type_name=expected.type_name AND actual.not_null=expected.not_null)) THEN RAISE EXCEPTION 'OUTBOX_ACTUAL_CATALOG_MISMATCH'; END IF;\nEND $outbox_catalog$;\nSELECT a.attname::text AS column_name,t.typname::text AS type_name,a.attnotnull AS not_null FROM pg_attribute a JOIN pg_type t ON t.oid=a.atttypid WHERE a.attrelid='public.\"NotificationOutbox\"'::regclass AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum;\nSELECT id, jsonb_typeof(payload)='object' AS payload_object, jsonb_typeof(payload->'template')='string' AS template_string, coalesce(payload->>'template','') IN('BOOKING_CONFIRMATION','BOOKING_STATUS') AS template_allowlisted, jsonb_typeof(payload->'params')='object' AS params_object, jsonb_typeof(payload->'params'->'referenceNumber')='string' AS reference_string, coalesce(payload->'params'->>'referenceNumber','')=ANY(ARRAY['FWS-2026-53YFS3','FWS-2026-5LA6DA']::text[]) AS reference_owned FROM public.\"NotificationOutbox\" WHERE id=ANY(ARRAY['cmvxtcxf20008q4f4hr0mqb79','cmvxzb3eb0006ucf4icuoxdcu','cmvxzb3g70008ucf4tpebixcr','cmvz42161000o70f47jyl8myp']::text[]) ORDER BY id;\nDO $outbox_shape$ BEGIN\n IF EXISTS(SELECT FROM public.\"NotificationOutbox\" WHERE id=ANY(ARRAY['cmvxtcxf20008q4f4hr0mqb79','cmvxzb3eb0006ucf4icuoxdcu','cmvxzb3g70008ucf4tpebixcr','cmvz42161000o70f47jyl8myp']::text[]) AND (jsonb_typeof(payload) IS DISTINCT FROM 'object' OR jsonb_typeof(payload->'template') IS DISTINCT FROM 'string' OR jsonb_typeof(payload->'params') IS DISTINCT FROM 'object' OR jsonb_typeof(payload->'params'->'referenceNumber') IS DISTINCT FROM 'string')) THEN RAISE EXCEPTION 'OWNED_OUTBOX_PAYLOAD_SHAPE_MISMATCH'; END IF;\nEND $outbox_shape$;\n",
+  "sqlSha256": "8CF7DD95F5DAC4C8F215DA0CD5896DB4139DFAA85215C487A607D8B276A38D2A",
+  "commandSha256": "D6D21B78F13E8FD1B5054C9C847868B4CDB42209F00A0EC84381F65E54E51BB6",
+  "livePayloadVerification": "NOT_EXECUTED_REQUIRED_IN_READONLY_ATTEMPT",
+  "cleanupCandidate": "NOT_AUTHORIZED_NO_DESTRUCTIVE_CALLER_PREPARED",
+  "databaseExecuted": false
+}

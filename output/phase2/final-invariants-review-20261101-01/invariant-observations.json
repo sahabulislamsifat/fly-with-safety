@@ -1,0 +1,278 @@
+{
+    "value":  [
+                  {
+                      "matched":  true,
+                      "expected":  true,
+                      "observed":  true,
+                      "invariant":  "acceptanceActor",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  1,
+                      "observed":  1,
+                      "invariant":  "acceptedQuoteCount",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  true,
+                      "observed":  true,
+                      "invariant":  "acceptedQuoteLink",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  true,
+                      "observed":  true,
+                      "invariant":  "bookingOwnership",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  1,
+                      "observed":  1,
+                      "invariant":  "bookings",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  "COMPLETED",
+                      "observed":  "COMPLETED",
+                      "invariant":  "bookingStatus",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  true,
+                      "observed":  true,
+                      "invariant":  "commercialVersion",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  true,
+                      "observed":  true,
+                      "invariant":  "completionAudit",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  true,
+                      "observed":  true,
+                      "invariant":  "confirmationAudit",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  true,
+                      "observed":  true,
+                      "invariant":  "confirmationNotification",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  4,
+                      "observed":  4,
+                      "invariant":  "history",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  4,
+                      "observed":  4,
+                      "invariant":  "historyCount",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  true,
+                      "observed":  true,
+                      "invariant":  "historyExactIds",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  true,
+                      "observed":  true,
+                      "invariant":  "historyTimestampsPresent",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  1,
+                      "observed":  1,
+                      "invariant":  "idempotency",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  true,
+                      "observed":  true,
+                      "invariant":  "idempotencyOwnership",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  true,
+                      "observed":  true,
+                      "invariant":  "initialHistoryContract",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  true,
+                      "observed":  true,
+                      "invariant":  "noPaymentVerification",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  true,
+                      "observed":  true,
+                      "invariant":  "notification_COMPLETED",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  true,
+                      "observed":  true,
+                      "invariant":  "notification_CONFIRMED",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  true,
+                      "observed":  true,
+                      "invariant":  "notificationOwnership",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  3,
+                      "observed":  3,
+                      "invariant":  "notifications",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  true,
+                      "observed":  true,
+                      "invariant":  "passengerOwnership",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  1,
+                      "observed":  1,
+                      "invariant":  "passengers",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  1,
+                      "observed":  1,
+                      "invariant":  "paymentCount",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  3,
+                      "observed":  3,
+                      "invariant":  "quoteCount",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  true,
+                      "observed":  true,
+                      "invariant":  "quoteExactIds",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  5,
+                      "observed":  5,
+                      "invariant":  "receiptCount",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  true,
+                      "observed":  true,
+                      "invariant":  "receiptIdsAndActors",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  true,
+                      "observed":  true,
+                      "invariant":  "rollbackBookingAbsent",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  true,
+                      "observed":  true,
+                      "invariant":  "rollbackHistoryAbsent",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  true,
+                      "observed":  true,
+                      "invariant":  "sessionOwnership",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  9,
+                      "observed":  9,
+                      "invariant":  "sessions",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  "STAFF_EMAIL",
+                      "observed":  "STAFF_EMAIL",
+                      "invariant":  "statusActors",
+                      "legacyExpected":  "STAFF_ID"
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  2,
+                      "observed":  2,
+                      "invariant":  "statusTransitionCount",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  12000,
+                      "observed":  12000,
+                      "invariant":  "totalPrice",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  true,
+                      "observed":  true,
+                      "invariant":  "unverifiedPaymentLink",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  true,
+                      "observed":  true,
+                      "invariant":  "userOwnership",
+                      "legacyExpected":  null
+                  },
+                  {
+                      "matched":  true,
+                      "expected":  4,
+                      "observed":  4,
+                      "invariant":  "users",
+                      "legacyExpected":  null
+                  }
+              ],
+    "Count":  39
+}

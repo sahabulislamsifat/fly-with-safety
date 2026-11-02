@@ -1,0 +1,33 @@
+{
+  "prepared": true,
+  "sourceOID": 34701,
+  "source": "flywithsafe_phase2_booking_integration",
+  "destination": "flywithsafety_local_integration",
+  "backupBytes": 63951,
+  "backupChecksumMatched": true,
+  "backupACL": "OWNER_AND_SYSTEM_ONLY",
+  "restoreRehearsalExecuted": false,
+  "sourceOtherConnectionsAtPreparation": 0,
+  "destinationAvailableAtPreparation": true,
+  "freshChecks": "RECHECK_INSIDE_AUTHORIZED_EXECUTION",
+  "pins": 33,
+  "callerHash": "8A77A31735AAE9EBFF14AFB49B5F1C00B2A7837FC19DC4730F56A2DF1BE10A97",
+  "manifestHash": "AB122A39C4A2193037F5C817AD5703FBD4E8287F2FB8510814FDC144CD7CE55F",
+  "offlineCandidate": {
+    "bundle": {
+      "passed": 56,
+      "failed": 0,
+      "skipped": 0
+    },
+    "native": {
+      "passed": 56,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "activeSourceChanged": false,
+  "referencePatchFiles": 5,
+  "actualRename": "NOT_AUTHORIZED_OR_EXECUTED",
+  "archivedOriginalSources": 5,
+  "localTargetLiteralChanges": 6
+}

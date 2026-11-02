@@ -1,0 +1,7 @@
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p='E:\Programming\Project\fly-with-safety\output\phase2\sameports-browser-20261102-02\Invoke-BrowserHost.ps1'
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne '38E69EFC239B0EDE4C8A495D433418CD0A3C47113C6D926830E8B4A058DCB43B'){throw 'STOP: reviewed caller mismatch'}
+ & $p -OwnerApprovedSamePortTest
+}

@@ -1,0 +1,16 @@
+{
+  "case": "A",
+  "readOnlyExit": 0,
+  "readOnlyFinishedUTC": "2026-11-02T13:37:54.0352930Z",
+  "pins": 26,
+  "manifestHash": "4D3E0971806D221FB9A78F4523D4FDBE263CA11B2AD3ABE2E67A319A3E76B001",
+  "callerHash": "EABE530F57D1384337F7FB38FE53BEB7954A4EC5FE753DCC1054170E380CBF85",
+  "sqlHash": "0DF77B208206905D198410D931DC9E6C95A26E7F7C3539E545C7210C77F0A2EB",
+  "expectedOwnedRows": 33,
+  "observedUnlistedAtReconciliation": {
+    "User": 6,
+    "Session": 1
+  },
+  "destructiveExecution": "NOT_AUTHORIZED_OR_EXECUTED",
+  "databaseExecuted": false
+}

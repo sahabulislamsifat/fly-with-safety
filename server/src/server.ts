@@ -15,7 +15,7 @@ async function startServer(): Promise<void> {
   }
 
   // Local development may poll. Serverless/production execution requires the protected trigger.
-  if (env.nodeEnv === 'development' && !process.env.VERCEL) {
+  if (env.nodeEnv === 'development' && !process.env.VERCEL && !process.argv.includes('--no-outbox-worker')) {
     startOutboxWorker(15000);
     console.log('   Outbox: Background notification worker initialized (15s poll)');
   }

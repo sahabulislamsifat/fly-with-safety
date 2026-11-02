@@ -1,0 +1,10 @@
+# PREPARED ONLY: separate explicit approval required for ONE new same-input psql + browser-host execution.
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p=Join-Path -Path 'E:\Programming\Project\fly-with-safety' -ChildPath 'output\phase2\browser-auth-parity-20261101-01\Invoke-BrowserAuthParity.ps1'
+ if(-not (Test-Path -LiteralPath $p -PathType Leaf)){throw 'STOP: reviewed auth-parity caller missing'}
+ if((Get-Item -LiteralPath $p -Stream *|Where-Object Stream -eq 'Zone.Identifier')){throw 'STOP: unexpected script zone marking'}
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne '56E735DD8815E74243FE10584C2E185E8CDFCAFE4507CDA2FB05581A4DF8F429'){throw 'STOP: caller integrity mismatch'}
+ & $p -OwnerApprovedOneAuthParityHost
+}

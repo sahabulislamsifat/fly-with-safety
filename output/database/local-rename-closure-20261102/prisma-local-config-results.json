@@ -1,0 +1,16 @@
+{
+  "results": [
+    {
+      "config": "prisma.config.ts",
+      "exit": 0,
+      "databaseConnected": false
+    },
+    {
+      "config": "prisma7.config.ts",
+      "exit": 0,
+      "databaseConnected": false
+    }
+  ],
+  "syntheticProcessOnlyUrl": true,
+  "privateCredentialsUsed": false
+}

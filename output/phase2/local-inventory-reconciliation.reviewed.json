@@ -1,0 +1,74 @@
+{
+  "observedFromSavedOutput": true,
+  "readOnlyEndedWithRollback": true,
+  "database": "flywithsafe_phase2_booking_integration",
+  "role": "flywithsafe_phase2_booking_test",
+  "server": "127.0.0.1:5432",
+  "version": "18.6",
+  "completedMigrations": 7,
+  "sourceMigrationCount": 7,
+  "migrationDiffs": [],
+  "applicationColumns": 206,
+  "columnTypeNullabilityDiffs": [],
+  "extraApplicationColumns": [],
+  "indexCount": 82,
+  "indexDifferencesVersusSavedCloud": [],
+  "enumValues": 32,
+  "enumDiffs": [],
+  "counts": {
+    "users": 9,
+    "bookings": 1,
+    "sessions": 9
+  },
+  "additionalUsersVersusHistoricalOwnedFour": 5,
+  "additionalUserOwnership": "UNVERIFIED: aggregate inventory has no user IDs",
+  "notCovered": [
+    "column defaults",
+    "foreign-key definitions",
+    "current cloud state",
+    "user identity/password or ownership"
+  ],
+  "passed": true,
+  "arrayNullabilityBaselineNotes": [
+    {
+      "field": "Package.gallery",
+      "prismaList": true,
+      "baselineNotNull": false
+    },
+    {
+      "field": "Package.inclusions",
+      "prismaList": true,
+      "baselineNotNull": false
+    },
+    {
+      "field": "Package.exclusions",
+      "prismaList": true,
+      "baselineNotNull": false
+    },
+    {
+      "field": "VisaInfo.documents",
+      "prismaList": true,
+      "baselineNotNull": false
+    }
+  ],
+  "enumOrderDifferences": [
+    {
+      "name": "ContactStatus",
+      "sourceOrder": [
+        "NEW",
+        "IN_PROGRESS",
+        "RESOLVED",
+        "OPEN",
+        "CLOSED"
+      ],
+      "catalogOrder": [
+        "OPEN",
+        "IN_PROGRESS",
+        "RESOLVED",
+        "CLOSED",
+        "NEW"
+      ]
+    }
+  ],
+  "interpretation": "PASS means checked identities, seven exact migration checksums, scalar types/nullability with explicit baseline array exceptions, enum membership and source field names match. Array nullability and enum order are recorded exceptions, not erased; defaults and FK definitions were not collected. Index definitions match the saved cloud inventory, not a fresh cloud query."
+}

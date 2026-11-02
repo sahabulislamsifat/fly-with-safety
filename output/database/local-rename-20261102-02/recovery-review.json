@@ -1,0 +1,40 @@
+{
+  "case": "RENAME_NOT_EXECUTED",
+  "failedStage": "pre-rename-maintenance-admin-reconnect",
+  "historicalResult": {
+    "adminExit": 3,
+    "renameCommitted": false,
+    "restrictedExit": null
+  },
+  "ownerProvidedCatalog": {
+    "provenance": "owner-supplied standalone SELECT output,no agent query repeated",
+    "host": "127.0.0.1",
+    "port": 5432,
+    "maintenanceDatabase": "postgres",
+    "role": "postgres",
+    "sourceOID": 34701,
+    "sourceName": "flywithsafe_phase2_booking_integration",
+    "destinationNameAbsent": "flywithsafety_local_integration"
+  },
+  "originalArtifacts": {
+    "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\attempt.json": "36D6985B82A0903DC3F076293E8120F94CAFE864EC72710B3A268EC4E5A1204E",
+    "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\admin-stdout.txt": "5D2C054C93095DF34A3D30D6D568ADAE04176F924490EEB66A54964F932383AF",
+    "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\result.json": "87A99A6A2FA63A96054F5EB12D8CC9AB08717A49BE066B5DEA38129C092088FA",
+    "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\Invoke-LocalRename.ps1": "8A77A31735AAE9EBFF14AFB49B5F1C00B2A7837FC19DC4730F56A2DF1BE10A97",
+    "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\rename.review.sql": "A08075E1AD9DD67EA1C54B46CC35FE6C0F2D5A13BA9C07A188D860B414932DFC",
+    "E:\\Programming\\Project\\fly-with-safety\\output\\database\\local-rename-20261102-01\\pins.json": "AB122A39C4A2193037F5C817AD5703FBD4E8287F2FB8510814FDC144CD7CE55F"
+  },
+  "sqlChanges": [
+    [
+      "\\connect postgres",
+      "\\echo ADMIN RECONNECT: enter SAME existing postgres administrator password; NOT restricted-role password.\n\\connect postgres postgres 127.0.0.1 5432"
+    ],
+    [
+      "\\connect flywithsafety_local_integration",
+      "\\echo ADMIN POSTCHECK RECONNECT: enter SAME existing postgres administrator password; NOT restricted-role password.\n\\connect flywithsafety_local_integration postgres 127.0.0.1 5432"
+    ]
+  ],
+  "credentialInputCause": "Second prompt still postgres;previous assistant guidance incorrectly called second password restricted-role. Actual private inputs not recorded or compared.",
+  "sourceReferencePatchApplied": false,
+  "databaseExecutedByPreparation": false
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "name": "account",
+    "status": 401,
+    "expected": 401,
+    "passed": true,
+    "cors": "http://localhost:3000"
+  },
+  {
+    "name": "admin",
+    "status": 401,
+    "expected": 401,
+    "passed": true,
+    "cors": "http://localhost:3000"
+  },
+  {
+    "name": "owned-detail",
+    "status": 401,
+    "expected": 401,
+    "passed": true,
+    "cors": "http://localhost:3000"
+  },
+  {
+    "name": "invalid-session",
+    "status": 401,
+    "expected": 401,
+    "passed": true,
+    "cors": "http://localhost:3000"
+  }
+]

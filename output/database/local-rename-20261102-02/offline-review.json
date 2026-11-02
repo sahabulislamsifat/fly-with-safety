@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "checks": 279,
+  "sqlStatements": 36,
+  "plpgsqlBlocks": 11,
+  "pins": 42,
+  "sourcePinsUnchanged": 225,
+  "typescriptAnd56TestsPerLoader": "UNCHANGED_CANDIDATE_EVIDENCE_REUSED_NO_RERUN",
+  "oldArtifactsUnchanged": true,
+  "actualRenameExecuted": false
+}

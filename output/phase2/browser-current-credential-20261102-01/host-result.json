@@ -1,0 +1,14 @@
+{
+  "hostClosedNormally": false,
+  "stage": "browser-handoff",
+  "failure": {
+    "classification": "UNCLASSIFIED",
+    "prismaCode": null,
+    "sqlState": null,
+    "networkCode": null
+  },
+  "identityVerified": true,
+  "elapsedMs": 907425,
+  "businessAcceptance": false,
+  "finishedUTC": "2026-11-01T19:40:31.549Z"
+}

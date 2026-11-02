@@ -1,0 +1,10 @@
+# Execute only after explicit approval for this fresh bounded browser host.
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p=Join-Path -Path 'E:\Programming\Project\fly-with-safety' -ChildPath 'output\phase2\browser-confirmed-local-20261102-01\Invoke-BrowserAuthParity.ps1'
+ if(-not (Test-Path -LiteralPath $p -PathType Leaf)){throw 'STOP: reviewed caller missing'}
+ if((Get-Item -LiteralPath $p -Stream *|Where-Object Stream -eq 'Zone.Identifier')){throw 'STOP: unexpected script zone marking'}
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne 'F7DD9AD1FBEC49C26C23E658894BB0349F022D2E0F0D0AB6834348E972428476'){throw 'STOP: caller integrity mismatch'}
+ & $p -OwnerApprovedOneAuthParityHost
+}

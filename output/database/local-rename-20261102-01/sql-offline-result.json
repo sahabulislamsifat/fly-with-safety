@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "sqlStatements": 34,
+  "plpgsqlBlocks": 11,
+  "authorizedMutationStatements": 1,
+  "sourceOID": 34701,
+  "otherDatabaseChanges": 0,
+  "databaseExecuted": false
+}

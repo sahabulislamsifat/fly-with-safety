@@ -13,7 +13,7 @@ const enabled = process.env.PHASE2_BOOKING_MODE === 'owner-approved-synthetic';
 it.skipIf(!enabled)('real isolated booking API → PostgreSQL → quotation/payment/status/dashboard', async () => {
   let target: URL;
   try { target = new URL(process.env.PHASE2_BOOKING_DATABASE_URL || ''); } catch { throw new Error('PHASE2_WRONG_TARGET'); }
-  if (target.hostname !== '127.0.0.1' || target.port !== '5432' || target.pathname !== '/flywithsafe_phase2_booking_integration' ||
+  if (target.hostname !== '127.0.0.1' || target.port !== '5432' || target.pathname !== '/flywithsafety_local_integration' ||
       target.username !== 'flywithsafe_phase2_booking_test' || !target.password || target.search) throw new Error('PHASE2_WRONG_TARGET');
   const ledger = process.env.PHASE2_BOOKING_LEDGER;
   if (!ledger) throw new Error('PHASE2_LEDGER_REQUIRED');
@@ -30,7 +30,7 @@ it.skipIf(!enabled)('real isolated booking API → PostgreSQL → quotation/paym
   };
   try {
     const identity = await prisma.$queryRaw<{ db: string; role: string; host: string; port: number }[]>`SELECT current_database() AS db,current_user AS role,host(inet_server_addr()) AS host,inet_server_port() AS port`;
-    expect(identity).toEqual([{ db: 'flywithsafe_phase2_booking_integration', role: 'flywithsafe_phase2_booking_test', host: '127.0.0.1', port: 5432 }]);
+    expect(identity).toEqual([{ db: 'flywithsafety_local_integration', role: 'flywithsafe_phase2_booking_test', host: '127.0.0.1', port: 5432 }]);
     stage = 'access-and-empty-state';
     const access = await prisma.$queryRaw<{ denied: boolean }[]>`SELECT NOT has_table_privilege(current_user,'public."Booking"','DELETE') AND NOT has_schema_privilege(current_user,'public','CREATE') AS denied`;
     expect(access[0].denied).toBe(true);

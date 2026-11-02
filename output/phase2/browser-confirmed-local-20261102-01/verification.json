@@ -1,0 +1,16 @@
+{
+  "nativePS51Passed": 10,
+  "bundledAndNativeWorkerTests": "Prior 2 PASS per loader reused; all corresponding source pins match",
+  "failed": 0,
+  "urlPaths": 18,
+  "parserErrors": 0,
+  "skipped": 0,
+  "noAttempt": true,
+  "databaseExecuted": false,
+  "typeScriptAndLint": "Prior exit0 reused; no TypeScript changes",
+  "realPrivateInputComparisonPerformed": false,
+  "callerSha256": "F7DD9AD1FBEC49C26C23E658894BB0349F022D2E0F0D0AB6834348E972428476",
+  "pins": 206,
+  "productionOrHelperLogicChanged": false,
+  "ownerDirectReadOnlyExit": 0
+}

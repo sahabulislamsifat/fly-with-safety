@@ -1,0 +1,17 @@
+const fs = require('node:fs'), path = require('node:path'), crypto = require('node:crypto'), assert = require('node:assert/strict');
+const read = name => fs.readFileSync(path.join(__dirname, name), 'utf8');
+const sha = file => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex').toUpperCase();
+const pins = JSON.parse(read('pins.json')), preserved = JSON.parse(read('preservation.json'));
+for (const pin of [...pins, ...preserved]) assert.equal(sha(pin.path), pin.sha256);
+const caller = read('Invoke-BrowserAuthParity.ps1'), helper = read('Set-PrivatePhase2Connection.ps1');
+assert.ok(caller.includes(sha(path.join(__dirname, 'pins.json'))));
+assert.equal((helper.match(/EscapeDataString/g) || []).length, 1);
+assert.ok(caller.indexOf("$stage='same-input-psql-readonly'") < caller.indexOf("$stage='prisma-browser-host'"));
+assert.ok(caller.indexOf('Remove-Item -LiteralPath Env:PGPASSWORD') < caller.indexOf('server/node_modules/vitest/vitest.mjs'));
+assert.doesNotMatch(caller, /Invoke-Phase2Recovery|phase2-booking\.pg|phase2-commercial-continuation|Set-ExecutionPolicy|ExecutionPolicy\s+Bypass/);
+assert.equal(sha(path.join(__dirname, 'credential-preflight.readonly.sql')), sha(path.resolve(__dirname, '../integration-recovery-20261101-01/credential-preflight.readonly.sql')));
+assert.equal(sha(path.join(__dirname, 'verify-private-url.cjs')), sha(path.resolve(__dirname, '../integration-recovery-20261101-01/verify-private-url.cjs')));
+for (const name of ['attempt-started.json','caller-result.json','host-result.json','ready.json','vitest-result.json','psql-stdout.txt','host-journal.jsonl']) assert.equal(fs.existsSync(path.join(__dirname, name)), false);
+const failed = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../browser-recovery-20261101-01/host-result.json')));
+assert.equal(failed.stage, 'identity-query'); assert.equal(failed.failure.sqlState, '28P01'); assert.equal(failed.identityVerified, false);
+console.log(JSON.stringify({ passed: true, pins: pins.length, preservedFailedFiles: preserved.length, noAttempt: true, sqlAndVerifierByteIdenticalToReference: true, databaseExecuted: false }));

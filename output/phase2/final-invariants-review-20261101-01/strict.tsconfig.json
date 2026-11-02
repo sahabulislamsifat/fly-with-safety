@@ -1,0 +1,8 @@
+{
+ "extends": "../strict.tsconfig.json",
+ "include": [
+  "../../../server/test/phase2-final-invariants.test.ts",
+  "../../../server/test/phase2-final-invariant-diagnostics.ts",
+  "../../../server/test/phase2-commercial-continuation.pg.test.ts"
+ ]
+}

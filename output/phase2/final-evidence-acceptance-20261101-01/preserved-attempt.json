@@ -1,0 +1,126 @@
+[
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\attempt-started.json",
+    "sha256": "04549AA32509D2E67FD91F6A10F84C4D6F4657E886EDC758ABA8AD267BFB0F9F"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\browser-host-check.txt",
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\controller-bundle.json",
+    "sha256": "5C3A06943CA32EC76076026C52794892CBA275CC9CE9036C4F88417426B4C256"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\controller-native.json",
+    "sha256": "06C193E8CE4CDB6318AC368574F972C474425C5A1BE8437CC1F0FF23B1A7CAC0"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\diff-check.txt",
+    "sha256": "C708056F33884AC92C44256E101FD518947CB384B988575C679CBA5C42F75532"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\expected-inventory.json",
+    "sha256": "74DDCE1700260E984F1B06039809EA10AD18204CC631FFAE56E5F0783951B512"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\FOREGROUND-AFTER-APPROVAL.txt",
+    "sha256": "83E510BFFF7B9EE3237765D86A0BE8633BD1CFDC0BD2A2AF304705BE0C7A3D24"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\invariant-observations.json",
+    "sha256": "BC6C882A0E1484FF4E4D135D2835BEE7B578AC8873B7094F9C7A888093CD1722"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\Invoke-FinalStateReadOnly.ps1",
+    "sha256": "6497E5A9DE62303A73B6E2A2C042B751F424FBFC3C3C0A4FE07C8D15333ACA6E"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\lint-check.txt",
+    "sha256": "523BFCB87143DE1E48986BAEBFE9282660820B5CD12B04FF8167A0042F1A99BE"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\offline-bundle.json",
+    "sha256": "27BF902EBAC479413E054D14E595008AB0C42C5094122DBA39B1A46E43130A78"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\offline-native.json",
+    "sha256": "F9F371E00B90E68A9509043182220E527E9BA59B885202BF2B33D3E14EC07840"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\parse-sql.offline.cjs",
+    "sha256": "8FE39183FCCC400F0213534760FFBF5A6160269FBE56E6FEC3B9BA7EA040B7AB"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\pins.json",
+    "sha256": "68DA947DD51FFAA6D2B49E960C0309D93088F063759707A6F39E96F4CBFFE79F"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\powershell-parser.json",
+    "sha256": "9AB5E8CE503E856B53E38553296C73050338D6ABAB0CBD19AE206D857C66F7E9"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\prepare-sql.offline.cjs",
+    "sha256": "03129771D8545CCAA8050959338F1FE6F1EC069A44E62FDB691C2513A1BCC826"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\preservation.json",
+    "sha256": "371229B7BAEE71194C665514970AC544D172897F99F6733D535B1ACCC70221BD"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\prior-checkpoints.json",
+    "sha256": "61CF8E89FBBFCE398C5306F0DEED53D590666618A1F98AA8FA7971F7157A9BF8"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\prisma-check.txt",
+    "sha256": "EDBAC16BF7036BA595E88ECC668131A528982AAB5FCDC423B58B45080AF7ED93"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\readonly-output.txt",
+    "sha256": "E7F0925E1F7C9D357F1D80AB81C765DAF6A9945FFE38607558E40B8486F5A7E4"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\result.json",
+    "sha256": "0E73F5B0D50ADACFA6FDF0D2D2C5EB9921DE1A5ADDD0CF203A569D9DBEB807D6"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\REVIEW.md",
+    "sha256": "33B5D31390F1D261F6289C4DFB6FA79AE18AFE17F8CF9A67C72BCC303CC52E18"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\server-check.txt",
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\sql-parser-result.json",
+    "sha256": "7CDF53864FCF24E9D96A05D53D0A4ED209E15D3B6FA2E4D4D487D4655CF41785"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\strict-check.txt",
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\strict.tsconfig.json",
+    "sha256": "325804ACF9B5171286E7B78732CF54D8E3200895B78DC7635F22AF99D2D3B4C0"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\verification.json",
+    "sha256": "5DC1503D78BBEA39430C19B504EF9AABFEE58BD4A23D3CF0E97FC17F69281F0B"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\verify-final.readonly.sql",
+    "sha256": "6D7931E9FCD4868305F985CDF7A7D04CE29237885369BB5B204B5566873D337B"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\verify-package.offline.cjs",
+    "sha256": "8D4360CF0DA03603D32FA2D3B08E28F52097AD57C4E670BE2A99CC352FC85BB7"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\original-source\\phase2-commercial-continuation.pg.test.ts",
+    "sha256": "23138D7945AB8234C7133966882863D4F7EFDEC52BEA63F9217EE21824714AC9"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\final-invariants-review-20261101-01\\original-source\\phase2-continuation-contract.ts",
+    "sha256": "1651291BCEA39E9B9D1483AB1DB275E8926F6C00B76357E8CE83DA864FAD484A"
+  }
+]

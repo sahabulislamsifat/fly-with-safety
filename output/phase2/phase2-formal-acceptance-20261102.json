@@ -1,0 +1,78 @@
+{
+  "status": "PHASE 2 — FORMALLY ACCEPTED (14/14)",
+  "acceptedIds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "acceptedAtUTC": "2026-11-02T13:59:58.076Z",
+  "cleanup": {
+    "exit": 0,
+    "finishedUTC": "2026-11-02T13:51:06.8555976Z",
+    "commitObserved": true,
+    "readOnlyPostcheckPassed": true,
+    "exactIdsAbsentProvenBy": "seven exact-ID DELETE/count assertions before COMMIT plus owned-graph and final readonly absence guards",
+    "deletedCounts": {
+      "User": 4,
+      "Session": 14,
+      "Booking": 2,
+      "BookingPassenger": 2,
+      "BookingStatusHistory": 5,
+      "IdempotencyRecord": 2,
+      "NotificationOutbox": 4
+    },
+    "countEvidence": "Owner native notices corroborated by executed pinned rowcount assertions; native notices were stderr, not saved stdout",
+    "preservedUnlisted": {
+      "User": 6,
+      "Session": 1,
+      "Booking": 0,
+      "NotificationOutbox": 0
+    },
+    "schemaAccessMigrationsPreserved": true,
+    "sqlTarget": "127.0.0.1:5432/flywithsafe_phase2_booking_integration",
+    "pinsVerified": 26,
+    "artifactHashes": {
+      "output/phase2/exact-cleanup-20261102-02/attempt-started.json": "9AD5C3BFC70A4A7C2EA8F1A47DC497916F6F06776B046AA48B6BB398CA213B1B",
+      "output/phase2/exact-cleanup-20261102-02/stdout.txt": "9C1BE00B06C35F456A9A1AFB736A1E63EF26F1CCF107EC4788FC2EA4103C4022",
+      "output/phase2/exact-cleanup-20261102-02/result.json": "F7873501DCFA9663C00EB66F4280996CC9C6655633641C7C753A7261A71FB034",
+      "output/phase2/exact-cleanup-20261102-02/cleanup.review.sql": "0DF77B208206905D198410D931DC9E6C95A26E7F7C3539E545C7210C77F0A2EB",
+      "output/phase2/exact-cleanup-20261102-02/pins.json": "4D3E0971806D221FB9A78F4523D4FDBE263CA11B2AD3ABE2E67A319A3E76B001",
+      "output/phase2/exact-cleanup-20261102-02/Invoke-ExactCleanup.ps1": "EABE530F57D1384337F7FB38FE53BEB7954A4EC5FE753DCC1054170E380CBF85"
+    }
+  },
+  "regression": {
+    "perLoader": {
+      "bundle": {
+        "passed": 164,
+        "failed": 0,
+        "skipped": 0
+      },
+      "native": {
+        "passed": 164,
+        "failed": 0,
+        "skipped": 0
+      }
+    },
+    "sourcePinsVerified": 225,
+    "rawVitestReportsVerified": 8,
+    "rerun": false,
+    "tsLintPrismaSavedExits": 0
+  },
+  "commercialEvidenceHashesVerified": 7,
+  "phase1G7": "ACCEPTED_UNCHANGED",
+  "mainCloudAndStaging": "No connection or mutation by this closure verification; cleanup pinned local target guards exclude cloud",
+  "rename": "NOT_EXECUTED_REQUIRES_SEPARATE_APPROVAL_AND_PREFLIGHT_BACKUP",
+  "phase3": "NOT_STARTED_PENDING_OWNER_REQUIRED_RENAME_GATE",
+  "verification": "Saved artifacts and source integrity only; no live query or destructive rerun"
+}

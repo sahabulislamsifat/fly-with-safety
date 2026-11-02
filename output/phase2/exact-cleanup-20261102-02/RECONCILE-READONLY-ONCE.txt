@@ -1,0 +1,29 @@
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ if($PSVersionTable.PSVersion.Major -ne 5 -or $PSVersionTable.PSVersion.Minor -ne 1 -or $Host.Name -ne 'ConsoleHost' -or [Console]::IsInputRedirected -or [Console]::IsOutputRedirected){throw 'STOP: existing private interactive Windows PowerShell5.1 required'}
+ if((Get-ExecutionPolicy) -ne 'RemoteSigned'){throw 'STOP: execution policy differs; no bypass'}
+ $base='E:\Programming\Project\fly-with-safety\output\phase2\exact-cleanup-20261102-02'
+ $original='E:\Programming\Project\fly-with-safety\output\phase2\exact-cleanup-20261102-01'
+ foreach($name in @('PGPASSWORD','PGHOSTADDR','PGOPTIONS','PGSERVICE','PGSERVICEFILE','PGPASSFILE')){if([Environment]::GetEnvironmentVariable($name,'Process')){throw 'STOP: PostgreSQL environment override present'}}
+ foreach($name in @('reconcile-readonly-attempt.json','reconcile-readonly-output.txt','reconcile-readonly-result.json')){if(Test-Path -LiteralPath (Join-Path $base $name)){throw 'STOP: existing read-only reconciliation evidence; do not retry'}}
+ if((Get-FileHash -LiteralPath (Join-Path $original 'Invoke-ExactCleanup.ps1') -Algorithm SHA256).Hash -cne '44663BFA874B07837CC60D9BCC9CE4A4762A6355A724E2BC8B11E7580872DD32'){throw 'STOP: original cleanup caller changed'}
+ if((Get-FileHash -LiteralPath (Join-Path $original 'pins.json') -Algorithm SHA256).Hash -cne '25460883F5488E657A9F90E4B9AB6347B2AA344CF1D6AB4AE909CE810049F042'){throw 'STOP: original cleanup manifest changed'}
+ foreach($pin in (Get-Content -LiteralPath (Join-Path $original 'pins.json') -Raw|ConvertFrom-Json)){if((Get-FileHash -LiteralPath $pin.path -Algorithm SHA256).Hash -cne $pin.sha256){throw 'STOP: original cleanup pin changed'}}
+ $sql=Join-Path $base 'reconcile.readonly.sql'
+ if((Get-FileHash -LiteralPath $sql -Algorithm SHA256).Hash -cne '8CF7DD95F5DAC4C8F215DA0CD5896DB4139DFAA85215C487A607D8B276A38D2A'){throw 'STOP: read-only SQL integrity mismatch'}
+ $cleanupArtifacts=@('attempt-started.json','stdout.txt','result.json'|Where-Object {Test-Path -LiteralPath (Join-Path $original $_)})
+ $meta=@{startedUTC=[DateTime]::UtcNow.ToString('o');action='read-only-exact33-payload-corrected-reconciliation';cleanupAttemptArtifacts=$cleanupArtifacts;target='127.0.0.1:5432/flywithsafe_phase2_booking_integration'}|ConvertTo-Json -Compress
+ $stream=[IO.File]::Open((Join-Path $base 'reconcile-readonly-attempt.json'),[IO.FileMode]::CreateNew,[IO.FileAccess]::Write,[IO.FileShare]::None)
+ try{$bytes=[Text.Encoding]::UTF8.GetBytes($meta);$stream.Write($bytes,0,$bytes.Length)}finally{$stream.Dispose()}
+ Write-Host 'READ ONLY: existing local postgres password only at the private psql prompt. This does not run cleanup.'
+ $output=& 'C:\Program Files\PostgreSQL\18\bin\psql.exe' -X -W -h 127.0.0.1 -p 5432 -U postgres -d flywithsafe_phase2_booking_integration -v ON_ERROR_STOP=1 -f $sql | Tee-Object -FilePath (Join-Path $base 'reconcile-readonly-output.txt')
+ $code=$LASTEXITCODE
+ $pending=@($output|Where-Object {$_ -match '^\s*ALL_33_PRESENT_ORIGINAL_PRECONDITIONS_PASS_CLEANUP_PENDING\s*$'}).Count -eq 1
+ $absent=@($output|Where-Object {$_ -match '^\s*ALL_33_ABSENT_DO_NOT_EXECUTE_CLEANUP_RECOVER_PRIOR_RESULT\s*$'}).Count -eq 1
+ $finished=@($output|Where-Object {$_ -eq 'PHASE2_CLEANUP_READONLY_RECONCILIATION_FINISHED_NOT_CLEANUP'}).Count -eq 1
+ [IO.File]::WriteAllText((Join-Path $base 'reconcile-readonly-result.json'),(@{exit=$code;all33PresentAndPreconditionsPass=$pending;all33Absent=$absent;readOnlyFinished=$finished;cleanupExecutedByThisReview=$false;finishedUTC=[DateTime]::UtcNow.ToString('o')}|ConvertTo-Json -Compress))
+ Write-Host ('Phase2 exact-owned read-only reconciliation exit: '+$code)
+ if($code -ne 0 -or -not $finished -or ($pending -eq $absent)){throw 'STOP: read-only reconciliation inconclusive; no cleanup, retry or repair'}
+ Write-Host 'Read-only review complete. Return the sanitized result; do not run cleanup automatically.'
+}

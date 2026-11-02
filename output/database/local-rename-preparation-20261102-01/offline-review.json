@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "sqlStatements": 12,
+  "plpgsqlBlocks": 3,
+  "pins": 8,
+  "callerSha256": "5F4B5D95137370294C5CC2A781A99EA4D640C3BFB92536BFA705233558FA48CD",
+  "databaseExecuted": false,
+  "backupCreated": false,
+  "renameExecuted": false,
+  "approval": "PENDING_READONLY_AND_PRIVATE_BACKUP_ONLY"
+}

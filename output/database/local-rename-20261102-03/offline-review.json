@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "pins": 48,
+  "sourcePinsUnchanged": 225,
+  "sqlFilesByteIdentical": 3,
+  "sqlParserEvidence": "REUSED_UNCHANGED_V02_36_STATEMENTS_11_BLOCKS",
+  "candidateTests": "REUSED_UNCHANGED_56_PASS_PER_LOADER",
+  "backupChecksumAndSizeMatch": true,
+  "originalArtifactsPreserved": true,
+  "newAttemptExists": false,
+  "databaseExecuted": false
+}

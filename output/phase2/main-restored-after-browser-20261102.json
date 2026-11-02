@@ -1,0 +1,10 @@
+{
+  "pid": 27724,
+  "readOnly": true,
+  "actualRunningClient": true,
+  "runtimeClientAvailable": true,
+  "database": "postgres",
+  "role": "prisma_migration",
+  "serverAddress": "10.0.44.77",
+  "serverPort": 5432
+}

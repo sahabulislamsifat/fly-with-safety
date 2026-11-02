@@ -8,6 +8,7 @@ import request from 'supertest';
 import type { Express } from 'express';
 import { EXPECTED_IDENTITY, readOnlyTarget, safeFailure, safeHttpOutcome } from './phase2-identity-diagnostic.js';
 import { assertDispatchBudget, retainedContract, traceActualService, trackActualTask } from './phase2-continuation-contract.js';
+import { finalInvariantRecord, statusActorTag, type FinalInvariantId } from './phase2-final-invariant-diagnostics.js';
 vi.mock('dotenv', () => ({ default: { config: () => ({ parsed: {} }) }, config: () => ({ parsed: {} }) }));
 
 it.skipIf(process.env.PHASE2_CONTINUATION_MODE !== 'owner-approved-retained-fixtures')('retained booking → quotation expiry/revision/acceptance → payment/status/history', async () => {
@@ -214,13 +215,21 @@ it.skipIf(process.env.PHASE2_CONTINUATION_MODE !== 'owner-approved-retained-fixt
     expect(fresh.body.data.booking.commercial.revision).toBe(5);
     stage = 'persisted-final-invariants';
     const final = await stored(); const state = commercial.readCommercial(final.bookingDetails);
-    expect(final.statusHistory).toHaveLength(4); expect(final.totalPrice).toBe(12000);
-    expect(state.quotes).toHaveLength(3); expect(state.payments).toHaveLength(1); expect(state.receipts).toHaveLength(5);
-    expect(final.statusHistory.filter(h => h.reason === 'Quotation accepted; awaiting staff processing')[0].changedBy).toBe(c.actors[0].id);
-    expect(final.statusHistory.filter(h => h.fromStatus !== h.toStatus).every(h => h.changedBy === c.actors[2].id)).toBe(true);
+    const checkFinal = (id: FinalInvariantId, expected: Parameters<typeof finalInvariantRecord>[1], observed: unknown) => {
+      const record = finalInvariantRecord(id, expected, observed); journal(record); expect(record.matched).toBe(true);
+    };
+    checkFinal('historyCount', 4, final.statusHistory.length); checkFinal('totalPrice', 12000, final.totalPrice);
+    checkFinal('quoteCount', 3, state.quotes.length); checkFinal('paymentCount', 1, state.payments.length); checkFinal('receiptCount', 5, state.receipts.length);
+    checkFinal('acceptanceActor', true, final.statusHistory.filter(h => h.reason === 'Quotation accepted; awaiting staff processing')[0]?.changedBy === c.actors[0].id);
+    const statusEvents = final.statusHistory.filter(h => h.fromStatus !== h.toStatus);
+    checkFinal('statusTransitionCount', 2, statusEvents.length);
+    // Existing controller contract records authenticated email for staff status transitions.
+    checkFinal('statusActors', 'STAFF_EMAIL', statusActorTag(statusEvents.map(h => h.changedBy), c.actors[2]));
     const outboxStart = performance.now();
     while ((await prisma.notificationOutbox.count()) < 3 && performance.now() - outboxStart < 5000) await pause(50);
-    expect(await totals()).toEqual({ users: 4, sessions: 9, bookings: 1, passengers: 1, history: 4, idempotency: 1, notifications: 3 });
+    const expectedTotals = { users: 4, sessions: 9, bookings: 1, passengers: 1, history: 4, idempotency: 1, notifications: 3 };
+    const actualTotals = await totals();
+    for (const key of ['users', 'sessions', 'bookings', 'passengers', 'history', 'idempotency', 'notifications'] as const) checkFinal(key, expectedTotals[key], actualTotals[key]);
     journal({ kind: 'commercial-continuation-pass', bookingId: c.booking.id, revision: 5, quotes: 3, unverifiedPayments: 1, acceptanceConcurrency: 8, statusConcurrency: 8, finalCounts: await totals() });
     stage = 'complete';
   } catch (error) { failed = safeFailure(error); journal({ kind: 'continuation-stopped', stage, diagnostic: failed }); }

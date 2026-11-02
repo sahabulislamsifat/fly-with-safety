@@ -1,0 +1,23 @@
+{
+  "results": [
+    {
+      "url": "http://localhost:3000/",
+      "status": 200,
+      "database": null,
+      "apiStatus": null,
+      "frontendProjectBrand": true,
+      "allowOrigin": null,
+      "allowCredentials": null
+    },
+    {
+      "url": "http://localhost:5000/api/v1/health",
+      "status": 200,
+      "database": "up",
+      "apiStatus": "ok",
+      "allowOrigin": "http://localhost:3000",
+      "allowCredentials": "true"
+    }
+  ],
+  "readOnly": true,
+  "processesRestarted": false
+}

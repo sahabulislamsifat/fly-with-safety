@@ -1,0 +1,7 @@
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p='E:\Programming\Project\fly-with-safety\output\database\local-rename-20261102-02\Invoke-LocalRename.ps1'
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne '9EDA61F9E74D8E05DC428272A002A5686466AD9B54B2D97E89452E330BC32456'){throw 'STOP: reviewed local rename recovery caller mismatch'}
+ & $p -OwnerApprovedInPlaceLocalRename
+}

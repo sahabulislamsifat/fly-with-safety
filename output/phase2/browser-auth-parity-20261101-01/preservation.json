@@ -1,0 +1,90 @@
+[
+  {
+    "sha256": "CC9FA040CC8BC370E49D9438D23BED9FAEB9C5D926F87D45FAD5C45985F1DE56",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\attempt-started.json"
+  },
+  {
+    "sha256": "210C5DBAF98A3F86376275FFBF5BC9838687A8246D3CB31B79880835D53A0EE5",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\bundle.txt"
+  },
+  {
+    "sha256": "D6E00C2D1205C710C368F4892B10F3C0D780ECE04DB04855E18E4F45AB6B22E3",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\caller-result.json"
+  },
+  {
+    "sha256": "644574DA144320778F6107B49CC2178E11E9DECAA60F5FB3D866BBD694E2360D",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\finalization.json"
+  },
+  {
+    "sha256": "BBDCDD1B9C4A56FF5BC251BF86A30319D6945C057126D650DE21B2052DBECC6A",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\FOREGROUND-AFTER-APPROVAL.txt"
+  },
+  {
+    "sha256": "1C9F8B82036B0B50CE49ECAA6154D472DE572A2589DBAFBEEBF576BDAA42FD58",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\host-journal.jsonl"
+  },
+  {
+    "sha256": "C84AFE7721ED178A1EBE597B0C036E20D284BFE2FA64F488CE7614AC7E9DAD35",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\host-result.json"
+  },
+  {
+    "sha256": "55FA0FF3023A1DF635A6208306BCC7624C568CEED8C57BAEAD15E0302C0C711D",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\host-stdout.txt"
+  },
+  {
+    "sha256": "98959C549CF7F08B5E89E8E23D00E356D7BCF225938D91342C0860293A4F7CDD",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\Invoke-BrowserHost.ps1"
+  },
+  {
+    "sha256": "523BFCB87143DE1E48986BAEBFE9282660820B5CD12B04FF8167A0042F1A99BE",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\lint.txt"
+  },
+  {
+    "sha256": "65F4808125CB5CE75CF5A6F87696A235002A11EBAA4955E5142799A8E8DD4CD5",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\native.txt"
+  },
+  {
+    "sha256": "C58449A3D4BE30F763D782EE3C0648BEE4191D201D1AC2C1653CD97FA8A887D9",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\offline-bundle.json"
+  },
+  {
+    "sha256": "3DFF52F263A0638F573517A62E248449DDCC9BFAB0BE910AB5E70D7A71C999B2",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\offline-native.json"
+  },
+  {
+    "sha256": "3C3BD9FF5351AD26178638509EFD7286B327F94DE14DA39A7FEB01720E66423F",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\pins.json"
+  },
+  {
+    "sha256": "63B947A1EA348399859291AA3F5CCF4AB44083DC95C6FB25287AAD2D1DECD0E0",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\preservation.json"
+  },
+  {
+    "sha256": "2D825C1C4DD7420F9E08FE442B7C35C114DAD1EEA0FB9E8308BA7D47D7053D59",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\REVIEW.md"
+  },
+  {
+    "sha256": "457C104B5C4BECFE66C5597A557C78DC6501D1CAC2ABB2EEA6922E5366E1696B",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\strict.tsconfig.json"
+  },
+  {
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\typescript.txt"
+  },
+  {
+    "sha256": "CAD3AD53B9523ED36F72E1EC7196D254DEF7A601C98506FB3C2F5C0E373984B2",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\verification.json"
+  },
+  {
+    "sha256": "EF6AAD57FB44A29BBC155048C7ABE28E16E6A947332C4EA65E897EEAB34414C8",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\verify-review.offline.cjs"
+  },
+  {
+    "sha256": "AD0E1A59D33ACD5ACAB65208B3805A909C29F57E27E833129768269C6EB56539",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\vitest-result.json"
+  },
+  {
+    "sha256": "FD903B05DF75B684E8716CAD99DDA7C7E7B8E427583577700653C37DBFD66DD5",
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase2\\browser-recovery-20261101-01\\original-source\\phase2-browser-host.pg.test.ts"
+  }
+]

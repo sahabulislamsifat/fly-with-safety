@@ -1,0 +1,1 @@
+{"passed":true,"metrics":{"innerWidth":390,"clientWidth":367,"scrollWidth":367,"devicePixelRatio":0.6666666865348816},"passengerVisible":true,"note":"configured viewport compensates existing browser zoom; actual CSS viewport is the asserted phone width"}

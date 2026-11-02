@@ -1,0 +1,44 @@
+{
+  "renameCommitted": true,
+  "actualDatabase": "flywithsafety_local_integration",
+  "sourceOID": 34701,
+  "adminExit": 0,
+  "adminPostcheckPassed": true,
+  "oldNameAbsent": "Verified by executed pinned renamed-identity guard before successful admin marker",
+  "dataPreservation": "Executed before/after metadata/table-ID/count comparison returned1;seven migration/role/ACL guards PASS",
+  "counts": {
+    "User": 6,
+    "Session": 1,
+    "Booking": 0
+  },
+  "restricted": {
+    "exit": 2,
+    "sqlExecuted": false,
+    "stdoutExists": false,
+    "classification": "DATABASE_AUTHENTICATION",
+    "cause": "UNDETERMINED_NO_PRIVATE_INPUT_CAPTURE_OR_CONFIG_BUG_PROVEN",
+    "nativeTarget": {
+      "host": "127.0.0.1",
+      "port": 5432,
+      "database": "flywithsafety_local_integration",
+      "role": "flywithsafe_phase2_booking_test"
+    },
+    "credentialPath": "Direct native -X -W;no URL/env/password conversion"
+  },
+  "historicalArtifacts": {
+    "output/database/local-rename-20261102-03/attempt.json": "037CA0DDA6F5DC0F55A1FABFE8032B3411230049596E69015A2CE0D8807C5F20",
+    "output/database/local-rename-20261102-03/result.json": "B4CC7021DB10EC049DFA1341C7997A425131BF0A68E9658019C55A78F48ED890",
+    "output/database/local-rename-20261102-03/admin-stdout.txt": "513B91FE512C1B6F86785DE7AD81B3DF202D0552C583EDB1CB7685DF4245BA5B",
+    "output/database/local-rename-20261102-03/Invoke-LocalRename.ps1": "EDB88D0D859FBBE6F72D96182E1F5CB1C27753A7BA948E357C4193FD9EA54570",
+    "output/database/local-rename-20261102-03/rename.review.sql": "59449D6273403EC380FB7B77AC7067334E26F9F95925B095E4C1F038D37A2F7D",
+    "output/database/local-rename-20261102-03/restricted.verify.readonly.sql": "2218BED8C13A4763A582D3F00D764C7D7EB8D59F465FDEE21C56B244F42B60FE",
+    "output/database/local-rename-20261102-03/pins.json": "909357427E7F14D689EBEB101EB14864D90FD95D282DA30801BAC76755378E9F"
+  },
+  "pinsVerified": 48,
+  "sourcePatchApplied": false,
+  "renameFullyVerified": false,
+  "followupScope": "Only existing restricted.verify.readonly.sql in one separately named readonly follow-up;no rename/admin connection/mutation",
+  "phase2": "ACCEPTED_14_OF_14",
+  "phase3": "PENDING_RESTRICTED_ACCESS_AND_LOCAL_REFERENCE_ACCEPTANCE",
+  "databaseExecutedByReview": false
+}

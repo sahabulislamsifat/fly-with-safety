@@ -1,0 +1,11 @@
+{"kind":"stage","stage":"client-import","elapsedMs":0}
+{"kind":"stage","stage":"identity-query","elapsedMs":595}
+{"kind":"stage","stage":"identity-assertion","elapsedMs":725}
+{"kind":"identity-comparison","singleRow":true,"databaseMatches":true,"roleMatches":true,"hostMatches":true,"portMatches":true,"elapsedMs":726}
+{"kind":"stage","stage":"actor-query","elapsedMs":726}
+{"kind":"stage","stage":"actor-assertion","elapsedMs":779}
+{"kind":"actor-comparison","expectedCount":4,"observedCount":4,"matches":true,"elapsedMs":780}
+{"kind":"stage","stage":"auth-readiness-query","elapsedMs":780}
+{"kind":"stage","stage":"auth-readiness-assertion","elapsedMs":783}
+{"kind":"stage","stage":"app-import","elapsedMs":783}
+{"kind":"stage","stage":"loopback-listen","elapsedMs":4981}

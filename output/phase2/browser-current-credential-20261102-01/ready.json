@@ -1,0 +1,28 @@
+{
+  "state": "HOST_READY_NOT_BUSINESS_ACCEPTANCE",
+  "api": "http://phase2.localhost:5002/api/v1",
+  "frontend": "http://phase2.localhost:3002",
+  "actors": [
+    {
+      "id": "7a504831-759c-4c1c-8325-4a187f711d91",
+      "email": "7a504831-759c-4c1c-8325-4a187f711d91@example.invalid",
+      "role": "CUSTOMER"
+    },
+    {
+      "id": "e3061e7a-ac46-4ed5-b3f3-fbc8b52feac6",
+      "email": "e3061e7a-ac46-4ed5-b3f3-fbc8b52feac6@example.invalid",
+      "role": "CUSTOMER"
+    },
+    {
+      "id": "698a9431-d269-4c63-ae57-23e14503d477",
+      "email": "698a9431-d269-4c63-ae57-23e14503d477@example.invalid",
+      "role": "STAFF"
+    },
+    {
+      "id": "76374639-4185-4f99-a451-155c2250503d",
+      "email": "76374639-4185-4f99-a451-155c2250503d@example.invalid",
+      "role": "ADMIN"
+    }
+  ],
+  "readyUTC": "2026-11-01T19:25:31.259Z"
+}

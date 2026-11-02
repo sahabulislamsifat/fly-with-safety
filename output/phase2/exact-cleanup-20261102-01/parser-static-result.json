@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "statements": 15,
+  "plpgsqlBlocks": 7,
+  "deleteStatements": 7,
+  "exactOwnedIdsMatched": 33,
+  "unexpectedMutationStatements": 0,
+  "databaseExecuted": false,
+  "parser": "PostgreSQL18 WASM",
+  "liveCleanup": "NOT_EXECUTED"
+}

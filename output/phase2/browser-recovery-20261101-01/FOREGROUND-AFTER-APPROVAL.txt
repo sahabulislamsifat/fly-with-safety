@@ -1,0 +1,10 @@
+# PREPARED ONLY: requires separate owner approval for ONE new browser-host recovery.
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p=Join-Path -Path 'E:\Programming\Project\fly-with-safety' -ChildPath 'output\phase2\browser-recovery-20261101-01\Invoke-BrowserHost.ps1'
+ if(-not (Test-Path -LiteralPath $p -PathType Leaf)){throw 'STOP: reviewed recovery caller missing'}
+ if((Get-Item -LiteralPath $p -Stream *|Where-Object Stream -eq 'Zone.Identifier')){throw 'STOP: unexpected script zone marking'}
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne '98959C549CF7F08B5E89E8E23D00E356D7BCF225938D91342C0860293A4F7CDD'){throw 'STOP: caller integrity mismatch'}
+ & $p -RunAuthorizedBrowserJourney
+}

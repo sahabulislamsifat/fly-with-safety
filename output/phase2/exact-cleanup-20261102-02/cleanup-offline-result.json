@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "checks": 276,
+  "sqlStatements": 19,
+  "plpgsqlBlocks": 9,
+  "unchangedExactDeletes": 7,
+  "ownedRowCount": 33,
+  "pins": 26,
+  "sourcePins": 225,
+  "case": "A",
+  "reconciliationFinishedUTC": "2026-11-02T13:37:54.0352930Z",
+  "newDestructiveExecution": false,
+  "databaseExecutedByVerifier": false
+}

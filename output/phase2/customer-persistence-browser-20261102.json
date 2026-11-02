@@ -1,0 +1,1 @@
+{"passed":5,"failed":0,"checks":[{"id":"reload-persisted-detail","passed":true},{"id":"session-after-reload","passed":true},{"id":"navigation-list-detail-persistence","passed":true},{"id":"mobile-no-horizontal-overflow","passed":true},{"id":"mobile-passenger-payment-visible","passed":true}],"mobile":{"width":585,"scrollWidth":562},"fixtureWrites":false}

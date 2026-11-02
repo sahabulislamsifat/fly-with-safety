@@ -1,0 +1,141 @@
+{
+  "readOnly": true,
+  "rolledBack": true,
+  "enums": [
+    {
+      "name": "BookingModel",
+      "value": "AGENCY_INQUIRY"
+    },
+    {
+      "name": "BookingModel",
+      "value": "PROVIDER_REDIRECT"
+    },
+    {
+      "name": "BookingModel",
+      "value": "DIRECT_API"
+    },
+    {
+      "name": "BookingStatus",
+      "value": "PENDING"
+    },
+    {
+      "name": "BookingStatus",
+      "value": "CONFIRMED"
+    },
+    {
+      "name": "BookingStatus",
+      "value": "CANCELLED"
+    },
+    {
+      "name": "BookingStatus",
+      "value": "COMPLETED"
+    },
+    {
+      "name": "BookingType",
+      "value": "FLIGHT"
+    },
+    {
+      "name": "BookingType",
+      "value": "HOTEL"
+    },
+    {
+      "name": "BookingType",
+      "value": "PACKAGE"
+    },
+    {
+      "name": "ContactStatus",
+      "value": "OPEN"
+    },
+    {
+      "name": "ContactStatus",
+      "value": "IN_PROGRESS"
+    },
+    {
+      "name": "ContactStatus",
+      "value": "RESOLVED"
+    },
+    {
+      "name": "ContactStatus",
+      "value": "CLOSED"
+    },
+    {
+      "name": "ContactStatus",
+      "value": "NEW"
+    },
+    {
+      "name": "ContentStatus",
+      "value": "DRAFT"
+    },
+    {
+      "name": "ContentStatus",
+      "value": "PUBLISHED"
+    },
+    {
+      "name": "ContentStatus",
+      "value": "ARCHIVED"
+    },
+    {
+      "name": "InquiryStatus",
+      "value": "PENDING"
+    },
+    {
+      "name": "InquiryStatus",
+      "value": "CONFIRMED"
+    },
+    {
+      "name": "InquiryStatus",
+      "value": "CANCELLED"
+    },
+    {
+      "name": "InquiryStatus",
+      "value": "COMPLETED"
+    },
+    {
+      "name": "NotificationStatus",
+      "value": "PENDING"
+    },
+    {
+      "name": "NotificationStatus",
+      "value": "PROCESSING"
+    },
+    {
+      "name": "NotificationStatus",
+      "value": "DELIVERED"
+    },
+    {
+      "name": "NotificationStatus",
+      "value": "FAILED"
+    },
+    {
+      "name": "TestimonialStatus",
+      "value": "PENDING"
+    },
+    {
+      "name": "TestimonialStatus",
+      "value": "APPROVED"
+    },
+    {
+      "name": "TestimonialStatus",
+      "value": "REJECTED"
+    },
+    {
+      "name": "UserRole",
+      "value": "CUSTOMER"
+    },
+    {
+      "name": "UserRole",
+      "value": "STAFF"
+    },
+    {
+      "name": "UserRole",
+      "value": "ADMIN"
+    }
+  ],
+  "defaults": [
+    {
+      "table_name": "ContactMessage",
+      "column_name": "status",
+      "column_default": "'NEW'::\"ContactStatus\""
+    }
+  ]
+}

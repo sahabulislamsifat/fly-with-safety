@@ -1,0 +1,14 @@
+{
+  "hostClosedNormally": false,
+  "stage": "identity-query",
+  "failure": {
+    "classification": "DATABASE_AUTHENTICATION",
+    "prismaCode": "P2010",
+    "sqlState": "28P01",
+    "networkCode": null
+  },
+  "identityVerified": false,
+  "elapsedMs": 621,
+  "businessAcceptance": false,
+  "finishedUTC": "2026-11-01T17:10:50.259Z"
+}
