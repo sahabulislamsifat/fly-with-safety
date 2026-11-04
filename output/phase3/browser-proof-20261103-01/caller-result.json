@@ -1,0 +1,9 @@
+{
+    "passed":  true,
+    "cleanup":  false,
+    "readOnlyExit":  0,
+    "stage":  "browser-host",
+    "provider":  "MOCK_ONLY",
+    "finishedUTC":  "2026-11-03T08:24:02.8488783Z",
+    "hostExit":  0
+}

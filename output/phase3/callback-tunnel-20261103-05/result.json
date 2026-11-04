@@ -1,0 +1,50 @@
+{
+  "passed": false,
+  "stage": "remaining-public-path-checks",
+  "failure": "PROBE_CONNECTION_FAILED",
+  "failureDetail": {
+    "classification": "TLS",
+    "codes": [
+      "ERR_TLS_CERT_ALTNAME_INVALID"
+    ]
+  },
+  "shutdownFailure": null,
+  "dnsReady": true,
+  "callbackReady": true,
+  "attempted": 31,
+  "completedHttp": 30,
+  "pass": 30,
+  "fail": 1,
+  "unexecuted": 0,
+  "firstFailedCheck": {
+    "index": 31,
+    "method": "GET",
+    "path": "/api/v1/bookings",
+    "expected": "DENIED",
+    "observed": null,
+    "passed": false,
+    "failure": {
+      "classification": "TLS",
+      "codes": [
+        "ERR_TLS_CERT_ALTNAME_INVALID"
+      ]
+    },
+    "origin": {
+      "reached": false,
+      "hostClass": null,
+      "methodMatched": null,
+      "pathMatched": null,
+      "guard": null,
+      "media": null,
+      "transferEncodingPresent": null,
+      "status": null
+    }
+  },
+  "connectorPID": 13096,
+  "tunnelStopped": true,
+  "listenerStopped": true,
+  "databaseAccess": false,
+  "merchantCalls": 0,
+  "credentialsRead": false,
+  "finishedUTC": "2026-11-03T14:16:49.573Z"
+}

@@ -1,0 +1,10 @@
+{
+  "closeFailure": null,
+  "snapshotFailure": null,
+  "disconnectFailure": null,
+  "disconnected": true,
+  "noCleanup": true,
+  "supplierCalled": false,
+  "genuineProviderCalled": false,
+  "fixtureCommitted": true
+}

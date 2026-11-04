@@ -1,0 +1,15 @@
+PENDING EXPLICIT OWNER APPROVAL. Do not run under either consumed v01/v02 authorization.
+ONE bounded public boundary-response evidence proof; no password required.
+
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p='E:\Programming\Project\fly-with-safety\output\phase3\callback-tunnel-20261103-03\Invoke-CallbackProbe.ps1'
+ if(-not (Test-Path -LiteralPath $p -PathType Leaf)){throw 'STOP: reviewed boundary-evidence caller missing'}
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne '30148E590751FA34596811725DA0C5938DDE25D433DAEF847F1CD1DBA2BD8CE0'){throw 'STOP: reviewed boundary-evidence caller mismatch'}
+ & $p -OwnerApprovedOnePublicBoundaryEvidence
+}
+
+Return actual counters and first-probe HTTP/media/CF type/body-code/origin-reached/Host-class/status line.
+If failure, no retry or consumed-package rerun. Preserve all results.
+No application,DB,credential,SSLCommerz or payment transaction in this scope.

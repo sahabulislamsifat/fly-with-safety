@@ -1,0 +1,134 @@
+### Page
+- Page URL: http://localhost:3000/admin
+- Page Title: Staff & Admin Operations Portal | FlyWithSafety
+### Snapshot
+```yaml
+- generic [active] [ref=f1e1]:
+  - banner [ref=f1e2]:
+    - navigation "Main navigation" [ref=f1e3]:
+      - generic [ref=f1e4]:
+        - link "FlyWithSafety Home" [ref=f1e6] [cursor=pointer]:
+          - /url: /
+          - generic [ref=f1e10]: FlyWithSafety
+        - generic [ref=f1e11]:
+          - link "Flight" [ref=f1e12] [cursor=pointer]:
+            - /url: /
+          - link "Visa" [ref=f1e16] [cursor=pointer]:
+            - /url: /visa-info
+          - link "Hotel" [ref=f1e21] [cursor=pointer]:
+            - /url: /hotels
+          - link "Holiday" [ref=f1e26] [cursor=pointer]:
+            - /url: /packages
+          - button "More navigation options" [ref=f1e34] [cursor=pointer]:
+            - generic [ref=f1e40]: More
+        - generic [ref=f1e43]:
+          - link "24/7 Support Desk" [ref=f1e44] [cursor=pointer]:
+            - /url: /contact
+          - generic [ref=f1e130]:
+            - link "Staff Portal" [ref=f1e131] [cursor=pointer]:
+              - /url: /admin
+            - link "Synthetic Phase3 STAFF" [ref=f1e132] [cursor=pointer]:
+              - /url: /account
+            - button "Sign out" [ref=f1e133]
+  - main [ref=f1e47]:
+    - generic [ref=f1e49]:
+      - generic [ref=f1e50]:
+        - generic [ref=f1e51]:
+          - generic [ref=f1e134]:
+            - generic [ref=f1e135]:
+              - generic [ref=f1e136]: FlyWithSafety Operations
+              - generic [ref=f1e137]: STAFF Portal
+            - heading "Staff & Admin Operations" [level=1] [ref=f1e138]
+            - paragraph [ref=f1e139]:
+              - text: "Authorized session:"
+              - strong [ref=f1e140]: Synthetic Phase3 STAFF
+              - text: (7ca1205c-0844-40d7-abff-74da4974a8de@example.invalid)
+          - generic [ref=f1e141]:
+            - link [ref=f1e142] [cursor=pointer]:
+              - /url: /account
+              - button "My Profile" [ref=f1e143]
+            - button "Sign Out" [ref=f1e144]
+        - navigation "Operations sections" [ref=f1e145]:
+          - button "Inquiries Management" [ref=f1e146] [cursor=pointer]
+          - button "Bookings Processing" [ref=f1e150] [cursor=pointer]
+          - button "Support Messages" [ref=f1e154] [cursor=pointer]
+          - button "Testimonial Moderation" [ref=f1e159] [cursor=pointer]
+      - main [ref=f1e163]:
+        - generic [ref=f1e164]:
+          - generic [ref=f1e166]:
+            - tablist "Inquiry service type" [ref=f1e167]:
+              - tab "flights" [selected] [ref=f1e168] [cursor=pointer]
+              - tab "hotels" [ref=f1e169] [cursor=pointer]
+              - tab "packages" [ref=f1e170] [cursor=pointer]
+              - tab "visa" [ref=f1e171] [cursor=pointer]
+            - generic [ref=f1e172]:
+              - generic [ref=f1e173]: "Status:"
+              - combobox "Status:" [ref=f1e174]:
+                - option "All Statuses" [selected]
+                - option "Pending"
+                - option "Confirmed"
+                - option "Cancelled"
+                - option "Completed"
+              - button "Refresh" [ref=f1e175]
+          - generic [ref=f1e182]:
+            - generic [ref=f1e183]: flights Inquiries (0)
+            - generic [ref=f1e185]: No flights inquiries found.
+  - contentinfo [ref=f1e55]:
+    - generic [ref=f1e56]:
+      - generic [ref=f1e57]:
+        - generic [ref=f1e58]:
+          - link "FlyWithSafety Home" [ref=f1e59] [cursor=pointer]:
+            - /url: /
+            - generic [ref=f1e62]: FlyWithSafety
+          - paragraph [ref=f1e63]: Thoughtful travel planning, easier bookings, and support that stays with you.
+        - navigation "Explore" [ref=f1e64]:
+          - heading "Explore" [level=3] [ref=f1e65]
+          - list [ref=f1e66]:
+            - listitem [ref=f1e67]:
+              - link "Home" [ref=f1e68] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=f1e69]:
+              - link "Flights" [ref=f1e70] [cursor=pointer]:
+                - /url: /flights
+            - listitem [ref=f1e71]:
+              - link "Hotels" [ref=f1e72] [cursor=pointer]:
+                - /url: /hotels
+            - listitem [ref=f1e73]:
+              - link "Packages" [ref=f1e74] [cursor=pointer]:
+                - /url: /packages
+            - listitem [ref=f1e75]:
+              - link "Visa Info" [ref=f1e76] [cursor=pointer]:
+                - /url: /visa-info
+            - listitem [ref=f1e77]:
+              - link "Track Booking" [ref=f1e78] [cursor=pointer]:
+                - /url: /track-booking
+        - navigation "Legal" [ref=f1e79]:
+          - heading "Legal" [level=3] [ref=f1e80]
+          - list [ref=f1e81]:
+            - listitem [ref=f1e82]:
+              - link "Contact Us" [ref=f1e83] [cursor=pointer]:
+                - /url: /contact
+            - listitem [ref=f1e84]:
+              - link "Privacy Policy" [ref=f1e85] [cursor=pointer]:
+                - /url: /privacy
+            - listitem [ref=f1e86]:
+              - link "Terms of Use" [ref=f1e87] [cursor=pointer]:
+                - /url: /terms
+        - generic [ref=f1e88]:
+          - heading "Payment Options" [level=3] [ref=f1e89]
+          - generic [ref=f1e90]:
+            - img "VISA" [ref=f1e91]
+            - img "Mastercard" [ref=f1e95]
+            - img "bKash" [ref=f1e99]
+      - generic [ref=f1e104]:
+        - paragraph [ref=f1e105]: © 2026 FlyWithSafety. All rights reserved.
+        - navigation "Social media" [ref=f1e106]:
+          - link "Facebook" [ref=f1e107] [cursor=pointer]:
+            - /url: https://facebook.com
+          - link "Instagram" [ref=f1e114] [cursor=pointer]:
+            - /url: https://instagram.com
+          - link "WhatsApp" [ref=f1e118] [cursor=pointer]:
+            - /url: https://wa.me
+  - button "Open Next.js Dev Tools" [ref=f1e126] [cursor=pointer]
+  - alert [ref=f1e186]
+```

@@ -1,0 +1,19 @@
+{
+  "historicalPackagesPreserved": ["callback-tunnel-20261103-01", "callback-tunnel-20261103-02"],
+  "v02": {
+    "failedStage": "public-path-checks", "failure": "PUBLIC_BOUNDARY_MISMATCH", "callerExit": 1,
+    "firstRequest": { "method": "POST", "path": "/api/v1/payments/sslcommerz/success", "expectedStatus": 204, "expectedMarker": true, "observedStatus": 530, "observedMarker": null },
+    "attempted": 1, "completedHttp": 1, "pass": 0, "fail": 1, "untouched": 30,
+    "responseMedia": null, "responseBody": "NOT_RETAINED", "cloudflare1xxxCode": null,
+    "localOriginReached": null, "hostRewritten": null,
+    "sourceConclusion": "NOT a status emitted by local handler; consistent with documented upstream Cloudflare530; precise layer/subcode not preserved",
+    "assertionCorrect": true, "protectedRouteExposureObserved": false, "publicIsolationAccepted": false,
+    "connectorPID": 9808, "savedTunnelStopped": true, "savedListenerStopped": true,
+    "currentMatchingProcesses": 0, "currentPort5000ListenersAtInspection": 0
+  },
+  "verifiedIngressBug": false, "verifiedCloudflareConfigurationBug": false,
+  "verifiedEvidenceGap": "response headers/body classification and correlated origin receipt were not persisted",
+  "localHttpVerification": { "port": 5000, "interface": "127.0.0.1", "pass": 31, "fail": 0, "unexecuted": 0, "exit": 0, "listenerStopped": true, "publicRequests": 0 },
+  "credentialReads": 0, "databaseAccess": false, "providerCalls": 0, "newTunnelStarted": false,
+  "noUnprovenCloudflareEnvironmentFixApplied": true
+}

@@ -1,0 +1,12 @@
+{
+  "problem": "Captured payment still displayed Pay now/resume form",
+  "beforeObservation": "captured-ui-observation-before.json",
+  "beforeSha256": "CEA690A667EBA8D934E563A524AC7134E16897E4418AB9B7C58A18B14A650C60",
+  "afterSha256": "A99C39B6DB42A9140AA8A6FAA51AC1E8BBD3901CE57340215097F79A24DD9150",
+  "exactOneGuardDeltaVerified": true,
+  "clientTypeScriptExit": 0,
+  "scopedEslintExit": 0,
+  "actualPostFixBrowserChecks": true,
+  "financialCodeChanged": false,
+  "old203PgPinsUnchanged": true
+}

@@ -1,0 +1,26 @@
+{
+  "ownerReportedRotationCompleted": true,
+  "realRotatedTokenReadByAgent": false,
+  "privateConfigurationUpdatedByAgent": false,
+  "syntheticInputAndSerializationCases": {
+    "pass": 16,
+    "fail": 0
+  },
+  "nativePS51ParserExit": 0,
+  "agentPackageAndBinaryPinPass": true,
+  "sourcePinsMatched": 6,
+  "freshPrivateTargetAbsent": true,
+  "newAttemptExists": false,
+  "nativeTokenArguments": false,
+  "tokenEnvironmentVariable": false,
+  "oldConfigAndAuthPassEvidencePreserved": true,
+  "networkSessionStarted": false,
+  "publicEndpointStarted": false,
+  "servicesStopped": false,
+  "databaseOperations": 0,
+  "sslcommerzCalls": 0,
+  "callerSHA256": "7C042CB8CA7C7A8C04352AECD0FA6FBE125EB70F760F94EBFD411E9323ED2C72",
+  "phase3Accepted": false,
+  "syntheticDirectInvalidConfigExit": 1,
+  "syntheticDirectValidConfigExit": 0
+}

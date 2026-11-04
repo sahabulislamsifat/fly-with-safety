@@ -1,0 +1,8 @@
+{"atUTC":"2026-11-03T10:49:46.650Z","event":"listener-bound","address":"127.0.0.1","port":5000}
+{"atUTC":"2026-11-03T10:49:46.660Z","event":"connector-started","pid":9808}
+{"atUTC":"2026-11-03T10:49:53.031Z","event":"origin-discovered","origin":"https://differently-enters-simpsons-important.trycloudflare.com"}
+{"atUTC":"2026-11-03T10:49:53.547Z","event":"connector-registered"}
+{"atUTC":"2026-11-03T10:49:53.548Z","event":"probe-started","index":1,"method":"POST","path":"/api/v1/payments/sslcommerz/success","expected":204,"observed":null,"passed":false}
+{"atUTC":"2026-11-03T10:49:54.071Z","event":"probe-response","index":1,"method":"POST","path":"/api/v1/payments/sslcommerz/success","expected":204,"observed":530,"passed":false}
+{"atUTC":"2026-11-03T10:49:54.081Z","event":"connector-exit","code":null,"signal":"SIGTERM"}
+{"atUTC":"2026-11-03T10:49:54.082Z","event":"listener-closed","tunnelStopped":true}

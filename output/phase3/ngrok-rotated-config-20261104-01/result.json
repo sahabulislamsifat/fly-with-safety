@@ -1,0 +1,9 @@
+﻿{
+    "passed":  true,
+    "networkSessionStarted":  false,
+    "nativeTokenArgument":  false,
+    "configCheckExit":  0,
+    "publicEndpointStarted":  false,
+    "historicalConfigChanged":  false,
+    "privateConfigSaved":  true
+}

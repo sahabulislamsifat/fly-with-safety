@@ -1,0 +1,15 @@
+{
+  "hostClosedNormally": true,
+  "browserAcceptance": false,
+  "provider": "MOCK_ONLY",
+  "originalPreservation": true,
+  "providerCalls": {
+    "initiate": 1,
+    "query": 2,
+    "validate": 1,
+    "refund": 0
+  },
+  "sessionRequests": 13,
+  "paymentPosts": 10,
+  "reconcileRequests": 6
+}

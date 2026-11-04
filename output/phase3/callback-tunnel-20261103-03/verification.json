@@ -1,0 +1,22 @@
+{
+  "scope": "response/origin evidence correction, no Cloudflare root-cause fix claimed",
+  "unitTests": { "pass": 37, "fail": 0, "skip": 0, "exit": 0 },
+  "actualLoopbackHTTP": { "pass": 31, "fail": 0, "unexecuted": 0, "exit": 0, "port": 5000, "listenerStopped": true, "publicRequests": 0 },
+  "saved530AssertionReproducedAsFailure": true,
+  "historicalResponseFormatOrSpecific1xxxRecovered": false,
+  "nodeSyntaxExit": 0,
+  "nativePowerShellVersion": "5.1.26100.9818",
+  "nativePowerShellParsingExit": 0,
+  "pinsMatched": 26,
+  "v02OriginalPinsMatched": 16,
+  "guardHandlerConfigNetworkClassifierUnchanged": true,
+  "diffCheckExit": 0,
+  "manifestSHA256": "3811CD59C3CC5AE9B74A7769D6F5FA04F1C022999B4210234748103B3409AE68",
+  "callerSHA256": "30148E590751FA34596811725DA0C5938DDE25D433DAEF847F1CD1DBA2BD8CE0",
+  "publicAttemptExists": false,
+  "newTunnelStarted": false,
+  "databaseAccess": false,
+  "providerCalls": 0,
+  "credentialsRead": false,
+  "phase3Accepted": false
+}

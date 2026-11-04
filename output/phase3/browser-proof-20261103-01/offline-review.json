@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "pins": 248,
+  "newOfflineTestsPerLoader": 14,
+  "failures": 0,
+  "skips": 0,
+  "sqlStatements": 9,
+  "plpgsqlBlocks": 2,
+  "hostQueriesParsed": 11,
+  "eslintErrors": 0,
+  "eslintWarnings": 0,
+  "old64ProofRerun": false,
+  "browserAuthenticatedTestsExecuted": 0,
+  "databaseExecuted": false,
+  "providerCalled": false,
+  "attemptExists": false,
+  "callerSha256": "2E153EC2B58EA8C26B6AACCFCE205C21F83E668A35C668609F8E5F583DBE3CFE"
+}

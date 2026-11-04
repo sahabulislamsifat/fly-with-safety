@@ -1,0 +1,8 @@
+version: 3
+agent:
+  web_addr: false
+  update_check: false
+  remote_management: false
+  console_ui: false
+  log: false
+# No token, upstream, endpoint or session definition.

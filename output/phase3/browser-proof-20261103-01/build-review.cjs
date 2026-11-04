@@ -1,0 +1,38 @@
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
+const root=path.resolve(__dirname,'../../..'),prior=path.join(root,'output/phase3/retained-proof-20261103-01');
+const read=p=>fs.readFileSync(p,'utf8').replace(/^\uFEFF/,'');
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex').toUpperCase();
+const write=(n,v)=>fs.writeFileSync(path.join(__dirname,n),JSON.stringify(v,null,2));
+if(['attempt-started.json','ready.json','host-result.json','caller-result.json'].some(n=>fs.existsSync(path.join(__dirname,n))))throw Error('EXISTING_HOST_ATTEMPT_NO_REBUILD');
+const accepted=JSON.parse(read(path.join(__dirname,'accepted-postgres.json')));
+if(!accepted.accepted||accepted.artifacts.some(p=>sha(p.path)!==p.sha256))throw Error('ACCEPTED_PROOF_ARTIFACT_MISMATCH');
+const planFile=path.join(__dirname,'fixture-plan.json');
+if(!fs.existsSync(planFile)){const id=crypto.randomUUID();write('fixture-plan.json',{bookingId:id,passengerId:crypto.randomUUID(),historyId:crypto.randomUUID(),quoteId:crypto.randomUUID(),reference:'FWS-P3-BROWSER-'+id.slice(0,8).toUpperCase()});}
+const plan=JSON.parse(read(planFile));
+const ledger=read(path.join(prior,'ledger.jsonl')).trim().split(/\r?\n/).map(JSON.parse).find(r=>r.kind==='final-owned-row-ids').rows;
+const kinds=[...new Set(ledger.map(r=>r.kind))];
+let preflight=read(path.join(prior,'preflight.readonly.sql'));
+const start=preflight.indexOf('DO $retained$');if(start<0)throw Error('PREVIOUS_RETAINED_GUARD_MISSING');
+preflight=preflight.slice(0,start);
+const fresh=" IF EXISTS(SELECT FROM public.\"GatewayPayment\") OR EXISTS(SELECT FROM public.\"GatewayPaymentEvent\") OR EXISTS(SELECT FROM public.\"GatewayRefund\") THEN RAISE EXCEPTION 'PHASE3_PAYMENT_LEDGER_NOT_FRESH_STOP'; END IF;";
+if(!preflight.includes(fresh))throw Error('EXACT_FRESH_GUARD_ANCHOR_MISSING');
+preflight=preflight.replace(fresh," IF (SELECT count(*) FROM public.\"GatewayPayment\")<>2 OR (SELECT count(*) FROM public.\"GatewayPaymentEvent\")<>16 OR (SELECT count(*) FROM public.\"GatewayRefund\")<>1 THEN RAISE EXCEPTION 'PHASE3_ACCEPTED_LEDGER_COUNTS_MISMATCH'; END IF;");
+preflight+='DO $browser$\nBEGIN\n';
+for(const kind of kinds){const ids=ledger.filter(r=>r.kind===kind).map(r=>r.id);if(ids.some(id=>!/^[A-Za-z0-9:_-]{1,255}$/.test(id)))throw Error('UNSAFE_LEDGER_ID');preflight+=` IF (SELECT count(*) FROM public."${kind}" WHERE id IN (${ids.map(id=>"'"+id+"'").join(',')}))<>${ids.length} THEN RAISE EXCEPTION 'PHASE3_ACCEPTED_${kind}_IDS_MISMATCH'; END IF;\n`;}
+preflight+=` IF (SELECT count(*) FROM public."User")<>10 OR (SELECT count(*) FROM public."Session")<>1 OR (SELECT count(*) FROM public."Booking")<>2 OR EXISTS(SELECT FROM public."Booking" WHERE id='${plan.bookingId}' OR "referenceNumber"='${plan.reference}') THEN RAISE EXCEPTION 'PHASE3_BROWSER_GLOBAL_OR_DESTINATION_PRESTATE_MISMATCH'; END IF;
+ IF NOT EXISTS(SELECT FROM public."GatewayPayment" WHERE "bookingId"='df9912fd-492c-4d38-a5a8-fa26e6d947ac' AND status='VERIFIED' AND state->>'captured'='true') OR NOT EXISTS(SELECT FROM public."GatewayPayment" WHERE "bookingId"='b79d19e7-8539-4037-9892-47ebed0f1f5e' AND status='RISK_REVIEW' AND state->>'captured'='true') OR NOT EXISTS(SELECT FROM public."GatewayRefund" WHERE state->>'status'='REFUNDED' AND state->>'amountMinor'='700000') THEN RAISE EXCEPTION 'PHASE3_ACCEPTED_FINANCIAL_STATES_MISMATCH'; END IF;
+END $browser$;
+SELECT 'PHASE3_BROWSER_READONLY_PRESTATE_PASS';
+ROLLBACK;
+`;
+fs.writeFileSync(path.join(__dirname,'preflight.readonly.sql'),preflight);
+for(const n of ['Set-PrivateConnection.ps1','verify-private-url.cjs'])fs.copyFileSync(path.join(prior,n),path.join(__dirname,n));
+fs.copyFileSync(path.join(root,'output/phase2/sameports-browser-20261102-02/Assert-Phase2BackendPortFree.ps1'),path.join(__dirname,'Assert-BackendPortFree.ps1'));
+const modeFile=path.join(__dirname,'provider-mode.json');if(!fs.existsSync(modeFile))write('provider-mode.json',{mode:'pending',provider:'MOCK_ONLY'});
+const sourceFiles=['server/test/phase3-browser-host.pg.integration.ts','server/test/phase3-browser-host.pg.vitest.config.ts','server/test/phase3-browser-double.ts','server/test/phase3-browser-double.test.ts','server/test/phase2-browser-preflight.ts','server/test/phase2-identity-diagnostic.ts','client/src/lib/api/client.ts','client/src/components/booking/GatewayPaymentPanel.tsx','client/src/components/booking/GatewayReturn.tsx','client/src/components/booking/BookingCommercialPanel.tsx','client/src/components/admin/AdminBookingsTab.tsx','client/package.json','client/pnpm-lock.yaml','client/next.config.ts','server/node_modules/@prisma/adapter-pg/dist/index.js'].filter(n=>fs.existsSync(path.join(root,n))).map(n=>path.join(root,n));
+const files=[...JSON.parse(read(path.join(prior,'pins.json'))).map(p=>p.path),...accepted.artifacts.map(p=>p.path),...sourceFiles,...['accepted-postgres.json','fixture-plan.json','preflight.readonly.sql','provider-mode.json','Set-PrivateConnection.ps1','verify-private-url.cjs','Assert-BackendPortFree.ps1','frontend.cjs'].map(n=>path.join(__dirname,n))];
+const pins=[...new Set(files)].map(p=>({path:p,sha256:sha(p)}));write('pins.json',pins);
+const template=read(path.join(__dirname,'Invoke-BrowserHost.template.ps1'));
+fs.writeFileSync(path.join(__dirname,'Invoke-BrowserHost.ps1'),template.replace('__MANIFEST_SHA__',sha(path.join(__dirname,'pins.json'))));
+write('review-hashes.json',{pins:pins.length,callerSha256:sha(path.join(__dirname,'Invoke-BrowserHost.ps1')),manifestSha256:sha(path.join(__dirname,'pins.json')),fixturePlan:plan,newUsers:0,newBooking:1,maxSessions:16,maxNewPayment:1,maxNewEvents:32,maxNewHistory:2,maxNewOutbox:21,externalProviderCalls:0,approved:false,databaseExecuted:false});
+console.log(JSON.parse(read(path.join(__dirname,'review-hashes.json'))));

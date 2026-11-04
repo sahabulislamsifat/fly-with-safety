@@ -1,0 +1,51 @@
+{
+  "backendCwd": "server",
+  "backendExistingFiles": [
+    "server/.env"
+  ],
+  "backendPrecedence": "fresh child -> server/.env -> root/.env missing keys only",
+  "database": {
+    "present": true,
+    "valid": true,
+    "protocol": "postgres:",
+    "local": false,
+    "prismaHost": true,
+    "db": "postgres",
+    "roleMatchesPreviouslyObservedMain": false,
+    "localRole": false,
+    "hasPassword": true,
+    "hasQuery": true
+  },
+  "direct": {
+    "present": true,
+    "valid": true,
+    "protocol": "postgres:",
+    "local": false,
+    "prismaHost": true,
+    "db": "postgres",
+    "roleMatchesPreviouslyObservedMain": false,
+    "localRole": false,
+    "hasPassword": true,
+    "hasQuery": true
+  },
+  "runtimeAndDirectSameTarget": false,
+  "runtimeEqualsConfiguredStaging": false,
+  "storePasswordPresent": true,
+  "storeIdPresent": true,
+  "sandboxTrue": true,
+  "paymentEnabledInFile": false,
+  "callbackOriginConfigured": true,
+  "configuredFrontendLocal": true,
+  "configuredBackendLocal": true,
+  "configuredGoogleCallbackLocal": true,
+  "googleCredentialPairPresent": true,
+  "frontendLoadedFiles": [
+    "client/.env"
+  ],
+  "frontendAPIIsLocal": true,
+  "frontendExplicitLocalAPI": false,
+  "frontendPublicSecretKeyNames": [],
+  "callbackHostsLoadDotenv": false,
+  "callbackHostsHaveMerchantCredentials": false,
+  "noEnvFilesModified": true
+}

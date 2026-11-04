@@ -1,0 +1,10 @@
+'use strict';
+const {test}=require('node:test'),assert=require('node:assert/strict'),{canRestore,proofExitText,failureLabel}=require('./backend-policy.cjs');
+const safe=()=>({backendStopped:true,proofStarted:true,proofExited:true,state:{backendAbsent:true,connectorsAbsent:true,frontendPreserved:true},result:{tunnelStopped:true,listenerStopped:true}});
+test('safe backend restoration independent of frontend state',()=>{const c=safe();c.state.frontendPreserved=false;assert.equal(canRestore(c),true);});
+for(const key of ['backendAbsent','connectorsAbsent'])test('unsafe '+key+' blocks main restoration',()=>{const c=safe();c.state[key]=false;assert.equal(canRestore(c),false);});
+for(const key of ['tunnelStopped','listenerStopped'])test('unconfirmed '+key+' blocks main restoration',()=>{const c=safe();c.result[key]=false;assert.equal(canRestore(c),false);});
+test('live probe cannot be replaced by main',()=>{const c=safe();c.proofExited=false;assert.equal(canRestore(c),false);});
+test('no blank or fabricated proof exit',()=>{assert.equal(proofExitText(false,null),'NOT_STARTED');assert.equal(proofExitText(true,null),'UNCONFIRMED');assert.equal(proofExitText(true,0),'0');assert.equal(proofExitText(true,1),'1');});
+test('known preflight rejection retains the actual safe reason',()=>assert.equal(failureLabel(Error('NORMAL_SERVICES_NOT_HEALTHY')),'NORMAL_SERVICES_NOT_HEALTHY'));
+test('unknown error message cannot leak a private value',()=>assert.equal(failureLabel(Error('synthetic-private-value')),'WORKFLOW_METADATA_OR_OWNERSHIP_ERROR'));

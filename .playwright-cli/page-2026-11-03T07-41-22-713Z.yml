@@ -1,0 +1,906 @@
+- generic [ref=f1e1]:
+  - banner [ref=f1e2]:
+    - navigation "Main navigation" [ref=f1e3]:
+      - generic [ref=f1e4]:
+        - link "FlyWithSafety Home" [ref=f1e6] [cursor=pointer]:
+          - /url: /
+          - generic [ref=f1e10]: FlyWithSafety
+        - generic [ref=f1e11]:
+          - link "Flight" [ref=f1e12] [cursor=pointer]:
+            - /url: /
+          - link "Visa" [ref=f1e17] [cursor=pointer]:
+            - /url: /visa-info
+          - link "Hotel" [ref=f1e22] [cursor=pointer]:
+            - /url: /hotels
+          - link "Holiday" [ref=f1e27] [cursor=pointer]:
+            - /url: /packages
+          - button "More navigation options" [ref=f1e35] [cursor=pointer]:
+            - generic [ref=f1e41]: More
+        - generic [ref=f1e44]:
+          - link "24/7 Support Desk" [ref=f1e45] [cursor=pointer]:
+            - /url: /contact
+          - button "Sign in to your FlyWithSafety account" [ref=f1e48] [cursor=pointer]:
+            - generic [ref=f1e52]: Sign In
+  - main [ref=f1e53]:
+    - generic [ref=f1e54]:
+      - heading "FlyWithSafe — Travel Made Reassuring" [level=1] [ref=f1e55]
+      - region "Homepage hero banner and booking search" [ref=f1e56]:
+        - generic [ref=f1e58]:
+          - tablist "Carousel slide selectors" [ref=f1e64]:
+            - 'tab "Show slide 1: Dubai, UAE" [ref=f1e65] [cursor=pointer]'
+            - 'tab "Show slide 2: Bangkok, Thailand" [ref=f1e67] [cursor=pointer]'
+            - 'tab "Show slide 3: Kuala Lumpur, Malaysia" [ref=f1e69] [cursor=pointer]'
+            - 'tab "Show slide 4: Dubai Marina, UAE" [selected] [ref=f1e71] [cursor=pointer]'
+          - button "Explore flight from DAC to Dubai" [ref=f1e74] [cursor=pointer]:
+            - generic [ref=f1e75]: BOOK FLIGHTS, VISAS, HOTELS & HOLIDAYS
+            - heading "Where to Next?" [level=2] [ref=f1e77]
+            - generic [ref=f1e78]:
+              - generic [ref=f1e79]:
+                - generic [ref=f1e80]:
+                  - generic [ref=f1e81]: D
+                  - generic [ref=f1e82]: A
+                  - generic [ref=f1e83]: C
+                - generic [ref=f1e87]:
+                  - generic [ref=f1e88]: D
+                  - generic [ref=f1e89]: X
+                  - generic [ref=f1e90]: B
+              - generic [ref=f1e91]:
+                - generic [ref=f1e92]:
+                  - generic [ref=f1e93]: FLY TO
+                  - generic [ref=f1e94]: Dubai
+                - button "Cycle to next destination from Dubai" [ref=f1e95]
+        - search "Travel booking search" [ref=f1e98]:
+          - tablist "Travel categories" [ref=f1e100]:
+            - tab "Flight" [selected] [ref=f1e101] [cursor=pointer]
+            - tab "Visa" [ref=f1e106] [cursor=pointer]
+            - tab "Hotel" [ref=f1e112] [cursor=pointer]
+            - tab "Holiday" [ref=f1e118] [cursor=pointer]
+          - generic [ref=f1e127]:
+            - tabpanel "Flight" [ref=f1e128]:
+              - generic [ref=f1e130]:
+                - button "One Way" [ref=f1e131] [cursor=pointer]
+                - button "Round Trip" [ref=f1e133] [cursor=pointer]
+                - button "Multi City" [ref=f1e136] [cursor=pointer]
+              - generic [ref=f1e138]:
+                - button "FROM Dhaka DAC DAC · Hazrat Shahjalal International Airport" [ref=f1e141] [cursor=pointer]:
+                  - generic [ref=f1e142]: FROM
+                  - generic [ref=f1e143]:
+                    - generic [ref=f1e144]: Dhaka
+                    - generic [ref=f1e145]: DAC
+                  - paragraph [ref=f1e146]: DAC · Hazrat Shahjalal International Airport
+                - button "Swap origin and destination" [ref=f1e148] [cursor=pointer]
+                - button "TO Cox's Bazar CXB CXB · Cox's Bazar Airport" [ref=f1e154] [cursor=pointer]:
+                  - generic [ref=f1e155]: TO
+                  - generic [ref=f1e156]:
+                    - generic [ref=f1e157]: Cox's Bazar
+                    - generic [ref=f1e158]: CXB
+                  - paragraph [ref=f1e159]: CXB · Cox's Bazar Airport
+                - generic [ref=f1e161]:
+                  - generic [ref=f1e162]:
+                    - generic [ref=f1e163] [cursor=pointer]: DEPARTURE
+                    - textbox "DEPARTURE" [ref=f1e164] [cursor=pointer]: 2026-11-03
+                    - generic:
+                      - paragraph: 3 Nov, 26
+                      - paragraph: Tuesday
+                  - generic [ref=f1e166]:
+                    - generic [ref=f1e167] [cursor=pointer]: RETURN
+                    - textbox "RETURN" [ref=f1e168] [cursor=pointer]: 2026-11-06
+                    - generic [ref=f1e169]:
+                      - generic:
+                        - paragraph: 6 Nov, 26
+                        - paragraph: Friday
+                      - button "Clear return date" [ref=f1e170]
+                - button "PASSENGER & CLASS 1 Passenger Economy" [ref=f1e176] [cursor=pointer]:
+                  - generic [ref=f1e177]: PASSENGER & CLASS
+                  - generic [ref=f1e178]: 1 Passenger
+                  - paragraph [ref=f1e180]: Economy
+              - generic [ref=f1e181]:
+                - generic [ref=f1e182]: Compare demo fares and request confirmed options from our travel desk.
+                - button "Add preferred airline" [ref=f1e185] [cursor=pointer]:
+                  - generic [ref=f1e189]: Add preferred Airline
+            - button "Request specialist help instead" [ref=f1e191]
+            - button "Search" [ref=f1e193] [cursor=pointer]
+        - generic [ref=f1e199]:
+          - generic [ref=f1e204]:
+            - heading "Trending Routes" [level=3] [ref=f1e205]
+            - paragraph [ref=f1e206]: Most searched · lowest fare
+          - generic [ref=f1e208]:
+            - button "Select route DAC to BKK from ৳28,946" [ref=f1e209] [cursor=pointer]:
+              - generic [ref=f1e210]: "1"
+              - generic [ref=f1e211]:
+                - generic [ref=f1e212]: DAC
+                - generic [ref=f1e213]: →
+                - generic [ref=f1e214]: BKK
+              - generic [ref=f1e215]: from ৳28,946
+            - button "Select route DAC to KUL from ৳32,924" [ref=f1e216] [cursor=pointer]:
+              - generic [ref=f1e217]: "2"
+              - generic [ref=f1e218]:
+                - generic [ref=f1e219]: DAC
+                - generic [ref=f1e220]: →
+                - generic [ref=f1e221]: KUL
+              - generic [ref=f1e222]: from ৳32,924
+            - button "Select route ZYL to JED from ৳56,146" [ref=f1e223] [cursor=pointer]:
+              - generic [ref=f1e224]: "3"
+              - generic [ref=f1e225]:
+                - generic [ref=f1e226]: ZYL
+                - generic [ref=f1e227]: →
+                - generic [ref=f1e228]: JED
+              - generic [ref=f1e229]: from ৳56,146
+            - button "Select route DAC to CXB from ৳4,315" [ref=f1e230] [cursor=pointer]:
+              - generic [ref=f1e231]: "4"
+              - generic [ref=f1e232]:
+                - generic [ref=f1e233]: DAC
+                - generic [ref=f1e234]: →
+                - generic [ref=f1e235]: CXB
+              - generic [ref=f1e236]: from ৳4,315
+            - button "Select route DAC to DXB from ৳41,200" [ref=f1e237] [cursor=pointer]:
+              - generic [ref=f1e238]: "5"
+              - generic [ref=f1e239]:
+                - generic [ref=f1e240]: DAC
+                - generic [ref=f1e241]: →
+                - generic [ref=f1e242]: DXB
+              - generic [ref=f1e243]: from ৳41,200
+            - button "Select route CGP to MCT from ৳38,500" [ref=f1e244] [cursor=pointer]:
+              - generic [ref=f1e245]: "6"
+              - generic [ref=f1e246]:
+                - generic [ref=f1e247]: CGP
+                - generic [ref=f1e248]: →
+                - generic [ref=f1e249]: MCT
+              - generic [ref=f1e250]: from ৳38,500
+            - button "Select route DAC to SIN from ৳39,800" [ref=f1e251] [cursor=pointer]:
+              - generic [ref=f1e252]: "7"
+              - generic [ref=f1e253]:
+                - generic [ref=f1e254]: DAC
+                - generic [ref=f1e255]: →
+                - generic [ref=f1e256]: SIN
+              - generic [ref=f1e257]: from ৳39,800
+          - generic [ref=f1e258]:
+            - button "Scroll left in trending routes" [ref=f1e259] [cursor=pointer]
+            - button "Scroll right in trending routes" [ref=f1e262] [cursor=pointer]
+      - region [ref=f1e265]:
+        - generic [ref=f1e266]:
+          - generic [ref=f1e267]:
+            - generic [ref=f1e268]:
+              - paragraph [ref=f1e271]: Handpicked Offers
+              - heading "Exclusive Travel Deals" [level=2] [ref=f1e272]
+              - paragraph [ref=f1e273]: Curated seasonal flights, hotel packages, and holiday escapes with dedicated agency booking support.
+            - link "Explore All Offers" [ref=f1e274] [cursor=pointer]:
+              - /url: /packages
+          - generic [ref=f1e278]:
+            - article [ref=f1e279]:
+              - generic [ref=f1e280]:
+                - img "Bangkok Wat Arun temple at twilight" [ref=f1e281]
+                - generic [ref=f1e282]: Limited Time
+                - generic [ref=f1e283]:
+                  - generic [ref=f1e284]: FLIGHT OFFER
+                  - generic [ref=f1e285]: From ৳28,946
+              - generic [ref=f1e286]:
+                - generic [ref=f1e287]:
+                  - heading "Southeast Asia Special" [level=3] [ref=f1e288]
+                  - paragraph [ref=f1e289]: Dhaka to Bangkok Return
+                  - paragraph [ref=f1e290]: Special agency promotional fares on direct flights with standard 30kg baggage allowance included.
+                - link "View Flight Deal" [ref=f1e292] [cursor=pointer]:
+                  - /url: /flights/results?from=DAC&to=BKK&tripType=roundTrip
+            - article [ref=f1e296]:
+              - generic [ref=f1e297]:
+                - img "Kuala Lumpur city lights and modern architecture" [ref=f1e298]
+                - generic [ref=f1e299]: Popular Choice
+                - generic [ref=f1e300]:
+                  - generic [ref=f1e301]: COMBO SAVINGS
+                  - generic [ref=f1e302]: From ৳38,500
+              - generic [ref=f1e303]:
+                - generic [ref=f1e304]:
+                  - heading "Malaysia Twin City Break" [level=3] [ref=f1e305]
+                  - paragraph [ref=f1e306]: Kuala Lumpur & Genting
+                  - paragraph [ref=f1e307]: Curated 4-night stay packages with roundtrip flight assistance and cable car highland excursion.
+                - link "Explore Package" [ref=f1e309] [cursor=pointer]:
+                  - /url: /packages?destination=kuala-lumpur
+            - article [ref=f1e313]:
+              - generic [ref=f1e314]:
+                - img "Tropical sandy beach and turquoise ocean water" [ref=f1e315]
+                - generic [ref=f1e316]: Instant Confirmation
+                - generic [ref=f1e317]:
+                  - generic [ref=f1e318]: DOMESTIC ESCAPE
+                  - generic [ref=f1e319]: From ৳4,315
+              - generic [ref=f1e320]:
+                - generic [ref=f1e321]:
+                  - heading "Cox’s Bazar Coastal Weekend" [level=3] [ref=f1e322]
+                  - paragraph [ref=f1e323]: Dhaka to Cox’s Bazar
+                  - paragraph [ref=f1e324]: Weekend beach getaways with prime morning departure slots and resort transport guidance.
+                - link "Check Fares" [ref=f1e326] [cursor=pointer]:
+                  - /url: /flights/results?from=DAC&to=CXB&tripType=oneWay
+            - article [ref=f1e330]:
+              - generic [ref=f1e331]:
+                - img "Dubai desert dunes under golden sky" [ref=f1e332]
+                - generic [ref=f1e333]: Top Rated
+                - generic [ref=f1e334]:
+                  - generic [ref=f1e335]: HOTEL & FLIGHT
+                  - generic [ref=f1e336]: From ৳58,200
+              - generic [ref=f1e337]:
+                - generic [ref=f1e338]:
+                  - heading "Dubai Luxury & Desert Safari" [level=3] [ref=f1e339]
+                  - paragraph [ref=f1e340]: Direct Flights + 4-Star Stay
+                  - paragraph [ref=f1e341]: Experience Dubai Marina, Burj Khalifa views, and authentic dune dining with full visa assistance.
+                - link "View Details" [ref=f1e343] [cursor=pointer]:
+                  - /url: /packages?destination=dubai
+      - region [ref=f1e347]:
+        - generic [ref=f1e348]:
+          - generic [ref=f1e349]:
+            - generic [ref=f1e350]:
+              - paragraph [ref=f1e353]: Explore The World
+              - heading "Popular Tourist Destinations" [level=2] [ref=f1e354]
+              - paragraph [ref=f1e355]: Select your next getaway from top-traveled leisure and cultural capitals across South and Southeast Asia, the Middle East, and beyond.
+            - link "View All Flights" [ref=f1e356] [cursor=pointer]:
+              - /url: /flights/results?from=DAC&to=BKK&tripType=roundTrip
+          - generic [ref=f1e360]:
+            - generic [ref=f1e361]:
+              - button "BKK Bangkok Thailand ৳28,946" [ref=f1e362] [cursor=pointer]:
+                - generic [ref=f1e363]:
+                  - generic [ref=f1e364]: BKK
+                  - generic [ref=f1e365]:
+                    - paragraph [ref=f1e366]: Bangkok
+                    - paragraph [ref=f1e367]: Thailand
+                - generic [ref=f1e368]: ৳28,946
+              - button "KUL Kuala Lumpur Malaysia ৳32,924" [ref=f1e373] [cursor=pointer]:
+                - generic [ref=f1e374]:
+                  - generic [ref=f1e375]: KUL
+                  - generic [ref=f1e376]:
+                    - paragraph [ref=f1e377]: Kuala Lumpur
+                    - paragraph [ref=f1e378]: Malaysia
+                - generic [ref=f1e379]: ৳32,924
+              - button "CXB Cox's Bazar Bangladesh ৳4,315" [ref=f1e384] [cursor=pointer]:
+                - generic [ref=f1e385]:
+                  - generic [ref=f1e386]: CXB
+                  - generic [ref=f1e387]:
+                    - paragraph [ref=f1e388]: Cox's Bazar
+                    - paragraph [ref=f1e389]: Bangladesh
+                - generic [ref=f1e390]: ৳4,315
+              - button "DXB Dubai United Arab Emirates ৳41,200" [ref=f1e395] [cursor=pointer]:
+                - generic [ref=f1e396]:
+                  - generic [ref=f1e397]: DXB
+                  - generic [ref=f1e398]:
+                    - paragraph [ref=f1e399]: Dubai
+                    - paragraph [ref=f1e400]: United Arab Emirates
+                - generic [ref=f1e401]: ৳41,200
+              - button "SIN Singapore Singapore ৳39,800" [ref=f1e406] [cursor=pointer]:
+                - generic [ref=f1e407]:
+                  - generic [ref=f1e408]: SIN
+                  - generic [ref=f1e409]:
+                    - paragraph [ref=f1e410]: Singapore
+                    - paragraph [ref=f1e411]: Singapore
+                - generic [ref=f1e412]: ৳39,800
+              - button "JED Jeddah Saudi Arabia ৳56,146" [ref=f1e417] [cursor=pointer]:
+                - generic [ref=f1e418]:
+                  - generic [ref=f1e419]: JED
+                  - generic [ref=f1e420]:
+                    - paragraph [ref=f1e421]: Jeddah
+                    - paragraph [ref=f1e422]: Saudi Arabia
+                - generic [ref=f1e423]: ৳56,146
+            - generic [ref=f1e429]:
+              - img "Bangkok cityscape with Grand Palace and Chao Phraya river" [ref=f1e430]
+              - generic [ref=f1e433]:
+                - generic [ref=f1e434]:
+                  - generic [ref=f1e435]: Thailand
+                  - generic [ref=f1e438]:
+                    - generic [ref=f1e439]: Fares from
+                    - generic [ref=f1e440]: ৳28,946
+                - generic [ref=f1e441]:
+                  - generic [ref=f1e442]: DIRECT OR 1-STOP ROUTE · DAC ➔ BKK
+                  - heading "Bangkok" [level=3] [ref=f1e443]
+                  - paragraph [ref=f1e444]: Vibrant capital with historic temples, floating markets, world-class shopping, and night street food.
+                  - generic [ref=f1e445]:
+                    - button "Search Flights to Bangkok" [ref=f1e446] [cursor=pointer]
+                    - link "View Packages" [ref=f1e450] [cursor=pointer]:
+                      - /url: /packages?destination=bangkok
+      - region [ref=f1e454]:
+        - generic [ref=f1e455]:
+          - generic [ref=f1e456]:
+            - generic [ref=f1e457]:
+              - paragraph [ref=f1e460]: Tailored Itineraries
+              - heading "Curated Holiday Packages" [level=2] [ref=f1e461]
+              - paragraph [ref=f1e462]: Complete vacation experiences combining flights, premium accommodations, airport transfers, and guided tours.
+            - link "All Packages" [ref=f1e463] [cursor=pointer]:
+              - /url: /packages
+          - generic [ref=f1e467]:
+            - generic [ref=f1e468]:
+              - img "Spectacular limestone islands in Phang Nga Bay Phuket" [ref=f1e469]
+              - generic [ref=f1e470]:
+                - generic [ref=f1e471]:
+                  - generic [ref=f1e472]: Featured Experience
+                  - generic [ref=f1e473]: 5 Nights · 6 Days
+                  - generic [ref=f1e474]: Starting ৳48,500
+                - 'heading "Thailand Highlights: Bangkok & Phuket" [level=3] [ref=f1e475]'
+                - paragraph [ref=f1e476]: Bangkok & Phuket, Thailand
+                - generic [ref=f1e477]:
+                  - generic [ref=f1e478]: Best Seller
+                  - generic [ref=f1e479]: Flight + 4★ Hotel
+                  - generic [ref=f1e480]: Breakfast Included
+                - link "View Package Details" [ref=f1e481] [cursor=pointer]:
+                  - /url: /packages?destination=bangkok
+            - generic [ref=f1e485]:
+              - article [ref=f1e486]:
+                - generic [ref=f1e487]:
+                  - img "Kuala Lumpur street and skyline" [ref=f1e488]
+                  - generic [ref=f1e489]: 4 Nights · 5 Days
+                - generic [ref=f1e490]:
+                  - generic [ref=f1e491]:
+                    - generic [ref=f1e492]:
+                      - generic [ref=f1e493]: Malaysia
+                      - generic [ref=f1e494]: ৳39,900
+                    - heading "Malaysia Urban & Highlands Discovery" [level=4] [ref=f1e495]
+                    - paragraph [ref=f1e496]: Kuala Lumpur
+                  - generic [ref=f1e497]:
+                    - generic [ref=f1e498]: Flights + Stay + Transfers
+                    - link "Inquire" [ref=f1e499] [cursor=pointer]:
+                      - /url: /packages?destination=kuala-lumpur
+              - article [ref=f1e503]:
+                - generic [ref=f1e504]:
+                  - img "Dubai Marina skyscraper waterfront" [ref=f1e505]
+                  - generic [ref=f1e506]: 4 Nights · 5 Days
+                - generic [ref=f1e507]:
+                  - generic [ref=f1e508]:
+                    - generic [ref=f1e509]:
+                      - generic [ref=f1e510]: United Arab Emirates
+                      - generic [ref=f1e511]: ৳62,000
+                    - 'heading "Dubai Wonder: City, Marina & Desert Safari" [level=4] [ref=f1e512]'
+                    - paragraph [ref=f1e513]: Dubai
+                  - generic [ref=f1e514]:
+                    - generic [ref=f1e515]: Flights + Stay + Transfers
+                    - link "Inquire" [ref=f1e516] [cursor=pointer]:
+                      - /url: /packages?destination=dubai
+              - article [ref=f1e520]:
+                - generic [ref=f1e521]:
+                  - img "Tropical coastal sea retreat with palm trees" [ref=f1e522]
+                  - generic [ref=f1e523]: 3 Nights · 4 Days
+                - generic [ref=f1e524]:
+                  - generic [ref=f1e525]:
+                    - generic [ref=f1e526]:
+                      - generic [ref=f1e527]: Bangladesh
+                      - generic [ref=f1e528]: ৳14,500
+                    - heading "Cox’s Bazar Luxury Beach Resort Retreat" [level=4] [ref=f1e529]
+                    - paragraph [ref=f1e530]: Cox's Bazar
+                  - generic [ref=f1e531]:
+                    - generic [ref=f1e532]: Flights + Stay + Transfers
+                    - link "Inquire" [ref=f1e533] [cursor=pointer]:
+                      - /url: /packages?destination=cox-s-bazar
+      - region [ref=f1e537]:
+        - generic [ref=f1e538]:
+          - generic [ref=f1e539]:
+            - paragraph [ref=f1e542]: Travel Booking, Done Right
+            - heading "Why Book With FlyWithsafety" [level=2] [ref=f1e543]
+            - paragraph [ref=f1e544]: Transparent travel planning backed by verified airline inventories, real human booking agents, and personalized customer care.
+          - generic [ref=f1e545]:
+            - generic [ref=f1e546]:
+              - generic [ref=f1e547]:
+                - heading "Convenient Booking Requests" [level=3] [ref=f1e552]
+                - paragraph [ref=f1e553]: Search domestic and international routes with instant agency desk confirmations and seamless reservation assistance.
+              - generic [ref=f1e554]: Verified Service Promise
+            - generic [ref=f1e558]:
+              - generic [ref=f1e559]:
+                - heading "Clear Travel Information" [level=3] [ref=f1e563]
+                - paragraph [ref=f1e564]: Transparent baggage policies, transit durations, and fare breakdowns with zero hidden booking surprises.
+              - generic [ref=f1e565]: Verified Service Promise
+            - generic [ref=f1e569]:
+              - generic [ref=f1e570]:
+                - heading "24/7 Human Booking Support" [level=3] [ref=f1e574]
+                - paragraph [ref=f1e575]: Direct phone and WhatsApp support from dedicated travel agents ready to handle date changes, cancellations, and special requests.
+              - generic [ref=f1e576]: Verified Service Promise
+            - generic [ref=f1e580]:
+              - generic [ref=f1e581]:
+                - heading "Easy Trip Planning" [level=3] [ref=f1e585]
+                - paragraph [ref=f1e586]: Coordinate flights, vetted hotel stays, and custom holiday packages with unified agency assistance from start to finish.
+              - generic [ref=f1e587]: Verified Service Promise
+            - generic [ref=f1e591]:
+              - generic [ref=f1e592]:
+                - heading "Secure Information Handling" [level=3] [ref=f1e596]
+                - paragraph [ref=f1e597]: All passenger passport details, itineraries, and booking inquiries are processed securely and handled with strict confidentiality.
+              - generic [ref=f1e598]: Verified Service Promise
+            - generic [ref=f1e602]:
+              - generic [ref=f1e603]:
+                - generic [ref=f1e604]: Agency Travel Desk
+                - heading "Need Group Flights or Custom Itinerary?" [level=3] [ref=f1e608]
+                - paragraph [ref=f1e609]: Speak directly with our senior travel specialists for corporate arrangements, family group discounts, and urgent booking confirmations.
+              - generic [ref=f1e610]:
+                - link "Contact Travel Desk" [ref=f1e611] [cursor=pointer]:
+                  - /url: /contact
+                - link "Track Booking" [ref=f1e615] [cursor=pointer]:
+                  - /url: /track-booking
+      - region [ref=f1e617]:
+        - generic [ref=f1e618]:
+          - generic [ref=f1e619]:
+            - paragraph [ref=f1e622]: World Class Carriers
+            - heading "Fly With The World's Leading Airlines" [level=2] [ref=f1e623]
+            - paragraph [ref=f1e624]: Access competitive schedules, fares, and baggage policies from verified domestic and international airline distribution networks.
+          - generic [ref=f1e625]:
+            - generic [ref=f1e626]:
+              - generic [ref=f1e627]:
+                - generic [ref=f1e628]:
+                  - generic [ref=f1e629]: BG
+                  - generic [ref=f1e634]:
+                    - paragraph [ref=f1e635]: Biman Bangladesh Airlines
+                    - paragraph [ref=f1e636]: Bangladesh
+                - generic [ref=f1e637]:
+                  - generic [ref=f1e638]: SQ
+                  - generic [ref=f1e643]:
+                    - paragraph [ref=f1e644]: Singapore Airlines
+                    - paragraph [ref=f1e645]: Singapore
+                - generic [ref=f1e646]:
+                  - generic [ref=f1e647]: SV
+                  - generic [ref=f1e652]:
+                    - paragraph [ref=f1e653]: Saudia
+                    - paragraph [ref=f1e654]: Saudi Arabia
+                - generic [ref=f1e655]:
+                  - generic [ref=f1e656]: BS
+                  - generic [ref=f1e661]:
+                    - paragraph [ref=f1e662]: US-Bangla Airlines
+                    - paragraph [ref=f1e663]: Bangladesh
+                - generic [ref=f1e664]:
+                  - generic [ref=f1e665]: TG
+                  - generic [ref=f1e670]:
+                    - paragraph [ref=f1e671]: Thai Airways
+                    - paragraph [ref=f1e672]: Thailand
+                - generic [ref=f1e673]:
+                  - generic [ref=f1e674]: TK
+                  - generic [ref=f1e679]:
+                    - paragraph [ref=f1e680]: Turkish Airlines
+                    - paragraph [ref=f1e681]: Turkey
+                - generic [ref=f1e682]:
+                  - generic [ref=f1e683]: GF
+                  - generic [ref=f1e688]:
+                    - paragraph [ref=f1e689]: Gulf Air
+                    - paragraph [ref=f1e690]: Bahrain
+              - generic [ref=f1e691]:
+                - generic [ref=f1e692]:
+                  - generic [ref=f1e693]: BG
+                  - generic [ref=f1e698]:
+                    - paragraph [ref=f1e699]: Biman Bangladesh Airlines
+                    - paragraph [ref=f1e700]: Bangladesh
+                - generic [ref=f1e701]:
+                  - generic [ref=f1e702]: SQ
+                  - generic [ref=f1e707]:
+                    - paragraph [ref=f1e708]: Singapore Airlines
+                    - paragraph [ref=f1e709]: Singapore
+                - generic [ref=f1e710]:
+                  - generic [ref=f1e711]: SV
+                  - generic [ref=f1e716]:
+                    - paragraph [ref=f1e717]: Saudia
+                    - paragraph [ref=f1e718]: Saudi Arabia
+                - generic [ref=f1e719]:
+                  - generic [ref=f1e720]: BS
+                  - generic [ref=f1e725]:
+                    - paragraph [ref=f1e726]: US-Bangla Airlines
+                    - paragraph [ref=f1e727]: Bangladesh
+                - generic [ref=f1e728]:
+                  - generic [ref=f1e729]: TG
+                  - generic [ref=f1e734]:
+                    - paragraph [ref=f1e735]: Thai Airways
+                    - paragraph [ref=f1e736]: Thailand
+                - generic [ref=f1e737]:
+                  - generic [ref=f1e738]: TK
+                  - generic [ref=f1e743]:
+                    - paragraph [ref=f1e744]: Turkish Airlines
+                    - paragraph [ref=f1e745]: Turkey
+                - generic [ref=f1e746]:
+                  - generic [ref=f1e747]: GF
+                  - generic [ref=f1e752]:
+                    - paragraph [ref=f1e753]: Gulf Air
+                    - paragraph [ref=f1e754]: Bahrain
+              - generic [ref=f1e755]:
+                - generic [ref=f1e756]:
+                  - generic [ref=f1e757]: BG
+                  - generic [ref=f1e762]:
+                    - paragraph [ref=f1e763]: Biman Bangladesh Airlines
+                    - paragraph [ref=f1e764]: Bangladesh
+                - generic [ref=f1e765]:
+                  - generic [ref=f1e766]: SQ
+                  - generic [ref=f1e771]:
+                    - paragraph [ref=f1e772]: Singapore Airlines
+                    - paragraph [ref=f1e773]: Singapore
+                - generic [ref=f1e774]:
+                  - generic [ref=f1e775]: SV
+                  - generic [ref=f1e780]:
+                    - paragraph [ref=f1e781]: Saudia
+                    - paragraph [ref=f1e782]: Saudi Arabia
+                - generic [ref=f1e783]:
+                  - generic [ref=f1e784]: BS
+                  - generic [ref=f1e789]:
+                    - paragraph [ref=f1e790]: US-Bangla Airlines
+                    - paragraph [ref=f1e791]: Bangladesh
+                - generic [ref=f1e792]:
+                  - generic [ref=f1e793]: TG
+                  - generic [ref=f1e798]:
+                    - paragraph [ref=f1e799]: Thai Airways
+                    - paragraph [ref=f1e800]: Thailand
+                - generic [ref=f1e801]:
+                  - generic [ref=f1e802]: TK
+                  - generic [ref=f1e807]:
+                    - paragraph [ref=f1e808]: Turkish Airlines
+                    - paragraph [ref=f1e809]: Turkey
+                - generic [ref=f1e810]:
+                  - generic [ref=f1e811]: GF
+                  - generic [ref=f1e816]:
+                    - paragraph [ref=f1e817]: Gulf Air
+                    - paragraph [ref=f1e818]: Bahrain
+              - generic [ref=f1e819]:
+                - generic [ref=f1e820]:
+                  - generic [ref=f1e821]: BG
+                  - generic [ref=f1e826]:
+                    - paragraph [ref=f1e827]: Biman Bangladesh Airlines
+                    - paragraph [ref=f1e828]: Bangladesh
+                - generic [ref=f1e829]:
+                  - generic [ref=f1e830]: SQ
+                  - generic [ref=f1e835]:
+                    - paragraph [ref=f1e836]: Singapore Airlines
+                    - paragraph [ref=f1e837]: Singapore
+                - generic [ref=f1e838]:
+                  - generic [ref=f1e839]: SV
+                  - generic [ref=f1e844]:
+                    - paragraph [ref=f1e845]: Saudia
+                    - paragraph [ref=f1e846]: Saudi Arabia
+                - generic [ref=f1e847]:
+                  - generic [ref=f1e848]: BS
+                  - generic [ref=f1e853]:
+                    - paragraph [ref=f1e854]: US-Bangla Airlines
+                    - paragraph [ref=f1e855]: Bangladesh
+                - generic [ref=f1e856]:
+                  - generic [ref=f1e857]: TG
+                  - generic [ref=f1e862]:
+                    - paragraph [ref=f1e863]: Thai Airways
+                    - paragraph [ref=f1e864]: Thailand
+                - generic [ref=f1e865]:
+                  - generic [ref=f1e866]: TK
+                  - generic [ref=f1e871]:
+                    - paragraph [ref=f1e872]: Turkish Airlines
+                    - paragraph [ref=f1e873]: Turkey
+                - generic [ref=f1e874]:
+                  - generic [ref=f1e875]: GF
+                  - generic [ref=f1e880]:
+                    - paragraph [ref=f1e881]: Gulf Air
+                    - paragraph [ref=f1e882]: Bahrain
+            - generic [ref=f1e883]:
+              - generic [ref=f1e884]:
+                - generic [ref=f1e885]:
+                  - generic [ref=f1e886]: EK
+                  - generic [ref=f1e891]:
+                    - paragraph [ref=f1e892]: Emirates
+                    - paragraph [ref=f1e893]: United Arab Emirates
+                - generic [ref=f1e894]:
+                  - generic [ref=f1e895]: QR
+                  - generic [ref=f1e900]:
+                    - paragraph [ref=f1e901]: Qatar Airways
+                    - paragraph [ref=f1e902]: Qatar
+                - generic [ref=f1e903]:
+                  - generic [ref=f1e904]: AK
+                  - generic [ref=f1e909]:
+                    - paragraph [ref=f1e910]: AirAsia
+                    - paragraph [ref=f1e911]: Malaysia
+                - generic [ref=f1e912]:
+                  - generic [ref=f1e913]: FZ
+                  - generic [ref=f1e918]:
+                    - paragraph [ref=f1e919]: Flydubai
+                    - paragraph [ref=f1e920]: United Arab Emirates
+                - generic [ref=f1e921]:
+                  - generic [ref=f1e922]: MH
+                  - generic [ref=f1e927]:
+                    - paragraph [ref=f1e928]: Malaysia Airlines
+                    - paragraph [ref=f1e929]: Malaysia
+                - generic [ref=f1e930]:
+                  - generic [ref=f1e931]: KU
+                  - generic [ref=f1e936]:
+                    - paragraph [ref=f1e937]: Kuwait Airways
+                    - paragraph [ref=f1e938]: Kuwait
+              - generic [ref=f1e939]:
+                - generic [ref=f1e940]:
+                  - generic [ref=f1e941]: EK
+                  - generic [ref=f1e946]:
+                    - paragraph [ref=f1e947]: Emirates
+                    - paragraph [ref=f1e948]: United Arab Emirates
+                - generic [ref=f1e949]:
+                  - generic [ref=f1e950]: QR
+                  - generic [ref=f1e955]:
+                    - paragraph [ref=f1e956]: Qatar Airways
+                    - paragraph [ref=f1e957]: Qatar
+                - generic [ref=f1e958]:
+                  - generic [ref=f1e959]: AK
+                  - generic [ref=f1e964]:
+                    - paragraph [ref=f1e965]: AirAsia
+                    - paragraph [ref=f1e966]: Malaysia
+                - generic [ref=f1e967]:
+                  - generic [ref=f1e968]: FZ
+                  - generic [ref=f1e973]:
+                    - paragraph [ref=f1e974]: Flydubai
+                    - paragraph [ref=f1e975]: United Arab Emirates
+                - generic [ref=f1e976]:
+                  - generic [ref=f1e977]: MH
+                  - generic [ref=f1e982]:
+                    - paragraph [ref=f1e983]: Malaysia Airlines
+                    - paragraph [ref=f1e984]: Malaysia
+                - generic [ref=f1e985]:
+                  - generic [ref=f1e986]: KU
+                  - generic [ref=f1e991]:
+                    - paragraph [ref=f1e992]: Kuwait Airways
+                    - paragraph [ref=f1e993]: Kuwait
+              - generic [ref=f1e994]:
+                - generic [ref=f1e995]:
+                  - generic [ref=f1e996]: EK
+                  - generic [ref=f1e1001]:
+                    - paragraph [ref=f1e1002]: Emirates
+                    - paragraph [ref=f1e1003]: United Arab Emirates
+                - generic [ref=f1e1004]:
+                  - generic [ref=f1e1005]: QR
+                  - generic [ref=f1e1010]:
+                    - paragraph [ref=f1e1011]: Qatar Airways
+                    - paragraph [ref=f1e1012]: Qatar
+                - generic [ref=f1e1013]:
+                  - generic [ref=f1e1014]: AK
+                  - generic [ref=f1e1019]:
+                    - paragraph [ref=f1e1020]: AirAsia
+                    - paragraph [ref=f1e1021]: Malaysia
+                - generic [ref=f1e1022]:
+                  - generic [ref=f1e1023]: FZ
+                  - generic [ref=f1e1028]:
+                    - paragraph [ref=f1e1029]: Flydubai
+                    - paragraph [ref=f1e1030]: United Arab Emirates
+                - generic [ref=f1e1031]:
+                  - generic [ref=f1e1032]: MH
+                  - generic [ref=f1e1037]:
+                    - paragraph [ref=f1e1038]: Malaysia Airlines
+                    - paragraph [ref=f1e1039]: Malaysia
+                - generic [ref=f1e1040]:
+                  - generic [ref=f1e1041]: KU
+                  - generic [ref=f1e1046]:
+                    - paragraph [ref=f1e1047]: Kuwait Airways
+                    - paragraph [ref=f1e1048]: Kuwait
+              - generic [ref=f1e1049]:
+                - generic [ref=f1e1050]:
+                  - generic [ref=f1e1051]: EK
+                  - generic [ref=f1e1056]:
+                    - paragraph [ref=f1e1057]: Emirates
+                    - paragraph [ref=f1e1058]: United Arab Emirates
+                - generic [ref=f1e1059]:
+                  - generic [ref=f1e1060]: QR
+                  - generic [ref=f1e1065]:
+                    - paragraph [ref=f1e1066]: Qatar Airways
+                    - paragraph [ref=f1e1067]: Qatar
+                - generic [ref=f1e1068]:
+                  - generic [ref=f1e1069]: AK
+                  - generic [ref=f1e1074]:
+                    - paragraph [ref=f1e1075]: AirAsia
+                    - paragraph [ref=f1e1076]: Malaysia
+                - generic [ref=f1e1077]:
+                  - generic [ref=f1e1078]: FZ
+                  - generic [ref=f1e1083]:
+                    - paragraph [ref=f1e1084]: Flydubai
+                    - paragraph [ref=f1e1085]: United Arab Emirates
+                - generic [ref=f1e1086]:
+                  - generic [ref=f1e1087]: MH
+                  - generic [ref=f1e1092]:
+                    - paragraph [ref=f1e1093]: Malaysia Airlines
+                    - paragraph [ref=f1e1094]: Malaysia
+                - generic [ref=f1e1095]:
+                  - generic [ref=f1e1096]: KU
+                  - generic [ref=f1e1101]:
+                    - paragraph [ref=f1e1102]: Kuwait Airways
+                    - paragraph [ref=f1e1103]: Kuwait
+          - paragraph [ref=f1e1105]: Schedules and ticket issuance are fulfilled across verified GDS networks, IATA-accredited agency partners, and official airline reservation portals.
+      - region [ref=f1e1106]:
+        - generic [ref=f1e1107]:
+          - generic [ref=f1e1108]:
+            - generic [ref=f1e1109]:
+              - paragraph [ref=f1e1112]: Community Feedback
+              - heading "Loved By Travellers Like You" [level=2] [ref=f1e1113]
+              - paragraph [ref=f1e1114]: Authentic traveler experiences with our fast ticket issuance, hassle-free booking desk, and attentive visa support.
+            - generic [ref=f1e1119]:
+              - generic [ref=f1e1120]:
+                - generic [ref=f1e1121]: 4.9 / 5.0
+                - generic [ref=f1e1122]: Traveler Rating
+              - paragraph [ref=f1e1123]: Based on verified customer journeys
+          - generic [ref=f1e1124]:
+            - article [ref=f1e1125]:
+              - blockquote [ref=f1e1138]: “Booking my flight was super fast and hassle-free! The team helped me find the best deal and I had my e-ticket within minutes.”
+              - generic [ref=f1e1139]:
+                - generic [ref=f1e1140]: S
+                - generic [ref=f1e1141]:
+                  - paragraph [ref=f1e1142]: Sarah Ahmed
+                  - paragraph [ref=f1e1143]: Frequent Traveler
+            - article [ref=f1e1144]:
+              - blockquote [ref=f1e1157]: “I've used many travel agencies but FlyWithsafety stands out for their transparency and support. Highly recommended!”
+              - generic [ref=f1e1158]:
+                - generic [ref=f1e1159]: M
+                - generic [ref=f1e1160]:
+                  - paragraph [ref=f1e1161]: Mohammad Rahman
+                  - paragraph [ref=f1e1162]: Business Traveler
+            - article [ref=f1e1163]:
+              - blockquote [ref=f1e1176]: “The visa assistance was incredibly helpful. They guided me through the entire process and made it stress-free.”
+              - generic [ref=f1e1177]:
+                - generic [ref=f1e1178]: P
+                - generic [ref=f1e1179]:
+                  - paragraph [ref=f1e1180]: Priya Sharma
+                  - paragraph [ref=f1e1181]: Tourist
+            - article [ref=f1e1182]:
+              - blockquote [ref=f1e1195]: “The visa assistance was incredibly helpful. They guided me through the entire process and made it stress-free.”
+              - generic [ref=f1e1196]:
+                - generic [ref=f1e1197]: P
+                - generic [ref=f1e1198]:
+                  - paragraph [ref=f1e1199]: Priya Sharma
+                  - paragraph [ref=f1e1200]: Tourist
+      - region "Travel Planning Benefits" [ref=f1e1201]:
+        - generic [ref=f1e1203]:
+          - img "Cinematic passenger airplane cruising above cloud bank" [ref=f1e1204]
+          - generic [ref=f1e1206]:
+            - generic [ref=f1e1207]: FlyWithsafety Privilege
+            - heading "Unlock Seamless Journeys With Expert Travel Planning" [level=2] [ref=f1e1212]
+            - paragraph [ref=f1e1213]: From quick domestic getaways to complex multi-city international itineraries, get dedicated travel desk assistance, fast electronic ticketing, and complete visa documentation guidance under one roof.
+            - generic [ref=f1e1214]:
+              - generic [ref=f1e1215]: Personalized Route Planning
+              - generic [ref=f1e1219]: Fast Ticket Issuance
+              - generic [ref=f1e1223]: Transparent Airline Fares
+              - generic [ref=f1e1227]: Dedicated Visa Advisory
+            - generic [ref=f1e1231]:
+              - link "Search Flights Now" [ref=f1e1232] [cursor=pointer]:
+                - /url: /flights
+              - link "Speak With Travel Desk" [ref=f1e1237] [cursor=pointer]:
+                - /url: /contact
+      - region [ref=f1e1241]:
+        - generic [ref=f1e1243]:
+          - generic [ref=f1e1244]:
+            - paragraph [ref=f1e1247]: Mobile Web & WhatsApp Concierge
+            - heading "Book & Manage Your Trips On The Go" [level=2] [ref=f1e1248]
+            - paragraph [ref=f1e1249]: Experience fast mobile flight searches, check hotel packages, and connect directly with our dedicated travel agents on WhatsApp for immediate fare quotes and reservation assistance.
+            - generic [ref=f1e1250]:
+              - generic [ref=f1e1255]:
+                - heading "Mobile-Optimized Booking Desk" [level=3] [ref=f1e1256]
+                - paragraph [ref=f1e1257]: Search, compare, and request flights seamlessly from any smartphone or tablet browser.
+              - generic [ref=f1e1262]:
+                - heading "Direct WhatsApp Travel Desk" [level=3] [ref=f1e1263]
+                - paragraph [ref=f1e1264]: Share travel dates with our agents for custom itinerary quotes and rapid ticket issuance.
+              - generic [ref=f1e1270]:
+                - heading "Instant Booking Status Tracking" [level=3] [ref=f1e1271]
+                - paragraph [ref=f1e1272]: Access your reference code and monitor reservation updates in real time.
+            - generic [ref=f1e1273]:
+              - link "Chat On WhatsApp" [ref=f1e1274] [cursor=pointer]:
+                - /url: https://wa.me
+              - link "Track My Booking" [ref=f1e1278] [cursor=pointer]:
+                - /url: /track-booking
+          - generic [ref=f1e1284]:
+            - generic [ref=f1e1285]:
+              - generic [ref=f1e1286]: 09:41
+              - generic [ref=f1e1287]: FLYWITHsafety MOBILE
+              - generic [ref=f1e1288]: 5G · 100%
+            - generic [ref=f1e1289]:
+              - generic [ref=f1e1290]:
+                - generic [ref=f1e1291]: Confirmed E-Ticket
+                - generic [ref=f1e1292]: FWS-89241
+              - generic [ref=f1e1293]:
+                - generic [ref=f1e1294]:
+                  - text: DAC
+                  - generic [ref=f1e1295]: Dhaka
+                - generic [ref=f1e1296]:
+                  - generic [ref=f1e1297]: 2h 35m
+                  - generic [ref=f1e1298]: ✈
+                  - generic [ref=f1e1300]: Non-stop
+                - generic [ref=f1e1301]:
+                  - text: BKK
+                  - generic [ref=f1e1302]: Bangkok
+              - generic [ref=f1e1303]:
+                - generic [ref=f1e1304]: "Passenger: Sarah Ahmed"
+                - generic [ref=f1e1305]: Economy · 30kg
+            - generic [ref=f1e1306]:
+              - generic [ref=f1e1307]: SCAN FOR TRAVEL DESK
+              - generic [ref=f1e1308]:
+                - paragraph [ref=f1e1309]: Scan With Phone Camera
+                - paragraph [ref=f1e1310]: Instantly opens WhatsApp chat with FlyWithsafety booking desk.
+      - region "Customer Booking Support" [ref=f1e1311]:
+        - generic [ref=f1e1313]:
+          - generic [ref=f1e1318]:
+            - heading "Need Help With Flight Or Visa Reservations?" [level=3] [ref=f1e1319]
+            - paragraph [ref=f1e1320]: Our certified travel consultants are available 24 Hours a day · 7 Days a week.
+          - generic [ref=f1e1321]:
+            - link "+880 1700-000000" [ref=f1e1322] [cursor=pointer]:
+              - /url: tel:+8801700000000
+            - link "support@flywithsafety.com" [ref=f1e1326] [cursor=pointer]:
+              - /url: mailto:support@flywithsafety.com
+            - link "WhatsApp Desk" [ref=f1e1331] [cursor=pointer]:
+              - /url: https://wa.me
+  - contentinfo [ref=f1e1335]:
+    - generic [ref=f1e1336]:
+      - generic [ref=f1e1337]:
+        - generic [ref=f1e1338]:
+          - link "FlyWithSafety Home" [ref=f1e1339] [cursor=pointer]:
+            - /url: /
+            - generic [ref=f1e1342]: FlyWithSafety
+          - paragraph [ref=f1e1343]: Thoughtful travel planning, easier bookings, and support that stays with you.
+        - navigation "Explore" [ref=f1e1344]:
+          - heading "Explore" [level=3] [ref=f1e1345]
+          - list [ref=f1e1346]:
+            - listitem [ref=f1e1347]:
+              - link "Home" [ref=f1e1348] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=f1e1349]:
+              - link "Flights" [ref=f1e1350] [cursor=pointer]:
+                - /url: /flights
+            - listitem [ref=f1e1351]:
+              - link "Hotels" [ref=f1e1352] [cursor=pointer]:
+                - /url: /hotels
+            - listitem [ref=f1e1353]:
+              - link "Packages" [ref=f1e1354] [cursor=pointer]:
+                - /url: /packages
+            - listitem [ref=f1e1355]:
+              - link "Visa Info" [ref=f1e1356] [cursor=pointer]:
+                - /url: /visa-info
+            - listitem [ref=f1e1357]:
+              - link "Track Booking" [ref=f1e1358] [cursor=pointer]:
+                - /url: /track-booking
+        - navigation "Legal" [ref=f1e1359]:
+          - heading "Legal" [level=3] [ref=f1e1360]
+          - list [ref=f1e1361]:
+            - listitem [ref=f1e1362]:
+              - link "Contact Us" [ref=f1e1363] [cursor=pointer]:
+                - /url: /contact
+            - listitem [ref=f1e1364]:
+              - link "Privacy Policy" [ref=f1e1365] [cursor=pointer]:
+                - /url: /privacy
+            - listitem [ref=f1e1366]:
+              - link "Terms of Use" [ref=f1e1367] [cursor=pointer]:
+                - /url: /terms
+        - generic [ref=f1e1368]:
+          - heading "Payment Options" [level=3] [ref=f1e1369]
+          - generic [ref=f1e1370]:
+            - img "VISA" [ref=f1e1371]
+            - img "Mastercard" [ref=f1e1375]
+            - img "bKash" [ref=f1e1379]
+      - generic [ref=f1e1384]:
+        - paragraph [ref=f1e1385]: © 2026 FlyWithSafety. All rights reserved.
+        - navigation "Social media" [ref=f1e1386]:
+          - link "Facebook" [ref=f1e1387] [cursor=pointer]:
+            - /url: https://facebook.com
+          - link "Instagram" [ref=f1e1394] [cursor=pointer]:
+            - /url: https://instagram.com
+          - link "WhatsApp" [ref=f1e1398] [cursor=pointer]:
+            - /url: https://wa.me
+  - button "Open Next.js Dev Tools" [ref=f1e1406] [cursor=pointer]
+  - alert [ref=f1e1410]
+  - dialog [ref=f1e1415]:
+    - generic [ref=f1e1416]:
+      - generic [ref=f1e1417]:
+        - generic [ref=f1e1418]: FlyWithSafety
+        - heading "Welcome back. Where to next?" [level=3] [ref=f1e1428]
+        - paragraph [ref=f1e1429]: Sign in to manage your bookings, saved travellers, and seamless flight updates.
+        - generic [ref=f1e1430]:
+          - generic [ref=f1e1431]: Flights, Hotels, Holidays & Visas in One Place
+          - generic [ref=f1e1436]: 24/7 Dedicated Agency Travel Desk Support
+          - generic [ref=f1e1441]: Instant Booking Inquiry & E-Ticket Tracking
+      - generic [ref=f1e1447]:
+        - text: Need immediate support? Contact our
+        - link "24/7 Human Desk" [ref=f1e1448] [cursor=pointer]:
+          - /url: /contact
+        - text: .
+    - generic [ref=f1e1449]:
+      - button "Close dialog" [ref=f1e1450]
+      - generic [ref=f1e1454]:
+        - heading "Sign In" [level=2] [ref=f1e1455]
+        - paragraph [ref=f1e1456]: Welcome back. Enter your details to continue.
+        - button "Continue with Google" [ref=f1e1457] [cursor=pointer]
+        - generic [ref=f1e1464]: or continue with email
+        - generic [ref=f1e1468]:
+          - generic [ref=f1e1469]:
+            - generic [ref=f1e1470]: Email Address
+            - textbox "Email Address" [active] [ref=f1e1472]:
+              - /placeholder: you@example.com
+          - generic [ref=f1e1473]:
+            - generic [ref=f1e1474]:
+              - generic [ref=f1e1475]: Password
+              - link "Forgot Password?" [ref=f1e1476] [cursor=pointer]:
+                - /url: /forgot-password
+            - generic [ref=f1e1477]:
+              - textbox "Password" [ref=f1e1478]:
+                - /placeholder: Enter your password
+              - button "Show password" [ref=f1e1479]
+          - generic [ref=f1e1483]:
+            - checkbox "Keep Me Signed In" [ref=f1e1484]
+            - generic [ref=f1e1485] [cursor=pointer]: Keep Me Signed In
+          - button "Sign In →" [ref=f1e1486] [cursor=pointer]
+      - generic [ref=f1e1488]:
+        - text: New to FlyWithSafe?
+        - link "Create an Account" [ref=f1e1489] [cursor=pointer]:
+          - /url: /register

@@ -1,0 +1,69 @@
+{
+  "ready": false,
+  "observations": [
+    {
+      "attempt": 1,
+      "elapsedBudgetRemainingMs": 29891,
+      "success": false,
+      "answers": 0,
+      "families": [],
+      "code": "ENOTFOUND"
+    },
+    {
+      "attempt": 2,
+      "elapsedBudgetRemainingMs": 27810,
+      "success": false,
+      "answers": 0,
+      "families": [],
+      "code": "ENOTFOUND"
+    },
+    {
+      "attempt": 3,
+      "elapsedBudgetRemainingMs": 25686,
+      "success": false,
+      "answers": 0,
+      "families": [],
+      "code": "ENOTFOUND"
+    },
+    {
+      "attempt": 4,
+      "elapsedBudgetRemainingMs": 23610,
+      "success": false,
+      "answers": 0,
+      "families": [],
+      "code": "ENOTFOUND"
+    },
+    {
+      "attempt": 5,
+      "elapsedBudgetRemainingMs": 21510,
+      "success": false,
+      "answers": 0,
+      "families": [],
+      "code": "ENOTFOUND"
+    },
+    {
+      "attempt": 6,
+      "elapsedBudgetRemainingMs": 19393,
+      "success": false,
+      "answers": 0,
+      "families": [],
+      "code": "ENOTFOUND"
+    },
+    {
+      "attempt": 7,
+      "elapsedBudgetRemainingMs": 17281,
+      "success": false,
+      "answers": 0,
+      "families": [],
+      "code": "ENOTFOUND"
+    },
+    {
+      "attempt": 8,
+      "elapsedBudgetRemainingMs": 15207,
+      "success": false,
+      "answers": 0,
+      "families": [],
+      "code": "ENOTFOUND"
+    }
+  ]
+}

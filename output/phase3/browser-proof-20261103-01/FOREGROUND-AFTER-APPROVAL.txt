@@ -1,0 +1,13 @@
+DO NOT RUN until explicit owner approval of this new LOCAL browser booking/session/payment scope in REVIEW.md. Exactly ONE attempt. Existing private WindowsPowerShell5.1. One private prompt: EXISTING flywithsafe_phase2_booking_test DB password, NOT postgres or synthetic browser password. On READY leave the console open; later sign-in is private browser entry. Failure means STOP/no retry/cleanup.
+
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p='E:\Programming\Project\fly-with-safety\output\phase3\browser-proof-20261103-01\Invoke-BrowserHost.ps1'
+ if(-not (Test-Path -LiteralPath $p -PathType Leaf)){throw 'STOP: reviewed browser caller missing'}
+ if((Get-Item -LiteralPath $p -Stream * | Where-Object Stream -eq 'Zone.Identifier')){throw 'STOP: unexpected script zone marking'}
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne '2E153EC2B58EA8C26B6AACCFCE205C21F83E668A35C668609F8E5F583DBE3CFE'){throw 'STOP: reviewed browser caller mismatch'}
+ & $p -OwnerApprovedBoundedBrowserProof
+}
+
+Return PHASE3_BROWSER_API_READY_NOT_ACCEPTANCE and keep console open; on failure return sanitized stage/error and exit without rerunning. Host readiness is not browser/provider acceptance. No external provider calls/cleanup are authorized.

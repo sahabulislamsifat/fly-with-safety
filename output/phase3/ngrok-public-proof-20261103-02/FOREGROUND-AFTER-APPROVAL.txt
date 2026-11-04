@@ -1,0 +1,11 @@
+PENDING SEPARATE OWNER APPROVAL. New diagnostic-preserving identity; historical caller consumed.
+Run only once after approval. No token/password prompt or SSLCommerz call.
+
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p='E:\Programming\Project\fly-with-safety\output\phase3\ngrok-public-proof-20261103-02\Invoke-BackendOnlyProof.ps1'
+ if(-not(Test-Path -LiteralPath $p -PathType Leaf)){throw 'STOP: reviewed ngrok caller missing'}
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne 'EE5FF83E8698EFDD27327D7601908D6B1ED58E7199CF22B24D4EF5A6B95862D8'){throw 'STOP: reviewed ngrok caller mismatch'}
+ & $p -OwnerApprovedNgrokIsolationProof
+}

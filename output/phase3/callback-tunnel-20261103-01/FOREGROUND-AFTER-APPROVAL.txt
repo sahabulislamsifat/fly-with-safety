@@ -1,0 +1,16 @@
+DO NOT EXECUTE until ONE public transport-only scope is explicitly approved.
+No password is needed. No SSLCommerz or database access is included.
+Existing Windows PowerShell 5.1 console; one execution, no retry.
+
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p='E:\Programming\Project\fly-with-safety\output\phase3\callback-tunnel-20261103-01\Invoke-CallbackProbe.ps1'
+ if(-not (Test-Path -LiteralPath $p -PathType Leaf)){throw 'STOP: reviewed callback transport caller missing'}
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne 'AE7BFB5B308EC2FD4A4014FE86D7BCDF6A0C54A0CC56D5A990B160ADFC6EBF59'){throw 'STOP: reviewed callback transport caller mismatch'}
+ & $p -OwnerApprovedOnePublicTransportProof
+}
+
+Return only final Phase3 callback transport proof exit: line and result/check counts.
+If failure, preserve all artifacts; no rerun, cleanup, repair or merchant call.
+The owned probe listener/tunnel closes automatically. This URL is not a merchant payment callback origin after shutdown.

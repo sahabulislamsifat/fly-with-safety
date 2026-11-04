@@ -1,0 +1,7 @@
+{
+  "supervisor": 21136,
+  "backend": 17348,
+  "frontend": 4440,
+  "mainApplication": true,
+  "credentialsInFile": false
+}

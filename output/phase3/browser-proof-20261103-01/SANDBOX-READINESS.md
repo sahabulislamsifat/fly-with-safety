@@ -1,0 +1,11 @@
+# Genuine sandbox gate — not executed
+
+Official source reviewed2026-11-03: https://developer.sslcommerz.com/doc/v4/ and https://developer.sslcommerz.com/ . This is a source/API contract review, not merchant connectivity evidence.
+
+Implemented paths match V4 sandbox sessionPOST,GatewayPageURL,server-side validation/query/refund APIs. Hosted Checkout uses merchant configuration; no channel list is forced. IPN is durably recorded before bounded authoritative validation. Request identity/gross amount/currency/validation/bank identity/risk are checked, duplicate effects dedupe and risky captures hold. Refund initiation and status remain separate; payment never authorizes supplier fulfillment. These contracts have offline and real-PG-with-double evidence, not real provider acceptance.
+
+Before external execution the owner must rotate previously exposed credentials, supply the sandbox-only store ID/password privately (never chat/repo), and approve an existing public HTTPS callback origin plus exact external transaction/refund scope. The main/staging cloud DBs are excluded. Use the reusable local DB and private environment-specific encryption key. No production credentials, live charge, card storage, PNR/ticket/supplier call or automatic provider provisioning is authorized.
+
+Genuine acceptance still requires actual session/Hosted Checkout response and enabled merchant channels; HTTPS IPN/return reachability; server-side Order Validation/transaction/amount/currency/risk; duplicate/delayed notification and failure/cancel/reconciliation; refund capability/status where merchant-enabled. bKash,Rocket,Visa/Mastercard availability is NOT claimed from a generic API category: record actual merchant-enabled checkout evidence. Unsupported channels are not counted PASS. The planned synthetic amountBDT12000 lies within the published standard session amount range; merchant-specific/channel limits must be observed during the approved real run.
+
+No merchant API request, tunnel, external webhook registration, sandbox transaction or refund was executed in this batch. Owner action is presently the bounded LOCAL browser host approval; external approval/private rotated setup follows browser evidence, without re-running the accepted64-check PG suite.

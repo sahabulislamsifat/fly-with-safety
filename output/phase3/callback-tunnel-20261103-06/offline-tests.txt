@@ -1,0 +1,316 @@
+TAP version 13
+# Subtest: healthy frontend remains untouched: one backend stop, one proof, one backend restore
+ok 1 - healthy frontend remains untouched: one backend stop, one proof, one backend restore
+  ---
+  duration_ms: 9.16
+  type: 'test'
+  ...
+# Subtest: failed proof restores backend without replay
+ok 2 - failed proof restores backend without replay
+  ---
+  duration_ms: 2.6578
+  type: 'test'
+  ...
+# Subtest: frontend change blocks public proof but does not block independently safe backend restore
+ok 3 - frontend change blocks public proof but does not block independently safe backend restore
+  ---
+  duration_ms: 1.959
+  type: 'test'
+  ...
+# Subtest: frontend HTTP outage cannot suppress a healthy backend-restoration result
+ok 4 - frontend HTTP outage cannot suppress a healthy backend-restoration result
+  ---
+  duration_ms: 1.9041
+  type: 'test'
+  ...
+# Subtest: unconfirmed probe exit blocks exposing restored main backend
+ok 5 - unconfirmed probe exit blocks exposing restored main backend
+  ---
+  duration_ms: 1.9856
+  type: 'test'
+  ...
+# Subtest: residual connector blocks main restoration and public proof
+ok 6 - residual connector blocks main restoration and public proof
+  ---
+  duration_ms: 1.7275
+  type: 'test'
+  ...
+# Subtest: backend stop incomplete never starts another backend or public process
+ok 7 - backend stop incomplete never starts another backend or public process
+  ---
+  duration_ms: 2.4428
+  type: 'test'
+  ...
+# Subtest: nonzero graceful-stop acknowledgement skips public proof and safely restores backend
+ok 8 - nonzero graceful-stop acknowledgement skips public proof and safely restores backend
+  ---
+  duration_ms: 1.9867
+  type: 'test'
+  ...
+# Subtest: safe backend restoration independent of frontend state
+ok 9 - safe backend restoration independent of frontend state
+  ---
+  duration_ms: 0.7149
+  type: 'test'
+  ...
+# Subtest: unsafe backendAbsent blocks main restoration
+ok 10 - unsafe backendAbsent blocks main restoration
+  ---
+  duration_ms: 0.1244
+  type: 'test'
+  ...
+# Subtest: unsafe connectorsAbsent blocks main restoration
+ok 11 - unsafe connectorsAbsent blocks main restoration
+  ---
+  duration_ms: 0.0718
+  type: 'test'
+  ...
+# Subtest: unconfirmed tunnelStopped blocks main restoration
+ok 12 - unconfirmed tunnelStopped blocks main restoration
+  ---
+  duration_ms: 0.0931
+  type: 'test'
+  ...
+# Subtest: unconfirmed listenerStopped blocks main restoration
+ok 13 - unconfirmed listenerStopped blocks main restoration
+  ---
+  duration_ms: 0.1728
+  type: 'test'
+  ...
+# Subtest: live probe cannot be replaced by main
+ok 14 - live probe cannot be replaced by main
+  ---
+  duration_ms: 0.1209
+  type: 'test'
+  ...
+# Subtest: no blank or fabricated proof exit
+ok 15 - no blank or fabricated proof exit
+  ---
+  duration_ms: 0.115
+  type: 'test'
+  ...
+# Subtest: known preflight rejection retains the actual safe reason
+ok 16 - known preflight rejection retains the actual safe reason
+  ---
+  duration_ms: 0.1028
+  type: 'test'
+  ...
+# Subtest: unknown error message cannot leak a private value
+ok 17 - unknown error message cannot leak a private value
+  ---
+  duration_ms: 0.1024
+  type: 'test'
+  ...
+# Subtest: historical actual request reproducibly derives localhost SNI from forged Host without any socket
+ok 18 - historical actual request reproducibly derives localhost SNI from forged Host without any socket
+  ---
+  duration_ms: 15.2078
+  type: 'test'
+  ...
+# Subtest: only TLS servername changes in public request implementation
+ok 19 - only TLS servername changes in public request implementation
+  ---
+  duration_ms: 0.1533
+  type: 'test'
+  ...
+# Subtest: case 1: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 20 - case 1: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 1.8252
+  type: 'test'
+  ...
+# Subtest: case 2: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 21 - case 2: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 1.1304
+  type: 'test'
+  ...
+# Subtest: case 3: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 22 - case 3: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 1.0873
+  type: 'test'
+  ...
+# Subtest: case 4: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 23 - case 4: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 0.9572
+  type: 'test'
+  ...
+# Subtest: case 5: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 24 - case 5: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 0.969
+  type: 'test'
+  ...
+# Subtest: case 6: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 25 - case 6: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 1.033
+  type: 'test'
+  ...
+# Subtest: case 7: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 26 - case 7: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 1.0963
+  type: 'test'
+  ...
+# Subtest: case 8: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 27 - case 8: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 1.0243
+  type: 'test'
+  ...
+# Subtest: case 9: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 28 - case 9: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 1.0052
+  type: 'test'
+  ...
+# Subtest: case 10: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 29 - case 10: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 0.8482
+  type: 'test'
+  ...
+# Subtest: case 11: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 30 - case 11: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 1.5457
+  type: 'test'
+  ...
+# Subtest: case 12: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 31 - case 12: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 0.8018
+  type: 'test'
+  ...
+# Subtest: case 13: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 32 - case 13: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 0.7739
+  type: 'test'
+  ...
+# Subtest: case 14: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 33 - case 14: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 0.7034
+  type: 'test'
+  ...
+# Subtest: case 15: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 34 - case 15: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 0.7859
+  type: 'test'
+  ...
+# Subtest: case 16: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 35 - case 16: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 0.7955
+  type: 'test'
+  ...
+# Subtest: case 17: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 36 - case 17: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 1.1516
+  type: 'test'
+  ...
+# Subtest: case 18: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 37 - case 18: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 0.8403
+  type: 'test'
+  ...
+# Subtest: case 19: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 38 - case 19: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 0.8129
+  type: 'test'
+  ...
+# Subtest: case 20: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 39 - case 20: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 0.828
+  type: 'test'
+  ...
+# Subtest: case 21: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 40 - case 21: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 0.7488
+  type: 'test'
+  ...
+# Subtest: case 22: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 41 - case 22: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 0.8699
+  type: 'test'
+  ...
+# Subtest: case 23: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 42 - case 23: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 0.8165
+  type: 'test'
+  ...
+# Subtest: case 24: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 43 - case 24: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 1.4646
+  type: 'test'
+  ...
+# Subtest: case 25: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 44 - case 25: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 0.7982
+  type: 'test'
+  ...
+# Subtest: case 26: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 45 - case 26: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 0.7404
+  type: 'test'
+  ...
+# Subtest: case 27: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 46 - case 27: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 0.7434
+  type: 'test'
+  ...
+# Subtest: case 28: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 47 - case 28: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 0.6978
+  type: 'test'
+  ...
+# Subtest: case 29: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 48 - case 29: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 0.6874
+  type: 'test'
+  ...
+# Subtest: case 30: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 49 - case 30: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 0.7652
+  type: 'test'
+  ...
+# Subtest: case 31: TLS identity stays public while HTTP method/path/Host remain unchanged
+ok 50 - case 31: TLS identity stays public while HTTP method/path/Host remain unchanged
+  ---
+  duration_ms: 0.7959
+  type: 'test'
+  ...
+# Subtest: synthetic SAN shows localhost mismatch and public match; unrelated certificate still rejected
+ok 51 - synthetic SAN shows localhost mismatch and public match; unrelated certificate still rejected
+  ---
+  duration_ms: 1.3327
+  type: 'test'
+  ...
+1..51
+# tests 51
+# suites 0
+# pass 51
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 187.3393

@@ -1,0 +1,30 @@
+async page => {
+  const s = page.__phase3, ref = 'FWS-P3-BROWSER-E77192B4';
+  if (s.role !== 'CUSTOMER' || !s.initiationDone || s.refreshReplayAdmitted) throw Error('CUSTOMER_REFRESH_SCOPE_OR_DUPLICATE_GUARD');
+  s.refreshReplayAdmitted = true;
+  const check = (id, ok) => { s.checks.push({ id, passed: ok }); if (!ok) throw Error('PHASE3_BROWSER_'+id); };
+  const reopen = async () => { await page.getByRole('button', { name: /^flight · FWS-P3-BROWSER-E77192B4 / }).click(); await page.getByRole('heading', { name: 'SSLCommerz sandbox payments', exact: true }).waitFor(); };
+  await page.goto('http://localhost:3000/account', { waitUntil: 'domcontentloaded' }); await reopen();
+  check('session-ready-ui-after-checkout-return', await page.getByText('12000.00 BDT · SESSION READY', { exact: true }).isVisible());
+  await page.reload({ waitUntil: 'domcontentloaded' }); await reopen();
+  check('session-ready-ui-after-full-refresh', await page.getByText('12000.00 BDT · SESSION READY', { exact: true }).isVisible());
+  const url = 'http://localhost:5000/api/v1/payments/bookings/'+ref+'/initiate';
+  const body = { requestId: s.initiationRequestId, address: 'Synthetic browser billing', city: 'Synthetic city', country: 'BD' };
+  const replay = await page.request.post(url, { headers: { Origin: 'http://localhost:3000', 'Idempotency-Key': body.requestId }, data: body, maxRedirects: 0, maxRetries: 0 });
+  const r = (await replay.json()).data;
+  check('same-key-http-replay-after-refresh', replay.status() === 202 && r.payment.id === s.paymentId && !!r.checkoutUrl);
+  const conflict = await page.request.post(url, { headers: { Origin: 'http://localhost:3000', 'Idempotency-Key': body.requestId }, data: { ...body, city: 'Changed synthetic city' }, maxRedirects: 0, maxRetries: 0 });
+  check('changed-payload-http-replay-denied', conflict.status() === 409);
+  await page.getByRole('textbox', { name: 'Synthetic billing address', exact: true }).fill(body.address);
+  await page.getByRole('textbox', { name: 'City', exact: true }).fill(body.city);
+  await page.getByRole('textbox', { name: 'Country code', exact: true }).fill(body.country);
+  const observed = page.waitForResponse(r => r.request().method() === 'POST' && r.url() === url);
+  await page.getByRole('button', { name: 'Pay now / resume sandbox checkout', exact: true }).click();
+  check('fresh-ui-request-after-refresh-cannot-create-second-charge', (await observed).status() === 409);
+  const persisted = await page.request.get('http://localhost:5000/api/v1/payments/bookings/'+ref), data = (await persisted.json()).data;
+  check('refresh-retry-one-original-payment-persists', data.payments.length === 1 && data.payments[0].id === s.paymentId && !data.payments[0].captured);
+  await page.getByText('Payment audit history', { exact: true }).click();
+  check('customer-durable-payment-history-ui', (await page.locator('body').innerText()).includes('SESSION READY'));
+  s.refreshReplayDone = true;
+  return { role: s.role, passed: s.checks.filter(c => c.passed).length, failed: s.checks.filter(c => !c.passed).length, checks: s.checks, uiFreshKeyResult: 409, sameKeyReplayResult: 202, clientRequestKeySurvivesReload: false, duplicateChargeCreated: false, provider: 'MOCK_ONLY' };
+}

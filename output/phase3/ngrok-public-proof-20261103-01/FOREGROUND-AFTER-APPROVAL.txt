@@ -1,0 +1,12 @@
+PENDING EXPLICIT OWNER APPROVAL. One execution only after approval of this exact reviewed scope.
+No password prompt; existing private agent config is used by ngrok only.
+No SSLCommerz or database business operations. Do not run consumed Cloudflare callers.
+
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p='E:\Programming\Project\fly-with-safety\output\phase3\ngrok-public-proof-20261103-01\Invoke-BackendOnlyProof.ps1'
+ if(-not(Test-Path -LiteralPath $p -PathType Leaf)){throw 'STOP: reviewed ngrok caller missing'}
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne '3776BD813366643617923508CA314810419E46AA8142EE09C3C729451A232013'){throw 'STOP: reviewed ngrok caller mismatch'}
+ & $p -OwnerApprovedNgrokIsolationProof
+}

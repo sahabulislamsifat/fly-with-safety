@@ -1,0 +1,7 @@
+{"atUTC":"2026-11-03T19:20:44.035Z","event":"listener-bound","address":"127.0.0.1","port":5000}
+{"atUTC":"2026-11-03T19:20:44.047Z","event":"origin-received","index":0,"hostClass":"TUNNEL_MARKER","methodMatched":true,"pathMatched":true,"guard":"callback","media":"application/x-www-form-urlencoded","transferEncodingPresent":false}
+{"atUTC":"2026-11-03T19:20:44.049Z","event":"origin-response","index":0,"status":204}
+{"atUTC":"2026-11-03T19:20:44.109Z","event":"connector-started","pid":26176}
+{"atUTC":"2026-11-03T19:20:44.594Z","event":"connector-rejected","failure":"NGROK_UPSTREAM_UNCONFIRMED","codes":[]}
+{"atUTC":"2026-11-03T19:20:44.600Z","event":"connector-exit","code":null,"signal":"SIGTERM"}
+{"atUTC":"2026-11-03T19:20:44.602Z","event":"listener-closed","tunnelStopped":true}

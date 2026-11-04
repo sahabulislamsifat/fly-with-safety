@@ -1,0 +1,5 @@
+{
+  "origin": "https://intervention-captured-monitoring-installations.trycloudflare.com",
+  "scope": "PROBE_ONLY_NOT_APPROVED_MERCHANT_CALLBACK",
+  "expiresWhenTunnelStops": true
+}

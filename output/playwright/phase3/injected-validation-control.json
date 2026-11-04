@@ -1,0 +1,8 @@
+{
+  "from": "pending",
+  "to": "validated",
+  "provider": "MOCK_ONLY",
+  "bookingId": "e77192b4-357f-47a6-ad59-dc35b980330e",
+  "beforeSha256": "EBD8CD96313D93D67C41132D0CD1842DF48B62D0BDEF0A3A9F43BA152F0E26A0",
+  "externalProviderCalled": false
+}

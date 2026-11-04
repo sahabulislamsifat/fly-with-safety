@@ -1,0 +1,25 @@
+✔ healthy frontend remains untouched: one backend stop, one proof, one backend restore (9.2566ms)
+✔ failed proof restores backend without replay (3.1539ms)
+✔ frontend change blocks public proof but does not block independently safe backend restore (2.3212ms)
+✔ frontend HTTP outage cannot suppress a healthy backend-restoration result (1.9272ms)
+✔ unconfirmed probe exit blocks exposing restored main backend (1.5037ms)
+✔ residual connector blocks main restoration and public proof (1.3771ms)
+✔ backend stop incomplete never starts another backend or public process (1.7594ms)
+✔ nonzero graceful-stop acknowledgement skips public proof and safely restores backend (2.2162ms)
+✔ safe backend restoration independent of frontend state (0.9024ms)
+✔ unsafe backendAbsent blocks main restoration (0.1637ms)
+✔ unsafe connectorsAbsent blocks main restoration (0.1269ms)
+✔ unconfirmed tunnelStopped blocks main restoration (0.1996ms)
+✔ unconfirmed listenerStopped blocks main restoration (0.256ms)
+✔ live probe cannot be replaced by main (0.2076ms)
+✔ no blank or fabricated proof exit (0.2891ms)
+✔ known preflight rejection retains the actual safe reason (0.1711ms)
+✔ unknown error message cannot leak a private value (0.1381ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 125.0467

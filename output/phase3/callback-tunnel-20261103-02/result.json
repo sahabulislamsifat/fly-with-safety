@@ -1,0 +1,19 @@
+{
+  "passed": false,
+  "stage": "public-path-checks",
+  "failure": "PUBLIC_BOUNDARY_MISMATCH",
+  "failureDetail": null,
+  "shutdownFailure": null,
+  "attempted": 1,
+  "completedHttp": 1,
+  "pass": 0,
+  "fail": 1,
+  "unexecuted": 30,
+  "connectorPID": 9808,
+  "tunnelStopped": true,
+  "listenerStopped": true,
+  "databaseAccess": false,
+  "merchantCalls": 0,
+  "credentialsRead": false,
+  "finishedUTC": "2026-11-03T10:49:54.082Z"
+}

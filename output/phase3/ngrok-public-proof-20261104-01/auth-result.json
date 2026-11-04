@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "authenticatedSessionStarted": true,
+  "codes": [],
+  "failure": null,
+  "ownedProcessStopped": true,
+  "endpointRequested": false,
+  "publicURLBound": false,
+  "domainEntitlementVerified": false,
+  "policyEntitlementVerified": false,
+  "databaseAccess": false,
+  "providerCalls": 0,
+  "finishedUTC": "2026-11-03T19:20:35.984Z"
+}

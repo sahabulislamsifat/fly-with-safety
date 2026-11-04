@@ -1,0 +1,152 @@
+{
+  "accepted": true,
+  "realPostgres": true,
+  "provider": "MOCK_ONLY",
+  "vitest": {
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0
+  },
+  "checks": {
+    "passed": 64,
+    "failed": 0,
+    "unexecuted": 0
+  },
+  "snapshotPassed": true,
+  "disconnected": true,
+  "unlistedPreservation": true,
+  "migrationPreservation": true,
+  "pins": 203,
+  "sourceIntegrityPassed": true,
+  "ownedSnapshotCounts": {
+    "User": 4,
+    "Booking": 2,
+    "BookingPassenger": 2,
+    "BookingStatusHistory": 7,
+    "GatewayPayment": 2,
+    "GatewayRefund": 1,
+    "GatewayPaymentEvent": 16,
+    "NotificationOutbox": 15
+  },
+  "ownedSnapshotTotal": 49,
+  "finishedUTC": "2026-11-02T21:26:05.7135200Z",
+  "ownerReportedCallerPassMarker": "PHASE3_RESTRICTED_POSTGRES_PAYMENT_PROOF_PASS_NOT_PROVIDER_ACCEPTANCE",
+  "callerMarkerDerivableFromSavedPassedState": true,
+  "callerConsoleMarkerSeparatelyPersisted": false,
+  "browserAccepted": false,
+  "genuineProviderAccepted": false,
+  "artifacts": [
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\accepted-readonly.json",
+      "sha256": "91A00BFA8A8FC23E85196041392E873DD0A6C80A5DF953169772D84DC89D3065"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\attempt-started.json",
+      "sha256": "515596EC7054A5A99DFB99A86BE1CE375AF44E5CB1DB610473176ABBE8C86915"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\build-review.cjs",
+      "sha256": "8AA7B45D3DD764C57A2EFAD0D5C6A1D31AE243F0E00CEFA31F8637DBF159216F"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\caller-result.json",
+      "sha256": "8DEE3054BB49A163DF056877CD88E78228AE19A9B204537C61390561999F91F4"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\eslint.json",
+      "sha256": "D63E9FD669FFA7BE2C9230C23D4D19A5D091A525B7DFC095A2951C33D146CF30"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\fixtures-bundled.json",
+      "sha256": "1DC2D632E46CC0E8C05B836F211C98AE0FE78F4D48B43CEC8BB63B29F181D5E0"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\fixtures-native.json",
+      "sha256": "98B89CAAA7076610A0BC2532A1CF88ECEBEFFBFC7742B83C92752D73A184B555"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\FOREGROUND-AFTER-APPROVAL.txt",
+      "sha256": "5E848FCE27EE4CD5DF6773E17C54B54FF23E882C73C7DF7FB25BF8AB5A5A06CE"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\Invoke-RetainedProof.ps1",
+      "sha256": "DBA2493CBD8580D4D98E02B5343283AEE6519341A1222534E41C3D8691147711"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\ledger.jsonl",
+      "sha256": "F93F8A1A7C4C7FDE7F51D96DB360CF04971B8EAD4B9E387440AFBDB2554153B7"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\offline-review.json",
+      "sha256": "1BA5E34C53848237AB5AA172B9FB8C3D868E2A1572FB1D853FA411284C24E90E"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\pins.json",
+      "sha256": "DDBF3030DB846B59EEDD96260D721B2E3929E793DA2571A6F01EAFF5A3C4B091"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\policy.json",
+      "sha256": "21D9816F2A6E89C4BEB2AE57DD3B76E308FD91CEBA0094EBC3DD14B9AE2C8FFB"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\preflight.readonly.sql",
+      "sha256": "0B50DC529BB3A5E5ABFAD000773DD630A8F19A16BC3BD6D39246BCA9118894B5"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\proof-attempt.json",
+      "sha256": "55463196C9F5B94C804EF4BB5D1578B2CB8321D0A10461FF3F3C560D5B762231"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\proof-result.json",
+      "sha256": "70DF3EDABE559911DD3D0FC36C1AB74CCDFFF87C631727283A769223B0090F44"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\proof-stdout.txt",
+      "sha256": "D178731A98CD767BE79BD9FF4D4C81A733A56178458A43CF32209E19C3DBC9FF"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\readonly-stdout.txt",
+      "sha256": "1CF870114D0EFEC952F6CEE81F1E7552B8397C70FCF1888ECFB247D3911A40BD"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\retained-guards.fragment.sql",
+      "sha256": "10CA7DCEC4F127F36BFF6EC6909D1CA519DB7CE36D34D55EC1429C80A8270474"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\review-hashes.json",
+      "sha256": "CEDDA2286D26C9E84C686DBB2FB69C01879B9BD14D8156D5448EA66A46CCD873"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\REVIEW.md",
+      "sha256": "79000D0EA2E7B996DFD33C2D94E5F76EAEC362117ED51DCF0C1011E4A66B8347"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\Set-PrivateConnection.ps1",
+      "sha256": "477B44A61F99BB65944491B4421BA98F30AC24716C8212D5509AC1DB9389B1D2"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\source-before.ts",
+      "sha256": "3BF9D186BD1A9BA4233E789D27F889A818F54EBF3459F149D415E43F2459936C"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\test-contract.json",
+      "sha256": "CA50AF945A700B3C9BE21F1C0802C6487DDDADB67E29994923BDC356F6957D0D"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\verify-lint.cjs",
+      "sha256": "24194B7893DF524DD938D3A2B7EDDA1EB835064B004782BAA8C61672F5E945E5"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\verify-private-url.cjs",
+      "sha256": "85338F939C9B16FF36B563FA6080CF77CD4B746375D39F723425EC9C47261E48"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\verify.offline.cjs",
+      "sha256": "02F2E2348540F8A5521C01288689CD001BA1D5AB7CDBD8FD475453328C6D25CD"
+    },
+    {
+      "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\retained-proof-20261103-01\\vitest-result.json",
+      "sha256": "1A44C6166ABFCEEF11750B2E16C943F923E43CFB1DFB57A3B23B3EE7743C3839"
+    }
+  ]
+}

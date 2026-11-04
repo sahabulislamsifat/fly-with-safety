@@ -1,0 +1,226 @@
+TAP version 13
+# Subtest: auth-only command requests no endpoints/upstream and excludes credential environment overrides
+ok 1 - auth-only command requests no endpoints/upstream and excludes credential environment overrides
+  ---
+  duration_ms: 21.5831
+  type: 'test'
+  ...
+# Subtest: reject fails, preserves evidence, stops owned session and never retries
+ok 2 - reject fails, preserves evidence, stops owned session and never retries
+  ---
+  duration_ms: 1.5974
+  type: 'test'
+  ...
+# Subtest: endpoint fails, preserves evidence, stops owned session and never retries
+ok 3 - endpoint fails, preserves evidence, stops owned session and never retries
+  ---
+  duration_ms: 1.8684
+  type: 'test'
+  ...
+# Subtest: warn fails, preserves evidence, stops owned session and never retries
+ok 4 - warn fails, preserves evidence, stops owned session and never retries
+  ---
+  duration_ms: 1.6708
+  type: 'test'
+  ...
+# Subtest: exit fails, preserves evidence, stops owned session and never retries
+ok 5 - exit fails, preserves evidence, stops owned session and never retries
+  ---
+  duration_ms: 1.5429
+  type: 'test'
+  ...
+# Subtest: timeout fails, preserves evidence, stops owned session and never retries
+ok 6 - timeout fails, preserves evidence, stops owned session and never retries
+  ---
+  duration_ms: 15.034
+  type: 'test'
+  ...
+# Subtest: healthy frontend remains untouched: one backend stop, one proof, one backend restore
+ok 7 - healthy frontend remains untouched: one backend stop, one proof, one backend restore
+  ---
+  duration_ms: 15.9799
+  type: 'test'
+  ...
+# Subtest: failed proof restores backend without replay
+ok 8 - failed proof restores backend without replay
+  ---
+  duration_ms: 5.6144
+  type: 'test'
+  ...
+# Subtest: frontend change blocks public proof but does not block independently safe backend restore
+ok 9 - frontend change blocks public proof but does not block independently safe backend restore
+  ---
+  duration_ms: 3.7177
+  type: 'test'
+  ...
+# Subtest: frontend HTTP outage cannot suppress a healthy backend-restoration result
+ok 10 - frontend HTTP outage cannot suppress a healthy backend-restoration result
+  ---
+  duration_ms: 3.4649
+  type: 'test'
+  ...
+# Subtest: unconfirmed probe exit blocks exposing restored main backend
+ok 11 - unconfirmed probe exit blocks exposing restored main backend
+  ---
+  duration_ms: 4.3784
+  type: 'test'
+  ...
+# Subtest: residual connector blocks main restoration and public proof
+ok 12 - residual connector blocks main restoration and public proof
+  ---
+  duration_ms: 3.9139
+  type: 'test'
+  ...
+# Subtest: backend stop incomplete never starts another backend or public process
+ok 13 - backend stop incomplete never starts another backend or public process
+  ---
+  duration_ms: 5.3411
+  type: 'test'
+  ...
+# Subtest: nonzero graceful-stop acknowledgement skips public proof and safely restores backend
+ok 14 - nonzero graceful-stop acknowledgement skips public proof and safely restores backend
+  ---
+  duration_ms: 4.1377
+  type: 'test'
+  ...
+# Subtest: backend HTTP200/database down preflight captures mismatch and never starts maintenance or connector
+ok 15 - backend HTTP200/database down preflight captures mismatch and never starts maintenance or connector
+  ---
+  duration_ms: 3.0658
+  type: 'test'
+  ...
+# Subtest: failed/unconfirmed rotated auth blocks all maintenance/public actions {"authReject":true}
+ok 16 - failed/unconfirmed rotated auth blocks all maintenance/public actions {"authReject":true}
+  ---
+  duration_ms: 3.3513
+  type: 'test'
+  ...
+# Subtest: failed/unconfirmed rotated auth blocks all maintenance/public actions {"authHung":true}
+ok 17 - failed/unconfirmed rotated auth blocks all maintenance/public actions {"authHung":true}
+  ---
+  duration_ms: 2.1803
+  type: 'test'
+  ...
+# Subtest: failed/unconfirmed rotated auth blocks all maintenance/public actions {"authStopUnconfirmed":true}
+ok 18 - failed/unconfirmed rotated auth blocks all maintenance/public actions {"authStopUnconfirmed":true}
+  ---
+  duration_ms: 2.3552
+  type: 'test'
+  ...
+# Subtest: safe backend restoration independent of frontend state
+ok 19 - safe backend restoration independent of frontend state
+  ---
+  duration_ms: 1.9151
+  type: 'test'
+  ...
+# Subtest: unsafe backendAbsent blocks main restoration
+ok 20 - unsafe backendAbsent blocks main restoration
+  ---
+  duration_ms: 0.1955
+  type: 'test'
+  ...
+# Subtest: unsafe connectorsAbsent blocks main restoration
+ok 21 - unsafe connectorsAbsent blocks main restoration
+  ---
+  duration_ms: 0.1354
+  type: 'test'
+  ...
+# Subtest: unconfirmed tunnelStopped blocks main restoration
+ok 22 - unconfirmed tunnelStopped blocks main restoration
+  ---
+  duration_ms: 0.1978
+  type: 'test'
+  ...
+# Subtest: unconfirmed listenerStopped blocks main restoration
+ok 23 - unconfirmed listenerStopped blocks main restoration
+  ---
+  duration_ms: 0.2977
+  type: 'test'
+  ...
+# Subtest: live probe cannot be replaced by main
+ok 24 - live probe cannot be replaced by main
+  ---
+  duration_ms: 0.2435
+  type: 'test'
+  ...
+# Subtest: no blank or fabricated proof exit
+ok 25 - no blank or fabricated proof exit
+  ---
+  duration_ms: 0.2989
+  type: 'test'
+  ...
+# Subtest: known preflight rejection retains the actual safe reason
+ok 26 - known preflight rejection retains the actual safe reason
+  ---
+  duration_ms: 0.5221
+  type: 'test'
+  ...
+# Subtest: unknown error message cannot leak a private value
+ok 27 - unknown error message cannot leak a private value
+  ---
+  duration_ms: 0.2901
+  type: 'test'
+  ...
+# Subtest: exact explicit config list includes only file paths once, no credential value
+ok 28 - exact explicit config list includes only file paths once, no credential value
+  ---
+  duration_ms: 2.2996
+  type: 'test'
+  ...
+# Subtest: path delimiter/relative override rejected before session
+ok 29 - path delimiter/relative override rejected before session
+  ---
+  duration_ms: 0.6014
+  type: 'test'
+  ...
+# Subtest: public scope fixed to isolated loopback and assigned domain
+ok 30 - public scope fixed to isolated loopback and assigned domain
+  ---
+  duration_ms: 0.4547
+  type: 'test'
+  ...
+# Subtest: configuration/client-connect chatter is not successful authentication
+ok 31 - configuration/client-connect chatter is not successful authentication
+  ---
+  duration_ms: 0.8431
+  type: 'test'
+  ...
+# Subtest: only session-start acknowledgement passes
+ok 32 - only session-start acknowledgement passes
+  ---
+  duration_ms: 0.1668
+  type: 'test'
+  ...
+# Subtest: ERR_NGROK_105 retained without raw credential
+ok 33 - ERR_NGROK_105 retained without raw credential
+  ---
+  duration_ms: 0.7156
+  type: 'test'
+  ...
+# Subtest: unexpected public endpoint event fails even though session could be valid
+ok 34 - unexpected public endpoint event fails even though session could be valid
+  ---
+  duration_ms: 0.1742
+  type: 'test'
+  ...
+# Subtest: first error/warning stops rather than triggering retry
+ok 35 - first error/warning stops rather than triggering retry
+  ---
+  duration_ms: 1.0098
+  type: 'test'
+  ...
+# Subtest: unknown fields/invalid JSON discarded
+ok 36 - unknown fields/invalid JSON discarded
+  ---
+  duration_ms: 0.2503
+  type: 'test'
+  ...
+1..36
+# tests 36
+# suites 0
+# pass 36
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 192.8778

@@ -1,0 +1,26 @@
+[
+  {
+    "index": 1,
+    "method": "POST",
+    "path": "/api/v1/payments/sslcommerz/success",
+    "expected": 204,
+    "observed": null,
+    "passed": false,
+    "failure": {
+      "classification": "DNS",
+      "codes": [
+        "ENOTFOUND"
+      ]
+    },
+    "origin": {
+      "reached": false,
+      "hostClass": null,
+      "methodMatched": null,
+      "pathMatched": null,
+      "guard": null,
+      "media": null,
+      "transferEncodingPresent": null,
+      "status": null
+    }
+  }
+]

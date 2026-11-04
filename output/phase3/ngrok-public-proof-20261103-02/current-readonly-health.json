@@ -1,0 +1,36 @@
+{
+  "backend": true,
+  "frontend": true,
+  "checks": {
+    "backend": {
+      "target": "backend",
+      "url": "http://localhost:5000/api/v1/health",
+      "budgetMs": 2000,
+      "expectedStatus": 200,
+      "expectedDatabase": "up",
+      "status": 200,
+      "media": "application/json",
+      "jsonShape": "DATA_OBJECT",
+      "database": "up",
+      "environment": "development",
+      "elapsedMs": 472,
+      "passed": true,
+      "failure": null
+    },
+    "frontend": {
+      "target": "frontend",
+      "url": "http://localhost:3000/",
+      "budgetMs": 4000,
+      "expectedStatus": 200,
+      "expectedDatabase": null,
+      "status": 200,
+      "media": "text/html",
+      "jsonShape": null,
+      "database": null,
+      "environment": null,
+      "elapsedMs": 82,
+      "passed": true,
+      "failure": null
+    }
+  }
+}

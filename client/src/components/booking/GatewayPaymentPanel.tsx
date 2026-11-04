@@ -45,7 +45,7 @@ export function GatewayPaymentPanel({ reference, staff }: { reference: string; s
     {records?.refunds.map(r => <p className="text-xs" key={r.id}>Refund {money(r.amountMinor)} · {r.status}. An initiated refund is not a completed refund.</p>)}
     {!!records?.history.length && <details className="text-xs"><summary>Payment audit history</summary><ol>{records.history.map((e, i) => <li key={`${e.createdAt}:${i}`}>{e.kind.replaceAll('_', ' ')} · {new Date(e.createdAt).toLocaleString()}</li>)}</ol></details>}
     <Button size="sm" variant="outline" disabled={busy} onClick={() => void refresh().catch(() => setMessage('Payment status could not be refreshed.'))}>Refresh payment status</Button>
-    {!staff && <form onChange={() => { request.current = null; }} onSubmit={async e => {
+    {!staff && !records?.payments.some(p => p.captured) && <form onChange={() => { request.current = null; }} onSubmit={async e => {
       e.preventDefault(); if (busy) return; setBusy(true); setMessage('');
       const form = new FormData(e.currentTarget);
       request.current ||= crypto.randomUUID();

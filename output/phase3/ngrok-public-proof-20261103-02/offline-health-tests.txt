@@ -1,0 +1,178 @@
+TAP version 13
+# Subtest: healthy frontend remains untouched: one backend stop, one proof, one backend restore
+ok 1 - healthy frontend remains untouched: one backend stop, one proof, one backend restore
+  ---
+  duration_ms: 12.9427
+  type: 'test'
+  ...
+# Subtest: failed proof restores backend without replay
+ok 2 - failed proof restores backend without replay
+  ---
+  duration_ms: 4.2007
+  type: 'test'
+  ...
+# Subtest: frontend change blocks public proof but does not block independently safe backend restore
+ok 3 - frontend change blocks public proof but does not block independently safe backend restore
+  ---
+  duration_ms: 3.3927
+  type: 'test'
+  ...
+# Subtest: frontend HTTP outage cannot suppress a healthy backend-restoration result
+ok 4 - frontend HTTP outage cannot suppress a healthy backend-restoration result
+  ---
+  duration_ms: 3.1236
+  type: 'test'
+  ...
+# Subtest: unconfirmed probe exit blocks exposing restored main backend
+ok 5 - unconfirmed probe exit blocks exposing restored main backend
+  ---
+  duration_ms: 2.8511
+  type: 'test'
+  ...
+# Subtest: residual connector blocks main restoration and public proof
+ok 6 - residual connector blocks main restoration and public proof
+  ---
+  duration_ms: 2.4836
+  type: 'test'
+  ...
+# Subtest: backend stop incomplete never starts another backend or public process
+ok 7 - backend stop incomplete never starts another backend or public process
+  ---
+  duration_ms: 2.5064
+  type: 'test'
+  ...
+# Subtest: nonzero graceful-stop acknowledgement skips public proof and safely restores backend
+ok 8 - nonzero graceful-stop acknowledgement skips public proof and safely restores backend
+  ---
+  duration_ms: 2.6399
+  type: 'test'
+  ...
+# Subtest: backend HTTP200/database down preflight captures mismatch and never starts maintenance or connector
+ok 9 - backend HTTP200/database down preflight captures mismatch and never starts maintenance or connector
+  ---
+  duration_ms: 2.9662
+  type: 'test'
+  ...
+# Subtest: safe backend restoration independent of frontend state
+ok 10 - safe backend restoration independent of frontend state
+  ---
+  duration_ms: 0.9978
+  type: 'test'
+  ...
+# Subtest: unsafe backendAbsent blocks main restoration
+ok 11 - unsafe backendAbsent blocks main restoration
+  ---
+  duration_ms: 0.128
+  type: 'test'
+  ...
+# Subtest: unsafe connectorsAbsent blocks main restoration
+ok 12 - unsafe connectorsAbsent blocks main restoration
+  ---
+  duration_ms: 0.0745
+  type: 'test'
+  ...
+# Subtest: unconfirmed tunnelStopped blocks main restoration
+ok 13 - unconfirmed tunnelStopped blocks main restoration
+  ---
+  duration_ms: 0.0829
+  type: 'test'
+  ...
+# Subtest: unconfirmed listenerStopped blocks main restoration
+ok 14 - unconfirmed listenerStopped blocks main restoration
+  ---
+  duration_ms: 0.1732
+  type: 'test'
+  ...
+# Subtest: live probe cannot be replaced by main
+ok 15 - live probe cannot be replaced by main
+  ---
+  duration_ms: 0.1044
+  type: 'test'
+  ...
+# Subtest: no blank or fabricated proof exit
+ok 16 - no blank or fabricated proof exit
+  ---
+  duration_ms: 0.1027
+  type: 'test'
+  ...
+# Subtest: known preflight rejection retains the actual safe reason
+ok 17 - known preflight rejection retains the actual safe reason
+  ---
+  duration_ms: 0.0986
+  type: 'test'
+  ...
+# Subtest: unknown error message cannot leak a private value
+ok 18 - unknown error message cannot leak a private value
+  ---
+  duration_ms: 0.1074
+  type: 'test'
+  ...
+# Subtest: unchanged exact URLs, sequential checks and2s/4s budgets
+ok 19 - unchanged exact URLs, sequential checks and2s/4s budgets
+  ---
+  duration_ms: 2.9345
+  type: 'test'
+  ...
+# Subtest: database down remains FAIL with HTTP200 recorded
+ok 20 - database down remains FAIL with HTTP200 recorded
+  ---
+  duration_ms: 0.2974
+  type: 'test'
+  ...
+# Subtest: non200 does not pass even with database up
+ok 21 - non200 does not pass even with database up
+  ---
+  duration_ms: 0.1495
+  type: 'test'
+  ...
+# Subtest: wrong nesting captured without treating it as healthy
+ok 22 - wrong nesting captured without treating it as healthy
+  ---
+  duration_ms: 0.4043
+  type: 'test'
+  ...
+# Subtest: invalid JSON is distinct from network or database-down result
+ok 23 - invalid JSON is distinct from network or database-down result
+  ---
+  duration_ms: 0.5643
+  type: 'test'
+  ...
+# Subtest: timeout classification preserved, no retry
+ok 24 - timeout classification preserved, no retry
+  ---
+  duration_ms: 0.3255
+  type: 'test'
+  ...
+# Subtest: native connection error code retained without message or stack
+ok 25 - native connection error code retained without message or stack
+  ---
+  duration_ms: 0.2446
+  type: 'test'
+  ...
+# Subtest: unknown sensitive fields never serialized
+ok 26 - unknown sensitive fields never serialized
+  ---
+  duration_ms: 0.1203
+  type: 'test'
+  ...
+# Subtest: frontend failure remains independent from backend success
+ok 27 - frontend failure remains independent from backend success
+  ---
+  duration_ms: 0.3741
+  type: 'test'
+  ...
+# Subtest: body cancellation error does not silently pass frontend
+ok 28 - body cancellation error does not silently pass frontend
+  ---
+  duration_ms: 0.4198
+  type: 'test'
+  ...
+1..28
+# tests 28
+# suites 0
+# pass 28
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 145.2767
