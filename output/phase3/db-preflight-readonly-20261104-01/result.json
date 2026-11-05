@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "failure": null,
+  "identityVerified": true,
+  "nativeOriginalCatalogCharOID18": true,
+  "correctedCatalogRows": 340,
+  "snapshotSerializable": true,
+  "controlledRollback": true,
+  "guards": {
+    "identityVerified": true,
+    "migrations": 8,
+    "actors": 4,
+    "staffRecipients": 2,
+    "fixtureAbsent": true
+  },
+  "completed": [
+    "native-readonly-identity",
+    "native-original-catalog",
+    "prisma-identity",
+    "prisma-migrations",
+    "prisma-role-or-permission",
+    "prisma-payment-permissions",
+    "prisma-migrations",
+    "prisma-corrected-catalog",
+    "prisma-role-or-permission",
+    "prisma-protected-row-select",
+    "prisma-protected-row-select",
+    "prisma-protected-row-select",
+    "protected-snapshot-json-serializable"
+  ],
+  "financialWrites": 0,
+  "providerCalls": 0,
+  "publicConnections": 0,
+  "mainCloudAccess": false,
+  "normalServicesTouched": false
+}

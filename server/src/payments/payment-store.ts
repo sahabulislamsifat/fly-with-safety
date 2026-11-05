@@ -18,8 +18,9 @@ export interface PaymentStore {
 }
 /** Booking is always locked before its payment/refund rows. Provider I/O is forbidden in this callback. */
 export class PrismaPaymentStore implements PaymentStore {
+  constructor(private readonly database: typeof prisma = prisma) {}
   async transaction<T>(reference: string, action: (l: Ledger) => Promise<T>) {
-    return prisma.$transaction(async tx => {
+    return this.database.$transaction(async tx => {
       await tx.$queryRaw(Prisma.sql`SELECT id FROM public."Booking" WHERE "referenceNumber"=${reference} FOR UPDATE`);
       const booking = await tx.booking.findUnique({ where: { referenceNumber: reference } });
       if (!booking) throw AppError.notFound('Booking not found');
@@ -61,15 +62,15 @@ export class PrismaPaymentStore implements PaymentStore {
     }, { maxWait: 5000, timeout: 10_000 });
   }
   async locate(tranId: string) {
-    const rows = await prisma.$queryRaw<Array<{ referenceNumber: string }>>(Prisma.sql`SELECT b."referenceNumber" FROM public."GatewayPayment" p JOIN public."Booking" b ON b.id=p."bookingId" WHERE p."tranId"=${tranId}`);
+    const rows = await this.database.$queryRaw<Array<{ referenceNumber: string }>>(Prisma.sql`SELECT b."referenceNumber" FROM public."GatewayPayment" p JOIN public."Booking" b ON b.id=p."bookingId" WHERE p."tranId"=${tranId}`);
     return rows[0]?.referenceNumber ?? null;
   }
   async due(limit: number) {
-    const rows = await prisma.$queryRaw<Array<{ referenceNumber: string }>>(Prisma.sql`SELECT DISTINCT b."referenceNumber" FROM public."GatewayPayment" p JOIN public."Booking" b ON b.id=p."bookingId" WHERE p."dueAt" <= clock_timestamp() ORDER BY b."referenceNumber" LIMIT ${Math.min(20, Math.max(1, limit))}`);
+    const rows = await this.database.$queryRaw<Array<{ referenceNumber: string }>>(Prisma.sql`SELECT DISTINCT b."referenceNumber" FROM public."GatewayPayment" p JOIN public."Booking" b ON b.id=p."bookingId" WHERE p."dueAt" <= clock_timestamp() ORDER BY b."referenceNumber" LIMIT ${Math.min(20, Math.max(1, limit))}`);
     return rows.map(r => r.referenceNumber);
   }
   async operations() {
-    return prisma.$queryRaw<Array<{ reference: string; paymentId: string; status: string; refundPending: boolean }>>(Prisma.sql`
+    return this.database.$queryRaw<Array<{ reference: string; paymentId: string; status: string; refundPending: boolean }>>(Prisma.sql`
       SELECT b."referenceNumber" AS reference,p.id AS "paymentId",p.status,
       EXISTS(SELECT FROM public."GatewayRefund" r WHERE r."paymentId"=p.id AND r.state->>'status' IN ('INITIATING','UNKNOWN','PROCESSING')) AS "refundPending"
       FROM public."GatewayPayment" p JOIN public."Booking" b ON b.id=p."bookingId"

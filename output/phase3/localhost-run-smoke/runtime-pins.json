@@ -1,0 +1,26 @@
+[
+  {
+    "path": "C:\\Program Files\\nodejs\\node.exe",
+    "sha256": "8490398F5E0082772DFB0AE5A6EBDFF98A97696A20CB9778B4F82EEC79B6D0A1"
+  },
+  {
+    "path": "C:\\Windows\\System32\\OpenSSH\\ssh.exe",
+    "sha256": "98D447730047F5DF91373E852D057928A921C3D1E89938700AB656BA84B19DC8"
+  },
+  {
+    "path": "C:\\Windows\\System32\\OpenSSH\\ssh-keyscan.exe",
+    "sha256": "673EE651264490808E0B236C041D13D1539EA8C4C266700EC599E14785132363"
+  },
+  {
+    "path": "C:\\Windows\\System32\\OpenSSH\\ssh-keygen.exe",
+    "sha256": "C9DC170CD161DB87E75EB6CF282F1325005B9E35628B9A36CB19883A8BE1A34F"
+  },
+  {
+    "path": "C:\\Users\\sahab\\AppData\\Local\\npm-cache\\_npx\\31e32ef8478fbf80\\node_modules\\playwright\\package.json",
+    "sha256": "FE3C6792E66CBF7277D6DA6D744AFE78DB8CFA12138129B6EAA3A83CC1D2DA37"
+  },
+  {
+    "path": "C:\\Users\\sahab\\AppData\\Local\\npm-cache\\_npx\\31e32ef8478fbf80\\node_modules\\playwright\\index.js",
+    "sha256": "4E98F65F0A9D9BCAB8CFFC0C5CFDD87FD3F5B0BE74FC494FF166A466B204CD44"
+  }
+]

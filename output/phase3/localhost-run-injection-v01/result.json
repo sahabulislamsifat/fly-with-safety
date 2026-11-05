@@ -1,0 +1,243 @@
+{
+  "passed": true,
+  "failure": null,
+  "stage": "browser-form-post",
+  "nativeEvidence": {
+    "nativeExitCode": null,
+    "signal": "SIGTERM",
+    "spawnError": null,
+    "stdoutBytes": 15481,
+    "stderrBytes": 810,
+    "categories": [
+      "AUTH_TEXT_OBSERVED"
+    ],
+    "cleanupRequested": true
+  },
+  "checks": [
+    {
+      "method": "POST",
+      "path": "/api/v1/payments/sslcommerz/success",
+      "expected": 200,
+      "status": 200,
+      "marker": true,
+      "originMatched": true,
+      "guard": {
+        "originKnown": true,
+        "loopback": true,
+        "methodPOST": true,
+        "exactCallback": true,
+        "hostMatches": true,
+        "forwardedHTTPS": true,
+        "formContentType": true,
+        "noTransferEncoding": true,
+        "boundedDeclaredLength": true,
+        "admitted": true,
+        "failedPredicates": []
+      },
+      "proxyMetadata": {
+        "xfpClass": "EXACT_HTTPS",
+        "forwardedClass": "HTTPS",
+        "xfpRawCount": 1,
+        "forwardedRawCount": 1,
+        "duplicateSchemeHeader": false,
+        "crossHeaderConflict": false,
+        "loopbackPeer": true,
+        "exactAssignedHost": true,
+        "metadataAuthority": "UNVERIFIED_PROXY_OVERWRITE_SEMANTICS",
+        "usedToAuthorize": false
+      },
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/payments/sslcommerz/fail",
+      "expected": 200,
+      "status": 200,
+      "marker": true,
+      "originMatched": true,
+      "guard": {
+        "originKnown": true,
+        "loopback": true,
+        "methodPOST": true,
+        "exactCallback": true,
+        "hostMatches": true,
+        "forwardedHTTPS": true,
+        "formContentType": true,
+        "noTransferEncoding": true,
+        "boundedDeclaredLength": true,
+        "admitted": true,
+        "failedPredicates": []
+      },
+      "proxyMetadata": {
+        "xfpClass": "EXACT_HTTPS",
+        "forwardedClass": "HTTPS",
+        "xfpRawCount": 1,
+        "forwardedRawCount": 1,
+        "duplicateSchemeHeader": false,
+        "crossHeaderConflict": false,
+        "loopbackPeer": true,
+        "exactAssignedHost": true,
+        "metadataAuthority": "UNVERIFIED_PROXY_OVERWRITE_SEMANTICS",
+        "usedToAuthorize": false
+      },
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/payments/sslcommerz/cancel",
+      "expected": 200,
+      "status": 200,
+      "marker": true,
+      "originMatched": true,
+      "guard": {
+        "originKnown": true,
+        "loopback": true,
+        "methodPOST": true,
+        "exactCallback": true,
+        "hostMatches": true,
+        "forwardedHTTPS": true,
+        "formContentType": true,
+        "noTransferEncoding": true,
+        "boundedDeclaredLength": true,
+        "admitted": true,
+        "failedPredicates": []
+      },
+      "proxyMetadata": {
+        "xfpClass": "EXACT_HTTPS",
+        "forwardedClass": "HTTPS",
+        "xfpRawCount": 1,
+        "forwardedRawCount": 1,
+        "duplicateSchemeHeader": false,
+        "crossHeaderConflict": false,
+        "loopbackPeer": true,
+        "exactAssignedHost": true,
+        "metadataAuthority": "UNVERIFIED_PROXY_OVERWRITE_SEMANTICS",
+        "usedToAuthorize": false
+      },
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/payments/sslcommerz/ipn",
+      "expected": 200,
+      "status": 200,
+      "marker": true,
+      "originMatched": true,
+      "guard": {
+        "originKnown": true,
+        "loopback": true,
+        "methodPOST": true,
+        "exactCallback": true,
+        "hostMatches": true,
+        "forwardedHTTPS": true,
+        "formContentType": true,
+        "noTransferEncoding": true,
+        "boundedDeclaredLength": true,
+        "admitted": true,
+        "failedPredicates": []
+      },
+      "proxyMetadata": {
+        "xfpClass": "EXACT_HTTPS",
+        "forwardedClass": "HTTPS",
+        "xfpRawCount": 1,
+        "forwardedRawCount": 1,
+        "duplicateSchemeHeader": false,
+        "crossHeaderConflict": false,
+        "loopbackPeer": true,
+        "exactAssignedHost": true,
+        "metadataAuthority": "UNVERIFIED_PROXY_OVERWRITE_SEMANTICS",
+        "usedToAuthorize": false
+      },
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "expected": 404,
+      "status": 404,
+      "marker": true,
+      "originMatched": true,
+      "guard": {
+        "originKnown": true,
+        "loopback": true,
+        "methodPOST": true,
+        "exactCallback": false,
+        "hostMatches": true,
+        "forwardedHTTPS": true,
+        "formContentType": true,
+        "noTransferEncoding": true,
+        "boundedDeclaredLength": true,
+        "admitted": false,
+        "failedPredicates": [
+          "exactCallback"
+        ]
+      },
+      "proxyMetadata": {
+        "xfpClass": "EXACT_HTTPS",
+        "forwardedClass": "HTTPS",
+        "xfpRawCount": 1,
+        "forwardedRawCount": 1,
+        "duplicateSchemeHeader": false,
+        "crossHeaderConflict": false,
+        "loopbackPeer": true,
+        "exactAssignedHost": true,
+        "metadataAuthority": "UNVERIFIED_PROXY_OVERWRITE_SEMANTICS",
+        "usedToAuthorize": false
+      },
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/payments/sslcommerz/success",
+      "expected": 404,
+      "status": 404,
+      "marker": true,
+      "originMatched": true,
+      "guard": {
+        "originKnown": true,
+        "loopback": true,
+        "methodPOST": false,
+        "exactCallback": true,
+        "hostMatches": true,
+        "forwardedHTTPS": true,
+        "formContentType": true,
+        "noTransferEncoding": true,
+        "boundedDeclaredLength": true,
+        "admitted": false,
+        "failedPredicates": [
+          "methodPOST"
+        ]
+      },
+      "proxyMetadata": {
+        "xfpClass": "EXACT_HTTPS",
+        "forwardedClass": "HTTPS",
+        "xfpRawCount": 1,
+        "forwardedRawCount": 1,
+        "duplicateSchemeHeader": false,
+        "crossHeaderConflict": false,
+        "loopbackPeer": true,
+        "exactAssignedHost": true,
+        "metadataAuthority": "UNVERIFIED_PROXY_OVERWRITE_SEMANTICS",
+        "usedToAuthorize": false
+      },
+      "passed": true
+    },
+    {
+      "method": "BROWSER_FORM_POST",
+      "status": 200,
+      "originMatched": true,
+      "marker": true,
+      "rendered": true,
+      "passed": true
+    }
+  ],
+  "pass": 7,
+  "fail": 0,
+  "unexecuted": 0,
+  "connectorStopped": true,
+  "trust": "TOFU_SYNTHETIC_ONLY",
+  "normalServicesTouched": false,
+  "databaseAccess": false,
+  "providerCalls": 0,
+  "paymentAcceptance": false
+}

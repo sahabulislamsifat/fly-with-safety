@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "checks": 1183,
+  "sourcePins": 176,
+  "runtimePins": 923,
+  "attemptAbsent": true,
+  "publicExecution": false,
+  "databaseAccess": false,
+  "providerCalls": 0,
+  "callerSHA256": "86DA3C1474B8E398337A90AE618709BB9871C770504D0DC6DCBDEAC4EC0E610C"
+}

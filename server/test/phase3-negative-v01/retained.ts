@@ -1,0 +1,22 @@
+import {readFileSync} from 'node:fs';
+import {resolve} from 'node:path';
+import type {PrismaClient} from '../../src/generated/prisma/client.js';
+import type {Gateway,Evidence} from '../../src/payments/sslcommerz.js';
+type Row={id:string;[key:string]:unknown};
+export function canonical(value:unknown):string{if(Array.isArray(value))return '['+value.map(v=>canonical(v)).sort().join(',')+']';if(value&&typeof value==='object')return '{'+Object.keys(value).sort().map(k=>JSON.stringify(k)+':'+canonical((value as Record<string,unknown>)[k])).join(',')+'}';return JSON.stringify(value);}
+export function assertRetainedRows(expected:Record<string,Row[]>,actual:Record<string,Row[]>){for(const key of ['bookings','passengers','history','payments','events','outbox'])if(canonical(expected[key])!==canonical(actual[key]))throw Error('RETAINED_V02_CHANGED_'+key.toUpperCase());}
+export async function verifyRetained(db:PrismaClient,repo:string){
+ const base=resolve(repo,'output/phase3/genuine-sandbox-e2e-20261104-02'),saved=JSON.parse(readFileSync(resolve(base,'owned-final.json'),'utf8')) as Record<string,Row[]>,plan=JSON.parse(readFileSync(resolve(base,'fixture-plan.json'),'utf8')) as {fixtures:Array<{name:string;bookingId:string;reference:string;customerId:string;quoteId:string}>};
+ const ids=plan.fixtures.map(f=>f.bookingId),params=ids.map((_,i)=>'$'+(i+1)).join(',');const bookings=await db.booking.findMany({where:{id:{in:ids}},select:{id:true,referenceNumber:true,status:true,userId:true}});
+ if(bookings.length!==3||bookings.some(b=>b.userId!==plan.fixtures.find(f=>f.bookingId===b.id)?.customerId))throw Error('RETAINED_OWNER_CHANGED');
+ const paymentRows=await db.$queryRawUnsafe<Array<{id:string;bookingId:string;status:string;captured:boolean;state:{tranId:string;userId:string;quoteId:string;amountMinor:string;currency:string}}>>(`SELECT id,"bookingId",status,(state->>'captured')::boolean AS captured,state FROM public."GatewayPayment" WHERE "bookingId" IN (${params})`,...ids);
+ const expected={...saved,payments:saved.payments.map(({tranId,...r})=>{void tranId;return r;})};
+ const actual={bookings:bookings.map(({userId,...r})=>{void userId;return r;}),passengers:await db.bookingPassenger.findMany({where:{bookingId:{in:ids}},select:{id:true,bookingId:true}}),history:await db.bookingStatusHistory.findMany({where:{bookingId:{in:ids}},select:{id:true,bookingId:true,fromStatus:true,toStatus:true}}),payments:paymentRows.map(({state,...r})=>{void state;return r;}),events:await db.$queryRawUnsafe<Row[]>(`SELECT e.id,e."paymentId",e.kind FROM public."GatewayPaymentEvent" e JOIN public."GatewayPayment" p ON p.id=e."paymentId" WHERE p."bookingId" IN (${params})`,...ids),outbox:await db.notificationOutbox.findMany({where:{OR:plan.fixtures.map(f=>({payload:{path:['params','referenceNumber'],equals:f.reference}}))},select:{id:true,idempotencyKey:true,status:true}})};
+ assertRetainedRows(expected,actual);
+ for(const p of paymentRows){const f=plan.fixtures.find(f=>f.bookingId===p.bookingId);if(!f||saved.payments.find(r=>r.id===p.id)?.tranId!==p.state.tranId||p.state.userId!==f.customerId||p.state.quoteId!==f.quoteId||p.state.amountMinor!=='1200000'||p.state.currency!=='BDT')throw Error('RETAINED_PAYMENT_IDENTITY_CHANGED');}
+ const success=paymentRows.find(p=>p.bookingId===plan.fixtures.find(f=>f.name==='success')?.bookingId),fail=paymentRows.find(p=>p.bookingId===plan.fixtures.find(f=>f.name==='fail')?.bookingId);
+ if(!success?.captured||success.status!=='VERIFIED'||!fail||fail.captured||fail.status!=='SESSION_READY')throw Error('RETAINED_FINANCIAL_STATE_CHANGED');
+ return{summary:{ownedRows:23,successVerifiedAndUntouched:true,incompleteIntentPreserved:true,ownership:true},incomplete:{tranId:fail.state.tranId,amountMinor:fail.state.amountMinor,currency:fail.state.currency}};
+}
+export function assertOldIntentQuery(rows:Evidence[],intent:{tranId:string;amountMinor:string;currency:string}){if(rows.length!==1||rows.some(r=>r.tranId!==intent.tranId||r.amountMinor!==intent.amountMinor||r.currency!==intent.currency||r.risk||!['UNATTEMPTED','FAILED','CANCELLED','EXPIRED'].includes(r.status)))throw Error('RETAINED_PROVIDER_OUTCOME_UNRESOLVED');return{queriedOnly:true,status:rows[0].status,matching:true,oldPaymentMutated:false};}
+export async function queryRetainedIntent(gateway:Pick<Gateway,'query'>,intent:{tranId:string;amountMinor:string;currency:string}){return assertOldIntentQuery(await gateway.query(intent.tranId),intent);}

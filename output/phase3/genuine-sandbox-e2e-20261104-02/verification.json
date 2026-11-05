@@ -1,0 +1,48 @@
+{
+  "preparedOnly": true,
+  "verifiedAt": "2026-11-04T10:56:53.971Z",
+  "targetedTests": {
+    "pass": 36,
+    "fail": 0,
+    "pending": 0
+  },
+  "strictTypeScriptExit": 0,
+  "lint": {
+    "errors": 0,
+    "warnings": 0,
+    "files": []
+  },
+  "nativePS51ParseAndPinPaths": 1099,
+  "nodeSyntax": true,
+  "sql": {
+    "passed": true,
+    "staticSelectStatements": 12,
+    "databaseConnected": false,
+    "note": "Syntax only; live identity/ownership rechecked by approved execution"
+  },
+  "contract": {
+    "passed": true,
+    "checks": 1183,
+    "sourcePins": 176,
+    "runtimePins": 923,
+    "attemptAbsent": true,
+    "publicExecution": false,
+    "databaseAccess": false,
+    "providerCalls": 0,
+    "callerSHA256": "86DA3C1474B8E398337A90AE618709BB9871C770504D0DC6DCBDEAC4EC0E610C"
+  },
+  "previousReadOnly": {
+    "passed": true,
+    "catalogRows": 340,
+    "controlledRollback": true,
+    "migrations": 8
+  },
+  "historicalPackagesUnchanged": true,
+  "accepted7_64_79Rerun": false,
+  "publicExecution": false,
+  "databaseAccessThisPreparation": false,
+  "providerCalls": 0,
+  "liveBatchPreflights": "PENDING fresh approved execution",
+  "phase3Accepted": false,
+  "phase4": "ON HOLD"
+}

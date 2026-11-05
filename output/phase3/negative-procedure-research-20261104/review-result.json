@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "sourceEvidencePins": 7,
+  "phase1LocalG7Accepted": true,
+  "phase2AcceptedCount": 14,
+  "renameFormallyVerified": true,
+  "localReconciliationActualExit": 0,
+  "localReconciliationOwnedRows": 23,
+  "newProviderStatusQueries": 0,
+  "newPaymentSessions": 0,
+  "newDBOperations": 0,
+  "newPublicTunnels": 0,
+  "phase3Accepted": false,
+  "phase4": "ON HOLD"
+}

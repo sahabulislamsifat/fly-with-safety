@@ -1,0 +1,42 @@
+{
+  "preparedOnly": true,
+  "verifiedAt": "2026-11-04T10:34:48.676Z",
+  "targetedTests": {
+    "pass": 45,
+    "fail": 0,
+    "pending": 0
+  },
+  "strictTypeScriptExit": 0,
+  "lint": {
+    "errors": 0,
+    "warnings": 0,
+    "files": []
+  },
+  "nativePS51Parse": true,
+  "nodeSyntax": true,
+  "sql": {
+    "passed": true,
+    "staticSelectStatements": 11,
+    "databaseConnected": false,
+    "note": "Syntax only; live catalog/privilege semantics remain execution preflight"
+  },
+  "contract": {
+    "passed": true,
+    "checks": 1141,
+    "sourcePins": 145,
+    "runtimePins": 923,
+    "attemptAbsent": true,
+    "publicExecution": false,
+    "databaseAccess": false,
+    "providerCalls": 0,
+    "callerSHA256": "39F9BF85FD340AFADF5A641B2A19EF62632204B9C4E869D9091480806299B798"
+  },
+  "historical64And79Rerun": false,
+  "accepted7Rerun": false,
+  "publicExecution": false,
+  "databaseAccess": false,
+  "providerCalls": 0,
+  "livePreflights": "NOT EXECUTED - separate approval required",
+  "phase3Accepted": false,
+  "phase4": "ON HOLD"
+}

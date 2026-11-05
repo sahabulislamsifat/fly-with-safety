@@ -1,0 +1,9 @@
+{
+  "counts": {},
+  "bookings": [],
+  "passengers": [],
+  "history": [],
+  "payments": [],
+  "events": [],
+  "outbox": []
+}

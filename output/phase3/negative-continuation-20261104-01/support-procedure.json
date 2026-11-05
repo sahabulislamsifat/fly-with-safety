@@ -1,0 +1,15 @@
+{
+  "status": "PENDING_OFFICIAL_SUPPORT",
+  "source": null,
+  "reviewedReference": null,
+  "fail": {
+    "instruction": null,
+    "requireIPN": true,
+    "method": null
+  },
+  "cancel": {
+    "instruction": null,
+    "requireIPN": true,
+    "method": null
+  }
+}

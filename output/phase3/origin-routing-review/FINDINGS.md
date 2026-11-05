@@ -1,0 +1,13 @@
+# v03 origin404: verified source and evidence limit
+
+Saved first callback POST returned404, marker=true, originMatched=true. The per-run random header and request UUID receipt establish origin delivery. No new SSH/tunnel/DB/provider operation was performed for this review. Historical12 pins unchanged.
+
+404 source is run.cjs listener's `if(!admitted){res.writeHead(404);res.end();return;}`. `admitted=accept(req,origin)` checks exact Host and x-forwarded-proto=https, then original marker-adapted loopback/method/exact URL/form/declared-length/no-transfer-encoding guards. At least one failed, but v03 did not persist receipts array or received guard booleans. Client receipt only proves UUID correlation; it does not retain actual method/path/headers/admitted. Thus received Host/proto/body framing and exact failed predicate cannot be reconstructed. No evidence justifies changing Host/proxy trust, allowing chunked bodies, loosening path/method checks or changing SSH.
+
+Reviewed source expects200 for four admitted programmatic callbacks and200 inert HTML for browser formPOST. The owner message's204 is inconsistent with this source. No saved result includes an expected field. Do not rewrite historical evidence; preserve200 reviewed contract unless a separately reviewed contract change is needed. This status discrepancy does not explain404.
+
+New guard-evidence.cjs is OFFLINE-ONLY, not wired into consumed runner. It invokes the original accept function and emits only boolean predicates and enum failure names, never raw headers/body/credentials. Ten deterministic tests PASS: intended request accepted; separate Host/proto/method/path/type/length/chunking/peer failures denied and isolated; secret values excluded. These tests demonstrate conditional guard behavior, not the historical request's unknown values.
+
+Minimum justified correction is evidence preservation, not an unproven authorization change. Any future minimally scoped request must retain guard-evidence for the very first origin POST (and expected status200) before any further public checks, then stop on mismatch. No new execution package or approval is claimed here; the precise routing correction depends on those observed booleans. Reuse existing pinned key, strictTLS and same isolated source. No need to repeat hostname/auth diagnostics.
+
+Phase3 gate1 remains BLOCKED at origin admission. Financial-use trust/runtime/fixtures/genuine Hosted Checkout/return/IPN/Order Validation/persistence/final acceptance gates remain pending. Existing64/79 accepted component proofs and prior delivery evidence stand. Phase4 ON HOLD, budget$0.

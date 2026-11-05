@@ -1,0 +1,15 @@
+{
+  "planning": "compact",
+  "context_depth": "dependency",
+  "verification_depth": "impact",
+  "delegation": "none",
+  "reason_codes": [
+    "focused-negative-procedure-research",
+    "preserve-accepted-gates"
+  ],
+  "allowed_write_scope": [
+    "output/phase3/negative-procedure-research-20261104/",
+    "docs/proposals/PHASE_3_FINAL_GATES.md"
+  ],
+  "newLiveExecutionApproved": false
+}

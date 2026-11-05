@@ -33,7 +33,7 @@ export function minor(value: string): bigint {
 }
 export function decimal(value: string): string { const n = BigInt(value); if (n < 1n || n > 9_999_999_999n) throw AppError.badRequest('Gateway amount is outside supported bounds'); return `${n / 100n}.${String(n % 100n).padStart(2, '0')}`; }
 export class GatewayError extends Error {
-  constructor(readonly kind: 'UNAVAILABLE' | 'MALFORMED' | 'AUTHENTICATION' | 'MISMATCH') { super('Gateway operation unresolved'); }
+  constructor(readonly kind: 'UNAVAILABLE' | 'MALFORMED' | 'AUTHENTICATION' | 'MISMATCH', readonly unresolvedStatus?: 'PROCESSING') { super('Gateway operation unresolved'); }
 }
 /** SSLCommerz's documented MD5 notification protocol, not password storage or payment authority. */
 export function verifyNotification(input: Record<string, unknown>, storePassword: string): 'absent' | 'verified' {
@@ -94,6 +94,9 @@ export class SSLCommerzClient implements Gateway {
     catch { throw new GatewayError('MALFORMED'); }
   }
   private evidence(data: Record<string, unknown>): Evidence {
+    // Observed in sandbox Transaction Query, absent from the reviewed V4 status enum.
+    // Preserve a safe diagnostic tag, never normalize it into payment authority.
+    if (data.status === 'PROCESSING') throw new GatewayError('MALFORMED', 'PROCESSING');
     try {
       const status = z.enum(['VALID', 'VALIDATED', 'FAILED', 'CANCELLED', 'EXPIRED', 'UNATTEMPTED', 'PENDING']).parse(data.status);
       const amountMinor = minor(text.parse(data.amount)).toString();

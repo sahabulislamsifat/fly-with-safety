@@ -1,0 +1,204 @@
+{
+  "status": 200,
+  "finalURL": "https://russel-semisacred-elise.ngrok-free.dev/api/v1/payments/sslcommerz/success",
+  "contentType": "text/html",
+  "serverClass": "OTHER_OR_ABSENT",
+  "cookieHeaderPresent": false,
+  "locationPresent": false,
+  "originMarkerMatched": false,
+  "classification": {
+    "source": "NGROK_INTERSTITIAL",
+    "html": {
+      "sampleCharacters": 2885,
+      "truncated": false,
+      "scripts": 2,
+      "frames": 0,
+      "forms": 0,
+      "warning": true,
+      "ngrokError": true
+    },
+    "title": "",
+    "renderLimited": true,
+    "decision": "BLOCKED_WARNING",
+    "paymentAcceptance": false
+  },
+  "network": [
+    {
+      "event": "route",
+      "type": "document",
+      "category": "DOCUMENT",
+      "allowed": true
+    },
+    {
+      "event": "route",
+      "type": "font",
+      "category": "OUT_OF_SCOPE",
+      "allowed": false
+    },
+    {
+      "event": "route",
+      "type": "font",
+      "category": "OUT_OF_SCOPE",
+      "allowed": false
+    },
+    {
+      "event": "route",
+      "type": "font",
+      "category": "OUT_OF_SCOPE",
+      "allowed": false
+    },
+    {
+      "event": "route",
+      "type": "font",
+      "category": "OUT_OF_SCOPE",
+      "allowed": false
+    },
+    {
+      "event": "route",
+      "type": "font",
+      "category": "OUT_OF_SCOPE",
+      "allowed": false
+    },
+    {
+      "event": "route",
+      "type": "font",
+      "category": "OUT_OF_SCOPE",
+      "allowed": false
+    },
+    {
+      "event": "route",
+      "type": "font",
+      "category": "OUT_OF_SCOPE",
+      "allowed": false
+    },
+    {
+      "event": "route",
+      "type": "font",
+      "category": "OUT_OF_SCOPE",
+      "allowed": false
+    },
+    {
+      "event": "route",
+      "type": "stylesheet",
+      "category": "NGROK_CDN_STATIC",
+      "allowed": true
+    },
+    {
+      "event": "route",
+      "type": "script",
+      "category": "NGROK_CDN_STATIC",
+      "allowed": true
+    },
+    {
+      "event": "requestfailed",
+      "type": "font",
+      "category": "OUT_OF_SCOPE",
+      "error": "REQUEST_FAILED"
+    },
+    {
+      "event": "console",
+      "error": "BROWSER_CONSOLE_ERROR"
+    },
+    {
+      "event": "requestfailed",
+      "type": "font",
+      "category": "OUT_OF_SCOPE",
+      "error": "REQUEST_FAILED"
+    },
+    {
+      "event": "console",
+      "error": "BROWSER_CONSOLE_ERROR"
+    },
+    {
+      "event": "requestfailed",
+      "type": "font",
+      "category": "OUT_OF_SCOPE",
+      "error": "REQUEST_FAILED"
+    },
+    {
+      "event": "console",
+      "error": "BROWSER_CONSOLE_ERROR"
+    },
+    {
+      "event": "requestfailed",
+      "type": "font",
+      "category": "OUT_OF_SCOPE",
+      "error": "REQUEST_FAILED"
+    },
+    {
+      "event": "console",
+      "error": "BROWSER_CONSOLE_ERROR"
+    },
+    {
+      "event": "requestfailed",
+      "type": "font",
+      "category": "OUT_OF_SCOPE",
+      "error": "REQUEST_FAILED"
+    },
+    {
+      "event": "console",
+      "error": "BROWSER_CONSOLE_ERROR"
+    },
+    {
+      "event": "requestfailed",
+      "type": "font",
+      "category": "OUT_OF_SCOPE",
+      "error": "REQUEST_FAILED"
+    },
+    {
+      "event": "console",
+      "error": "BROWSER_CONSOLE_ERROR"
+    },
+    {
+      "event": "requestfailed",
+      "type": "font",
+      "category": "OUT_OF_SCOPE",
+      "error": "REQUEST_FAILED"
+    },
+    {
+      "event": "console",
+      "error": "BROWSER_CONSOLE_ERROR"
+    },
+    {
+      "event": "requestfailed",
+      "type": "font",
+      "category": "OUT_OF_SCOPE",
+      "error": "REQUEST_FAILED"
+    },
+    {
+      "event": "console",
+      "error": "BROWSER_CONSOLE_ERROR"
+    },
+    {
+      "event": "route",
+      "type": "script",
+      "category": "NGROK_CDN_STATIC",
+      "allowed": true
+    },
+    {
+      "event": "route",
+      "type": "stylesheet",
+      "category": "NGROK_CDN_STATIC",
+      "allowed": true
+    }
+  ],
+  "redirectChain": [
+    {
+      "sameApprovedOrigin": true,
+      "pathClass": "EXACT_CALLBACK",
+      "method": "GET"
+    }
+  ],
+  "tls": {
+    "issuer": "YE2",
+    "protocol": "TLS 1.3",
+    "subjectName": "*.ngrok-free.dev",
+    "validFrom": 1790349877,
+    "validTo": 1798125876
+  },
+  "defaultBrowserIdentity": true,
+  "freshContext": true,
+  "warningClicked": false,
+  "browserOriginEvents": [],
+  "decision": "BLOCKED_WARNING"
+}

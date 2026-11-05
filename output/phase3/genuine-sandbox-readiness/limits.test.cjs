@@ -1,0 +1,6 @@
+const {test}=require('node:test'),a=require('node:assert/strict'),{limits}=require('./limits.cjs');
+function plan(){return{fixtures:[0,1,2].map(i=>({reference:'F'+i,bookingId:'B'+i,customerId:'SYNTHETIC'})),caps:{initiate:3,transactions:10,events:36,refund:0}};}
+test('only exact fixture ownership admitted',()=>{const b=limits(plan());b.transaction('F0','B0','SYNTHETIC');a.throws(()=>b.transaction('F0','B1','SYNTHETIC'));a.throws(()=>b.transaction('F0','B0','OTHER'));a.throws(()=>b.transaction('UNKNOWN','B0','SYNTHETIC'));});
+test('concurrent reservations cannot exceed fixed cap',async()=>{const b=limits(plan());const r=await Promise.allSettled(Array.from({length:8},async()=>b.reserve('initiate')));a.equal(r.filter(x=>x.status==='fulfilled').length,3);a.equal(b.snapshot().initiate,3);});
+test('ambiguous failed operation consumes budget, no auto retry allowance',()=>{const b=limits(plan());for(let i=0;i<3;i++)b.reserve('initiate');a.throws(()=>b.reserve('initiate'));});
+test('refund/unlisted operation forbidden and invalid amounts rejected',()=>{const b=limits(plan());for(const [k,n] of [['refund',1],['unknown',1],['events',0],['events',-1],['events',0.5]])a.throws(()=>b.reserve(k,n));});

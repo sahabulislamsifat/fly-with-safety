@@ -1,0 +1,36 @@
+{
+  "preparedOnly": true,
+  "verifiedAt": "2026-11-04T14:48:47.350Z",
+  "newMockedTests": {
+    "PASS": 17,
+    "FAIL": 0,
+    "SKIP": 0
+  },
+  "strictTypeScriptExit": 0,
+  "nodeSyntax": true,
+  "nativePS51ParseFlagAndPinPaths": 981,
+  "sqlSelects": 15,
+  "lintErrorsOrWarnings": 0,
+  "review": {
+    "passed": true,
+    "checks": 1310,
+    "pins": 981,
+    "focusedTests": 17,
+    "sqlSelects": 15,
+    "lintErrorsOrWarnings": 0,
+    "historicalArtifactsUnchanged": 102,
+    "previous48And1473Rerun": false,
+    "attemptAbsent": true,
+    "liveProviderQueries": 0,
+    "databaseOperations": 0,
+    "publicConnections": 0,
+    "callerSHA256": "7BFA35F2057C2DBC89B3581DD6A979AE5DDC3B16647B2942AC06F3D818D3125F"
+  },
+  "historical48And1473Rerun": false,
+  "liveProviderQueries": 0,
+  "databaseOperations": 0,
+  "publicConnections": 0,
+  "requiresSeparateExecutionApproval": true,
+  "phase3Accepted": false,
+  "phase4": "ON HOLD"
+}

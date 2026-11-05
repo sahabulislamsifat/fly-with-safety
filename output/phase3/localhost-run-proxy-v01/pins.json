@@ -1,0 +1,62 @@
+[
+  {
+    "path": "run.cjs",
+    "sha256": "7640E906D5E97FD6837EC9C145D584EB432C952B27A8EE9AA7D7633BE6AFE988"
+  },
+  {
+    "path": "handler.cjs",
+    "sha256": "5F10D5705E1E0BDF990BD23B07A3BD3314E7C545252F79AD5086ECCD9D03B0FB"
+  },
+  {
+    "path": "proxy-evidence.cjs",
+    "sha256": "65A700B4A4ED6C99B123E0EDD8E6592D56022F67192CC7D4994FC1B68E0C5284"
+  },
+  {
+    "path": "proxy-evidence.test.cjs",
+    "sha256": "E2BF4AB6DD47249A92EE5496B13BCB70285DE43F4EFF62B26F96E144605DB990"
+  },
+  {
+    "path": "offline.test.cjs",
+    "sha256": "A44DFAB1EBDB89EBDAD0A30774F1531D09767780A28F7B3E53CD5F1F6F3D1683"
+  },
+  {
+    "path": "runtime-pins.json",
+    "sha256": "8C57A33C01810CA6704AEA2871AE2ECF3D8CD2D34715E2AD2CE73813303CE7FC"
+  },
+  {
+    "path": "REVIEW.md",
+    "sha256": "E0CCC1F749D93DA17216FB3141F9496C2B0F1448D98F98EBA2F034FABE137EDC"
+  },
+  {
+    "path": "../origin-routing-review/guard-evidence.cjs",
+    "sha256": "E8CE79F1CBE859D9F1CD1C273E235DB7209CE691DC155507B538AF6F50DC0ECB"
+  },
+  {
+    "path": "../localhost-run-smoke/transport.cjs",
+    "sha256": "6BE06F0E0D6DF08E90653FE51946F51052BD9956B6F7B4C0205FEEF34775EF88"
+  },
+  {
+    "path": "../localhost-run-smoke/trust.cjs",
+    "sha256": "63AD67CC8AB06A8051308F90B5251098DB16F5463F98B55A62348F9AE6D4D632"
+  },
+  {
+    "path": "../localhost-run-smoke/ssh-environment.cjs",
+    "sha256": "D2E6063E04F062B2C70953CCEC18BA531C51B73B17E21101342E3DDA2E159ED1"
+  },
+  {
+    "path": "../localhost-run-smoke/known_hosts",
+    "sha256": "F18AD2187F181DE3052FB073724990D41E13ED4732F6C209E34BB98AA7ED4324"
+  },
+  {
+    "path": "../localhost-run-smoke-v03/discovery.cjs",
+    "sha256": "AA4043BA1E49F6FA3B282AC7F987979F99AAADB143753BFEEB2FE50FC50B9164"
+  },
+  {
+    "path": "../localhost-run-smoke-v03/ssh-lifecycle.cjs",
+    "sha256": "9723A82559741410C4141E04F6A9D6D2185F8490083EF38E0273C3866FBA3E50"
+  },
+  {
+    "path": "../isolated-callback/boundary.cjs",
+    "sha256": "FDED195FF92CFBB02A66BDC41915C414D6D06801BA8DD2A62B91EAA6A7DFCBA4"
+  }
+]

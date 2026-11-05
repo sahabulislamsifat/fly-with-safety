@@ -1,0 +1,17 @@
+Subject: Official sandbox Hosted Checkout FAILED/CANCELLED test steps
+
+Our synthetic sandbox success case has passed actual IPN, server-side validation
+and browser return. We need documented current Hosted Checkout negative tests:
+
+1. What supported sandbox action/test data deterministically produces FAILED?
+   Is there an official decline test card/OTP/control? Please provide documentation.
+2. Does the top-right X on this Hosted Checkout produce a server POST to cancel_url,
+   a genuine CANCEL/CANCELLED transaction status and an IPN, or only close the UI?
+3. Which required fields/channel selections/consents enable the greyed-out PAY
+   button? Our UI shows Cards, Mobile Banking and Net Banking, without Fail/Cancel.
+4. How should an abandoned SESSION_READY sandbox intent be queried/closed safely,
+   without replaying it or creating another payment for the same intent?
+
+We use sandbox only, no real customer or production data. Please reply with steps
+for the current V4 Hosted Checkout and expected callback/API status values.
+Do not include merchant secrets or session/payment payloads in a public reply.

@@ -1,0 +1,35 @@
+{
+  "passed": false,
+  "failure": "PUBLIC_BOUNDARY_MISMATCH",
+  "stage": "public-callback-and-deny-checks",
+  "nativeEvidence": {
+    "nativeExitCode": null,
+    "signal": "SIGTERM",
+    "spawnError": null,
+    "stdoutBytes": 15483,
+    "stderrBytes": 810,
+    "categories": [
+      "AUTH_TEXT_OBSERVED"
+    ],
+    "cleanupRequested": true
+  },
+  "checks": [
+    {
+      "method": "POST",
+      "path": "/api/v1/payments/sslcommerz/success",
+      "status": 404,
+      "marker": true,
+      "originMatched": true,
+      "passed": false
+    }
+  ],
+  "pass": 0,
+  "fail": 1,
+  "unexecuted": 6,
+  "connectorStopped": true,
+  "trust": "TOFU_SYNTHETIC_ONLY",
+  "normalServicesTouched": false,
+  "databaseAccess": false,
+  "providerCalls": 0,
+  "paymentAcceptance": false
+}

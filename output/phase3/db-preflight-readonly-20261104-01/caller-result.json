@@ -1,0 +1,9 @@
+﻿{
+    "passed":  true,
+    "financialWrites":  0,
+    "stderrClassification":  null,
+    "readOnly":  true,
+    "providerCalls":  0,
+    "exit":  0,
+    "publicConnections":  0
+}

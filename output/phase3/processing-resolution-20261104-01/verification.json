@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "checks": 1119,
+  "tests": {
+    "PASS": 63,
+    "FAIL": 0,
+    "simulated": true
+  },
+  "historicalPins": 1009,
+  "historicalArtifacts": 102,
+  "financialParserStillRejectsProcessing": true,
+  "savedOwnedRows": 23,
+  "sourcePins": [
+    {
+      "path": "server/src/payments/sslcommerz.ts",
+      "sha256": "B8DDE5861F548D02AEBCF800DD3336592FD564D11F7EAD7A8646D1F4D9EA78AA"
+    },
+    {
+      "path": "server/src/payments/payment.service.ts",
+      "sha256": "48664CC45135E03F5759A9F87E9228243138360CAFB35DF4564EC6D616172BAC"
+    },
+    {
+      "path": "server/src/payments/payment-domain.ts",
+      "sha256": "0F36B68F68623EB5EB488BB1A8BE20BE675E18373C38636AA529ABFADEA9BC53"
+    },
+    {
+      "path": "server/test/phase3-processing.test.ts",
+      "sha256": "A1E8F5E9F4CABA0901E2B272E2B9574EA17EE38C935CB0AE0522D3FF4508614E"
+    },
+    {
+      "path": "docs/proposals/PHASE_3_FINAL_GATES.md",
+      "sha256": "08D11E60361ECBD23A18A49D8BBEA00D538A73E6549E7EA2193E07B2DA043BB9"
+    }
+  ],
+  "liveDatabaseOperations": 0,
+  "providerCalls": 0,
+  "publicConnections": 0,
+  "phase3Accepted": false,
+  "phase4": "ON HOLD"
+}

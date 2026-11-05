@@ -1,0 +1,17 @@
+{
+  "planning": "compact",
+  "context_depth": "dependency",
+  "verification_depth": "impact",
+  "delegation": "none",
+  "reason_codes": [
+    "final-independent-reconciliation",
+    "no-provider-network"
+  ],
+  "allowed_write_scope": [
+    "server/test/phase3-final-reconciliation/",
+    "server/test/phase3-final-independent.test.ts",
+    "output/phase3/final-local-reconciliation-20261104-01/",
+    "docs/proposals/PHASE_3_FINAL_GATES.md"
+  ],
+  "liveExecutionApproved": false
+}

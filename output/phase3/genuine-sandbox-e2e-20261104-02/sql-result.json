@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "staticSelectStatements": 12,
+  "databaseConnected": false,
+  "note": "Syntax only; live identity/ownership rechecked by approved execution"
+}

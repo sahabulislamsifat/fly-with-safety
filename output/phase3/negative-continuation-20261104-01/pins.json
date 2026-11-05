@@ -1,0 +1,838 @@
+[
+  {
+    "path": "..\\..\\..\\docs\\proposals\\PHASE_3_FINAL_GATES.md",
+    "sha256": "D9BDA746C3DC9FA4DA0BDB7DC751469C9F16027DA914AF55A797D06816635E8D"
+  },
+  {
+    "path": "..\\db-preflight-readonly-20261104-01\\Invoke-ReadOnlyPreflight.ps1",
+    "sha256": "441B3877DA9DCA7A5E698B5314EDEB0F7E689A4741F1C946CE3FC0825FD5147F"
+  },
+  {
+    "path": "..\\db-preflight-readonly-20261104-01\\REVIEW.md",
+    "sha256": "9E3E923CBC56FCBDC67B633F3E923DF0973C5EE8B93F33323A68036B9BD9F3E6"
+  },
+  {
+    "path": "..\\db-preflight-readonly-20261104-01\\attempt.json",
+    "sha256": "D9BE33D6294FD53A4162F00E1775374263C2215B8DF6A1905C9B09C254E7CDBB"
+  },
+  {
+    "path": "..\\db-preflight-readonly-20261104-01\\caller-attempt.json",
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "..\\db-preflight-readonly-20261104-01\\caller-result.json",
+    "sha256": "3CC51B544AAC39ADA7CD419609263EE03B26EC6B94185DB7D9326AB01AA8262E"
+  },
+  {
+    "path": "..\\db-preflight-readonly-20261104-01\\offline-result.json",
+    "sha256": "98DE284E45E56E7BF3B9A7215837BFA7D48A34D282106445F06C1F1A97EE44DC"
+  },
+  {
+    "path": "..\\db-preflight-readonly-20261104-01\\pins.json",
+    "sha256": "9942F33E174E21014E926518C1954CC81A89C49972B0752AD013113ADFF695C3"
+  },
+  {
+    "path": "..\\db-preflight-readonly-20261104-01\\result.json",
+    "sha256": "59BF38FDAA0A6093842782036D7D845C49089AC1A329E511632F24F2153E5625"
+  },
+  {
+    "path": "..\\db-preflight-readonly-20261104-01\\tests-result.json",
+    "sha256": "365F3F82252689DFED0FD6EC8C32A825D052CD34546EAEEE09131C238A3302FA"
+  },
+  {
+    "path": "..\\db-preflight-readonly-20261104-01\\verify-review.cjs",
+    "sha256": "C765526060D6B665A0CA1E7F2EAB254027879538D0BFAE462B21E823CF40FB3F"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-01\\Invoke-GenuineSandbox.ps1",
+    "sha256": "39F9BF85FD340AFADF5A641B2A19EF62632204B9C4E869D9091480806299B798"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-01\\REVIEW.md",
+    "sha256": "963372630D2CA957BCB40D53E0B2A8C83A25C4CCFFEB5FBEA948504D67A8D88F"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-01\\attempt.json",
+    "sha256": "BC9ADF1FF17D80301D9BFF50BE6029B1AC43CF03FEF7C87894BC840086667BF9"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-01\\build-pins.cjs",
+    "sha256": "2CB1C221A09AF3DB51AEAC0A1FFA2637082806E9D625E4996E59A1C41564F935"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-01\\contract-result.json",
+    "sha256": "4BB790769337CF29DAA22058AF3DCC7786706715625E8BFC3FB5612E2A236895"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-01\\fixture-plan.json",
+    "sha256": "7A9F8716BBFABEEE46C5ECCD635E2925700EE0200A2EF10E218F75B748BC0ECE"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-01\\lint-result.json",
+    "sha256": "74706B797933C2960E986E215DC0EC17537FA5EC0F3386BF706C2CED6D0EC32A"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-01\\owned-final.json",
+    "sha256": "FEFDC222A43A2B8FDA6E476B55D7D15C7F890E075417C5622CA918D0E669DF26"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-01\\pins.json",
+    "sha256": "9556199B22005769113010158C8BC5260458C25C769E64727C59E59B91CC9F35"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-01\\readonly-preflight.json",
+    "sha256": "9016B8E7594E445708DC1410A02AADCE3EC58EA0F7C294C91CEB63AC50F74C33"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-01\\result.json",
+    "sha256": "12D4CEF34116B5F06499BD1F737CBDFD672DEA1D5A2914FC6CDE22FC4D017198"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-01\\runtime-pins.json",
+    "sha256": "0F670CC95740F278B04F9CB9AB5AD7A3554E101F6C353E9EDA704F1BFFF5F3CA"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-01\\sql-result.json",
+    "sha256": "3FCBC6E41669163C419A8AE5A2E4A08DDD7C9687FA124E29D13D36087C9695A5"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-01\\tests-result.json",
+    "sha256": "52768675EC857CD9873CE11914452D5AB7FD435D48EBB00B62011E5430F32E2E"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-01\\verification.json",
+    "sha256": "E6364CF3CEDFAC05D27BEB4B45B561CDC836A05B835F1BE5711ACE5BE99E513B"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-01\\verify-contract.cjs",
+    "sha256": "9E9810C555F644885F93EB1E7C401F702C3D5693731FBC10A4B0E605CD355853"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-01\\verify-lint.cjs",
+    "sha256": "22C9DA0EDFD1A31B82A81D8B08EA1A23E305286BC6CB2228A5293CD3B7E2CEDD"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-01\\verify-sql.cjs",
+    "sha256": "B2B5C5DD065F4F6E1145D3FA869A71BCE25249101FD2EA3F5D918758D6428873"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-02\\Invoke-GenuineSandbox.ps1",
+    "sha256": "86DA3C1474B8E398337A90AE618709BB9871C770504D0DC6DCBDEAC4EC0E610C"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-02\\REVIEW.md",
+    "sha256": "472D793DC922986BAE51A92BFDD2FBFF8CC1E92F57E7AC33F674816702A918F8"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-02\\assigned-origin.json",
+    "sha256": "60AFCCD5DB5A8349ED0B411E86D8785EAFA140060F80EE2FE6E725C9736D7222"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-02\\attempt.json",
+    "sha256": "90515B2323D7155555FB0EEB8612718E4F29DBFB5EF624E5A0BD068A91BEEACF"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-02\\build-pins.cjs",
+    "sha256": "0DD9D9B0B1F816265BBDA683ECE3DC92D8B8A7CF9F46154EA1189AF0EBE11C60"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-02\\contract-result.json",
+    "sha256": "CEF408081601347D88D209F295310194D86C0A147B74FDCEEE04BC835FBBC51B"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-02\\fixture-plan.json",
+    "sha256": "7A9F8716BBFABEEE46C5ECCD635E2925700EE0200A2EF10E218F75B748BC0ECE"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-02\\ledger.jsonl",
+    "sha256": "5C09EF1559921A0B0414E963DF894DED011102F8C5936614ED8AFABE1B34DE4F"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-02\\lint-result.json",
+    "sha256": "74706B797933C2960E986E215DC0EC17537FA5EC0F3386BF706C2CED6D0EC32A"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-02\\owned-final.json",
+    "sha256": "A14DDBBC1B68E76BC488909EF355D48EED7EA1B68F461E46C0045086DE913431"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-02\\pins.json",
+    "sha256": "3449273AD3880CF4150013108568BD1188EF316B5804026FF44E375B84806BCE"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-02\\policy.json",
+    "sha256": "0E9960611FF24071364AD6EB39A56C3ADEDC032F0E7997567B758271B6EBACAE"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-02\\preservation-ready.json",
+    "sha256": "F1F86CFEA7B53C49FB07613D4535DD9C56EA5B289A05C3E87515BFB3170C3628"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-02\\readonly-preflight.json",
+    "sha256": "9016B8E7594E445708DC1410A02AADCE3EC58EA0F7C294C91CEB63AC50F74C33"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-02\\result.json",
+    "sha256": "4AB879B2C8D5285D97E77F69BBCC19A15D86067F008A544781FB2152898799EC"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-02\\return-success.png",
+    "sha256": "392016C8D781AD11E77D25F67DA2A21AA3C98DB186A4A0BEF397DF59B1B7B6A5"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-02\\runtime-pins.json",
+    "sha256": "0F670CC95740F278B04F9CB9AB5AD7A3554E101F6C353E9EDA704F1BFFF5F3CA"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-02\\sql-result.json",
+    "sha256": "2CB543F8C582B2E9829F2AE169994C90405640BD6B11DC299CA3A1A286991204"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-02\\ssh-process.json",
+    "sha256": "7EB954A41C565F7104D5243ABFA5ABFDC8B3F4D5DD7B2AC9132992049763AD7F"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-02\\tests-result.json",
+    "sha256": "041D8D2B2A1CAB48452FA14C9B598D68D150B050D0B17A6FD197444CC2BAA6BE"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-02\\transport-preflight.json",
+    "sha256": "B4EA5A0C6053615742E43AFB7757F8A8B15025E9927AF10C6B4E8984EA2F75EF"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-02\\verification.json",
+    "sha256": "93D342CAE62D06F6D641AC43EEC987FECCF9AB5F90B1748C84BCB243B25A7B05"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-02\\verify-contract.cjs",
+    "sha256": "1597B2D8BF24B5D2483F42B1D0E9BAC47111430FD332359AC6EB50734EB4A6B4"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-02\\verify-lint.cjs",
+    "sha256": "66725261FB4DA14D10A3B9CFF2A825081E5D7A16033F7D535A01A490BA7A3757"
+  },
+  {
+    "path": "..\\genuine-sandbox-e2e-20261104-02\\verify-sql.cjs",
+    "sha256": "52677920691C51A6482EEFC3AFB10C70551D3B81136E543CFEEFE0111DF381D4"
+  },
+  {
+    "path": "..\\isolated-callback\\boundary.cjs",
+    "sha256": "FDED195FF92CFBB02A66BDC41915C414D6D06801BA8DD2A62B91EAA6A7DFCBA4"
+  },
+  {
+    "path": "..\\localhost-run-injection-v01\\transport.cjs",
+    "sha256": "6D9FC2C6999F511D7EFA77C1F5F945051D74579190E30500A2207372FC8EA1DD"
+  },
+  {
+    "path": "..\\localhost-run-proxy-v01\\proxy-evidence.cjs",
+    "sha256": "65A700B4A4ED6C99B123E0EDD8E6592D56022F67192CC7D4994FC1B68E0C5284"
+  },
+  {
+    "path": "..\\localhost-run-smoke-v03\\discovery.cjs",
+    "sha256": "AA4043BA1E49F6FA3B282AC7F987979F99AAADB143753BFEEB2FE50FC50B9164"
+  },
+  {
+    "path": "..\\localhost-run-smoke-v03\\ssh-lifecycle.cjs",
+    "sha256": "9723A82559741410C4141E04F6A9D6D2185F8490083EF38E0273C3866FBA3E50"
+  },
+  {
+    "path": "..\\localhost-run-smoke\\known_hosts",
+    "sha256": "F18AD2187F181DE3052FB073724990D41E13ED4732F6C209E34BB98AA7ED4324"
+  },
+  {
+    "path": "..\\localhost-run-smoke\\ssh-environment.cjs",
+    "sha256": "D2E6063E04F062B2C70953CCEC18BA531C51B73B17E21101342E3DDA2E159ED1"
+  },
+  {
+    "path": "..\\localhost-run-smoke\\transport.cjs",
+    "sha256": "6BE06F0E0D6DF08E90653FE51946F51052BD9956B6F7B4C0205FEEF34775EF88"
+  },
+  {
+    "path": "REVIEW.md",
+    "sha256": "3A9F759CD5794E213C64F2966960E81A7A6983F1778FF968189C32DE6478C635"
+  },
+  {
+    "path": "artifact-inventory.json",
+    "sha256": "9228440AE8CB344838E49BEC5C93402D88E702B991D3595789D19048756FE3C9"
+  },
+  {
+    "path": "build-pins.cjs",
+    "sha256": "2CAB1B8D4BBCA332007B284D0591B6EB30F663100054F765B5F680EDDB088E85"
+  },
+  {
+    "path": "fixture-plan.json",
+    "sha256": "A76C99B572A9E9E393C05A06E8E1B210CE338027A00C20E1E44ACDB08E6387D9"
+  },
+  {
+    "path": "policy.json",
+    "sha256": "DB65F36371A61E938452BFC9CEFA1589343D298BF9B0A09C5F3205BE1AA55929"
+  },
+  {
+    "path": "runtime-pins.json",
+    "sha256": "0F670CC95740F278B04F9CB9AB5AD7A3554E101F6C353E9EDA704F1BFFF5F3CA"
+  },
+  {
+    "path": "support-procedure.json",
+    "sha256": "A0E3870414A343E57C8C0712589E7AC2ECC4AE8FE18DF5DBB8621998ACEFED78"
+  },
+  {
+    "path": "verify-contract.cjs",
+    "sha256": "CDB7C97658ED17293063085FD552E5847F45B898458D769B646C284AEF3697FA"
+  },
+  {
+    "path": "verify-lint.cjs",
+    "sha256": "D4D48A5BEB0FC345695CA1EFDEDB1A11CBEB7C7840CC946BCD3ECA5EB68AD6E6"
+  },
+  {
+    "path": "verify-sql.cjs",
+    "sha256": "DB503657B67395C062C4C18A6825A48F7DF869202EE7F182B9A3F9890B4C2B48"
+  },
+  {
+    "path": "..\\..\\..\\server\\package-lock.json",
+    "sha256": "8F44F5B4CE4C7FC947E356E299C3EEEF5C5D7D6922405E071B2F8C4CC5063579"
+  },
+  {
+    "path": "..\\..\\..\\server\\package.json",
+    "sha256": "38DF6888AAE91BA92DB0B1DAC421E1D5BE2316D3EDB2081C578271F89C872EC8"
+  },
+  {
+    "path": "..\\..\\..\\server\\pnpm-lock.yaml",
+    "sha256": "9DC4A419136E15339B4C9B8151C1A5B3389CFCF62056AC4CADC3442C5618B9B7"
+  },
+  {
+    "path": "..\\..\\..\\server\\prisma\\migrations\\20260926202822_init\\migration.sql",
+    "sha256": "EFDA6A0CD3D01B2503E4CC1557F8ABA2807664DB545A742E52EACA60A3B2E1CB"
+  },
+  {
+    "path": "..\\..\\..\\server\\prisma\\migrations\\20260927082715_full_schema\\migration.sql",
+    "sha256": "AE3BCD7668F026858EE7E43CBCEB9955C451A1BF648520E6AFB7814CE2CC7921"
+  },
+  {
+    "path": "..\\..\\..\\server\\prisma\\migrations\\20261009000000_auth_sessions_and_password_resets\\migration.sql",
+    "sha256": "E1EB929668D33CBE94F07E7512CB7174084150C50683A2E15F5709509B53E1B4"
+  },
+  {
+    "path": "..\\..\\..\\server\\prisma\\migrations\\20261011000000_inquiry_idempotency\\migration.sql",
+    "sha256": "0316F0857663D04900E1CEAE1E305490A9B97E49192F9AAD2F74BB2F494C6706"
+  },
+  {
+    "path": "..\\..\\..\\server\\prisma\\migrations\\20261011120000_notification_outbox\\migration.sql",
+    "sha256": "1ECC18D0E4381CDF0489A9919F61B58C3F9F1A3BD102303CCF1FA5F81E14ECA2"
+  },
+  {
+    "path": "..\\..\\..\\server\\prisma\\migrations\\20261022000100_contact_status_new\\migration.sql",
+    "sha256": "4C9AF2C97DD22A88CB3B7E5FE5422AC1023BCC86FCDE999409033AC5180178A7"
+  },
+  {
+    "path": "..\\..\\..\\server\\prisma\\migrations\\20261022000200_booking_contact_schema\\migration.sql",
+    "sha256": "BC10E7343B3C40769C43DEEE8B3164245319A9F35D7A3B50D4E3EE721895F32B"
+  },
+  {
+    "path": "..\\..\\..\\server\\prisma\\migrations\\20261103000100_gateway_sandbox_ledgers\\migration.sql",
+    "sha256": "DA1E65891C57A827F2AF5498B45D923D025D1F1D6FD80C9D9AB63FB986A802C5"
+  },
+  {
+    "path": "..\\..\\..\\server\\prisma\\schema.prisma",
+    "sha256": "ABFC6567BE3475326B7CB053D8291834DD189AE4178206A0E7CDDB6A5753FFAF"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\app.ts",
+    "sha256": "01E5AABAEB0E997A2225DC31848B3DA8B2757923458E6038056E41389A318D70"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\config\\env.ts",
+    "sha256": "1D1402615E4929597E7A867906B45CD9E641928BC23DEF1689E8977B6CA9468A"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\config\\passport.ts",
+    "sha256": "F2CBF4261A8C8092C431EF7B6E85A6392AC6E5252C134FC43FBA9F1C1B452B2E"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\controllers\\account.controller.ts",
+    "sha256": "122A58E5B6FAA79E8C165B9FC5CF29823EF703B73537C4BDAEFE9AFE7A52FFEC"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\controllers\\airport.controller.ts",
+    "sha256": "46534B323FE22E93CF42E13253DF35DDBAB272EF86179C52CF6485075CA2069E"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\controllers\\auth.controller.ts",
+    "sha256": "EF64165990F9D24DC00574FAB242A5D80AE5BDBC0FB910774FE9A692371A3A63"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\controllers\\booking-commercial.controller.ts",
+    "sha256": "20D1AF74158951CC03D47F071FB06D02996837929A878C403E939C747A89F9FD"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\controllers\\booking.controller.ts",
+    "sha256": "94E6050E7CBE707F6F0F34A8D5B81CB6580FC59F3F1B79DD77DD0335F2B7E81B"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\controllers\\compatible-outbox.controller.ts",
+    "sha256": "2A4818C3515A054E140FE655845A516C73397A7B71DC290049C870128D24ABA2"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\controllers\\contact.controller.ts",
+    "sha256": "54B4D166B8103A3E3A7C65FD52EC4007324FFADF197D66FA13D6BFAC5B3B72D9"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\controllers\\destination.controller.ts",
+    "sha256": "9DF8C7FD87F48ECCF64CD6C22D5919D788C3435EC96F74904B6254B527DC4F83"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\controllers\\flight.controller.ts",
+    "sha256": "DFB88DA222EEA5A10DA5674242DB288322E25BB183E1AC434E621DFF9C64AF4F"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\controllers\\hotel.controller.ts",
+    "sha256": "6AB406B0773E452B246230939AC2828CB5F64CE06C5758B921B5B304FEBC3EB7"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\controllers\\package.controller.ts",
+    "sha256": "57897B6C4FF4FB36DA3D845B459127053F0F6DD8AF92957C5EEACE128C33BB3F"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\controllers\\testimonial.controller.ts",
+    "sha256": "3510054D271F0082E4067DB985505D676DF005261083943A2ED76812B7F9E162"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\controllers\\visa.controller.ts",
+    "sha256": "97F004B953463729AF7AC0DC2C4E750EF97C3D500EAAB68AAFD9034A69E5C9E4"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\generated\\prisma\\client.d.ts",
+    "sha256": "D5EB5865D4CBAA9985CC3CFB920B230CDCF3363F1E70903A08DC4BAAB80B0CE1"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\generated\\prisma\\default.d.ts",
+    "sha256": "D5EB5865D4CBAA9985CC3CFB920B230CDCF3363F1E70903A08DC4BAAB80B0CE1"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\generated\\prisma\\edge.d.ts",
+    "sha256": "7378DD41401BA1ACFF435B9C317A5B919A3D38479ED3DBD4A25C8B4FD623A224"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\generated\\prisma\\index.d.ts",
+    "sha256": "FB4DD2AFCF008B14F1C7FDB3B0B2259312C1258E68BE470AA3B56B04A3A976E3"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\generated\\prisma\\runtime\\client.d.ts",
+    "sha256": "2E3533BC1651AA968A274740771D2189270BD9D28253708E887BFB9B70532AC5"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\generated\\prisma\\runtime\\index-browser.d.ts",
+    "sha256": "64604F63C6F4540EB43BC6C10C1E33D36F44391E24A51CDAB314DFED2BAB37B2"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\lib\\logger.ts",
+    "sha256": "C7BFDA67A8DAFD10B4A54BDD4F1451A5349098693003FBE4CB6749C6352AD3F0"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\lib\\prisma.ts",
+    "sha256": "F4285907DA50D4189774C76C5F7C191ED53A254616B31679EF9FCB058DDADD3D"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\lib\\request-context.ts",
+    "sha256": "F4A6BD094E8AF6BDCBFEF7A662857DE85FF26DFBC3BF89DE860E40B1AD143313"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\middleware\\auth.middleware.ts",
+    "sha256": "6133FF051F2187C3BD89F7CE263A1E8873489841DE756C0CE597EFE7128A775E"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\middleware\\error-handler.ts",
+    "sha256": "6C021672A745F62CC9E334209A2F79FEE80E1B6545DE5C28CABF40E883F4BA3D"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\middleware\\idempotency.middleware.ts",
+    "sha256": "B5A566167F64FFAA547D3FA72D49295F78E136334460C83F4A9AF016641CA1DD"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\middleware\\not-found.ts",
+    "sha256": "EA8481FB28E4BAEFD092FA4FDE89262CD32E3DEF90CB93644733B50070D615C4"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\middleware\\oauth-state.ts",
+    "sha256": "7FF2B8DAF7FBF7A44E76C9FFD9DC51401F5D7B58676FC386513894D5A16501F1"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\middleware\\rate-limit.ts",
+    "sha256": "FC547DC41346129662393877C4FDC3009376397FEDBB50D07015E98A89730167"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\middleware\\request-id.ts",
+    "sha256": "85FDEC0FDB57451D26BBD726C4046624FFA1C7D789064BA782CE4211F7A49AB5"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\middleware\\request-origin.ts",
+    "sha256": "5349FE0C320E5F3A387DC5B04E7902DADF16DCB402602789D9ABFB9727C5ED61"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\middleware\\validation.middleware.ts",
+    "sha256": "E16D9CC8DAED1FFCC41B9AC236AA45C63B36E9F73633648C6ED88068B3FB3480"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\payments\\payment-domain.ts",
+    "sha256": "0F36B68F68623EB5EB488BB1A8BE20BE675E18373C38636AA529ABFADEA9BC53"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\payments\\payment-store.ts",
+    "sha256": "5B59F05BB178E57430BD97D0845116970A1B358CFC8A39BF30D762F5241AFD02"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\payments\\payment.routes.ts",
+    "sha256": "08A704501F4A034C3373FFEB6631599BD8AB67D05C6099C752ECBC98AAC66952"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\payments\\payment.service.ts",
+    "sha256": "48664CC45135E03F5759A9F87E9228243138360CAFB35DF4564EC6D616172BAC"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\payments\\sslcommerz.ts",
+    "sha256": "105A38C5DC0814361D735B329CC12EFEB933ED2B253079ADB2B8F24977CE2FEA"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\routes\\account.routes.ts",
+    "sha256": "F192A3403041765E27D39C4E536528CD13E310F4E6F8D60AD9955D912A6358DB"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\routes\\admin.routes.ts",
+    "sha256": "F7F35A21EF3DA21FC7694E6A5DDACD537FE0666050152AE6D21618FD2E65E83E"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\routes\\airports.routes.ts",
+    "sha256": "940345F22F731B51E407AA156591C32B0B48CCC99C4795580982C9E64EA624C2"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\routes\\auth.routes.ts",
+    "sha256": "F09AD3A3473E5D9C59622D55DA4D879E23D9F3EE81AF4AF58106C57453D76316"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\routes\\bookings.routes.ts",
+    "sha256": "B4401684E69749B4FF39848EEE949214C2C0C3902621CA5461F5B7456C60E4D0"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\routes\\contact.routes.ts",
+    "sha256": "A4DC70F594265CD33A206ECC50D7CB6A5E0F2D10462BC4CAEB5A62226B71E971"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\routes\\destinations.routes.ts",
+    "sha256": "E2C0C34AE86F54C195B9B409B882CFDFF62E23428B979BFDAB5207CD75F1EC74"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\routes\\flights.routes.ts",
+    "sha256": "814CD89997D94BE1F49F332493F7930D46764B353CFC1404FD7A2E3F04F507A2"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\routes\\future-stubs.routes.ts",
+    "sha256": "1D6DFB7899D5CC9252CFBB0E25101D44B192EF2CEE6D214CF142F02451165A23"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\routes\\health.routes.ts",
+    "sha256": "F1AA4D0495F1AB2E3F43243CED4D790839F04EC0C98A24760E44B9F2D972BDB5"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\routes\\hotels.routes.ts",
+    "sha256": "06ADDEE66C4F9F7249C6260C9EE87F2185AEF3FF6DDD28E22F2773E86954A800"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\routes\\outbox-worker.routes.ts",
+    "sha256": "837B10C34320174FD37FF65CD7067B31321659A9DCC8DD2F51D798C521079604"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\routes\\packages.routes.ts",
+    "sha256": "A425BB63908C429E14FE281854E4A1FD5EBE283E34416D82009CD964B66D4628"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\routes\\testimonials.routes.ts",
+    "sha256": "CAEA8D2588662C0D65A4AFED3E3EC4700C2EC83B09CB93D942D03829EA854A69"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\routes\\visa.routes.ts",
+    "sha256": "8A789BEE6B5BC41B18BF38A72BE18F4A0C7BAEEA6A118EAD5762A1C491E064A2"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\security\\compatible-outbox.pg.ts",
+    "sha256": "A014C4DB7E4A16B0B520E2F01D491E9EAC479583792AD640C558E2EFDF132F8C"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\security\\enrollment-cutover.ts",
+    "sha256": "6E0B102EB09D0F9A2541755E8D9544EDD338DD292257DC6B9FC3F7B44FCCB7E2"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\security\\idempotency-digest.ts",
+    "sha256": "8CCDA0717C181C42997103EF549E20A54D69D35DFA3E103CA851781C84C99446"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\security\\issuance-replay.ts",
+    "sha256": "6D4DCCDD92EA74FA4074E426FDA8DA21B55CA6D50FC024FC2506A53FB744E12C"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\security\\logical-digest.ts",
+    "sha256": "627D2CEE51CDAEC7E72A23D41B4BBE708B04815A6C1B679993F454D000928A13"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\security\\notification-recovery.pg.ts",
+    "sha256": "4D01D0926B2144E6C5B0A5A5827EB2E0F3A7C390F3F33B919FF42A79D624A675"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\security\\notification-recovery.ts",
+    "sha256": "D1DCE67CE3FD110524CF6697865CAB7ECDDC80CD0038DF0A36F09A719E77F090"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\security\\passenger-secrets.ts",
+    "sha256": "6EF8C8C10F23F2C173B08BFE06316D898D98FBCEA0E29B84238D12AB28D236DA"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\security\\protected-auth.pg.ts",
+    "sha256": "2C73A466AF1F7E9FA9C746BD591EAF5DC02C444AF8EF67F2461FC2D49286AD49"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\security\\protected-auth.ts",
+    "sha256": "49A24FDBAA13DFE07B003B08A9C897D2A2BA882488777725799BF40D47538CF1"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\security\\protected-envelope.ts",
+    "sha256": "D13BF6B44BE586DE061727D656C67E1B0505BBDCC16D9ACEA4BF850FA9556F87"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\security\\recovery-epoch.ts",
+    "sha256": "94F6F0BB014AFE3A0461BAE635E08F0DCB67FE3FD49B5FB102CC65507EDD9ADF"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\security\\secret-data-plane.ts",
+    "sha256": "11DC65AB5B26183F1FD94234F23BD652B8A641E07E63D83278B2EFCA0B8E148B"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\server.ts",
+    "sha256": "21CA39EB33E82E000C63A844AFE3B6B3331AB81CF2F5EAFF96F92DF9C12CD550"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\services\\account.service.ts",
+    "sha256": "7E49B181C7A490CCAF11CE81C8E2D18D4E8AEE20A535662A0AE07B5C8DA718AF"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\services\\airport.service.ts",
+    "sha256": "B4A6541FCD9095A57BAEB9AFECC349AFA8E388D822E5410BC72C28D4BFCEFE44"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\services\\auth.service.ts",
+    "sha256": "0BB7E8E72BD221D55D2FC78F660F9E89328E90F75F39C14CEEF6B98841F2639E"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\services\\booking-commercial.service.ts",
+    "sha256": "71158A319B619FEE40460BF9FFBA077A6B71487F72D288A8F97D447E44E04F56"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\services\\booking.service.ts",
+    "sha256": "4FD4252035222CF8D483456D0CCA7ADD909D1DC05C69E250838E9F1E8F0D9EE5"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\services\\compatible-outbox.service.ts",
+    "sha256": "24FD4C76F31B61E66BC5537145D07078FA1BF348F6E9D25193F0387622EDB849"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\services\\contact.service.ts",
+    "sha256": "EFEF713514BA0989512B12FC86956639CB528D12DED5A009690E1CA031EE3D4E"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\services\\destination.service.ts",
+    "sha256": "64AD79E91A83C208DE8D95AE4BBD0EFCDB23B20AF547456C34DDA6DB0FC7185B"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\services\\flight-aggregator.service.ts",
+    "sha256": "6CDEE07CFAD3EFB74907024BBAE42D4A04EF7CA8771E1DF94E1BEE4FAEA75858"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\services\\flight.service.ts",
+    "sha256": "C9C404D9CFF1DDD512E0BE78336C60E5BF05E2A7500413A1378EE30627F117BD"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\services\\hotel.service.ts",
+    "sha256": "173194A752BCB384BF18C92E539181A102926BE394E6D290E28D436CFEA873F3"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\services\\idempotency.service.ts",
+    "sha256": "464AEDE40872D062981F8C53984E08097729E41EC004FE897138E0A731A0FD5A"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\services\\inquiry-page-query.ts",
+    "sha256": "E7D4E8973604C5AB26C2C9E0960227DDE536D5AE50E0C522239D05FCDE8E3D57"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\services\\inquiry-status.service.ts",
+    "sha256": "950AA955B990E82FD2E2269DB016D274D5468D8389B10661747D2B8DEA1334CF"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\services\\notification.service.ts",
+    "sha256": "9F5E407A51F6B18AA29F09E254E3F8724F397C381B20D69B5E6C2DE5F3C790B4"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\services\\outbox.service.ts",
+    "sha256": "270273CE702FEAB19A195F3EBD3292943176E809E5AF06025DD9D86763F7DF41"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\services\\package.service.ts",
+    "sha256": "F7D7958D911579496EB153CFB3620D63645F7117795B1B78DA53BE7CD7AA9162"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\services\\protected-auth.service.ts",
+    "sha256": "E844B59C9887145CDBD9028DE5EF170CFE5824E52EA9242D6C372D45139F3465"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\services\\protected-phase1.composition.ts",
+    "sha256": "CC22658CA440D0B598AA43A051424D26A90534A1BE9F5BEEE06728474E005E35"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\services\\providers\\flight.provider.ts",
+    "sha256": "9D6F937875D46F7E9850125B1F5062E2CB9D68F0F5FA20885576E3B0B6D01C3D"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\services\\providers\\hotel.provider.ts",
+    "sha256": "2FF3EB639A5098C45AF455CE8060921F8ADCAB2181FFB1B2D5174F4E1008E9B6"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\services\\providers\\mock-flight.provider.ts",
+    "sha256": "5E470A0A45E40AF4ADA3408651789610B35801AAA3988E1BCFF6BD73EC8033DB"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\services\\providers\\mock-hotel.provider.ts",
+    "sha256": "843713D15EE4B25B2579637C67CDD05D9ADBFE4545989031C2F59470C421EDC8"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\services\\testimonial.service.ts",
+    "sha256": "B181E48D41CE78683ADD073530FCCCE7B01F0161936F14BD5928EB15527A138C"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\services\\visa.service.ts",
+    "sha256": "066F989F3431FD2878DA2A3DFE693D5850D5C8A6EBD5BD7DA3A5676BAD7690FA"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\utils\\booking-dto.ts",
+    "sha256": "16ACC6456DCA34588F9C0ADE85442C1403435C511DB28AB20D08BBE3C522E6C5"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\utils\\error-fields.ts",
+    "sha256": "0C09D8AC652439F7064C37AA5EDE9FBCAE42CDEB8CF15B7A1AFFD233456B5583"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\utils\\errors.ts",
+    "sha256": "BCDA3E9F567E7A7D5063A3614129FF93FD53661866D16B462E8900CB2CE55E92"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\utils\\helpers.ts",
+    "sha256": "91C2D81C35FE6D6BBE39DC418B272BADA3D74484CC58F25CD8DE3D3DBB8D005D"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\utils\\response.ts",
+    "sha256": "34B0A7198818BDC20166195EE10FA6538C952EEF696F3E8D2F3E998BE855B416"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\utils\\status-transitions.ts",
+    "sha256": "008773DC1DBF1AC3EFAE8F9C56F771A3C614FED2ADFE565B5C8FF294B3FDEB59"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\validators\\account.schemas.ts",
+    "sha256": "196EC670DDF4284A1B5D72DED25168A1915A977928DE51F9974F112266FA515B"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\validators\\admin.schemas.ts",
+    "sha256": "397F0E4EB936C391649C26AEE1EEA14473A493007B53762569B57332740808E2"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\validators\\auth.schemas.ts",
+    "sha256": "D8DDADFDB92A52E3E22F09793D03ED18B5BC73FC50E82000FBA808816A214221"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\validators\\booking.schemas.ts",
+    "sha256": "45A40880761674B1F3AA977D445AF82F6A9D815EFB0519F566B829E55AD30E63"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\validators\\contact.schemas.ts",
+    "sha256": "14A92905877A135BC91326B9323F7D2277D2A200E498F952EA76F1681A185D1D"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\validators\\flight.schemas.ts",
+    "sha256": "6BCDC3FC69CBB09F6123B58A75D6BCD9B3A51095C3990708317ED326D0651617"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\validators\\hotel.schemas.ts",
+    "sha256": "982078CD25AF0B3E02A89C577A13FD49EBD82E1BB9853E69E06FF01D96CCAA55"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\validators\\inquiry-query.schemas.ts",
+    "sha256": "512D60473F30D13DE7B999D71E7D311FEB865E3F39DFCB74B4A1DE6C4E213B84"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\validators\\package.schemas.ts",
+    "sha256": "EA629BC44B7CED0B80429B8CD83B14BCA231593083A81826CE5CB68C42ADD82E"
+  },
+  {
+    "path": "..\\..\\..\\server\\src\\validators\\visa.schemas.ts",
+    "sha256": "03BCD23C786D70C88B339484CE1E55BA6097697BA11601B6E3C092C7E1D95B89"
+  },
+  {
+    "path": "..\\..\\..\\server\\test\\phase3-db-preflight-diagnostics.ts",
+    "sha256": "83BABD9C7DA46D5F86220843330ABAFFF2EE631C36CE0BE9A0B7BE553CFD4A5C"
+  },
+  {
+    "path": "..\\..\\..\\server\\test\\phase3-db-preflight-v02.ts",
+    "sha256": "606F25FE2269D1E47685468A7CF081DF87F8DB63F27F7BAAB3D4D83B7DE6F145"
+  },
+  {
+    "path": "..\\..\\..\\server\\test\\phase3-gateway.vitest.config.ts",
+    "sha256": "E811CE5DFFB5096EA6B40C9C186DA40E10A47072845FC20616407856433AFAE8"
+  },
+  {
+    "path": "..\\..\\..\\server\\test\\phase3-negative-offline.test.ts",
+    "sha256": "1D171AAB3D4ADB74E26CA27D8F552C1134D95F6B3DBD2B09964D4C8FEC9E2443"
+  },
+  {
+    "path": "..\\..\\..\\server\\test\\phase3-negative-security.test.ts",
+    "sha256": "84B9AA09917494E54C0A6F00BF049AE91D1BAE62637D086F46B7F32012B03257"
+  },
+  {
+    "path": "..\\..\\..\\server\\test\\phase3-negative-v01\\callback-limit.ts",
+    "sha256": "DDDD20B60CDE6343AAC9103A3609C4A895BA442E6C50401A89AFCC438F5D7844"
+  },
+  {
+    "path": "..\\..\\..\\server\\test\\phase3-negative-v01\\callbacks.ts",
+    "sha256": "683DD796CB996F724B3B2F02882331BAE8C85BA31AC2A46DED5AF27328E2A849"
+  },
+  {
+    "path": "..\\..\\..\\server\\test\\phase3-negative-v01\\case-window.ts",
+    "sha256": "1F9B32303257C66897711B48C90E3B10C8F4BD624E0AB182F5BE89644451AE4F"
+  },
+  {
+    "path": "..\\..\\..\\server\\test\\phase3-negative-v01\\ingress.ts",
+    "sha256": "F8CF5077F37B9023BDBB990B616098050737BEE22CFB3C0D0F339D7CFBF66EA0"
+  },
+  {
+    "path": "..\\..\\..\\server\\test\\phase3-negative-v01\\main.ts",
+    "sha256": "30657493B99ED7E174F935BB04C2C7A7E3ADF69CFE0709A8115AEB0BABFC0BC9"
+  },
+  {
+    "path": "..\\..\\..\\server\\test\\phase3-negative-v01\\owner.ts",
+    "sha256": "8F60E2657EA269C22097F3F44F1D82ABE2A2F2D3B4DBF9926FF2FDFC5D56BF1C"
+  },
+  {
+    "path": "..\\..\\..\\server\\test\\phase3-negative-v01\\preflight.ts",
+    "sha256": "4DAA9835275158426431C611D0AA52C1AE9C1CA3EEA6FBAAAA02FF9D57724C06"
+  },
+  {
+    "path": "..\\..\\..\\server\\test\\phase3-negative-v01\\retained.ts",
+    "sha256": "FD85C5FFBC27B67C70F22182782973B2EB969D33D7B4B2433F4CCDFE1BFB1198"
+  },
+  {
+    "path": "..\\..\\..\\server\\test\\phase3-negative-v01\\scope.ts",
+    "sha256": "1442528A9F3D666A193335B4670127AFD60F2142260328F23F049A8ECA6BBE9A"
+  },
+  {
+    "path": "..\\..\\..\\server\\test\\phase3-negative-v01\\support.ts",
+    "sha256": "9581F54938ACFA345DB4A270904EF3F9BBF691E1B48AA061DCCDFC8A447C8335"
+  },
+  {
+    "path": "..\\..\\..\\server\\test\\phase3-proof-diagnostics.ts",
+    "sha256": "5E0280756881FEA9BF6654D8D53BF6C65D428FE612EE6F447E9425366782230D"
+  }
+]

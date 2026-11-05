@@ -1,0 +1,85 @@
+{
+  "passed": false,
+  "failure": {
+    "prismaCode": null,
+    "sqlState": null,
+    "appCode": null,
+    "classification": "ASSERTION_OR_UNCLASSIFIED",
+    "operation": "one-official-retained-transaction-query",
+    "adapterKind": null,
+    "nativeType": null,
+    "guard": null,
+    "gatewayKind": "MALFORMED"
+  },
+  "stage": "one-official-retained-transaction-query",
+  "guards": {
+    "identityVerified": true,
+    "migrations": 8,
+    "actors": 4,
+    "staffRecipients": 2,
+    "fixtureAbsent": true
+  },
+  "retainedSummary": {
+    "ownedRows": 23,
+    "successVerifiedAndUntouched": true,
+    "incompleteIntentPreserved": true,
+    "ownership": true
+  },
+  "providerQuery": null,
+  "providerObservation": {
+    "diagnosticOnly": true,
+    "authorizesPayment": false,
+    "stage": "HTTP_RESPONSE",
+    "httpStatus": 200,
+    "contentType": "JSON",
+    "json": "OBJECT",
+    "bodyBytes": 796,
+    "apiConnect": "DONE",
+    "topStatus": "ABSENT",
+    "elementType": "ARRAY",
+    "recordCount": 1,
+    "merchantEchoPresent": false,
+    "merchantEchoMatches": null,
+    "failurePaths": [],
+    "records": [
+      {
+        "index": 0,
+        "status": "OTHER",
+        "statusType": "STRING",
+        "statusLiteral": "PROCESSING",
+        "statusLength": 10,
+        "statusTrimWouldMatch": false,
+        "statusCaseFoldWouldMatch": false,
+        "statusWhitespacePresent": false,
+        "amountType": "STRING",
+        "amountValid": true,
+        "amountMatchesIntent": true,
+        "currency": "BDT",
+        "currencyType": "BDT",
+        "currencyAmountType": "STRING",
+        "currencyAmountValid": true,
+        "currencyAmountMatches": true,
+        "transactionMatches": true,
+        "riskType": "STRING",
+        "riskRecognized": true,
+        "validationIdPresent": false,
+        "bankIdPresent": false,
+        "failurePaths": [
+          "STATUS_ENUM"
+        ]
+      }
+    ]
+  },
+  "providerCalls": 1,
+  "controlledRollbacks": 2,
+  "preservation": true,
+  "financialWrites": 0,
+  "initiations": 0,
+  "validations": 0,
+  "refunds": 0,
+  "publicConnections": 0,
+  "mainCloudAccess": false,
+  "normalServicesTouched": false,
+  "oldPaymentMutated": false,
+  "phase3Accepted": false
+}

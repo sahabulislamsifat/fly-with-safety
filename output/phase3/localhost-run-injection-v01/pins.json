@@ -1,0 +1,58 @@
+[
+  {
+    "path": "run.cjs",
+    "sha256": "7FBB2C84635E49440050D7125B07EDCFD420C06C3127B4562FE1283109BDDD7A"
+  },
+  {
+    "path": "transport.cjs",
+    "sha256": "6D9FC2C6999F511D7EFA77C1F5F945051D74579190E30500A2207372FC8EA1DD"
+  },
+  {
+    "path": "offline.test.cjs",
+    "sha256": "EBF9E464AD815263D1FD432BFC9B10257D129CB5AA99E6CAFC9D67F6F5B1D444"
+  },
+  {
+    "path": "runtime-pins.json",
+    "sha256": "8C57A33C01810CA6704AEA2871AE2ECF3D8CD2D34715E2AD2CE73813303CE7FC"
+  },
+  {
+    "path": "REVIEW.md",
+    "sha256": "608FF8D688714CDEF93A41B08E3EA827A2BF9B7940CE168DAAAD85FC0AC4DED9"
+  },
+  {
+    "path": "../localhost-run-proxy-v01/proxy-evidence.cjs",
+    "sha256": "65A700B4A4ED6C99B123E0EDD8E6592D56022F67192CC7D4994FC1B68E0C5284"
+  },
+  {
+    "path": "../origin-routing-review/guard-evidence.cjs",
+    "sha256": "E8CE79F1CBE859D9F1CD1C273E235DB7209CE691DC155507B538AF6F50DC0ECB"
+  },
+  {
+    "path": "../localhost-run-smoke/transport.cjs",
+    "sha256": "6BE06F0E0D6DF08E90653FE51946F51052BD9956B6F7B4C0205FEEF34775EF88"
+  },
+  {
+    "path": "../localhost-run-smoke/trust.cjs",
+    "sha256": "63AD67CC8AB06A8051308F90B5251098DB16F5463F98B55A62348F9AE6D4D632"
+  },
+  {
+    "path": "../localhost-run-smoke/ssh-environment.cjs",
+    "sha256": "D2E6063E04F062B2C70953CCEC18BA531C51B73B17E21101342E3DDA2E159ED1"
+  },
+  {
+    "path": "../localhost-run-smoke/known_hosts",
+    "sha256": "F18AD2187F181DE3052FB073724990D41E13ED4732F6C209E34BB98AA7ED4324"
+  },
+  {
+    "path": "../localhost-run-smoke-v03/discovery.cjs",
+    "sha256": "AA4043BA1E49F6FA3B282AC7F987979F99AAADB143753BFEEB2FE50FC50B9164"
+  },
+  {
+    "path": "../localhost-run-smoke-v03/ssh-lifecycle.cjs",
+    "sha256": "9723A82559741410C4141E04F6A9D6D2185F8490083EF38E0273C3866FBA3E50"
+  },
+  {
+    "path": "../isolated-callback/boundary.cjs",
+    "sha256": "FDED195FF92CFBB02A66BDC41915C414D6D06801BA8DD2A62B91EAA6A7DFCBA4"
+  }
+]

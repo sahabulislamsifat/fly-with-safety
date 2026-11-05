@@ -1,0 +1,28 @@
+{
+  "checkedUTC": "2026-11-04T15:20:00.319Z",
+  "frontend": {
+    "port": 3000,
+    "http": "ECONNREFUSED"
+  },
+  "backend": {
+    "port": 5000,
+    "http": "ECONNREFUSED",
+    "cloudBackedHealthNotCalled": true
+  },
+  "postgres": {
+    "host": "127.0.0.1",
+    "port": 5432,
+    "pgIsReadyExit": 0,
+    "acceptingConnections": true,
+    "authenticatedIdentityVerified": false,
+    "expectedOID": 34701
+  },
+  "callerSHA256": "7BFA35F2057C2DBC89B3581DD6A979AE5DDC3B16647B2942AC06F3D818D3125F",
+  "sourceRuntimePins": 981,
+  "offlineChecks": 1310,
+  "attemptAbsent": true,
+  "providerQueriesExecuted": 0,
+  "databaseSQLExecuted": 0,
+  "serverProcessesChanged": false,
+  "environmentFilesChanged": false
+}

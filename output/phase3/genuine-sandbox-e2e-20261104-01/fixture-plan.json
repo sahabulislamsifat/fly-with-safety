@@ -1,0 +1,76 @@
+{
+  "actors": [
+    {
+      "email": "d8505f78-a138-405e-a750-b23d82af87ad@example.invalid",
+      "role": "CUSTOMER",
+      "id": "d8505f78-a138-405e-a750-b23d82af87ad"
+    },
+    {
+      "email": "701fb225-e21e-4901-8663-81590207a66f@example.invalid",
+      "role": "CUSTOMER",
+      "id": "701fb225-e21e-4901-8663-81590207a66f"
+    },
+    {
+      "email": "7ca1205c-0844-40d7-abff-74da4974a8de@example.invalid",
+      "role": "STAFF",
+      "id": "7ca1205c-0844-40d7-abff-74da4974a8de"
+    },
+    {
+      "email": "8948d02b-8f17-4e2c-aa35-3875420da1cb@example.invalid",
+      "role": "ADMIN",
+      "id": "8948d02b-8f17-4e2c-aa35-3875420da1cb"
+    }
+  ],
+  "fixtures": [
+    {
+      "name": "success",
+      "bookingId": "bb4b0355-69c4-42ab-aa41-3d246652fe8a",
+      "reference": "FWS-P3-G-BB4B0355",
+      "passengerId": "3b4683e6-e67c-4fdb-8ba0-7cdfabae4675",
+      "historyId": "f0bedb4f-7a2e-4fee-b076-d7048c6ba8e0",
+      "quoteId": "60d8de8a-e739-4e86-926c-4c402bbf7abe",
+      "requestId": "25436a1c-d94f-496b-9f28-ec2e5a86a444",
+      "customerId": "d8505f78-a138-405e-a750-b23d82af87ad",
+      "amount": 12000
+    },
+    {
+      "name": "fail",
+      "bookingId": "60243d17-c3e8-41b2-83ad-f1487799bbf4",
+      "reference": "FWS-P3-G-60243D17",
+      "passengerId": "8641a68f-d1b6-4bf6-9e11-e9a0048d4a44",
+      "historyId": "8d78d83c-34f3-4a90-88ca-ec36057b3f15",
+      "quoteId": "1fe47cc6-33a0-49fc-9c7d-533723d0b054",
+      "requestId": "4bce92da-b2c1-47a8-b781-521078536366",
+      "customerId": "d8505f78-a138-405e-a750-b23d82af87ad",
+      "amount": 12000
+    },
+    {
+      "name": "cancel",
+      "bookingId": "0f54dcb9-0d05-45b9-8dbf-7a262c2b7cea",
+      "reference": "FWS-P3-G-0F54DCB9",
+      "passengerId": "eccdf3c2-d2c1-4f88-9f5d-abf1f94322b0",
+      "historyId": "77549354-3e21-4468-9fd3-b17749cd7bca",
+      "quoteId": "6b311059-e992-49d2-a06b-11ba92009f1b",
+      "requestId": "ad6533dd-4ac2-4e09-8dce-423ad4173fa4",
+      "customerId": "d8505f78-a138-405e-a750-b23d82af87ad",
+      "amount": 12000
+    }
+  ],
+  "caps": {
+    "transactions": 100,
+    "bookings": 3,
+    "passengers": 3,
+    "initialHistory": 3,
+    "payments": 3,
+    "saves": 90,
+    "events": 36,
+    "bookingUpdates": 6,
+    "financialHistory": 6,
+    "outbox": 18,
+    "initiate": 3,
+    "query": 12,
+    "validate": 6,
+    "callbacks": 12,
+    "deniedRequests": 24
+  }
+}

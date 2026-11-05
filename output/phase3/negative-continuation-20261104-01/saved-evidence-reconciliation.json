@@ -1,0 +1,81 @@
+{
+  "savedEvidenceOnly": true,
+  "freshDatabaseQuery": false,
+  "successVerified": true,
+  "successRows": 14,
+  "incompleteFailRows": 6,
+  "unstartedCancelRows": 3,
+  "totalOwnedRows": 23,
+  "oldFail": "SESSION_READY_CAPTURED_FALSE_PROVIDER_OUTCOME_UNKNOWN",
+  "consumedLimits": {
+    "transactions": 23,
+    "bookings": 3,
+    "passengers": 3,
+    "initialHistory": 3,
+    "payments": 2,
+    "saves": 13,
+    "events": 10,
+    "initiate": 2,
+    "callbacks": 2,
+    "query": 2,
+    "validate": 2,
+    "bookingUpdates": 1,
+    "financialHistory": 1,
+    "outbox": 3
+  },
+  "timeline": [
+    {
+      "at": "2026-11-04T11:57:19.596Z",
+      "kind": "genuine-session",
+      "case": "success"
+    },
+    {
+      "at": "2026-11-04T11:59:47.570Z",
+      "kind": "callback",
+      "case": "success",
+      "source": "ipn",
+      "signed": true,
+      "processed": true,
+      "status": 200
+    },
+    {
+      "at": "2026-11-04T11:59:54.530Z",
+      "kind": "callback",
+      "case": "success",
+      "source": "success",
+      "signed": true,
+      "processed": true,
+      "status": 303
+    },
+    {
+      "at": "2026-11-04T11:59:54.821Z",
+      "kind": "browser-return-landing",
+      "case": "success"
+    },
+    {
+      "at": "2026-11-04T11:59:54.941Z",
+      "kind": "browser-render",
+      "case": "success"
+    },
+    {
+      "at": "2026-11-04T11:59:54.943Z",
+      "kind": "outcome-assertion",
+      "case": "success",
+      "expected": "VERIFIED",
+      "observed": "VERIFIED",
+      "captured": true
+    },
+    {
+      "at": "2026-11-04T11:59:55.016Z",
+      "kind": "case-adjudicated",
+      "case": "success",
+      "status": "VERIFIED"
+    },
+    {
+      "at": "2026-11-04T11:59:55.202Z",
+      "kind": "genuine-session",
+      "case": "fail"
+    }
+  ],
+  "noTransactionIdentifiersLogged": true
+}

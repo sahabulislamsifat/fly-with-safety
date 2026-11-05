@@ -40,14 +40,15 @@ paymentRoutes.post('/payments/bookings/:reference/refunds', run(async (req, res)
 }));
 
 // Only these four provider POST paths bypass the browser Origin guard. No cookie-based authorization is used here.
-export const paymentCallbacks: Router = Router();
+export function createPaymentCallbacks(callbackService = service, callbackConfig = gatewayConfig): Router {
+const paymentCallbacks: Router = Router();
 const callbackLimit = rateLimit({ windowMs: 60_000, limit: 60, standardHeaders: 'draft-8', legacyHeaders: false });
 for (const source of ['success', 'fail', 'cancel', 'ipn']) {
   paymentCallbacks.post(`/payments/sslcommerz/${source}`, callbackLimit, express.urlencoded({ extended: false, limit: '16kb', parameterLimit: 40 }), run(async (req, res) => {
     if (!req.is('application/x-www-form-urlencoded')) throw AppError.badRequest('Expected provider form data');
     const tranId = providerId.parse(req.body?.tran_id);
     const valId = req.body?.val_id === undefined || req.body.val_id === '' ? undefined : providerId.parse(req.body.val_id);
-    const c = gatewayConfig(), s = service();
+    const c = callbackConfig(), s = callbackService();
     try { verifyNotification(req.body, c.password); } catch { throw AppError.badRequest('Invalid provider notification'); }
     if (req.body.store_id !== undefined && req.body.store_id !== c.storeId) throw AppError.badRequest('Invalid provider notification');
     const booking = await s.notify(tranId, valId, source);
@@ -58,6 +59,10 @@ for (const source of ['success', 'fail', 'cancel', 'ipn']) {
     res.redirect(303, `${c.frontendOrigin}/payments/return?booking=${encodeURIComponent(booking)}`);
   }));
 }
+
+return paymentCallbacks;
+}
+export const paymentCallbacks: Router = createPaymentCallbacks();
 
 /** Explicit owner-controlled worker entry point; not admitted automatically on normal development startup. */
 export async function reconcileSandboxPayments() { return service().tick(); }

@@ -1,0 +1,11 @@
+{
+  "strictTypeScriptExit": 0,
+  "nodeSyntax": true,
+  "nativePowerShell51Parsing": true,
+  "nativePowerShell51PinPaths": 1000,
+  "attemptAbsent": true,
+  "sqlSyntaxOnly": true,
+  "liveDatabaseOperations": 0,
+  "providerCalls": 0,
+  "publicConnections": 0
+}

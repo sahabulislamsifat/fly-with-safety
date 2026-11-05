@@ -1,0 +1,14 @@
+{
+  "passed": false,
+  "failure": "SSH_EXIT_BEFORE_READINESS",
+  "checks": [],
+  "pass": 0,
+  "fail": 0,
+  "unexecuted": 7,
+  "connectorStopped": true,
+  "trust": "TOFU_SYNTHETIC_ONLY",
+  "normalServicesTouched": false,
+  "databaseAccess": false,
+  "providerCalls": 0,
+  "paymentAcceptance": false
+}
