@@ -94,6 +94,7 @@ export class SSLCommerzClient implements Gateway {
     catch { throw new GatewayError('MALFORMED'); }
   }
   private evidence(data: Record<string, unknown>): Evidence {
+    if (data.store_id !== undefined && data.store_id !== this.config.storeId) throw new GatewayError('MISMATCH');
     // Observed in sandbox Transaction Query, absent from the reviewed V4 status enum.
     // Preserve a safe diagnostic tag, never normalize it into payment authority.
     if (data.status === 'PROCESSING') throw new GatewayError('MALFORMED', 'PROCESSING');

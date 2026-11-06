@@ -1,0 +1,72 @@
+{
+  "counts": {
+    "transactions": 20,
+    "bookings": 1,
+    "passengers": 1,
+    "initialHistory": 1,
+    "payments": 1,
+    "saves": 10,
+    "events": 8,
+    "initiate": 1,
+    "callbacks": 2,
+    "query": 2
+  },
+  "bookings": [
+    {
+      "id": "59ac02e7-1921-4811-ac8f-8335a80be8fa",
+      "referenceNumber": "FWS-P3-F-59AC02E7",
+      "status": "PENDING"
+    }
+  ],
+  "passengers": [
+    {
+      "id": "39187ea0-5e25-4f88-a119-ad2d955be498",
+      "bookingId": "59ac02e7-1921-4811-ac8f-8335a80be8fa"
+    }
+  ],
+  "history": [
+    {
+      "id": "68e33c71-737f-4fef-b5fd-a72aae2dc2ef",
+      "bookingId": "59ac02e7-1921-4811-ac8f-8335a80be8fa",
+      "fromStatus": "PENDING",
+      "toStatus": "PENDING"
+    }
+  ],
+  "payments": [
+    {
+      "id": "6dbc1a4a-2f7e-4f79-b4be-aec9d4be7367",
+      "bookingId": "59ac02e7-1921-4811-ac8f-8335a80be8fa",
+      "tranId": "FWS974f4dc9182621694add6fa8ec",
+      "status": "FAILED",
+      "captured": false
+    }
+  ],
+  "events": [
+    {
+      "id": "intent:6dbc1a4a-2f7e-4f79-b4be-aec9d4be7367",
+      "paymentId": "6dbc1a4a-2f7e-4f79-b4be-aec9d4be7367",
+      "kind": "INTENT"
+    },
+    {
+      "id": "session:6dbc1a4a-2f7e-4f79-b4be-aec9d4be7367",
+      "paymentId": "6dbc1a4a-2f7e-4f79-b4be-aec9d4be7367",
+      "kind": "SESSION_READY"
+    },
+    {
+      "id": "notice:fd8102d197c9310bd122ff40f89d1e30ad92aecb93187759466d99736c1804c4",
+      "paymentId": "6dbc1a4a-2f7e-4f79-b4be-aec9d4be7367",
+      "kind": "NOTICE"
+    },
+    {
+      "id": "outcome:a74faec0efbbb9a2734d0fd1da24fdf162abc32b2fc83951e8553a945bc31458",
+      "paymentId": "6dbc1a4a-2f7e-4f79-b4be-aec9d4be7367",
+      "kind": "FAILED"
+    },
+    {
+      "id": "notice:d0f93a38c63f53827d69b052d99f8560eb89cd7546bf4fba98d2906e61cf5d75",
+      "paymentId": "6dbc1a4a-2f7e-4f79-b4be-aec9d4be7367",
+      "kind": "NOTICE"
+    }
+  ],
+  "outbox": []
+}

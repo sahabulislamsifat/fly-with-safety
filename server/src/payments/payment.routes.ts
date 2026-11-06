@@ -10,6 +10,7 @@ import { gatewayConfig, paymentEnabled, SSLCommerzClient, verifyNotification } f
 
 const reference = z.string().regex(/^[A-Z0-9-]{3,64}$/);
 const providerId = z.string().regex(/^[A-Za-z0-9_-]{1,100}$/);
+const negativeNotice = z.enum(['FAILED', 'CANCELLED', 'EXPIRED', 'UNATTEMPTED']);
 const refundInput = z.object({ requestId: z.uuid().transform(v => v.toLowerCase()), paymentId: z.uuid().transform(v => v.toLowerCase()), amountMinor: z.string().regex(/^[1-9][0-9]{0,9}$/), reason: z.string().trim().min(1).max(100) }).strict();
 const run = (fn: (req: Request, res: Response) => Promise<unknown>) => (req: Request, res: Response, next: NextFunction) => { void fn(req, res).catch(e => next(e instanceof z.ZodError ? AppError.badRequest('Invalid payment request') : e)); };
 const service = () => { const c = gatewayConfig(); return new PaymentService(new PrismaPaymentStore(), new SSLCommerzClient(c), c); };
@@ -49,12 +50,16 @@ for (const source of ['success', 'fail', 'cancel', 'ipn']) {
     const tranId = providerId.parse(req.body?.tran_id);
     const valId = req.body?.val_id === undefined || req.body.val_id === '' ? undefined : providerId.parse(req.body.val_id);
     const c = callbackConfig(), s = callbackService();
-    try { verifyNotification(req.body, c.password); } catch { throw AppError.badRequest('Invalid provider notification'); }
+    let signed = false;
+    try { signed = verifyNotification(req.body, c.password) === 'verified'; } catch { throw AppError.badRequest('Invalid provider notification'); }
     if (req.body.store_id !== undefined && req.body.store_id !== c.storeId) throw AppError.badRequest('Invalid provider notification');
-    const booking = await s.notify(tranId, valId, source);
+    const negative = negativeNotice.safeParse(req.body.status);
+    const booking = signed && source === 'ipn' && negative.success
+      ? await s.notify(tranId, valId, source, negative.data)
+      : await s.notify(tranId, valId, source);
     // Durable notice first; then bounded authoritative validation, without holding a database lock over HTTP.
     // Provider outages remain scheduled for the explicit tick/manual recheck; acknowledgement is of the durable notice.
-    await s.reconcile(booking);
+    await s.reconcile(booking, undefined, tranId);
     if (source === 'ipn') { res.status(200).type('text').send('RECEIVED'); return; }
     res.redirect(303, `${c.frontendOrigin}/payments/return?booking=${encodeURIComponent(booking)}`);
   }));

@@ -1,0 +1,54 @@
+{
+  "actors": [
+    {
+      "email": "d8505f78-a138-405e-a750-b23d82af87ad@example.invalid",
+      "role": "CUSTOMER",
+      "id": "d8505f78-a138-405e-a750-b23d82af87ad"
+    },
+    {
+      "email": "701fb225-e21e-4901-8663-81590207a66f@example.invalid",
+      "role": "CUSTOMER",
+      "id": "701fb225-e21e-4901-8663-81590207a66f"
+    },
+    {
+      "email": "7ca1205c-0844-40d7-abff-74da4974a8de@example.invalid",
+      "role": "STAFF",
+      "id": "7ca1205c-0844-40d7-abff-74da4974a8de"
+    },
+    {
+      "email": "8948d02b-8f17-4e2c-aa35-3875420da1cb@example.invalid",
+      "role": "ADMIN",
+      "id": "8948d02b-8f17-4e2c-aa35-3875420da1cb"
+    }
+  ],
+  "fixtures": [
+    {
+      "name": "fail",
+      "bookingId": "0b04abc4-e70e-4782-ad3d-b90a5e359275",
+      "reference": "FWS-P3-F-0B04ABC4",
+      "passengerId": "d363fa48-672c-40ba-bd3d-64c612b09c3d",
+      "historyId": "d0ab3e81-b827-4b5f-be28-5fdc456ae60c",
+      "quoteId": "907f9c08-0e01-48ef-9d34-3eff32868f41",
+      "requestId": "45c3e8fb-d834-4aab-876b-a0c927121caa",
+      "customerId": "d8505f78-a138-405e-a750-b23d82af87ad",
+      "amount": 12000
+    }
+  ],
+  "caps": {
+    "transactions": 48,
+    "bookings": 1,
+    "passengers": 1,
+    "initialHistory": 1,
+    "payments": 1,
+    "saves": 24,
+    "events": 12,
+    "bookingUpdates": 0,
+    "financialHistory": 0,
+    "outbox": 0,
+    "initiate": 1,
+    "query": 4,
+    "validate": 0,
+    "callbacks": 8,
+    "deniedRequests": 12
+  }
+}

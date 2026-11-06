@@ -42,7 +42,9 @@ export function settle(attempt: Attempt, booking: Booking, evidence: Evidence, n
     return { ...attempt, status, captured: true, valId: evidence.valId, bankId: evidence.bankId, channel: evidence.channel, due: 0, updated: now };
   }
   if (attempt.captured) return attempt; // delayed failure/cancellation never downgrades captured funds
-  const terminal = ['FAILED', 'CANCELLED', 'EXPIRED'].includes(evidence.status);
+  const negative = ['FAILED', 'CANCELLED', 'EXPIRED'];
+  // The query contract supplies no ordering proof for conflicting terminal outcomes.
+  const terminal = negative.includes(evidence.status) && (!negative.includes(attempt.status) || attempt.status === evidence.status);
   return { ...attempt, status: terminal ? evidence.status as PaymentStatus : 'UNKNOWN', due: terminal ? 0 : now + 60_000, updated: now };
 }
 export function reserveRefund(payment: Attempt, refunds: Refund[], amount: string) {

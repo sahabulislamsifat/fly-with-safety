@@ -1,0 +1,8 @@
+﻿{
+    "passed":  true,
+    "publicConnections":  0,
+    "stderrPresent":  false,
+    "provider":  "MOCK_ONLY",
+    "exit":  0,
+    "providerNetworkCalls":  0
+}

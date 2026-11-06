@@ -1,0 +1,21 @@
+{
+  "stdoutShapes": [
+    {
+      "format": "OBJECT_JSON",
+      "event": "ABSENT_OR_NON_STRING",
+      "status": "ABSENT_OR_OTHER",
+      "tlsTermination": "ABSENT_OR_NON_BOOLEAN",
+      "fieldTypes": {
+        "type": "string"
+      },
+      "classification": "IGNORED",
+      "count": 2
+    }
+  ],
+  "omittedShapes": 0,
+  "incompleteStdoutLine": false,
+  "stderrCategories": [
+    "AUTH_TEXT_OBSERVED"
+  ],
+  "stdioClosed": true
+}

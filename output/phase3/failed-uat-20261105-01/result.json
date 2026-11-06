@@ -1,0 +1,76 @@
+{
+  "passed": false,
+  "stage": "genuine-fail",
+  "failure": {
+    "stage": "genuine-fail",
+    "prismaCode": null,
+    "sqlState": null,
+    "appCode": null,
+    "classification": "ASSERTION_OR_UNCLASSIFIED",
+    "operation": "genuine-fail",
+    "adapterKind": null,
+    "nativeType": null,
+    "code": "OWNER_STOP_OR_RUN_DEADLINE"
+  },
+  "cases": [],
+  "counts": {
+    "transactions": 16,
+    "bookings": 1,
+    "passengers": 1,
+    "initialHistory": 1,
+    "payments": 1,
+    "saves": 7,
+    "events": 8,
+    "initiate": 1,
+    "callbacks": 8,
+    "query": 2
+  },
+  "notices": [
+    {
+      "case": "fail",
+      "source": "fail",
+      "signed": true,
+      "processed": true,
+      "failedStatus": true
+    },
+    {
+      "case": "fail",
+      "source": "fail",
+      "signed": true,
+      "processed": true,
+      "failedStatus": true
+    },
+    {
+      "case": "fail",
+      "source": "fail",
+      "signed": true,
+      "processed": true,
+      "failedStatus": true
+    },
+    {
+      "case": "fail",
+      "source": "fail",
+      "signed": true,
+      "processed": true,
+      "failedStatus": true
+    }
+  ],
+  "preservation": true,
+  "connectorStopped": true,
+  "oldProviderRequests": 0,
+  "normalServicesTouched": false,
+  "mainCloudAccess": false,
+  "refundsExecuted": false,
+  "fixturesRetained": true,
+  "phase3Accepted": false,
+  "nativeEvidence": {
+    "nativeExitCode": null,
+    "signal": "SIGTERM",
+    "spawnError": null,
+    "stdoutBytes": 15493,
+    "stderrBytes": 810,
+    "categories": [
+      "AUTH_TEXT_OBSERVED"
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "passed": false,
+  "failure": "checkout-inspection",
+  "preservation": true,
+  "providerRequests": 1,
+  "oldIntentProviderRequests": 0,
+  "databaseWrites": 0,
+  "publicExposure": 0,
+  "phase3Accepted": false
+}

@@ -1,0 +1,10 @@
+{
+  "ownedRows": 23,
+  "successVerifiedAndUntouched": true,
+  "incompleteIntentPreserved": true,
+  "ownership": true,
+  "priorFailedPreserved": true,
+  "priorCloudflarePreserved": true,
+  "dashboardMerchantIdMatched": true,
+  "priorOwnerSeparatedFailedPreserved": true
+}

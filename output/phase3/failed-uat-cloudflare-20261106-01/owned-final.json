@@ -1,0 +1,55 @@
+{
+  "counts": {
+    "transactions": 4,
+    "bookings": 1,
+    "passengers": 1,
+    "initialHistory": 1,
+    "payments": 1,
+    "saves": 2,
+    "events": 2,
+    "initiate": 1,
+    "deniedRequests": 1
+  },
+  "bookings": [
+    {
+      "id": "fb68a2f4-531c-415e-9449-e8fcaf7b779d",
+      "referenceNumber": "FWS-P3-F-FB68A2F4",
+      "status": "PENDING"
+    }
+  ],
+  "passengers": [
+    {
+      "id": "434b06e2-15d1-4f7d-85cc-36531832d7b5",
+      "bookingId": "fb68a2f4-531c-415e-9449-e8fcaf7b779d"
+    }
+  ],
+  "history": [
+    {
+      "id": "0fa7e05b-88df-4a99-b1fa-16f2ddc67361",
+      "bookingId": "fb68a2f4-531c-415e-9449-e8fcaf7b779d",
+      "fromStatus": "PENDING",
+      "toStatus": "PENDING"
+    }
+  ],
+  "payments": [
+    {
+      "id": "eff12b2e-3d1a-4bd2-8654-41a6cfbde376",
+      "bookingId": "fb68a2f4-531c-415e-9449-e8fcaf7b779d",
+      "status": "SESSION_READY",
+      "captured": false
+    }
+  ],
+  "events": [
+    {
+      "id": "intent:eff12b2e-3d1a-4bd2-8654-41a6cfbde376",
+      "paymentId": "eff12b2e-3d1a-4bd2-8654-41a6cfbde376",
+      "kind": "INTENT"
+    },
+    {
+      "id": "session:eff12b2e-3d1a-4bd2-8654-41a6cfbde376",
+      "paymentId": "eff12b2e-3d1a-4bd2-8654-41a6cfbde376",
+      "kind": "SESSION_READY"
+    }
+  ],
+  "outbox": []
+}

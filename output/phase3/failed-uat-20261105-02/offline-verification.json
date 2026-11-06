@@ -1,0 +1,20 @@
+{
+  "scope": "offline-preparation",
+  "focusedMockedTests": { "passed": 13, "failed": 0 },
+  "strictTypeScript": "PASS",
+  "scopedESLint": { "files": 5, "errors": 0, "warnings": 0 },
+  "newPostgreSQLStatementSyntax": "PASS",
+  "nativePowerShell51ParserAndInvocationContract": "PASS",
+  "childApprovalGuard": "PASS_WITHOUT_EXECUTING_WORKFLOW",
+  "sourcePins": 177,
+  "runtimePins": 923,
+  "priorPackagePinsMatched": 1074,
+  "historicalArtifactsMatched": 102,
+  "existingEvidenceSealFilesMatched": 22,
+  "callerSHA256": "2D410A2400CEA1CFD64C8474765A3C01C8878C453F3B576AC3C9806102318BD6",
+  "attemptExists": false,
+  "databaseConnected": false,
+  "providerCalls": 0,
+  "publicConnections": 0,
+  "phase3Accepted": false
+}

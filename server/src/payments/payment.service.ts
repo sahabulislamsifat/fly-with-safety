@@ -57,19 +57,25 @@ export class PaymentService {
       });
     }
   }
-  async notify(tranId: string, valId: string | undefined, source: string) {
+  async notify(tranId: string, valId: string | undefined, source: string, signedNegative?: 'FAILED' | 'CANCELLED' | 'EXPIRED' | 'UNATTEMPTED') {
     const reference = await this.store.locate(tranId);
     if (!reference) throw AppError.notFound('Unknown payment');
     await this.store.transaction(reference, async l => {
-      const a = l.attempts.find(p => p.tranId === tranId)!;
+      const a = l.attempts.find(p => p.tranId === tranId);
+      if (!a || a.bookingId !== l.booking.id || a.userId !== l.booking.userId) throw AppError.notFound('Unknown payment');
       // Persist bounded identifiers only, before acknowledging the provider. Callback status/amount are not authority.
-      if (await l.event(a.id, `notice:${digest([a.id, valId || '', source])}`, 'NOTICE', 'PROVIDER', { source, ...(valId ? { valId } : {}) })) {
-        await l.save({ ...a, due: l.now });
+      const identity = [a.id, valId || '', source];
+      if (signedNegative) identity.push(signedNegative);
+      if (await l.event(a.id, `notice:${digest(identity)}`, 'NOTICE', 'PROVIDER', { source, ...(valId ? { valId } : {}), ...(signedNegative ? { signedNegative } : {}) })) {
+        // A live lease owns scheduling. Advance its due value even when two
+        // distinct notices land in the same millisecond, so the owner sees new work.
+        const due = a.lease && a.lease.until > l.now ? Math.max(l.now, a.due + 1) : l.now;
+        await l.save({ ...a, due });
       }
     });
     return reference;
   }
-  async reconcile(reference: string, actor?: BookingActor) {
+  async reconcile(reference: string, actor?: BookingActor, noticeTranId?: string) {
     const owner = randomUUID();
     const claimed = await this.store.transaction(reference, async l => {
       if (actor && !['ADMIN', 'STAFF'].includes(actor.role)) throw AppError.forbidden();
@@ -77,6 +83,8 @@ export class PaymentService {
       const priority = (a: Attempt) => active(a) || l.refunds.some(r => r.paymentId === a.id && ['INITIATING', 'UNKNOWN', 'PROCESSING'].includes(r.status)) ? 0 : a.captured ? 1 : 2;
       for (const a of [...l.attempts].sort((x, y) => priority(x) - priority(y) || x.updated - y.updated)) {
         if (claimed.length >= 1) break; // bounded work per admission; remaining rows retain their due time
+        if (noticeTranId !== undefined && a.tranId !== noticeTranId) continue;
+        if (a.bookingId !== l.booking.id || a.userId !== l.booking.userId) throw AppError.conflict('Payment ownership mismatch');
         if (a.lease && a.lease.until > l.now || !actor && (a.due === 0 || a.due > l.now || a.checks >= 10)) continue;
         const next = { ...a, checks: a.checks + 1, lease: { owner, until: l.now + 30_000 } }; await l.save(next); claimed.push(next);
       }
@@ -100,9 +108,14 @@ export class PaymentService {
         await this.store.transaction(reference, async l => {
           const current = l.attempts.find(p => p.id === a.id)!;
           if (!this.fenced(current, owner, l.now)) return;
+          // A distinct notice arrived while this query was in flight. Keep the
+          // intent unresolved until the queued check can review newer evidence.
+          if (!successes.length && current.due !== a.due) return;
           let next = settle(current, l.booking, evidence, l.now);
+          if (next === current) return;
           if (next.captured && l.attempts.some(p => p.id !== a.id && p.captured)) next = { ...next, status: 'EXCEPTION_REVIEW' };
-          await l.save({ ...next, lease: current.lease });
+          // Keep the scheduling marker until this lease's finalization.
+          await l.save({ ...next, due: current.due, lease: current.lease });
           if (await l.event(a.id, `outcome:${digest([a.id, next.status, next.valId || ''])}`, next.status, 'PROVIDER', { captured: next.captured })) {
             if (next.captured) await l.publish(next);
           }
@@ -132,7 +145,8 @@ export class PaymentService {
           const current = l.attempts.find(p => p.id === a.id)!;
           if (!this.fenced(current, owner, l.now)) return;
           const pendingRefund = l.refunds.some(r => r.paymentId === a.id && ['INITIATING', 'UNKNOWN', 'PROCESSING'].includes(r.status));
-          const due = current.checks >= 10 ? 0 : active(current) || pendingRefund ? l.now + Math.min(3600000, 30_000 * 2 ** current.checks) : 0;
+          const newerNotice = current.due !== a.due;
+          const due = current.checks >= 10 ? 0 : newerNotice ? l.now : active(current) || pendingRefund ? l.now + Math.min(3600000, 30_000 * 2 ** current.checks) : 0;
           if (current.checks >= 10 && (active(current) || pendingRefund)) {
             const key = `review-required:${a.id}`;
             if (await l.event(a.id, key, 'REVIEW_REQUIRED', 'WORKER')) await l.publish(current, key);

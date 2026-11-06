@@ -1,0 +1,108 @@
+{
+  "passed": true,
+  "failure": null,
+  "fixtureCommitted": true,
+  "preservation": true,
+  "checks": [
+    "local-identity-and-retained-preflight",
+    "tampered-ipn-denied",
+    "foreign-store-denied",
+    "unowned-transaction-denied",
+    "forgeries-no-notice-or-query",
+    "other-customer-denied",
+    "customer-reconcile-denied",
+    "safe-browser-return",
+    "processing-fail-closed",
+    "pending-persists-unknown",
+    "conflicting-query-stays-unknown",
+    "later-ipn-commits-during-query",
+    "earlier-ipn-acknowledged",
+    "stale-negative-deferred",
+    "confirmed-failed-persisted",
+    "cancel-browser-return",
+    "concurrent-cancel-ipns-acknowledged",
+    "cancel-replay-acknowledged",
+    "cancelled-persisted-once",
+    "late-negative-return",
+    "seeded-capture-protected",
+    "postgres-constraint-triggered",
+    "status-and-event-rolled-back",
+    "role-consistency-fail",
+    "no-fulfillment-fail",
+    "role-consistency-cancel",
+    "no-fulfillment-cancel",
+    "role-consistency-success",
+    "no-fulfillment-success",
+    "exact-mock-query-count",
+    "exact-persisted-event-counts",
+    "no-new-refunds"
+  ],
+  "persisted": [
+    {
+      "case": "fail",
+      "status": "FAILED",
+      "captured": false,
+      "notices": 3,
+      "events": [
+        "FAILED",
+        "NOTICE",
+        "NOTICE",
+        "NOTICE",
+        "RECONCILIATION_UNRESOLVED",
+        "RECONCILIATION_UNRESOLVED",
+        "UNKNOWN"
+      ],
+      "eventIds": [
+        "notice:5b20e59b29b82111eac759aaf0b2a8020651b54f148df33c465827be09d2cde6",
+        "notice:6456634f4a889c199a87fee0071711007530346f34a448c038fd8c847efae54a",
+        "notice:98246d25f8c6828cfd5774331d3752b874ff8c2d43a6bd2370b44d6902962574",
+        "outcome:3db41fc5ba13bc3f70f2483abf2fd61fafb45150103a2a9e370d1c1aa9d55794",
+        "outcome:ca835d9a1d8dedbb5d03b860c8d03fb96e0cd43e407e1ff6465b1f17d0c969e5",
+        "unresolved:56ebc866-75d5-4f6f-b108-c41ee1a9ca93:1",
+        "unresolved:56ebc866-75d5-4f6f-b108-c41ee1a9ca93:3"
+      ]
+    },
+    {
+      "case": "cancel",
+      "status": "CANCELLED",
+      "captured": false,
+      "notices": 2,
+      "events": [
+        "CANCELLED",
+        "NOTICE",
+        "NOTICE"
+      ],
+      "eventIds": [
+        "notice:79bd46fdcf95d99447f8b6368201e037761b193cd9cf0f9e067cf07637bbe3db",
+        "notice:c24624657c3df8231bbe72264fb07ec7fe1ce97f42b41f3a93811da97bcfbfc3",
+        "outcome:1b536daf940c667db7d901548c594c62ab369d7dca3a891ac2821ac258f7f252"
+      ]
+    },
+    {
+      "case": "success",
+      "status": "VERIFIED",
+      "captured": true,
+      "notices": 1,
+      "events": [
+        "NOTICE"
+      ],
+      "eventIds": [
+        "notice:7e51a79d48ea2bc64665b10acbd256b4d7bccf595b2b194aab235154aa431e5a"
+      ]
+    }
+  ],
+  "counts": {
+    "bookingInserts": 3,
+    "paymentInserts": 3,
+    "callbackRequests": 13,
+    "storeTransactions": 57,
+    "eventInsertAttempts": 17,
+    "paymentSaveAttempts": 28,
+    "providerDoubles": 8
+  },
+  "provider": "MOCK_ONLY",
+  "realPostgres": true,
+  "providerNetworkCalls": 0,
+  "publicConnections": 0,
+  "phase3Accepted": false
+}

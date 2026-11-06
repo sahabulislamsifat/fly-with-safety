@@ -1,0 +1,49 @@
+{
+  "fixtures": [
+    {
+      "name": "fail",
+      "bookingId": "48e60856-2c85-4912-ba65-eaf35d0ceb04",
+      "reference": "FWS-NPG-7229BC8167",
+      "paymentId": "56ebc866-75d5-4f6f-b108-c41ee1a9ca93",
+      "tranId": "FWSN159bb0f29a31cc093d46412537",
+      "requestId": "e8d2e26d-9c03-4f92-ab99-b159d926f4ce",
+      "quoteId": "d2c2cec3-4c67-4a7c-ae27-22e0c42d1943",
+      "customerId": "d8505f78-a138-405e-a750-b23d82af87ad",
+      "amount": 12000
+    },
+    {
+      "name": "cancel",
+      "bookingId": "0d2b66a5-944d-4c84-9509-7c9a91909dbb",
+      "reference": "FWS-NPG-AC6652450C",
+      "paymentId": "f878be43-90b6-4f92-84c3-619272a47e2b",
+      "tranId": "FWSN68a50203855a3e35fa915d64cd",
+      "requestId": "70fb2002-ad21-4f78-a960-1f33a82e3c20",
+      "quoteId": "36cd2258-bf88-4750-adee-852319aad020",
+      "customerId": "d8505f78-a138-405e-a750-b23d82af87ad",
+      "amount": 12000
+    },
+    {
+      "name": "success",
+      "bookingId": "c93ecc5e-9f72-4a1c-8857-c41e5a869e36",
+      "reference": "FWS-NPG-DD72E7017F",
+      "paymentId": "e6823f7e-9fec-43cb-8b37-d7f9773f7e2d",
+      "tranId": "FWSNb6fbfee4d835d1d670aa4ff513",
+      "requestId": "611b5903-f582-4c15-b272-9940347b7e93",
+      "quoteId": "214e77c1-b8b3-40f2-a08d-6c28caa4947b",
+      "customerId": "d8505f78-a138-405e-a750-b23d82af87ad",
+      "amount": 12000,
+      "valId": "NPGVb8801021a5a2405b04f6e4f8",
+      "bankId": "NPGBbe2ccbf07116776659ce2f36"
+    }
+  ],
+  "rollbackEventId": "npg-rollback-7c08726c-c5c9-4872-8ed1-ed6ada4a7a76",
+  "caps": {
+    "bookingInserts": 3,
+    "paymentInserts": 3,
+    "paymentSaveAttempts": 32,
+    "eventInsertAttempts": 18,
+    "storeTransactions": 64,
+    "callbackRequests": 16,
+    "providerDoubles": 8
+  }
+}

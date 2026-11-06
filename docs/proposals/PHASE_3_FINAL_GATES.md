@@ -1,5 +1,7 @@
 # Phase 3 consolidated acceptance matrix
 
+**Final verdict: ACCEPTED AND CLOSED · 10/10 original gates PASS.** The [final matrix and owner decision](#final-acceptance-after-cancelled-v01) supersede the historical assessments below. Production release obligations are tracked separately.
+
 Assessment:2026-11-04 Asia/Dhaka. Phase3 NOT ACCEPTED; Phase4 ON HOLD; budget $0.
 Phase1G7/Phase2 14/14 remain ACCEPTED. This matrix reports saved evidence and offline
 checks; no fresh DB/provider/public operation was performed for this update.
@@ -136,3 +138,80 @@ Phase1 LOCAL G7,Phase2 14/14 and local rename FORMALLY VERIFIED remain accepted 
 [Focused negative-method findings](../../output/phase3/negative-procedure-research-20261104/FINDINGS.md):official V4/current sandbox/official PHP+Laravel/community sources reviewed. Existing authenticated merchant dashboard and its Self-Test were inspected read-only; IPN tool requires successful sandbox transaction,not a negative generator. No verified deterministic Hosted FAILED/CANCELLED method found; invoice cancellation/popupX/timeout/simulated callbacks cannot satisfy this gate. No claim that the provider has no such facility. Existing continuation/limiter/caps/source remain unchanged; no new caller or provider status diagnostic created.
 
 Current ten-gate disposition:1PASS sandbox transport;2PASS saved isolated execution;3BLOCKED genuineFAILED/CANCELLED;4BLOCKED negative returns/IPN contract+evidence;5BLOCKED negative authority;6offline/replay/concurrency evidence PASS,final negative live adjudication BLOCKED;7SUCCESS/independent23row persistence PASS,negative persistence/role checks BLOCKED;8PASS paid-vs-fulfilled invariant;9independent local reconciliation PASS,post-negative reconciliation still pending;10BLOCKED formal acceptance. Phase3 NOT ACCEPTED;Phase4 ON HOLD;budget$0.
+
+## 2026-11-05 production-parity negative contract and genuine UAT
+
+**A. Implementation and MOCKED CONTRACT TESTS — complete within the local contract scope. B. Genuine provider UAT — pending FAILED and CANCELLED. Formal Phase 3 remains NOT ACCEPTED.**
+
+The pre-change tracked source is recorded at Git commit `0e7f5ec0e39b7b7dde7f6a04cdda17069a12e9d8`. All 102 inventoried historical artifacts match their accepted hashes. The saved local reconciliation still reports preservation of 23 owned rows. Historical manifests describe their original source and execution scopes.
+
+The existing callback form parser, signature verification, durable notice, authenticated Transaction Query, matching amount/currency/transaction checks, capture validation, payment history and authenticated return view remain the basis of the contract. The callback now reconciles the matching attempt directly. Transaction Query row `store_id` is checked when present. Signed negative IPNs with distinct statuses remain distinct notices. Duplicate notices stay idempotent. Conflicting terminal negatives reopen reconciliation. When a new notice arrives during a query, a negative result from that query is deferred and the next check remains due. This uses the existing mutable `due` field and lease, including same-millisecond arrivals. Captured success remains protected. The schema and deployment configuration are unchanged.
+
+| Original gate | A. Implementation and local contract evidence | B. Genuine provider evidence |
+|---|---|---|
+| 1. Callback HTTPS and boundary | Accepted boundary retained. Form handling exercised in the actual router with an in-process HTTP request/response pair. | Existing transport proof retained. |
+| 2. Isolated sandbox runtime | Default and production gateway rejection tested. Test provider and Prisma boundary mocked. | Existing isolated-runtime proof retained. |
+| 3. Hosted outcomes | Confirmed negative branches tested with synthetic V4-shaped replies. | SUCCESS accepted. Genuine FAILED and CANCELLED pending. |
+| 4. Return and IPN | Negative browser redirect, signed negative IPN acknowledgement and signature tamper rejection tested. | Genuine negative returns and applicable signed IPN pending. |
+| 5. Authority and matching | Authenticated query, row/store and transaction/amount/currency mismatch, missing validation ID, unsupported status and query failure tested. | Matching authoritative negative outcome pending for each case. |
+| 6. Idempotency and concurrency | Same-notice replay, simultaneous IPN, distinct IPN during a query, conflicting negatives and delayed result after capture tested. | Negative-run replay/security evidence pending. |
+| 7. Persistence and role consistency | Actual store code exercised over a simulated atomic Prisma transaction. Event write fault rolls status back. Customer/staff/admin views and foreign owner denial tested. | Negative local PostgreSQL persistence and role checks pending in genuine run. |
+| 8. Capture and fulfillment | Negative responses never capture. Captured success stays verified. Booking remains PENDING. | Existing SUCCESS boundary proof retained. |
+| 9. Final preservation | Accepted local reconciliation retained. Compatibility checked against existing immutable-state trigger fields. | Protected reconciliation after genuine negatives pending. |
+| 10. Formal acceptance | Local contract evidence accepted for A. | Pending the original genuine negative evidence requirements. |
+
+[MOCKED CONTRACT TESTS](../../server/test/phase3-negative-contract.test.ts) passed 28/28. Server/client type checks, strict test TypeScript, scoped ESLint for six changed files and `git diff --check` passed. The initial loopback test transport hit sandbox EACCES. The final suite exercises Express without a listening socket and uses a mocked Prisma boundary. No new PostgreSQL execution or provider transaction occurred. Previously accepted suites were not rerun.
+
+The official IPN contract lists `CANCELLED` and `EXPIRED`. The published Transaction Query table does not enumerate them. Their query branches are tested as synthetic compatible responses using the documented envelope shape. A callback status alone cannot establish the corresponding final outcome when the provider's authoritative response is unavailable or ambiguous. [V4 IPN](https://sandbox-gw.sslcommerz.com/doc/v4/ipn.html), [V4 Transaction Query](https://sandbox-gw.sslcommerz.com/doc/v4/order-query.html).
+
+**Owner decision pending.** Authorize independent Phase 4 engineering under a separate scope while production payment activation stays blocked and Phase 3 remains formally unaccepted, or keep Phase 4 on hold until original acceptance. Phase 4 remains on hold pending that decision. This decision does not waive genuine negative UAT or approve supplier calls, production activation or database mutations.
+
+## 2026-11-05 engineering closure
+
+[Engineering Completion Report](PHASE_3_ENGINEERING_COMPLETION_REPORT.md) gives the current disposition of all ten gates. Saved negative integration evidence confirms real PostgreSQL 32/32 PASS, exit 0, with only the provider transport mocked. Both negative states persisted uncaptured, the constraint probe rolled back status and event, and the protected records were preserved. The [mandatory provider-UAT register](PHASE_3_MANDATORY_PROVIDER_UAT_REGISTER.md) remains open for genuine FAILED/CANCELLED and dependent checks. Engineering is complete within the reviewed scope. Original Phase 3 acceptance and production payment activation remain blocked. The proposed Phase 4 policy is pending explicit owner approval.
+
+## Latest evidence matrix after genuine FAILED v03
+
+| Original gate | Current disposition and evidence |
+|---|---|
+| 1. Public HTTPS, boundary, TLS | PASS for saved sandbox evidence. [FAILED v03 readiness](../../output/phase3/failed-uat-cloudflare-20261106-03/transport-preflight.json). Fresh CANCELLED readiness is part of its approved run. |
+| 2. Isolated sandbox runtime | PASS for FAILED v03. [Restricted DB preflight](../../output/phase3/failed-uat-cloudflare-20261106-03/readonly-preflight.json). |
+| 3. Hosted outcomes | SUCCESS and genuine FAILED PASS. Genuine CANCELLED pending. [FAILED v03 case](../../output/phase3/failed-uat-cloudflare-20261106-03/result.json). |
+| 4. Return and IPN | FAILED v03 signed browser return and distinct genuine signed IPN PASS. CANCELLED evidence pending. [FAILED v03 journal](../../output/phase3/failed-uat-cloudflare-20261106-03/ledger.jsonl). |
+| 5. Provider authority | Two authenticated FAILED queries matched transaction, amount and currency. CANCELLED authoritative evidence pending. [FAILED v03 journal](../../output/phase3/failed-uat-cloudflare-20261106-03/ledger.jsonl). |
+| 6. Replay, concurrency, fraud | Retained local integration proof and genuine FAILED v03 replay PASS. CANCELLED replay pending. [FAILED v03 case](../../output/phase3/failed-uat-cloudflare-20261106-03/result.json). |
+| 7. Persistence, roles and ownership | FAILED v03 uncaptured, roles consistent, foreign ownership denied. CANCELLED persistence pending. [FAILED v03 owned rows](../../output/phase3/failed-uat-cloudflare-20261106-03/owned-final.json). |
+| 8. Paid versus fulfilled | FAILED v03 booking PENDING with empty outbox. CANCELLED boundary check pending. [FAILED v03 owned rows](../../output/phase3/failed-uat-cloudflare-20261106-03/owned-final.json). |
+| 9. Final protected reconciliation | FAILED v03 protected reconciliation PASS with 23 retained rows and historical SUCCESS intact. Final post-CANCELLED reconciliation pending. [FAILED v03 postcheck](../../output/phase3/failed-uat-cloudflare-20261106-03/retained-postcheck.json). |
+| 10. Formal Phase 3 acceptance | BLOCKED pending genuine CANCELLED evidence and final protected ten-gate review. Phase 4 ON HOLD. [Provider-UAT register](PHASE_3_MANDATORY_PROVIDER_UAT_REGISTER.md). |
+
+[FAILED v03 SHA-256 evidence seal](../../output/phase3/cancelled-uat-cloudflare-20261106-01/failed-v03-evidence-seal.json) preserves the consumed package and its 19 files. [CANCELLED-only execution review](../../output/phase3/cancelled-uat-cloudflare-20261106-01/REVIEW.md) is subject to separate owner approval.
+
+## Final acceptance after CANCELLED v01
+
+| Original gate | Decision | Evidence |
+|---|---|---|
+| 1. Public HTTPS, TLS and exact callback boundary | PASS | CANCELLED readiness and 40 correlated HTTPS proofs, with signed exact-route return. [Ledger](../../output/phase3/cancelled-uat-cloudflare-20261106-01/ledger.jsonl) |
+| 2. Isolated runtime and restricted DB | PASS | Restricted local DB identity, eight migrations and fresh fixture guard. [Preflight](../../output/phase3/cancelled-uat-cloudflare-20261106-01/readonly-preflight.json) |
+| 3. Genuine Hosted Checkout outcomes | PASS | Genuine [SUCCESS](../../output/phase3/genuine-sandbox-e2e-20261104-02/result.json), [FAILED](../../output/phase3/failed-uat-cloudflare-20261106-03/result.json) and [authoritative CANCELLED](../../output/phase3/cancelled-uat-cloudflare-20261106-01/ledger.jsonl). This is the outcome gate. |
+| 4. Browser returns and IPN | PASS | Owner approved the original conditional requirement for this transaction. Signed CANCELLED return and private landing observed. Genuine SUCCESS and FAILED IPNs verified. Separate live CANCELLED IPN `NOT_OBSERVED`, provider generation and dispatch `UNKNOWN`. See the adjudication below. |
+| 5. Authoritative matching and risk | PASS | Exact transaction, BDT 12,000, authenticated store context and `risk=false`. [Query ledger](../../output/phase3/cancelled-uat-cloudflare-20261106-01/ledger.jsonl) |
+| 6. Authenticity, replay, idempotency and concurrency | PASS | Genuine authenticated cancellation, exact saved notice key replay and same-key initiation tests using the real service over an isolated ledger. Conflict, concurrent delivery and signed IPN regressions passed. Prior real PostgreSQL concurrency and replay proof retained. [Closure tests](../../server/test/phase3-cancelled-closure.test.ts) · [PostgreSQL proof](../../output/phase3/negative-postgres-20261105-01/result.json) |
+| 7. Persistence, ownership and role consistency | PASS | Saved genuine CANCELLED persistence plus identical customer, staff and admin payment views and foreign-owner 404 using the saved fixture identities in the real service. Prior real PostgreSQL role checks retained. [Owned snapshot](../../output/phase3/cancelled-uat-cloudflare-20261106-01/owned-final.json) · [Closure tests](../../server/test/phase3-cancelled-closure.test.ts) |
+| 8. PAID versus FULFILLED | PASS | Uncaptured CANCELLED, PENDING booking, unchanged PENDING history and empty outbox. [Owned snapshot](../../output/phase3/cancelled-uat-cloudflare-20261106-01/owned-final.json) |
+| 9. Targeted regression and protected reconciliation | PASS | Post-run targeted regression 12/12. Saved post-shutdown protected PostgreSQL reconciliation confirmed historical SUCCESS, FAILED v03 and 23 retained rows. Read-only fixture cross-check and FAILED artifact hashes 19/19 passed. [Closure tests](../../server/test/phase3-cancelled-closure.test.ts) · [Retained postcheck](../../output/phase3/cancelled-uat-cloudflare-20261106-01/retained-postcheck.json) |
+| 10. Formal acceptance | PASS | Gates 1–9 passed and the owner-approved Gate 4 decision is recorded below. Phase 3 ACCEPTED AND CLOSED. |
+
+The targeted run selected four new closure checks and eight existing CANCELLED/negative regressions. It passed 12/12 across three files, with 36 out-of-scope tests skipped. Strict TypeScript passed. The new tests reconstruct only required service inputs from the saved fixture and synthesize omitted fields. They do not represent a new live database replay or role check. Database persistence and protected reconciliation evidence comes from the completed UAT's saved post-shutdown read-only queries. Production code and consumed execution artifacts are outside the closure edits.
+
+### Owner-approved Gate 4 adjudication
+
+The [original requirement](PHASE_3_ENGINEERING_COMPLETION_REPORT.md#মূল-দশটি-acceptance-gate) calls for genuine returns and signed IPN evidence if the provider sends it. The [approved CANCELLED runner](../../output/phase3/cancelled-uat-cloudflare-20261106-01/REVIEW.md) required a separate signed IPN to pass that execution. Its recorded timeout and failed result are historical evidence. The [SSLCommerz clarification](https://mail.google.com/mail/u/0/#inbox/KtbxLthNQSfqtNmlrffvmgRHlmTPcjFPFg) describes IPN as a backup, and [V4 IPN](https://sandbox-gw.sslcommerz.com/doc/v4/ipn.html) lists CANCELLED as supported.
+
+The owner explicitly approved the conditional assessment for sandbox transaction `FWSed46b7b83ed58a623140c5fbde`, subject to the original wording and the saved configuration check. The runner sets the registered Cloudflare HTTPS origin as the session callback base. The pinned session builder sends `ipn_url` at that same origin under `/api/v1/payments/sslcommerz/ipn`. The runner admits the exact IPN route and mounts its POST handler. All 313 source pins matched. The saved ledger records 40 successful origin-correlated forwarding proofs, the signed `POST /cancel` and no recorded callback rejection or delivery failure. Forwarding probes exercised `/fail` on the shared origin. Signed-IPN contract and PostgreSQL integration evidence covers the handler. The saved evidence supports the configured route and shared-origin reachability. Direct provider delivery to `/ipn` for this transaction remains unobserved. [Session configuration](../../server/src/payments/sslcommerz.ts#L88) · [Runner](../../server/test/phase3-cancelled-uat/run.ts#L103) · [IPN handler](../../server/test/phase3-cancelled-uat/callbacks.ts#L38) · [Ledger](../../output/phase3/cancelled-uat-cloudflare-20261106-01/ledger.jsonl) · [PostgreSQL integration](../../output/phase3/negative-postgres-20261105-01/result.json)
+
+Gate 4 passes under the original conditional wording for this transaction. The evidence includes the genuine signed CANCELLED return, matching authoritative CANCELLED, preserved financial state, signed IPN handler coverage, and genuine SUCCESS and FAILED IPNs. Separate live CANCELLED IPN is `NOT_OBSERVED`, provider generation and dispatch are `UNKNOWN`, and the historical runner result remains `passed: false` with `TIMEOUT_INDETERMINATE`. Provider evidence of an expected IPN with unresolved delivery for this transaction would reopen Gate 4. [Historical runner result](../../output/phase3/cancelled-uat-cloudflare-20261106-01/result.json)
+
+### Separate production release obligations
+
+Phase 3 acceptance covers the reviewed sandbox scope. Production gateway activation and deployment require separate release approval. Gate B/C, production privacy, KMS and retention, cloud migrations and mutations, live funds or customer data, and supplier connectivity or fulfillment remain separate release obligations. [Release boundaries](PHASE_3_ENGINEERING_COMPLETION_REPORT.md#phase-transition-policy-প্রস্তাব--অনুমোদনের-অপেক্ষায়)

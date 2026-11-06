@@ -1,0 +1,118 @@
+{
+  "algorithm": "SHA-256",
+  "evidenceOnly": true,
+  "checkedPackagePins": 977,
+  "checkedHistoricalArtifacts": 102,
+  "files": [
+    {
+      "path": "output/phase3/negative-postgres-20261105-01/attempt.json",
+      "bytes": 79,
+      "sha256": "CF4869F46955C98E64E913809C824370A41F1A3F6B37F41CDC87CECFDDE7C3F0"
+    },
+    {
+      "path": "output/phase3/negative-postgres-20261105-01/caller-attempt.json",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "output/phase3/negative-postgres-20261105-01/caller-result.json",
+      "bytes": 171,
+      "sha256": "5A9D02B5D29B164AC3BF2B8628638783DF187A480F191C0D587E7FDAED293873"
+    },
+    {
+      "path": "output/phase3/negative-postgres-20261105-01/fixture-plan.json",
+      "bytes": 1734,
+      "sha256": "1DD354C3BD5DBD06652AC825064A63B7D2A2C64E0B9CFFAD9A0A5D69836C93F1"
+    },
+    {
+      "path": "output/phase3/negative-postgres-20261105-01/Invoke-NegativePostgres.ps1",
+      "bytes": 4327,
+      "sha256": "8B35C67DF05D11544414E924C5EC7F844C528CB8D00EF5909C728E1EEBF3D872"
+    },
+    {
+      "path": "output/phase3/negative-postgres-20261105-01/journal.jsonl",
+      "bytes": 2074,
+      "sha256": "11A67E46B0A789D384B684EE95B20E3190123A003621DAAED495782BE985FE5C"
+    },
+    {
+      "path": "output/phase3/negative-postgres-20261105-01/pins.json",
+      "bytes": 197225,
+      "sha256": "BDBBD54268D852E88BEACD623A5D1E662A8A64A8690FC8606AAA212F6CCE528A"
+    },
+    {
+      "path": "output/phase3/negative-postgres-20261105-01/result.json",
+      "bytes": 3106,
+      "sha256": "721240635910E106033A33D119535F214BC10BC86D6BAF9B69E180FCB678E5AF"
+    },
+    {
+      "path": "output/phase3/negative-postgres-20261105-01/REVIEW.md",
+      "bytes": 5525,
+      "sha256": "98F1C01BF5C72D59A8CF7FC5CF1BCE8E27FE4A01CA384D50100C5A1EA107C39D"
+    },
+    {
+      "path": "output/phase3/negative-continuation-20261104-01/artifact-inventory.json",
+      "bytes": 25462,
+      "sha256": "9228440AE8CB344838E49BEC5C93402D88E702B991D3595789D19048756FE3C9"
+    },
+    {
+      "path": "output/phase3/localhost-run-injection-v01/result.json",
+      "bytes": 6632,
+      "sha256": "30FC2CD6CB355BBF4AC7A92FBFFA9F64C1CD4DC94F1C4D5425D3FF03D2712F0B"
+    },
+    {
+      "path": "output/phase3/retained-proof-20261103-01/proof-result.json",
+      "bytes": 6582,
+      "sha256": "70DF3EDABE559911DD3D0FC36C1AB74CCDFFF87C631727283A769223B0090F44"
+    },
+    {
+      "path": "output/phase3/browser-proof-20261103-01/host-result.json",
+      "bytes": 290,
+      "sha256": "42E995E5EC91399BC7D2D34D8C8A38FE1C56C1E317ADB23BCAB799A38CA1FCA5"
+    },
+    {
+      "path": "output/phase3/genuine-sandbox-e2e-20261104-02/result.json",
+      "bytes": 1584,
+      "sha256": "4AB879B2C8D5285D97E77F69BBCC19A15D86067F008A544781FB2152898799EC"
+    },
+    {
+      "path": "output/phase3/retained-status-readback-20261104-01/result.json",
+      "bytes": 2205,
+      "sha256": "2D810B37259817B958395F1247433AA0AFD307A635192CBEFD6CDCB9C39A20A7"
+    },
+    {
+      "path": "output/phase3/processing-resolution-20261104-01/verification.json",
+      "bytes": 1141,
+      "sha256": "EBC44C5A6D743BA9B72CEDA9ED04B2212BA2D15FB60BB1272734C7EE29798C4B"
+    },
+    {
+      "path": "output/phase3/final-local-reconciliation-20261104-01/result.json",
+      "bytes": 794,
+      "sha256": "681C86D8B3B3C2FD1F4184B0744597445CE9D06CF20A9EA4C948A9BF6DC2FE0C"
+    },
+    {
+      "path": "output/phase3/final-local-reconciliation-20261104-01/caller-result.json",
+      "bytes": 194,
+      "sha256": "CE7B52264CC5223112655C67661CD9B48A6F68C715EE571FA92E75AF481A81F1"
+    },
+    {
+      "path": "output/phase2/phase2-formal-acceptance-20261102.json",
+      "bytes": 2758,
+      "sha256": "95CF279F68E56B9EEFFBF321231A7D6C226854AB36417D2DB40B43254A0C5F91"
+    },
+    {
+      "path": "output/database/local-rename-closure-20261102/rename-acceptance.json",
+      "bytes": 3996,
+      "sha256": "CA11049A32D36D48A70E137FF83CC799C428BF7B6560AE897D72E6BFE35C952E"
+    },
+    {
+      "path": "docs/proposals/PHASE_1_EVIDENCE_LOG.md",
+      "bytes": 295942,
+      "sha256": "BBF761699C8872A2DF4FDB8B9D01C88426F84801D2E4A248729B299F7F505090"
+    },
+    {
+      "path": "server/test/phase3-negative-contract.test.ts",
+      "bytes": 19296,
+      "sha256": "008F9FA99E36264BE2EB68D78AD2B142716295AF581BC49863C501161D37DED4"
+    }
+  ]
+}

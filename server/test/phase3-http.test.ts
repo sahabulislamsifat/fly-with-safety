@@ -41,7 +41,7 @@ it('forwards authenticated owner identity and returns no-store pending outcome',
 it('accepts only provider form data on the four narrowly exempt callback paths', async () => {
   expect((await request(app).post('/api/v1/payments/sslcommerz/ipn').send({ tran_id: 'synthetic' })).status).toBe(400);
   const result = await request(app).post('/api/v1/payments/sslcommerz/ipn').type('form').send({ tran_id: 'synthetic', val_id: 'validation', amount: '1', status: 'VALID', card_no: 'DO-NOT-PERSIST' });
-  expect(result.status).toBe(200); expect(mocks.notify).toHaveBeenCalledWith('synthetic', 'validation', 'ipn'); expect(mocks.reconcile).toHaveBeenCalledWith('FWS-SYNTHETIC');
+  expect(result.status).toBe(200); expect(mocks.notify).toHaveBeenCalledWith('synthetic', 'validation', 'ipn'); expect(mocks.reconcile).toHaveBeenCalledWith('FWS-SYNTHETIC', undefined, 'synthetic');
   expect(mocks.notify.mock.invocationCallOrder[0]).toBeLessThan(mocks.reconcile.mock.invocationCallOrder[0]);
 });
 it('does not acknowledge a notice that could not be durably persisted', async () => {
@@ -49,7 +49,7 @@ it('does not acknowledge a notice that could not be durably persisted', async ()
 });
 it('redirects browser returns to a status review rather than declaring success', async () => {
   const result = await request(app).post('/api/v1/payments/sslcommerz/success').type('form').send({ tran_id: 'synthetic', val_id: 'validation' });
-  expect(result.status).toBe(303); expect(result.headers.location).toBe('http://localhost:3000/payments/return?booking=FWS-SYNTHETIC'); expect(mocks.reconcile).toHaveBeenCalledWith('FWS-SYNTHETIC');
+  expect(result.status).toBe(303); expect(result.headers.location).toBe('http://localhost:3000/payments/return?booking=FWS-SYNTHETIC'); expect(mocks.reconcile).toHaveBeenCalledWith('FWS-SYNTHETIC', undefined, 'synthetic');
 });
 it('rejects oversized and repeated form identifiers', async () => {
   expect((await request(app).post('/api/v1/payments/sslcommerz/ipn').type('form').send({ tran_id: ['a', 'b'] })).status).toBe(400);

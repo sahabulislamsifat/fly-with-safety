@@ -1,0 +1,21 @@
+{
+  "passed": false,
+  "firstFailure": "SSH_ALLOCATION_TIMEOUT",
+  "positiveChecks": 0,
+  "spoofPassed": 0,
+  "elapsedMs": 30037,
+  "observedSpanMs": 0,
+  "connectorStopped": true,
+  "nativeEvidence": {
+    "nativeExitCode": null,
+    "signal": "SIGTERM",
+    "spawnError": null,
+    "stdoutBytes": 15483,
+    "stderrBytes": 810,
+    "categories": [
+      "AUTH_TEXT_OBSERVED"
+    ]
+  },
+  "databaseCalls": 0,
+  "paymentProviderCalls": 0
+}

@@ -1,0 +1,44 @@
+{
+  "checks": [
+    {
+      "scheme": "https",
+      "status": 404,
+      "originSeen": true,
+      "admitted": false,
+      "proxy": {
+        "xfpClass": "CONFLICT",
+        "forwardedClass": "CONFLICT",
+        "xfpRawCount": 2,
+        "forwardedRawCount": 2,
+        "duplicateSchemeHeader": true,
+        "crossHeaderConflict": false,
+        "loopbackPeer": true,
+        "exactAssignedHost": true,
+        "metadataAuthority": "UNVERIFIED_PROXY_OVERWRITE_SEMANTICS",
+        "usedToAuthorize": false
+      },
+      "passed": true
+    },
+    {
+      "scheme": "http",
+      "status": 404,
+      "originSeen": true,
+      "admitted": false,
+      "proxy": {
+        "xfpClass": "CONFLICT",
+        "forwardedClass": "CONFLICT",
+        "xfpRawCount": 2,
+        "forwardedRawCount": 2,
+        "duplicateSchemeHeader": true,
+        "crossHeaderConflict": false,
+        "loopbackPeer": true,
+        "exactAssignedHost": true,
+        "metadataAuthority": "UNVERIFIED_PROXY_OVERWRITE_SEMANTICS",
+        "usedToAuthorize": false
+      },
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "acceptedSmokeReplayed": false
+}
