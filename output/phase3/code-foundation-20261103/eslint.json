@@ -1,0 +1,74 @@
+{
+  "errors": 0,
+  "warnings": 0,
+  "files": [
+    {
+      "path": "server\\src\\payments\\payment-domain.ts",
+      "messages": []
+    },
+    {
+      "path": "server\\src\\payments\\payment-store.ts",
+      "messages": []
+    },
+    {
+      "path": "server\\src\\payments\\payment.routes.ts",
+      "messages": []
+    },
+    {
+      "path": "server\\src\\payments\\payment.service.ts",
+      "messages": []
+    },
+    {
+      "path": "server\\src\\payments\\sslcommerz.ts",
+      "messages": []
+    },
+    {
+      "path": "server\\test\\phase3-booking-boundary.test.ts",
+      "messages": []
+    },
+    {
+      "path": "server\\test\\phase3-gateway.vitest.config.ts",
+      "messages": []
+    },
+    {
+      "path": "server\\test\\phase3-http.test.ts",
+      "messages": []
+    },
+    {
+      "path": "server\\test\\phase3-ledger.pg.integration.ts",
+      "messages": []
+    },
+    {
+      "path": "server\\test\\phase3-ledger.pg.vitest.config.ts",
+      "messages": []
+    },
+    {
+      "path": "server\\test\\phase3-lifecycle.test.ts",
+      "messages": []
+    },
+    {
+      "path": "server\\test\\phase3-provider.test.ts",
+      "messages": []
+    },
+    {
+      "path": "client\\src\\components\\booking\\GatewayPaymentPanel.tsx",
+      "messages": []
+    },
+    {
+      "path": "client\\src\\components\\booking\\GatewayReturn.tsx",
+      "messages": []
+    },
+    {
+      "path": "client\\app\\payments\\return\\page.tsx",
+      "messages": []
+    },
+    {
+      "path": "client\\src\\components\\booking\\BookingCommercialPanel.tsx",
+      "messages": []
+    },
+    {
+      "path": "client\\src\\components\\admin\\AdminBookingsTab.tsx",
+      "messages": []
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "frontendNavigationPassed": true,
+  "frontend": "http://localhost:3000/",
+  "apiResourceOriginsObserved": ["http://localhost:5000"],
+  "apiPathsObserved": ["/api/v1/auth/me"],
+  "apiReady": false,
+  "observedApiFailure": "ERR_CONNECTION_REFUSED",
+  "credentialFailureInferred": false,
+  "externalBrowserRequestsBlocked": true,
+  "authenticatedTestsExecuted": 0,
+  "browserAcceptance": false,
+  "source": "Actual isolated Playwright CLI frontend-readiness.js output"
+}

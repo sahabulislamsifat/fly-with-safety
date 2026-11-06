@@ -1,0 +1,15 @@
+{"at":"2026-11-06T06:53:59.322Z","kind":"assigned-origin-validated","https":true,"localOnly":true}
+{"at":"2026-11-06T06:54:00.914Z","kind":"forwarding-proof","stage":"BEFORE_FIXTURES","status":204,"originCorrelated":true}
+{"at":"2026-11-06T06:54:02.510Z","kind":"spoof-check","scheme":"HTTPS","status":404,"originSeen":true,"passed":true}
+{"at":"2026-11-06T06:54:04.152Z","kind":"spoof-check","scheme":"HTTP","status":404,"originSeen":true,"passed":true}
+{"at":"2026-11-06T06:54:31.164Z","kind":"forwarding-proof","stage":"CHECKOUT_WATCH","status":204,"originCorrelated":true}
+{"at":"2026-11-06T06:55:01.435Z","kind":"forwarding-proof","stage":"CHECKOUT_WATCH","status":204,"originCorrelated":true}
+{"at":"2026-11-06T06:55:31.611Z","kind":"forwarding-proof","stage":"CHECKOUT_WATCH","status":204,"originCorrelated":true}
+{"at":"2026-11-06T06:56:02.292Z","kind":"forwarding-proof","stage":"CHECKOUT_WATCH","status":204,"originCorrelated":true}
+{"at":"2026-11-06T06:56:32.322Z","kind":"forwarding-proof","stage":"CHECKOUT_WATCH","status":204,"originCorrelated":true}
+{"at":"2026-11-06T06:57:02.592Z","kind":"forwarding-proof","stage":"CHECKOUT_WATCH","status":204,"originCorrelated":true}
+{"at":"2026-11-06T06:57:33.006Z","kind":"forwarding-proof","stage":"CHECKOUT_WATCH","status":204,"originCorrelated":true}
+{"at":"2026-11-06T06:58:03.142Z","kind":"forwarding-proof","stage":"CHECKOUT_WATCH","status":204,"originCorrelated":true}
+{"at":"2026-11-06T06:58:33.417Z","kind":"forwarding-proof","stage":"CHECKOUT_WATCH","status":204,"originCorrelated":true}
+{"at":"2026-11-06T06:59:04.042Z","kind":"forwarding-proof","stage":"CHECKOUT_WATCH","status":204,"originCorrelated":true}
+{"at":"2026-11-06T06:59:30.263Z","kind":"stop","reason":"SSH_ASSIGNED_ORIGIN_CHANGED"}

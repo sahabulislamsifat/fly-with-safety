@@ -1,0 +1,18 @@
+{
+  "errors": 0,
+  "warnings": 0,
+  "files": [
+    {
+      "file": "server\\test\\phase3-ledger.pg.integration.ts",
+      "messages": []
+    },
+    {
+      "file": "server\\test\\phase3-proof-diagnostics.ts",
+      "messages": []
+    },
+    {
+      "file": "server\\test\\phase3-proof-diagnostics.test.ts",
+      "messages": []
+    }
+  ]
+}

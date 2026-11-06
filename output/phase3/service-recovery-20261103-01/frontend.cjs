@@ -1,0 +1,12 @@
+'use strict';
+const path=require('node:path'),fs=require('node:fs'),{createRequire}=require('node:module');
+const {closeFrontend}=require('./frontend-close.cjs');
+const dir=path.resolve(__dirname,'../../../client'),local=createRequire(path.join(dir,'package.json'));
+const log=event=>fs.appendFileSync(path.join(__dirname,'frontend-lifecycle.jsonl'),JSON.stringify({event,atUTC:new Date().toISOString()})+'\n');
+process.env.NODE_ENV='development';process.env.NEXT_PUBLIC_LOCAL_API_BASE_URL='http://localhost:5000/api/v1';process.env.NEXT_PUBLIC_API_BASE_URL='http://localhost:5000/api/v1';
+(async()=>{const app=local('next')({dev:true,dir,hostname:'localhost',port:3000});await app.prepare();
+ const server=require('node:http').createServer(app.getRequestHandler());let stopping=false;
+ server.on('error',()=>{console.error('FRONTEND_BIND_FAILED');process.exitCode=1;void app.close();});
+ server.listen(3000,'localhost',()=>{fs.writeFileSync(path.join(__dirname,'frontend-config.json'),JSON.stringify({pid:process.pid,frontend:'http://localhost:3000',api:'http://localhost:5000/api/v1',cloudFallbackDisabled:true,envFilesModified:false}),{flag:'wx'});console.log('NORMAL_FRONTEND_RESTORED_3000');});
+ process.on('message',async m=>{if(m?.action!=='stop-owned-development-server'||stopping)return;stopping=true;try{await closeFrontend(server,app,log);log('graceful-exit');process.exit(0);}catch(e){log(['HTTP_CLOSE_FAILED','NEXT_CLOSE_FAILED','FRONTEND_DRAIN_TIMEOUT'].includes(e.message)?e.message:'SHUTDOWN_FAILED');console.error('FRONTEND_SHUTDOWN_INCOMPLETE_NO_FORCED_EXIT');}});
+})().catch(()=>{console.error('FRONTEND_PREPARATION_FAILED_SANITIZED');process.exit(1);});

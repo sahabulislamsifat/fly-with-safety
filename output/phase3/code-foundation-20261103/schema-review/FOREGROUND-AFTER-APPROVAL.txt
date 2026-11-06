@@ -1,0 +1,13 @@
+DO NOT EXECUTE BEFORE SEPARATE EXPLICIT OWNER APPROVAL OF REVIEW.md.
+Existing private Windows PowerShell5.1 console. ONE native prompt: existing postgres administrator password only.
+No business test, restricted-role password, provider call, retry or cleanup.
+
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p='E:\Programming\Project\fly-with-safety\output\phase3\code-foundation-20261103\schema-review\Invoke-Phase3Schema.ps1'
+ if(-not (Test-Path -LiteralPath $p -PathType Leaf)){throw 'STOP: reviewed Phase3 schema caller missing'}
+ if((Get-Item -LiteralPath $p -Stream * | Where-Object Stream -eq 'Zone.Identifier')){throw 'STOP: unexpected script zone marking'}
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne '6FCDED4588137814D02BE628E78DB5B5865D9B8C3D609C1BCEFD5BAF57F6263A'){throw 'STOP: reviewed Phase3 schema caller integrity mismatch'}
+ & $p -OwnerApprovedPhase3LocalSchema
+}

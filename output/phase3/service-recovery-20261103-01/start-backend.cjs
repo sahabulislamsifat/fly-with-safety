@@ -1,0 +1,12 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),{fork}=require('node:child_process'),{createRequire}=require('node:module');
+const root=path.resolve(__dirname,'../../..'),server=path.join(root,'server');
+if(fs.existsSync(path.join(__dirname,'backend-started.json')))throw Error('EXISTING_BACKEND_RECOVERY_INSPECT_FIRST');
+const env=Object.fromEntries(['SystemRoot','WINDIR','ComSpec','TEMP','TMP','USERPROFILE','APPDATA','LOCALAPPDATA','Path','PATH','PATHEXT'].filter(k=>process.env[k]).map(k=>[k,process.env[k]]));
+const local=createRequire(path.join(server,'package.json'));
+const p=fork(path.join(__dirname,'restore-backend.ts'),[],{cwd:server,env,execArgv:['--import',require('node:url').pathToFileURL(local.resolve('tsx')).href],silent:true,windowsHide:true});
+fs.writeFileSync(path.join(__dirname,'backend-started.json'),JSON.stringify({supervisor:process.pid,backend:p.pid,existingMainRestoration:true,noTunnel:true}),{flag:'wx'});
+p.stdout.on('data',chunk=>{if(chunk.toString().includes('FlyWithsafety API server running on port 5000'))console.log('NORMAL_MAIN_BACKEND_RESTORED_5000');});
+p.stderr.on('data',()=>console.error('BACKEND_DIAGNOSTIC_SUPPRESSED_CHECK_SANITIZED_ERROR_FILE'));
+p.on('exit',(code,signal)=>{fs.writeFileSync(path.join(__dirname,'backend-exit.json'),JSON.stringify({pid:p.pid,code,signal}),{flag:'wx'});console.log('OWNED_BACKEND_EXIT '+code);});
+const timer=setInterval(()=>{if(!fs.existsSync(path.join(__dirname,'stop-backend.request.json')))return;clearInterval(timer);if(p.connected)p.send({action:'stop-owned-development-server'});},1000);

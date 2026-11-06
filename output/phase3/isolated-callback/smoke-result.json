@@ -1,0 +1,63 @@
+{
+  "passed": false,
+  "failure": "PUBLIC_BOUNDARY_MISMATCH",
+  "checks": [
+    {
+      "index": 0,
+      "method": "POST",
+      "path": "/api/v1/payments/sslcommerz/success",
+      "expected": 204,
+      "status": 204,
+      "marker": true,
+      "originReached": true,
+      "passed": true
+    },
+    {
+      "index": 1,
+      "method": "POST",
+      "path": "/api/v1/payments/sslcommerz/fail",
+      "expected": 204,
+      "status": 204,
+      "marker": true,
+      "originReached": true,
+      "passed": true
+    },
+    {
+      "index": 2,
+      "method": "POST",
+      "path": "/api/v1/payments/sslcommerz/cancel",
+      "expected": 204,
+      "status": 204,
+      "marker": true,
+      "originReached": true,
+      "passed": true
+    },
+    {
+      "index": 3,
+      "method": "POST",
+      "path": "/api/v1/payments/sslcommerz/ipn",
+      "expected": 204,
+      "status": 204,
+      "marker": true,
+      "originReached": true,
+      "passed": true
+    },
+    {
+      "index": 4,
+      "method": "GET",
+      "path": "/api/v1/payments/sslcommerz/success",
+      "expected": 404,
+      "status": 200,
+      "marker": false,
+      "originReached": false,
+      "passed": false
+    }
+  ],
+  "pass": 4,
+  "fail": 1,
+  "unexecuted": 4,
+  "ownedConnectorStopped": true,
+  "normalServicesTouched": false,
+  "databaseAccess": false,
+  "providerCalls": 0
+}

@@ -1,0 +1,9 @@
+{
+  "supportedGeneratedShape": false,
+  "singleTokenKey": true,
+  "source": "agent.authtoken",
+  "scalarDecoded": false,
+  "format": null,
+  "tokenTypeVerified": false,
+  "accountAuthenticationVerified": false
+}

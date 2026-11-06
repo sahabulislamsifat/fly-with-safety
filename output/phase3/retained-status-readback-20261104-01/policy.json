@@ -1,0 +1,18 @@
+{
+  "planning": "compact",
+  "context_depth": "dependency",
+  "verification_depth": "impact",
+  "delegation": "none",
+  "reason_codes": [
+    "support-independent-authoritative-query",
+    "read-only-local-state",
+    "one-provider-call-cap"
+  ],
+  "allowed_write_scope": [
+    "server/test/phase3-status-readback/",
+    "server/test/phase3-status-readback.test.ts",
+    "output/phase3/retained-status-readback-20261104-01/",
+    "docs/proposals/PHASE_3_FINAL_GATES.md"
+  ],
+  "liveExecutionApproved": false
+}

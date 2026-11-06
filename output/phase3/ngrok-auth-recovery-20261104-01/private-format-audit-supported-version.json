@@ -1,0 +1,18 @@
+{
+  "supportedGeneratedShape": true,
+  "singleTokenKey": true,
+  "source": "agent.authtoken",
+  "scalarDecoded": true,
+  "format": {
+    "leadingOrTrailingWhitespace": false,
+    "embeddedWhitespace": false,
+    "nonAsciiOrControl": false,
+    "literalWrapperQuotes": false,
+    "commandText": false,
+    "urlInsteadOfToken": false,
+    "recognizedPlaceholder": false,
+    "empty": false
+  },
+  "tokenTypeVerified": false,
+  "accountAuthenticationVerified": false
+}

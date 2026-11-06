@@ -1,0 +1,150 @@
+{
+  "counts": {
+    "transactions": 23,
+    "bookings": 3,
+    "passengers": 3,
+    "initialHistory": 3,
+    "payments": 2,
+    "saves": 13,
+    "events": 10,
+    "initiate": 2,
+    "callbacks": 2,
+    "query": 2,
+    "validate": 2,
+    "bookingUpdates": 1,
+    "financialHistory": 1,
+    "outbox": 3
+  },
+  "bookings": [
+    {
+      "id": "bb4b0355-69c4-42ab-aa41-3d246652fe8a",
+      "referenceNumber": "FWS-P3-G-BB4B0355",
+      "status": "PENDING"
+    },
+    {
+      "id": "60243d17-c3e8-41b2-83ad-f1487799bbf4",
+      "referenceNumber": "FWS-P3-G-60243D17",
+      "status": "PENDING"
+    },
+    {
+      "id": "0f54dcb9-0d05-45b9-8dbf-7a262c2b7cea",
+      "referenceNumber": "FWS-P3-G-0F54DCB9",
+      "status": "PENDING"
+    }
+  ],
+  "passengers": [
+    {
+      "id": "3b4683e6-e67c-4fdb-8ba0-7cdfabae4675",
+      "bookingId": "bb4b0355-69c4-42ab-aa41-3d246652fe8a"
+    },
+    {
+      "id": "8641a68f-d1b6-4bf6-9e11-e9a0048d4a44",
+      "bookingId": "60243d17-c3e8-41b2-83ad-f1487799bbf4"
+    },
+    {
+      "id": "eccdf3c2-d2c1-4f88-9f5d-abf1f94322b0",
+      "bookingId": "0f54dcb9-0d05-45b9-8dbf-7a262c2b7cea"
+    }
+  ],
+  "history": [
+    {
+      "id": "f0bedb4f-7a2e-4fee-b076-d7048c6ba8e0",
+      "bookingId": "bb4b0355-69c4-42ab-aa41-3d246652fe8a",
+      "fromStatus": "PENDING",
+      "toStatus": "PENDING"
+    },
+    {
+      "id": "8d78d83c-34f3-4a90-88ca-ec36057b3f15",
+      "bookingId": "60243d17-c3e8-41b2-83ad-f1487799bbf4",
+      "fromStatus": "PENDING",
+      "toStatus": "PENDING"
+    },
+    {
+      "id": "77549354-3e21-4468-9fd3-b17749cd7bca",
+      "bookingId": "0f54dcb9-0d05-45b9-8dbf-7a262c2b7cea",
+      "fromStatus": "PENDING",
+      "toStatus": "PENDING"
+    },
+    {
+      "id": "cmw22dydv0000bkf4c5nj3krw",
+      "bookingId": "bb4b0355-69c4-42ab-aa41-3d246652fe8a",
+      "fromStatus": "PENDING",
+      "toStatus": "PENDING"
+    }
+  ],
+  "payments": [
+    {
+      "id": "e0c1909f-17f9-4375-a04c-492291f4750a",
+      "bookingId": "bb4b0355-69c4-42ab-aa41-3d246652fe8a",
+      "tranId": "FWS60cd63f677877e81f92e0b2fc2",
+      "status": "VERIFIED",
+      "captured": true
+    },
+    {
+      "id": "ffdab8bc-ca89-4411-9949-a81ab3d327a5",
+      "bookingId": "60243d17-c3e8-41b2-83ad-f1487799bbf4",
+      "tranId": "FWSe7ea468bff5e9daef40ec4dae2",
+      "status": "SESSION_READY",
+      "captured": false
+    }
+  ],
+  "events": [
+    {
+      "id": "intent:e0c1909f-17f9-4375-a04c-492291f4750a",
+      "paymentId": "e0c1909f-17f9-4375-a04c-492291f4750a",
+      "kind": "INTENT"
+    },
+    {
+      "id": "session:e0c1909f-17f9-4375-a04c-492291f4750a",
+      "paymentId": "e0c1909f-17f9-4375-a04c-492291f4750a",
+      "kind": "SESSION_READY"
+    },
+    {
+      "id": "notice:c2d3b2063cdafce9fa12f1102cba3fb9a9321fc5d33fdef5119c8772f51b625f",
+      "paymentId": "e0c1909f-17f9-4375-a04c-492291f4750a",
+      "kind": "NOTICE"
+    },
+    {
+      "id": "outcome:4d7c71aa4b2d745d3e9ec33dbfb2c694ef9b3db35a2c8ed471c60936cc9aa53a",
+      "paymentId": "e0c1909f-17f9-4375-a04c-492291f4750a",
+      "kind": "VERIFIED"
+    },
+    {
+      "id": "notice:8944826420b60f54af251da4fcc6e907f4354470af86d6f8d8da1e06cc638bbb",
+      "paymentId": "e0c1909f-17f9-4375-a04c-492291f4750a",
+      "kind": "NOTICE"
+    },
+    {
+      "id": "notice:6fb06d3d8feb09c2b1ad6d3734cbb073ad42919ead4b38ebeb7310a298eb076d",
+      "paymentId": "e0c1909f-17f9-4375-a04c-492291f4750a",
+      "kind": "NOTICE"
+    },
+    {
+      "id": "intent:ffdab8bc-ca89-4411-9949-a81ab3d327a5",
+      "paymentId": "ffdab8bc-ca89-4411-9949-a81ab3d327a5",
+      "kind": "INTENT"
+    },
+    {
+      "id": "session:ffdab8bc-ca89-4411-9949-a81ab3d327a5",
+      "paymentId": "ffdab8bc-ca89-4411-9949-a81ab3d327a5",
+      "kind": "SESSION_READY"
+    }
+  ],
+  "outbox": [
+    {
+      "id": "cmw22dydy0001bkf4tfk8q77q",
+      "idempotencyKey": "gateway:capture:e0c1909f-17f9-4375-a04c-492291f4750a:VERIFIED",
+      "status": "PENDING"
+    },
+    {
+      "id": "cmw22dye70002bkf4dxqfpf1g",
+      "idempotencyKey": "gateway:capture:e0c1909f-17f9-4375-a04c-492291f4750a:VERIFIED:staff:7ca1205c-0844-40d7-abff-74da4974a8de",
+      "status": "PENDING"
+    },
+    {
+      "id": "cmw22dye90003bkf4v8yx7a9j",
+      "idempotencyKey": "gateway:capture:e0c1909f-17f9-4375-a04c-492291f4750a:VERIFIED:staff:8948d02b-8f17-4e2c-aa35-3875420da1cb",
+      "status": "PENDING"
+    }
+  ]
+}

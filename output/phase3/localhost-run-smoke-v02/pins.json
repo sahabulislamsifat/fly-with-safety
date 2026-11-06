@@ -1,0 +1,42 @@
+[
+  {
+    "path": "run.cjs",
+    "sha256": "9D0101D5D6F00A42B0725EEB3C7D8AAD37A8E388AD63E6BE74064E1A6C3F6322"
+  },
+  {
+    "path": "ssh-lifecycle.cjs",
+    "sha256": "1EAF0535B8B27D3C74A3CCA61D80BC9FE97A5CA02F6579D629CB0DBC5351B920"
+  },
+  {
+    "path": "offline.test.cjs",
+    "sha256": "32F50B6DA14B3AE6554804CE0191607F69DEF1787808D6C05B6074C4F23AE7E6"
+  },
+  {
+    "path": "runtime-pins.json",
+    "sha256": "8C57A33C01810CA6704AEA2871AE2ECF3D8CD2D34715E2AD2CE73813303CE7FC"
+  },
+  {
+    "path": "REVIEW.md",
+    "sha256": "13F65433AC11F322EC770B00F735692C3497CDBD1ABBF6BADAEEB8198BBF2C2F"
+  },
+  {
+    "path": "../localhost-run-smoke/transport.cjs",
+    "sha256": "6BE06F0E0D6DF08E90653FE51946F51052BD9956B6F7B4C0205FEEF34775EF88"
+  },
+  {
+    "path": "../localhost-run-smoke/trust.cjs",
+    "sha256": "63AD67CC8AB06A8051308F90B5251098DB16F5463F98B55A62348F9AE6D4D632"
+  },
+  {
+    "path": "../localhost-run-smoke/ssh-environment.cjs",
+    "sha256": "D2E6063E04F062B2C70953CCEC18BA531C51B73B17E21101342E3DDA2E159ED1"
+  },
+  {
+    "path": "../localhost-run-smoke/known_hosts",
+    "sha256": "F18AD2187F181DE3052FB073724990D41E13ED4732F6C209E34BB98AA7ED4324"
+  },
+  {
+    "path": "../isolated-callback/boundary.cjs",
+    "sha256": "FDED195FF92CFBB02A66BDC41915C414D6D06801BA8DD2A62B91EAA6A7DFCBA4"
+  }
+]

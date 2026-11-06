@@ -1,0 +1,60 @@
+{
+  "passed": true,
+  "stage": "final-fixture-reconciliation",
+  "failure": null,
+  "cases": [
+    {
+      "case": "fail",
+      "status": "FAILED",
+      "captured": false,
+      "actualReturn": true,
+      "signedIPN": true,
+      "roleConsistency": true,
+      "ownershipIsolation": true,
+      "bookingStillPending": true,
+      "manualReplayNotProviderEvidence": true
+    }
+  ],
+  "counts": {
+    "transactions": 20,
+    "bookings": 1,
+    "passengers": 1,
+    "initialHistory": 1,
+    "payments": 1,
+    "saves": 10,
+    "events": 8,
+    "initiate": 1,
+    "callbacks": 2,
+    "query": 2,
+    "wireRequests": 2
+  },
+  "notices": [
+    {
+      "case": "fail",
+      "source": "ipn",
+      "signed": true,
+      "failedStatus": true,
+      "processed": true
+    },
+    {
+      "case": "fail",
+      "source": "fail",
+      "signed": true,
+      "failedStatus": true,
+      "processed": true
+    }
+  ],
+  "preservation": true,
+  "connectorStopped": true,
+  "oldProviderRequests": 0,
+  "normalServicesTouched": false,
+  "mainCloudAccess": false,
+  "refundsExecuted": false,
+  "fixturesRetained": true,
+  "phase3Accepted": false,
+  "nativeEvidence": {
+    "pid": 28024,
+    "exitCode": null,
+    "signal": "SIGTERM"
+  }
+}

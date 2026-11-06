@@ -1,0 +1,42 @@
+{
+  "passed": false,
+  "stage": "genuine-fail",
+  "failure": {
+    "stage": "genuine-fail",
+    "prismaCode": null,
+    "sqlState": null,
+    "appCode": null,
+    "classification": "ASSERTION_OR_UNCLASSIFIED",
+    "operation": "genuine-fail",
+    "adapterKind": null,
+    "nativeType": null,
+    "code": "TIMEOUT_INDETERMINATE"
+  },
+  "cases": [],
+  "counts": {
+    "transactions": 4,
+    "bookings": 1,
+    "passengers": 1,
+    "initialHistory": 1,
+    "payments": 1,
+    "saves": 2,
+    "events": 2,
+    "initiate": 1,
+    "deniedRequests": 1,
+    "wireRequests": 1
+  },
+  "notices": [],
+  "preservation": true,
+  "connectorStopped": true,
+  "oldProviderRequests": 0,
+  "normalServicesTouched": false,
+  "mainCloudAccess": false,
+  "refundsExecuted": false,
+  "fixturesRetained": true,
+  "phase3Accepted": false,
+  "nativeEvidence": {
+    "pid": 27376,
+    "exitCode": null,
+    "signal": "SIGTERM"
+  }
+}

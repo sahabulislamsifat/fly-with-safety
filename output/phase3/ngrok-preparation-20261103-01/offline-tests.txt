@@ -1,0 +1,208 @@
+TAP version 13
+# Subtest: case1: edge deny or unchanged origin guard denies unrelated route
+ok 1 - case1: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 2.8742
+  type: 'test'
+  ...
+# Subtest: case2: edge deny or unchanged origin guard denies unrelated route
+ok 2 - case2: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.2588
+  type: 'test'
+  ...
+# Subtest: case3: edge deny or unchanged origin guard denies unrelated route
+ok 3 - case3: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.1283
+  type: 'test'
+  ...
+# Subtest: case4: edge deny or unchanged origin guard denies unrelated route
+ok 4 - case4: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.1142
+  type: 'test'
+  ...
+# Subtest: case5: edge deny or unchanged origin guard denies unrelated route
+ok 5 - case5: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.5521
+  type: 'test'
+  ...
+# Subtest: case6: edge deny or unchanged origin guard denies unrelated route
+ok 6 - case6: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0978
+  type: 'test'
+  ...
+# Subtest: case7: edge deny or unchanged origin guard denies unrelated route
+ok 7 - case7: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.1334
+  type: 'test'
+  ...
+# Subtest: case8: edge deny or unchanged origin guard denies unrelated route
+ok 8 - case8: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0877
+  type: 'test'
+  ...
+# Subtest: case9: edge deny or unchanged origin guard denies unrelated route
+ok 9 - case9: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.1067
+  type: 'test'
+  ...
+# Subtest: case10: edge deny or unchanged origin guard denies unrelated route
+ok 10 - case10: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.1842
+  type: 'test'
+  ...
+# Subtest: case11: edge deny or unchanged origin guard denies unrelated route
+ok 11 - case11: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0919
+  type: 'test'
+  ...
+# Subtest: case12: edge deny or unchanged origin guard denies unrelated route
+ok 12 - case12: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 1.0335
+  type: 'test'
+  ...
+# Subtest: case13: edge deny or unchanged origin guard denies unrelated route
+ok 13 - case13: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.1666
+  type: 'test'
+  ...
+# Subtest: case14: edge deny or unchanged origin guard denies unrelated route
+ok 14 - case14: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0678
+  type: 'test'
+  ...
+# Subtest: case15: edge deny or unchanged origin guard denies unrelated route
+ok 15 - case15: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0469
+  type: 'test'
+  ...
+# Subtest: case16: edge deny or unchanged origin guard denies unrelated route
+ok 16 - case16: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0705
+  type: 'test'
+  ...
+# Subtest: case17: edge deny or unchanged origin guard denies unrelated route
+ok 17 - case17: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0768
+  type: 'test'
+  ...
+# Subtest: case18: edge deny or unchanged origin guard denies unrelated route
+ok 18 - case18: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.051
+  type: 'test'
+  ...
+# Subtest: case19: edge deny or unchanged origin guard denies unrelated route
+ok 19 - case19: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0498
+  type: 'test'
+  ...
+# Subtest: case20: edge deny or unchanged origin guard denies unrelated route
+ok 20 - case20: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0404
+  type: 'test'
+  ...
+# Subtest: case21: edge deny or unchanged origin guard denies unrelated route
+ok 21 - case21: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.037
+  type: 'test'
+  ...
+# Subtest: case22: edge deny or unchanged origin guard denies unrelated route
+ok 22 - case22: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0403
+  type: 'test'
+  ...
+# Subtest: case23: edge deny or unchanged origin guard denies unrelated route
+ok 23 - case23: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0527
+  type: 'test'
+  ...
+# Subtest: case24: edge deny or unchanged origin guard denies unrelated route
+ok 24 - case24: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0388
+  type: 'test'
+  ...
+# Subtest: case25: edge deny or unchanged origin guard denies unrelated route
+ok 25 - case25: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0465
+  type: 'test'
+  ...
+# Subtest: case26: edge deny or unchanged origin guard denies unrelated route
+ok 26 - case26: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0405
+  type: 'test'
+  ...
+# Subtest: case27: edge deny or unchanged origin guard denies unrelated route
+ok 27 - case27: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0384
+  type: 'test'
+  ...
+# Subtest: case28: edge deny or unchanged origin guard denies unrelated route
+ok 28 - case28: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0587
+  type: 'test'
+  ...
+# Subtest: case29: edge deny or unchanged origin guard denies unrelated route
+ok 29 - case29: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0503
+  type: 'test'
+  ...
+# Subtest: case30: edge deny or unchanged origin guard denies unrelated route
+ok 30 - case30: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0401
+  type: 'test'
+  ...
+# Subtest: case31: edge deny or unchanged origin guard denies unrelated route
+ok 31 - case31: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.042
+  type: 'test'
+  ...
+# Subtest: all four exact POST paths allowed but wrong domain/scheme/encoded path rejected
+ok 32 - all four exact POST paths allowed but wrong domain/scheme/encoded path rejected
+  ---
+  duration_ms: 0.2089
+  type: 'test'
+  ...
+# Subtest: no OAuth/basic auth/provider signature fiction; deny precedes Host override
+ok 33 - no OAuth/basic auth/provider signature fiction; deny precedes Host override
+  ---
+  duration_ms: 2.0816
+  type: 'test'
+  ...
+1..33
+# tests 33
+# suites 0
+# pass 33
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 151.431

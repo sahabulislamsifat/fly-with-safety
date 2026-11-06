@@ -1,0 +1,10 @@
+Existing private Windows PowerShell5.1. Exactly ONE read-only investigation; existing restricted-role password at native private prompt. NOT postgres. Do not rerun after failure. Return sanitized output/exit; no payment proof or cleanup is authorized here.
+
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p='E:\Programming\Project\fly-with-safety\output\phase3\concurrency-recovery-20261103-01\Read-OnlyClock.ps1'
+ if(-not (Test-Path -LiteralPath $p -PathType Leaf)){throw 'STOP: reviewed read-only caller missing'}
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne '78970E9410D4ABD88CA55C731DEC5345DFEAA53B9205FC3D6AD3E45A3103CB10'){throw 'STOP: reviewed read-only caller mismatch'}
+ & $p -OwnerApprovedReadOnlyInvestigation
+}

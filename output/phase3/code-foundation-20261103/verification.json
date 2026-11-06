@@ -1,0 +1,63 @@
+{
+  "verifiedUTC": "2026-11-02T19:26:59.544Z",
+  "phase3Acceptance": "NOT_ACCEPTED",
+  "bundled": {
+    "passed": 98,
+    "failed": 0,
+    "skipped": 0,
+    "exit": 0
+  },
+  "native": {
+    "passed": 98,
+    "failed": 0,
+    "skipped": 0,
+    "exit": 0
+  },
+  "affectedCommercial": {
+    "passed": 60,
+    "failed": 0,
+    "skipped": 0,
+    "exit": 0
+  },
+  "serverTypeScriptExit": 0,
+  "strictTypeScriptExit": 0,
+  "clientTypeScriptExit": 0,
+  "prismaValidationExit": 0,
+  "eslintExit": 0,
+  "eslintErrors": 0,
+  "eslintWarnings": 0,
+  "diffCheckExit": 0,
+  "powerShell51ParsingExit": 0,
+  "sql": {
+    "passed": true,
+    "statements": 17,
+    "functions": 2,
+    "accessStatements": 7,
+    "accessGuards": 1,
+    "databaseExecuted": false,
+    "parser": "PostgreSQL18 WASM"
+  },
+  "schemaReview": {
+    "passed": true,
+    "pins": 18,
+    "sqlStatements": 32,
+    "plpgsqlBlocks": 6,
+    "newTables": [
+      "GatewayPayment",
+      "GatewayPaymentEvent",
+      "GatewayRefund"
+    ],
+    "existingTableDml": "one new migration ledger INSERT only",
+    "nativeConnections": 1,
+    "callerSha256": "6FCDED4588137814D02BE628E78DB5B5865D9B8C3D609C1BCEFD5BAF57F6263A",
+    "attemptExists": false,
+    "databaseExecuted": false
+  },
+  "sourceFiles": 22,
+  "livePostgres": "NOT_RUN",
+  "genuineProvider": "NOT_RUN",
+  "browserPayment": "NOT_RUN",
+  "databaseMutationExecuted": false,
+  "applicationConfigurationChanged": false,
+  "historicalPhase1Phase2Retained": true
+}

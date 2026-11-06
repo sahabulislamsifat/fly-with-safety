@@ -1,0 +1,8 @@
+### Error
+Error: locator.innerText: Error: strict mode violation: locator('main') resolved to 2 elements:
+    1) <main class="flex-1 pt-[70px]">…</main> aka getByRole('main').filter({ hasText: 'Your travel accountAccount' })
+    2) <main class="min-w-0" aria-live="polite">…</main> aka getByText('Your accountBooking detailsBack to bookingsBooking detailsReferenceFWS-P3-')
+
+Call log:
+[2m  - waiting for locator('main')[22m
+

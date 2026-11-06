@@ -1,0 +1,21 @@
+{
+  "passed": false,
+  "firstFailure": "SSH_ASSIGNED_ORIGIN_CHANGED",
+  "positiveChecks": 11,
+  "spoofPassed": 2,
+  "elapsedMs": 334985,
+  "observedSpanMs": 302879,
+  "connectorStopped": true,
+  "nativeEvidence": {
+    "nativeExitCode": null,
+    "signal": "SIGTERM",
+    "spawnError": null,
+    "stdoutBytes": 30958,
+    "stderrBytes": 810,
+    "categories": [
+      "AUTH_TEXT_OBSERVED"
+    ]
+  },
+  "databaseCalls": 0,
+  "paymentProviderCalls": 0
+}

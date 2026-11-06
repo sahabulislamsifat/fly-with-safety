@@ -1,0 +1,8 @@
+{"atUTC":"2026-11-03T11:09:56.996Z","event":"listener-bound","address":"127.0.0.1","port":5000}
+{"atUTC":"2026-11-03T11:09:57.007Z","event":"connector-started","pid":27404}
+{"atUTC":"2026-11-03T11:10:02.928Z","event":"origin-discovered","origin":"https://transcript-videos-thereafter-honors.trycloudflare.com"}
+{"atUTC":"2026-11-03T11:10:03.470Z","event":"connector-registered"}
+{"atUTC":"2026-11-03T11:10:03.472Z","event":"probe-started","index":1,"method":"POST","path":"/api/v1/payments/sslcommerz/success","expected":204,"observed":null,"passed":false}
+{"atUTC":"2026-11-03T11:10:03.515Z","event":"probe-connection-failed","index":1,"method":"POST","path":"/api/v1/payments/sslcommerz/success","expected":204,"observed":null,"passed":false,"failure":{"classification":"DNS","codes":["ENOTFOUND"]}}
+{"atUTC":"2026-11-03T11:10:03.523Z","event":"connector-exit","code":null,"signal":"SIGTERM"}
+{"atUTC":"2026-11-03T11:10:03.524Z","event":"listener-closed","tunnelStopped":true}

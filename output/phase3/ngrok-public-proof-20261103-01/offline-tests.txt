@@ -1,0 +1,388 @@
+TAP version 13
+# Subtest: healthy frontend remains untouched: one backend stop, one proof, one backend restore
+ok 1 - healthy frontend remains untouched: one backend stop, one proof, one backend restore
+  ---
+  duration_ms: 23.1822
+  type: 'test'
+  ...
+# Subtest: failed proof restores backend without replay
+ok 2 - failed proof restores backend without replay
+  ---
+  duration_ms: 6.404
+  type: 'test'
+  ...
+# Subtest: frontend change blocks public proof but does not block independently safe backend restore
+ok 3 - frontend change blocks public proof but does not block independently safe backend restore
+  ---
+  duration_ms: 4.2967
+  type: 'test'
+  ...
+# Subtest: frontend HTTP outage cannot suppress a healthy backend-restoration result
+ok 4 - frontend HTTP outage cannot suppress a healthy backend-restoration result
+  ---
+  duration_ms: 4.998
+  type: 'test'
+  ...
+# Subtest: unconfirmed probe exit blocks exposing restored main backend
+ok 5 - unconfirmed probe exit blocks exposing restored main backend
+  ---
+  duration_ms: 6.0471
+  type: 'test'
+  ...
+# Subtest: residual connector blocks main restoration and public proof
+ok 6 - residual connector blocks main restoration and public proof
+  ---
+  duration_ms: 3.2783
+  type: 'test'
+  ...
+# Subtest: backend stop incomplete never starts another backend or public process
+ok 7 - backend stop incomplete never starts another backend or public process
+  ---
+  duration_ms: 6.1359
+  type: 'test'
+  ...
+# Subtest: nonzero graceful-stop acknowledgement skips public proof and safely restores backend
+ok 8 - nonzero graceful-stop acknowledgement skips public proof and safely restores backend
+  ---
+  duration_ms: 3.5183
+  type: 'test'
+  ...
+# Subtest: safe backend restoration independent of frontend state
+ok 9 - safe backend restoration independent of frontend state
+  ---
+  duration_ms: 1.9261
+  type: 'test'
+  ...
+# Subtest: unsafe backendAbsent blocks main restoration
+ok 10 - unsafe backendAbsent blocks main restoration
+  ---
+  duration_ms: 0.2118
+  type: 'test'
+  ...
+# Subtest: unsafe connectorsAbsent blocks main restoration
+ok 11 - unsafe connectorsAbsent blocks main restoration
+  ---
+  duration_ms: 0.0881
+  type: 'test'
+  ...
+# Subtest: unconfirmed tunnelStopped blocks main restoration
+ok 12 - unconfirmed tunnelStopped blocks main restoration
+  ---
+  duration_ms: 0.1048
+  type: 'test'
+  ...
+# Subtest: unconfirmed listenerStopped blocks main restoration
+ok 13 - unconfirmed listenerStopped blocks main restoration
+  ---
+  duration_ms: 0.8871
+  type: 'test'
+  ...
+# Subtest: live probe cannot be replaced by main
+ok 14 - live probe cannot be replaced by main
+  ---
+  duration_ms: 0.1395
+  type: 'test'
+  ...
+# Subtest: no blank or fabricated proof exit
+ok 15 - no blank or fabricated proof exit
+  ---
+  duration_ms: 0.1479
+  type: 'test'
+  ...
+# Subtest: known preflight rejection retains the actual safe reason
+ok 16 - known preflight rejection retains the actual safe reason
+  ---
+  duration_ms: 0.1506
+  type: 'test'
+  ...
+# Subtest: unknown error message cannot leak a private value
+ok 17 - unknown error message cannot leak a private value
+  ---
+  duration_ms: 0.181
+  type: 'test'
+  ...
+# Subtest: exact authenticated binding accepted, not inferred from config check
+ok 18 - exact authenticated binding accepted, not inferred from config check
+  ---
+  duration_ms: 1.3415
+  type: 'test'
+  ...
+# Subtest: alternate domain rejected
+ok 19 - alternate domain rejected
+  ---
+  duration_ms: 1.3743
+  type: 'test'
+  ...
+# Subtest: non-isolated or altered upstream rejected
+ok 20 - non-isolated or altered upstream rejected
+  ---
+  duration_ms: 0.4639
+  type: 'test'
+  ...
+# Subtest: missing upstream evidence fails closed
+ok 21 - missing upstream evidence fails closed
+  ---
+  duration_ms: 0.3584
+  type: 'test'
+  ...
+# Subtest: safe platform codes retained without raw secret/error text
+ok 22 - safe platform codes retained without raw secret/error text
+  ---
+  duration_ms: 1.0544
+  type: 'test'
+  ...
+# Subtest: fragmented native JSON readiness captured without raw logging
+ok 23 - fragmented native JSON readiness captured without raw logging
+  ---
+  duration_ms: 0.7981
+  type: 'test'
+  ...
+# Subtest: account/policy refusal rejects without public probe
+ok 24 - account/policy refusal rejects without public probe
+  ---
+  duration_ms: 1.4358
+  type: 'test'
+  ...
+# Subtest: native process exit fails rather than claiming ready
+ok 25 - native process exit fails rather than claiming ready
+  ---
+  duration_ms: 0.7316
+  type: 'test'
+  ...
+# Subtest: bounded startup timeout does not retry
+ok 26 - bounded startup timeout does not retry
+  ---
+  duration_ms: 6.6666
+  type: 'test'
+  ...
+# Subtest: exact static HTTPS origin only; no cloudflare or arbitrary fallback
+ok 27 - exact static HTTPS origin only; no cloudflare or arbitrary fallback
+  ---
+  duration_ms: 0.5969
+  type: 'test'
+  ...
+# Subtest: DNS cap preserves fail-closed ENOTFOUND evidence
+ok 28 - DNS cap preserves fail-closed ENOTFOUND evidence
+  ---
+  duration_ms: 0.6974
+  type: 'test'
+  ...
+# Subtest: two consecutive real lookup successes required before callback
+ok 29 - two consecutive real lookup successes required before callback
+  ---
+  duration_ms: 0.3206
+  type: 'test'
+  ...
+# Subtest: actual forged-Host request preserves ngrok SNI and default certificate verification without opening socket
+ok 30 - actual forged-Host request preserves ngrok SNI and default certificate verification without opening socket
+  ---
+  duration_ms: 50.5612
+  type: 'test'
+  ...
+# Subtest: case1: edge deny or unchanged origin guard denies unrelated route
+ok 31 - case1: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 3.8469
+  type: 'test'
+  ...
+# Subtest: case2: edge deny or unchanged origin guard denies unrelated route
+ok 32 - case2: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.3967
+  type: 'test'
+  ...
+# Subtest: case3: edge deny or unchanged origin guard denies unrelated route
+ok 33 - case3: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.2095
+  type: 'test'
+  ...
+# Subtest: case4: edge deny or unchanged origin guard denies unrelated route
+ok 34 - case4: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.1784
+  type: 'test'
+  ...
+# Subtest: case5: edge deny or unchanged origin guard denies unrelated route
+ok 35 - case5: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.2301
+  type: 'test'
+  ...
+# Subtest: case6: edge deny or unchanged origin guard denies unrelated route
+ok 36 - case6: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.1916
+  type: 'test'
+  ...
+# Subtest: case7: edge deny or unchanged origin guard denies unrelated route
+ok 37 - case7: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.2157
+  type: 'test'
+  ...
+# Subtest: case8: edge deny or unchanged origin guard denies unrelated route
+ok 38 - case8: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.1701
+  type: 'test'
+  ...
+# Subtest: case9: edge deny or unchanged origin guard denies unrelated route
+ok 39 - case9: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.2167
+  type: 'test'
+  ...
+# Subtest: case10: edge deny or unchanged origin guard denies unrelated route
+ok 40 - case10: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.5239
+  type: 'test'
+  ...
+# Subtest: case11: edge deny or unchanged origin guard denies unrelated route
+ok 41 - case11: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.2716
+  type: 'test'
+  ...
+# Subtest: case12: edge deny or unchanged origin guard denies unrelated route
+ok 42 - case12: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.7905
+  type: 'test'
+  ...
+# Subtest: case13: edge deny or unchanged origin guard denies unrelated route
+ok 43 - case13: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.1595
+  type: 'test'
+  ...
+# Subtest: case14: edge deny or unchanged origin guard denies unrelated route
+ok 44 - case14: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0618
+  type: 'test'
+  ...
+# Subtest: case15: edge deny or unchanged origin guard denies unrelated route
+ok 45 - case15: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0458
+  type: 'test'
+  ...
+# Subtest: case16: edge deny or unchanged origin guard denies unrelated route
+ok 46 - case16: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0714
+  type: 'test'
+  ...
+# Subtest: case17: edge deny or unchanged origin guard denies unrelated route
+ok 47 - case17: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.1145
+  type: 'test'
+  ...
+# Subtest: case18: edge deny or unchanged origin guard denies unrelated route
+ok 48 - case18: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.083
+  type: 'test'
+  ...
+# Subtest: case19: edge deny or unchanged origin guard denies unrelated route
+ok 49 - case19: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0789
+  type: 'test'
+  ...
+# Subtest: case20: edge deny or unchanged origin guard denies unrelated route
+ok 50 - case20: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0513
+  type: 'test'
+  ...
+# Subtest: case21: edge deny or unchanged origin guard denies unrelated route
+ok 51 - case21: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0387
+  type: 'test'
+  ...
+# Subtest: case22: edge deny or unchanged origin guard denies unrelated route
+ok 52 - case22: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0508
+  type: 'test'
+  ...
+# Subtest: case23: edge deny or unchanged origin guard denies unrelated route
+ok 53 - case23: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0431
+  type: 'test'
+  ...
+# Subtest: case24: edge deny or unchanged origin guard denies unrelated route
+ok 54 - case24: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0377
+  type: 'test'
+  ...
+# Subtest: case25: edge deny or unchanged origin guard denies unrelated route
+ok 55 - case25: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0498
+  type: 'test'
+  ...
+# Subtest: case26: edge deny or unchanged origin guard denies unrelated route
+ok 56 - case26: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0413
+  type: 'test'
+  ...
+# Subtest: case27: edge deny or unchanged origin guard denies unrelated route
+ok 57 - case27: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0384
+  type: 'test'
+  ...
+# Subtest: case28: edge deny or unchanged origin guard denies unrelated route
+ok 58 - case28: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0642
+  type: 'test'
+  ...
+# Subtest: case29: edge deny or unchanged origin guard denies unrelated route
+ok 59 - case29: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.049
+  type: 'test'
+  ...
+# Subtest: case30: edge deny or unchanged origin guard denies unrelated route
+ok 60 - case30: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0425
+  type: 'test'
+  ...
+# Subtest: case31: edge deny or unchanged origin guard denies unrelated route
+ok 61 - case31: edge deny or unchanged origin guard denies unrelated route
+  ---
+  duration_ms: 0.0409
+  type: 'test'
+  ...
+# Subtest: all four exact POST paths allowed but wrong domain/scheme/encoded path rejected
+ok 62 - all four exact POST paths allowed but wrong domain/scheme/encoded path rejected
+  ---
+  duration_ms: 0.2298
+  type: 'test'
+  ...
+# Subtest: no OAuth/basic auth/provider signature fiction; deny precedes Host override
+ok 63 - no OAuth/basic auth/provider signature fiction; deny precedes Host override
+  ---
+  duration_ms: 2.7191
+  type: 'test'
+  ...
+1..63
+# tests 63
+# suites 0
+# pass 63
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 225.3175

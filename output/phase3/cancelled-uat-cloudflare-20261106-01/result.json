@@ -1,0 +1,51 @@
+{
+  "passed": false,
+  "stage": "genuine-cancel",
+  "failure": {
+    "stage": "genuine-cancel",
+    "prismaCode": null,
+    "sqlState": null,
+    "appCode": null,
+    "classification": "ASSERTION_OR_UNCLASSIFIED",
+    "operation": "genuine-cancel",
+    "adapterKind": null,
+    "nativeType": null,
+    "code": "TIMEOUT_INDETERMINATE"
+  },
+  "cases": [],
+  "counts": {
+    "transactions": 9,
+    "bookings": 1,
+    "passengers": 1,
+    "initialHistory": 1,
+    "payments": 1,
+    "saves": 6,
+    "events": 4,
+    "initiate": 1,
+    "callbacks": 1,
+    "query": 1,
+    "wireRequests": 1
+  },
+  "notices": [
+    {
+      "case": "cancel",
+      "source": "cancel",
+      "signed": true,
+      "cancelledStatus": true,
+      "processed": true
+    }
+  ],
+  "preservation": true,
+  "connectorStopped": true,
+  "oldProviderRequests": 0,
+  "normalServicesTouched": false,
+  "mainCloudAccess": false,
+  "refundsExecuted": false,
+  "fixturesRetained": true,
+  "phase3Accepted": false,
+  "nativeEvidence": {
+    "pid": 24524,
+    "exitCode": null,
+    "signal": "SIGTERM"
+  }
+}

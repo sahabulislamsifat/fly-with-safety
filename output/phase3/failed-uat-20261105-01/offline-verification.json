@@ -1,0 +1,21 @@
+{
+  "scope": "offline-preparation",
+  "focusedMockedTests": { "passed": 11, "failed": 0 },
+  "strictTypeScript": "PASS",
+  "scopedESLint": { "files": 5, "errors": 0, "warnings": 0 },
+  "postgresqlSyntaxStatementsParsed": 19,
+  "nativePowerShell51ParseSwitchAndGuardOrder": "PASS",
+  "nativeCallerInvocation": "Execution policy rejected script-file invocation in the agent shell. The native parser and AST contract checks passed. The approved foreground workflow is reserved for the owner's console.",
+  "childRejectedAbsentApprovalBeforeAttempt": true,
+  "strictSshArgumentsCheckedOffline": true,
+  "sourcePins": 151,
+  "runtimePins": 923,
+  "historicalArtifactsMatched": 102,
+  "existingEvidenceSealFilesMatched": 22,
+  "callerSHA256": "FE48C1DBABAE9D4491E521418CE5EF1A62AFA6282DBCF5971DA82CBF4B6749EF",
+  "attemptExists": false,
+  "databaseConnected": false,
+  "providerCalls": 0,
+  "publicConnections": 0,
+  "phase3Accepted": false
+}

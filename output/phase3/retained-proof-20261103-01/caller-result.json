@@ -1,0 +1,9 @@
+{
+    "passed":  true,
+    "cleanupExecuted":  false,
+    "readOnlyExit":  0,
+    "stage":  "restricted-retained-payment-business-proof",
+    "provider":  "MOCK_ONLY",
+    "finishedUTC":  "2026-11-02T21:26:05.7135200Z",
+    "proofExit":  0
+}

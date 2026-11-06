@@ -1,0 +1,14 @@
+PENDING FRESH EXPLICIT APPROVAL. Do not run under the consumed v01 authorization.
+ONE diagnostics-preserving public transport recovery only; no password required.
+
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p='E:\Programming\Project\fly-with-safety\output\phase3\callback-tunnel-20261103-02\Invoke-CallbackProbe.ps1'
+ if(-not (Test-Path -LiteralPath $p -PathType Leaf)){throw 'STOP: reviewed recovery caller missing'}
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne '4FFE4768A689754FB29751D37C15F3B588E1B556C7CF881BA40C3562804BECC5'){throw 'STOP: reviewed recovery caller mismatch'}
+ & $p -OwnerApprovedOnePublicTransportRecovery
+}
+
+Return actual exit/stage/classification/codes/attempted/completed/PASS/FAIL/untouched/shutdown status.
+No automatic retry, historical caller replay, app/database/merchant access or repair.

@@ -1,0 +1,73 @@
+{
+  "schema": {
+    "accepted": true,
+    "resultExit": 0,
+    "commitMarkerObserved": true,
+    "postcheckPassed": true,
+    "originalReportedFinishedUTC": "2026-11-02T19:30:08.2310577Z",
+    "pins": 18,
+    "sourceRoleProof": "ADMIN_METADATA_ONLY; restricted login/operations not yet executed",
+    "artifacts": [
+      {
+        "path": "output\\phase3\\code-foundation-20261103\\schema-review\\attempt.json",
+        "sha256": "52D10C87741749E5918143AB642E12EFC32D893F4ACAACB70D3D5A0995C01E57"
+      },
+      {
+        "path": "output\\phase3\\code-foundation-20261103\\schema-review\\stdout.txt",
+        "sha256": "319C928B1ED9747A0B5DD0A9AABF762826EDE9980EDC186A31294948185A77B8"
+      },
+      {
+        "path": "output\\phase3\\code-foundation-20261103\\schema-review\\result.json",
+        "sha256": "89F23B3AB44FAFED63744EE0F7C46F39CE8C780DA99F7E2915F5A6C3BA2977A4"
+      }
+    ],
+    "callerSha256": "6FCDED4588137814D02BE628E78DB5B5865D9B8C3D609C1BCEFD5BAF57F6263A",
+    "newDatabaseCalls": false
+  },
+  "newDiagnosticsBundled": {
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0,
+    "exit": 0
+  },
+  "newDiagnosticsNative": {
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0,
+    "exit": 0
+  },
+  "privatePath": {
+    "passed": 10,
+    "failed": 0,
+    "skipped": 0,
+    "exit": 0,
+    "powerShellVersion": "5.1.26100.9818",
+    "executionPolicyObserved": "RemoteSigned",
+    "policyChanged": false,
+    "policyBypassed": false,
+    "databaseExecuted": false,
+    "credentialsUsed": "SYNTHETIC_CONSTANTS_ONLY",
+    "initialSandboxRestriction": "Execution-policy registry read blocked; resolved with normal registry read access without policy changes",
+    "evidence": "Observed native PowerShell tool output in this implementation turn"
+  },
+  "strictTypeScriptExit": 0,
+  "eslintErrors": 0,
+  "eslintWarnings": 0,
+  "powerShell51FilesParsed": 3,
+  "sql": {
+    "passed": true,
+    "pins": 169,
+    "readOnlyStatements": 7,
+    "plpgsqlBlocks": 1,
+    "postgresQueriesParsed": 11,
+    "callerSha256": "07BFCB319F14E9C9412564A4901E02D03765B708D7C42903B2ED2C6BA3045026",
+    "originalSchemaConsumedAndPreserved": true,
+    "liveAttemptExists": false,
+    "databaseExecuted": false,
+    "providerCalled": false
+  },
+  "databaseProof": "NOT_RUN",
+  "browserProof": "NOT_RUN",
+  "externalProvider": "NOT_RUN",
+  "historical98NotRerun": true
+}

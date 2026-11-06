@@ -1,0 +1,67 @@
+{
+  "counts": {
+    "transactions": 9,
+    "bookings": 1,
+    "passengers": 1,
+    "initialHistory": 1,
+    "payments": 1,
+    "saves": 6,
+    "events": 4,
+    "initiate": 1,
+    "callbacks": 1,
+    "query": 1
+  },
+  "bookings": [
+    {
+      "id": "118bc1e4-ca96-4ca1-98f0-84498deb27c1",
+      "referenceNumber": "FWS-P3-C-118BC1E4",
+      "status": "PENDING"
+    }
+  ],
+  "passengers": [
+    {
+      "id": "97fd038e-9ab5-48c1-b177-3bc56cfb2684",
+      "bookingId": "118bc1e4-ca96-4ca1-98f0-84498deb27c1"
+    }
+  ],
+  "history": [
+    {
+      "id": "2a71d88d-f834-4a72-b474-dfe3881d5ead",
+      "bookingId": "118bc1e4-ca96-4ca1-98f0-84498deb27c1",
+      "fromStatus": "PENDING",
+      "toStatus": "PENDING"
+    }
+  ],
+  "payments": [
+    {
+      "id": "5c137cbf-6888-48d8-885c-25162b661ff5",
+      "bookingId": "118bc1e4-ca96-4ca1-98f0-84498deb27c1",
+      "tranId": "FWSed46b7b83ed58a623140c5fbde",
+      "status": "CANCELLED",
+      "captured": false
+    }
+  ],
+  "events": [
+    {
+      "id": "intent:5c137cbf-6888-48d8-885c-25162b661ff5",
+      "paymentId": "5c137cbf-6888-48d8-885c-25162b661ff5",
+      "kind": "INTENT"
+    },
+    {
+      "id": "session:5c137cbf-6888-48d8-885c-25162b661ff5",
+      "paymentId": "5c137cbf-6888-48d8-885c-25162b661ff5",
+      "kind": "SESSION_READY"
+    },
+    {
+      "id": "notice:2a3a55ccc14d3b94101027267687834b97cd81dfb0c580e6ba0b103ad70a8c8d",
+      "paymentId": "5c137cbf-6888-48d8-885c-25162b661ff5",
+      "kind": "NOTICE"
+    },
+    {
+      "id": "outcome:e6e253e026988772f01748299a02402698fa558bbda51a1efb6e6a5ac668492a",
+      "paymentId": "5c137cbf-6888-48d8-885c-25162b661ff5",
+      "kind": "CANCELLED"
+    }
+  ],
+  "outbox": []
+}

@@ -1,0 +1,11 @@
+version: 3
+agent:
+  web_addr: false
+  update_check: false
+  remote_management: false
+  console_ui: false
+  log: false
+
+# No authtoken or endpoints. Merge only after separate reviewed execution approval.
+# The reviewed future CLI must specify --inspect=false, exact static --url,
+# callback-only policy and the isolated 127.0.0.1:5000 listener after handoff.

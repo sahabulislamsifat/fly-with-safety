@@ -1,0 +1,14 @@
+DO NOT EXECUTE UNTIL OWNER EXPLICITLY APPROVES THE NEW FIXTURE SCOPE IN REVIEW.md.
+ONE private foreground execution, existing Windows PowerShell5.1. First password: EXISTING restricted database role, NOT postgres. After read-only preflight PASS: choose a NEW separate synthetic-account password (16 characters minimum,72 UTF8 bytes maximum); remember privately for later browser sign-ins. No credentials in chat/files/logs.
+
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p='E:\Programming\Project\fly-with-safety\output\phase3\postgres-proof-20261103-01\Invoke-PostgresProof.ps1'
+ if(-not (Test-Path -LiteralPath $p -PathType Leaf)){throw 'STOP: reviewed payment proof caller missing'}
+ if((Get-Item -LiteralPath $p -Stream * | Where-Object Stream -eq 'Zone.Identifier')){throw 'STOP: unexpected script zone marking'}
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne '07BFCB319F14E9C9412564A4901E02D03765B708D7C42903B2ED2C6BA3045026'){throw 'STOP: reviewed payment proof caller mismatch'}
+ & $p -OwnerApprovedSyntheticPaymentProof
+}
+
+Return the actual PHASE3_RESTRICTED_POSTGRES_PAYMENT_PROOF_PASS_NOT_PROVIDER_ACCEPTANCE marker, Payment proof checks line and Phase3 restricted PostgreSQL proof exit line, or sanitized STOP/error. Do not rerun after failure. Preserve all fixtures and ledgers; cleanup is not authorized here.

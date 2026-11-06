@@ -1,0 +1,66 @@
+{
+  "actors": [
+    {
+      "email": "d8505f78-a138-405e-a750-b23d82af87ad@example.invalid",
+      "role": "CUSTOMER",
+      "id": "d8505f78-a138-405e-a750-b23d82af87ad"
+    },
+    {
+      "email": "701fb225-e21e-4901-8663-81590207a66f@example.invalid",
+      "role": "CUSTOMER",
+      "id": "701fb225-e21e-4901-8663-81590207a66f"
+    },
+    {
+      "email": "7ca1205c-0844-40d7-abff-74da4974a8de@example.invalid",
+      "role": "STAFF",
+      "id": "7ca1205c-0844-40d7-abff-74da4974a8de"
+    },
+    {
+      "email": "8948d02b-8f17-4e2c-aa35-3875420da1cb@example.invalid",
+      "role": "ADMIN",
+      "id": "8948d02b-8f17-4e2c-aa35-3875420da1cb"
+    }
+  ],
+  "fixtures": [
+    {
+      "name": "fail",
+      "bookingId": "18339e64-9fa3-4335-bdc5-bd4f8a689fd5",
+      "reference": "FWS-P3-N-18339E64",
+      "passengerId": "68eb3b23-dfa1-4c7d-a40e-64c00a7acecd",
+      "historyId": "b971c97c-3d7d-4447-bc6b-b86e960d7423",
+      "quoteId": "75f0203b-8529-4350-b78b-26c573692854",
+      "requestId": "6f12f656-d2de-4e1f-ab80-444da3ce3d6a",
+      "customerId": "d8505f78-a138-405e-a750-b23d82af87ad",
+      "amount": 12000
+    },
+    {
+      "name": "cancel",
+      "bookingId": "10c314e3-5292-4fdc-b00a-94836cc3f6e2",
+      "reference": "FWS-P3-N-10C314E3",
+      "passengerId": "2cca360b-ad9e-4535-9a26-ec71c75db004",
+      "historyId": "1f4f054d-0112-4405-b4cd-99d8526dd630",
+      "quoteId": "41f6ebd4-c1bb-483c-a3db-4fc139ebc9d6",
+      "requestId": "3973e82c-243c-49d9-9339-b61e7c215078",
+      "customerId": "d8505f78-a138-405e-a750-b23d82af87ad",
+      "amount": 12000
+    }
+  ],
+  "caps": {
+    "transactions": 100,
+    "bookings": 2,
+    "passengers": 2,
+    "initialHistory": 2,
+    "payments": 2,
+    "saves": 80,
+    "events": 32,
+    "bookingUpdates": 4,
+    "financialHistory": 4,
+    "outbox": 12,
+    "initiate": 2,
+    "query": 12,
+    "validate": 4,
+    "retainedQuery": 1,
+    "callbacks": 12,
+    "deniedRequests": 24
+  }
+}

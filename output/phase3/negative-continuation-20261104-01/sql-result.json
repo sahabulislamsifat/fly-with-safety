@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "selectStatements": 18,
+  "databaseConnected": false,
+  "note": "Syntax only; live schema and identity not queried. Parameter-list placeholders parsed offline."
+}

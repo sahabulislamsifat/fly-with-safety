@@ -1,0 +1,26 @@
+[
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\concurrency-recovery-20261103-01\\clock-fixtures.readonly.sql",
+    "sha256": "600A9BF86FFB330FC3D83FEF1F9C489E6D6AE52A3A998551ECDCF2C6CB0F12F1"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\concurrency-recovery-20261103-01\\historical-artifacts.json",
+    "sha256": "58A1A61B053A6F8A862F6582310381561507E05618E41AA597801F949C1B3F30"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\proof-result.json",
+    "sha256": "FE95386BE7C4516BB63AB4A7A8A83F503F35059F2D485E2A6F71A18A5D78EC14"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\ledger.jsonl",
+    "sha256": "F4789BAF4EEDAB0A68AC954FAD17089E3E0C2867642F4CCBBD2A5A601BE3B276"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\caller-result.json",
+    "sha256": "D8BFACF75468EA60B85FF73368663EC415FCAD3D63A719D28CB9B1277A98056D"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\attempt-started.json",
+    "sha256": "5F1F011886338B1DA898559A9D6B34707E2B98A3F923F5CED20D016C33816D8C"
+  }
+]

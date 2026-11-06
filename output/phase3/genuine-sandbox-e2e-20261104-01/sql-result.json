@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "staticSelectStatements": 11,
+  "databaseConnected": false,
+  "note": "Syntax only; live catalog/privilege semantics remain execution preflight"
+}

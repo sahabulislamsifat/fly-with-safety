@@ -1,0 +1,66 @@
+[
+  {
+    "path": "probe.cjs",
+    "sha256": "3fa1cb34a843a35262ceecd2859483792f43c08282819fbe64a5363bdd7012c4"
+  },
+  {
+    "path": "run.cjs",
+    "sha256": "b6616ada16827fc49d1f76ec4eb86f2ea44f1b06ea1a6dd4bf51ec5e470f9012"
+  },
+  {
+    "path": "connector.yml",
+    "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+  },
+  {
+    "path": "diagnostics.cjs",
+    "sha256": "81bccce0895144a13296514e44d8fcac40abda466bc861fbb3190aebc7bf34f3"
+  },
+  {
+    "path": "diagnostics.test.cjs",
+    "sha256": "6532a8e1e14b81741db1a67ff0531a23c905c5a27d4a76c1122e3ba2b3c5c9b7"
+  },
+  {
+    "path": "REVIEW.md",
+    "sha256": "6502b83695afd7551327d06ac78281494fe44ac258f653fbbf05751aa7fd1e6a"
+  },
+  {
+    "path": "../callback-preparation-20261103-01/ingress.cjs",
+    "sha256": "dc4faeefd7a72344cd2868bea6d2e947dbad30ee7418edd95df56fe9f988332e"
+  },
+  {
+    "path": "../callback-preparation-20261103-01/ingress.test.cjs",
+    "sha256": "6c92d017e30a03e3059119eee0569767aa7a6ad4498daf2186e96ff26b9d6a4b"
+  },
+  {
+    "path": "../callback-tunnel-20261103-01/attempt.json",
+    "sha256": "8f7dd356275c1b4528b6ff57e7b8e4df3eaff116a9fe3ac1940b65bc204a4fd4"
+  },
+  {
+    "path": "../callback-tunnel-20261103-01/result.json",
+    "sha256": "84f2f7a2e586124d895745b1de6fa3e7032e7de6bc12e905e08174bfd217f727"
+  },
+  {
+    "path": "../callback-tunnel-20261103-01/checks.json",
+    "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  {
+    "path": "../callback-tunnel-20261103-01/origin.json",
+    "sha256": "dd420c6ec52ffbbdc027828113a2c2b8017980cc0d9dea9c0f3ee18e452f2985"
+  },
+  {
+    "path": "../callback-tunnel-20261103-01/caller-result.json",
+    "sha256": "3a79b423f0d9ba8f10f3f077b88d0e93b553fa96405fc680ea117fc7861588af"
+  },
+  {
+    "path": "../callback-tunnel-20261103-01/run.cjs",
+    "sha256": "7e8a90162c8a7ad001a4f4175015080d85ebd83f462d90d1720ca1061177d2d7"
+  },
+  {
+    "path": "../callback-tunnel-20261103-01/Invoke-CallbackProbe.ps1",
+    "sha256": "ae7bfb5b308ec2fd4a4014fe86d7bcdf6a0c54a0cc56d5a990b160adfc6ebf59"
+  },
+  {
+    "path": "../callback-tunnel-20261103-01/pins.json",
+    "sha256": "48e4ebace9f86a41d75190d4fa11c98ae77a2e034cf5a5ce8077e4c7a9d3d0f3"
+  }
+]

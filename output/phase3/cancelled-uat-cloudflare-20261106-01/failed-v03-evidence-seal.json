@@ -1,0 +1,91 @@
+{
+  "run": "failed-uat-cloudflare-20261106-03",
+  "merchantTransactionId": "FWS974f4dc9182621694add6fa8ec",
+  "paymentId": "6dbc1a4a-2f7e-4f79-b4be-aec9d4be7367",
+  "bookingId": "59ac02e7-1921-4811-ac8f-8335a80be8fa",
+  "bookingReference": "FWS-P3-F-59AC02E7",
+  "authoritativeQueries": 2,
+  "signedBrowserReturn": true,
+  "signedIPN": true,
+  "captured": false,
+  "bookingStatus": "PENDING",
+  "protectedRows": 23,
+  "files": [
+    {
+      "path": "attempt.json",
+      "sha256": "821177CFD1D9A2BF858E8265CAF5CC3EB356B4CC1E1F5339BA8CB19C10B673C4"
+    },
+    {
+      "path": "caller-attempt.json",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "caller-result.json",
+      "sha256": "F20B10F223EDA735DD57DE28063CE3043FF6CF234954A4EF0960D897673DA7F8"
+    },
+    {
+      "path": "connector-process.json",
+      "sha256": "17C740C65349EAD5DFFBE88E952819ED1BAC4367AC3F186060E7CB5F60091530"
+    },
+    {
+      "path": "connector.yml",
+      "sha256": "CA3D163BAB055381827226140568F3BEF7EAAC187CEBD76878E0B63E9E442356"
+    },
+    {
+      "path": "fixture-plan.json",
+      "sha256": "D56DE4C8E037E84FB14A77BA896E55CA6CE5AB84B6DACAD37A045EABA7D0FD70"
+    },
+    {
+      "path": "Invoke-FailedUat.ps1",
+      "sha256": "1D54C1DB648DA15E3B0248E0C64B5B96DE69BB843D0FC3B8CD665A7F14B571F5"
+    },
+    {
+      "path": "ledger.jsonl",
+      "sha256": "4929F076436DB2E5304DA84B6A0EDEBBF8E4E5E05DAD3E148AAF464FCA3AC204"
+    },
+    {
+      "path": "owned-final.json",
+      "sha256": "BE37648A05E8FF28A5E781CD57BEE36C03AC680F3BBD9AC9552123145788CCC8"
+    },
+    {
+      "path": "pins.json",
+      "sha256": "54FADAF6032DD6D46D4E20C23FFC8183D0DAF5965A677A463D689D6B2C5EB10B"
+    },
+    {
+      "path": "preservation-ready.json",
+      "sha256": "148466FD6FB263B0B72D78BFD4D5952897F7BFB620D35E249DBBD0438FCEC56A"
+    },
+    {
+      "path": "readonly-preflight.json",
+      "sha256": "9016B8E7594E445708DC1410A02AADCE3EC58EA0F7C294C91CEB63AC50F74C33"
+    },
+    {
+      "path": "result.json",
+      "sha256": "73E9623CAFA6544327CEF4F825D841966E15B6335A5ED73D0AD142E655E5FAAE"
+    },
+    {
+      "path": "retained-postcheck.json",
+      "sha256": "E53C748F7C40698BF7631511BC3655F26F52F5B4DEAD2E205E200AE24F7F69D6"
+    },
+    {
+      "path": "retained-preflight.json",
+      "sha256": "E53C748F7C40698BF7631511BC3655F26F52F5B4DEAD2E205E200AE24F7F69D6"
+    },
+    {
+      "path": "return-fail.png",
+      "sha256": "392016C8D781AD11E77D25F67DA2A21AA3C98DB186A4A0BEF397DF59B1B7B6A5"
+    },
+    {
+      "path": "REVIEW.md",
+      "sha256": "81EE52810FA8A42C36C9CF92C13427CCA76883A00091B64BD67E3B0AC90E9C1B"
+    },
+    {
+      "path": "runtime-pins.json",
+      "sha256": "1F47A400490EDFDABAB7B1BDBA15DA1D2946798C0078EF32391AA5DE52E418C7"
+    },
+    {
+      "path": "transport-preflight.json",
+      "sha256": "E8B361569979110ED5EE7740B21196812F5107C5204AC575A8CAB258EE8F42DD"
+    }
+  ]
+}

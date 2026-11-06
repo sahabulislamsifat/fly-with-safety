@@ -1,0 +1,15 @@
+{
+  "repository": "ngrok/skills",
+  "commit": "6f2d9b4fa2d7068560726bcc3969a4b906d44a4c",
+  "skills": [
+    "expose-localhost",
+    "ngrok-engine",
+    "ngrok-setup",
+    "ngrok-surfaces",
+    "receive-webhooks",
+    "secure-endpoint",
+    "troubleshoot-ngrok"
+  ],
+  "verifiedGitBlobs": 48,
+  "networkAccountCalls": false
+}

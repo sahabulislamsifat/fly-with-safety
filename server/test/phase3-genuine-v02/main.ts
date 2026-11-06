@@ -1,0 +1,136 @@
+/** One owner-approved genuine sandbox run. Never import this module from normal startup. */
+import { readFileSync,writeFileSync,appendFileSync,existsSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { randomBytes,randomUUID } from 'node:crypto';
+import http from 'node:http';
+import https from 'node:https';
+import { spawn,type ChildProcess } from 'node:child_process';
+import express from 'express';
+import {createRequire} from 'node:module';
+import type {Browser} from 'C:/Users/sahab/AppData/Local/npm-cache/_npx/31e32ef8478fbf80/node_modules/playwright';
+const local=createRequire(__filename);
+import type { Server } from 'node:http';
+import { Scope,OwnedStore,LimitedGateway,type Plan } from './scope.js';
+import { assertLocalURL,preflight,preserve } from './preflight.js';
+import {financialAdmission} from './ingress.js';
+const repo=resolve(__dirname,'../../..'),base=resolve(repo,'output/phase3/genuine-sandbox-e2e-20261104-02');
+const {sshArgs}=local('../../../output/phase3/localhost-run-injection-v01/transport.cjs');
+const {reader}=local('../../../output/phase3/localhost-run-smoke-v03/discovery.cjs');
+const {diagnostics,stopOwned}=local('../../../output/phase3/localhost-run-smoke-v03/ssh-lifecycle.cjs');
+const {sshEnvironment}=local('../../../output/phase3/localhost-run-smoke/ssh-environment.cjs');
+const paths:string[]=local('../../../output/phase3/isolated-callback/boundary.cjs').paths;
+const save=(name:string,data:object)=>writeFileSync(resolve(base,name),JSON.stringify(data,null,2),{flag:'wx'});
+const record=(e:object)=>appendFileSync(resolve(base,'ledger.jsonl'),JSON.stringify({at:new Date().toISOString(),...e})+'\n');
+async function main(){
+ if(process.argv[2]!=='--owner-approved-genuine-sandbox-v02'||process.env.PHASE3_GENUINE_APPROVED!=='true')throw Error('EXECUTION_NOT_APPROVED');
+ assertLocalURL(process.env.DATABASE_URL||'');if(process.env.DIRECT_URL!==process.env.DATABASE_URL)throw Error('URL_PARITY_REQUIRED');
+ if(existsSync(resolve(base,'attempt.json')))throw Error('CONSUMED_NO_RETRY');
+ const plan=JSON.parse(readFileSync(resolve(base,'fixture-plan.json'),'utf8').replace(/^\uFEFF/,'')) as Plan;
+ const dotenv=local('../../node_modules/dotenv');const privateEnv=dotenv.parse(readFileSync(resolve(repo,'server/.env')));
+ if(privateEnv.SSLCOMMERZ_SANDBOX!=='true'||!privateEnv.SSLCOMMERZ_STORE_ID||!privateEnv.SSLCOMMERZ_STORE_PASSWORD)throw Error('PRIVATE_SANDBOX_CONFIG_MISSING');
+ Object.assign(process.env,{NODE_ENV:'development',EMAIL_DELIVERY_ENABLED:'false',SSLCOMMERZ_ENABLED:'true',SSLCOMMERZ_SANDBOX:'true',SSLCOMMERZ_SCHEMA_VERIFIED:'true',SSLCOMMERZ_REFUNDS_APPROVED:'false',SSLCOMMERZ_STORE_ID:privateEnv.SSLCOMMERZ_STORE_ID,SSLCOMMERZ_STORE_PASSWORD:privateEnv.SSLCOMMERZ_STORE_PASSWORD,SSLCOMMERZ_STORAGE_KEY:randomBytes(32).toString('base64'),SSLCOMMERZ_API_BASE_URL:'https://sandbox.sslcommerz.com'});
+ save('attempt.json',{at:new Date().toISOString(),syntheticOnly:true,genuineProviderRequested:true});
+ const {prisma}=await import('../../src/lib/prisma.js');let connector:ChildProcess|undefined,pub:Server|undefined,landing:Server|undefined,origin:string|undefined,nativeEvidence:object|undefined,browser:Browser|undefined,phase:'probe'|'financial'|'stopped'='probe',failure:object|null=null,stage='db-readonly-preflight',baseline:unknown,financialRouter:express.Router|undefined;
+ const receipts:Array<{id:string|null;admitted:boolean;proxy:Record<string,unknown>}>=[], notices:Array<{case:string;source:string;signed:boolean;processed:boolean}>=[],returned=new Set<string>();
+ const cases:Array<object>=[];const scope=new Scope(plan,record);const marker=randomBytes(24).toString('hex');const tasks=new Set<Promise<unknown>>();let abort=false,connectorStopped=true,preservation=false;
+ const requestStop=()=>{abort=true;scope.closed=true;phase='stopped';void stopOwned(connector);void browser?.close().catch(()=>{});};
+ const timeout=setTimeout(requestStop,1800000),stopWatch=setInterval(()=>{if(existsSync(resolve(base,'stop.request')))requestStop();},500);
+ process.once('SIGINT',requestStop);process.once('SIGTERM',requestStop);
+ try{
+ save('readonly-preflight.json',await preflight(prisma,plan,repo));stage='db-protected-snapshot';baseline=await preserve(prisma,plan);JSON.stringify(baseline);save('preservation-ready.json',{serializable:true,protectedSnapshotInMemoryOnly:true});
+ const publicApp=express();publicApp.disable('x-powered-by');publicApp.use((req,res,next)=>{
+ const {meta,admitted}=financialAdmission(req,origin);
+ record({kind:'origin-admission',phase,admitted,proxy:meta,callbackPath:paths.includes(req.path),methodPOST:req.method==='POST'});
+ const id=req.get('x-proof-id');receipts.push({id:id&&/^[a-f0-9-]{36}$/.test(id)?id:null,admitted,proxy:meta});
+ if(phase==='probe'){res.setHeader('x-proof-marker',marker);req.resume();res.status(admitted?200:404).end();return;}
+ if(phase!=='financial'||!admitted){if(phase==='financial'){try{scope.reserve('deniedRequests');}catch{failure={stage,code:'DENIED_REQUEST_CAP'};requestStop();}}return res.status(404).end();}
+ try{scope.reserve('callbacks');}catch{failure={stage,code:'CALLBACK_CAP'};requestStop();return res.status(429).end();}next();
+ });
+ publicApp.use(express.urlencoded({extended:false,limit:'16kb',parameterLimit:40}));
+ publicApp.use((req,res,next)=>{if(phase!=='financial')return res.status(404).end();const owned=[...scope.payments.values()].find(p=>p.tranId===req.body?.tran_id);if(!owned)return res.status(404).end();
+ const source=paths.includes(req.path)?req.path.split('/').at(-1)!:'';let signed=false;
+ try{const {verifyNotification}=local('../../src/payments/sslcommerz.js');signed=verifyNotification(req.body,process.env.SSLCOMMERZ_STORE_PASSWORD)==='verified';}catch{return res.status(400).end();}
+ const notice={case:owned.fixture.name,source,signed,processed:false};notices.push(notice);
+ const finished=new Promise<void>(resolve=>res.once('finish',()=>{notice.processed=res.statusCode<400;record({kind:'callback',case:notice.case,source,signed,processed:notice.processed,status:res.statusCode});resolve();}));tasks.add(finished);void finished.finally(()=>tasks.delete(finished));next();
+ });
+ publicApp.use('/api/v1',(req,res,next)=>financialRouter?financialRouter(req,res,next):res.status(503).end());
+ publicApp.use((_req,res)=>res.status(404).end());
+ publicApp.use((e:unknown,_req:express.Request,res:express.Response,_next:express.NextFunction)=>{void _next;record({kind:'callback-error',code:e instanceof Error&&/^[A-Z0-9_]+$/.test(e.message)?e.message:'CALLBACK_REJECTED'});res.status(400).json({error:'CALLBACK_REJECTED'});});
+ pub=await listen(publicApp);const port=portOf(pub);if([3000,5000].includes(port))throw Error('NORMAL_PORT_FORBIDDEN');
+ stage='ssh-allocation';const ssh=resolve(process.env.WINDIR||'C:/Windows','System32/OpenSSH/ssh.exe'),known=resolve(repo,'output/phase3/localhost-run-smoke/known_hosts');
+ connector=spawn(ssh,sshArgs(port,known),{windowsHide:true,stdio:['ignore','pipe','pipe'],env:sshEnvironment(process.env)});save('ssh-process.json',{pid:connector.pid,loopbackPort:port,owned:true});nativeEvidence=diagnostics(connector);
+ await bounded(new Promise<void>((resolve,reject)=>{const parse=reader();connector!.stdout!.on('data',b=>{try{for(const value of parse(b)){if(!origin){origin=value;save('assigned-origin.json',{origin});resolve();}}}catch(e){reject(e);}});connector!.once('error',()=>reject(Error('SSH_START_FAILED')));connector!.once('exit',()=>reject(Error('SSH_EXIT_BEFORE_ALLOCATION')));}),30000);
+ if(abort||!origin)throw Error('PUBLIC_ORIGIN_UNAVAILABLE');
+ stage='financial-proxy-preflight';
+ const preflightChecks=[];
+ // New malicious-header cases only; do not repeat accepted7 smoke cases.
+ for(const scheme of ['https','http'] as const){
+ const id=randomUUID(),before=receipts.length;const response=await request(scheme==='https'?origin:origin.replace('https:','http:'),paths[0],{ 'x-proof-id':id,'x-forwarded-proto':scheme==='https'?'http':'https',forwarded:scheme==='https'?'proto=http':'proto=https' });
+ const receipt=receipts.slice(before).find(r=>r.id===id),redirect=scheme==='http'&&[301,302,307,308].includes(response.status)&&response.location===origin+paths[0];
+ const ok=scheme==='https'?!!receipt&&(receipt.admitted?response.status===200&&response.marker===marker:response.status===404&&response.marker===marker):!!receipt&&!receipt.admitted&&response.status===404&&response.marker===marker||redirect;
+ preflightChecks.push({scheme,status:response.status,originSeen:!!receipt,admitted:receipt?.admitted??false,proxy:receipt?.proxy||null,passed:ok});if(!ok)throw Error('PROXY_SPOOF_PREFLIGHT_FAILED');
+ }
+ save('transport-preflight.json',{checks:preflightChecks,passed:true,acceptedSmokeReplayed:false});
+ stage='private-landing-and-config';
+ const privateApp=express();privateApp.disable('x-powered-by');privateApp.use((req,res,next)=>{if(!['127.0.0.1','::1','::ffff:127.0.0.1'].includes(req.socket.remoteAddress||''))return res.status(404).end();next();});
+ privateApp.get('/payments/return',(req,res)=>{const ref=typeof req.query.booking==='string'?req.query.booking:'';const f=plan.fixtures.find(f=>f.reference===ref);if(!f)return res.status(404).end();returned.add(f.name);record({kind:'browser-return-landing',case:f.name});res.setHeader('Content-Security-Policy',"default-src 'none'; frame-ancestors 'none'");res.type('html').send('<!doctype html><title>Sandbox return</title><p>Provider return observed. Financial status requires server validation. No supplier fulfillment.</p>');});
+ landing=await listen(privateApp);process.env.FRONTEND_URL=`http://127.0.0.1:${portOf(landing)}`;process.env.SSLCOMMERZ_CALLBACK_BASE_URL=origin;
+ const {gatewayConfig,SSLCommerzClient}=await import('../../src/payments/sslcommerz.js');const config=gatewayConfig();
+ const {PrismaPaymentStore}=await import('../../src/payments/payment-store.js');const {PaymentService}=await import('../../src/payments/payment.service.js');
+ const scopedDB=scope.database(prisma),gateway=new LimitedGateway(new SSLCommerzClient(config),scope),store=new OwnedStore(new PrismaPaymentStore(scopedDB),scope),service=new PaymentService(store,gateway,config);
+ const {createPaymentCallbacks}=await import('../../src/payments/payment.routes.js');financialRouter=createPaymentCallbacks(()=>service,()=>config);
+ assertLocalURL(process.env.DATABASE_URL||'');if(process.env.DIRECT_URL!==process.env.DATABASE_URL)throw Error('URL_PARITY_REQUIRED');
+ if(abort)throw Error('EXECUTION_DEADLINE');stage='owned-fixture-create';
+ await scopedDB.$transaction(async tx=>{const clock=await tx.$queryRawUnsafe<Array<{now:Date}>>("SELECT clock_timestamp() AT TIME ZONE 'UTC' AS now"),now=clock[0].now;
+ for(const f of plan.fixtures){const owner=plan.actors.find(a=>a.id===f.customerId)!;await tx.booking.create({data:{id:f.bookingId,referenceNumber:f.reference,userId:f.customerId,status:'PENDING',customerName:'Synthetic Sandbox Traveller',customerEmail:owner.email,customerPhone:'01000000000',totalPrice:f.amount,currency:'BDT',bookingDetails:{integrationFixture:{phase:3,genuineSandbox:true,case:f.name},commercial:{version:1,revision:2,quotes:[{id:f.quoteId,amount:f.amount,currency:'BDT',description:'Synthetic sandbox, no supplier fulfillment',createdAt:now.toISOString(),acceptedAt:now.toISOString(),validUntil:new Date(+now+7200000).toISOString()}],payments:[],receipts:[]}},passengers:{create:{id:f.passengerId,firstName:'Synthetic',lastName:'Sandbox',passengerType:'adult'}},statusHistory:{create:{id:f.historyId,fromStatus:'PENDING',toStatus:'PENDING',changedBy:f.customerId,reason:'Owned genuine sandbox fixture; no supplier operation'}}}});}
+ });
+ if(abort)throw Error('EXECUTION_DEADLINE');phase='financial';const {chromium}=local(resolve(process.env.LOCALAPPDATA||'','npm-cache/_npx/31e32ef8478fbf80/node_modules/playwright'));browser=await chromium.launch({channel:'chrome',headless:false,timeout:15000});if(!browser)throw Error('BROWSER_START_FAILED');
+ for(const f of plan.fixtures){
+ if(abort)throw Error('EXECUTION_DEADLINE');stage='genuine-'+f.name;
+ const actor={id:f.customerId,role:'CUSTOMER' as const},input={requestId:f.requestId,address:'Synthetic sandbox address',city:'Dhaka',country:'BD'};
+ const initiated=await service.initiate(f.reference,actor,input);if(!initiated.checkoutUrl)throw Error('SESSION_INITIATION_UNRESOLVED');
+ const before=scope.counts.initiate;await service.initiate(f.reference,actor,input);if(scope.counts.initiate!==before)throw Error('IDEMPOTENCY_DISPATCH_MISMATCH');
+ const context=await browser.newContext(),page=await context.newPage();
+ console.log('OWNER_SANDBOX_CHECKOUT_CASE_'+f.name.toUpperCase()+' — complete this synthetic case in the opened browser; do not enter real payment data.');
+ await page.goto(initiated.checkoutUrl,{waitUntil:'domcontentloaded',timeout:25000});
+ await bounded(new Promise<void>((resolve,reject)=>{const t=setInterval(()=>{if(abort){clearInterval(t);reject(Error('EXECUTION_DEADLINE'));return;}const hasReturn=returned.has(f.name),hasNotice=notices.some(n=>n.case===f.name&&n.source===f.name&&n.processed),hasIPN=f.name!=='success'||notices.some(n=>n.case===f.name&&n.source==='ipn'&&n.signed&&n.processed);if(hasReturn&&hasNotice&&hasIPN){clearInterval(t);resolve();}},500);}),420000);
+ await page.waitForURL(u=>u.origin===process.env.FRONTEND_URL&&u.pathname==='/payments/return',{waitUntil:'domcontentloaded',timeout:15000});
+ const landingURL=new URL(page.url());if(landingURL.origin!==process.env.FRONTEND_URL||landingURL.pathname!=='/payments/return')throw Error('BROWSER_RETURN_NOT_RENDERED');
+ await page.screenshot({path:resolve(base,`return-${f.name}.png`)});record({kind:'browser-render',case:f.name,title:await page.title(),privateLanding:true});
+ const state=await prisma.$queryRawUnsafe<Array<{state:unknown}>>('SELECT state FROM public."GatewayPayment" WHERE "bookingId"=$1',f.bookingId);const a=state[0]?.state as {id:string;status:string;captured:boolean};
+ const expected=f.name==='success'?'VERIFIED':f.name==='fail'?'FAILED':'CANCELLED';record({kind:'outcome-assertion',case:f.name,expected,observed:a?.status||null,captured:a?.captured??null});if(a?.status!==expected||a.captured!==(f.name==='success'))throw Error('GENUINE_OUTCOME_MISMATCH');
+ const views=[];for(const role of ['CUSTOMER','STAFF','ADMIN'] as const){const user=role==='CUSTOMER'?plan.actors[0]:plan.actors.find(u=>u.role===role)!;const v=await service.list(f.reference,{id:user.id,role});views.push(v.payments.find(p=>p.id===a.id)?.financialState);}
+ if(views.some(v=>v!==expected))throw Error('ROLE_STATE_MISMATCH');
+ let isolated=false;try{await service.list(f.reference,{id:plan.actors[1].id,role:'CUSTOMER'});}catch{isolated=true;}if(!isolated)throw Error('OWNERSHIP_ISOLATION_FAILED');
+ const booking=await prisma.booking.findUniqueOrThrow({where:{id:f.bookingId},select:{status:true,bookingDetails:true}});if(booking.status!=='PENDING')throw Error('PAID_FULFILLED_BOUNDARY_BROKEN');
+ // Repeated notice from the owner harness is replay evidence, never labelled genuine provider IPN.
+ const p=[...scope.payments.values()].find(p=>p.fixture===f)!;const eventBefore=await eventCount(prisma,p.id);
+ await service.notify(p.tranId,undefined,'success');await service.notify(p.tranId,undefined,'success');const eventAfter=await eventCount(prisma,p.id);if(eventAfter-eventBefore>1)throw Error('DUPLICATE_NOTICE_EFFECT');
+ cases.push({case:f.name,status:a.status,captured:a.captured,actualReturn:true,signedIPN:notices.some(n=>n.case===f.name&&n.source==='ipn'&&n.signed&&n.processed),roleConsistency:true,ownershipIsolation:true,bookingStillPending:true,manualReplayNotProviderEvidence:true});record({kind:'case-adjudicated',case:f.name,status:a.status});await context.close();
+ }
+ stage='forged-callback-negatives';
+ const first=[...scope.payments.values()][0];const beforeNegative=await eventCount(prisma,first.id);
+ for(const [body,expected] of [[new URLSearchParams({tran_id:'FWS_UNKNOWN_SYNTHETIC'}).toString(),404],[new URLSearchParams({tran_id:first.tranId,amount:'1.00',currency:'USD',status:'VALID',verify_key:'tran_id,amount,currency,status',verify_sign:'00000000000000000000000000000000'}).toString(),400]] as const){const r=await request(origin!,paths[3],{},body);if(r.status!==expected)throw Error('FORGED_NOTIFICATION_ACCEPTED');}
+ if(await eventCount(prisma,first.id)!==beforeNegative)throw Error('FORGED_NOTIFICATION_MUTATED_LEDGER');
+ stage='final-fixture-reconciliation';
+ preservation=JSON.stringify(baseline)===JSON.stringify(await preserve(prisma,plan));if(!preservation)throw Error('UNRELATED_PRESERVATION_MISMATCH');
+ save('owned-final.json',await ownedFinal(prisma,plan,scope.counts));
+ }catch(e){const {preflightFailure}=await import('../phase3-db-preflight-diagnostics.js');failure={stage,...preflightFailure(e,stage),code:e instanceof Error&&/^[A-Z0-9_]+$/.test(e.message)?e.message:null};}
+ finally{
+ abort=true;scope.closed=true;phase='stopped';clearTimeout(timeout);clearInterval(stopWatch);process.removeListener('SIGINT',requestStop);process.removeListener('SIGTERM',requestStop);connectorStopped=await stopOwned(connector);if(browser)await bounded(browser.close(),5000).catch(()=>{failure=failure||{stage:'cleanup',code:'BROWSER_SHUTDOWN_UNCONFIRMED'};});
+ await bounded(Promise.allSettled([...tasks]),60000).catch(()=>{failure=failure||{stage:'cleanup',code:'CALLBACK_DRAIN_TIMEOUT'};});
+ for(const server of [pub,landing])if(server){server.closeAllConnections();await new Promise<void>(r=>server.close(()=>r()));}
+ if(baseline&&!preservation){try{preservation=JSON.stringify(baseline)===JSON.stringify(await preserve(prisma,plan));}catch(e){const {preflightFailure}=await import('../phase3-db-preflight-diagnostics.js');failure=failure||preflightFailure(e,'final-preservation');}}
+ try{if(!existsSync(resolve(base,'owned-final.json')))save('owned-final.json',await ownedFinal(prisma,plan,scope.counts));}catch{record({kind:'snapshot-incomplete'});}
+ await prisma.$disconnect().catch(()=>{});delete process.env.SSLCOMMERZ_STORAGE_KEY;delete process.env.SSLCOMMERZ_STORE_PASSWORD;
+ const result={passed:!failure&&cases.length===3&&preservation&&connectorStopped,stage,failure,cases,counts:scope.counts,notices,preservation,connectorStopped,normalServicesTouched:false,mainCloudAccess:false,refundsExecuted:false,fixturesRetained:true,phase3Accepted:false,nativeEvidence};save('result.json',result);console.log(JSON.stringify(result));process.exitCode=result.passed?0:1;
+ }
+}
+async function listen(app:express.Express){return new Promise<Server>((resolve,reject)=>{const s=app.listen(0,'127.0.0.1',()=>resolve(s));s.once('error',reject);});}
+function portOf(s:Server){const a=s.address();if(!a||typeof a==='string')throw Error('LOOPBACK_PORT_REQUIRED');return a.port;}
+function bounded<T>(promise:Promise<T>,ms:number):Promise<T>{return new Promise((resolve,reject)=>{const t=setTimeout(()=>reject(Error('BOUNDED_STAGE_TIMEOUT')),ms);promise.then(v=>{clearTimeout(t);resolve(v);},e=>{clearTimeout(t);reject(e);});});}
+async function request(origin:string,path:string,headers:Record<string,string>,body='x=1'){const u=new URL(origin);return new Promise<{status:number;marker:string|undefined;location:string|undefined}>((resolve,reject)=>{const q=(u.protocol==='https:'?https:http).request(origin+path,{method:'POST',...(u.protocol==='https:'?{rejectUnauthorized:true,servername:u.hostname}:{}),headers:{...headers,'content-type':'application/x-www-form-urlencoded','content-length':String(Buffer.byteLength(body))}},r=>{r.resume();r.once('end',()=>resolve({status:r.statusCode||0,marker:typeof r.headers['x-proof-marker']==='string'?r.headers['x-proof-marker']:undefined,location:r.headers.location}));});q.setTimeout(10000,()=>q.destroy(Error('TRANSPORT_TIMEOUT')));q.once('error',()=>reject(Error('TRANSPORT_PREFLIGHT_FAILED')));q.end(body);});}
+async function eventCount(db:import('../../src/generated/prisma/client.js').PrismaClient,id:string){const r=await db.$queryRawUnsafe<Array<{count:number}>>('SELECT count(*)::int AS count FROM public."GatewayPaymentEvent" WHERE "paymentId"=$1',id);return r[0].count;}
+async function ownedFinal(db:import('../../src/generated/prisma/client.js').PrismaClient,plan:Plan,counts:Record<string,number>){const ids=plan.fixtures.map(f=>f.bookingId),params=ids.map((_,i)=>'$'+(i+1)).join(',');return{counts,bookings:await db.booking.findMany({where:{id:{in:ids}},select:{id:true,referenceNumber:true,status:true}}),passengers:await db.bookingPassenger.findMany({where:{bookingId:{in:ids}},select:{id:true,bookingId:true}}),history:await db.bookingStatusHistory.findMany({where:{bookingId:{in:ids}},select:{id:true,bookingId:true,fromStatus:true,toStatus:true}}),payments:await db.$queryRawUnsafe(`SELECT id,"bookingId","tranId",status,(state->>'captured')::boolean AS captured FROM public."GatewayPayment" WHERE "bookingId" IN (${params})`,...ids),events:await db.$queryRawUnsafe(`SELECT e.id,e."paymentId",e.kind FROM public."GatewayPaymentEvent" e JOIN public."GatewayPayment" p ON p.id=e."paymentId" WHERE p."bookingId" IN (${params})`,...ids),outbox:await db.notificationOutbox.findMany({where:{OR:plan.fixtures.map(f=>({payload:{path:['params','referenceNumber'],equals:f.reference}}))},select:{id:true,idempotencyKey:true,status:true}})};}
+if(require.main===module)main().catch(()=>{console.error('STOP: approved genuine run incomplete; preserve evidence; no retry');process.exitCode=1;});
+

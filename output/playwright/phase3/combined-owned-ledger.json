@@ -1,0 +1,295 @@
+{
+  "readOnlyEvidenceOnly": true,
+  "cleanupApproved": false,
+  "unlistedUsersPreserved": 6,
+  "unlistedSessionPreserved": 1,
+  "originalRows": 49,
+  "newRows": 22,
+  "totalOwnedRows": 71,
+  "rows": [
+    {
+      "kind": "User",
+      "id": "d8505f78-a138-405e-a750-b23d82af87ad"
+    },
+    {
+      "kind": "User",
+      "id": "701fb225-e21e-4901-8663-81590207a66f"
+    },
+    {
+      "kind": "User",
+      "id": "7ca1205c-0844-40d7-abff-74da4974a8de"
+    },
+    {
+      "kind": "User",
+      "id": "8948d02b-8f17-4e2c-aa35-3875420da1cb"
+    },
+    {
+      "kind": "Booking",
+      "id": "df9912fd-492c-4d38-a5a8-fa26e6d947ac"
+    },
+    {
+      "kind": "Booking",
+      "id": "b79d19e7-8539-4037-9892-47ebed0f1f5e"
+    },
+    {
+      "kind": "BookingPassenger",
+      "id": "620888a7-4eac-4b43-9175-e8ffdcf0b614"
+    },
+    {
+      "kind": "BookingPassenger",
+      "id": "5d6183db-5ea5-49ed-9b3c-605ae8d467ad"
+    },
+    {
+      "kind": "BookingStatusHistory",
+      "id": "60d43611-9967-47e9-8ceb-1d5fedb2ad3c"
+    },
+    {
+      "kind": "BookingStatusHistory",
+      "id": "68584d87-fe22-4c35-85b0-fab2517b45bc"
+    },
+    {
+      "kind": "BookingStatusHistory",
+      "id": "cmvzrqife0000j4f419mav44a"
+    },
+    {
+      "kind": "BookingStatusHistory",
+      "id": "cmvzrqikv0006j4f4mw4g5zn3"
+    },
+    {
+      "kind": "BookingStatusHistory",
+      "id": "cmvzrqiln000aj4f4c4e13gys"
+    },
+    {
+      "kind": "BookingStatusHistory",
+      "id": "cmvzrqinh000ej4f4zkk744kx"
+    },
+    {
+      "kind": "BookingStatusHistory",
+      "id": "cmvzrqioc000ij4f4a004r538"
+    },
+    {
+      "kind": "GatewayPayment",
+      "id": "e472de44-0a06-4721-894e-b8a06595a062"
+    },
+    {
+      "kind": "GatewayPayment",
+      "id": "9fe5928b-fbe0-4044-b1c4-2e98139af633"
+    },
+    {
+      "kind": "GatewayRefund",
+      "id": "R3ac4ee9454218941857f6c7e23ed"
+    },
+    {
+      "kind": "GatewayPaymentEvent",
+      "id": "intent:9fe5928b-fbe0-4044-b1c4-2e98139af633"
+    },
+    {
+      "kind": "GatewayPaymentEvent",
+      "id": "session:9fe5928b-fbe0-4044-b1c4-2e98139af633"
+    },
+    {
+      "kind": "GatewayPaymentEvent",
+      "id": "notice:7d9699b26f7d1fe51d53364b3130703c23dbf1ac0ff69a05320221042c8e45b9"
+    },
+    {
+      "kind": "GatewayPaymentEvent",
+      "id": "notice:e3870f6fc40e64065737db764cef9f9b2b908f9d384fb7ee1363a2058ef0ef7c"
+    },
+    {
+      "kind": "GatewayPaymentEvent",
+      "id": "unresolved:9fe5928b-fbe0-4044-b1c4-2e98139af633:1"
+    },
+    {
+      "kind": "GatewayPaymentEvent",
+      "id": "unresolved:9fe5928b-fbe0-4044-b1c4-2e98139af633:2"
+    },
+    {
+      "kind": "GatewayPaymentEvent",
+      "id": "unresolved:9fe5928b-fbe0-4044-b1c4-2e98139af633:3"
+    },
+    {
+      "kind": "GatewayPaymentEvent",
+      "id": "unresolved:9fe5928b-fbe0-4044-b1c4-2e98139af633:4"
+    },
+    {
+      "kind": "GatewayPaymentEvent",
+      "id": "outcome:f8609a34ceccfc5e6edcc8dffbe18ab3f51caff14ba448ae5f33fe7e3b4dc8b4"
+    },
+    {
+      "kind": "GatewayPaymentEvent",
+      "id": "intent:e472de44-0a06-4721-894e-b8a06595a062"
+    },
+    {
+      "kind": "GatewayPaymentEvent",
+      "id": "session:e472de44-0a06-4721-894e-b8a06595a062"
+    },
+    {
+      "kind": "GatewayPaymentEvent",
+      "id": "outcome:beb6d69620802b63c2d9f04a18f2a7d396ba041ebe0b79fe2ab909294b6cba44"
+    },
+    {
+      "kind": "GatewayPaymentEvent",
+      "id": "refund-intent:R3ac4ee9454218941857f6c7e23ed"
+    },
+    {
+      "kind": "GatewayPaymentEvent",
+      "id": "refund-submitted:R3ac4ee9454218941857f6c7e23ed"
+    },
+    {
+      "kind": "GatewayPaymentEvent",
+      "id": "refund:R3ac4ee9454218941857f6c7e23ed:PROCESSING"
+    },
+    {
+      "kind": "GatewayPaymentEvent",
+      "id": "refund:R3ac4ee9454218941857f6c7e23ed:REFUNDED"
+    },
+    {
+      "kind": "NotificationOutbox",
+      "id": "cmvzrqifh0001j4f4yaqyusf4"
+    },
+    {
+      "kind": "NotificationOutbox",
+      "id": "cmvzrqifo0002j4f4xeqz0ruk"
+    },
+    {
+      "kind": "NotificationOutbox",
+      "id": "cmvzrqifp0003j4f4yzjdg529"
+    },
+    {
+      "kind": "NotificationOutbox",
+      "id": "cmvzrqikw0007j4f4qh185xmh"
+    },
+    {
+      "kind": "NotificationOutbox",
+      "id": "cmvzrqikx0008j4f4zk9ch144"
+    },
+    {
+      "kind": "NotificationOutbox",
+      "id": "cmvzrqiky0009j4f40mavf5sn"
+    },
+    {
+      "kind": "NotificationOutbox",
+      "id": "cmvzrqilo000bj4f478zunvxo"
+    },
+    {
+      "kind": "NotificationOutbox",
+      "id": "cmvzrqilp000cj4f41g3obej6"
+    },
+    {
+      "kind": "NotificationOutbox",
+      "id": "cmvzrqilq000dj4f4l1lrlfab"
+    },
+    {
+      "kind": "NotificationOutbox",
+      "id": "cmvzrqini000fj4f4hv4glrbr"
+    },
+    {
+      "kind": "NotificationOutbox",
+      "id": "cmvzrqink000gj4f4pwd0q5cq"
+    },
+    {
+      "kind": "NotificationOutbox",
+      "id": "cmvzrqinl000hj4f4s80yl9o8"
+    },
+    {
+      "kind": "NotificationOutbox",
+      "id": "cmvzrqioc000jj4f47zdf1sud"
+    },
+    {
+      "kind": "NotificationOutbox",
+      "id": "cmvzrqioe000kj4f4unnqhut5"
+    },
+    {
+      "kind": "NotificationOutbox",
+      "id": "cmvzrqiof000lj4f4ngnafxix"
+    },
+    {
+      "kind": "Session",
+      "id": "cmw0dr5dd00005gf4noo558xr"
+    },
+    {
+      "kind": "Session",
+      "id": "cmw0drg4l00015gf49m2lj7dy"
+    },
+    {
+      "kind": "Session",
+      "id": "cmw0drnr800025gf4e1dgp1a3"
+    },
+    {
+      "kind": "Session",
+      "id": "cmw0dsbps00035gf44s4pigdw"
+    },
+    {
+      "kind": "Session",
+      "id": "cmw0eedis00045gf4as0q3puu"
+    },
+    {
+      "kind": "Session",
+      "id": "cmw0en29700055gf4wpay71k7"
+    },
+    {
+      "kind": "Session",
+      "id": "cmw0en2un00065gf4flv9altm"
+    },
+    {
+      "kind": "Session",
+      "id": "cmw0en3h500075gf4n1kuk2hq"
+    },
+    {
+      "kind": "Session",
+      "id": "cmw0f0jib000c5gf4rgvcksv5"
+    },
+    {
+      "kind": "Booking",
+      "id": "e77192b4-357f-47a6-ad59-dc35b980330e"
+    },
+    {
+      "kind": "BookingPassenger",
+      "id": "c33b3b1f-3214-4f29-a8ed-b7cbaaf9269b"
+    },
+    {
+      "kind": "BookingStatusHistory",
+      "id": "ddc9b4a1-4a55-4671-bbbd-131c4c0da3e1"
+    },
+    {
+      "kind": "BookingStatusHistory",
+      "id": "cmw0etmmd00085gf4jdgxixe3"
+    },
+    {
+      "kind": "GatewayPayment",
+      "id": "8fbd96d2-69a5-4f79-991a-623dd8de5057"
+    },
+    {
+      "kind": "GatewayPaymentEvent",
+      "id": "intent:8fbd96d2-69a5-4f79-991a-623dd8de5057"
+    },
+    {
+      "kind": "GatewayPaymentEvent",
+      "id": "session:8fbd96d2-69a5-4f79-991a-623dd8de5057"
+    },
+    {
+      "kind": "GatewayPaymentEvent",
+      "id": "notice:c146c11651051a451f5c533abd314268142357469e5dbecba852806e164d7ae1"
+    },
+    {
+      "kind": "GatewayPaymentEvent",
+      "id": "outcome:f24324a850967111478e2bd159eae6f2016da6c80d574b923b43407376c8fe36"
+    },
+    {
+      "kind": "GatewayPaymentEvent",
+      "id": "outcome:85154c3c74f590284db854e68a2cdd93618c2fa398f87e54c0223c276ef68824"
+    },
+    {
+      "kind": "NotificationOutbox",
+      "id": "cmw0etmmg00095gf4egnoshzy"
+    },
+    {
+      "kind": "NotificationOutbox",
+      "id": "cmw0etmmz000a5gf4ci2wm9f6"
+    },
+    {
+      "kind": "NotificationOutbox",
+      "id": "cmw0etmn0000b5gf4qx4nuyrd"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "passed": false,
+  "stage": "public-path-checks",
+  "failure": "PROBE_CONNECTION_FAILED",
+  "failureDetail": {
+    "classification": "DNS",
+    "codes": [
+      "ENOTFOUND"
+    ]
+  },
+  "shutdownFailure": null,
+  "attempted": 1,
+  "completedHttp": 0,
+  "pass": 0,
+  "fail": 1,
+  "unexecuted": 30,
+  "firstFailedCheck": {
+    "index": 1,
+    "method": "POST",
+    "path": "/api/v1/payments/sslcommerz/success",
+    "expected": 204,
+    "observed": null,
+    "passed": false,
+    "failure": {
+      "classification": "DNS",
+      "codes": [
+        "ENOTFOUND"
+      ]
+    },
+    "origin": {
+      "reached": false,
+      "hostClass": null,
+      "methodMatched": null,
+      "pathMatched": null,
+      "guard": null,
+      "media": null,
+      "transferEncodingPresent": null,
+      "status": null
+    }
+  },
+  "connectorPID": 27404,
+  "tunnelStopped": true,
+  "listenerStopped": true,
+  "databaseAccess": false,
+  "merchantCalls": 0,
+  "credentialsRead": false,
+  "finishedUTC": "2026-11-03T11:10:03.525Z"
+}

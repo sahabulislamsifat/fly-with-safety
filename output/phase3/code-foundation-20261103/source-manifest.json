@@ -1,0 +1,90 @@
+[
+  {
+    "path": "server/src/payments/payment-domain.ts",
+    "sha256": "0F36B68F68623EB5EB488BB1A8BE20BE675E18373C38636AA529ABFADEA9BC53"
+  },
+  {
+    "path": "server/src/payments/payment-store.ts",
+    "sha256": "FED1A408A6DF41F091C03BFDBEE14C6436ACCE110B559BDED3D554FA0D559B8F"
+  },
+  {
+    "path": "server/src/payments/payment.routes.ts",
+    "sha256": "504BDAFF1F373CA626EBA3D3DB2D392778CE7A728177BD18DF664BBFBA4A463E"
+  },
+  {
+    "path": "server/src/payments/payment.service.ts",
+    "sha256": "48664CC45135E03F5759A9F87E9228243138360CAFB35DF4564EC6D616172BAC"
+  },
+  {
+    "path": "server/src/payments/sslcommerz.ts",
+    "sha256": "105A38C5DC0814361D735B329CC12EFEB933ED2B253079ADB2B8F24977CE2FEA"
+  },
+  {
+    "path": "server/test/phase3-booking-boundary.test.ts",
+    "sha256": "F93F8B7341DC0018F779879AF0DEF653A1E5D40E4ACFC42622A9FF5D473460DE"
+  },
+  {
+    "path": "server/test/phase3-gateway.vitest.config.ts",
+    "sha256": "E811CE5DFFB5096EA6B40C9C186DA40E10A47072845FC20616407856433AFAE8"
+  },
+  {
+    "path": "server/test/phase3-http.test.ts",
+    "sha256": "8E7EDDD0F10110771EF32A09525E7864B2870A9AC0A2EA47A0D046B512BFC5AB"
+  },
+  {
+    "path": "server/test/phase3-ledger.pg.integration.ts",
+    "sha256": "042D8AE0E223821EC6FBE067DA5FF0100C50A3AAAEF6F881E0D9723163171FDE"
+  },
+  {
+    "path": "server/test/phase3-ledger.pg.vitest.config.ts",
+    "sha256": "F677A35E7DE620FF64B72373FE4A56CB8091994881CECCD642B4BA24FEFB6C7C"
+  },
+  {
+    "path": "server/test/phase3-lifecycle.test.ts",
+    "sha256": "50AA997B452E910BEFBF0183581E43ABB3A07B30AAE5373B47391FC320C82D79"
+  },
+  {
+    "path": "server/test/phase3-provider.test.ts",
+    "sha256": "054ABC30EB22EF1C77B3E9A5074104B68DFB5A4EA2239543EA8B60BEF5BD24CB"
+  },
+  {
+    "path": "server/prisma/schema.prisma",
+    "sha256": "ABFC6567BE3475326B7CB053D8291834DD189AE4178206A0E7CDDB6A5753FFAF"
+  },
+  {
+    "path": "server/prisma/migrations/20261103000100_gateway_sandbox_ledgers/migration.sql",
+    "sha256": "DA1E65891C57A827F2AF5498B45D923D025D1F1D6FD80C9D9AB63FB986A802C5"
+  },
+  {
+    "path": "server/src/app.ts",
+    "sha256": "01E5AABAEB0E997A2225DC31848B3DA8B2757923458E6038056E41389A318D70"
+  },
+  {
+    "path": "server/src/services/booking-commercial.service.ts",
+    "sha256": "71158A319B619FEE40460BF9FFBA077A6B71487F72D288A8F97D447E44E04F56"
+  },
+  {
+    "path": "server/src/services/booking.service.ts",
+    "sha256": "4FD4252035222CF8D483456D0CCA7ADD909D1DC05C69E250838E9F1E8F0D9EE5"
+  },
+  {
+    "path": "client/src/components/booking/GatewayPaymentPanel.tsx",
+    "sha256": "CEA690A667EBA8D934E563A524AC7134E16897E4418AB9B7C58A18B14A650C60"
+  },
+  {
+    "path": "client/src/components/booking/GatewayReturn.tsx",
+    "sha256": "676907E5137F6B312A62D694A21C233A934BCB62FDDCCD72109B63A3BBBDCF5D"
+  },
+  {
+    "path": "client/src/components/booking/BookingCommercialPanel.tsx",
+    "sha256": "849DCAE9D2A673C2B18734AC4322EDF20E2EA2B40A37FC2E480F7F4B55DEE1E2"
+  },
+  {
+    "path": "client/src/components/admin/AdminBookingsTab.tsx",
+    "sha256": "EA09D6379E383DD829C98F1856BECE20A7CEF27C2CE43B0137515FB4B85C8F76"
+  },
+  {
+    "path": "client/app/payments/return/page.tsx",
+    "sha256": "404773FEF5470238596C0D52B12C66A8CEF068A09684D7E9960E6F5A85F9BAF4"
+  }
+]

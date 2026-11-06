@@ -1,0 +1,7 @@
+{"atUTC":"2026-11-03T18:16:47.505Z","event":"listener-bound","address":"127.0.0.1","port":5000}
+{"atUTC":"2026-11-03T18:16:47.523Z","event":"origin-received","index":0,"hostClass":"TUNNEL_MARKER","methodMatched":true,"pathMatched":true,"guard":"callback","media":"application/x-www-form-urlencoded","transferEncodingPresent":false}
+{"atUTC":"2026-11-03T18:16:47.525Z","event":"origin-response","index":0,"status":204}
+{"atUTC":"2026-11-03T18:16:47.588Z","event":"connector-started","pid":27016}
+{"atUTC":"2026-11-03T18:16:47.883Z","event":"connector-rejected","failure":"NGROK_START_REJECTED","codes":["ERR_NGROK_105"]}
+{"atUTC":"2026-11-03T18:16:47.887Z","event":"connector-exit","code":1,"signal":null}
+{"atUTC":"2026-11-03T18:16:47.889Z","event":"listener-closed","tunnelStopped":true}

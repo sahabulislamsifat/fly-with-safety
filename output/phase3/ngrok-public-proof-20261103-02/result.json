@@ -1,0 +1,27 @@
+{
+  "passed": false,
+  "stage": "authenticated-domain-and-policy-binding",
+  "failure": "NGROK_START_REJECTED",
+  "failureDetail": {
+    "classification": "NGROK",
+    "codes": [
+      "ERR_NGROK_105"
+    ]
+  },
+  "shutdownFailure": null,
+  "dnsReady": false,
+  "callbackReady": false,
+  "attempted": 0,
+  "completedHttp": 0,
+  "pass": 0,
+  "fail": 0,
+  "unexecuted": 31,
+  "firstFailedCheck": null,
+  "connectorPID": 27016,
+  "tunnelStopped": true,
+  "listenerStopped": true,
+  "databaseAccess": false,
+  "merchantCalls": 0,
+  "credentialsRead": false,
+  "finishedUTC": "2026-11-03T18:16:47.890Z"
+}

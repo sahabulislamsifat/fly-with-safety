@@ -1,0 +1,8 @@
+{
+  "pid": 4440,
+  "frontend": "http://localhost:3000",
+  "api": "http://localhost:5000/api/v1",
+  "cloudFallbackDisabled": true,
+  "processLocalPin": true,
+  "envFilesModified": false
+}

@@ -1,0 +1,118 @@
+[
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\attempt-started.json",
+    "sha256": "5F1F011886338B1DA898559A9D6B34707E2B98A3F923F5CED20D016C33816D8C"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\build-pins.cjs",
+    "sha256": "B79EC076F2957210A319A3BA26DDF5480CEDB2367EAC2790319B6DFB4CAA0503"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\build-preflight.cjs",
+    "sha256": "61F23D2293691F7B278B356940301F6FD55B5B04C676879B4D6CB9CBC4A61D5D"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\caller-result.json",
+    "sha256": "D8BFACF75468EA60B85FF73368663EC415FCAD3D63A719D28CB9B1277A98056D"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\diagnostics-bundled.json",
+    "sha256": "05A1101ED28FF05193819B6D323264B2E5922E3B3C04DBCBAA58C55244B623AF"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\diagnostics-native.json",
+    "sha256": "404FDDB75CF7B6ED71939BE584283B23622F3A883E5529199375F539BF3C7B14"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\eslint.json",
+    "sha256": "43B37B350138BEC186AF303DA418CE702EF1D708B6B145431C6C5EC18513A24A"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\FOREGROUND-AFTER-APPROVAL.txt",
+    "sha256": "C15CD37B42E66F263724E193C6D845A2A52859126624E803ED29AE211B2CC785"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\Invoke-PostgresProof.ps1",
+    "sha256": "07BFCB319F14E9C9412564A4901E02D03765B708D7C42903B2ED2C6BA3045026"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\ledger.jsonl",
+    "sha256": "F4789BAF4EEDAB0A68AC954FAD17089E3E0C2867642F4CCBBD2A5A601BE3B276"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\offline-review.json",
+    "sha256": "0CF6E679C6125F26C54506A45B568A8E42779F3D31763B6144A84C95C82A6F3E"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\pins.json",
+    "sha256": "D79720E8CC35E6C341974E30B5600CF3921E64E396FE37B1AB75B03CC290CD14"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\policy.json",
+    "sha256": "3C97AB29801566BBBE7CDF9AEACC134D3E531B13CD44EB411FBD1EFBBAC7D2AB"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\preflight.readonly.sql",
+    "sha256": "4E8B2F3347F5297D16AA506D1805604E5FC070953C0670B10F5009502F01DDC5"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\private-path-offline-result.json",
+    "sha256": "2A52C7F2A826EB89C19EB52A82C09A33B69DBD96EAE55E1B41C6932BCEE213B1"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\proof-attempt.json",
+    "sha256": "28D916E847C7B87F8ED2EB194B86B579978CF98B85204426AB993C2177DE74F7"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\proof-result.json",
+    "sha256": "FE95386BE7C4516BB63AB4A7A8A83F503F35059F2D485E2A6F71A18A5D78EC14"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\proof-stdout.txt",
+    "sha256": "64C58F9C55DC1812CDC076E4BE17AA32C3A089EC75A7C81833632865D884DD73"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\readonly-stdout.txt",
+    "sha256": "0022410C43125923D662BE5C9636C1F856B182A8C7148834250E1C0376C392BE"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\review-hashes.json",
+    "sha256": "E5B72E223D2B30FFAB755DDCCBC04B7A2CC082846F1274F00A6D9423AD0D0884"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\REVIEW.md",
+    "sha256": "77CF41A4C39B280939B353F69F47A1A5DAFA3EEE9C4BC376CDB9B2671E15BF34"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\schema-acceptance.json",
+    "sha256": "D7733A53C3D7602C42243A2FEFBC4E38BDC1C2DD8776DE878B8CCE7724446A7F"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\Set-PrivateConnection.ps1",
+    "sha256": "477B44A61F99BB65944491B4421BA98F30AC24716C8212D5509AC1DB9389B1D2"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\test-contract.json",
+    "sha256": "5B66FF018FF70B16398C9E6823569F30E66E6D4B4F2C2CADB153010CA1C4F3CD"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\Test-PrivateConnection.offline.ps1",
+    "sha256": "A821F36120B3C1124777FF85D6DF7AA1E53040F1EC7248EEDC05331BF723126E"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\verification.json",
+    "sha256": "52DE672CE023A3865CEE326BC6CBC5E09E1698ABBADB22B26157BA384A9916EA"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\verify-private-url.cjs",
+    "sha256": "85338F939C9B16FF36B563FA6080CF77CD4B746375D39F723425EC9C47261E48"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\verify.offline.cjs",
+    "sha256": "1ACD68B0135588C35AD6A11DC40774CC33ADC1D32971292133096AD8DC3CDB4C"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\postgres-proof-20261103-01\\vitest-result.json",
+    "sha256": "892DCCEE3A1E87E8C39FE741EFAFD0B35E3770AF35CAF346A442EEEEDA1EC396"
+  }
+]

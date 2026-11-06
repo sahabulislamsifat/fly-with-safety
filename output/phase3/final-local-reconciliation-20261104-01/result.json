@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "failure": null,
+  "stage": "final-readonly-preservation",
+  "guards": {
+    "identityVerified": true,
+    "migrations": 8,
+    "actors": 4,
+    "staffRecipients": 2,
+    "fixtureAbsent": true
+  },
+  "retainedSummary": {
+    "ownedRows": 23,
+    "successVerifiedAndUntouched": true,
+    "incompleteIntentPreserved": true,
+    "ownership": true
+  },
+  "providerCalls": 0,
+  "providerStateSource": "saved-readback-only",
+  "observedProviderState": "PROCESSING",
+  "providerStateRequeried": false,
+  "controlledRollbacks": 2,
+  "preservation": true,
+  "financialWrites": 0,
+  "initiations": 0,
+  "validations": 0,
+  "refunds": 0,
+  "publicConnections": 0,
+  "mainCloudAccess": false,
+  "normalServicesTouched": false,
+  "oldPaymentMutated": false,
+  "phase3Accepted": false
+}

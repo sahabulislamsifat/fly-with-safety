@@ -1,0 +1,83 @@
+{
+  "verifiedAt": "2026-11-04T13:33:29.272Z",
+  "offlineImplementationComplete": true,
+  "executionReady": false,
+  "supportStatus": "PENDING_OFFICIAL_SUPPORT",
+  "tests": {
+    "simulated": true,
+    "PASS": 48,
+    "FAIL": 0,
+    "SKIP": 0
+  },
+  "strictTypeScriptExit": 0,
+  "lintErrors": 0,
+  "lintWarnings": 0,
+  "nodeSyntax": true,
+  "nativePS51ParseContractPinPaths": 1132,
+  "sql": {
+    "passed": true,
+    "selectStatements": 18,
+    "databaseConnected": false,
+    "note": "Syntax only; live schema and identity not queried. Parameter-list placeholders parsed offline."
+  },
+  "contract": {
+    "passed": true,
+    "checks": 1473,
+    "sourcePins": 209,
+    "runtimePins": 923,
+    "historicalArtifacts": 102,
+    "ownedRows": {
+      "bookings": 3,
+      "passengers": 3,
+      "history": 4,
+      "payments": 2,
+      "events": 8,
+      "outbox": 3
+    },
+    "consumedV02Budget": {
+      "transactions": 23,
+      "bookings": 3,
+      "passengers": 3,
+      "initialHistory": 3,
+      "payments": 2,
+      "saves": 13,
+      "events": 10,
+      "initiate": 2,
+      "callbacks": 2,
+      "query": 2,
+      "validate": 2,
+      "bookingUpdates": 1,
+      "financialHistory": 1,
+      "outbox": 3
+    },
+    "focusedSimulatedTests": 48,
+    "supportPending": true,
+    "executionReady": false,
+    "attemptAbsent": true,
+    "providerCalls": 0,
+    "databaseOperations": 0,
+    "publicExecution": false,
+    "callerSHA256": "252399408DF4FC886ACE53B22874C4105DC8CCAE681A352A8B232BF502582944"
+  },
+  "changedFiles": [
+    "server/test/phase3-negative-v01/callback-limit.ts",
+    "server/test/phase3-negative-v01/callbacks.ts",
+    "server/test/phase3-negative-v01/case-window.ts",
+    "server/test/phase3-negative-v01/ingress.ts",
+    "server/test/phase3-negative-v01/main.ts",
+    "server/test/phase3-negative-v01/owner.ts",
+    "server/test/phase3-negative-v01/preflight.ts",
+    "server/test/phase3-negative-v01/retained.ts",
+    "server/test/phase3-negative-v01/scope.ts",
+    "server/test/phase3-negative-v01/support.ts",
+    "server/test/phase3-negative-offline.test.ts",
+    "server/test/phase3-negative-security.test.ts",
+    "docs/proposals/PHASE_3_FINAL_GATES.md"
+  ],
+  "liveDatabaseOperations": 0,
+  "publicConnections": 0,
+  "providerCalls": 0,
+  "historical7_64_79Rerun": false,
+  "phase3Accepted": false,
+  "phase4": "ON HOLD"
+}

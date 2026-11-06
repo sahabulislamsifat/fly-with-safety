@@ -1,0 +1,10 @@
+'use strict';
+const {test}=require('node:test'),assert=require('node:assert/strict');
+const {canRestore}=require('./handoff-policy.cjs');
+const safe=()=>({originalStopped:true,proofStarted:true,proofExited:true,tunnelAbsent:true,result:{tunnelStopped:true,listenerStopped:true}});
+test('confirmed connector/listener shutdown permits main restoration',()=>assert.equal(canRestore(safe()),true));
+test('public proof failure does not prevent safe normal restoration',()=>{const s=safe();s.result.passed=false;assert.equal(canRestore(s),true);});
+for(const flag of ['originalStopped','proofExited','tunnelAbsent'])test(flag+' false blocks main restoration',()=>{const s=safe();s[flag]=false;assert.equal(canRestore(s),false);});
+for(const flag of ['tunnelStopped','listenerStopped'])test('unconfirmed '+flag+' blocks main exposure',()=>{const s=safe();s.result[flag]=false;assert.equal(canRestore(s),false);});
+test('failure before proof start may restore only after original shutdown and no connector',()=>assert.equal(canRestore({originalStopped:true,proofStarted:false,tunnelAbsent:true}),true));
+test('missing proof result cannot restore while probe process is unconfirmed',()=>{const s=safe();s.result=null;s.proofExited=false;assert.equal(canRestore(s),false);});

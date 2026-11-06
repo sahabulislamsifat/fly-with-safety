@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "pins": 169,
+  "readOnlyStatements": 7,
+  "plpgsqlBlocks": 1,
+  "postgresQueriesParsed": 11,
+  "callerSha256": "07BFCB319F14E9C9412564A4901E02D03765B708D7C42903B2ED2C6BA3045026",
+  "originalSchemaConsumedAndPreserved": true,
+  "liveAttemptExists": false,
+  "databaseExecuted": false,
+  "providerCalled": false
+}

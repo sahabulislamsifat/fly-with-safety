@@ -1,0 +1,19 @@
+{
+  "scope": "diagnostics-only recovery preparation; not a network fix claim",
+  "tests": { "passed": 17, "failed": 0, "skipped": 0, "exit": 0 },
+  "nodeSyntaxExit": 0,
+  "nativePowerShellVersion": "5.1.26100.9818",
+  "nativePowerShellParsingExit": 0,
+  "pinsMatched": 16,
+  "originalEightPinsMatched": 8,
+  "originalCallerSHA256": "AE7BFB5B308EC2FD4A4014FE86D7BCDF6A0C54A0CC56D5A990B160ADFC6EBF59",
+  "recoveryCallerSHA256": "4FFE4768A689754FB29751D37C15F3B588E1B556C7CF881BA40C3562804BECC5",
+  "recoveryManifestSHA256": "835EAFF70F48C23BAFD9464A9C910DC3684CC1A0823D79EF4F3036180711D738",
+  "unchangedHandlerAndConfigHashesVerified": true,
+  "unchangedConnectorArgsEnvironmentAndDeadlineVerified": true,
+  "diffCheckExit": 0,
+  "recoveryAttemptExists": false,
+  "newPublicExecution": false,
+  "historicalProofSuiteRerun": false,
+  "phase3Accepted": false
+}

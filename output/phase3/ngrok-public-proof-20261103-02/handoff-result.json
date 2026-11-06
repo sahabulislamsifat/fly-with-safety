@@ -1,0 +1,18 @@
+{
+  "supervisorPID": 33776,
+  "backendStopped": true,
+  "proofStarted": true,
+  "proofExited": true,
+  "proofExit": 1,
+  "proofExitText": "1",
+  "proofPassed": false,
+  "backendRestored": true,
+  "frontendPreserved": true,
+  "frontendStopRequested": false,
+  "frontendStarted": false,
+  "failure": "PUBLIC_PROOF_FAILED_PRESERVED",
+  "restorationBlocked": false,
+  "merchantCalls": 0,
+  "businessMutations": false,
+  "finishedUTC": "2026-11-03T18:17:03.927Z"
+}

@@ -1,0 +1,220 @@
+{
+  "controlledBrowserProofAccepted": true,
+  "provider": "MOCK_ONLY",
+  "genuineProviderAccepted": false,
+  "phase3Accepted": false,
+  "browserChecks": {
+    "roleChecks": 76,
+    "livePreflightChecks": 3,
+    "passed": 79,
+    "unresolvedFailed": 0,
+    "skipped": 0
+  },
+  "roleCounts": [
+    {
+      "role": "CUSTOMER",
+      "passed": 34,
+      "failed": 0
+    },
+    {
+      "role": "STAFF",
+      "passed": 14,
+      "failed": 0
+    },
+    {
+      "role": "ADMIN",
+      "passed": 18,
+      "failed": 0
+    },
+    {
+      "role": "OTHER CUSTOMER",
+      "passed": 10,
+      "failed": 0
+    }
+  ],
+  "hostVitest": {
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0
+  },
+  "hostExit": 0,
+  "readOnlyExit": 0,
+  "original49RowsPreserved": true,
+  "unlistedSixUsersAndOneSessionPreserved": true,
+  "eightMigrationsPreserved": true,
+  "sourcePins": {
+    "browserPins": 248,
+    "unchanged": 246,
+    "approvedOrAuthorizedChanges": [
+      "client/src/components/booking/GatewayPaymentPanel.tsx",
+      "output/phase3/browser-proof-20261103-01/provider-mode.json"
+    ],
+    "acceptedPgPins": 203,
+    "allAcceptedPgPinsUnchanged": true
+  },
+  "newPersistedCounts": {
+    "Session": 9,
+    "Booking": 1,
+    "BookingPassenger": 1,
+    "BookingStatusHistory": 2,
+    "GatewayPayment": 1,
+    "GatewayPaymentEvent": 5,
+    "NotificationOutbox": 3
+  },
+  "newPersistedTotal": 22,
+  "combinedOwnedTotal": 71,
+  "providerDoubleCalls": {
+    "initiate": 1,
+    "query": 2,
+    "validate": 1,
+    "refund": 0
+  },
+  "realSupplierCalls": 0,
+  "cleanupExecuted": false,
+  "hostStoppedNormally": true,
+  "disconnected": true,
+  "initialSelectorFailure": {
+    "file": "customer-eligible-result.json",
+    "cause": "main locator matched two elements",
+    "resolvedWith": "unique main[aria-live=polite]",
+    "financialWritesOnFailure": false
+  },
+  "transportObservations": [
+    {
+      "role": "CUSTOMER",
+      "failures": [
+        {
+          "path": "/api/v1/auth/refresh",
+          "failed": true
+        }
+      ]
+    },
+    {
+      "role": "STAFF",
+      "failures": [
+        {
+          "path": "/api/v1/auth/refresh",
+          "failed": true
+        }
+      ]
+    },
+    {
+      "role": "ADMIN",
+      "failures": [
+        {
+          "path": "/api/v1/auth/refresh",
+          "failed": true
+        }
+      ]
+    },
+    {
+      "role": "OTHER CUSTOMER",
+      "failures": [
+        {
+          "path": "/api/v1/auth/refresh",
+          "failed": true
+        }
+      ]
+    }
+  ],
+  "transportCause": "Test wrapper rejects missing-cookie guest refresh before real app CORS; four initial CORS observations retained. Actual owned refresh returned200 and all final assertions passed.",
+  "uiRetryObserved": {
+    "newKeyAfterReload": 409,
+    "originalKeyHttpReplay": 202,
+    "duplicateCharge": false,
+    "automaticUiResumeAfterReloadClaimed": false
+  },
+  "remaining": [
+    "Actual rotated-merchant sandbox session/HostedCheckout/channel evidence",
+    "Approved public HTTPS IPN/returns and genuine server Order Validation",
+    "Actual provider failure/cancel/delayed-notification/reconciliation/refund evidence as merchant-supported",
+    "Exact-ledger cleanup after all dependent tests, separate deletion approval",
+    "Final relevant regression and formal Phase3 acceptance"
+  ],
+  "evidenceFiles": [
+    {
+      "path": "admin-validate-result.json",
+      "sha256": "6A3808EB17B4AB1A606D0487117FFEA1338E5D9B4A11B0061247C657F71EEE75"
+    },
+    {
+      "path": "admin-verified.png",
+      "sha256": "FA1D5BBBDBC6A329F793A6AE1AD0C6CA7CCF9D18CA1BC7A16953FE96364AAA2D"
+    },
+    {
+      "path": "callback-proof-result.json",
+      "sha256": "3154FB1DC485A39ADFE55B856CFB23EB4CE224CE9E6533725BD83B7169E01277"
+    },
+    {
+      "path": "callback-read-result.json",
+      "sha256": "79F0FF55FE673687AEA1BF57F2B8304FB2A4B201B0D5C2D25D4B6F5CE74BB602"
+    },
+    {
+      "path": "customer-eligible-result-02.json",
+      "sha256": "39F26E3670DEFEABBBCD03A1A66A9220F67920ACF41CE8A82532113E017E2546"
+    },
+    {
+      "path": "customer-eligible-result.json",
+      "sha256": "9D698F12793A485BB9DDF10F9AA46C2EAAE982261536CEA9BB11E0AF4DEC4EFF"
+    },
+    {
+      "path": "customer-operation-denial-result.json",
+      "sha256": "54D47C7C4CECC4779B1E1A73107961AFE31C43E29C779E89E813B9377E601897"
+    },
+    {
+      "path": "customer-refresh-replay-result.json",
+      "sha256": "AFDD61823FB35DF12DC93524BD130D4E9B5A678F806E646618A9698B42C0BB24"
+    },
+    {
+      "path": "customer-verified.png",
+      "sha256": "6DADE1955CEC8067F6BD352A0C901B3D5386D73141DBFDED63107B3AC3055EA8"
+    },
+    {
+      "path": "fwsphase3admin-final.json",
+      "sha256": "BA4FCAD1FEA7DB88A01913A5F1AE47621111971F1623366F8705FD5AADEB8BB5"
+    },
+    {
+      "path": "fwsphase3admin-management-final-refresh-result.json",
+      "sha256": "5E9EFBA677665C05204B8EE326AEB5AB0BE5A2A7F187072356B5D9E979A1D232"
+    },
+    {
+      "path": "fwsphase3admin-management-readonly-result.json",
+      "sha256": "3023B9567CE1BE246D48CF1021C53CA6A47D90F361FC92805399CA11CF9D5362"
+    },
+    {
+      "path": "fwsphase3customer-customer-final-verified-result.json",
+      "sha256": "5F411110ACEE6FE6430B22E9CCCAF02C71283D876A2B210F75238377DAFDDEB3"
+    },
+    {
+      "path": "fwsphase3customer-customer-initiate-result.json",
+      "sha256": "F2DEF944367FD04D7250CEAB470A48915CE53CC7C240A4A5FD679153DBAFED20"
+    },
+    {
+      "path": "fwsphase3customer-final.json",
+      "sha256": "D0AE91606CF5A4183FCA310C31DD40833C9C63F086B28B852F05053BFD80D16F"
+    },
+    {
+      "path": "fwsphase3other-final.json",
+      "sha256": "9BFB449BBE295D2F20B02C91B693A40948A867E3AC64A3EE44822B395275AE50"
+    },
+    {
+      "path": "fwsphase3staff-final.json",
+      "sha256": "94E2894484B0BC86B0FB67103A6D52A650D1A6B953FA490E7D5FDF294AC539D5"
+    },
+    {
+      "path": "fwsphase3staff-management-final-refresh-result.json",
+      "sha256": "C446C3FB4D919FFE790E3F74042229AB29ED362E4BD32D75870D452A8F787CBD"
+    },
+    {
+      "path": "fwsphase3staff-management-readonly-result.json",
+      "sha256": "6BFE8E4B5C2156D9C49E0A7E6B2A88DA68F09DCD888927AD3C4F3E3399AD1E6D"
+    },
+    {
+      "path": "other-final-isolation-result.json",
+      "sha256": "0DF5E57A4BBB8E7B9EE0243D85E3EA0544932E8CA6AEC82667BBB78212B5B71F"
+    },
+    {
+      "path": "other-ownership-result.json",
+      "sha256": "6C9C683CC5BDE829FD532B26506202A2BD1134CB46203C684D145A91FA8D1C6C"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "role": "supervisor",
+    "pid": 21136,
+    "parent": 18356,
+    "name": "node.exe",
+    "createdUTC": "2026-11-03T11:32:33.1056950Z",
+    "scriptFragment": "environment-restart-20261103-01/start.cjs"
+  },
+  {
+    "role": "backend",
+    "pid": 17348,
+    "parent": 21136,
+    "name": "node.exe",
+    "createdUTC": "2026-11-03T11:32:33.2257840Z",
+    "scriptFragment": "environment-restart-20261103-01/backend.ts"
+  },
+  {
+    "role": "frontend",
+    "pid": 4440,
+    "parent": 21136,
+    "name": "node.exe",
+    "createdUTC": "2026-11-03T11:32:33.2361390Z",
+    "scriptFragment": "environment-restart-20261103-01/frontend.cjs"
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "captureCompleted": true,
+  "failure": null,
+  "connectorStopped": true,
+  "originEvents": [],
+  "normalServicesTouched": false,
+  "databaseAccess": false,
+  "providerCalls": 0,
+  "paymentAcceptance": false,
+  "decision": "BLOCKED_UNCLASSIFIED_RESPONSE"
+}

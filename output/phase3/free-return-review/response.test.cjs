@@ -1,0 +1,3 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),{metadata}=require('./response.cjs');
+test('warning requires distinct signature',()=>{assert.equal(metadata(200,{'content-type':'text/html'},'ngrok ERR_NGROK_6024').classification,'NGROK_WARNING_SIGNATURE');assert.equal(metadata(200,{'content-type':'text/html'},'hello').classification,'HTML_UNCLASSIFIED');});
+test('secrets/header values not retained',()=>{const r=metadata(302,{'set-cookie':'secret','location':'https://other.invalid/?secret=x','server':'private'},'private');assert.equal(JSON.stringify(r).includes('secret'),false);assert.equal(r.locationClass,'OTHER_ORIGIN');assert.equal(r.redirectsFollowed,0);});

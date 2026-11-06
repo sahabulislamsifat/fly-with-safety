@@ -1,0 +1,30 @@
+[
+  {
+    "path": "docs/proposals/PHASE_1_EVIDENCE_LOG.md",
+    "sha256": "BBF761699C8872A2DF4FDB8B9D01C88426F84801D2E4A248729B299F7F505090"
+  },
+  {
+    "path": "docs/proposals/PHASE_2_ACCEPTANCE_REPORT.md",
+    "sha256": "AD2200D0FF9912F8A788389ED8820DC3A602A3291BA1182DDFA0F0C9ECB724A3"
+  },
+  {
+    "path": "output/phase2/phase2-formal-acceptance-20261102.json",
+    "sha256": "95CF279F68E56B9EEFFBF321231A7D6C226854AB36417D2DB40B43254A0C5F91"
+  },
+  {
+    "path": "output/database/local-rename-closure-20261102/rename-acceptance.json",
+    "sha256": "CA11049A32D36D48A70E137FF83CC799C428BF7B6560AE897D72E6BFE35C952E"
+  },
+  {
+    "path": "output/phase3/final-local-reconciliation-20261104-01/result.json",
+    "sha256": "681C86D8B3B3C2FD1F4184B0744597445CE9D06CF20A9EA4C948A9BF6DC2FE0C"
+  },
+  {
+    "path": "output/phase3/final-local-reconciliation-20261104-01/caller-result.json",
+    "sha256": "CE7B52264CC5223112655C67661CD9B48A6F68C715EE571FA92E75AF481A81F1"
+  },
+  {
+    "path": "output/phase3/negative-continuation-20261104-01/support-procedure.json",
+    "sha256": "A0E3870414A343E57C8C0712589E7AC2ECC4AE8FE18DF5DBB8621998ACEFED78"
+  }
+]

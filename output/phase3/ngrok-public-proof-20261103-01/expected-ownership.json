@@ -1,0 +1,34 @@
+[
+  {
+    "role": "backend",
+    "pid": 31108,
+    "parent": 28924,
+    "name": "node.exe",
+    "createdUTC": "2026-11-03T14:29:01.5681930Z",
+    "scriptFragment": "callback-tunnel-20261103-06/restore-backend.ts"
+  },
+  {
+    "role": "backend-supervisor",
+    "pid": 28924,
+    "parent": 26736,
+    "name": "node.exe",
+    "createdUTC": "2026-11-03T14:28:28.3004590Z",
+    "scriptFragment": "callback-tunnel-20261103-06/handoff.cjs"
+  },
+  {
+    "role": "frontend",
+    "pid": 21588,
+    "parent": 7940,
+    "name": "node.exe",
+    "createdUTC": "2026-11-03T13:22:58.4774740Z",
+    "scriptFragment": "service-recovery-20261103-01/frontend.cjs"
+  },
+  {
+    "role": "frontend-supervisor",
+    "pid": 7940,
+    "parent": 4884,
+    "name": "node.exe",
+    "createdUTC": "2026-11-03T13:22:58.4256510Z",
+    "scriptFragment": "service-recovery-20261103-01/start-frontend.cjs"
+  }
+]

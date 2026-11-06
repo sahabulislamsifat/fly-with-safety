@@ -23,6 +23,7 @@ import bookingRoutes from './routes/bookings.routes.js';
 import futureStubsRoutes from './routes/future-stubs.routes.js';
 import accountRoutes from './routes/account.routes.js';
 import outboxWorkerRoutes from './routes/outbox-worker.routes.js';
+import { paymentCallbacks, paymentRoutes } from './payments/payment.routes.js';
 
 const app: Express = express();
 
@@ -63,6 +64,7 @@ app.use(
 );
 
 // Body parsing
+app.use('/api/v1', paymentCallbacks);
 app.use(protectRequestOrigin);
 app.use(express.json({ limit: '100kb' }));
 app.use(express.urlencoded({ extended: true, limit: '100kb' }));
@@ -86,6 +88,7 @@ app.use(API_PREFIX, adminRoutes);
 app.use(API_PREFIX, airportsRoutes);
 app.use(API_PREFIX, bookingRoutes);
 app.use(API_PREFIX, accountRoutes);
+app.use(API_PREFIX, paymentRoutes);
 app.use(API_PREFIX, futureStubsRoutes);
 
 // 404 handler

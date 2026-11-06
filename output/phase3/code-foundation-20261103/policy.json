@@ -1,0 +1,28 @@
+{
+  "planning": "deep",
+  "context_depth": "dependency",
+  "verification_depth": "impact",
+  "delegation": "none",
+  "reason_codes": [
+    "payment-security",
+    "durable-transactions",
+    "additive-schema",
+    "provider-activation-boundary"
+  ],
+  "mode": "implement",
+  "allowed_write_scope": [
+    "server/src/payments",
+    "server/prisma/schema.prisma",
+    "server/prisma/migrations/20261103000100_gateway_sandbox_ledgers",
+    "server/src/app.ts",
+    "server/src/services/booking-commercial.service.ts",
+    "server/src/services/booking.service.ts",
+    "server/test/phase3-*",
+    "client/src/components/booking",
+    "docs/proposals/PHASE_3*",
+    "output/phase3/code-foundation-20261103",
+    "client/app/payments/return",
+    "client/src/components/admin/AdminBookingsTab.tsx"
+  ],
+  "live_operations": "not authorized; no database or provider transaction calls"
+}

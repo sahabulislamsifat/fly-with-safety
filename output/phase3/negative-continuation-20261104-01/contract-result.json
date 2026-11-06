@@ -1,0 +1,39 @@
+{
+  "passed": true,
+  "checks": 1473,
+  "sourcePins": 209,
+  "runtimePins": 923,
+  "historicalArtifacts": 102,
+  "ownedRows": {
+    "bookings": 3,
+    "passengers": 3,
+    "history": 4,
+    "payments": 2,
+    "events": 8,
+    "outbox": 3
+  },
+  "consumedV02Budget": {
+    "transactions": 23,
+    "bookings": 3,
+    "passengers": 3,
+    "initialHistory": 3,
+    "payments": 2,
+    "saves": 13,
+    "events": 10,
+    "initiate": 2,
+    "callbacks": 2,
+    "query": 2,
+    "validate": 2,
+    "bookingUpdates": 1,
+    "financialHistory": 1,
+    "outbox": 3
+  },
+  "focusedSimulatedTests": 48,
+  "supportPending": true,
+  "executionReady": false,
+  "attemptAbsent": true,
+  "providerCalls": 0,
+  "databaseOperations": 0,
+  "publicExecution": false,
+  "callerSHA256": "252399408DF4FC886ACE53B22874C4105DC8CCAE681A352A8B232BF502582944"
+}

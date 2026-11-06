@@ -1,0 +1,120 @@
+{
+  "sessions": [
+    {
+      "id": "cmw0dr5dd00005gf4noo558xr",
+      "userId": "7ca1205c-0844-40d7-abff-74da4974a8de"
+    },
+    {
+      "id": "cmw0drg4l00015gf49m2lj7dy",
+      "userId": "d8505f78-a138-405e-a750-b23d82af87ad"
+    },
+    {
+      "id": "cmw0drnr800025gf4e1dgp1a3",
+      "userId": "701fb225-e21e-4901-8663-81590207a66f"
+    },
+    {
+      "id": "cmw0dsbps00035gf44s4pigdw",
+      "userId": "8948d02b-8f17-4e2c-aa35-3875420da1cb"
+    },
+    {
+      "id": "cmw0eedis00045gf4as0q3puu",
+      "userId": "d8505f78-a138-405e-a750-b23d82af87ad"
+    },
+    {
+      "id": "cmw0en29700055gf4wpay71k7",
+      "userId": "7ca1205c-0844-40d7-abff-74da4974a8de"
+    },
+    {
+      "id": "cmw0en2un00065gf4flv9altm",
+      "userId": "701fb225-e21e-4901-8663-81590207a66f"
+    },
+    {
+      "id": "cmw0en3h500075gf4n1kuk2hq",
+      "userId": "8948d02b-8f17-4e2c-aa35-3875420da1cb"
+    },
+    {
+      "id": "cmw0f0jib000c5gf4rgvcksv5",
+      "userId": "d8505f78-a138-405e-a750-b23d82af87ad"
+    }
+  ],
+  "booking": {
+    "id": "e77192b4-357f-47a6-ad59-dc35b980330e",
+    "status": "PENDING",
+    "bookingDetails": {
+      "commercial": {
+        "quotes": [
+          {
+            "id": "cb765cfb-31a5-4264-bec1-649ad54066dd",
+            "amount": 12000,
+            "currency": "BDT",
+            "createdAt": "2026-11-03T07:34:50.194Z",
+            "acceptedAt": "2026-11-03T07:34:50.194Z",
+            "validUntil": "2026-11-03T09:34:50.194Z",
+            "description": "Synthetic browser payment fixture; no supplier operation"
+          }
+        ],
+        "version": 1,
+        "payments": [],
+        "receipts": [],
+        "revision": 2
+      },
+      "gatewayPayment": {
+        "id": "8fbd96d2-69a5-4f79-991a-623dd8de5057",
+        "mode": "sandbox",
+        "status": "VERIFIED",
+        "fulfillment": "AWAITING_OPERATIONS"
+      },
+      "integrationFixture": {
+        "phase": 3,
+        "browser": true,
+        "provider": "MOCK_ONLY"
+      }
+    }
+  },
+  "passengers": [
+    {
+      "id": "c33b3b1f-3214-4f29-a8ed-b7cbaaf9269b"
+    }
+  ],
+  "history": [
+    {
+      "id": "ddc9b4a1-4a55-4671-bbbd-131c4c0da3e1"
+    },
+    {
+      "id": "cmw0etmmd00085gf4jdgxixe3"
+    }
+  ],
+  "payments": [
+    {
+      "id": "8fbd96d2-69a5-4f79-991a-623dd8de5057"
+    }
+  ],
+  "events": [
+    {
+      "id": "intent:8fbd96d2-69a5-4f79-991a-623dd8de5057"
+    },
+    {
+      "id": "session:8fbd96d2-69a5-4f79-991a-623dd8de5057"
+    },
+    {
+      "id": "notice:c146c11651051a451f5c533abd314268142357469e5dbecba852806e164d7ae1"
+    },
+    {
+      "id": "outcome:f24324a850967111478e2bd159eae6f2016da6c80d574b923b43407376c8fe36"
+    },
+    {
+      "id": "outcome:85154c3c74f590284db854e68a2cdd93618c2fa398f87e54c0223c276ef68824"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "cmw0etmmg00095gf4egnoshzy"
+    },
+    {
+      "id": "cmw0etmmz000a5gf4ci2wm9f6"
+    },
+    {
+      "id": "cmw0etmn0000b5gf4qx4nuyrd"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "selectStatements": 17,
+  "databaseConnected": false,
+  "strictTypeScriptExit": 0,
+  "nodeSyntax": true,
+  "nativePS51ParsedCallers": 2,
+  "executedCallers": 0
+}

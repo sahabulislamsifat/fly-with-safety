@@ -1,0 +1,27 @@
+{
+  "v03Recorded": {
+    "classification": "DNS", "code": "ENOTFOUND", "attempted": 1, "httpCompleted": 0, "pass": 0, "fail": 1, "untouched": 30,
+    "originReached": false, "connectorRegistered": true, "registrationToFirstProbeMs": 2,
+    "tunnelStopped": true, "listenerStopped": true, "preProbeDNSGate": false
+  },
+  "currentArchivedHosts": [
+    { "attempt": "01", "syntaxValid": true, "osLookup": "ENOTFOUND", "configuredResolverA": "ENOTFOUND" },
+    { "attempt": "02", "syntaxValid": true, "osLookup": "ENOTFOUND", "configuredResolverA": "ENOTFOUND" },
+    { "attempt": "03", "syntaxValid": true, "osLookup": "ENOTFOUND", "configuredResolverA": "ENOTFOUND" }
+  ],
+  "currentObservationAfterTunnelShutdownCannotProveHistoricalPropagationRace": true,
+  "windowsProxyEnabled": false,
+  "proxyAutoConfigPresent": false,
+  "proxyEnvironmentPresent": false,
+  "callbackRunnerInheritsProxyEnvironment": false,
+  "dnsAdaptersWithServers": 1,
+  "firewallProfilesEnabled": ["Domain", "Private", "Public"],
+  "firewallOutboundActionReported": "NotConfigured; does not independently prove an allow/block policy",
+  "specificFirewallOrProxyCauseProven": false,
+  "v02CF1xxxCaptured": false,
+  "v01OriginalNetworkCauseKnown": false,
+  "dnsConfigurationModified": false,
+  "publicHTTPRequestsDuringCurrentInvestigation": 0,
+  "newTunnelStarted": false,
+  "providerCalls": 0
+}

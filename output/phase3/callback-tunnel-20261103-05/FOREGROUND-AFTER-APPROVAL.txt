@@ -1,0 +1,15 @@
+PENDING FRESH EXPLICIT APPROVAL: ONE BACKEND-ONLY maintenance + DNS-gated public proof + safe normal backend restoration.
+Frontend21588/controller7940 remain untouched. No password required. No v01–v04 caller replay.
+
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p='E:\Programming\Project\fly-with-safety\output\phase3\callback-tunnel-20261103-05\Invoke-BackendOnlyProof.ps1'
+ if(-not(Test-Path -LiteralPath $p -PathType Leaf)){throw 'STOP: reviewed backend-only caller missing'}
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne 'ABE6CE31E72A0D54CCAFA5F9CC50B7D2AA8B1F3C93DB9963A59F7F414567DAB6'){throw 'STOP: reviewed backend-only caller mismatch'}
+ & $p -OwnerApprovedBackendOnlyDnsProof
+}
+
+Return proof exit/stage/DNS/HTTP counts, backend-restored and frontend-preserved status.
+Failure: preserve all artifacts; no rerun/repair. Unconfirmed live connector/probe blocks main5000 restoration.
+No additional dev-server launch or normal form submission during the brief approved backend API maintenance.

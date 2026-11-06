@@ -1,0 +1,10 @@
+[
+  {
+    "index": 1,
+    "method": "POST",
+    "path": "/api/v1/payments/sslcommerz/success",
+    "expected": 204,
+    "observed": 530,
+    "passed": false
+  }
+]

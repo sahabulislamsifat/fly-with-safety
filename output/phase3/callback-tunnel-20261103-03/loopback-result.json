@@ -1,0 +1,229 @@
+{
+  "passed": true,
+  "failure": null,
+  "pass": 31,
+  "fail": 0,
+  "unexecuted": 0,
+  "listenerStopped": true,
+  "publicRequests": 0,
+  "databaseAccess": false,
+  "checks": [
+    {
+      "index": 1,
+      "method": "POST",
+      "path": "/api/v1/payments/sslcommerz/success",
+      "status": 204,
+      "passed": true
+    },
+    {
+      "index": 2,
+      "method": "POST",
+      "path": "/api/v1/payments/sslcommerz/fail",
+      "status": 204,
+      "passed": true
+    },
+    {
+      "index": 3,
+      "method": "POST",
+      "path": "/api/v1/payments/sslcommerz/cancel",
+      "status": 204,
+      "passed": true
+    },
+    {
+      "index": 4,
+      "method": "POST",
+      "path": "/api/v1/payments/sslcommerz/ipn",
+      "status": 204,
+      "passed": true
+    },
+    {
+      "index": 5,
+      "method": "GET",
+      "path": "/api/v1/payments/sslcommerz/success",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "index": 6,
+      "method": "GET",
+      "path": "/api/v1/payments/sslcommerz/fail",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "index": 7,
+      "method": "GET",
+      "path": "/api/v1/payments/sslcommerz/cancel",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "index": 8,
+      "method": "GET",
+      "path": "/api/v1/payments/sslcommerz/ipn",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "index": 9,
+      "method": "GET",
+      "path": "/",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "index": 10,
+      "method": "POST",
+      "path": "/",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "index": 11,
+      "method": "GET",
+      "path": "/health",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "index": 12,
+      "method": "POST",
+      "path": "/health",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "index": 13,
+      "method": "GET",
+      "path": "/api/v1/auth/login",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "index": 14,
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "index": 15,
+      "method": "GET",
+      "path": "/api/v1/auth/refresh",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "index": 16,
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "index": 17,
+      "method": "GET",
+      "path": "/api/v1/admin",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "index": 18,
+      "method": "POST",
+      "path": "/api/v1/admin",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "index": 19,
+      "method": "GET",
+      "path": "/api/v1/bookings",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "index": 20,
+      "method": "POST",
+      "path": "/api/v1/bookings",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "index": 21,
+      "method": "GET",
+      "path": "/api/v1/payments/operations",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "index": 22,
+      "method": "POST",
+      "path": "/api/v1/payments/operations",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "index": 23,
+      "method": "GET",
+      "path": "/account",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "index": 24,
+      "method": "POST",
+      "path": "/account",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "index": 25,
+      "method": "POST",
+      "path": "/api/v1/payments/sslcommerz/success?x=1",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "index": 26,
+      "method": "POST",
+      "path": "/api/v1/payments/sslcommerz/success/",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "index": 27,
+      "method": "POST",
+      "path": "/API/V1/PAYMENTS/SSLCOMMERZ/SUCCESS",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "index": 28,
+      "method": "POST",
+      "path": "/api/v1/payments/sslcommerz/success",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "index": 29,
+      "method": "POST",
+      "path": "/api/v1/payments/sslcommerz/success",
+      "status": 400,
+      "passed": true
+    },
+    {
+      "index": 30,
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 404,
+      "passed": true
+    },
+    {
+      "index": 31,
+      "method": "GET",
+      "path": "/api/v1/bookings",
+      "status": 404,
+      "passed": true
+    }
+  ]
+}

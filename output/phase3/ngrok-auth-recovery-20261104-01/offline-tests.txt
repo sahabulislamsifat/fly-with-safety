@@ -1,0 +1,136 @@
+TAP version 13
+# Subtest: ordinary synthetic scalar has no heuristic issues; authentication remains unverified
+ok 1 - ordinary synthetic scalar has no heuristic issues; authentication remains unverified
+  ---
+  duration_ms: 1.1678
+  type: 'test'
+  ...
+# Subtest: CLI-compatible quoted version is supported without changing token
+ok 2 - CLI-compatible quoted version is supported without changing token
+  ---
+  duration_ms: 0.2821
+  type: 'test'
+  ...
+# Subtest: quoted YAML scalar correctly decoded without implying literal quote damage
+ok 3 - quoted YAML scalar correctly decoded without implying literal quote damage
+  ---
+  duration_ms: 0.1169
+  type: 'test'
+  ...
+# Subtest: literal pasted quotes detected
+ok 4 - literal pasted quotes detected
+  ---
+  duration_ms: 0.8434
+  type: 'test'
+  ...
+# Subtest: whitespace/control and newline detected without trimming
+ok 5 - whitespace/control and newline detected without trimming
+  ---
+  duration_ms: 0.4009
+  type: 'test'
+  ...
+# Subtest: command/URL/placeholders rejected as heuristic findings
+ok 6 - command/URL/placeholders rejected as heuristic findings
+  ---
+  duration_ms: 0.143
+  type: 'test'
+  ...
+# Subtest: single-quoted YAML doubles handled locally
+ok 7 - single-quoted YAML doubles handled locally
+  ---
+  duration_ms: 0.1133
+  type: 'test'
+  ...
+# Subtest: duplicate/unsupported scalar never guessed
+ok 8 - duplicate/unsupported scalar never guessed
+  ---
+  duration_ms: 0.0842
+  type: 'test'
+  ...
+# Subtest: safe report has no credential value or reusable hash/length
+ok 9 - safe report has no credential value or reusable hash/length
+  ---
+  duration_ms: 0.2063
+  type: 'test'
+  ...
+# Subtest: auth-only command requests no endpoints/upstream and excludes credential environment overrides
+ok 10 - auth-only command requests no endpoints/upstream and excludes credential environment overrides
+  ---
+  duration_ms: 8.0973
+  type: 'test'
+  ...
+# Subtest: reject fails, preserves evidence, stops owned session and never retries
+ok 11 - reject fails, preserves evidence, stops owned session and never retries
+  ---
+  duration_ms: 0.9132
+  type: 'test'
+  ...
+# Subtest: endpoint fails, preserves evidence, stops owned session and never retries
+ok 12 - endpoint fails, preserves evidence, stops owned session and never retries
+  ---
+  duration_ms: 0.9772
+  type: 'test'
+  ...
+# Subtest: warn fails, preserves evidence, stops owned session and never retries
+ok 13 - warn fails, preserves evidence, stops owned session and never retries
+  ---
+  duration_ms: 0.8553
+  type: 'test'
+  ...
+# Subtest: exit fails, preserves evidence, stops owned session and never retries
+ok 14 - exit fails, preserves evidence, stops owned session and never retries
+  ---
+  duration_ms: 0.6756
+  type: 'test'
+  ...
+# Subtest: timeout fails, preserves evidence, stops owned session and never retries
+ok 15 - timeout fails, preserves evidence, stops owned session and never retries
+  ---
+  duration_ms: 5.8043
+  type: 'test'
+  ...
+# Subtest: configuration/client-connect chatter is not successful authentication
+ok 16 - configuration/client-connect chatter is not successful authentication
+  ---
+  duration_ms: 0.8387
+  type: 'test'
+  ...
+# Subtest: only session-start acknowledgement passes
+ok 17 - only session-start acknowledgement passes
+  ---
+  duration_ms: 0.1778
+  type: 'test'
+  ...
+# Subtest: ERR_NGROK_105 retained without raw credential
+ok 18 - ERR_NGROK_105 retained without raw credential
+  ---
+  duration_ms: 0.762
+  type: 'test'
+  ...
+# Subtest: unexpected public endpoint event fails even though session could be valid
+ok 19 - unexpected public endpoint event fails even though session could be valid
+  ---
+  duration_ms: 0.1201
+  type: 'test'
+  ...
+# Subtest: first error/warning stops rather than triggering retry
+ok 20 - first error/warning stops rather than triggering retry
+  ---
+  duration_ms: 0.9811
+  type: 'test'
+  ...
+# Subtest: unknown fields/invalid JSON discarded
+ok 21 - unknown fields/invalid JSON discarded
+  ---
+  duration_ms: 0.3802
+  type: 'test'
+  ...
+1..21
+# tests 21
+# suites 0
+# pass 21
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 127.3424

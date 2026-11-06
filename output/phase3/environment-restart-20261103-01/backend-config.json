@@ -1,0 +1,19 @@
+{
+  "pid": 17348,
+  "remotePrisma": true,
+  "designatedMainFromServerEnv": true,
+  "consoleResourceIndependentlyVerified": false,
+  "localIntegrationSelected": false,
+  "database": "postgres",
+  "sqlRoleMatchesHistoricalMain": true,
+  "runtimeDatabaseMatchesFile": true,
+  "sandboxTrue": true,
+  "storePasswordLoadedFromUpdatedFile": true,
+  "storeIdLoadedFromUpdatedFile": true,
+  "paymentsEnabled": false,
+  "notificationDeliveryEnabled": false,
+  "backgroundOutboxWorkerEnabled": false,
+  "googleConfigurationPreserved": true,
+  "readOnlyIdentityQuery": true,
+  "envFilesModified": false
+}

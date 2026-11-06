@@ -1,0 +1,15 @@
+{
+  "scope": "offline callback-ingress candidate only",
+  "tests": { "passed": 36, "failed": 0, "skipped": 0, "exit": 0 },
+  "diffCheckExit": 0,
+  "ingressSHA256": "DC4FAEEFD7A72344CD2868BEA6D2E947DBAD30EE7418EDD95DF56FE9F988332E",
+  "testsSHA256": "6C92D017E30A03E3059119EEE0569767AA7A6AD4498DAF2186E96FF26B9D6A4B",
+  "cloudflaredFoundOnPath": false,
+  "credentialRotation": "owner confirmed; secret not read",
+  "publicOrigin": null,
+  "tunnelStarted": false,
+  "publicIsolationVerified": false,
+  "providerCalls": 0,
+  "databaseMutations": 0,
+  "phase3Accepted": false
+}

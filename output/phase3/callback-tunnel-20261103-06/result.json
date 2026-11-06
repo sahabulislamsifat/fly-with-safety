@@ -1,0 +1,22 @@
+{
+  "passed": false,
+  "stage": "dns-readiness",
+  "failure": "DNS_READINESS_NOT_ESTABLISHED",
+  "failureDetail": null,
+  "shutdownFailure": null,
+  "dnsReady": false,
+  "callbackReady": false,
+  "attempted": 0,
+  "completedHttp": 0,
+  "pass": 0,
+  "fail": 0,
+  "unexecuted": 31,
+  "firstFailedCheck": null,
+  "connectorPID": 24964,
+  "tunnelStopped": true,
+  "listenerStopped": true,
+  "databaseAccess": false,
+  "merchantCalls": 0,
+  "credentialsRead": false,
+  "finishedUTC": "2026-11-03T14:28:55.537Z"
+}

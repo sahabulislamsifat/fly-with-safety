@@ -1,0 +1,40 @@
+{
+  "historical": {
+    "vitestPassed": 0,
+    "vitestFailed": 1,
+    "checkpointsPassed": 10,
+    "checkpointsFailed": 0,
+    "unexecuted": 54,
+    "snapshotCounts": {
+      "User": 4,
+      "Booking": 2,
+      "BookingPassenger": 2,
+      "BookingStatusHistory": 2
+    },
+    "snapshotTotal": 10,
+    "currentDatabaseRequeried": false,
+    "contenderIndexCaptured": false,
+    "originalExceptionMessageCaptured": false,
+    "artifactsUnchanged": true,
+    "intendedSourceChanges": [
+      "server/src/payments/payment-store.ts",
+      "server/test/phase3-ledger.pg.integration.ts",
+      "server/test/phase3-proof-diagnostics.ts"
+    ]
+  },
+  "offline": {
+    "bundled": 117,
+    "native": 117,
+    "failures": 0,
+    "skips": 0,
+    "newTests": 12,
+    "sqlStatements": 9,
+    "plpgsqlBlocks": 1,
+    "storeSqlQueries": 11,
+    "exactRuntimeDeltaVerified": true
+  },
+  "readOnlyPins": 6,
+  "callerSha256": "78970E9410D4ABD88CA55C731DEC5345DFEAA53B9205FC3D6AD3E45A3103CB10",
+  "newReadOnlyAttempt": false,
+  "liveDatabaseExecuted": false
+}

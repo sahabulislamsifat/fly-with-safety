@@ -1,0 +1,26 @@
+[
+  {
+    "path": "config-text.ps1",
+    "sha256": "038b028b655d91684f2a48bfc14633233f9a18bf7ce86a05d043145efba3f3ff"
+  },
+  {
+    "path": "Test-ConfigText.ps1",
+    "sha256": "d3a99c87223ef705b79f08df4b3b8e58b1eb91c3c015da1f479f005890430add"
+  },
+  {
+    "path": "agent-safety.yml",
+    "sha256": "ed9711ad8956314d4e115bf0a334d263e7306df10cfffd5e6561d042bf12aa38"
+  },
+  {
+    "path": "REVIEW.md",
+    "sha256": "ab12abc16687c832ebcfa98a2a30f6ba49622e8a6e782db902fefacb58d9ab5a"
+  },
+  {
+    "path": "../ngrok-auth-recovery-20261104-01/auth-result.json",
+    "sha256": "a5b3eedb866d755f3a12d55dfd3a91ca6fca66e5d2322fc300ea9299330c3721"
+  },
+  {
+    "path": "../ngrok-auth-recovery-20261104-01/owner-result.json",
+    "sha256": "bf6ce8f6057460b7d7d647d2a5cbdf1b23da2ba3fdf3f5a6b086f4334f46c95a"
+  }
+]

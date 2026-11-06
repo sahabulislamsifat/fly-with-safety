@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "pins": 18,
+  "sqlStatements": 32,
+  "plpgsqlBlocks": 6,
+  "newTables": [
+    "GatewayPayment",
+    "GatewayPaymentEvent",
+    "GatewayRefund"
+  ],
+  "existingTableDml": "one new migration ledger INSERT only",
+  "nativeConnections": 1,
+  "callerSha256": "6FCDED4588137814D02BE628E78DB5B5865D9B8C3D609C1BCEFD5BAF57F6263A",
+  "attemptExists": false,
+  "databaseExecuted": false
+}

@@ -1,0 +1,15 @@
+# Phase 3 · one-shot SSH allocation check
+
+**Separate owner approval required. No live execution.** This review authorizes no financial work, no checkout-duration run and no retry. Budget $0.
+
+The consumed v02 runner reached its 30-second allocation timeout with 15,483 stdout bytes and 810 stderr bytes, no accepted origin or HTTPS sample, and confirmed owned connector shutdown. It saved byte counts, one broad authentication-text classification and the timeout. It did not retain an allocation line, rejected event shape or the text required to distinguish an SSH rejection from a help banner. Its SIGTERM was part of owned shutdown. Allocation issuance, schema mismatch, malformed or incomplete output, and actual rejection cannot be distinguished from the saved evidence. [Consumed result](../failed-uat-transport-20261106-02/transport-result.json)
+
+The proven gap is evidence loss before allocation. The existing strict parser is reused byte-for-byte and the allocation timeout stays 30 seconds. The official `--output json` option specifies the format and does not publish an exact event schema. The check records allowlisted event/status labels, field types, a nonreversible short fingerprint for unknown event names, ignored/malformed/ambiguous versus accepted classification, partial-line presence, and bounded stderr categories. Raw SSH output, URL, credential and message values are excluded. No observed shape becomes authoritative through the observation layer. [CLI reference](https://localhost.run/docs/cli) · [Strict parser](../localhost-run-smoke-v04/discovery.cjs)
+
+## Bounded execution
+
+- One owned `localhost.run` SSH connector with the same pinned host key, strict verification and `--output json`. One ephemeral isolated `127.0.0.1` inert listener. No production or normal service port, no customer data and no credentials inherited.
+- At most 30 seconds to recognize a strict allocation. If allocation succeeds, make one nonce-correlated HTTPS POST on the exact reviewed callback route and two inert forwarding spoof checks, one HTTPS and one HTTP. Each request has a 5-second timeout. No redirect following. Stop on first failure or origin change. Owned shutdown has its existing 5-second bound. Parent waits at most 52 seconds for a normal result, then requests owned stop on timeout. No retries or alternate provider in this package.
+- PASS requires accepted allocation, verified HTTPS with matching local receipt, both spoof checks and confirmed connector shutdown. A PASS proves initial callback routing only. This check cannot establish sustained forwarding through Checkout, and cannot grant genuine FAILED acceptance. The next FAILED review must retain live forwarding monitoring and fail closed. No SSLCommerz calls, database operations, migrations, public payment routes or changes to ngrok/Cloudflare/DNS.
+
+The PowerShell 5.1 entry is `Invoke-AllocationCheck.ps1 -OwnerApprovedAllocationCheck`. It verifies the pinned manifest and prior shutdown and consumes its own marker. The child requires `--owner-approved-allocation-check` and the isolated approval environment. The hash-guarded foreground command follows explicit approval.

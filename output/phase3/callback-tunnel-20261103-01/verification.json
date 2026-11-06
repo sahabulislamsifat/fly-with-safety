@@ -1,0 +1,21 @@
+{
+  "scope": "offline preparation; no public execution authorized or performed",
+  "binaryAuthenticity": "Valid Authenticode Cloudflare, Inc. and exact official release SHA256 match",
+  "tests": { "passed": 36, "failed": 0, "skipped": 0, "exit": 0 },
+  "syntaxExit": 0,
+  "powershellVersion": "5.1.26100.9818",
+  "nativePowerShellParsingExit": 0,
+  "dependencyPinsMatched": 8,
+  "acceptedPostgresSourcePinsMatched": 203,
+  "noAttemptGuard": true,
+  "diffCheckExit": 0,
+  "callerSHA256": "AE7BFB5B308EC2FD4A4014FE86D7BCDF6A0C54A0CC56D5A990B160ADFC6EBF59",
+  "manifestSHA256": "48E4EBACE9F86A41D75190D4FA11C98AE77A2E034CF5A5CE8077E4C7A9D3D0F3",
+  "plannedPublicChecks": 31,
+  "tunnelStarted": false,
+  "publicIsolationVerified": false,
+  "databaseAccess": false,
+  "providerCalls": 0,
+  "credentialsRead": false,
+  "phase3Accepted": false
+}

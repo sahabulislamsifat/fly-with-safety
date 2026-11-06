@@ -1,0 +1,22 @@
+{
+  "passed": false,
+  "stage": "db-readonly-preflight",
+  "failure": {
+    "stage": "db-readonly-preflight",
+    "prismaCode": "P2010",
+    "sqlState": null,
+    "appCode": null,
+    "classification": "DATABASE_ERROR",
+    "code": null
+  },
+  "cases": [],
+  "counts": {},
+  "notices": [],
+  "preservation": false,
+  "connectorStopped": true,
+  "normalServicesTouched": false,
+  "mainCloudAccess": false,
+  "refundsExecuted": false,
+  "fixturesRetained": true,
+  "phase3Accepted": false
+}

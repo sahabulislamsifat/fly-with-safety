@@ -1,0 +1,15 @@
+PENDING EXPLICIT APPROVAL OF ALL THREE: brief PAIRED normal3000/5000 maintenance, ONE DNS-gated public probe, and safe normal restoration.
+Do not run under v01/v02/v03 approval. No password required. Normal-dev processes remain running after safe restoration.
+
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p='E:\Programming\Project\fly-with-safety\output\phase3\callback-tunnel-20261103-04\Invoke-DnsGatedProof.ps1'
+ if(-not(Test-Path -LiteralPath $p -PathType Leaf)){throw 'STOP: reviewed DNS-gated caller missing'}
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne 'E84A51F44739634B8868C9EBDBB1B1E71A07AA143ED93369356C08A1019C7A42'){throw 'STOP: reviewed DNS-gated caller mismatch'}
+ & $p -OwnerApprovedPairedHandoffDnsProof
+}
+
+Return actual proof exit, DNS/HTTP counts, first mismatch details and normal3000/5000 restoration status.
+Failure: preserve artifacts, no rerun/repair. Unconfirmed connector/probe shutdown blocks main5000 restoration; request operator attention.
+Do not run additional dev processes or submit normal forms during the approved brief maintenance window.

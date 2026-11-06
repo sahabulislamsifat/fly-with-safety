@@ -4,6 +4,7 @@ import { Button } from '@/components/ui';
 import { ApiError } from '@/lib/api/client';
 import { createBookingAttempt, isTerminalBookingFailure } from '@/lib/api/booking-attempt';
 import { changeBookingCommercial, type BookingCommercial, type CommercialInput } from '@/lib/api/booking-commercial';
+import { GatewayPaymentPanel } from './GatewayPaymentPanel';
 
 export function BookingCommercialPanel({ reference, currency, initial, staff = false, onChanged }: {
   reference: string; currency: string; initial?: BookingCommercial; staff?: boolean; onChanged?: () => void;
@@ -74,5 +75,6 @@ export function BookingCommercialPanel({ reference, currency, initial, staff = f
         <Button type="submit" size="sm" variant="outline">{busy ? 'Saving…' : 'Save record'}</Button>
       </fieldset>
     </form>}
+    <GatewayPaymentPanel reference={reference} staff={staff} />
   </section>;
 }

@@ -1,0 +1,20 @@
+{
+  "planning": "deep",
+  "context_depth": "dependency",
+  "verification_depth": "impact",
+  "delegation": "none",
+  "reason_codes": [
+    "offline-continuation-implementation",
+    "preserved-genuine-success",
+    "support-and-execution-gates"
+  ],
+  "allowed_write_scope": [
+    "server/test/phase3-negative-v01/",
+    "server/test/phase3-negative-offline.test.ts",
+    "output/phase3/negative-continuation-20261104-01/",
+    "docs/proposals/PHASE_3_FINAL_GATES.md",
+    "server/test/phase3-negative-offline.test.ts",
+    "server/test/phase3-negative-security.test.ts"
+  ],
+  "liveExecutionApproved": false
+}

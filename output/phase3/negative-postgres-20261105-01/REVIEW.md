@@ -1,0 +1,27 @@
+# Real PostgreSQL negative-payment integration
+
+**Prepared offline. One live local execution requires separate owner approval.** The SSLCommerz HTTP transport is the sole application dependency replaced with a test double. This is database integration evidence with a mocked provider.
+
+Planning policy: compact dependency review, impact-focused verification, no delegation. Scope is the new integration runner, offline boundary tests and this one-time package. Production code and historical execution artifacts are outside its write scope.
+
+## Exact target and fixtures
+
+`127.0.0.1:5432/flywithsafety_local_integration`, OID `34701`, restricted role `flywithsafe_phase2_booking_test`, eight pinned migration checksums. The [fixture plan](fixture-plan.json) supplies all three fresh booking IDs, references, payment IDs, merchant transaction IDs, request IDs, quote identities, synthetic captured-state validation and bank IDs, and the exact rollback probe event ID. Existing synthetic actors are verified against the pinned negative-continuation plan. No login sessions are created. The fixture seed is one atomic transaction that inserts three bookings and three gateway payments. There is no session initiation.
+
+The preflight uses a repeatable-read read-only transaction with a controlled rollback. It checks target identity, migrations, restricted permissions, actor ownership, every fixture identity's absence, and the 23 previously retained rows. The before/after protected snapshots are compared in memory. Only safe proof results and owned synthetic event IDs are written to the artifacts. The historical PROCESSING intent is examined only as part of retained local rows, with zero provider queries and zero writes to its records.
+
+## Verification and caps
+
+- Real fail/cancel return and IPN Express routes, form parsing, signature verification, SDK, PaymentService, PrismaPaymentStore and PostgreSQL. The HTTP request/response streams are in process with zero listeners. Owner/staff/admin and foreign-customer checks call the real service authorization, without a second login/browser-auth suite.
+- Mocked Transaction Query replies cover PROCESSING, PENDING to UNKNOWN, a conflicting result set, a distinct later IPN arriving during a suspended query, then confirmed FAILED, confirmed CANCELLED and delayed FAILED against a new synthetic captured row. Four concurrent signed cancel IPNs and one replay share one durable notice and one query for that group. The genuine historical SUCCESS row is protected by the retained-row verification and snapshot rather than used as a write fixture.
+- Real rollback probe on the fresh FAILED payment. The transaction saves UNKNOWN and inserts its exact synthetic event, then attempts to change the immutable digest. The existing database trigger must produce SQLSTATE `23514`. A fresh read must show the exact prior payment unchanged and the inserted event absent. If the trigger does not fire the runner throws inside the transaction to roll back anyway.
+- Caps count attempted operations before dispatch: three booking inserts, three payment inserts, 32 payment saves, 18 event inserts, 64 scoped store transactions, 16 in-process callback requests and eight mocked provider queries. Seed, two snapshots and owned SELECT readbacks are separate bounded operations. Test cases expect 11 committed events, distributed 7/3/1 across FAILED/CANCELLED/seeded VERIFIED. The guarded store validates exact ownership at lock and write time. The scope excludes booking publication, fulfillment, user/session/passenger/history/outbox writes, refunds, deletes, migrations and global worker sweeps.
+- Default payment activation is disabled. The injected SDK gets synthetic store credentials and its exact Query URL, method and transaction are checked by the in-memory transport. External fetch fails closed. No merchant credentials are passed to the SDK. Zero provider wire requests, public listeners, tunnels, Main Prisma Cloud connections, payment/refund API calls, or SMTP calls.
+
+## Execution and preservation
+
+Native Windows PowerShell 5.1 caller validates its bound manifest and creates a one-shot marker before the private restricted-role password prompt. Its child uses an explicit local URL and a clean inherited environment. Runner admission closes at 60 seconds, with bounded Prisma connection/query/lock and transaction deadlines. The caller waits 95 seconds and then stops its owned Node process with a five-second shutdown wait. On timeout, preservation is unconfirmed. On a normal failure path, the runner closes scope, settles admitted requests and attempts the final read-only protected snapshot.
+
+Committed synthetic rows are retained on success or partial failure. There is no deletion or cleanup privilege in this run. A later exact cleanup needs its own review and approval. Any attempt marker consumes the run. The journal records safe check IDs and rollback SQLSTATE. The result records persisted payment statuses, capture flags and owned event IDs. PASS requires successful checks, three persisted case summaries, protected snapshot equality and retained-row revalidation. A hard stop cannot be classified as PASS.
+
+This run can complete the remaining independent real-PostgreSQL engineering proof. Genuine provider FAILED/CANCELLED, their authentic returns and applicable signed IPN, authoritative matching and final reconciliation of those genuine cases remain separate. Phase 3 stays NOT ACCEPTED and Phase 4 stays ON HOLD until the original gates have evidence.

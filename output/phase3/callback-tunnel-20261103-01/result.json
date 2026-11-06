@@ -1,0 +1,14 @@
+{
+  "passed": false,
+  "stage": "public-path-checks",
+  "failure": "PROBE_CONNECTION_FAILED",
+  "pass": 0,
+  "fail": 0,
+  "unexecuted": 31,
+  "connectorPID": 22388,
+  "tunnelStopped": true,
+  "databaseAccess": false,
+  "merchantCalls": 0,
+  "credentialsRead": false,
+  "finishedUTC": "2026-11-03T10:33:10.444Z"
+}

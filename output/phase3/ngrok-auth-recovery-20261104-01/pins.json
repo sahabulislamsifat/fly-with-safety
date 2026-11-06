@@ -1,0 +1,66 @@
+[
+  {
+    "path": "auth-format.cjs",
+    "sha256": "c1d08dc0ddc5f18fc7e3ccddb284f949fb172b2868b654873f7547531874f244"
+  },
+  {
+    "path": "auth-format.test.cjs",
+    "sha256": "e9c971c512c6615dde11c5dccdc18a3a90d6d1455480e8818e32347ed3133a5d"
+  },
+  {
+    "path": "session-evidence.cjs",
+    "sha256": "839b8896159f1a782c50a4e850e95b14c40f6c3f256ecf266a09a1a4f9ff3944"
+  },
+  {
+    "path": "session-evidence.test.cjs",
+    "sha256": "1737bc4f4e0fd04f4efb88a586a5db277bcbc62bcda6328320bfcbab6dc76772"
+  },
+  {
+    "path": "auth-only.cjs",
+    "sha256": "857e2570adef2cecf708ad6b24f9c53d65b028fb0c4af2c9df1f58cceaffb2ef"
+  },
+  {
+    "path": "auth-only.test.cjs",
+    "sha256": "951451de2dd102bf70b31ae216baba345055d82add74b8d0d06d9637c01a2b92"
+  },
+  {
+    "path": "agent-safety.yml",
+    "sha256": "9976f799318e03a5f96d69624c01a0d83c5366dddb63ab1aa52e09e2a0040355"
+  },
+  {
+    "path": "REVIEW.md",
+    "sha256": "82d056788c94a04009d3670452e70f9ba8bfcecabe7d2cce31db0424e56283d4"
+  },
+  {
+    "path": "private-format-audit.json",
+    "sha256": "6c21072c5a6b9c11e59788e8c4343b2fb08d76a187e7ae03f646e8f71495f169"
+  },
+  {
+    "path": "private-format-audit-supported-version.json",
+    "sha256": "19d98c6b17fdbde05d8df12858b590e5efc9512ad770838f86e42a65f91f1b25"
+  },
+  {
+    "path": "../ngrok-public-proof-20261103-02/result.json",
+    "sha256": "61e65ae66073ebd091e8fde2be3b617311597dc16dba94b842abd8470b52a88a"
+  },
+  {
+    "path": "../ngrok-public-proof-20261103-02/handoff-result.json",
+    "sha256": "a375cccae861524977c7200b2a5b76f7b1567cbde12f773599f4a9f7dda008d1"
+  },
+  {
+    "path": "../ngrok-public-proof-20261103-02/journal.jsonl",
+    "sha256": "fa001467105979dde965387d51186c1f672bf9e64b273bea81a3cd9095168ba3"
+  },
+  {
+    "path": "../ngrok-public-proof-20261103-02/run.cjs",
+    "sha256": "eeaac3570fd8c1e6ddadd567e6f652a0c1a4d0be28c38f4f20d97e4ecf9b0edb"
+  },
+  {
+    "path": "../ngrok-public-proof-20261103-02/Invoke-BackendOnlyProof.ps1",
+    "sha256": "ee5ff83e8698efdd27327d7601908d6b1ed58e7199cf22b24d4ef5a6b95862d8"
+  },
+  {
+    "path": "../ngrok-public-proof-20261103-02/pins.json",
+    "sha256": "c72abfeefcb61fcda61d8c7e29149d3802db0e3a9bba35f50a7d827c3c63f963"
+  }
+]

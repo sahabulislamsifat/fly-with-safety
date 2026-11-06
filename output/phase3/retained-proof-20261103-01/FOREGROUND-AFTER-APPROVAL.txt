@@ -1,0 +1,13 @@
+DO NOT EXECUTE until the owner explicitly approves this new retained-fixture continuation scope in REVIEW.md. Existing private Windows PowerShell5.1. ONE attempt; failure means STOP/no retry. Only EXISTING flywithsafe_phase2_booking_test DB password at private prompt, NOT postgres. No actor password/reset, new users/bookings, quote renewal or cleanup.
+
+& {
+ $ErrorActionPreference='Stop'
+ Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+ $p='E:\Programming\Project\fly-with-safety\output\phase3\retained-proof-20261103-01\Invoke-RetainedProof.ps1'
+ if(-not (Test-Path -LiteralPath $p -PathType Leaf)){throw 'STOP: reviewed retained proof caller missing'}
+ if((Get-Item -LiteralPath $p -Stream * | Where-Object Stream -eq 'Zone.Identifier')){throw 'STOP: unexpected script zone marking'}
+ if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -cne 'DBA2493CBD8580D4D98E02B5343283AEE6519341A1222534E41C3D8691147711'){throw 'STOP: reviewed retained proof caller mismatch'}
+ & $p -OwnerApprovedRetainedPaymentProof
+}
+
+Return actual Payment proof checks line, Phase3 restricted PostgreSQL proof exit line and PASS/STOP marker/sanitized failure. Preserve every artifact/ledger; no retry/cleanup after failure. Success proves PostgreSQL with provider doubles, not genuine SSLCommerz sandbox or browser acceptance.

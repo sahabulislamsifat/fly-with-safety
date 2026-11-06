@@ -1,0 +1,22 @@
+{
+  "errors": 0,
+  "warnings": 0,
+  "files": [
+    {
+      "path": "server\\test\\phase3-browser-host.pg.integration.ts",
+      "messages": []
+    },
+    {
+      "path": "server\\test\\phase3-browser-host.pg.vitest.config.ts",
+      "messages": []
+    },
+    {
+      "path": "server\\test\\phase3-browser-double.ts",
+      "messages": []
+    },
+    {
+      "path": "server\\test\\phase3-browser-double.test.ts",
+      "messages": []
+    }
+  ]
+}

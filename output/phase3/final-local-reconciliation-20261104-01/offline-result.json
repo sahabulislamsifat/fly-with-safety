@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "checks": 2341,
+  "pins": 1000,
+  "newTests": 11,
+  "focusedIPN": 1,
+  "unselectedIPNFileTests": 47,
+  "sqlSelects": 15,
+  "historicalArtifacts": 102,
+  "negativeHarnessPreserved": true,
+  "attemptAbsent": true,
+  "liveDatabaseOperations": 0,
+  "providerCalls": 0,
+  "publicConnections": 0,
+  "callerSHA256": "F0C891F34D30252201290A20642EAE01FB6C2465B3C63D92AD8030B35851DA06"
+}

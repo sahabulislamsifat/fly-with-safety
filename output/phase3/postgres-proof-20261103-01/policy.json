@@ -1,0 +1,10 @@
+{
+  "planning": "compact",
+  "context_depth": "dependency",
+  "verification_depth": "impact",
+  "delegation": "none",
+  "reason_codes": ["restricted-postgres-payment-proof", "private-credential-boundary", "preserve-consumed-schema-evidence"],
+  "allowed_write_scope": ["server/test/phase3-*", "output/phase3/postgres-proof-20261103-01", "docs/proposals/PHASE_3_IMPLEMENTATION_EVIDENCE.md"],
+  "database_execution": "Owner-only private foreground execution after exact synthetic fixture scope approval; no automatic SQL/provider/browser mutation",
+  "production_source_changes": "None planned; fix only demonstrated defects"
+}

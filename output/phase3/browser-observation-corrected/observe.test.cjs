@@ -1,0 +1,16 @@
+'use strict';
+const {test}=require('node:test'),a=require('node:assert/strict'),{resource,structure,classify,install}=require('./observe.cjs');
+const origin='https://russel-semisacred-elise.ngrok-free.dev';
+test('interstitial recognized in non-rendered HTML',()=>a.equal(classify({status:200,html:'<script>let code="ERR_NGROK_6024"</script>'}).source,'NGROK_INTERSTITIAL'));
+test('origin requires independent receipt AND marker',()=>{a.equal(classify({status:404,marker:true,originSeen:true}).source,'CORRELATED_ORIGIN');a.equal(classify({status:200,marker:true}).source,'UNKNOWN_INTERMEDIARY');});
+test('unknown HTML stays blocked',()=>a.equal(classify({status:200,html:'<html></html>'}).decision,'BLOCKED_UNCLASSIFIED'));
+test('incomplete navigation never GO',()=>a.equal(classify({status:404,navigationError:true}).source,'INCOMPLETE_NAVIGATION'));
+test('render restrictions never silent GO',()=>a.equal(classify({status:404,renderLimited:true}).decision,'BLOCKED_UNCLASSIFIED'));
+test('404 permits only genuine POST test',()=>{const r=classify({status:404});a.equal(r.decision,'GO_TO_GENUINE_POST_TEST');a.equal(r.paymentAcceptance,false);});
+test('CDN static scripts render',()=>a.equal(resource('https://cdn.ngrok.com/static/js/error.js','script').allow,true));
+test('same origin static loads without opening app documents',()=>{a.equal(resource(origin+'/style.css','stylesheet').allow,true);a.equal(resource(origin+'/api/v1/admin','document').allow,false);});
+test('only exact document permitted',()=>{a.equal(resource(origin+'/api/v1/payments/sslcommerz/success','document').allow,true);a.equal(resource(origin+'/api/v1/payments/sslcommerz/success?q=secret','document').allow,false);});
+test('external, XHR, credentials and insecure resources denied',()=>{for(const [u,t] of [['https://evil.invalid/a.js','script'],[origin+'/api','fetch'],['http://cdn.ngrok.com/static/a','script'],['https://user:secret@cdn.ngrok.com/static/a','script']])a.equal(resource(u,t).allow,false);});
+test('structure is bounded and carries no payload text',()=>{const r=structure('<script>secret</script>'+'x'.repeat(40000));a.equal(r.truncated,true);a.equal(r.sampleCharacters,32768);a.equal(JSON.stringify(r).includes('secret'),false);});
+test('title secrets redacted',()=>a.equal(classify({title:'a@example.invalid abcdefghijklmnopqrstuvwxyz'}).title.includes('abcdefghijklmnopqrstuvwxyz'),false));
+test('routing preserves normal request without custom headers',async()=>{let handler;const handlers={};const events=await install({on:(k,v)=>handlers[k]=v,route:async(_,fn)=>handler=fn});let continued=false;await handler({request:()=>({url:()=>origin+'/a.js',resourceType:()=> 'script'}),continue:()=>continued=true,abort:()=>{throw Error('wrong abort');}});a.equal(continued,true);a.equal(events[0].allowed,true);handlers.pageerror(Error('secret'));a.equal(JSON.stringify(events).includes('secret'),false);});

@@ -1,0 +1,102 @@
+[
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\genuine-sandbox-e2e-20261104-02\\assigned-origin.json",
+    "sha256": "60AFCCD5DB5A8349ED0B411E86D8785EAFA140060F80EE2FE6E725C9736D7222"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\genuine-sandbox-e2e-20261104-02\\attempt.json",
+    "sha256": "90515B2323D7155555FB0EEB8612718E4F29DBFB5EF624E5A0BD068A91BEEACF"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\genuine-sandbox-e2e-20261104-02\\build-pins.cjs",
+    "sha256": "0DD9D9B0B1F816265BBDA683ECE3DC92D8B8A7CF9F46154EA1189AF0EBE11C60"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\genuine-sandbox-e2e-20261104-02\\contract-result.json",
+    "sha256": "CEF408081601347D88D209F295310194D86C0A147B74FDCEEE04BC835FBBC51B"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\genuine-sandbox-e2e-20261104-02\\fixture-plan.json",
+    "sha256": "7A9F8716BBFABEEE46C5ECCD635E2925700EE0200A2EF10E218F75B748BC0ECE"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\genuine-sandbox-e2e-20261104-02\\Invoke-GenuineSandbox.ps1",
+    "sha256": "86DA3C1474B8E398337A90AE618709BB9871C770504D0DC6DCBDEAC4EC0E610C"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\genuine-sandbox-e2e-20261104-02\\ledger.jsonl",
+    "sha256": "5C09EF1559921A0B0414E963DF894DED011102F8C5936614ED8AFABE1B34DE4F"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\genuine-sandbox-e2e-20261104-02\\lint-result.json",
+    "sha256": "74706B797933C2960E986E215DC0EC17537FA5EC0F3386BF706C2CED6D0EC32A"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\genuine-sandbox-e2e-20261104-02\\owned-final.json",
+    "sha256": "A14DDBBC1B68E76BC488909EF355D48EED7EA1B68F461E46C0045086DE913431"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\genuine-sandbox-e2e-20261104-02\\pins.json",
+    "sha256": "3449273AD3880CF4150013108568BD1188EF316B5804026FF44E375B84806BCE"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\genuine-sandbox-e2e-20261104-02\\policy.json",
+    "sha256": "0E9960611FF24071364AD6EB39A56C3ADEDC032F0E7997567B758271B6EBACAE"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\genuine-sandbox-e2e-20261104-02\\preservation-ready.json",
+    "sha256": "F1F86CFEA7B53C49FB07613D4535DD9C56EA5B289A05C3E87515BFB3170C3628"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\genuine-sandbox-e2e-20261104-02\\readonly-preflight.json",
+    "sha256": "9016B8E7594E445708DC1410A02AADCE3EC58EA0F7C294C91CEB63AC50F74C33"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\genuine-sandbox-e2e-20261104-02\\result.json",
+    "sha256": "4AB879B2C8D5285D97E77F69BBCC19A15D86067F008A544781FB2152898799EC"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\genuine-sandbox-e2e-20261104-02\\return-success.png",
+    "sha256": "392016C8D781AD11E77D25F67DA2A21AA3C98DB186A4A0BEF397DF59B1B7B6A5"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\genuine-sandbox-e2e-20261104-02\\REVIEW.md",
+    "sha256": "472D793DC922986BAE51A92BFDD2FBFF8CC1E92F57E7AC33F674816702A918F8"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\genuine-sandbox-e2e-20261104-02\\runtime-pins.json",
+    "sha256": "0F670CC95740F278B04F9CB9AB5AD7A3554E101F6C353E9EDA704F1BFFF5F3CA"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\genuine-sandbox-e2e-20261104-02\\sql-result.json",
+    "sha256": "2CB543F8C582B2E9829F2AE169994C90405640BD6B11DC299CA3A1A286991204"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\genuine-sandbox-e2e-20261104-02\\ssh-process.json",
+    "sha256": "7EB954A41C565F7104D5243ABFA5ABFDC8B3F4D5DD7B2AC9132992049763AD7F"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\genuine-sandbox-e2e-20261104-02\\tests-result.json",
+    "sha256": "041D8D2B2A1CAB48452FA14C9B598D68D150B050D0B17A6FD197444CC2BAA6BE"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\genuine-sandbox-e2e-20261104-02\\transport-preflight.json",
+    "sha256": "B4EA5A0C6053615742E43AFB7757F8A8B15025E9927AF10C6B4E8984EA2F75EF"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\genuine-sandbox-e2e-20261104-02\\verification.json",
+    "sha256": "93D342CAE62D06F6D641AC43EEC987FECCF9AB5F90B1748C84BCB243B25A7B05"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\genuine-sandbox-e2e-20261104-02\\verify-contract.cjs",
+    "sha256": "1597B2D8BF24B5D2483F42B1D0E9BAC47111430FD332359AC6EB50734EB4A6B4"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\genuine-sandbox-e2e-20261104-02\\verify-lint.cjs",
+    "sha256": "66725261FB4DA14D10A3B9CFF2A825081E5D7A16033F7D535A01A490BA7A3757"
+  },
+  {
+    "path": "E:\\Programming\\Project\\fly-with-safety\\output\\phase3\\genuine-sandbox-e2e-20261104-02\\verify-sql.cjs",
+    "sha256": "52677920691C51A6482EEFC3AFB10C70551D3B81136E543CFEEFE0111DF381D4"
+  }
+]

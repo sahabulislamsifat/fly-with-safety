@@ -1,0 +1,21 @@
+{
+  "observedDate": "2026-11-03",
+  "path": "C:\\Users\\sahab\\Downloads\\cloudflared-windows-amd64.exe",
+  "version": "2026.10.7",
+  "builtUTC": "2026-10-30T09:43Z",
+  "versionExit": 0,
+  "helpExit": 0,
+  "size": 55390512,
+  "sha256": "2493DBC168923BB3E59E5E7716F71DECED92992EEA9ACD6E9D74F84AC7751343",
+  "authenticodeStatus": "Valid",
+  "signerSimpleName": "Cloudflare, Inc.",
+  "upstreamRelease": "2026.10.7",
+  "upstreamPublishedUTC": "2026-10-30T17:11:03Z",
+  "upstreamAsset": "https://github.com/cloudflare/cloudflared/releases/download/2026.10.7/cloudflared-windows-amd64.exe",
+  "upstreamDigest": "sha256:2493dbc168923bb3e59e5e7716f71deced92992eea9acd6e9d74f84ac7751343",
+  "upstreamDigestMatches": true,
+  "hostOverrideHelpVerified": true,
+  "tunnelStarted": false,
+  "providerCalls": 0,
+  "databaseAccess": false
+}

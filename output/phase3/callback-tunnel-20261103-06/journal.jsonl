@@ -1,0 +1,16 @@
+{"atUTC":"2026-11-03T14:28:33.935Z","event":"listener-bound","address":"127.0.0.1","port":5000}
+{"atUTC":"2026-11-03T14:28:33.945Z","event":"origin-received","index":0,"hostClass":"TUNNEL_MARKER","methodMatched":true,"pathMatched":true,"guard":"callback","media":"application/x-www-form-urlencoded","transferEncodingPresent":false}
+{"atUTC":"2026-11-03T14:28:33.947Z","event":"origin-response","index":0,"status":204}
+{"atUTC":"2026-11-03T14:28:33.956Z","event":"connector-started","pid":24964}
+{"atUTC":"2026-11-03T14:28:40.213Z","event":"origin-discovered","origin":"https://executive-lottery-aircraft-protecting.trycloudflare.com"}
+{"atUTC":"2026-11-03T14:28:40.726Z","event":"connector-registered"}
+{"atUTC":"2026-11-03T14:28:40.836Z","event":"dns-observation","attempt":1,"elapsedBudgetRemainingMs":29891,"success":false,"answers":0,"families":[],"code":"ENOTFOUND"}
+{"atUTC":"2026-11-03T14:28:42.917Z","event":"dns-observation","attempt":2,"elapsedBudgetRemainingMs":27810,"success":false,"answers":0,"families":[],"code":"ENOTFOUND"}
+{"atUTC":"2026-11-03T14:28:45.041Z","event":"dns-observation","attempt":3,"elapsedBudgetRemainingMs":25686,"success":false,"answers":0,"families":[],"code":"ENOTFOUND"}
+{"atUTC":"2026-11-03T14:28:47.117Z","event":"dns-observation","attempt":4,"elapsedBudgetRemainingMs":23610,"success":false,"answers":0,"families":[],"code":"ENOTFOUND"}
+{"atUTC":"2026-11-03T14:28:49.217Z","event":"dns-observation","attempt":5,"elapsedBudgetRemainingMs":21510,"success":false,"answers":0,"families":[],"code":"ENOTFOUND"}
+{"atUTC":"2026-11-03T14:28:51.334Z","event":"dns-observation","attempt":6,"elapsedBudgetRemainingMs":19393,"success":false,"answers":0,"families":[],"code":"ENOTFOUND"}
+{"atUTC":"2026-11-03T14:28:53.446Z","event":"dns-observation","attempt":7,"elapsedBudgetRemainingMs":17281,"success":false,"answers":0,"families":[],"code":"ENOTFOUND"}
+{"atUTC":"2026-11-03T14:28:55.520Z","event":"dns-observation","attempt":8,"elapsedBudgetRemainingMs":15207,"success":false,"answers":0,"families":[],"code":"ENOTFOUND"}
+{"atUTC":"2026-11-03T14:28:55.528Z","event":"connector-exit","code":null,"signal":"SIGTERM"}
+{"atUTC":"2026-11-03T14:28:55.537Z","event":"listener-closed","tunnelStopped":true}

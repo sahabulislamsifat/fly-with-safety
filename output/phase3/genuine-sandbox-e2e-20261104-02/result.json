@@ -1,0 +1,75 @@
+{
+  "passed": false,
+  "stage": "genuine-fail",
+  "failure": {
+    "stage": "genuine-fail",
+    "prismaCode": null,
+    "sqlState": null,
+    "appCode": null,
+    "classification": "ASSERTION_OR_UNCLASSIFIED",
+    "operation": "genuine-fail",
+    "adapterKind": null,
+    "nativeType": null,
+    "code": "BOUNDED_STAGE_TIMEOUT"
+  },
+  "cases": [
+    {
+      "case": "success",
+      "status": "VERIFIED",
+      "captured": true,
+      "actualReturn": true,
+      "signedIPN": true,
+      "roleConsistency": true,
+      "ownershipIsolation": true,
+      "bookingStillPending": true,
+      "manualReplayNotProviderEvidence": true
+    }
+  ],
+  "counts": {
+    "transactions": 23,
+    "bookings": 3,
+    "passengers": 3,
+    "initialHistory": 3,
+    "payments": 2,
+    "saves": 13,
+    "events": 10,
+    "initiate": 2,
+    "callbacks": 2,
+    "query": 2,
+    "validate": 2,
+    "bookingUpdates": 1,
+    "financialHistory": 1,
+    "outbox": 3
+  },
+  "notices": [
+    {
+      "case": "success",
+      "source": "ipn",
+      "signed": true,
+      "processed": true
+    },
+    {
+      "case": "success",
+      "source": "success",
+      "signed": true,
+      "processed": true
+    }
+  ],
+  "preservation": true,
+  "connectorStopped": true,
+  "normalServicesTouched": false,
+  "mainCloudAccess": false,
+  "refundsExecuted": false,
+  "fixturesRetained": true,
+  "phase3Accepted": false,
+  "nativeEvidence": {
+    "nativeExitCode": null,
+    "signal": "SIGTERM",
+    "spawnError": null,
+    "stdoutBytes": 15477,
+    "stderrBytes": 810,
+    "categories": [
+      "AUTH_TEXT_OBSERVED"
+    ]
+  }
+}

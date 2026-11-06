@@ -1,0 +1,22 @@
+{
+  "passed": false,
+  "stage": "authenticated-domain-and-policy-binding",
+  "failure": "NGROK_UPSTREAM_UNCONFIRMED",
+  "failureDetail": null,
+  "shutdownFailure": null,
+  "dnsReady": false,
+  "callbackReady": false,
+  "attempted": 0,
+  "completedHttp": 0,
+  "pass": 0,
+  "fail": 0,
+  "unexecuted": 31,
+  "firstFailedCheck": null,
+  "connectorPID": 26176,
+  "tunnelStopped": true,
+  "listenerStopped": true,
+  "databaseAccess": false,
+  "merchantCalls": 0,
+  "credentialsRead": false,
+  "finishedUTC": "2026-11-03T19:20:44.603Z"
+}

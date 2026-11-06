@@ -1,0 +1,16 @@
+'use strict';
+const {test}=require('node:test');const assert=require('node:assert/strict');
+const {allowed,paths,assertTarget}=require('./boundary.cjs');const {inspect}=require('./binding.cjs');
+const request=()=>({method:'POST',url:paths[0],socket:{remoteAddress:'127.0.0.1'},headers:{host:'phase3-callback.invalid','content-type':'application/x-www-form-urlencoded','content-length':'3'}});
+for(const path of paths)test('allow exact '+path,()=>{const r=request();r.url=path;assert.equal(allowed(r),true);});
+for(const path of ['/','/api/v1/auth/login','/api/v1/bookings','/api/v1/admin','/api/v1/account',paths[0]+'?x=1',paths[0]+'/',paths[0].replace('success','%73uccess')])test('deny '+path,()=>{const r=request();r.url=path;assert.equal(allowed(r),false);});
+for(const method of ['GET','HEAD','OPTIONS','PUT','DELETE'])test('deny method '+method,()=>{const r=request();r.method=method;assert.equal(allowed(r),false);});
+test('no local-host bypass',()=>{const r=request();r.headers.host='localhost:5000';assert.equal(allowed(r),false);});
+test('remote peer denied',()=>{const r=request();r.socket.remoteAddress='10.0.0.1';assert.equal(allowed(r),false);});
+test('chunked denied',()=>{const r=request();r.headers['transfer-encoding']='chunked';assert.equal(allowed(r),false);});
+test('oversize denied',()=>{const r=request();r.headers['content-length']='16385';assert.equal(allowed(r),false);});
+test('JSON denied',()=>{const r=request();r.headers['content-type']='application/json';assert.equal(allowed(r),false);});
+test('local-only database',()=>{assertTarget('postgresql://flywithsafe_phase2_booking_test:synthetic@127.0.0.1:5432/flywithsafety_local_integration');for(const u of ['postgresql://x:y@cloud.example:5432/postgres','postgresql://postgres:x@127.0.0.1:5432/flywithsafety_local_integration'])assert.throws(()=>assertTarget(u));});
+test('missing addr is not sufficient upstream proof',()=>{const r=inspect(JSON.stringify({msg:'started tunnel',url:'https://example.invalid'}),'https://example.invalid');assert.equal(r.upstreamVerified,false);assert.equal(r.correlationRequired,true);});
+test('wrong domain rejected',()=>assert.equal(inspect(JSON.stringify({msg:'started tunnel',url:'https://other.invalid'}),'https://example.invalid').failure,'EXACT_DOMAIN_MISMATCH'));
+test('native entitlement error retained',()=>assert.deepEqual(inspect('ERR_NGROK_105','https://example.invalid').codes,['ERR_NGROK_105']));

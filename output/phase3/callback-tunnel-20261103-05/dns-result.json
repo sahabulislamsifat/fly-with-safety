@@ -1,0 +1,49 @@
+{
+  "ready": true,
+  "observations": [
+    {
+      "attempt": 1,
+      "elapsedBudgetRemainingMs": 29858,
+      "success": false,
+      "answers": 0,
+      "families": [],
+      "code": "ENOTFOUND"
+    },
+    {
+      "attempt": 2,
+      "elapsedBudgetRemainingMs": 27771,
+      "success": false,
+      "answers": 0,
+      "families": [],
+      "code": "ENOTFOUND"
+    },
+    {
+      "attempt": 3,
+      "elapsedBudgetRemainingMs": 25698,
+      "success": false,
+      "answers": 0,
+      "families": [],
+      "code": "ENOTFOUND"
+    },
+    {
+      "attempt": 4,
+      "elapsedBudgetRemainingMs": 23578,
+      "success": true,
+      "answers": 2,
+      "families": [
+        4
+      ],
+      "code": null
+    },
+    {
+      "attempt": 5,
+      "elapsedBudgetRemainingMs": 21503,
+      "success": true,
+      "answers": 2,
+      "families": [
+        4
+      ],
+      "code": null
+    }
+  ]
+}

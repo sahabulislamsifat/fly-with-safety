@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "checks": 1168,
+  "pins": 992,
+  "focusedTests": 9,
+  "sqlSelects": 11,
+  "lintErrorsOrWarnings": 0,
+  "callerSHA256": "441B3877DA9DCA7A5E698B5314EDEB0F7E689A4741F1C946CE3FC0825FD5147F",
+  "historicalPackageUnchanged": true,
+  "attemptAbsent": true,
+  "databaseExecuted": false,
+  "providerCalls": 0,
+  "publicConnections": 0
+}
