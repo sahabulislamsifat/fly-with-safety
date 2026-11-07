@@ -1,0 +1,16 @@
+{
+  "extends": "../p5-tsconfig.json",
+  "include": [
+    "./postgres.test.ts",
+    "./vitest.config.ts",
+    "./reporter-fixture.test.ts",
+    "./reporter-fixture.config.ts",
+    "../p5-disposable-target.ts",
+    "./api-checks.ts",
+    "./timezone.test.ts",
+    "./offline.config.ts",
+    "./regression.config.ts",
+    "./api-offline.test.ts",
+    "../../src/**/*"
+  ]
+}

@@ -57,7 +57,7 @@ export function AdminPortal() {
   }
 
   // Forbidden: CUSTOMER role state
-  if (user.role === 'CUSTOMER') {
+  if (!['ADMIN', 'STAFF', 'SUPER_ADMIN'].includes(user.role)) {
     return (
       <section className="min-h-[calc(100vh-70px)] bg-neutral-50 flex items-center justify-center py-12 px-4">
         <div className="w-full max-w-lg rounded-xs border border-neutral-200 bg-white p-8 text-center shadow-card space-y-5">
@@ -94,7 +94,7 @@ export function AdminPortal() {
   }
 
   // Authorized: STAFF or ADMIN role
-  const isSuperAdmin = user.role === 'ADMIN';
+  const isSuperAdmin = user.role === 'SUPER_ADMIN';
 
   return (
     <section className="min-h-[calc(100vh-70px)] bg-neutral-50 py-8 lg:py-10">
@@ -124,6 +124,8 @@ export function AdminPortal() {
             </div>
 
             <div className="flex items-center gap-2">
+              <Link href="/account/security" className="text-xs font-bold underline">Security &amp; MFA</Link>
+              <Link href="/staff" className="text-xs font-bold underline">Identity &amp; assignments</Link>
               <Link href="/account">
                 <Button variant="outline" size="sm" className="rounded-xs text-xs">
                   My Profile

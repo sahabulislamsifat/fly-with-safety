@@ -1,0 +1,9 @@
+{
+  "scope": "OFFLINE_UTC_MODEL_AND_ROUTER",
+  "exit": 0,
+  "passed": 15,
+  "failed": 0,
+  "skipped": 0,
+  "newDatabaseConnections": 0,
+  "providerCalls": 0
+}

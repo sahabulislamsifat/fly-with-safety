@@ -165,7 +165,8 @@ export async function googleCallback(req: Request, res: Response, next: NextFunc
     const profile = req.user as
       | {
           id: string;
-          emails?: Array<{ value?: string }>;
+          emails?: Array<{ value?: string; verified?: boolean }>;
+          _json?: { email_verified?: boolean };
           displayName?: string;
           photos?: Array<{ value?: string }>;
         }
@@ -179,6 +180,7 @@ export async function googleCallback(req: Request, res: Response, next: NextFunc
     const session = await authService.findOrCreateGoogleUser({
       googleId: profile.id,
       email: profile.emails?.[0]?.value || '',
+      emailVerified: profile.emails?.[0]?.verified === true || profile._json?.email_verified === true,
       name: profile.displayName,
       avatar: profile.photos?.[0]?.value,
     });

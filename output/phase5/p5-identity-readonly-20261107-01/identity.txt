@@ -1,0 +1,5 @@
+BEGIN
+SET
+SET
+{"diagnosticOnly" : true, "database" : "postgres", "role" : "postgres", "sessionRole" : "postgres", "addressAsV05Text" : "127.0.0.1/32", "addressAsHost" : "127.0.0.1", "port" : 5432, "maintenanceDatabaseOid" : 5, "transactionReadOnly" : "on", "databaseMatches" : true, "roleMatches" : true, "sessionRoleMatches" : true, "v05AddressMatches" : false, "hostAddressMatches" : true, "portMatches" : true}
+ROLLBACK

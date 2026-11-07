@@ -17,7 +17,7 @@ export type Refund = { id: string; paymentId: string; requestId: string; actorId
 export type Booking = { id: string; referenceNumber: string; userId: string | null; status: string; currency: string; totalPrice: number; bookingDetails: unknown; customerName: string; customerEmail: string; customerPhone: string | null };
 export const active = (a: Attempt) => ['INITIATING', 'SESSION_READY', 'UNKNOWN'].includes(a.status);
 export function authorize(booking: Booking, actor: BookingActor, customerOnly = false) {
-  if (actor.role === 'CUSTOMER' ? booking.userId !== actor.id : customerOnly || !['ADMIN', 'STAFF'].includes(actor.role)) throw AppError.notFound('Booking not found');
+  if (actor.role === 'CUSTOMER' ? booking.userId !== actor.id : customerOnly || !['ADMIN', 'STAFF', 'SUPER_ADMIN'].includes(actor.role)) throw AppError.notFound('Booking not found');
 }
 export function payable(booking: Booking, actor: BookingActor, now: number) {
   authorize(booking, actor, true);

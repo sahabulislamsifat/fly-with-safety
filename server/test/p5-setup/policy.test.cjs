@@ -1,0 +1,27 @@
+'use strict';
+const {test}=require('node:test'),assert=require('node:assert/strict'),crypto=require('node:crypto');
+const P=require('./policy.cjs');
+const sample=()=>({maintenanceUser:'postgres',maintenancePassword:'synthetic-maintenance-only',appPassword:'Synthetic-App-Secret-983!',ownerPassword:'Synthetic-Owner-Secret-492!'});
+test('distinct synthetic private credentials accepted',()=>{assert.equal(P.credentials(sample()).maintenanceUser,'postgres');});
+test('empty maintenance credential rejected',()=>{assert.throws(()=>P.credentials({...sample(),maintenancePassword:''}),/MAINTENANCE_PASSWORD_REQUIRED/);});
+test('missing maintenance identity cannot fall back to environment user',()=>{const value=sample();delete value.maintenanceUser;assert.throws(()=>P.credentials(value),/MAINTENANCE_IDENTITY_REQUIRED/);});
+test('technical role cannot stand in for maintenance role',()=>{assert.throws(()=>P.credentials({...sample(),maintenanceUser:P.owner}),/MAINTENANCE_IDENTITY_REQUIRED/);});
+test('new role credentials must differ',()=>{const value=sample();assert.throws(()=>P.credentials({...value,ownerPassword:value.appPassword}),/DISTINCT_PRIVATE_PASSWORDS_REQUIRED/);});
+test('weak or whitespace-bearing new credentials rejected',()=>{for(const secret of ['short','a'.repeat(24),' Synthetic-App-Secret-983!'])assert.throws(()=>P.credentials({...sample(),appPassword:secret}),/NEW_PRIVATE_PASSWORD_POLICY/);});
+test('explicit connection never falls back to another target',()=>{const value=P.configuration(P.app,'synthetic',P.database);assert.equal(value.host,'127.0.0.1');assert.equal(value.port,5432);assert.equal(value.database,P.database);assert.equal(value.user,P.app);assert.throws(()=>P.configuration(P.app,'synthetic','flywithsafety_local_integration'),/CONNECTION_TARGET_REJECTED/);});
+test('private owner URL preserves reserved password characters without outputting it',()=>{const Params=require('../../node_modules/pg/lib/connection-parameters.js'),password='Synthetic%Owner@Secret/94:!';const value=new Params(P.ownerUrl(password));assert.equal(value.password,password);assert.equal(value.user,P.owner);assert.equal(value.database,P.database);assert.equal(value.host,'127.0.0.1');});
+test('OID must come from matching live identity and cannot be protected OID',()=>{const row={database:P.database,role:P.app,address:'127.0.0.1',port:5432,oid:99999};P.identity(row,P.database,P.app,99999);assert.throws(()=>P.identity({...row,oid:34701},P.database,P.app),/DATABASE_OID_MISMATCH/);assert.throws(()=>P.identity(row,P.database,P.app,99998),/DATABASE_OID_MISMATCH/);assert.throws(()=>P.identity({...row,role:'postgres'},P.database,P.app),/SERVER_IDENTITY_MISMATCH/);});
+test('runtime grant sets distinguish mutable, append-only and financial tables',()=>{assert.equal(new Set(P.tables).size,29);assert(!P.mutable.includes('IdentityAudit'));assert(P.append.includes('IdentityAudit'));assert(!P.mutable.includes('GatewayPayment'));assert(!P.mutable.includes('GatewayRefund'));assert(!P.tables.includes('_prisma_migrations'));});
+test('failure output drops message, SQL, connection and secret data',()=>{const value=P.safeFailure({code:'28P01',guard:'LOGIN_REJECTED',message:'DO_NOT_LOG',query:'DO_NOT_LOG',password:'DO_NOT_LOG'});assert.equal(value.sqlState,'28P01');assert(!JSON.stringify(value).includes('DO_NOT_LOG'));});
+test('randomized SCRAM verifier never contains supplied plaintext',()=>{const password=sample().appPassword,a=P.verifier(password),b=P.verifier(password);assert.notEqual(a,b);assert(!a.includes(password));assert.match(a,/^SCRAM-SHA-256\$4096:[A-Za-z0-9+/=]+\$[A-Za-z0-9+/=]+:[A-Za-z0-9+/=]+$/);});
+test('SCRAM honors a higher supported iteration policy and rejects unsafe bounds',()=>{assert.match(P.verifier(sample().appPassword,undefined,8192),/^SCRAM-SHA-256\$8192:/);for(const iterations of [0,4095,100001])assert.throws(()=>P.verifier(sample().appPassword,undefined,iterations),/SCRAM_POLICY_REQUIRES_REVIEW/);});
+test('stored verifier matches the installed pg SCRAM client protocol offline',async()=>{
+  const sasl=require('../../node_modules/pg/lib/crypto/sasl.js'),password=sample().appPassword;
+  const stored=P.verifier(password,Buffer.alloc(16,3)),[,saltSpec,keySpec]=stored.split('$'),[iterations,salt]=saltSpec.split(':'),[storedKey,serverKey]=keySpec.split(':');
+  const session=sasl.startSession(['SCRAM-SHA-256']);const first=session.response.slice(3),serverFirst=`r=${session.clientNonce}synthetic-server,s=${salt},i=${iterations}`;
+  await sasl.continueSession(session,password,serverFirst);
+  const bare=session.response.slice(0,session.response.lastIndexOf(',p=')),proof=Buffer.from(session.response.split(',p=')[1],'base64'),auth=first+','+serverFirst+','+bare;
+  const signature=crypto.createHmac('sha256',Buffer.from(storedKey,'base64')).update(auth).digest();const recovered=Buffer.from(proof.map((byte,index)=>byte^signature[index]));
+  assert.equal(crypto.createHash('sha256').update(recovered).digest('base64'),storedKey);
+  const expected=crypto.createHmac('sha256',Buffer.from(serverKey,'base64')).update(auth).digest('base64');assert.equal(session.serverSignature,expected);sasl.finalizeSession(session,'v='+expected);
+});

@@ -1,0 +1,11 @@
+{
+    "stage":  "private-password-input",
+    "ddlCalls":  0,
+    "passed":  false,
+    "childStarted":  false,
+    "networkReached":  false,
+    "databaseCalls":  0,
+    "failure":  {
+                    "guard":  "NEW_MIGRATOR_PASSWORD_LOWERCASE_REQUIRED"
+                }
+}

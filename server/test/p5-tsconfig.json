@@ -1,0 +1,5 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": { "rootDir": "..", "noEmit": true, "incremental": false, "declaration": false, "declarationMap": false },
+  "include": ["../src/**/*", "p5-identity.test.ts", "p5-disposable-target.ts", "p5-disposable-target.test.ts", "p5-postgres.test.ts", "p5-prisma.config.ts", "p5-vitest.config.ts", "p5-postgres.vitest.config.ts"]
+}

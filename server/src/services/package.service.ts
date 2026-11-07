@@ -6,6 +6,7 @@ import type { PackageInquiryInput } from '../validators/package.schemas.js';
 import { AppError } from '../utils/errors.js';
 import { transitionInquiryStatus } from './inquiry-status.service.js';
 import { createIdempotentInquiry } from './idempotency.service.js';
+import { assignedIds } from '../identity/store.js';
 
 export async function getPublicPackages(params: {
   page?: number;
@@ -112,7 +113,8 @@ export async function getPackageInquiries(params: { page?: number; limit?: numbe
   const page = Math.max(1, params.page || 1);
   const limit = Math.min(50, Math.max(1, params.limit || 20));
   const skip = (page - 1) * limit;
-  const where = params.status ? { status: params.status as any } : {};
+  const ids = await assignedIds('packageInquiry');
+  const where = { ...(params.status ? { status: params.status as any } : {}), ...(ids ? { id: { in: ids } } : {}) };
 
   const [total, inquiries] = await Promise.all([
     prisma.packageInquiry.count({ where }),

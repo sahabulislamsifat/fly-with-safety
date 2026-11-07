@@ -1,0 +1,390 @@
+{
+  "passed": true,
+  "stage": "SCOPED_POSTGRES_PASS_NOT_FULL_P5_ACCEPTANCE",
+  "identity": {
+    "database": "flywithsafety_p5_identity_scope_test",
+    "role": "fws_p5_identity_app",
+    "sessionRole": "fws_p5_identity_app",
+    "address": "127.0.0.1",
+    "port": 5432,
+    "oid": 35402,
+    "unsafe": false
+  },
+  "migrations": 9,
+  "postgres": {
+    "exitCode": 0,
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0,
+    "todo": 0,
+    "total": 1,
+    "success": true,
+    "failedAssertions": []
+  },
+  "childProcess": {
+    "spawned": true,
+    "exitCode": 0,
+    "signal": null,
+    "stdoutBytes": 1102,
+    "stderrBytes": 0,
+    "stdoutClassification": {
+      "jsonReportNotice": false,
+      "syntaxError": false,
+      "moduleNotFound": false,
+      "permissionDenied": false
+    },
+    "stderrClassification": {
+      "jsonReportNotice": false,
+      "syntaxError": false,
+      "moduleNotFound": false,
+      "permissionDenied": false
+    }
+  },
+  "preflightVerified": true,
+  "preflightTables": [
+    {
+      "table": "Account",
+      "count": 0
+    },
+    {
+      "table": "Booking",
+      "count": 0
+    },
+    {
+      "table": "BookingPassenger",
+      "count": 0
+    },
+    {
+      "table": "BookingStatusHistory",
+      "count": 0
+    },
+    {
+      "table": "ContactMessage",
+      "count": 0
+    },
+    {
+      "table": "Destination",
+      "count": 0
+    },
+    {
+      "table": "EmailVerificationToken",
+      "count": 0
+    },
+    {
+      "table": "FlightInquiry",
+      "count": 0
+    },
+    {
+      "table": "GatewayPayment",
+      "count": 0
+    },
+    {
+      "table": "GatewayPaymentEvent",
+      "count": 0
+    },
+    {
+      "table": "GatewayRefund",
+      "count": 0
+    },
+    {
+      "table": "HotelInquiry",
+      "count": 0
+    },
+    {
+      "table": "IdempotencyRecord",
+      "count": 0
+    },
+    {
+      "table": "IdentityAccount",
+      "count": 0
+    },
+    {
+      "table": "IdentityAssignment",
+      "count": 0
+    },
+    {
+      "table": "IdentityAudit",
+      "count": 0
+    },
+    {
+      "table": "IdentityInvitation",
+      "count": 0
+    },
+    {
+      "table": "IdentityMembership",
+      "count": 0
+    },
+    {
+      "table": "IdentityMfa",
+      "count": 0
+    },
+    {
+      "table": "IdentitySession",
+      "count": 0
+    },
+    {
+      "table": "NotificationOutbox",
+      "count": 0
+    },
+    {
+      "table": "Package",
+      "count": 0
+    },
+    {
+      "table": "PackageInquiry",
+      "count": 0
+    },
+    {
+      "table": "PasswordResetToken",
+      "count": 0
+    },
+    {
+      "table": "Session",
+      "count": 0
+    },
+    {
+      "table": "Testimonial",
+      "count": 0
+    },
+    {
+      "table": "User",
+      "count": 0
+    },
+    {
+      "table": "VisaInfo",
+      "count": 0
+    },
+    {
+      "table": "VisaInquiry",
+      "count": 0
+    }
+  ],
+  "finalTables": [
+    {
+      "table": "Account",
+      "count": 0
+    },
+    {
+      "table": "Booking",
+      "count": 0
+    },
+    {
+      "table": "BookingPassenger",
+      "count": 0
+    },
+    {
+      "table": "BookingStatusHistory",
+      "count": 0
+    },
+    {
+      "table": "ContactMessage",
+      "count": 0
+    },
+    {
+      "table": "Destination",
+      "count": 0
+    },
+    {
+      "table": "EmailVerificationToken",
+      "count": 0
+    },
+    {
+      "table": "FlightInquiry",
+      "count": 0
+    },
+    {
+      "table": "GatewayPayment",
+      "count": 0
+    },
+    {
+      "table": "GatewayPaymentEvent",
+      "count": 0
+    },
+    {
+      "table": "GatewayRefund",
+      "count": 0
+    },
+    {
+      "table": "HotelInquiry",
+      "count": 0
+    },
+    {
+      "table": "IdempotencyRecord",
+      "count": 0
+    },
+    {
+      "table": "IdentityAccount",
+      "count": 0
+    },
+    {
+      "table": "IdentityAssignment",
+      "count": 0
+    },
+    {
+      "table": "IdentityAudit",
+      "count": 0
+    },
+    {
+      "table": "IdentityInvitation",
+      "count": 0
+    },
+    {
+      "table": "IdentityMembership",
+      "count": 0
+    },
+    {
+      "table": "IdentityMfa",
+      "count": 0
+    },
+    {
+      "table": "IdentitySession",
+      "count": 0
+    },
+    {
+      "table": "NotificationOutbox",
+      "count": 0
+    },
+    {
+      "table": "Package",
+      "count": 0
+    },
+    {
+      "table": "PackageInquiry",
+      "count": 0
+    },
+    {
+      "table": "PasswordResetToken",
+      "count": 0
+    },
+    {
+      "table": "Session",
+      "count": 0
+    },
+    {
+      "table": "Testimonial",
+      "count": 0
+    },
+    {
+      "table": "User",
+      "count": 0
+    },
+    {
+      "table": "VisaInfo",
+      "count": 0
+    },
+    {
+      "table": "VisaInquiry",
+      "count": 0
+    }
+  ],
+  "finalPreservationAttempted": true,
+  "rollbackPreservation": true,
+  "providerCalls": 0,
+  "cloudAccess": false,
+  "browserExecuted": false,
+  "sessionExpiryStorage": "timestamp(3) without time zone",
+  "apiChecks": [
+    {
+      "check": "STAFF_ME",
+      "status": 200
+    },
+    {
+      "check": "CUSTOMER_ME",
+      "status": 200
+    },
+    {
+      "check": "ADMIN_ME",
+      "status": 200
+    },
+    {
+      "check": "SUPER_ADMIN_ME",
+      "status": 200
+    },
+    {
+      "check": "STAFF_AUDIT",
+      "status": 403
+    },
+    {
+      "check": "CUSTOMER_AUDIT",
+      "status": 403
+    },
+    {
+      "check": "ADMIN_AUDIT",
+      "status": 403
+    },
+    {
+      "check": "SUPER_ADMIN_AUDIT",
+      "status": 200
+    },
+    {
+      "check": "ADMIN_CUSTOMERS",
+      "status": 200
+    },
+    {
+      "check": "STAFF_CUSTOMERS_DENIED",
+      "status": 403
+    },
+    {
+      "check": "CUSTOMER_CUSTOMERS_DENIED",
+      "status": 403
+    },
+    {
+      "check": "OWNER_SELF_DEMOTION_DENIED",
+      "status": 403
+    },
+    {
+      "check": "ADMIN_PROMOTION_DENIED",
+      "status": 403
+    },
+    {
+      "check": "SUPER_PROMOTION_SCHEMA_DENIED",
+      "status": 400
+    },
+    {
+      "check": "STAFF_FOREIGN_DEPARTMENT_DENIED",
+      "status": 403
+    },
+    {
+      "check": "CUSTOMER_OWN_BOOKING",
+      "status": 200
+    },
+    {
+      "check": "CUSTOMER_FOREIGN_BOOKING_DENIED",
+      "status": 404
+    },
+    {
+      "check": "STAFF_ASSIGNED_BOOKING",
+      "status": 200
+    },
+    {
+      "check": "STAFF_UNASSIGNED_BOOKING_DENIED",
+      "status": 404
+    },
+    {
+      "check": "ADMIN_MFA_REQUIRED",
+      "status": 403
+    },
+    {
+      "check": "ADMIN_SUSPEND_CUSTOMER",
+      "status": 200
+    },
+    {
+      "check": "SUSPENDED_SESSION_DENIED",
+      "status": 401
+    },
+    {
+      "check": "OWNER_DEMOTE_ADMIN",
+      "status": 200
+    },
+    {
+      "check": "DEMOTED_SESSION_DENIED",
+      "status": 401
+    }
+  ],
+  "timezoneChecks": [
+    "UTC_SESSION_AND_SCOPE_PASS",
+    "UTC_EXPIRED_SESSION_DENIED",
+    "DHAKA_SESSION_AND_SCOPE_PASS",
+    "DHAKA_EXPIRED_SESSION_DENIED"
+  ]
+}

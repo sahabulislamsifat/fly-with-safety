@@ -1,0 +1,24 @@
+{
+  "passed": false,
+  "stage": "maintenance-identity",
+  "database": "flywithsafety_p5_identity_scope_test",
+  "oid": null,
+  "resourcesCreated": [],
+  "createdRoleOids": {},
+  "migrations": [],
+  "fixtureWrites": 0,
+  "providerCalls": 0,
+  "mainCloudAccess": false,
+  "normalServicesTouched": false,
+  "productionActivated": false,
+  "failure": {
+    "guard": "SERVER_IDENTITY_MISMATCH",
+    "sqlState": null,
+    "networkCode": null,
+    "prismaCode": null,
+    "exitCode": null
+  },
+  "connectionsClosed": true,
+  "currentStageOutcomeUnconfirmed": true,
+  "finishedUTC": "2026-11-07T16:44:04.775Z"
+}

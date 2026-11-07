@@ -21,11 +21,12 @@ import * as outboxService from '../services/outbox.service.js';
 import { AppError } from '../utils/errors.js';
 import { changeCommercial } from '../controllers/booking-commercial.controller.js';
 import { commercialCommandSchema } from '../services/booking-commercial.service.js';
+import { adminPolicy } from '../identity/middleware.js';
 
 const router: Router = createRouter();
 
 // All admin routes require authentication AND ADMIN/STAFF role
-router.use('/admin', requireAuth, requireRole('ADMIN', 'STAFF'));
+router.use('/admin', requireAuth, requireRole('ADMIN', 'STAFF'), adminPolicy);
 
 // ─── Contact Messages ────────────────────────────────────────────────────────
 router.get('/admin/contact', contactController.getContactMessages);

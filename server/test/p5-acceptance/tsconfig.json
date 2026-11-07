@@ -1,0 +1,4 @@
+{
+  "extends": "../p5-tsconfig.json",
+  "include": ["./four-role-api.ts", "./four-role-browser.ts"]
+}

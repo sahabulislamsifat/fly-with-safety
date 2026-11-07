@@ -1,0 +1,202 @@
+{
+  "head": "b5eb3164d02139f5fdf75a8c61b15c4ddb4b0c27",
+  "sourcePinCount": 49,
+  "files": [
+    {
+      "path": "client/app/account/security/page.tsx",
+      "sha256": "3A81AC40E01C1812C50BE569589080A9293ECCD8B5C8DD35F48AE61A1C620B20"
+    },
+    {
+      "path": "client/app/invite/page.tsx",
+      "sha256": "9AE31CE6C0896ABBFD117DFADBFCA95791CE3CA39758336F38345D95EC0F88FE"
+    },
+    {
+      "path": "client/app/owner/page.tsx",
+      "sha256": "3459945CF1CE9258D1577507BE7793D015E49FC5AA14755C92A4EE961EF1D580"
+    },
+    {
+      "path": "client/app/staff/page.tsx",
+      "sha256": "E5BE57C9AEDA4D54EF7197167EE77E912C20C00B10D6265BE56A51E6297459B9"
+    },
+    {
+      "path": "client/src/components/admin/AdminPortal.tsx",
+      "sha256": "43BDD5AB9C7854430C27646E1B8F913FB4D1DF5FBDEC43785CC8C0E48682711C"
+    },
+    {
+      "path": "client/src/components/admin/IdentityManagement.tsx",
+      "sha256": "45351D4EF52AA28CC229A042B756C25AC8516CC1B42D45D692A15849A9E67D0E"
+    },
+    {
+      "path": "client/src/components/admin/IdentityWorkspace.tsx",
+      "sha256": "4780745750752E7DF3BBF9E8A10B03D72A3CCBC65005D9B683491CD65F9826C6"
+    },
+    {
+      "path": "client/src/components/auth/IdentitySecurity.tsx",
+      "sha256": "FEBFFE3C50266F69F64502A85589E80EA42CE3E490DE95B332CC67EFA33036DB"
+    },
+    {
+      "path": "client/src/components/navbar/Navbar.tsx",
+      "sha256": "5FFB6F33589FCEF562975549AE0730F8B9C4DA781F899219F922C508C8D9A234"
+    },
+    {
+      "path": "client/src/lib/api/auth.ts",
+      "sha256": "0A02A8C5D595BC28C82E909D986AA82EFC1E54C555F725CA3D39CD323F00EF69"
+    },
+    {
+      "path": "docs/proposals/P5_IDENTITY_SCOPE_IMPLEMENTATION_REPORT.md",
+      "sha256": "E025AE566519A03B91E91AD2DB3C153C1D865945C5AC6E5FF7A98ADB65C557C5"
+    },
+    {
+      "path": "server/prisma/migrations/20261107000100_identity_scope/migration.sql",
+      "sha256": "A9EE8DFC6C06E3B0197CFB43E44B3D93247D7F2149A34735F83A50999809F9FD"
+    },
+    {
+      "path": "server/prisma/schema.prisma",
+      "sha256": "020749FE12BD40238814DE4D770453FA20136A09000347CC9B31573D5B78C998"
+    },
+    {
+      "path": "server/prisma/seed.ts",
+      "sha256": "4535E10A5010BEE7FE2C253C4F722099E1BDBA59B78CBE49EF46BB172A1DF25B"
+    },
+    {
+      "path": "server/src/app.ts",
+      "sha256": "D5285CA9449AF066171B21B925051D38A6E9EA3E36540C4D1AC9AC5C46381B97"
+    },
+    {
+      "path": "server/src/controllers/auth.controller.ts",
+      "sha256": "2144AB9AA134663728D0FD601EE7368DEC7193D432F2F4934A31B25E6625979A"
+    },
+    {
+      "path": "server/src/identity/auth.ts",
+      "sha256": "DA3255DD1F98D69F1C40958C7A894A17B97A5C0CA4E113FF5B23ECCC3BCCA376"
+    },
+    {
+      "path": "server/src/identity/bootstrap.ts",
+      "sha256": "F33B2C38F03AE65365A7D3239FC73145D43F471DC3F6F7E71DE7EC7B28D87E07"
+    },
+    {
+      "path": "server/src/identity/crypto.ts",
+      "sha256": "B76D713409A1A19341D1DC0D1113363BCCD2422588108BA35060B7BF12BBCAE1"
+    },
+    {
+      "path": "server/src/identity/management.ts",
+      "sha256": "9C439DFD9B37435852D36C1FB2B025CB2F79C776B287C435F23415CCCB6F1B1A"
+    },
+    {
+      "path": "server/src/identity/mfa.ts",
+      "sha256": "24BA580EB675066EF45829C4FC354D01DB851AEF16907F8C0752A225A6F0A199"
+    },
+    {
+      "path": "server/src/identity/middleware.ts",
+      "sha256": "2635141603D20057ADFF9D882F35FCD04F2FC081CBBBA1E18032EC7FCB5EC06C"
+    },
+    {
+      "path": "server/src/identity/policy.ts",
+      "sha256": "16997837D8ECCD95D1E6CEA1F44E09963F5747FF1E0057CA1B896414E3D6906D"
+    },
+    {
+      "path": "server/src/identity/routes.ts",
+      "sha256": "90998CD79BE22E8829FA7FFF11C44799206CBDB39161D8558F80FAD7F6423F7E"
+    },
+    {
+      "path": "server/src/identity/store.ts",
+      "sha256": "F6CE3AA4515B265F095602B52BC1F6EA77EDEBB3E9D5D28A3401C24E84941C6C"
+    },
+    {
+      "path": "server/src/middleware/auth.middleware.ts",
+      "sha256": "108A393B499B010963824634B74D9DB7BFCF5AA992C20DF3EE680C36F5FE9C55"
+    },
+    {
+      "path": "server/src/payments/payment-domain.ts",
+      "sha256": "7A8DF1DD3AA0B6B57150BBAA2382D0EF29E0C0DCEC735594E2FFF8D8752844F5"
+    },
+    {
+      "path": "server/src/payments/payment-store.ts",
+      "sha256": "9535063A8B9DA0F93AEE02B963C0C1DC2AD31099DC25217C1A8A39A3990264DB"
+    },
+    {
+      "path": "server/src/payments/payment.routes.ts",
+      "sha256": "F62EB3CC064D5E65DF4A7AE17C9E63C723020A9F02ADAA42AF7658EE885F5502"
+    },
+    {
+      "path": "server/src/payments/payment.service.ts",
+      "sha256": "704FF30408B6FF638019E2F3580C12838A72B319C01851589A362BC3B6B3EB02"
+    },
+    {
+      "path": "server/src/routes/admin.routes.ts",
+      "sha256": "85A44E4C6F98E8C8A47859EF1571A8F328D5CCDEBFF7E1E328D44CDB1C97AAB5"
+    },
+    {
+      "path": "server/src/services/auth.service.ts",
+      "sha256": "F2D3F606488718F57E2A0DC15CB2AF22104D1973594446374FC56FFE81E154C0"
+    },
+    {
+      "path": "server/src/services/booking-commercial.service.ts",
+      "sha256": "950E040CDB9C563E0753B0C9C568461C27FAB3481385F0CFE54AE95017EBE4A2"
+    },
+    {
+      "path": "server/src/services/booking.service.ts",
+      "sha256": "365692AACCA5A7FEE312F586A0139BAAB5614EFDF89189C5CFA31F6FA6B7F8CC"
+    },
+    {
+      "path": "server/src/services/contact.service.ts",
+      "sha256": "2C48CB68E2CB9912768C5D814CA09E07CA993E6FE68AD779738560CB76B14BBE"
+    },
+    {
+      "path": "server/src/services/flight.service.ts",
+      "sha256": "E2C7C34625C2C0F07D7CE060FD7D8EAC2E81847C6F042F85641E903F05A65472"
+    },
+    {
+      "path": "server/src/services/hotel.service.ts",
+      "sha256": "F57B03BFFC3C64F1D70A507170C3327C438E0CB56288AD6C058CAEF0EAD2D0D5"
+    },
+    {
+      "path": "server/src/services/inquiry-status.service.ts",
+      "sha256": "2C1C6AC2F8B87EA09C2F5C5C0BA92AA13E072FF534BDE4F69C7FE170CE3E5C68"
+    },
+    {
+      "path": "server/src/services/package.service.ts",
+      "sha256": "E7474C62743D2855EF545DEBDE1A6C29DFA07DA5A2F0E59EF1002BA7A1561FB0"
+    },
+    {
+      "path": "server/src/services/visa.service.ts",
+      "sha256": "B3AA9C64BB7E34899E19EC7B0938755BC21DF90E63A4244EA645C42709390D14"
+    },
+    {
+      "path": "server/test/p5-disposable-target.test.ts",
+      "sha256": "9227416EA264FBF3F4AAE476C30A4DAE0BACD6FE7FE85F2B129A4DFD6AF59E18"
+    },
+    {
+      "path": "server/test/p5-disposable-target.ts",
+      "sha256": "E1342EAFD76C0C46107F8CE039FF1D7C8DBA202205830B5520543141AA910A14"
+    },
+    {
+      "path": "server/test/p5-identity.test.ts",
+      "sha256": "C38E9EBB9511FC23CB17CFD5C240D7B8E83795431197B2E72E3709CAE017B23A"
+    },
+    {
+      "path": "server/test/p5-postgres.test.ts",
+      "sha256": "6504C4117F04B8086163D1279E9307B39E25E1C987DE359160E25016D73ABBB6"
+    },
+    {
+      "path": "server/test/p5-postgres.vitest.config.ts",
+      "sha256": "C5E1CD63F560280C8DEC5BFAE471FC4294A6338A80D39CBE974567709403BF6A"
+    },
+    {
+      "path": "server/test/p5-prisma.config.ts",
+      "sha256": "DA163532A66629114CC43D308CAAC3A967FBB1C4A636456649542CBF36629343"
+    },
+    {
+      "path": "server/test/p5-tsconfig.json",
+      "sha256": "320F4911B9E37FED8D857F8E028D94CE8C2C0EEEAB204D15E12424DE2FCD0CC4"
+    },
+    {
+      "path": "server/test/p5-verify-offline.cjs",
+      "sha256": "9FD5427D28A47F5F1BCB468162CB2A443EF4204C4C8E1779C84FF23A918FF0C1"
+    },
+    {
+      "path": "server/test/p5-vitest.config.ts",
+      "sha256": "B75C5B488C14EEFDF3B7FF2C6B9DF2C93986D3F5282D17B60BA092F8BDFF1280"
+    }
+  ]
+}

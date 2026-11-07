@@ -24,6 +24,7 @@ import futureStubsRoutes from './routes/future-stubs.routes.js';
 import accountRoutes from './routes/account.routes.js';
 import outboxWorkerRoutes from './routes/outbox-worker.routes.js';
 import { paymentCallbacks, paymentRoutes } from './payments/payment.routes.js';
+import identityRoutes from './identity/routes.js';
 
 const app: Express = express();
 
@@ -77,6 +78,7 @@ const API_PREFIX = '/api/v1';
 app.use(API_PREFIX, healthRoutes);
 app.use(API_PREFIX, outboxWorkerRoutes);
 app.use(API_PREFIX, authRoutes);
+app.use(API_PREFIX, identityRoutes);
 app.use(API_PREFIX, destinationRoutes);
 app.use(API_PREFIX, packageRoutes);
 app.use(API_PREFIX, flightRoutes);

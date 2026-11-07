@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "migrationParsed": true,
+  "identityTemplatesParsed": 55,
+  "substitution": "NULL values and fixed quoted identifiers; syntax only",
+  "databaseConnections": 0
+}

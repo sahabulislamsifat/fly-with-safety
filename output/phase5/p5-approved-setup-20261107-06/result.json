@@ -1,0 +1,406 @@
+{
+  "passed": true,
+  "stage": "setup-and-migration-verified",
+  "database": "flywithsafety_p5_identity_scope_test",
+  "oid": 35402,
+  "resourcesCreated": [
+    "fws_p5_identity_migrator",
+    "fws_p5_identity_app",
+    "flywithsafety_p5_identity_scope_test"
+  ],
+  "createdRoleOids": {
+    "fws_p5_identity_migrator": 35400,
+    "fws_p5_identity_app": 35401
+  },
+  "migrations": [
+    {
+      "migration_name": "20260926202822_init",
+      "checksum": "efda6a0cd3d01b2503e4cc1557f8aba2807664db545a742e52eaca60a3b2e1cb",
+      "finished": true,
+      "rolled_back": false,
+      "has_logs": false
+    },
+    {
+      "migration_name": "20260927082715_full_schema",
+      "checksum": "ae3bcd7668f026858ee7e43cbceb9955c451a1bf648520e6afb7814ce2cc7921",
+      "finished": true,
+      "rolled_back": false,
+      "has_logs": false
+    },
+    {
+      "migration_name": "20261009000000_auth_sessions_and_password_resets",
+      "checksum": "e1eb929668d33cbe94f07e7512cb7174084150c50683a2e15f5709509b53e1b4",
+      "finished": true,
+      "rolled_back": false,
+      "has_logs": false
+    },
+    {
+      "migration_name": "20261011000000_inquiry_idempotency",
+      "checksum": "0316f0857663d04900e1ceae1e305490a9b97e49192f9aad2f74bb2f494c6706",
+      "finished": true,
+      "rolled_back": false,
+      "has_logs": false
+    },
+    {
+      "migration_name": "20261011120000_notification_outbox",
+      "checksum": "1ecc18d0e4381cdf0489a9919f61b58c3f9f1a3bd102303ccf1fa5f81e14eca2",
+      "finished": true,
+      "rolled_back": false,
+      "has_logs": false
+    },
+    {
+      "migration_name": "20261022000100_contact_status_new",
+      "checksum": "4c9af2c97dd22a88cb3b7e5fe5422ac1023bcc86fcde999409033ac5180178a7",
+      "finished": true,
+      "rolled_back": false,
+      "has_logs": false
+    },
+    {
+      "migration_name": "20261022000200_booking_contact_schema",
+      "checksum": "bc10e7343b3c40769c43deee8b3164245319a9f35d7a3b50d4e3ee721895f32b",
+      "finished": true,
+      "rolled_back": false,
+      "has_logs": false
+    },
+    {
+      "migration_name": "20261103000100_gateway_sandbox_ledgers",
+      "checksum": "da1e65891c57a827f2af5498b45d923d025d1f1d6fd80c9d9ab63fb986a802c5",
+      "finished": true,
+      "rolled_back": false,
+      "has_logs": false
+    },
+    {
+      "migration_name": "20261107000100_identity_scope",
+      "checksum": "a9ee8dfc6c06e3b0197cfb43e44b3d93247d7f2149a34735f83a50999809f9fd",
+      "finished": true,
+      "rolled_back": false,
+      "has_logs": false
+    }
+  ],
+  "fixtureWrites": 0,
+  "providerCalls": 0,
+  "mainCloudAccess": false,
+  "normalServicesTouched": false,
+  "productionActivated": false,
+  "serverVersion": "18.6",
+  "scramIterations": 4096,
+  "catalog": {
+    "database_exists": false,
+    "app_role_exists": false,
+    "owner_role_exists": false
+  },
+  "migrationExit": 0,
+  "migrationOutputBytes": 1492,
+  "schema": {
+    "roles": 4,
+    "departments": 6,
+    "applicationTables": 29,
+    "identityConstraints": 23,
+    "identityIndexes": 9,
+    "auditTrigger": true,
+    "allApplicationTablesEmpty": true
+  },
+  "roles": {
+    "app": {
+      "rolname": "fws_p5_identity_app",
+      "rolcanlogin": true,
+      "rolsuper": false,
+      "rolcreatedb": false,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "rolbypassrls": false,
+      "rolinherit": false
+    },
+    "migration": {
+      "rolname": "fws_p5_identity_migrator",
+      "rolcanlogin": true,
+      "rolsuper": false,
+      "rolcreatedb": false,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "rolbypassrls": false,
+      "rolinherit": false
+    }
+  },
+  "grants": [
+    {
+      "table": "Account",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    {
+      "table": "Booking",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    {
+      "table": "BookingPassenger",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    {
+      "table": "BookingStatusHistory",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": false,
+      "delete": false,
+      "truncate": false
+    },
+    {
+      "table": "ContactMessage",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    {
+      "table": "Destination",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    {
+      "table": "EmailVerificationToken",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    {
+      "table": "FlightInquiry",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    {
+      "table": "GatewayPayment",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": false,
+      "truncate": false
+    },
+    {
+      "table": "GatewayPaymentEvent",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": false,
+      "delete": false,
+      "truncate": false
+    },
+    {
+      "table": "GatewayRefund",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": false,
+      "update": false,
+      "delete": false,
+      "truncate": false
+    },
+    {
+      "table": "HotelInquiry",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    {
+      "table": "IdempotencyRecord",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    {
+      "table": "IdentityAccount",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    {
+      "table": "IdentityAssignment",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    {
+      "table": "IdentityAudit",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": false,
+      "delete": false,
+      "truncate": false
+    },
+    {
+      "table": "IdentityInvitation",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    {
+      "table": "IdentityMembership",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    {
+      "table": "IdentityMfa",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    {
+      "table": "IdentitySession",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    {
+      "table": "NotificationOutbox",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    {
+      "table": "Package",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    {
+      "table": "PackageInquiry",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    {
+      "table": "PasswordResetToken",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    {
+      "table": "Session",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    {
+      "table": "Testimonial",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    {
+      "table": "User",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    {
+      "table": "VisaInfo",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    {
+      "table": "VisaInquiry",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    {
+      "table": "_prisma_migrations",
+      "owner": "fws_p5_identity_migrator",
+      "select": true,
+      "insert": false,
+      "update": false,
+      "delete": false,
+      "truncate": false
+    }
+  ],
+  "isolation": {
+    "schema_create": false,
+    "database_create": false,
+    "temporary": false,
+    "owner_membership": false
+  },
+  "connectionsClosed": true,
+  "currentStageOutcomeUnconfirmed": false,
+  "finishedUTC": "2026-11-07T17:17:00.055Z"
+}

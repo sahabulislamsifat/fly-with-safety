@@ -1,0 +1,19 @@
+{
+    "childFailure":  {
+                         "guard":  "NEW_PRIVATE_PASSWORD_POLICY",
+                         "sqlState":  null,
+                         "networkCode":  null,
+                         "prismaCode":  null,
+                         "exitCode":  null
+                     },
+    "stage":  "owned-child-start",
+    "ddlCalls":  0,
+    "passed":  false,
+    "childStarted":  true,
+    "childStage":  "before-network",
+    "networkReached":  false,
+    "databaseCalls":  0,
+    "failure":  {
+                    "guard":  "CALLER_STOP"
+                }
+}

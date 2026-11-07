@@ -1,0 +1,14 @@
+{"utc":"2026-11-07T18:15:48.532Z","stage":"TARGET_GUARD_PASS"}
+{"utc":"2026-11-07T18:15:48.584Z","stage":"PRISMA_CLIENT_CREATED"}
+{"utc":"2026-11-07T18:15:48.694Z","stage":"DATABASE_IDENTITY_VERIFIED"}
+{"utc":"2026-11-07T18:15:48.698Z","stage":"MIGRATIONS_VERIFIED"}
+{"utc":"2026-11-07T18:15:48.735Z","stage":"INITIAL_EMPTY_VERIFIED"}
+{"utc":"2026-11-07T18:15:48.738Z","stage":"TRANSACTION_ENTERED"}
+{"utc":"2026-11-07T18:15:48.764Z","stage":"USERS_INSERTED"}
+{"utc":"2026-11-07T18:15:48.791Z","stage":"SESSION_CREATED"}
+{"utc":"2026-11-07T18:15:48.799Z","stage":"BOOKING_CREATED"}
+{"utc":"2026-11-07T18:15:48.802Z","stage":"READ_ONLY_AUTH_PREDICATES","diagnosticOnly":true,"rowPresent":true,"notRevoked":true,"unexpired":false,"unexpiredUsingUtc":true,"versionsMatch":true,"mfaVersionsMatch":true,"notSuspended":true,"staffRole":true,"emailVerified":true,"databaseTimeZone":"Asia/Dhaka"}
+{"utc":"2026-11-07T18:15:48.806Z","stage":"PRINCIPAL_LOAD_STARTED"}
+{"utc":"2026-11-07T18:15:48.808Z","stage":"TRANSACTION_ERROR","prismaCode":null,"sqlState":null,"nativeCode":null,"errorKind":"Error","applicationCode":"UNAUTHORIZED","httpStatus":401,"sourceLocations":[{"file":"server/src/utils/errors.ts","line":37,"column":12},{"file":"server/src/identity/auth.ts","line":17,"column":147},{"file":"server/test/p5-integration-v03/postgres.test.ts","line":60,"column":19}]}
+{"utc":"2026-11-07T18:15:48.812Z","stage":"TEST_ERROR","prismaCode":null,"sqlState":null,"nativeCode":null,"errorKind":"AssertionError","applicationCode":"UNAUTHORIZED","httpStatus":401,"sourceLocations":[{"file":"server/test/p5-integration-v03/postgres.test.ts","line":78,"column":138},{"file":"server/src/utils/errors.ts","line":37,"column":12},{"file":"server/src/identity/auth.ts","line":17,"column":147}]}
+{"utc":"2026-11-07T18:15:48.815Z","stage":"CLIENT_DISCONNECTED"}

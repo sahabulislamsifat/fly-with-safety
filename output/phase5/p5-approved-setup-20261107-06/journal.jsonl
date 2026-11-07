@@ -1,0 +1,10 @@
+{"sequence":1,"utc":"2026-11-07T17:16:54.733Z","stage":"maintenance-identity"}
+{"sequence":2,"utc":"2026-11-07T17:16:54.818Z","stage":"readonly-name-conflict-check"}
+{"sequence":3,"utc":"2026-11-07T17:16:55.229Z","stage":"create-new-roles"}
+{"sequence":4,"utc":"2026-11-07T17:16:55.266Z","stage":"create-empty-database"}
+{"sequence":5,"utc":"2026-11-07T17:16:56.394Z","stage":"new-database-owner-and-oid"}
+{"sequence":6,"utc":"2026-11-07T17:16:56.496Z","stage":"nine-pinned-migrations"}
+{"sequence":7,"utc":"2026-11-07T17:16:59.873Z","stage":"schema-integrity"}
+{"sequence":8,"utc":"2026-11-07T17:16:59.974Z","stage":"least-privilege-grants"}
+{"sequence":9,"utc":"2026-11-07T17:16:59.987Z","stage":"application-login-identity-and-acls"}
+{"sequence":10,"utc":"2026-11-07T17:17:00.051Z","stage":"setup-and-migration-verified"}

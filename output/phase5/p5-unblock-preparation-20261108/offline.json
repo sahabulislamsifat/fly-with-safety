@@ -1,0 +1,39 @@
+{
+  "checkedUTC": "2026-11-07T18:14:40.234Z",
+  "status": "V03_SCOPED_INTEGRATION_PENDING_OWNER_APPROVAL",
+  "originalTestRootCause": "UNKNOWN_DETAIL_NOT_PERSISTED",
+  "failureBoundary": "v02 postgres.test.ts lines 50-52",
+  "confirmedCorrection": "RETAIN_NESTED_ACTUAL_ERROR_AND_SANITIZED_FAILED_ASSERTION_LOCATIONS",
+  "v02ActualPostgres": {
+    "passed": 0,
+    "failed": 1,
+    "exitCode": 1
+  },
+  "v02FinalTableCounts": {
+    "tables": 29,
+    "allZeroBeforeAndAfter": true,
+    "preservation": true
+  },
+  "newFocusedTestsPass": 39,
+  "newFocusedTestsFail": 0,
+  "typescriptRecovery": "PASS",
+  "typescriptPreparedApiBrowser": "PASS",
+  "lintFiles": 14,
+  "lintErrors": 0,
+  "lintWarnings": 0,
+  "sqlSyntaxParsed": 16,
+  "powerShell51Contract": "PASS",
+  "reporterScenariosVerified": 3,
+  "sourceRuntimePins": 4400,
+  "pinMismatches": 0,
+  "integrityContractAssertions": 8872,
+  "consumedV02FilesUnchanged": 8,
+  "newLiveAttempt": false,
+  "newDatabaseConnections": 0,
+  "newFixtureWrites": 0,
+  "providerCalls": 0,
+  "apiBrowser": "PREPARED_FUNCTIONS_ONLY_NOT_EXECUTED_FIXTURE_RUNTIME_WIRING_PENDING",
+  "callerSHA256": "C78B8B5E7B35549D28DD6ECA8EC03A2F8B32810D7C7B682D141E4F6BDF659846",
+  "manifestSHA256": "CD44AA44EB67E5F33E18E445E766B1242A72A7C63800ED605A1D13B60840F78D",
+  "p5Verdict": "PARTIAL"
+}

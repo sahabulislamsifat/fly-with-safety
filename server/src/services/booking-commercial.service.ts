@@ -4,6 +4,8 @@ import { Prisma } from '../generated/prisma/client.js';
 import { AppError } from '../utils/errors.js';
 import { createHash } from 'node:crypto';
 import { gatewayConfig, paymentEnabled } from '../payments/sslcommerz.js';
+import { assertRecordScope, audit } from '../identity/store.js';
+import { identityContext, identityEnabled } from '../identity/policy.js';
 
 // Amounts use the existing booking whole-currency unit, never floating point.
 const amount = z.number().int().min(1).max(2_000_000_000);
@@ -30,7 +32,7 @@ export const commercialCommandSchema = z.discriminatedUnion('action', [
     method: z.enum(['BANK_TRANSFER', 'CASH', 'MOBILE_BANKING']) }).strict(),
 ]);
 export type CommercialCommand = z.infer<typeof commercialCommandSchema>;
-export type BookingActor = { id: string; role: 'CUSTOMER' | 'STAFF' | 'ADMIN' };
+export type BookingActor = { id: string; role: 'CUSTOMER' | 'STAFF' | 'ADMIN' | 'SUPER_ADMIN' };
 type BookingState = { userId: string | null; status: string; currency: string; bookingDetails: unknown };
 
 export function readCommercial(details: unknown) {
@@ -44,7 +46,7 @@ export function readCommercial(details: unknown) {
 /** Pure transition; persistence owns serialization and commit/rollback. No provider side effects. */
 export function applyCommercial(booking: BookingState, actor: BookingActor, raw: CommercialCommand, now: Date) {
   const command = commercialCommandSchema.parse(raw);
-  const staff = actor.role === 'ADMIN' || actor.role === 'STAFF';
+  const staff = actor.role === 'ADMIN' || actor.role === 'STAFF' || actor.role === 'SUPER_ADMIN';
   if (command.action === 'ACCEPT_QUOTE' ? actor.role !== 'CUSTOMER' || booking.userId !== actor.id : !staff) {
     throw AppError.forbidden();
   }
@@ -96,6 +98,10 @@ export async function changeBookingCommercial(reference: string, actor: BookingA
     await tx.$queryRaw(Prisma.sql`SELECT id FROM public."Booking" WHERE "referenceNumber" = ${reference.toUpperCase()} FOR UPDATE`);
     const booking = await tx.booking.findUnique({ where: { referenceNumber: reference.toUpperCase() } });
     if (!booking || (actor.role === 'CUSTOMER' && booking.userId !== actor.id)) throw AppError.notFound('Booking not found');
+    if (actor.role !== 'CUSTOMER') {
+      await assertRecordScope(tx, 'booking', booking.id, true);
+      if (identityEnabled() && actor.role === 'STAFF' && command.action === 'RECORD_PAYMENT') throw AppError.forbidden();
+    }
     // Explicit UTC timestamp avoids session-offset reinterpretation in the pg adapter.
     const [{ now }] = await tx.$queryRaw<{ now: Date }[]>(Prisma.sql`SELECT clock_timestamp() AT TIME ZONE 'UTC' AS now`);
     const result = applyCommercial(booking, actor, command, now);
@@ -114,6 +120,8 @@ export async function changeBookingCommercial(reference: string, actor: BookingA
       await tx.bookingStatusHistory.create({ data: { bookingId: booking.id, fromStatus: booking.status, toStatus: booking.status,
         reason: 'Quotation accepted; awaiting staff processing', changedBy: actor.id } });
     }
+    const principal = identityEnabled() ? identityContext.getStore() : undefined;
+    if (principal) await audit(tx, principal.id, 'BOOKING_COMMERCIAL_CHANGED', booking.id, 'STAFF_ASSIGNMENT');
     return updated;
   });
 }
