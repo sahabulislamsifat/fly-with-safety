@@ -1,0 +1,34 @@
+[
+  {
+    "path": "server/test/p5-integration-v02/run.cjs",
+    "sha256": "67C435BA8173506030057E3BC107D04C52DC9CAF54443812566ABBFDEE2FC3C8"
+  },
+  {
+    "path": "server/test/p5-integration-v02/postgres.test.ts",
+    "sha256": "54993AB48E327702B0131AF6730593F400413D95B6CD1F1E5D6B643EA32E25F2"
+  },
+  {
+    "path": "server/test/p5-integration-v02/Invoke-Integration.ps1",
+    "sha256": "06C369E2EBB432A2FAB80DE1AA70DD7E2B68932B79265FEE3951D4B8AA8D6552"
+  },
+  {
+    "path": "server/test/p5-integration-v02/pins.json",
+    "sha256": "65239CA26A2EF4B3F748253A7EACDC1A32249FFA327BA6FF3F0EAF5B10AD39EC"
+  },
+  {
+    "path": "output/phase5/p5-integration-20261107-02/attempt.json",
+    "sha256": "1CFF48DA675A6664302540EA6912A377A92435B7567932E87FA41752B4D6EE90"
+  },
+  {
+    "path": "output/phase5/p5-integration-20261107-02/caller-attempt.json",
+    "sha256": "B5E22DA2A8CD996442356F20C736F7AF350E337BAB35DB8E96EC29BE159CD9BE"
+  },
+  {
+    "path": "output/phase5/p5-integration-20261107-02/result.json",
+    "sha256": "53DD9B26145A5CC9B6AF07CEE661E9B09107B5716D94CCC125E8A4C986ECD199"
+  },
+  {
+    "path": "output/phase5/p5-integration-20261107-02/test-journal.jsonl",
+    "sha256": "0BAB33709BE98A35D433653FB54111738AA24A08BBB024418F5BD484BF088E6C"
+  }
+]

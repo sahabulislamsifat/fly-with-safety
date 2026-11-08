@@ -1,0 +1,323 @@
+{
+  "passed": false,
+  "stage": "existing-postgres-rollback-test",
+  "identity": {
+    "database": "flywithsafety_p5_identity_scope_test",
+    "role": "fws_p5_identity_app",
+    "sessionRole": "fws_p5_identity_app",
+    "address": "127.0.0.1",
+    "port": 5432,
+    "oid": 35402,
+    "unsafe": false
+  },
+  "migrations": 9,
+  "postgres": {
+    "exitCode": 1,
+    "passed": 0,
+    "failed": 1,
+    "skipped": 0,
+    "todo": 0,
+    "total": 1,
+    "success": false,
+    "failedAssertions": [
+      {
+        "test": "checks real scope, revocation, audit immutability and rollback",
+        "status": "failed",
+        "sourceLocations": [
+          {
+            "file": "server/test/p5-integration-v03/postgres.test.ts",
+            "line": 78,
+            "column": 138
+          }
+        ],
+        "assertionError": false,
+        "mentionedPrismaCodes": []
+      }
+    ]
+  },
+  "childProcess": {
+    "spawned": true,
+    "exitCode": 1,
+    "signal": null,
+    "stdoutBytes": 2177,
+    "stderrBytes": 0,
+    "stdoutClassification": {
+      "jsonReportNotice": false,
+      "syntaxError": false,
+      "moduleNotFound": false,
+      "permissionDenied": false
+    },
+    "stderrClassification": {
+      "jsonReportNotice": false,
+      "syntaxError": false,
+      "moduleNotFound": false,
+      "permissionDenied": false
+    }
+  },
+  "preflightVerified": true,
+  "preflightTables": [
+    {
+      "table": "Account",
+      "count": 0
+    },
+    {
+      "table": "Booking",
+      "count": 0
+    },
+    {
+      "table": "BookingPassenger",
+      "count": 0
+    },
+    {
+      "table": "BookingStatusHistory",
+      "count": 0
+    },
+    {
+      "table": "ContactMessage",
+      "count": 0
+    },
+    {
+      "table": "Destination",
+      "count": 0
+    },
+    {
+      "table": "EmailVerificationToken",
+      "count": 0
+    },
+    {
+      "table": "FlightInquiry",
+      "count": 0
+    },
+    {
+      "table": "GatewayPayment",
+      "count": 0
+    },
+    {
+      "table": "GatewayPaymentEvent",
+      "count": 0
+    },
+    {
+      "table": "GatewayRefund",
+      "count": 0
+    },
+    {
+      "table": "HotelInquiry",
+      "count": 0
+    },
+    {
+      "table": "IdempotencyRecord",
+      "count": 0
+    },
+    {
+      "table": "IdentityAccount",
+      "count": 0
+    },
+    {
+      "table": "IdentityAssignment",
+      "count": 0
+    },
+    {
+      "table": "IdentityAudit",
+      "count": 0
+    },
+    {
+      "table": "IdentityInvitation",
+      "count": 0
+    },
+    {
+      "table": "IdentityMembership",
+      "count": 0
+    },
+    {
+      "table": "IdentityMfa",
+      "count": 0
+    },
+    {
+      "table": "IdentitySession",
+      "count": 0
+    },
+    {
+      "table": "NotificationOutbox",
+      "count": 0
+    },
+    {
+      "table": "Package",
+      "count": 0
+    },
+    {
+      "table": "PackageInquiry",
+      "count": 0
+    },
+    {
+      "table": "PasswordResetToken",
+      "count": 0
+    },
+    {
+      "table": "Session",
+      "count": 0
+    },
+    {
+      "table": "Testimonial",
+      "count": 0
+    },
+    {
+      "table": "User",
+      "count": 0
+    },
+    {
+      "table": "VisaInfo",
+      "count": 0
+    },
+    {
+      "table": "VisaInquiry",
+      "count": 0
+    }
+  ],
+  "finalTables": [
+    {
+      "table": "Account",
+      "count": 0
+    },
+    {
+      "table": "Booking",
+      "count": 0
+    },
+    {
+      "table": "BookingPassenger",
+      "count": 0
+    },
+    {
+      "table": "BookingStatusHistory",
+      "count": 0
+    },
+    {
+      "table": "ContactMessage",
+      "count": 0
+    },
+    {
+      "table": "Destination",
+      "count": 0
+    },
+    {
+      "table": "EmailVerificationToken",
+      "count": 0
+    },
+    {
+      "table": "FlightInquiry",
+      "count": 0
+    },
+    {
+      "table": "GatewayPayment",
+      "count": 0
+    },
+    {
+      "table": "GatewayPaymentEvent",
+      "count": 0
+    },
+    {
+      "table": "GatewayRefund",
+      "count": 0
+    },
+    {
+      "table": "HotelInquiry",
+      "count": 0
+    },
+    {
+      "table": "IdempotencyRecord",
+      "count": 0
+    },
+    {
+      "table": "IdentityAccount",
+      "count": 0
+    },
+    {
+      "table": "IdentityAssignment",
+      "count": 0
+    },
+    {
+      "table": "IdentityAudit",
+      "count": 0
+    },
+    {
+      "table": "IdentityInvitation",
+      "count": 0
+    },
+    {
+      "table": "IdentityMembership",
+      "count": 0
+    },
+    {
+      "table": "IdentityMfa",
+      "count": 0
+    },
+    {
+      "table": "IdentitySession",
+      "count": 0
+    },
+    {
+      "table": "NotificationOutbox",
+      "count": 0
+    },
+    {
+      "table": "Package",
+      "count": 0
+    },
+    {
+      "table": "PackageInquiry",
+      "count": 0
+    },
+    {
+      "table": "PasswordResetToken",
+      "count": 0
+    },
+    {
+      "table": "Session",
+      "count": 0
+    },
+    {
+      "table": "Testimonial",
+      "count": 0
+    },
+    {
+      "table": "User",
+      "count": 0
+    },
+    {
+      "table": "VisaInfo",
+      "count": 0
+    },
+    {
+      "table": "VisaInquiry",
+      "count": 0
+    }
+  ],
+  "finalPreservationAttempted": true,
+  "rollbackPreservation": true,
+  "providerCalls": 0,
+  "cloudAccess": false,
+  "browserExecuted": false,
+  "failure": {
+    "guard": "POSTGRES_TEST_NOT_PASS",
+    "prismaCode": null,
+    "sqlState": null,
+    "nativeCode": null,
+    "errorKind": "Error",
+    "sourceLocations": [
+      {
+        "file": "server/test/p5-integration-v03/output-contract.cjs",
+        "line": 3,
+        "column": 42
+      },
+      {
+        "file": "server/test/p5-integration-v03/output-contract.cjs",
+        "line": 35,
+        "column": 152
+      },
+      {
+        "file": "server/test/p5-integration-v03/run.cjs",
+        "line": 52,
+        "column": 192
+      }
+    ]
+  }
+}

@@ -7,6 +7,7 @@ import { billingSchema } from './payment-domain.js';
 import { PaymentService } from './payment.service.js';
 import { PrismaPaymentStore } from './payment-store.js';
 import { gatewayConfig, paymentEnabled, SSLCommerzClient, verifyNotification } from './sslcommerz.js';
+import { paymentPolicy } from '../identity/middleware.js';
 
 const reference = z.string().regex(/^[A-Z0-9-]{3,64}$/);
 const providerId = z.string().regex(/^[A-Za-z0-9_-]{1,100}$/);
@@ -17,10 +18,10 @@ const service = () => { const c = gatewayConfig(); return new PaymentService(new
 const actor = (r: Request) => { const a = (r as AuthenticatedRequest).user; if (!a) throw AppError.unauthorized(); return a; };
 
 export const paymentRoutes: Router = Router();
-paymentRoutes.use('/payments', requireAuth, rateLimit({ windowMs: 60_000, limit: 60, standardHeaders: 'draft-8', legacyHeaders: false }), (_req, res, next) => { res.setHeader('Cache-Control', 'no-store'); next(); });
+paymentRoutes.use('/payments', requireAuth, paymentPolicy, rateLimit({ windowMs: 60_000, limit: 60, standardHeaders: 'draft-8', legacyHeaders: false }), (_req, res, next) => { res.setHeader('Cache-Control', 'no-store'); next(); });
 paymentRoutes.get('/payments/capabilities', (_req, res) => res.json({ success: true, data: { enabled: paymentEnabled(), mode: 'sandbox' } }));
 paymentRoutes.get('/payments/operations', run(async (req, res) => {
-  if (!['STAFF', 'ADMIN'].includes(actor(req).role)) throw AppError.forbidden();
+  if (!['STAFF', 'ADMIN', 'SUPER_ADMIN'].includes(actor(req).role)) throw AppError.forbidden();
   res.json({ success: true, data: await service().operations(actor(req)) });
 }));
 paymentRoutes.get('/payments/bookings/:reference', run(async (req, res) => res.json({ success: true, data: await service().list(reference.parse(req.params.reference), actor(req)) })));
@@ -31,7 +32,7 @@ paymentRoutes.post('/payments/bookings/:reference/initiate', run(async (req, res
 }));
 paymentRoutes.post('/payments/bookings/:reference/reconcile', run(async (req, res) => res.json({ success: true, data: await service().reconcile(reference.parse(req.params.reference), actor(req)) })));
 paymentRoutes.post('/payments/reconciliation/run', run(async (req, res) => {
-  if (actor(req).role !== 'ADMIN') throw AppError.forbidden();
+  if (!['ADMIN', 'SUPER_ADMIN'].includes(actor(req).role)) throw AppError.forbidden();
   res.json({ success: true, data: await service().tick() });
 }));
 paymentRoutes.post('/payments/bookings/:reference/refunds', run(async (req, res) => {

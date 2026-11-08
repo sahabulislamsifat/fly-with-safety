@@ -1,0 +1,46 @@
+{
+  "results": [
+    {
+      "mode": "pass",
+      "exitCode": 0,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0,
+      "total": 1,
+      "success": true,
+      "integrationAcceptance": true,
+      "stderrBytes": 0,
+      "databaseImports": 0
+    },
+    {
+      "mode": "fail",
+      "exitCode": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "todo": 0,
+      "total": 1,
+      "success": false,
+      "integrationAcceptance": false,
+      "stderrBytes": 0,
+      "databaseImports": 0
+    },
+    {
+      "mode": "skip",
+      "exitCode": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "todo": 0,
+      "total": 1,
+      "success": true,
+      "integrationAcceptance": false,
+      "stderrBytes": 0,
+      "databaseImports": 0
+    }
+  ],
+  "cacheUnchanged": true,
+  "fixtureCasesVerified": 3,
+  "liveDatabaseConnections": 0
+}

@@ -1,0 +1,9 @@
+{
+  "scope": "MOCKED_AUTH_BOOKING_NEGATIVE_PAYMENT_REGRESSION",
+  "exit": 0,
+  "passed": 95,
+  "failed": 0,
+  "skipped": 0,
+  "newDatabaseConnections": 0,
+  "providerCalls": 0
+}

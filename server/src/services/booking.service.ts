@@ -11,6 +11,8 @@ import type {
   CreateBookingFromInquiryInput,
 } from '../validators/booking.schemas.js';
 import { logger, serializeError } from '../lib/logger.js';
+import { assignedIds, assertRecordScope, audit } from '../identity/store.js';
+import { identityContext, identityEnabled } from '../identity/policy.js';
 
 export async function createBooking(input: CreateBookingInput, userId?: string, headerIdempotencyKey?: string) {
   const idempotencyKey = input.idempotencyKey || headerIdempotencyKey;
@@ -394,6 +396,8 @@ export async function updateBookingStatus(
       throw AppError.notFound('Booking not found');
     }
 
+    await assertRecordScope(tx, 'booking', id, true);
+
     if (booking.status === newStatus) {
       return booking;
     }
@@ -443,6 +447,9 @@ export async function updateBookingStatus(
       },
     });
 
+    const principal = identityEnabled() ? identityContext.getStore() : undefined;
+    if (principal) await audit(tx, principal.id, 'BOOKING_STATUS_CHANGED', id, 'STAFF_ASSIGNMENT');
+
     customerToNotify = {
       email: booking.customerEmail,
       name: booking.customerName,
@@ -482,7 +489,8 @@ export async function adminGetBookings(params: {
   const limit = Math.min(50, Math.max(1, params.limit || 20));
   const skip = (page - 1) * limit;
 
-  const where: Record<string, any> = {};
+  const ids = await assignedIds('booking');
+  const where: Record<string, any> = ids ? { id: { in: ids } } : {};
   if (params.status) where.status = params.status;
   if (params.type) where.bookingType = params.type;
 

@@ -16,13 +16,13 @@ function failureCategory(e: unknown): Record<string, string> {
 export class PaymentService {
   constructor(private readonly store: PaymentStore, private readonly gateway: Gateway, private readonly config: GatewayConfig) {}
   async operations(actor: BookingActor) {
-    if (!['STAFF', 'ADMIN'].includes(actor.role)) throw AppError.forbidden();
+    if (!['STAFF', 'ADMIN', 'SUPER_ADMIN'].includes(actor.role)) throw AppError.forbidden();
     return { entries: await this.store.operations() };
   }
   async list(reference: string, actor: BookingActor) {
     return this.store.transaction(reference, async l => {
       authorize(l.booking, actor);
-      return { payments: l.attempts.map(a => paymentView(a, l.refunds)), refunds: l.refunds.map(r => ({ id: r.id, paymentId: r.paymentId, amountMinor: r.amountMinor, status: r.status })), history: l.history, refundsEnabled: actor.role === 'ADMIN' && this.config.refunds };
+      return { payments: l.attempts.map(a => paymentView(a, l.refunds)), refunds: l.refunds.map(r => ({ id: r.id, paymentId: r.paymentId, amountMinor: r.amountMinor, status: r.status })), history: l.history, refundsEnabled: ['ADMIN', 'SUPER_ADMIN'].includes(actor.role) && this.config.refunds };
     });
   }
   private session(a: Attempt) { return { payment: paymentView(a), ...(a.status === 'SESSION_READY' && a.session ? { checkoutUrl: openSession(a.session, a.id, this.config.storageKey).url } : {}) }; }
@@ -78,7 +78,7 @@ export class PaymentService {
   async reconcile(reference: string, actor?: BookingActor, noticeTranId?: string) {
     const owner = randomUUID();
     const claimed = await this.store.transaction(reference, async l => {
-      if (actor && !['ADMIN', 'STAFF'].includes(actor.role)) throw AppError.forbidden();
+      if (actor && !['ADMIN', 'STAFF', 'SUPER_ADMIN'].includes(actor.role)) throw AppError.forbidden();
       const claimed: Attempt[] = [];
       const priority = (a: Attempt) => active(a) || l.refunds.some(r => r.paymentId === a.id && ['INITIATING', 'UNKNOWN', 'PROCESSING'].includes(r.status)) ? 0 : a.captured ? 1 : 2;
       for (const a of [...l.attempts].sort((x, y) => priority(x) - priority(y) || x.updated - y.updated)) {
@@ -160,7 +160,7 @@ export class PaymentService {
   private fenced(a: Attempt, owner: string, now: number) { return a.lease?.owner === owner && a.lease.until > now; }
   async tick() { const refs = await this.store.due(1); for (const ref of refs) await this.reconcile(ref); return { bookings: refs.length }; }
   async refund(reference: string, actor: BookingActor, input: { requestId: string; paymentId: string; amountMinor: string; reason: string }) {
-    if (actor.role !== 'ADMIN' || !this.config.refunds) throw AppError.forbidden('Sandbox refunds require separate approval');
+    if (!['ADMIN', 'SUPER_ADMIN'].includes(actor.role) || !this.config.refunds) throw AppError.forbidden('Sandbox refunds require separate approval');
     const hash = digest(input);
     const prepared = await this.store.transaction(reference, async l => {
       const replay = l.refunds.find(r => r.actorId === actor.id && r.requestId === input.requestId);

@@ -13,6 +13,7 @@ enum UserRole {
   CUSTOMER
   STAFF
   ADMIN
+  SUPER_ADMIN
 }
 
 enum ContentStatus {
@@ -67,6 +68,11 @@ model User {
   visaInquiries            VisaInquiry[]
   bookings                 Booking[]
   gatewayPayments          GatewayPayment[]
+  identityAccount          IdentityAccount?
+  identityMemberships      IdentityMembership[]
+  identityAssignments      IdentityAssignment[]
+  identityMfa              IdentityMfa?
+  issuedIdentityInvites    IdentityInvitation[]
 
   @@index([email])
 }
@@ -123,6 +129,7 @@ model Session {
   lastUsedAt       DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  identityProof IdentitySession?
 
   @@index([userId])
   @@index([expiresAt])
@@ -234,6 +241,7 @@ model FlightInquiry {
   updatedAt       DateTime      @updatedAt
 
   user User? @relation(fields: [userId], references: [id])
+  identityAssignments IdentityAssignment[]
 
   @@index([referenceNumber])
   @@index([email])
@@ -259,6 +267,7 @@ model HotelInquiry {
   updatedAt       DateTime      @updatedAt
 
   user User? @relation(fields: [userId], references: [id])
+  identityAssignments IdentityAssignment[]
 
   @@index([referenceNumber])
   @@index([email])
@@ -284,6 +293,7 @@ model PackageInquiry {
 
   user    User?    @relation(fields: [userId], references: [id])
   package Package? @relation(fields: [packageId], references: [id])
+  identityAssignments IdentityAssignment[]
 
   @@index([referenceNumber])
   @@index([email])
@@ -307,6 +317,7 @@ model VisaInquiry {
   updatedAt       DateTime      @updatedAt
 
   user User? @relation(fields: [userId], references: [id])
+  identityAssignments IdentityAssignment[]
 
   @@index([referenceNumber])
   @@index([email])
@@ -329,6 +340,7 @@ model ContactMessage {
   status          ContactStatus @default(NEW)
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
+  identityAssignments IdentityAssignment[]
 
   @@index([referenceNumber])
   @@index([email])
@@ -393,6 +405,7 @@ model Booking {
   passengers    BookingPassenger[]
   statusHistory BookingStatusHistory[]
   gatewayPayments GatewayPayment[]
+  identityAssignments IdentityAssignment[]
 
   @@index([referenceNumber])
   @@index([customerEmail])
@@ -502,5 +515,103 @@ model NotificationOutbox {
 
   @@index([status, nextAttemptAt])
   @@index([createdAt])
+}
+
+// Additive P5 governance. Existing users are never promoted by this schema.
+enum IdentityDepartment {
+  FLIGHT
+  HOTEL
+  VISA
+  PACKAGES
+  FINANCE
+  SUPPORT
+}
+
+model IdentityAccount {
+  userId String @id
+  suspended Boolean @default(false)
+  version Int @default(0)
+  mfaVersion Int @default(0)
+  mfaFailures Int @default(0)
+  mfaBlockedUntil DateTime? @db.Timestamptz(6)
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
+}
+
+model IdentitySession {
+  sessionId String @id
+  version Int
+  mfaVersion Int
+  mfaVerifiedAt DateTime? @db.Timestamptz(6)
+  failures Int @default(0)
+  blockedUntil DateTime? @db.Timestamptz(6)
+  session Session @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+model IdentityMembership {
+  userId String
+  department IdentityDepartment
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
+  @@id([userId, department])
+}
+
+model IdentityAssignment {
+  id String @id
+  userId String
+  department IdentityDepartment
+  active Boolean @default(true)
+  bookingId String?
+  flightInquiryId String?
+  hotelInquiryId String?
+  packageInquiryId String?
+  visaInquiryId String?
+  contactMessageId String?
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
+  booking Booking? @relation(fields: [bookingId], references: [id], onDelete: Restrict)
+  flightInquiry FlightInquiry? @relation(fields: [flightInquiryId], references: [id], onDelete: Restrict)
+  hotelInquiry HotelInquiry? @relation(fields: [hotelInquiryId], references: [id], onDelete: Restrict)
+  packageInquiry PackageInquiry? @relation(fields: [packageInquiryId], references: [id], onDelete: Restrict)
+  visaInquiry VisaInquiry? @relation(fields: [visaInquiryId], references: [id], onDelete: Restrict)
+  contactMessage ContactMessage? @relation(fields: [contactMessageId], references: [id], onDelete: Restrict)
+  @@unique([userId, bookingId, department])
+  @@unique([userId, flightInquiryId, department])
+  @@unique([userId, hotelInquiryId, department])
+  @@unique([userId, packageInquiryId, department])
+  @@unique([userId, visaInquiryId, department])
+  @@unique([userId, contactMessageId, department])
+  @@index([userId, department, active])
+}
+
+model IdentityInvitation {
+  id String @id
+  email String
+  role UserRole
+  departments IdentityDepartment[]
+  tokenHash String @unique
+  issuerId String
+  issuerVersion Int
+  expiresAt DateTime @db.Timestamptz(6)
+  usedAt DateTime? @db.Timestamptz(6)
+  deliveredAt DateTime? @db.Timestamptz(6)
+  issuer User @relation(fields: [issuerId], references: [id], onDelete: Restrict)
+}
+
+model IdentityMfa {
+  userId String @id
+  secret String?
+  pendingSecret String?
+  pendingUntil DateTime? @db.Timestamptz(6)
+  lastStep BigInt @default(-1)
+  recoveryHashes String[]
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
+}
+
+model IdentityAudit {
+  id String @id
+  actorId String
+  action String
+  targetId String
+  reason String
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  @@index([targetId, createdAt])
 }
 

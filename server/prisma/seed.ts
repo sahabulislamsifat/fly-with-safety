@@ -7,7 +7,6 @@
  * Run: pnpm db:seed
  */
 import 'dotenv/config';
-import bcrypt from 'bcryptjs';
 import { prisma } from '../src/lib/prisma.js';
 
 async function main() {
@@ -259,26 +258,7 @@ async function main() {
 
   // ─── Admin User (Development Only) ────────────────────────────────────────
 
-  const adminEmail = process.env.ADMIN_EMAIL;
-  const adminPassword = process.env.ADMIN_PASSWORD;
-
-  if (adminEmail && adminPassword) {
-    const hashedPassword = await bcrypt.hash(adminPassword, 12);
-    const admin = await prisma.user.upsert({
-      where: { email: adminEmail },
-      update: { role: 'ADMIN' },
-      create: {
-        email: adminEmail,
-        password: hashedPassword,
-        name: 'Admin',
-        role: 'ADMIN',
-        emailVerified: true,
-      },
-    });
-    console.log(`✅ Admin user: ${admin.email}`);
-  } else {
-    console.log('ℹ️  Skipping admin user (ADMIN_EMAIL/ADMIN_PASSWORD not set)');
-  }
+  console.log('Privileged accounts require the reviewed individual provisioning workflow.');
 
   console.log('🎉 Seed completed!');
   await prisma.$disconnect();

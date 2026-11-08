@@ -1,0 +1,10 @@
+{
+  "exitCode": 1,
+  "timedOut": false,
+  "networkForbidden": true,
+  "fontFetchFailure": true,
+  "compiled": false,
+  "typeChecked": false,
+  "networkOperations": 0,
+  "databaseOperations": 0
+}

@@ -1,0 +1,21 @@
+{
+  "scope": "OFFLINE_ONLY",
+  "identityRegression": {"pass": 10, "fail": 0},
+  "invocationSafetyAssertions": {"pass": 10, "fail": 0},
+  "nodeSyntax": "PASS",
+  "nativePowerShell51Parse": "PASS",
+  "postgresqlSqlSyntaxOfflineParser": "PASS",
+  "eslintErrors": 0,
+  "eslintWarnings": 0,
+  "v05ManifestFilePins": 4321,
+  "v05ManifestFileMismatches": 0,
+  "historicalArtifactsSealed": 18,
+  "historicalArtifactMismatches": 0,
+  "diagnosticAttemptExists": false,
+  "newDatabaseConnections": 0,
+  "newSetupExecution": false,
+  "consumedV05Modified": false,
+  "historicalObservedIdentityRow": "NOT_SAVED",
+  "provenDefect": "INET_TEXT_NETMASK_VERSUS_BARE_IP_COMPARISON",
+  "additionalHistoricalPredicateFailures": "UNKNOWN"
+}

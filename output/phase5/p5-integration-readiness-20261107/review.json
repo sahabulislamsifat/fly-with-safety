@@ -1,0 +1,75 @@
+{
+  "checkedUTC": "2026-11-07T13:47:29.6416983Z",
+  "stage": "READINESS_REVIEW_ONLY",
+  "postgresVersion": "18.6",
+  "service": "postgresql-x64-18",
+  "serviceState": "Running",
+  "endpoint": "127.0.0.1:5432",
+  "readiness": "accepting connections (host-level check)",
+  "baselinePinsCheckedBeforeEdit": 49,
+  "baselineMismatchesBeforeEdit": 0,
+  "targetTestsPass": 11,
+  "targetTestsFail": 0,
+  "strictTypeScript": "PASS",
+  "focusedLintErrors": 0,
+  "focusedLintWarnings": 0,
+  "offlineSqlBlocksParsed": 2,
+  "catalogConflicts": "NOT_VERIFIED_PRIVATE_LOGIN_REQUIRED",
+  "actualTargetOid": null,
+  "authenticatedDatabaseConnections": 0,
+  "resourcesCreated": 0,
+  "migrationsExecuted": 0,
+  "fixtureWrites": 0,
+  "browserTests": "NOT_EXECUTED",
+  "productionActivated": false,
+  "files": [
+    {
+      "path": "docs/proposals/P5_IDENTITY_SCOPE_IMPLEMENTATION_REPORT.md",
+      "sha256": "659B3F33F3F85D843902EE7C49159A84AA66F20E19881F6AD4C45B3C0A906BA8"
+    },
+    {
+      "path": "server/prisma/migrations/20260926202822_init/migration.sql",
+      "sha256": "EFDA6A0CD3D01B2503E4CC1557F8ABA2807664DB545A742E52EACA60A3B2E1CB"
+    },
+    {
+      "path": "server/prisma/migrations/20260927082715_full_schema/migration.sql",
+      "sha256": "AE3BCD7668F026858EE7E43CBCEB9955C451A1BF648520E6AFB7814CE2CC7921"
+    },
+    {
+      "path": "server/prisma/migrations/20261009000000_auth_sessions_and_password_resets/migration.sql",
+      "sha256": "E1EB929668D33CBE94F07E7512CB7174084150C50683A2E15F5709509B53E1B4"
+    },
+    {
+      "path": "server/prisma/migrations/20261011000000_inquiry_idempotency/migration.sql",
+      "sha256": "0316F0857663D04900E1CEAE1E305490A9B97E49192F9AAD2F74BB2F494C6706"
+    },
+    {
+      "path": "server/prisma/migrations/20261011120000_notification_outbox/migration.sql",
+      "sha256": "1ECC18D0E4381CDF0489A9919F61B58C3F9F1A3BD102303CCF1FA5F81E14ECA2"
+    },
+    {
+      "path": "server/prisma/migrations/20261022000100_contact_status_new/migration.sql",
+      "sha256": "4C9AF2C97DD22A88CB3B7E5FE5422AC1023BCC86FCDE999409033AC5180178A7"
+    },
+    {
+      "path": "server/prisma/migrations/20261022000200_booking_contact_schema/migration.sql",
+      "sha256": "BC10E7343B3C40769C43DEEE8B3164245319A9F35D7A3B50D4E3EE721895F32B"
+    },
+    {
+      "path": "server/prisma/migrations/20261103000100_gateway_sandbox_ledgers/migration.sql",
+      "sha256": "DA1E65891C57A827F2AF5498B45D923D025D1F1D6FD80C9D9AB63FB986A802C5"
+    },
+    {
+      "path": "server/prisma/migrations/20261107000100_identity_scope/migration.sql",
+      "sha256": "A9EE8DFC6C06E3B0197CFB43E44B3D93247D7F2149A34735F83A50999809F9FD"
+    },
+    {
+      "path": "server/test/p5-disposable-target.test.ts",
+      "sha256": "8F69865DD4903357DDDB43CED8E40C010E1DDC43D3BCA4541456B5B6C4CBFF94"
+    },
+    {
+      "path": "server/test/p5-disposable-target.ts",
+      "sha256": "A0BFAFBDF72106C16BD48F65D62765D9F8782C2B48ED94EDF6C0D94A68337462"
+    }
+  ]
+}

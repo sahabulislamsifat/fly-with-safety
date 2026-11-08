@@ -6,6 +6,9 @@ import { assertContactTransition } from '../utils/status-transitions.js';
 import { AppError } from '../utils/errors.js';
 import { logger, serializeError } from '../lib/logger.js';
 import { createIdempotentInquiry } from './idempotency.service.js';
+import { assignedIds, assertRecordScope, audit } from '../identity/store.js';
+import { identityContext, identityEnabled } from '../identity/policy.js';
+import { Prisma } from '../generated/prisma/client.js';
 
 export async function submitContact(input: ContactInput, idempotencyKey: string) {
   const referenceNumber = generateReferenceNumber();
@@ -49,7 +52,8 @@ export async function getContactMessages(params: {
   const limit = Math.min(50, Math.max(1, params.limit || 20));
   const skip = (page - 1) * limit;
 
-  const where = params.status ? { status: params.status as any } : {};
+  const ids = await assignedIds('contactMessage');
+  const where = { ...(params.status ? { status: params.status as any } : {}), ...(ids ? { id: { in: ids } } : {}) };
 
   const [total, messages] = await Promise.all([
     prisma.contactMessage.count({ where }),
@@ -83,12 +87,24 @@ export async function getContactMessages(params: {
 }
 
 export async function getContactMessageById(id: string) {
+  const ids = await assignedIds('contactMessage');
+  if (ids && !ids.includes(id)) throw AppError.notFound();
   return prisma.contactMessage.findUnique({
     where: { id },
   });
 }
 
 export async function updateContactStatus(id: string, status: string) {
+  if (identityEnabled()) return prisma.$transaction(async tx => {
+    await tx.$queryRaw(Prisma.sql`SELECT id FROM "ContactMessage" WHERE id=${id} FOR UPDATE`);
+    await assertRecordScope(tx, 'contactMessage', id, true);
+    const current = await tx.contactMessage.findUnique({ where: { id }, select: { status: true } });
+    if (!current) throw AppError.notFound();
+    assertContactTransition(current.status, status);
+    const result = await tx.contactMessage.update({ where: { id }, data: { status: status as 'NEW' | 'IN_PROGRESS' | 'RESOLVED' } });
+    await audit(tx, identityContext.getStore()!.id, 'CONTACT_STATUS_CHANGED', id, 'STAFF_ASSIGNMENT');
+    return result;
+  });
   const current = await prisma.contactMessage.findUnique({
     where: { id },
     select: { status: true },

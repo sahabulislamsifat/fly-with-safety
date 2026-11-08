@@ -191,9 +191,9 @@ export function Navbar() {
 
             {user ? (
               <div className="flex items-center gap-2">
-                {(user.role === 'STAFF' || user.role === 'ADMIN') && (
+                {(['STAFF', 'ADMIN', 'SUPER_ADMIN'].includes(user.role)) && (
                   <Link
-                    href="/admin"
+                    href={user.role === 'SUPER_ADMIN' ? '/owner' : user.role === 'STAFF' ? '/staff' : '/admin'}
                     className="px-2.5 py-1 text-xs font-bold bg-neutral-900 text-white hover:bg-neutral-800 rounded-xs transition-colors"
                   >
                     Staff Portal
@@ -286,9 +286,9 @@ export function Navbar() {
             <div className="pt-3 border-t border-neutral-100 space-y-2">
               {user ? (
                 <>
-                  {(user.role === 'STAFF' || user.role === 'ADMIN') && (
+                  {(['STAFF', 'ADMIN', 'SUPER_ADMIN'].includes(user.role)) && (
                     <Link
-                      href="/admin"
+                      href={user.role === 'SUPER_ADMIN' ? '/owner' : user.role === 'STAFF' ? '/staff' : '/admin'}
                       onClick={() => setIsMobileMenuOpen(false)}
                       className="inline-flex items-center gap-2 w-full justify-center px-4 py-2 text-xs font-bold text-white bg-neutral-900 hover:bg-neutral-800 rounded-xs transition-colors"
                     >

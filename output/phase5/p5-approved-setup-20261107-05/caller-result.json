@@ -1,0 +1,19 @@
+{
+    "childFailure":  {
+                         "guard":  "SERVER_IDENTITY_MISMATCH",
+                         "sqlState":  null,
+                         "networkCode":  null,
+                         "prismaCode":  null,
+                         "exitCode":  null
+                     },
+    "stage":  "owned-child-start",
+    "ddlCalls":  null,
+    "passed":  false,
+    "childStarted":  true,
+    "childStage":  "maintenance-identity",
+    "networkReached":  null,
+    "databaseCalls":  null,
+    "failure":  {
+                    "guard":  "CALLER_STOP"
+                }
+}

@@ -1,0 +1,29 @@
+{
+  "checkedUTC": "2026-11-07T15:38:17.594Z",
+  "stage": "OFFLINE_RECOVERY_READY_PENDING_OWNER_APPROVAL",
+  "oldCallerOwnerReportedConsumed": true,
+  "oldCallerUnchanged": true,
+  "oldSavedLiveResultFound": false,
+  "oldSavedAttemptFound": false,
+  "oldJournalFound": false,
+  "oldArtifacts": [
+    "offline.json"
+  ],
+  "oldFailureSource": "OWNER_REPORTED_CONSOLE_AND_VERIFIED_CODE_PATH",
+  "oldFailurePath": "readInput -> credentials -> identity guard; before attempt/work/connect",
+  "recoveryNetworkCalls": 0,
+  "recoveryDatabaseCalls": 0,
+  "recoveryDdlCalls": 0,
+  "passwordPromptsOnInvalidRole": 0,
+  "ps51FocusedChecksPass": 29,
+  "nodeInvocationChecksPass": 2,
+  "typescript": "PASS",
+  "lintErrors": 0,
+  "lintWarnings": 0,
+  "newLiveAttempt": false,
+  "provisioningSqlUnchanged": true,
+  "packagePins": 4276,
+  "pinMismatches": 0,
+  "callerSHA256": "7434B57BEB76B8D4E8457DF49B8A1A5FCC49AABC3F4F05616932417835665780",
+  "manifestSHA256": "3F9F2029C3E9B592960188EBBE60551CDCC6095575F4AC61C8C1FD524E944FDC"
+}

@@ -1,0 +1,4 @@
+{
+  "extends": "../p5-tsconfig.json",
+  "include": ["./browser.test.ts", "./vitest.config.ts", "../p5-disposable-target.ts", "../../src/**/*"]
+}

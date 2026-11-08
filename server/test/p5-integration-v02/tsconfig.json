@@ -1,0 +1,4 @@
+{
+  "extends": "../p5-tsconfig.json",
+  "include": ["./postgres.test.ts", "./vitest.config.ts", "./reporter-fixture.test.ts", "./reporter-fixture.config.ts", "../p5-disposable-target.ts"]
+}

@@ -2,6 +2,8 @@ import { Prisma } from '../generated/prisma/client.js';
 import { prisma } from '../lib/prisma.js';
 import { AppError } from '../utils/errors.js';
 import { paymentView, type Attempt, type Booking, type Refund } from './payment-domain.js';
+import { assertRecordScope } from '../identity/store.js';
+import { identityContext, identityEnabled } from '../identity/policy.js';
 
 export interface Ledger {
   booking: Booking; attempts: Attempt[]; refunds: Refund[]; now: number;
@@ -24,6 +26,7 @@ export class PrismaPaymentStore implements PaymentStore {
       await tx.$queryRaw(Prisma.sql`SELECT id FROM public."Booking" WHERE "referenceNumber"=${reference} FOR UPDATE`);
       const booking = await tx.booking.findUnique({ where: { referenceNumber: reference } });
       if (!booking) throw AppError.notFound('Booking not found');
+      if (identityEnabled() && identityContext.getStore()?.role === 'STAFF') await assertRecordScope(tx, 'booking', booking.id);
       const ar = await tx.$queryRaw<Array<{ state: Attempt }>>(Prisma.sql`SELECT state FROM public."GatewayPayment" WHERE "bookingId"=${booking.id} ORDER BY id FOR UPDATE`);
       const rr = await tx.$queryRaw<Array<{ state: Refund }>>(Prisma.sql`SELECT r.state FROM public."GatewayRefund" r JOIN public."GatewayPayment" p ON p.id=r."paymentId" WHERE p."bookingId"=${booking.id} ORDER BY r.id FOR UPDATE OF r`);
       // adapter-pg normalizes timestamptz offsets without adjusting wall time. Return

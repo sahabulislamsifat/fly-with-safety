@@ -1,0 +1,74 @@
+[
+  {
+    "path": "output/phase5/p5-approved-setup-20261107-01/offline.json",
+    "sha256": "F9B22BEC25A0F84A89C7BF534D12A160124EFA5ED810DD8CB6B0EF1EA260CB2C"
+  },
+  {
+    "path": "output/phase5/p5-approved-setup-20261107-02/caller-attempt.json",
+    "sha256": "E73034AAC5683D326BE0C7C5CE0BE0B00262E701B415FC870C5C2697E7172276"
+  },
+  {
+    "path": "output/phase5/p5-approved-setup-20261107-02/caller-result.json",
+    "sha256": "B8C4525D6D4FC4479375A9A3E756A2EC8F896FC1CCF8E645FB3F91379E4FD255"
+  },
+  {
+    "path": "output/phase5/p5-approved-setup-20261107-02/offline.json",
+    "sha256": "7EF32F9037D91A7891AC10D52C9AE3B7C4D73F12D0E2193AA8F5524E08325ACB"
+  },
+  {
+    "path": "output/phase5/p5-approved-setup-20261107-03/caller-attempt.json",
+    "sha256": "C0F1FAD5AE88785FB5CD2075933BE27AB5D0689B0384112FD2D9805F11906C9B"
+  },
+  {
+    "path": "output/phase5/p5-approved-setup-20261107-03/caller-result.json",
+    "sha256": "2ED7FFF63E685015235A4D1D93552F5E9A63B71DAFB61FA3DAEB6D753B3E2010"
+  },
+  {
+    "path": "output/phase5/p5-approved-setup-20261107-03/offline.json",
+    "sha256": "80185C4B4FC5E301AA36585F80298E74C3FFF106DD9CFE52F1DB065485126AF2"
+  },
+  {
+    "path": "output/phase5/p5-approved-setup-20261107-03/result.json",
+    "sha256": "2ED7FFF63E685015235A4D1D93552F5E9A63B71DAFB61FA3DAEB6D753B3E2010"
+  },
+  {
+    "path": "output/phase5/p5-approved-setup-20261107-04/caller-attempt.json",
+    "sha256": "A457D8D80BC9035032D4635887B21CA0D51039717B39C9A47580FA4DB2A84F5F"
+  },
+  {
+    "path": "output/phase5/p5-approved-setup-20261107-04/caller-result.json",
+    "sha256": "07C23D88B37D40651C24EA9E13645765A74ACA701DD74D334A473E858203533E"
+  },
+  {
+    "path": "output/phase5/p5-approved-setup-20261107-04/offline.json",
+    "sha256": "801F4559CA19F3B5111AFB8F6EB006B2848F526BA09594A1577A66BE6818A00E"
+  },
+  {
+    "path": "output/phase5/p5-approved-setup-20261107-04/result.json",
+    "sha256": "07C23D88B37D40651C24EA9E13645765A74ACA701DD74D334A473E858203533E"
+  },
+  {
+    "path": "output/phase5/p5-approved-setup-20261107-05/attempt.json",
+    "sha256": "CA94853233E9C1956917A58130B3B27111D06FBEBEE518DB350DB2AA6BB28157"
+  },
+  {
+    "path": "output/phase5/p5-approved-setup-20261107-05/caller-attempt.json",
+    "sha256": "7071A7BA6447904F37D87A1D7CDED7690DF0CFFDB67B5A4C380B798D125184D2"
+  },
+  {
+    "path": "output/phase5/p5-approved-setup-20261107-05/caller-result.json",
+    "sha256": "6167E414ABB22EAAA8C512CFB745506E0B30E40A2FFFCF2A84C4320B11A5A146"
+  },
+  {
+    "path": "output/phase5/p5-approved-setup-20261107-05/journal.jsonl",
+    "sha256": "94A41DA4F3B082C7B02330BEB4E79E0E8103D113140595633ED159A4C4DAB15A"
+  },
+  {
+    "path": "output/phase5/p5-approved-setup-20261107-05/offline.json",
+    "sha256": "437AFF18E5065D7F9540BC27629F1E17CF2FABC052499179F88FB99C13618495"
+  },
+  {
+    "path": "output/phase5/p5-approved-setup-20261107-05/result.json",
+    "sha256": "E7535AD6706F6B859768DDDA00D21F35037ADA8C59C11261ECDB4EAEB149FCB3"
+  }
+]

@@ -9,7 +9,7 @@ export interface AuthenticatedUser {
   id: string;
   email: string;
   name: string | null;
-  role: 'CUSTOMER' | 'STAFF' | 'ADMIN';
+  role: 'CUSTOMER' | 'STAFF' | 'ADMIN' | 'SUPER_ADMIN';
   emailVerified: boolean;
 }
 

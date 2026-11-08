@@ -7,6 +7,7 @@ import { sendInquiryConfirmation } from './notification.service.js';
 import type { HotelSearchInput, HotelInquiryInput } from '../validators/hotel.schemas.js';
 import { transitionInquiryStatus } from './inquiry-status.service.js';
 import { createIdempotentInquiry } from './idempotency.service.js';
+import { assignedIds } from '../identity/store.js';
 
 const hotelProvider: HotelProvider = new MockHotelProvider();
 
@@ -68,7 +69,8 @@ export async function getHotelInquiries(params: { page?: number; limit?: number;
   const page = Math.max(1, params.page || 1);
   const limit = Math.min(50, Math.max(1, params.limit || 20));
   const skip = (page - 1) * limit;
-  const where = params.status ? { status: params.status as any } : {};
+  const ids = await assignedIds('hotelInquiry');
+  const where = { ...(params.status ? { status: params.status as any } : {}), ...(ids ? { id: { in: ids } } : {}) };
 
   const [total, inquiries] = await Promise.all([
     prisma.hotelInquiry.count({ where }),

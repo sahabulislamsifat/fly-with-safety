@@ -6,7 +6,10 @@ import { AppError } from '../utils/errors.js';
 import { env } from '../config/env.js';
 import { normalizeEmail } from '../utils/helpers.js';
 import { sendEmailVerification, sendPasswordReset } from './notification.service.js';
-import type { Prisma, UserRole } from '../generated/prisma/client.js';
+import { Prisma } from '../generated/prisma/client.js';
+import { identityEnabled, type Role } from '../identity/policy.js';
+import { bindSession } from '../identity/auth.js';
+import { audit, invalidate } from '../identity/store.js';
 
 const SALT_ROUNDS = 12;
 const VERIFICATION_TOKEN_EXPIRY_HOURS = 24;
@@ -16,7 +19,7 @@ export interface AuthUser {
   id: string;
   email: string;
   name: string | null;
-  role: UserRole;
+  role: Role;
   emailVerified: boolean;
 }
 export interface AuthSession {
@@ -31,9 +34,9 @@ function hashToken(token: string): string {
 function newOpaqueToken(): string {
   return randomBytes(48).toString('base64url');
 }
-function accessTokenFor(user: AuthUser, sessionId: string): string {
+function accessTokenFor(user: AuthUser, sessionId: string, version?: number): string {
   return jwt.sign(
-    { sub: user.id, email: user.email, role: user.role, sid: sessionId },
+    { sub: user.id, email: user.email, role: user.role, sid: sessionId, ...(version === undefined ? {} : { ver: version }) },
     env.jwtSecret,
     { expiresIn: env.jwtExpiresIn as jwt.SignOptions['expiresIn'] },
   );
@@ -41,6 +44,16 @@ function accessTokenFor(user: AuthUser, sessionId: string): string {
 
 async function createSessionFor(user: AuthUser): Promise<AuthSession> {
   const refreshToken = newOpaqueToken();
+  if (identityEnabled()) {
+    const bound = await prisma.$transaction(async tx => {
+      const session = await tx.session.create({ data: { userId: user.id, refreshTokenHash: hashToken(refreshToken),
+        expiresAt: new Date(Date.now() + env.refreshTokenExpiresDays * 86400000) } });
+      const account = await bindSession(tx, user.id, session.id);
+      return { sessionId: session.id, account };
+    });
+    const current = { ...user, role: bound.account.role };
+    return { user: current, accessToken: accessTokenFor(current, bound.sessionId, bound.account.version), refreshToken };
+  }
   const session = await prisma.session.create({
     data: {
       userId: user.id,
@@ -221,6 +234,7 @@ export async function verifyEmail(token: string): Promise<void> {
     await prisma.$transaction(async tx => {
       await consumeCredential(tx, 'verification', record, digest, submitted, invalid);
       await tx.user.update({ where: { id: record.userId }, data: { emailVerified: true } });
+      if (identityEnabled()) await audit(tx, record.userId, 'EMAIL_VERIFIED', record.userId, 'ACCOUNT_RECOVERY');
     }, { isolationLevel: 'ReadCommitted', maxWait: 2000, timeout: 5000 });
   } catch (error) {
     // Only this invocation's expected rejection is safe to expose; discard driver/query details.
@@ -280,6 +294,11 @@ export async function resetPassword(input: { token: string; password: string }):
       await tx.session.updateMany({
         where: { userId: record.userId, revokedAt: null }, data: { revokedAt: new Date() },
       });
+      if (identityEnabled()) {
+        await tx.$executeRaw(Prisma.sql`/*p5:ensure-account*/ INSERT INTO "IdentityAccount" ("userId") VALUES (${record.userId}) ON CONFLICT DO NOTHING`);
+        await invalidate(tx, record.userId);
+        await audit(tx, record.userId, 'PASSWORD_RESET', record.userId, 'ACCOUNT_RECOVERY');
+      }
     }, { isolationLevel: 'ReadCommitted', maxWait: 2000, timeout: 5000 });
   } catch (error) {
     if (error === invalid) throw invalid;
@@ -290,11 +309,12 @@ export async function resetPassword(input: { token: string; password: string }):
 export async function findOrCreateGoogleUser(profile: {
   googleId: string;
   email: string;
+  emailVerified?: boolean;
   name?: string;
   avatar?: string;
 }): Promise<AuthSession> {
   const email = normalizeEmail(profile.email);
-  if (!email) throw AppError.unauthorized('Google did not provide a verified email address');
+  if (!email || profile.emailVerified !== true) throw AppError.unauthorized('Google did not provide a verified email address');
   const account = await prisma.account.findUnique({
     where: {
       provider_providerAccountId: { provider: 'google', providerAccountId: profile.googleId },
@@ -309,6 +329,7 @@ export async function findOrCreateGoogleUser(profile: {
       where: { email },
       select: { id: true, email: true, name: true, role: true, emailVerified: true },
     });
+    if (existing && existing.role !== 'CUSTOMER') throw AppError.forbidden('Privileged identity linking requires controlled approval');
     const linked =
       existing ??
       (await tx.user.create({

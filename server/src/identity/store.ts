@@ -1,0 +1,72 @@
+import { Prisma, type PrismaClient } from '../generated/prisma/client.js';
+import { prisma } from '../lib/prisma.js';
+import { AppError } from '../utils/errors.js';
+import { identityContext, identityEnabled, resourceDepartment, requirePermission, type Principal, type Resource, type Department } from './policy.js';
+
+export type Database = Pick<Prisma.TransactionClient, '$queryRaw' | '$executeRaw'>;
+const fields: Record<Resource, string> = {
+  booking: 'bookingId', flightInquiry: 'flightInquiryId', hotelInquiry: 'hotelInquiryId',
+  packageInquiry: 'packageInquiryId', visaInquiry: 'visaInquiryId', contactMessage: 'contactMessageId',
+};
+export async function audit(db: Database, actorId: string, action: string, targetId: string, reason: string) {
+  const { randomUUID } = await import('node:crypto');
+  await db.$executeRaw(Prisma.sql`/*p5:audit*/ INSERT INTO "IdentityAudit" (id,"actorId",action,"targetId",reason) VALUES (${randomUUID()},${actorId},${action},${targetId},${reason})`);
+}
+export async function lockPrincipal(db: Database, p: Principal) {
+  const rows = await db.$queryRaw<Array<{ ok: boolean }>>(Prisma.sql`/*p5:lock-principal*/
+    SELECT (NOT a.suspended AND a.version=${p.version} AND u.role::text=${p.role}
+      AND i.version=a.version AND i."mfaVersion"=a."mfaVersion"
+      AND (NOT ${p.mfaVerified} OR i."mfaVerifiedAt">clock_timestamp()-interval '15 minutes')) IS TRUE AS ok
+    FROM "IdentityAccount" a JOIN "User" u ON u.id=a."userId" JOIN "Session" s ON s."userId"=u.id
+    JOIN "IdentitySession" i ON i."sessionId"=s.id
+    WHERE u.id=${p.id} AND s.id=${p.sessionId} AND s."revokedAt" IS NULL AND s."expiresAt">(clock_timestamp() AT TIME ZONE 'UTC') FOR SHARE OF a,u,s,i`);
+  if (rows.length !== 1 || !rows[0].ok) throw AppError.unauthorized('Identity changed; sign in again');
+}
+export async function assignedIds(resource: Resource, db: Database = prisma) {
+  if (!identityEnabled()) return undefined;
+  const p = identityContext.getStore();
+  if (!p) throw AppError.unauthorized();
+  requirePermission(p, resource === 'booking' ? 'booking.read' : 'inquiry');
+  if (p.role !== 'STAFF') return undefined;
+  const department = resourceDepartment[resource];
+  const allowed: Department[] = department ? p.departments.filter(d => d === department) : p.departments;
+  if (!allowed.length) return [];
+  const column = Prisma.raw(`"${fields[resource]}"`);
+  const rows = await db.$queryRaw<Array<{ id: string }>>(Prisma.sql`/*p5:assigned*/ SELECT ${column} AS id FROM "IdentityAssignment"
+    WHERE "userId"=${p.id} AND active AND department::text IN (${Prisma.join(allowed)}) AND ${column} IS NOT NULL
+      AND EXISTS (SELECT 1 FROM "IdentityAccount" a WHERE a."userId"=${p.id} AND NOT a.suspended AND a.version=${p.version})
+      AND EXISTS (SELECT 1 FROM "IdentityMembership" m WHERE m."userId"=${p.id} AND m.department="IdentityAssignment".department)`);
+  return rows.map(row => row.id);
+}
+/** Called inside each operations mutation transaction after its resource lock. */
+export async function assertRecordScope(db: Database, resource: Resource, id: string, write = false) {
+  if (!identityEnabled()) return;
+  const p = identityContext.getStore();
+  if (!p) throw AppError.unauthorized();
+  await lockPrincipal(db, p);
+  if (!p.mfaVerified) throw new AppError('Complete privileged MFA first', 403, 'MFA_REQUIRED');
+  if (p.role === 'ADMIN' || p.role === 'SUPER_ADMIN') return;
+  if (p.role !== 'STAFF' || !p.mfaVerified) throw AppError.forbidden();
+  let allowed = p.departments;
+  if (resourceDepartment[resource]) allowed = allowed.filter(d => d === resourceDepartment[resource]);
+  if (resource === 'booking' && write) {
+    const rows = await db.$queryRaw<Array<{ bookingType: string }>>(Prisma.sql`/*p5:booking-type*/ SELECT "bookingType"::text FROM "Booking" WHERE id=${id}`);
+    const department = { FLIGHT: 'FLIGHT', HOTEL: 'HOTEL', PACKAGE: 'PACKAGES' }[rows[0]?.bookingType] as Department | undefined;
+    allowed = allowed.filter(d => d === department);
+  }
+  if (!allowed.length) throw AppError.notFound();
+  const column = Prisma.raw(`"${fields[resource]}"`);
+  const rows = await db.$queryRaw<Array<{ id: string }>>(Prisma.sql`/*p5:scope-lock*/ SELECT id FROM "IdentityAssignment"
+    WHERE "userId"=${p.id} AND ${column}=${id} AND active AND department::text IN (${Prisma.join(allowed)}) FOR SHARE`);
+  if (!rows.length) throw AppError.notFound();
+}
+export async function invalidate(db: Database, userId: string) {
+  await db.$executeRaw(Prisma.sql`/*p5:invalidate*/ UPDATE "IdentityAccount" SET version=version+1 WHERE "userId"=${userId}`);
+  await db.$executeRaw(Prisma.sql`/*p5:revoke*/ UPDATE "Session" SET "revokedAt"=clock_timestamp() WHERE "userId"=${userId} AND "revokedAt" IS NULL`);
+}
+export function governanceTransaction<T>(work: (db: Prisma.TransactionClient) => Promise<T>, client: Pick<PrismaClient, '$transaction'> = prisma) {
+  return client.$transaction(async db => {
+    await db.$queryRaw(Prisma.sql`/*p5:policy-lock*/ SELECT pg_advisory_xact_lock(581029,5)::text`);
+    return work(db);
+  }, { maxWait: 5000, timeout: 10000 });
+}

@@ -1,0 +1,23 @@
+{
+  "passed": false,
+  "stage": "existing-postgres-rollback-test",
+  "identity": {
+    "database": "flywithsafety_p5_identity_scope_test",
+    "role": "fws_p5_identity_app",
+    "sessionRole": "fws_p5_identity_app",
+    "address": "127.0.0.1",
+    "port": 5432,
+    "oid": 35402,
+    "unsafe": false
+  },
+  "migrations": 9,
+  "postgres": null,
+  "rollbackPreservation": false,
+  "providerCalls": 0,
+  "cloudAccess": false,
+  "browserExecuted": false,
+  "failure": {
+    "guard": "SANITIZED_TEST_RESULT_UNAVAILABLE",
+    "sqlState": null
+  }
+}
