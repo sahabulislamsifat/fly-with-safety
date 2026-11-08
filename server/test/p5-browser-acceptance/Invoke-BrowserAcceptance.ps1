@@ -4,7 +4,7 @@ if(-not $OwnerApprovedBrowserAcceptance){throw 'STOP: isolated integration appro
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..\..'))
 if($repo -ine 'E:\Programming\Project\fly-with-safety'){throw 'STOP: exact workspace required'}
 $manifestPath=Join-Path $PSScriptRoot 'pins.json'
-if((Get-FileHash -LiteralPath $manifestPath -Algorithm SHA256).Hash -cne 'PENDING_MANIFEST_SHA'){throw 'STOP: integration manifest mismatch'}
+if((Get-FileHash -LiteralPath $manifestPath -Algorithm SHA256).Hash -cne 'BD467BE75598FC396019593E6F85FBC8859C1617934D213D4F53AE2586DE89C1'){throw 'STOP: integration manifest mismatch'}
 $manifest=Get-Content -LiteralPath $manifestPath -Raw|ConvertFrom-Json
 foreach($pin in $manifest.files){
   $full=[IO.Path]::GetFullPath((Join-Path $repo $pin.path))
@@ -12,6 +12,11 @@ foreach($pin in $manifest.files){
   if((Get-FileHash -LiteralPath $full -Algorithm SHA256).Hash -cne $pin.sha256){throw 'STOP: source/runtime pin mismatch'}
 }
 if((Get-FileHash -LiteralPath $manifest.node.path -Algorithm SHA256).Hash -cne $manifest.node.sha256){throw 'STOP: Node pin mismatch'}
+foreach($pin in $manifest.externalFiles){
+  $full=[IO.Path]::GetFullPath($pin.path)
+  if(-not ($full.StartsWith('C:\Users\sahab\AppData\Local\npm-cache\_npx\31e32ef8478fbf80\node_modules\',[StringComparison]::OrdinalIgnoreCase) -or $full.StartsWith('C:\Program Files\Google\Chrome\Application\',[StringComparison]::OrdinalIgnoreCase))){throw 'STOP: external runtime outside reviewed paths'}
+  if((Get-FileHash -LiteralPath $full -Algorithm SHA256).Hash -cne $pin.sha256){throw 'STOP: browser runtime pin mismatch'}
+}
 $out=Join-Path $repo 'output\phase5\p5-browser-20261108-01'
 if(Test-Path -LiteralPath $out){throw 'STOP: previous integration directory; preserve, no retry'}
 [void][IO.Directory]::CreateDirectory($out)
@@ -41,6 +46,15 @@ try{
   if(-not $process.WaitForExit(930000)){throw 'STOP: integration deadline; preserve evidence'}
   $null=$stderr.Result
   $summary=$stdout.Result|ConvertFrom-Json
+  $job.Dispose();$job=$null
+  $released=$false
+  for($i=0;$i -lt 5;$i++){
+    $listeners=@(Get-NetTCPConnection -State Listen -ErrorAction SilentlyContinue | Where-Object { $_.LocalPort -in @(38191,38192) })
+    if($listeners.Count -eq 0){$released=$true;break}
+    Start-Sleep -Milliseconds 500
+  }
+  [IO.File]::WriteAllText((Join-Path $out 'owned-shutdown.json'),(@{jobDisposed=$true;isolatedPortsReleased=$released}|ConvertTo-Json -Compress))
+  if(-not $released){throw 'STOP: isolated port release unconfirmed; preserve evidence, no unrelated process termination'}
   Write-Output ($summary|ConvertTo-Json -Depth 6 -Compress)
   if($process.ExitCode -ne 0 -or -not $summary.passed){throw 'STOP: scoped integration failed; no retry or cleanup'}
 }finally{

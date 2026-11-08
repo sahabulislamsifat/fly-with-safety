@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-08",
+  "offlineGuardTests": {
+    "passed": 23,
+    "failed": 0,
+    "skipped": 0
+  },
+  "typescript": "PASS_SERVER_BROWSER_AND_CLIENT",
+  "lint": "PASS",
+  "nativePowerShell51": "PASS_AST",
+  "generatedSchemaTokens": "PASS",
+  "optimizedBuild": {
+    "exitCode": 1,
+    "timedOut": false,
+    "networkForbidden": true,
+    "fontFetchFailure": true,
+    "compiled": false,
+    "typeChecked": false,
+    "networkOperations": 0,
+    "databaseOperations": 0
+  },
+  "packagePins": 17993,
+  "browserExternalPins": 441,
+  "nodeBinaryPins": 1,
+  "resolutions": 318,
+  "integrityAssertions": 18754,
+  "nodeSyntaxFiles": 12,
+  "preservedPriorPins": 6787,
+  "unmappedHistoricalChanges": [],
+  "manifestSHA256": "BD467BE75598FC396019593E6F85FBC8859C1617934D213D4F53AE2586DE89C1",
+  "callerSHA256": "F41CA07C7A5A19C51C021678839B4320CFA68FF6CE37CA90EE7EA7F476D21A2C",
+  "newLiveAttempt": false,
+  "databaseConnections": 0,
+  "fixtureWrites": 0,
+  "providerCalls": 0,
+  "browserExecuted": false,
+  "p5Verdict": "PARTIAL_PENDING_APPROVED_BROWSER_EXECUTION"
+}

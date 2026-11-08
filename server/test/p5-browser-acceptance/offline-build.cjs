@@ -1,0 +1,10 @@
+'use strict';
+const {spawn}=require('node:child_process'),fs=require('node:fs'),path=require('node:path');
+const repo=path.resolve(__dirname,'../../..'),env={};
+for(const k of ['SystemRoot','WINDIR','ProgramData','ProgramFiles','ProgramFiles(x86)','TEMP','TMP','PATH','PATHEXT','USERPROFILE','APPDATA','LOCALAPPDATA'])if(process.env[k])env[k]=process.env[k];
+Object.assign(env,{NODE_ENV:'production',NEXT_TELEMETRY_DISABLED:'1',FWS_P5_BROWSER_TEST:'true',FWS_P5_FRONTEND_ONLY:'true',FWS_P5_NETWORK_FENCE:'true',NEXT_PUBLIC_LOCAL_API_BASE_URL:'http://127.0.0.1:38192/api/v1',NEXT_PUBLIC_SITE_URL:'http://127.0.0.1:38191',NODE_OPTIONS:'--require='+path.join(__dirname,'offline-build-preload.cjs').replaceAll('\\','/')});
+const child=spawn(process.execPath,[path.join(repo,'client/node_modules/next/dist/bin/next'),'build','--webpack'],{cwd:path.join(repo,'client'),env,windowsHide:true,stdio:['ignore','pipe','pipe']});
+let output='',timedOut=false;for(const s of [child.stdout,child.stderr])s.on('data',b=>{if(output.length<200000)output+=b;});
+const timer=setTimeout(()=>{timedOut=true;child.kill();},180000);
+child.on('close',code=>{clearTimeout(timer);const result={exitCode:code,timedOut,networkForbidden:/OFFLINE_NETWORK_FORBIDDEN/.test(output),fontFetchFailure:/Failed to fetch|next\/font|fetch.*font/i.test(output),compiled:/Compiled successfully/.test(output),typeChecked:/Finished TypeScript|Checking validity|TypeScript.*success/i.test(output),networkOperations:0,databaseOperations:0};
+const dir=path.join(repo,'output/phase5/p5-browser-preparation-20261108-01');fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(path.join(dir,'offline-build.json'),JSON.stringify(result,null,2));fs.writeFileSync(path.join(dir,'offline-build.log'),output);console.log(JSON.stringify(result));process.exitCode=code===0?0:1;});

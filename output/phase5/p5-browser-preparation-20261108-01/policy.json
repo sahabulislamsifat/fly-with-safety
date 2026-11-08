@@ -1,0 +1,17 @@
+{
+  "planning": "compact",
+  "context_depth": "dependency",
+  "verification_depth": "impact",
+  "delegation": "none",
+  "reason_codes": [
+    "interrupted-task-continuation",
+    "separate-persistent-fixture-approval",
+    "preserve-accepted-v04"
+  ],
+  "allowed_write_scope": [
+    "server/test/p5-browser-acceptance",
+    "docs/proposals/P5_IDENTITY_SCOPE_IMPLEMENTATION_REPORT.md",
+    "output/phase5/p5-browser-preparation-20261108-01"
+  ],
+  "liveExecutionAuthorized": false
+}

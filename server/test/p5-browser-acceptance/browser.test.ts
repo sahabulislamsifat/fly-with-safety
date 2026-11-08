@@ -1,10 +1,10 @@
 /** Genuine local browser/API/PostgreSQL acceptance. Requires explicit persistent-fixture approval. */
-import { it, expect, vi } from 'vitest';
+import { it, vi } from 'vitest';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
-import { randomBytes, createHash } from 'node:crypto';
+import { randomBytes } from 'node:crypto';
 import { spawn, type ChildProcess } from 'node:child_process';
 import { createServer, type Server } from 'node:http';
 import type { PrismaClient, Prisma as PrismaType } from '../../src/generated/prisma/client.js';
@@ -63,7 +63,7 @@ it.skipIf(process.env.P5_BROWSER_EXECUTION_APPROVED!=='true')('four-role browser
   async function newPage(){const c=await browser!.newContext({serviceWorkers:'block'});contexts.push(c);await c.route('**/*',r=>[front,'http://127.0.0.1:38192'].includes(new URL(r.request().url()).origin)?r.continue():r.abort());const p=await c.newPage();p.setDefaultTimeout(15000);return p;}
   async function navigate(page:Page,where:string){await page.goto(front+where,{waitUntil:'domcontentloaded',timeout:60000});}
   async function submit(page:Page,endpoint:string,action:()=>Promise<unknown>,status=200){const wait=page.waitForResponse(r=>r.url()===api+endpoint&&r.request().method()!=='GET');await action();assert.equal((await wait).status(),status,'EXPECTED_UI_API_STATUS');}
-  async function login(page:Page,role:string){await navigate(page,'/account/security');await page.getByRole('button',{name:'Sign in to your FlyWithSafety account',exact:true}).click();await page.getByLabel('Email Address',{exact:true}).fill(S.emails[role]);await page.getByLabel('Password',{exact:true}).fill(passwords[role]);await submit(page,'/auth/login',()=>page.getByRole('dialog').getByRole('button',{name:'Sign In',exact:true}).click());await page.getByRole('dialog').waitFor({state:'hidden'});}
+  async function login(page:Page,role:string){const refresh=page.waitForResponse(r=>r.url()===api+'/auth/refresh');await navigate(page,'/account/security');assert.equal((await refresh).status(),401,'GUEST_REFRESH_SETTLED');await page.getByRole('button',{name:'Sign in to your FlyWithSafety account',exact:true}).click();await page.getByLabel('Email Address',{exact:true}).fill(S.emails[role]);await page.getByLabel('Password',{exact:true}).fill(passwords[role]);await submit(page,'/auth/login',()=>page.getByRole('dialog').getByRole('button',{name:'Sign In',exact:true}).click());await page.getByRole('dialog').waitFor({state:'hidden'});}
   async function enroll(page:Page,role:string){
     await navigate(page,'/account/security');await page.getByLabel('Current password',{exact:true}).fill(passwords[role]);
     await submit(page,'/identity/mfa/enroll',()=>page.getByRole('button',{name:'Begin authenticator setup',exact:true}).click());
@@ -94,7 +94,7 @@ it.skipIf(process.env.P5_BROWSER_EXECUTION_APPROVED!=='true')('four-role browser
     await step('EXACT_TARGET_AND_LOCAL_RUNTIME',startApi);
     await step('ISOLATED_FRONTEND_READY_BEFORE_FIXTURES',async()=>{
       const childEnv:NodeJS.ProcessEnv={};for(const k of ['SystemRoot','WINDIR','ProgramData','ProgramFiles','ProgramFiles(x86)','TEMP','TMP','PATH','PATHEXT','USERPROFILE','APPDATA','LOCALAPPDATA'])if(process.env[k])childEnv[k]=process.env[k];
-      Object.assign(childEnv,{NODE_ENV:'development',NEXT_TELEMETRY_DISABLED:'1',FWS_P5_BROWSER_TEST:'true',FWS_P5_NETWORK_FENCE:'true',FWS_P5_FRONTEND_ONLY:'true',NODE_OPTIONS:'--require "'+path.join(__dirname,'network-fence.cjs')+'"',NEXT_PUBLIC_LOCAL_API_BASE_URL:api,NEXT_PUBLIC_SITE_URL:front});
+      Object.assign(childEnv,{NODE_ENV:'development',NEXT_TELEMETRY_DISABLED:'1',FWS_P5_BROWSER_TEST:'true',FWS_P5_NETWORK_FENCE:'true',FWS_P5_FRONTEND_ONLY:'true',NODE_OPTIONS:'--require "'+path.join(__dirname,'network-fence.cjs').replaceAll('\\','/')+'"',NEXT_PUBLIC_LOCAL_API_BASE_URL:api,NEXT_PUBLIC_SITE_URL:front});
       next=spawn(process.execPath,[path.join(repo,'client/node_modules/next/dist/bin/next'),'dev','--webpack','--hostname','127.0.0.1','--port','38191'],{cwd:path.join(repo,'client'),env:childEnv,windowsHide:true,stdio:['ignore','pipe','pipe']});
       let bytes=0;next.stdout!.on('data',b=>{bytes+=b.length;});next.stderr!.on('data',b=>{bytes+=b.length;});
       let ready=false;for(let i=0;i<60;i++){assert(next.exitCode===null,'FRONTEND_EXIT_BEFORE_READY');try{const r=await fetch(front+'/account/security',{redirect:'error',signal:AbortSignal.timeout(2000)});if(r.status===200){ready=true;break;}}catch{}await delay(1000);}
@@ -106,7 +106,8 @@ it.skipIf(process.env.P5_BROWSER_EXECUTION_APPROVED!=='true')('four-role browser
       for(const [i,role]of ['customer','foreign'].entries())await db.booking.create({data:{id:S.books[i],referenceNumber:(S.prefix+(i?'-FOREIGN':'-OWN')).toUpperCase(),userId:S.ids[role],customerName:'Synthetic '+role,customerEmail:S.emails[role],bookingType:'FLIGHT'}});
     });
     const {chromium}=local('C:/Users/sahab/AppData/Local/npm-cache/_npx/31e32ef8478fbf80/node_modules/playwright') as typeof import('C:/Users/sahab/AppData/Local/npm-cache/_npx/31e32ef8478fbf80/node_modules/playwright');
-    browser=await chromium.launch({channel:'chrome',headless:true,timeout:15000});
+    const manifest=JSON.parse(fs.readFileSync(path.join(__dirname,'pins.json'),'utf8'));
+    browser=await chromium.launch({executablePath:manifest.chrome,headless:true,timeout:15000,args:['--disable-background-networking','--disable-component-update','--disable-sync','--no-first-run','--no-default-browser-check']});
     const owner=await newPage();
     await step('OWNER_REAL_LOGIN_MFA_AND_BOOTSTRAP',async()=>{
       await login(owner,'owner');await request(owner,'/identity/customers',403);await enroll(owner,'owner');
@@ -147,7 +148,7 @@ it.skipIf(process.env.P5_BROWSER_EXECUTION_APPROVED!=='true')('four-role browser
       await request(staffPage,'/identity/me',401);await request(staffPage,'/auth/logout',200,'POST',{});await login(staffPage,'staff');await recover(staffPage,'staff');
       await navigate(staffPage,'/staff');await staffPage.getByRole('heading',{name:'Department Staff Workspace',exact:true}).waitFor();
       await request(staffPage,'/admin/inquiries/hotels',403);await request(staffPage,'/identity/customers',403);await request(staffPage,'/admin/bookings/'+S.books[1]+'/status',404,'PATCH',{status:'PENDING'});
-      const list=await request(staffPage,'/admin/bookings',200);const refs=(await list.json()).data.bookings.map((b:{referenceNumber:string})=>b.referenceNumber);assert(refs.includes((S.prefix+'-OWN').toUpperCase())&&!refs.includes((S.prefix+'-FOREIGN').toUpperCase()));await shot(staffPage,'STAFF');
+      const list=await request(staffPage,'/admin/bookings',200);const refs=(await list.json()).data.bookings.map((b:{referenceNumber:string})=>b.referenceNumber);assert(refs.includes((S.prefix+'-OWN').toUpperCase())&&!refs.includes((S.prefix+'-FOREIGN').toUpperCase()));await staffPage.getByRole('button',{name:'Bookings Processing',exact:true}).click();await staffPage.getByText((S.prefix+'-OWN').toUpperCase(),{exact:true}).first().waitFor();assert.equal(await staffPage.getByText((S.prefix+'-FOREIGN').toUpperCase(),{exact:true}).count(),0);await shot(staffPage,'STAFF');
     });
     const customer=await newPage();
     await step('CUSTOMER_UI_AND_OWNERSHIP_BOUNDARIES',async()=>{
@@ -161,21 +162,30 @@ it.skipIf(process.env.P5_BROWSER_EXECUTION_APPROVED!=='true')('four-role browser
       await submit(adminPage,'/identity/users/'+actorIds.customer,()=>form.getByRole('button',{name:'Apply account change',exact:true}).click());await request(customer,'/identity/me',401);await navigate(customer,'/account/security');await customer.getByText('Sign in to manage your account security.',{exact:true}).waitFor();
       const ownerForm=owner.locator('form').filter({has:owner.getByRole('button',{name:'Apply account change',exact:true})});await ownerForm.getByLabel('Exact user ID',{exact:true}).fill(actorIds.admin);await ownerForm.getByLabel('Role',{exact:true}).selectOption('CUSTOMER');
       await submit(owner,'/identity/users/'+actorIds.admin,()=>ownerForm.getByRole('button',{name:'Apply account change',exact:true}).click());await request(adminPage,'/identity/me',401);
+      await navigate(adminPage,'/account/security');await adminPage.getByText('Sign in to manage your account security.',{exact:true}).waitFor();
       const after=await db.$queryRaw<Array<{userId:string;version:number}>>(P.sql`SELECT "userId",version FROM "IdentityAccount" WHERE "userId" IN (${actorIds.admin},${actorIds.customer})`);for(const r of after)assert.equal(r.version,before.find(b=>b.userId===r.userId)!.version+1);
+    });
+    await step('AUDIT_AND_FINAL_ROLE_PERSISTENCE',async()=>{
+      const actions=await db.$queryRaw<Array<{action:string}>>(P.sql`SELECT action FROM "IdentityAudit"`);
+      for(const name of ['PRIMARY_OWNER_PROVISIONED','INVITE_ACCEPTED','ASSIGNMENT_CHANGED','ACCOUNT_STATUS_CHANGED','ROLE_CHANGED','MFA_ENROLLED','MFA_RECOVERY_USED','MFA_REJECTED'])assert(actions.some(r=>r.action===name),'EXPECTED_AUDIT_ACTION');
+      const roles=await db.user.findMany({select:{id:true,role:true}});
+      for(const [r,expected]of Object.entries({owner:'SUPER_ADMIN',admin:'CUSTOMER',staff:'STAFF',customer:'CUSTOMER',foreign:'CUSTOMER'}))assert.equal(roles.find(v=>v.id===actorIds[r])?.role,expected,'FINAL_ROLE_PERSISTENCE');
     });
     passed=true;
   }catch(error){journal({stage,event:'FAIL',...safeDiagnostic(error)});throw error;}
   finally{
     try{if(raw){
-      const owned=[...cap.users.keys()];
+      const owned=[...cap.users.keys()];if(owned.length){
+      for(const id of owned)await db!.$executeRaw(P!.sql`/*p5:ensure-account*/ INSERT INTO "IdentityAccount" ("userId") VALUES (${id}) ON CONFLICT DO NOTHING`);
       await db!.$executeRaw(P!.sql`/*p5:browser-close-session*/ UPDATE "Session" SET "revokedAt"=clock_timestamp() WHERE "userId" IN (${P!.join(owned)}) AND "revokedAt" IS NULL`);
       await db!.$executeRaw(P!.sql`/*p5:browser-close-account*/ UPDATE "IdentityAccount" SET suspended=true,version=version+1 WHERE "userId" IN (${P!.join(owned)})`);
+      }
       closure=true;
     }}catch(error){passed=false;journal({stage:'OWNED_FIXTURE_CLOSURE',event:'FAIL',...safeDiagnostic(error)});}
     for(const c of contexts)await c.close().catch(()=>{});if(browser)await browser.close().catch(()=>{});
-    if(next){next.kill();await Promise.race([new Promise<void>(resolve=>next!.once('close',()=>{nextStopped=true;resolve();})),delay(5000)]);}
+    if(next){if(next.exitCode!==null)nextStopped=true;else{const stopped=new Promise<void>(resolve=>next!.once('close',()=>{nextStopped=true;resolve();}));next.kill();await Promise.race([stopped,delay(5000)]);}}
     await stopApi().catch(()=>{passed=false;});
-    fs.writeFileSync(path.join(out,'browser-result.json'),JSON.stringify({passed:passed&&closure&&nextStopped,stage,checks,phases,closure,nextStopped,fixtureIds:actorIds,...cap.summary(),providerCalls:0,productionActivated:false},null,2));
+    fs.writeFileSync(path.join(out,'browser-result.json'),JSON.stringify({passed:passed&&closure&&nextStopped,stage,checks,phases,closure,nextStopped,...cap.summary(),providerCalls:0,productionActivated:false},null,2));
     sink.clear();secrets.clear();recoveries.clear();for(const k of Object.keys(passwords))passwords[k]='';
     assert(passed&&closure&&nextStopped,'BROWSER_ACCEPTANCE_OR_OWNED_CLEANUP_FAILED');
   }

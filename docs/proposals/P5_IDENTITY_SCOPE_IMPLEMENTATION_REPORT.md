@@ -2,7 +2,7 @@
 
 Updated: 2026-11-08 (Asia/Dhaka). Repository: `E:\Programming\Project\fly-with-safety`.
 
-**Current verdict: PARTIAL — isolated setup/OID35402/nine migrations and final 29-table preservation are verified. The real integration failure is confirmed as a UTC timestamp versus Asia/Dhaka session-timezone comparison defect; two SQL predicates are corrected offline. Corrected PostgreSQL + four-role API execution awaits exact-command approval; browser acceptance remains pending. No production activation or whole-Phase-5 completion. Historical entries below retain their original execution state.**
+**Current verdict: PARTIAL — v04 real PostgreSQL integration PASS; 24/24 real API checks, four timezone checks, nine migrations/OID 35402 and 29-table rollback preservation PASS. Browser acceptance is prepared offline, NOT EXECUTED and requires explicit committed-fixture approval. Production rollout remains disabled.**
 
 ## Scope and preserved baseline
 
@@ -386,3 +386,16 @@ Caller: `server/test/p5-integration-v04/Invoke-Integration.ps1 -OwnerApprovedInt
 Setup and saved preservation PASS; actual v03 integration FAIL preserved. The confirmed source correction is offline-verified; **v04 real PostgreSQL and real API results are NOT RUN**. Prepared browser functions remain compile-verified only; individual synthetic password/MFA/invitation-sink fixture wiring and isolated frontend/runtime execution remain pending. Existing browser preparation includes four-role sign-in, MFA recovery/replay, direct authorization and workspace checks; it is not declared a completed browser suite.
 
 **P5-IDENTITY/SCOPE remains PARTIAL.** The wider Phase 5 roadmap and production payment activation remain outside this batch. Single next owner action: approve the exact sealed v04 command for the bounded corrected PostgreSQL + 24-API rollback scope above. No consumed v01–v03 integration or v01–v06 setup caller may be rerun.
+
+
+## Browser acceptance continuation — 2026-11-08
+
+Accepted v04 evidence: output/phase5/p5-integration-20261108-02/result.json (no rerun). The unfinished browser runner is completed in server/test/p5-browser-acceptance/; review REVIEW.md there for exact fixture IDs/emails, caps, mail sink, loopback ports, closure and preservation contract. Existing application changes are limited to owner read-only audit viewing and an opt-in separate Next output directory.
+
+Stale generated Prisma declarations were regenerated from the unchanged schema using credential-free offline configuration and a network-blocking preload. Prior generated files are archived under generated-before-browser; regenerated schema tokens match source. No migration or database connection was made.
+
+Offline results: 23/23 focused guard/contract tests PASS; strict server/browser and client TypeScript PASS; runner/test lint 13 files, zero errors/warnings; changed client lint PASS; native Windows PowerShell 5.1 AST PASS. Network-blocked optimized build is BLOCKED by existing Google Inter/Geist font downloads (recorded, not called PASS). Proposed live frontend readiness precedes all fixture writes. Final seal counts and caller hash are in output/phase5/p5-browser-preparation-20261108-01/offline.json.
+
+Browser scope: exactly one batch, OID35402/restricted role/nine checksum/ACL/29-empty-table preflight; actual four-role login/MFA/invitations/assignments/ownership/audit/revocation; at most five synthetic users and two PENDING bookings with bounded identity/session/audit rows, 400 mutation attempts and 1500 reads. Retain fixtures, revoke only owned sessions and suspend only owned accounts; independent final read-only ownership/table-cap/hash reconciliation. No financial/provider test rerun, cloud, SMTP, protected database access or rollout. Planned three isolated API application phases retain configured rate limits and database state; no automatic retry.
+
+**Remaining blocker: owner approval for persistent disposable-database fixture writes and local browser execution. Browser PASS and live closure/preservation are unverified. Optimized production build remains unverified due offline font dependency. P5-IDENTITY/SCOPE is not COMPLETE.**

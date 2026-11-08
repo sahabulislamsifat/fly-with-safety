@@ -12,13 +12,14 @@ function insist(value,guard){if(!value)throw Object.assign(Error(guard),{guard})
 function checkIdentity(row){insist(row&&row.database===expected.database&&row.role===expected.role&&row.oid===expected.oid&&row.address===expected.address&&row.port===expected.port&&row.sessionRole===expected.role&&!row.unsafe,'EXACT_RUNTIME_IDENTITY_REQUIRED');}
 const identitySql=`SELECT current_database() AS database,current_user::text AS role,session_user::text AS "sessionRole",host(inet_server_addr()) AS address,inet_server_port() AS port,(SELECT oid::int FROM pg_database WHERE datname=current_database()) AS oid,(SELECT rolsuper OR rolcreatedb OR rolcreaterole OR rolreplication OR rolbypassrls FROM pg_roles WHERE rolname=current_user) AS unsafe`;
 const sha=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex').toUpperCase();
+async function checkVacantPorts(){for(const port of [38191,38192])await new Promise((resolve,reject)=>{const s=require('node:net').createServer();s.once('error',()=>reject(Object.assign(Error('ISOLATED_PORT_OCCUPIED'),{guard:'ISOLATED_PORT_OCCUPIED'})));s.listen({host:'127.0.0.1',port,exclusive:true},()=>s.close(resolve));});}
 function verifyPins(){const pins=JSON.parse(fs.readFileSync(path.join(__dirname,'pins.json')));for(const item of pins.files)insist(sha(path.join(repo,item.path))===item.sha256,'INTEGRATION_PIN_MISMATCH');for(const item of pins.externalFiles||[])insist(sha(item.path)===item.sha256,'EXTERNAL_RUNTIME_PIN_MISMATCH');insist(sha(pins.node.path)===pins.node.sha256,'NODE_PIN_MISMATCH');for(const item of pins.resolutions){const entry=item.locator?fs.realpathSync(path.resolve(repo,item.locator)):createRequire(path.resolve(repo,item.from)).resolve(item.request);insist(entry===path.resolve(repo,item.entry),'RUNTIME_RESOLUTION_CHANGED');}return pins;}
 async function connect(password){const{Client}=require('../../node_modules/pg');client=new Client({host:'127.0.0.1',port:5432,database:expected.database,user:expected.role,password,connectionTimeoutMillis:5000,statement_timeout:5000,query_timeout:6000,application_name:'FWS_P5_APPROVED_INTEGRATION',options:'-c default_transaction_read_only=on -c search_path=pg_catalog,public -c lock_timeout=2000'});client.on('error',()=>{});await client.connect();}
 async function reconcile(c,tables){
   const rows={};
   for(const table of tables){
     insist(/^[A-Za-z]+$/.test(table),'TABLE_IDENTIFIER_REJECTED');
-    const data=(await c.query(`SELECT to_jsonb(t) AS row FROM public."${table}" t`)).rows.map(r=>r.row);
+    const data=(await c.query(`SELECT to_jsonb(t) AS row FROM public."${table}" t ORDER BY to_jsonb(t)::text`)).rows.map(r=>r.row);
     insist(data.length<=(S.caps[table]||0),'UNEXPECTED_TABLE_OR_ROW_CAP');rows[table]=data;
     state.finalTables.push({table,count:data.length,sha256:crypto.createHash('sha256').update(JSON.stringify(data)).digest('hex')});
   }
@@ -36,7 +37,7 @@ async function reconcile(c,tables){
   for(const row of rows.IdentityAssignment)insist(row.userId===byEmail(S.emails.staff)&&row.bookingId===S.books[0]&&row.department==='FLIGHT','UNOWNED_ASSIGNMENT');
   for(const row of rows.IdentityAudit)insist(user(row.actorId)&&(user(row.targetId)||invites.has(row.targetId)||S.books.includes(row.targetId)),'UNOWNED_AUDIT');
   state.ownedRowsRetained=true;state.unrelatedRowsPreserved=true;state.ownedSessionsClosed=true;
-  if(state.browser?.passed)insist(rows.User.length===5&&rows.IdentityInvitation.length===3&&rows.IdentityMfa.length===3&&rows.Booking.length===2,'FINAL_FIXTURE_COMPLETENESS');
+  if(state.browser?.passed)insist(rows.User.length===5&&rows.IdentityAccount.length===5&&rows.IdentityInvitation.length===3&&rows.IdentityMfa.length===3&&rows.Booking.length===2,'FINAL_FIXTURE_COMPLETENESS');
 }
 async function observe(password,initial){await connect(password);try{
   await client.query('BEGIN READ ONLY');
@@ -58,7 +59,7 @@ async function observe(password,initial){await connect(password);try{
 async function execute(password,pins){
   const url=new URL('postgresql://127.0.0.1:5432/'+expected.database);url.username=expected.role;url.password=password;
   const env={};for(const name of ['SystemRoot','WINDIR','ProgramData','ProgramFiles','ProgramFiles(x86)','TEMP','TMP','PATH','PATHEXT','USERPROFILE','APPDATA','LOCALAPPDATA'])if(process.env[name])env[name]=process.env[name];
-  Object.assign(env,{NODE_ENV:'test',P5_DISPOSABLE_EXECUTION_APPROVED:'true',P5_DISPOSABLE_DATABASE_URL:url.href,P5_EXPECTED_DATABASE:expected.database,P5_EXPECTED_ROLE:expected.role,P5_EXPECTED_OID:'35402',CHECKPOINT_DISABLE:'1',P5_BROWSER_EXECUTION_APPROVED:'true',IDENTITY_MFA_KEY:crypto.randomBytes(32).toString('base64'),P5_BROWSER_JWT_SECRET:crypto.randomBytes(32).toString('hex'),FWS_P5_NETWORK_FENCE:'true',NODE_OPTIONS:'--require "'+path.join(__dirname,'network-fence.cjs')+'"'});
+  Object.assign(env,{NODE_ENV:'test',P5_DISPOSABLE_EXECUTION_APPROVED:'true',P5_DISPOSABLE_DATABASE_URL:url.href,P5_EXPECTED_DATABASE:expected.database,P5_EXPECTED_ROLE:expected.role,P5_EXPECTED_OID:'35402',CHECKPOINT_DISABLE:'1',P5_BROWSER_EXECUTION_APPROVED:'true',IDENTITY_MFA_KEY:crypto.randomBytes(32).toString('base64'),P5_BROWSER_JWT_SECRET:crypto.randomBytes(32).toString('hex'),FWS_P5_NETWORK_FENCE:'true',NODE_OPTIONS:'--require "'+path.join(__dirname,'network-fence.cjs').replaceAll('\\','/')+'"'});
   const parsed=await new Promise((resolve,reject)=>{
     child=spawn(pins.node.path,[path.join(repo,'server/node_modules/vitest/vitest.mjs'),'run','--config','test/p5-browser-acceptance/vitest.config.ts'],{cwd:path.join(repo,'server'),env,windowsHide:true,stdio:['ignore','pipe','pipe']});
     let stdout='',stderr='',bytes=0,stderrBytes=0;
@@ -78,7 +79,7 @@ async function main(){
   let wire='';for await(const chunk of process.stdin){wire+=chunk;insist(wire.length<=4096,'PRIVATE_INPUT_TOO_LARGE');}const input=JSON.parse(Buffer.from(wire.trim(),'base64').toString('utf8'));wire='';insist(typeof input.password==='string'&&input.password.length>0&&input.password.length<=512,'EXISTING_RUNTIME_PASSWORD_REQUIRED');
   fs.mkdirSync(out,{recursive:true});fs.writeFileSync(path.join(out,'attempt.json'),JSON.stringify({utc:new Date().toISOString(),scope:'APPROVED_BROWSER_COMMITTED_SYNTHETIC_FIXTURES_ONLY'}),{flag:'wx'});
   timer=setTimeout(()=>{if(child)child.kill();state.passed=false;state.deadlineExceeded=true;state.failure||={guard:'INTEGRATION_DEADLINE'};fs.writeFileSync(path.join(out,'result.json'),JSON.stringify(state,null,2));process.exit(1);},900000);
-  try{state.stage='readonly-target-preflight';await observe(input.password,true);state.preflightVerified=true;state.stage='browser-and-remaining-identity';await execute(input.password,pins);
+  try{state.stage='isolated-port-preflight';await checkVacantPorts();state.stage='readonly-target-preflight';await observe(input.password,true);state.preflightVerified=true;state.stage='browser-and-remaining-identity';await execute(input.password,pins);
     const browser=JSON.parse(fs.readFileSync(path.join(out,'browser-result.json'),'utf8'));state.browser={passed:browser.passed,stage:browser.stage,checks:browser.checks,phases:browser.phases,closure:browser.closure,nextStopped:browser.nextStopped,writeAttempts:browser.writeAttempts,readOperations:browser.readOperations};
     requireComplete(state.postgres);insist(browser.passed&&browser.closure&&browser.nextStopped,'BROWSER_ACCEPTANCE_INCOMPLETE');state.passed=true;}
   catch(error){state.failure={guard:error.guard||'LOCAL_OPERATION_FAILED',...safeDiagnostic(error)};}

@@ -1,0 +1,13 @@
+{
+  "preservedHistoricalFiles": 6787,
+  "preservedSnapshots": [
+    {
+      "original": "server/src/generated/prisma/index.d.ts",
+      "snapshot": "server/test/p5-browser-acceptance/generated-before-browser/index.d.ts",
+      "sha256": "FB4DD2AFCF008B14F1C7FDB3B0B2259312C1258E68BE470AA3B56B04A3A976E3"
+    }
+  ],
+  "expectedChangedPaths": [],
+  "liveDatabaseConnections": 0,
+  "fixtureWrites": 0
+}

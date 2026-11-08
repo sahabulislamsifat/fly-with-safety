@@ -17,13 +17,20 @@ function createLimiter(){
     if(tag==='invite-create'){insist([emails.admin,emails.staff,emails.expired].includes(values[1]),'INVITATION_RECIPIENT_SCOPE');invitations.add(values[0]);insist(invitations.size<=3,'INVITATION_ROW_CAP');}
     if(tag==='audit'){insist(users.has(values[1]),'AUDIT_ACTOR_SCOPE');insist(users.has(values[3])||invitations.has(values[3])||books.includes(values[3]),'AUDIT_TARGET_SCOPE');audit.add(values[0]);insist(audit.size<=100,'AUDIT_ROW_CAP');}
     if(tag==='bootstrap-role')insist(values[0]===ids.owner,'PRIMARY_OWNER_FIXTURE_SCOPE');
+    if(['ensure-account','mfa-enroll','mfa-version','mfa-reset-failures','membership-add','invalidate','revoke'].includes(tag))insist(users.has(values[0]),'RAW_USER_SCOPE');
+    if(['mfa-confirm','mfa-failed','mfa-step','recovery-consume','role-change','suspend'].includes(tag))insist(users.has(values.at(-1)),'RAW_USER_SCOPE');
+    if(tag==='mfa-revoke-other')insist(users.has(values[0])&&sessions.has(values[1]),'RAW_SESSION_SCOPE');
+    if(tag==='bind-session')insist(sessions.has(values[0]),'RAW_SESSION_SCOPE');
+    if(tag==='mfa-proof')insist(sessions.has(values.at(-1)),'RAW_SESSION_SCOPE');
+    if(['invite-used','invite-delivered','browser-expire'].includes(tag))insist(invitations.has(values[0]),'RAW_INVITATION_SCOPE');
+    if(['browser-close-account','browser-close-session'].includes(tag))insist(values.length>0&&values.every(id=>users.has(id)),'RAW_CLOSURE_SCOPE');
     if(tag==='assignment-upsert')insist([...users].some(([id,email])=>id===values[1]&&email===emails.staff)&&books.includes(values.at(-1)),'ASSIGNMENT_FIXTURE_SCOPE');
     reserve();
   }
   function wrap(client){return new Proxy(client,{get(target,key){
     if(key==='$transaction')return (work,options)=>{insist(typeof work==='function','TRANSACTION_CALLBACK_REQUIRED');return target.$transaction(tx=>work(wrap(tx)),options);};
     if(key==='$executeRaw')return(sql)=>{raw(sql);return target.$executeRaw(sql);};
-    if(key==='$executeRawUnsafe')return()=>{throw Object.assign(Error('UNSAFE_SQL_FORBIDDEN'),{guard:'UNSAFE_SQL_FORBIDDEN'});};
+    if(key==='$executeRawUnsafe'||key==='$queryRawUnsafe')return()=>{throw Object.assign(Error('UNSAFE_SQL_FORBIDDEN'),{guard:'UNSAFE_SQL_FORBIDDEN'});};
     if(key==='$queryRaw')return(sql,...rest)=>{insist(++reads<=1500,'FIXTURE_READ_CAP');return target.$queryRaw(sql,...rest);};
     const value=Reflect.get(target,key);
     if(typeof key==='string'&&value&&typeof value==='object'&&!key.startsWith('_'))return new Proxy(value,{get(model,op){const method=Reflect.get(model,op);if(typeof method!=='function')return method;
@@ -31,7 +38,7 @@ function createLimiter(){
         if(['create','update','updateMany','upsert','createMany','delete','deleteMany'].includes(op)){
           insist(['user','session','booking'].includes(key)&&!['delete','deleteMany','createMany','upsert'].includes(op),'MODEL_WRITE_FORBIDDEN');
           if(key==='user'){insist(op==='create'&&userEmails.has(args.data.email)&&Object.values(ids).includes(args.data.id),'SEEDED_USER_SCOPE');users.set(args.data.id,args.data.email);insist(users.size<=5,'USER_ROW_CAP');}
-          if(key==='session'){if(op==='create')insist(users.has(args.data.userId),'SESSION_USER_SCOPE');else insist(sessions.has(args.where.id),'SESSION_ID_SCOPE');}
+          if(key==='session'){if(op==='create')insist(users.has(args.data.userId)&&sessions.size<40,'SESSION_USER_SCOPE_OR_CAP');else insist(sessions.has(args.where.id),'SESSION_ID_SCOPE');}
           if(key==='booking')insist(op==='create'&&books.includes(args.data.id)&&[ids.customer,ids.foreign].includes(args.data.userId)&&args.data.status===undefined,'BOOKING_FIXTURE_SCOPE');
           reserve();
         }else insist(++reads<=1500,'FIXTURE_READ_CAP');
